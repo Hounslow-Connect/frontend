@@ -1,0 +1,43 @@
+$media-xsmall: 480px;
+$media-small: 768px;
+$media-medium: 960px;
+$media-large: 1120px;
+$media-xlarge: 1280px;
+$media-wide: 1480px;
+
+/* Media query mixins */
+@mixin bp-xs {
+  @media (min-width: $media-xsmall) {
+    @content;
+  }
+}
+
+@mixin bp-sm {
+  @media (min-width: $media-small) {
+    @content;
+  }
+}
+
+@mixin bp-md {
+  @media (min-width: $media-medium) {
+    @content;
+  }
+}
+
+@mixin bp-lg {
+  @media (min-width: $media-large) {
+    @content;
+  }
+}
+
+@mixin bp-xl {
+  @media (min-width: $media-xlarge) {
+    @content;
+  }
+}
+
+@mixin bp-wide {
+  @media (min-width: $media-wide) {
+    @content;
+  }
+}
