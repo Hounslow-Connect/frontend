@@ -1,0 +1,15 @@
+/* Number of grid columns */
+$flex-grid-columns: 12;
+
+/* Amount of gutter width */
+$flex-grid-gutter-width: 15px;
+
+/* Grid max size */
+$container-size: 1440px;
+
+/* Container */
+.container {
+  margin: 0 auto;
+  max-width: $container-size;
+  padding: 0 $flex-grid-gutter-width;
+}
