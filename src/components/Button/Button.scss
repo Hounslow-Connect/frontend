@@ -1,6 +1,24 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
-@import '../../styles//breakpoints.scss';
+@import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
+
+@mixin disabled-btn {
+  &:disabled {
+    color: $mercury;
+    background-color: inherit;
+    border: 2px solid $mercury;
+    opacity: 0.75;
+  }
+}
+
+@mixin disabled-btn-hover {
+  &:disabled:hover {
+    box-shadow: none;
+    cursor: not-allowed;
+    border: 2px solid $mercury;
+  }
+}
 
 .button {
   background-color: $san-juan;
@@ -9,6 +27,7 @@
   font-size: pxtorem(22px);
   line-height: 1.15;
   border-radius: 10px;
+  border: none;
   box-sizing: border-box;
 
   &:hover {
@@ -24,6 +43,16 @@
     border: 2px solid $puerto-rico;
     outline: 0;
     text-decoration: none;
+  }
+
+  &:disabled {
+    background-color: $mercury;
+    opacity: 0.75;
+  }
+
+  &:disabled:hover {
+    box-shadow: none;
+    cursor: not-allowed;
   }
 }
 
@@ -77,6 +106,81 @@
   margin-left: space(16);
 }
 
-.button__secondary {
+.button__alt {
+  font-size: inherit;
   border-radius: 40px;
+  background-color: $white;
+  color: inherit;
+  border: 2px solid $san-juan;
+
+  &:hover {
+    box-shadow: none;
+    cursor: pointer;
+    border: 3px solid $san-juan;
+  }
+
+  &:disabled {
+    @include disabled-btn;
+  }
+
+  &:disabled:hover {
+    @include disabled-btn-hover;
+  }
+}
+
+.button__alt--disabled {
+  @include disabled-btn;
+
+  @include disabled-btn-hover;
+}
+
+.button__alt--medium {
+  height: pxtorem(50px);
+
+  svg {
+    margin-left: space(16);
+  }
+}
+
+.button__alt--small {
+  height: pxtorem(35px);
+  font-size: $font-body-m;
+  padding: 0 space(16);
+  line-height: 1.16;
+
+  svg {
+    margin-left: space(16);
+  }
+}
+
+.button__category {
+  height: pxtorem(50px);
+  padding: 0 space(16);
+  border-radius: 9px;
+}
+
+.button__header {
+  height: pxtorem(30px);
+  padding: 0 space(16);
+  border-radius: 16px;
+  border: 1px solid $san-juan;
+  background-color: $white;
+  color: $san-juan;
+  font-size: $font-body-m;
+  font-weight: normal;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+
+  &:hover {
+    border: 2px solid $san-juan;
+  }
+
+  &:disabled {
+    color: $white;
+    @include disabled-btn;
+  }
+
+  &:disabled:hover {
+    @include disabled-btn-hover;
+  }
 }

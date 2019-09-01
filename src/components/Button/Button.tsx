@@ -8,9 +8,11 @@ interface IProps {
   text: string;
   size?: string;
   icon?: string;
+  type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
-  secondary?: boolean;
-  secondaryType?: string;
+  alt?: boolean;
+  category?: boolean;
+  header?: boolean;
 }
 
 const Button: React.FunctionComponent<IProps> = ({
@@ -18,18 +20,29 @@ const Button: React.FunctionComponent<IProps> = ({
   size = 'medium',
   icon,
   disabled = false,
-  secondary = false,
-  secondaryType = 'light',
+  alt = false,
+  type = 'button',
+  category = false,
+  header = false,
 }) => (
   <button
     className={cx('button', `button--${size}`, {
-      ['button__secondary']: secondary,
-      ['button--disabled']: disabled,
+      ['button__alt']: alt,
+      [`button__alt--${size}`]: alt,
+      ['button__category button__alt button__alt--medium']: category,
+      ['button__header']: header,
     })}
+    disabled={disabled}
+    type={type}
   >
     {text}
     {icon && (
-      <FontAwesomeIcon icon="search" className={cx('button__icon', `button__icon--${size}`)} />
+      <FontAwesomeIcon
+        icon="search"
+        className={cx('button__icon', {
+          [`button__icon--${size}`]: !alt,
+        })}
+      />
     )}
   </button>
 );
