@@ -154,9 +154,12 @@
 }
 
 .button__category {
+  font-size: $font-body-m;
   height: pxtorem(50px);
   padding: 0 space(16);
   border-radius: 9px;
+  margin-right: space(20);
+  margin-bottom: space(16);
 }
 
 .button__header {
