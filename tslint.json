@@ -8,6 +8,8 @@
     "member-access": false,
     "object-literal-sort-keys": false,
     "no-console": false,
-    "no-unused-variable": true
+    "no-unused-variable": true,
+    "ordered-imports": false,
+    "jsx-no-lambda": false
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
+import Search from '../components/Search';
 
-const Home: React.FunctionComponent = () => <h1> HOME! </h1>;
+const Home: React.FunctionComponent = () => <Search />;
 
 export default Home;

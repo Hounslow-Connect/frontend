@@ -1,15 +1,75 @@
-/* Number of grid columns */
-$flex-grid-columns: 12;
+@mixin grid-row($margin-left: 0, $margin-right: 0) {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  margin-right: $margin-left;
+  margin-left: $margin-right;
+}
 
-/* Amount of gutter width */
-$flex-grid-gutter-width: 15px;
+@mixin grid-column($padding-left: 0, $padding-right: 0) {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding-right: $padding-right;
+  padding-left: $padding-left;
+}
 
-/* Grid max size */
-$container-size: 1440px;
+@mixin grid-row-direction($reverse: false) {
+  @if ($reverse) {
+    flex-direction: row-reverse;
+  } @else {
+    flex-direction: row;
+  }
+}
 
-/* Container */
-.container {
-  margin: 0 auto;
-  max-width: $container-size;
-  padding: 0 $flex-grid-gutter-width;
+@mixin grid-column-direction($reverse: false) {
+  @if ($reverse) {
+    flex-direction: column-reverse;
+  } @else {
+    flex-direction: column;
+  }
+}
+
+@mixin grid-row-alignment-horizontal($alignment) {
+  $justify: inherit;
+
+  @if ($alignment == center) {
+    $justify: center;
+  } @else if ($alignment == end) {
+    $justify: flex-end;
+  } @else if ($alignment == start) {
+    $justify: flex-start;
+  }
+
+  justify-content: $justify;
+  text-align: $alignment;
+}
+
+@mixin grid-row-alignment-vertical($alignment) {
+  @if ($alignment == middle) {
+    align-items: center;
+  } @else if ($alignment == bottom) {
+    align-items: flex-end;
+  } @else {
+    align-items: flex-start;
+  }
+}
+
+@mixin grid-row-spacing($spacing) {
+  justify-content: $spacing;
+}
+
+.row {
+  @include grid-row;
+}
+
+.row.reverse {
+  @include grid-row-direction(true);
+}
+
+.col.reverse {
+  @include grid-column-direction($reverse: true);
 }
