@@ -14,6 +14,7 @@ interface IProps {
   alt?: boolean;
   category?: boolean;
   header?: boolean;
+  onClick?: () => void;
 }
 
 const Button: React.FunctionComponent<IProps> = ({
@@ -25,16 +26,18 @@ const Button: React.FunctionComponent<IProps> = ({
   type = 'button',
   category = false,
   header = false,
+  onClick,
 }) => (
   <button
     className={cx('button', `button--${size}`, {
-      ['button__alt']: alt,
+      button__alt: alt,
       [`button__alt--${size}`]: alt,
-      ['button__category button__alt button__alt--medium']: category,
-      ['button__header']: header,
+      'button__category button__alt button__alt--medium': category,
+      button__header: header,
     })}
     disabled={disabled}
     type={type}
+    onClick={onClick}
   >
     {text}
     {icon && (
