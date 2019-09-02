@@ -1,3 +1,4 @@
+import { IconName } from '@fortawesome/fontawesome-common-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
 import React from 'react';
@@ -7,7 +8,7 @@ import './Button.scss';
 interface IProps {
   text: string;
   size?: string;
-  icon?: string;
+  icon?: IconName;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
   alt?: boolean;
@@ -38,7 +39,7 @@ const Button: React.FunctionComponent<IProps> = ({
     {text}
     {icon && (
       <FontAwesomeIcon
-        icon="search"
+        icon={icon}
         className={cx('button__icon', {
           [`button__icon--${size}`]: !alt,
         })}
