@@ -36,6 +36,8 @@ $font-body-mobile-alt: pxtorem(22px);
 $font-breadcrumb: $font-base;
 $font-breadcrumb-mobile: pxtorem(10px);
 
+$font-link-medium: $font-base;
+
 @font-face {
   font-family: Museo Sans 500;
   src: url('../assets/fonts/museosans_500.woff2') format('woff2'),
@@ -204,6 +206,16 @@ $font-breadcrumb-mobile: pxtorem(10px);
   @include for-phone-only {
     font-size: $font-body-mobile-alt;
   }
+}
+
+@mixin link-large {
+  @include heading-m;
+  display: block;
+}
+
+@mixin link-medium {
+  font-size: $font-link-medium;
+  font-family: $font-secondary;
 }
 
 @mixin breadcrumb {

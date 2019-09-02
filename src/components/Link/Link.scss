@@ -1,0 +1,29 @@
+@import '../../styles/fonts.scss';
+
+.link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link--large {
+  @include link-large;
+}
+
+.link--medium {
+  @include link-medium;
+}
+
+.link__inline {
+  display: inline;
+}
+
+.link__icon--right {
+  margin-left: space(8);
+}
+
+.link__icon--left {
+  margin-right: space(16);
+}
