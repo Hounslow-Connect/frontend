@@ -1,0 +1,7 @@
+@import '../../styles/mixins.scss';
+
+.header__button-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: space(16);
+}
