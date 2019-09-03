@@ -1,1 +1,1 @@
-export const apiBase = 'https://api.staging.connectedkingston.co.uk/core/v1';
+export const apiBase = process.env.REACT_APP_PRODUCTION_URL;
