@@ -1,3 +1,8 @@
+@mixin flex {
+  display: flex;
+  flex: 1;
+}
+
 @mixin grid-row($margin-left: 0, $margin-right: 0) {
   box-sizing: border-box;
   display: flex;
@@ -49,9 +54,9 @@
 }
 
 @mixin grid-row-alignment-vertical($alignment) {
-  @if ($alignment == middle) {
+  @if ($alignment == center) {
     align-items: center;
-  } @else if ($alignment == bottom) {
+  } @else if ($alignment == end) {
     align-items: flex-end;
   } @else {
     align-items: flex-start;
@@ -72,4 +77,12 @@
 
 .col.reverse {
   @include grid-column-direction($reverse: true);
+}
+
+.flex {
+  @include flex;
+}
+
+.flex-justify-centre {
+  @include grid-row-alignment-horizontal(center);
 }
