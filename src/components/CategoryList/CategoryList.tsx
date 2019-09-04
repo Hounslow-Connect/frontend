@@ -1,11 +1,11 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+import { withRouter, RouteComponentProps } from 'react-router';
+
+import { ICategory } from '../../types/types';
 import Button from '../Button';
-import { History } from 'history';
 
-import { ICategory } from '../Search/store';
-
-interface IProps {
-  history: History;
+interface IProps extends RouteComponentProps {
   categories: ICategory[];
 }
 
@@ -18,15 +18,15 @@ const CategoryList: React.FunctionComponent<IProps> = ({ categories, history }) 
         key={id}
         size="small"
         icon={icon}
-        onClick={() =>
+        onClick={() => {
           history.push({
             pathname: '/results',
             search: `?category=${id}`,
-          })
-        }
+          });
+        }}
       />
     ))}
   </div>
 );
 
-export default CategoryList;
+export default withRouter(observer(CategoryList));
