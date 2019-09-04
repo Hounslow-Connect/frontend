@@ -1,0 +1,10 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.personas {
+  color: $san-juan;
+}
+
+.personas__heading {
+  margin-bottom: space(8);
+}

@@ -1,0 +1,14 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.card {
+  background-color: $alabaster;
+  color: $san-juan;
+  border-radius: 25px;
+  padding: space(24) space(24) space(32) space(24);
+  margin: space(64);
+}
+
+.card__header {
+  margin-bottom: space(16);
+}
