@@ -11,14 +11,41 @@
     background-color: $iceberg;
   }
 
+  @include for-tablet-portrait-up {
+    padding: 0 space(10);
+  }
+
   span {
     margin-right: space(8);
   }
 }
 
-.header__logo {
+.header__top-bar {
+  align-self: flex-end;
+}
+
+.header__inner-container {
+  display: flex;
   width: 100%;
+
+  @include for-tablet-portrait-up {
+    margin-bottom: space(32);
+  }
+}
+
+.header__desktop-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  color: $san-juan;
+  margin-top: space(24);
+}
+
+.header__logo {
   height: auto;
+  @include for-phone-only {
+    width: 100%;
+  }
 }
 
 .header__logo--expanded {
@@ -44,23 +71,6 @@
 
   svg {
     margin-left: space(8);
-  }
-}
-
-.header_mobile--active {
-  position: fixed;
-  left: 0;
-  top: pxtorem(116px);
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  overflow: auto;
-  background: white;
-  color: $san-juan;
-  padding: space(32);
-
-  a {
-    margin-bottom: space(32);
   }
 }
 

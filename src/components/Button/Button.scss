@@ -167,16 +167,18 @@
   padding: 0 space(16);
   margin: 0 space(24);
   border-radius: 16px;
-  border: 1px solid $san-juan;
+  border: 1px solid $waikawa;
   background-color: $white;
-  color: $san-juan;
+  color: $waikawa;
   font-size: $font-body-m;
   font-weight: normal;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  border-top: 0;
 
   &:hover {
-    border: 2px solid $san-juan;
+    border: 2px solid $waikawa;
+    border-top: 0;
   }
 
   &:disabled {

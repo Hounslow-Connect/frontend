@@ -14,54 +14,65 @@ import MobileLogo from '../../assets/logo/logo-mobile.svg';
 
 import Link from '../Link';
 import Button from '../Button';
+import BurgerMenu from '../BurgerMenu';
 
-@inject('windowSizeStore')
+@inject('windowSizeStore', 'uiStore')
 @observer
-class Header extends Component<any, any, any> {
-  constructor(props: any) {
-    super(props);
-    this.state = { isOpen: false };
-  }
-
-  toggleMenu() {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-
+class Header extends Component<any> {
   render() {
-    const { windowSizeStore } = this.props;
+    const { windowSizeStore, uiStore } = this.props;
     const { isMobile } = windowSizeStore;
+    const { burgerMenuOpen, toggleBurgerMenu } = uiStore;
+
     return (
       <div>
         <header className="header">
-          <div className=" flex">
-            <ReactSVG
-              src={isMobile ? MobileLogo : Logo}
-              className={cx('header__logo', {
-                'header__logo--expanded': isMobile && this.state.isOpen,
-              })}
-            />
-            {isMobile && !this.state.isOpen && (
-              <button
-                className="header__mobile-menu-open"
-                aria-label="Open menu"
-                onClick={() => this.toggleMenu()}
-              >
-                <span>Menu</span>
-                <FontAwesomeIcon icon="bars" aria-hidden={true} title="Menu Trigger" />
-                <span className="sr-only">Menu Trigger</span>
-              </button>
+          <div className={cx(isMobile ? 'flex' : 'column')}>
+            {!isMobile && (
+              <div className="header__top-bar">
+                <Button text="Translate" header={true} icon="language" />
+                <Button text="Give Feedback" header={true} icon="comment" />
+                <Button text="Favourites" header={true} icon="star" />
+              </div>
             )}
+            <div className="header__inner-container">
+              <ReactSVG
+                src={isMobile ? MobileLogo : Logo}
+                className={cx('header__logo', {
+                  'header__logo--expanded': isMobile && burgerMenuOpen,
+                })}
+              />
+              {!isMobile && (
+                <nav className="header__desktop-nav">
+                  <Link text="Home" href="#" size="large" header={true} />
+                  <Link text="About" href="#" size="large" header={true} />
+                  <Link text="Contact Us" href="#" size="large" header={true} />
+                  <Link text="Get Involved" href="#" size="large" header={true} />
+                </nav>
+              )}
+              {isMobile && !burgerMenuOpen && (
+                <button
+                  className="header__mobile-menu-open"
+                  aria-label="Open menu"
+                  onClick={() => toggleBurgerMenu()}
+                >
+                  <span>Menu</span>
+                  <FontAwesomeIcon icon="bars" aria-hidden={true} title="Menu Trigger" />
+                  <span className="sr-only">Menu Trigger</span>
+                </button>
+              )}
+            </div>
           </div>
 
-          {isMobile && this.state.isOpen && (
+          {isMobile && burgerMenuOpen && (
             <div className="header__mobile-menu-close flex">
-              <button aria-label="Close menu" onClick={() => this.toggleMenu()}>
+              <button aria-label="Close menu" onClick={() => toggleBurgerMenu()}>
                 Close
                 <FontAwesomeIcon icon="times" aria-hidden={true} title="Menu Close" />
               </button>
             </div>
           )}
-          {isMobile && this.state.isOpen && (
+          {isMobile && burgerMenuOpen && (
             <div className="flex header__tree">
               <ReactSVG src={CranberryTreeSmall} />
               <ReactSVG src={PeurtoTreeSmall} />
@@ -69,22 +80,10 @@ class Header extends Component<any, any, any> {
           )}
         </header>
 
-        {this.state.isOpen && <Burger />}
+        {burgerMenuOpen && <BurgerMenu />}
       </div>
     );
   }
 }
-
-const Burger = () => (
-  <div className="header_mobile--active">
-    <Link text="Home" href="#" size="large" />
-    <Link text="About" href="#" size="large" />
-    <Link text="Contact Us" href="#" size="large" />
-    <Link text="Get Involved" href="#" size="large" />
-    <Button text="Translate" size="small" burgerMenu={true} icon="language" />
-    <Button text="Give feedback" size="small" burgerMenu={true} icon="comment" />
-    <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
-  </div>
-);
 
 export default Header;
