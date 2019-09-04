@@ -188,3 +188,21 @@
     @include disabled-btn-hover;
   }
 }
+
+.buton__burger-menu {
+  background-color: transparent;
+  color: $waikawa;
+  font-size: $font-body-xs;
+  display: block;
+  padding: 0;
+  height: auto;
+  margin-bottom: space(24);
+
+  &:focus {
+    border: inherit;
+  }
+
+  &:hover {
+    box-shadow: none;
+  }
+}
