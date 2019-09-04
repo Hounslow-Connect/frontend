@@ -208,6 +208,11 @@ $font-link-medium: $font-base;
   }
 }
 
+@mixin link-header {
+  font-size: $font-body-m;
+  font-family: $font-primary;
+}
+
 @mixin link-large {
   font-size: $font-heading-m;
   font-family: $font-secondary;

@@ -27,3 +27,8 @@
 .link__icon--left {
   margin-right: space(16);
 }
+
+.link__header {
+  @include link-header;
+  margin-right: space(32);
+}
