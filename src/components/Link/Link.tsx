@@ -25,7 +25,7 @@ const Link: React.FunctionComponent<ILinkProps> = ({
   <a
     href={href}
     className={cx('link', `link--${size}`, {
-      ['link__inline']: inline,
+      link__inline: inline,
     })}
   >
     {icon && iconPosition === 'left' && (
