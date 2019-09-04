@@ -39,7 +39,7 @@ $font-breadcrumb-mobile: pxtorem(10px);
 $font-link-medium: $font-base;
 
 @font-face {
-  font-family: Museo Sans 500;
+  font-family: 'Museo Sans 500';
   src: url('../assets/fonts/museosans_500.woff2') format('woff2'),
     url('../assets/fonts/museosans_500.woff') format('woff'),
     url('../assets/fonts/museosans_500.ttf') format('truetype');
