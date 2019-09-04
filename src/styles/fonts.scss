@@ -209,7 +209,8 @@ $font-link-medium: $font-base;
 }
 
 @mixin link-large {
-  @include heading-m;
+  font-size: $font-heading-m;
+  font-family: $font-secondary;
   display: block;
 }
 

@@ -1,6 +1,7 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/colors.scss';
 @import '../../styles/grid.scss';
+@import '../../styles/breakpoints.scss';
 
 @mixin marginLeft {
   margin-left: pxtorem(60px) !important;
@@ -13,6 +14,12 @@
   height: auto;
   background-size: 100% 100%;
   padding: space(64) space(24);
+
+  @include for-phone-only {
+    background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
+    background-size: 110% 100%;
+    background-color: $iceberg;
+  }
 }
 
 .search__inner-container {

@@ -1,7 +1,76 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/grid.scss';
+
+.header {
+  padding: space(16) space(10);
+  position: relative;
+
+  @include for-phone-only {
+    background-color: $iceberg;
+  }
+
+  span {
+    margin-right: space(8);
+  }
+}
+
+.header__logo {
+  width: 100%;
+  height: auto;
+}
+
+.header__logo--expanded {
+  margin-bottom: space(16);
+}
 
 .header__button-nav {
   display: flex;
   justify-content: flex-end;
   margin-bottom: space(16);
+}
+
+.header__mobile-menu-open {
+  @include body-xs;
+  color: $san-juan;
+  padding: 0;
+}
+
+.header__mobile-menu-close {
+  @include body-xs;
+  @include grid-row-spacing(flex-end);
+  color: $san-juan;
+
+  svg {
+    margin-left: space(8);
+  }
+}
+
+.header_mobile--active {
+  position: fixed;
+  left: 0;
+  top: pxtorem(116px);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  overflow: auto;
+  background: white;
+  color: $san-juan;
+  padding: space(32);
+
+  a {
+    margin-bottom: space(32);
+  }
+}
+
+.header__tree {
+  position: absolute;
+  bottom: -27px;
+  left: 40%;
+  z-index: 101;
+
+  svg {
+    margin: 0 pxtorem(6px);
+  }
 }

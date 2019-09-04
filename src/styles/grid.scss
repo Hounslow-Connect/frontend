@@ -1,3 +1,7 @@
+@mixin grid-flex {
+  display: flex;
+}
+
 @mixin grid-row($margin-left: 0, $margin-right: 0) {
   box-sizing: border-box;
   display: flex;
@@ -60,6 +64,10 @@
 
 @mixin grid-row-spacing($spacing) {
   justify-content: $spacing;
+}
+
+.flex {
+  @include grid-flex;
 }
 
 .row {
