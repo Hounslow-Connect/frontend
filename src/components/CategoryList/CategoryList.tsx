@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Button from '../Button';
 import { History } from 'history';
 
 import { ICategory } from '../Search/store';
+import { observer } from 'mobx-react';
 
 interface IProps {
   history: History;
   categories: ICategory[];
 }
 
-const CategoryList: React.FunctionComponent<IProps> = ({ categories, history }) => (
-  <div>
+const CategoryList: React.FunctionComponent<IProps> = ({ history, categories }) => (
+  <Fragment>
     {categories.map(({ name, id, icon }) => (
       <Button
         category={true}
@@ -26,7 +27,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ categories, history }) 
         }
       />
     ))}
-  </div>
+  </Fragment>
 );
 
-export default CategoryList;
+export default observer(CategoryList);
