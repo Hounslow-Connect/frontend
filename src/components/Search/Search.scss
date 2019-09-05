@@ -65,6 +65,9 @@
 }
 
 .search__heading {
+  @include heading-xl;
+  display: block;
+
   @include for-phone-only {
     margin-bottom: space(16);
   }
@@ -80,7 +83,10 @@
 }
 
 .search__category-heading {
-  @include marginLeft;
+  @include for-tablet-landscape-up {
+    @include marginLeft;
+  }
+  @include heading-l;
 }
 
 .search__cateogry-list {

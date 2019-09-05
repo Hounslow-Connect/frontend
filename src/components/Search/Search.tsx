@@ -1,16 +1,14 @@
 import React, { Fragment } from 'react';
 import { observer, inject } from 'mobx-react';
 import map from 'lodash/map';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 import SearchStore from './store';
-
-import { withRouter, RouteComponentProps } from 'react-router';
 
 import './Search.scss';
 import CategoryList from '../CategoryList';
 import Input from '../Input';
 import Select from '../Select';
-import cx from 'classnames';
 import Button from '../Button';
 import Personas from '../Personas';
 import WindowSizeStore from '../../stores/windowSizeStore';
@@ -20,9 +18,9 @@ interface IProps extends RouteComponentProps {
 }
 @inject('windowSizeStore')
 @observer
-class SearchSection extends React.Component<IProps> {
+class Search extends React.Component<IProps> {
   render() {
-    const { windowSizeStore } = this.props;
+    const { windowSizeStore, history } = this.props;
 
     // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
     if (!windowSizeStore) {
@@ -34,22 +32,21 @@ class SearchSection extends React.Component<IProps> {
     return (
       <Fragment>
         <section className="search__container row">
-          <div className="search__inner-container row">
+          <form className="search__inner-container row" aria-label="Search">
             <div className="search__input">
-              <h1 className="search__heading">I'm looking for</h1>
+              <label htmlFor="search" className="search__heading">
+                I'm looking for
+              </label>
               <Input
                 placeholder="Search for services, groups and activities"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => SearchStore.onChange(e)}
+                id="search"
               />
               {!isMobile && <Button text="Search" icon="search" />}
             </div>
-            <h2
-              className={cx({
-                'search__category-heading': !isMobile,
-              })}
-            >
+            <label className="search__category-heading" htmlFor="category">
               Or browse by category
-            </h2>
+            </label>
             {isMobile && (
               <Fragment>
                 <p className="search__category-subtitle">
@@ -57,11 +54,24 @@ class SearchSection extends React.Component<IProps> {
                 </p>
                 <Select
                   options={options}
-                  onChange={(e: any) => console.log(e.target.value)}
+                  onChange={(e: any) => SearchStore.setCategory(e)}
                   className="search__category--mobile"
                   placeholder="Category List"
+                  id="category"
                 />
-                <Button text="Search" icon="search" size="small" />
+                <Button
+                  text="Search"
+                  icon="search"
+                  size="small"
+                  onClick={() =>
+                    SearchStore.categoryId
+                      ? history.push({
+                          pathname: '/results',
+                          search: `?category=${SearchStore.categoryId}`,
+                        })
+                      : null
+                  }
+                />
               </Fragment>
             )}
             {!isMobile && (
@@ -69,7 +79,7 @@ class SearchSection extends React.Component<IProps> {
                 <CategoryList categories={SearchStore.categories} />
               </div>
             )}
-          </div>
+          </form>
         </section>
         <section>
           <Personas personas={SearchStore.personas} />
@@ -79,4 +89,4 @@ class SearchSection extends React.Component<IProps> {
   }
 }
 
-export default withRouter(SearchSection);
+export default withRouter(Search);

@@ -13,10 +13,17 @@ interface IProps {
   onChange?: any;
   className?: any;
   placeholder: string;
+  id: string;
 }
 
-const Select: React.FunctionComponent<IProps> = ({ options, onChange, className, placeholder }) => (
-  <select className={`select ${className}`} onChange={onChange}>
+const Select: React.FunctionComponent<IProps> = ({
+  options,
+  onChange,
+  className,
+  placeholder,
+  id,
+}) => (
+  <select className={`select ${className}`} onChange={onChange} id={id}>
     <option value="" disabled={true} selected={true} hidden={true}>
       {placeholder}
     </option>
