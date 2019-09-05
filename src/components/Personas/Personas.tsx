@@ -11,10 +11,10 @@ interface IProps extends RouteComponentProps {
 }
 
 const Personas: React.FunctionComponent<IProps> = ({ personas, history }) => (
-  <section className="personas flex-justify-centre" role="button">
-    <h2 className="personas__heading">I want to </h2>
+  <section className="personas" role="button">
+    <h2 className="personas__heading">I want to ...</h2>
     <p>Sometimes it's hard to know where to start - here are some suggestions</p>
-    <div className="row">
+    <div className="row flex-justify-centre personas__list">
       {personas.map(persona => (
         <PersonasCard
           key={persona.id}

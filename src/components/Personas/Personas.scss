@@ -1,15 +1,36 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
 
 .personas {
   color: $san-juan;
+  position: relative;
+  text-align: center;
+  padding: space(32) space(16);
 
   @include for-phone-only {
     background-color: $iceberg;
+    padding: space(32);
+    text-align: left;
+
+    p {
+      font-size: $font-body-s;
+    }
   }
 }
 
 .personas__heading {
+  font-size: $font-heading-m;
   margin-bottom: space(8);
+}
+
+.personas__list {
+  @include for-phone-only {
+    margin-top: space(32);
+  }
+}
+
+.persona__image--telephone-box {
+  width: 160px;
 }

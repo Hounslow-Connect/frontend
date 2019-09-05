@@ -16,7 +16,7 @@ const PersonasCard: React.FunctionComponent<IProps> = ({ persona, action, window
   <section className="flex card" onClick={action}>
     <img src={`${apiBase}/collections/personas/${persona.id}/image.png`} />
     <div className="card__description">
-      <h3>{persona.name}</h3>
+      <h3 className="card__heading">{persona.name}</h3>
       {!windowSizeStore!.isMobile && <p>{persona.intro}</p>}
     </div>
   </section>
