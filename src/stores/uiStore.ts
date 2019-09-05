@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx';
+import { observable, action } from 'mobx';
 
 export default class UIStore {
   @observable burgerMenuOpen: boolean = false;
