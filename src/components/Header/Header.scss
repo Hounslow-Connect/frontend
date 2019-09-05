@@ -5,11 +5,11 @@
 
 .header {
   padding: space(16) space(10);
-  position: sticky;
   top: 0;
 
   @include for-phone-only {
     background-color: $iceberg;
+    position: sticky;
   }
 
   @include for-tablet-portrait-up {
