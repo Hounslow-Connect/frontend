@@ -17,7 +17,6 @@ $font-heading-m: pxtorem(22px);
 $font-heading-mobile-m: pxtorem(12px);
 
 $font-heading-s: pxtorem(18px);
-$font-heading-s: pxtorem(16px);
 
 $font-body-l: pxtorem(20px);
 $font-body-mobile-l: $font-base;
@@ -39,7 +38,7 @@ $font-breadcrumb-mobile: pxtorem(10px);
 $font-link-medium: $font-base;
 
 @font-face {
-  font-family: Museo Sans 500;
+  font-family: 'Museo Sans 500';
   src: url('../assets/fonts/museosans_500.woff2') format('woff2'),
     url('../assets/fonts/museosans_500.woff') format('woff'),
     url('../assets/fonts/museosans_500.ttf') format('truetype');
@@ -208,8 +207,14 @@ $font-link-medium: $font-base;
   }
 }
 
+@mixin link-header {
+  font-size: $font-body-m;
+  font-family: $font-primary;
+}
+
 @mixin link-large {
-  @include heading-m;
+  font-size: $font-heading-m;
+  font-family: $font-secondary;
   display: block;
 }
 

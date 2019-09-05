@@ -12,14 +12,9 @@
   margin-left: $margin-right;
 }
 
-@mixin grid-column($padding-left: 0, $padding-right: 0) {
-  box-sizing: border-box;
+@mixin grid-column {
   display: flex;
-  flex: 0 1 auto;
-  flex-grow: 0;
-  flex-shrink: 0;
-  padding-right: $padding-right;
-  padding-left: $padding-left;
+  flex-direction: column;
 }
 
 @mixin grid-row-direction($reverse: false) {
@@ -69,6 +64,10 @@
 
 .row {
   @include grid-row;
+}
+
+.column {
+  @include grid-column;
 }
 
 .row.reverse {

@@ -1,7 +1,87 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/grid.scss';
+
+.header {
+  padding: space(16) space(10);
+  position: sticky;
+  top: 0;
+
+  @include for-phone-only {
+    background-color: $iceberg;
+  }
+
+  @include for-tablet-portrait-up {
+    padding: 0 space(10);
+  }
+
+  span {
+    margin-right: space(8);
+  }
+}
+
+.header__top-bar {
+  align-self: flex-end;
+}
+
+.header__inner-container {
+  display: flex;
+  width: 100%;
+
+  @include for-tablet-portrait-up {
+    margin-bottom: space(32);
+  }
+}
+
+.header__desktop-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  color: $san-juan;
+  margin-top: space(24);
+}
+
+.header__logo {
+  height: auto;
+  @include for-phone-only {
+    width: 100%;
+  }
+}
+
+.header__logo--expanded {
+  margin-bottom: space(16);
+}
 
 .header__button-nav {
   display: flex;
   justify-content: flex-end;
   margin-bottom: space(16);
+}
+
+.header__mobile-menu-open {
+  @include body-xs;
+  color: $san-juan;
+  padding: 0;
+}
+
+.header__mobile-menu-close {
+  @include body-xs;
+  @include grid-row-spacing(flex-end);
+  color: $san-juan;
+
+  svg {
+    margin-left: space(8);
+  }
+}
+
+.header__tree {
+  position: absolute;
+  bottom: -27px;
+  left: 40%;
+  z-index: 101;
+
+  svg {
+    margin: 0 pxtorem(6px);
+  }
 }
