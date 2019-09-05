@@ -29,4 +29,4 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories }) 
   </Fragment>
 );
 
-export default observer(CategoryList);
+export default withRouter(observer(CategoryList));
