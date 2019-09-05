@@ -15,15 +15,14 @@ const Personas: React.FunctionComponent<IProps> = ({ personas, history }) => (
     <h2 className="personas__heading">I want to </h2>
     <p>Sometimes it's hard to know where to start - here are some suggestions</p>
     <div className="row">
-      {personas.map(({ name, intro, id }) => (
+      {personas.map(persona => (
         <PersonasCard
-          key={id}
-          name={name}
-          intro={intro}
+          key={persona.id}
+          persona={persona}
           action={() => {
             history.push({
               pathname: '/results',
-              search: `?persona=${id}`,
+              search: `?persona=${persona.id}`,
             });
           }}
         />

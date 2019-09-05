@@ -1,8 +1,13 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
 
 .personas {
   color: $san-juan;
+
+  @include for-phone-only {
+    background-color: $iceberg;
+  }
 }
 
 .personas__heading {

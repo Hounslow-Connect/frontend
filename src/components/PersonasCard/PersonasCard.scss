@@ -1,14 +1,29 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
 
 .card {
   background-color: $alabaster;
   color: $san-juan;
   border-radius: 25px;
-  padding: space(24) space(24) space(32) space(24);
   margin: space(64);
+
+  @include for-phone-only {
+    background-color: $white;
+    margin: space(20) space(32);
+  }
+
+  img {
+    width: pxtorem(75px);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+  }
 }
 
-.card__header {
-  margin-bottom: space(16);
+// .card__header {
+//   margin-bottom: space(16);
+// }
+
+.card__description {
+  padding: space(24) space(16);
 }
