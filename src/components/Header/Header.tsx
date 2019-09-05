@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactSVG from 'react-svg';
-import { inject } from 'mobx-react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
 
@@ -15,18 +14,31 @@ import MobileLogo from '../../assets/logo/logo-mobile.svg';
 import Link from '../Link';
 import Button from '../Button';
 import BurgerMenu from '../BurgerMenu';
+import WindowSizeStore from '../../stores/windowSizeStore';
+import UIStore from '../../stores/uiStore';
+
+interface IProps {
+  windowSizeStore?: WindowSizeStore;
+  uiStore?: UIStore;
+}
 
 @inject('windowSizeStore', 'uiStore')
 @observer
-class Header extends Component<any> {
+class Header extends Component<IProps> {
   render() {
     const { windowSizeStore, uiStore } = this.props;
+
+    // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
+    if (!windowSizeStore || !uiStore) {
+      return null;
+    }
+
     const { isMobile } = windowSizeStore;
     const { burgerMenuOpen, toggleBurgerMenu } = uiStore;
 
     return (
-      <div>
-        <header className="header">
+      <header className="header">
+        <Fragment>
           <div className={cx(isMobile ? 'flex' : 'column')}>
             {!isMobile && (
               <div className="header__top-bar">
@@ -78,10 +90,9 @@ class Header extends Component<any> {
               <ReactSVG src={PeurtoTreeSmall} />
             </div>
           )}
-        </header>
-
+        </Fragment>
         {burgerMenuOpen && <BurgerMenu />}
-      </div>
+      </header>
     );
   }
 }

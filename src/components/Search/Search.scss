@@ -2,6 +2,7 @@
 @import '../../styles/colors.scss';
 @import '../../styles/grid.scss';
 @import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
 
 @mixin marginLeft {
   margin-left: pxtorem(60px) !important;
@@ -13,12 +14,20 @@
   background-repeat: no-repeat;
   height: auto;
   background-size: 100% 100%;
-  padding: space(64) space(24);
+
+  @include for-tablet-landscape-up {
+    padding: space(64) space(24);
+  }
 
   @include for-phone-only {
     background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
     background-size: 110% 100%;
     background-color: $iceberg;
+    padding: space(40) space(24);
+  }
+
+  input {
+    margin-bottom: space(24);
   }
 }
 
@@ -27,15 +36,27 @@
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
-  padding: space(64) space(32);
   background-size: 100% 100%;
+
+  @include for-tablet-landscape-up {
+    padding: space(64) space(32);
+  }
 }
 
 .search__input {
-  @include marginLeft;
+  @include for-tablet-landscape-up {
+    @include marginLeft;
+  }
+  width: 100%;
 
   button {
     margin: 0 space(20);
+  }
+
+  input {
+    width: 100%;
+    max-width: pxtorem(400px);
+    margin-bottom: space(24);
   }
 }
 
@@ -44,5 +65,26 @@
 }
 
 .search__heading {
-  margin-bottom: pxtorem(27px);
+  @include for-phone-only {
+    margin-bottom: space(16);
+  }
+}
+
+.search__category-subtitle {
+  font-size: $font-heading-s;
+  margin: space(10) 0;
+}
+
+.search__category--mobile {
+  margin-bottom: space(32);
+}
+
+.search__category-heading {
+  @include marginLeft;
+}
+
+.search__cateogry-list {
+  @include marginLeft;
+
+  margin-top: space(24);
 }
