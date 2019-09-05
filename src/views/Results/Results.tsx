@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import queryString from 'query-string';
-import SearchStore from '../../components/Search/store';
-
+import ResultStore from '../../stores/resultsStore';
 class Results extends Component<{ location: Location }> {
   componentDidMount() {
     const searchTerms = queryString.parse(this.props.location.search);
 
-    SearchStore.setSearchTerms(searchTerms);
+    ResultStore.setSearchTerms(searchTerms);
   }
 
   render() {
