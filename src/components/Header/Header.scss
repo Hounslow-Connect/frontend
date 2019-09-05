@@ -9,7 +9,6 @@
 
   @include for-phone-only {
     background-color: $iceberg;
-    position: sticky;
   }
 
   @include for-tablet-portrait-up {
@@ -19,6 +18,10 @@
   span {
     margin-right: space(8);
   }
+}
+
+.header--sticky {
+  position: sticky;
 }
 
 .header__top-bar {

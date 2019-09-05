@@ -37,7 +37,11 @@ class Header extends Component<IProps> {
     const { burgerMenuOpen, toggleBurgerMenu } = uiStore;
 
     return (
-      <header className="header">
+      <header
+        className={cx('header', {
+          'header--sticky': burgerMenuOpen && isMobile,
+        })}
+      >
         <Fragment>
           <div className={cx(isMobile ? 'flex' : 'column')}>
             {!isMobile && (
