@@ -15,11 +15,13 @@ import Header from './components/Header';
 import './styles/grid.scss';
 import WindowSizeStore from './stores/windowSizeStore';
 import UIStore from './stores/uiStore';
+import ResultsStore from './stores/resultsStore';
 
 library.add(fas);
 
 const windowSizeStore = new WindowSizeStore();
 const uiStore = new UIStore();
+const resultsStore = new ResultsStore();
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +30,7 @@ class App extends Component {
 
   render() {
     return (
-      <Provider windowSizeStore={windowSizeStore} uiStore={uiStore}>
+      <Provider windowSizeStore={windowSizeStore} uiStore={uiStore} resultsStore={resultsStore}>
         <Header />
         <Router>
           <Switch>
