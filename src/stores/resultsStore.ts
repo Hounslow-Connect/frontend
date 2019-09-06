@@ -6,15 +6,17 @@ import axios from 'axios';
 import { apiBase } from '../config/api';
 import { IParams } from '../types/types';
 
-class ResultsStore {
+export default class ResultsStore {
   @observable categoryId: string = '';
   @observable category: string = '';
   @observable personaId: string = '';
   @observable persona: string = '';
+  @observable organisations: any[] = [];
   @observable is_free: boolean | null = null;
   @observable wait_time: string = 'null';
   @observable order: 'relevance' | 'location' = 'relevance';
   @observable results: [] = [];
+  @observable loading: boolean = false;
 
   @action
   clear() {
@@ -26,6 +28,8 @@ class ResultsStore {
     this.wait_time = 'null';
     this.order = 'relevance';
     this.results = [];
+    this.loading = false;
+    this.organisations = [];
   }
 
   @action
@@ -105,13 +109,28 @@ class ResultsStore {
 
   @action
   fetchResults = async (params: IParams) => {
+    this.loading = true;
     try {
       const results = await axios.post(`${apiBase}/search?page=1`, params);
-      this.results = get(results, 'data.data');
+      this.results = get(results, 'data.data', []);
+
+      forEach(this.results, (service: any) => {
+        this.organisations.push(service.organisation_id);
+      });
+
+      this.getOrganisations();
     } catch (e) {
       console.error(e);
+      this.loading = false;
     }
   };
-}
 
-export default new ResultsStore();
+  @action
+  getOrganisations = async () => {
+    const organisations = await axios.get(
+      `${apiBase}/organisations?filter[id]=${this.organisations}`
+    );
+    this.organisations = get(organisations, 'data.data', []);
+    this.loading = false;
+  };
+}
