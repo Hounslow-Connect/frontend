@@ -9,20 +9,13 @@ class Results extends Component<{ location: Location }> {
     ResultStore.setSearchTerms(searchTerms);
   }
 
+  componentWillUnmount() {
+    ResultStore.clear();
+  }
+
   render() {
     return <p>results</p>;
   }
 }
 
 export default observer(Results);
-
-// const { category } = queryString.parse(this.props.location.search);
-// // need nice way to slugify url, but keep special characters. State?
-// if (category) {
-//   const cat = await axios.get(`${apiBase}/collections/categories/${category}`);
-//   const test = await axios.post(`${apiBase}/search?page=1`, {
-//     category: startCase(category as string),
-//     order: 'relevance',
-//   });
-//   console.log(test);
-// }

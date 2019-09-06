@@ -17,6 +17,18 @@ class ResultsStore {
   @observable results: [] = [];
 
   @action
+  clear() {
+    this.categoryId = '';
+    this.category = '';
+    this.personaId = '';
+    this.persona = '';
+    this.is_free = null;
+    this.wait_time = 'null';
+    this.order = 'relevance';
+    this.results = [];
+  }
+
+  @action
   getCategory = async () => {
     try {
       const category = await axios.get(`${apiBase}/collections/categories/${this.categoryId}`);
