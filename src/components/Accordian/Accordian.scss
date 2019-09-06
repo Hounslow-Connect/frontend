@@ -1,0 +1,25 @@
+@import '../../styles/mixins.scss';
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.accordian-icon {
+  margin-left: space(8);
+}
+
+.accordian-content {
+  padding: space(8) 0;
+  opacity: 0;
+
+  animation: fadeIn 200ms ease-in-out 0s forwards;
+
+  p {
+    margin: 0;
+  }
+}
