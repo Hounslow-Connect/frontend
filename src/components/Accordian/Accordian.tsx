@@ -26,7 +26,13 @@ export default class Accordian extends Component<IProps> {
     const { open } = this.state;
     return (
       <div className={className}>
-        <div className="flex" onClick={() => this.toggleAccordian()}>
+        <button
+          className="flex"
+          onClick={() => this.toggleAccordian()}
+          aria-expanded={open}
+          aria-controls="accordian-content"
+          id="accordian-header"
+        >
           {title}
           <FontAwesomeIcon
             icon="chevron-down"
@@ -34,8 +40,16 @@ export default class Accordian extends Component<IProps> {
               'accordian-icon--open': open,
             })}
           />
-        </div>
-        {open && <div className="accordian-content">{children}</div>}
+        </button>
+        {open && (
+          <div
+            className="accordian-content"
+            id="accordian-content"
+            aria-labelledby="accordian-header"
+          >
+            {children}
+          </div>
+        )}
       </div>
     );
   }
