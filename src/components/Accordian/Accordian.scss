@@ -13,6 +13,10 @@
   margin-left: space(8);
 }
 
+.accordian-icon--open {
+  transform: rotate(180deg);
+}
+
 .accordian-content {
   padding: space(8) 0;
   opacity: 0;

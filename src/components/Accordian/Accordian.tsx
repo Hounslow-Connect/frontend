@@ -1,5 +1,6 @@
 import React, { ReactChildren, Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cx from 'classnames';
 
 import './Accordian.scss';
 
@@ -22,13 +23,19 @@ export default class Accordian extends Component<IProps> {
 
   render() {
     const { children, title, className } = this.props;
+    const { open } = this.state;
     return (
       <div className={className}>
         <div className="flex" onClick={() => this.toggleAccordian()}>
           {title}
-          <FontAwesomeIcon icon="chevron-down" className="accordian-icon" />
+          <FontAwesomeIcon
+            icon="chevron-down"
+            className={cx('accordian-icon', {
+              'accordian-icon--open': open,
+            })}
+          />
         </div>
-        {this.state.open && <div className="accordian-content">{children}</div>}
+        {open && <div className="accordian-content">{children}</div>}
       </div>
     );
   }
