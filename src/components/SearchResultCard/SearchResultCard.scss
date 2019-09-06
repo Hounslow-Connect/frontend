@@ -94,3 +94,21 @@
     padding: 0 space(8) space(16) space(16);
   }
 }
+
+.search-result-card__footer {
+  background-color: $san-juan;
+  padding: space(16);
+  color: $white;
+  text-align: center;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+
+  a {
+    font-size: $font-body-m;
+    text-decoration: none;
+  }
+
+  svg {
+    margin-left: space(8);
+  }
+}

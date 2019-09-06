@@ -3,11 +3,12 @@ import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import capitalize from 'lodash/capitalize';
 import first from 'lodash/first';
+import get from 'lodash/get';
+import { Link } from 'react-router-dom';
 
 import { apiBase } from '../../config/api';
 
 import './SearchResultCard.scss';
-import get from 'lodash/get';
 import Accordian from '../Accordian';
 
 interface IProps {
@@ -73,6 +74,12 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisatio
       </div>
       <div className="search-result-card__intro">
         <p>{result.intro}</p>
+      </div>
+      <div className="search-result-card__footer">
+        <Link to={'/'}>
+          <span>View More</span>
+          <FontAwesomeIcon icon="chevron-right" />
+        </Link>
       </div>
     </article>
   );
