@@ -71,7 +71,9 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisatio
           />
         </div>
       </div>
-      {result.intro}
+      <div className="search-result-card__intro">
+        <p>{result.intro}</p>
+      </div>
     </article>
   );
 };

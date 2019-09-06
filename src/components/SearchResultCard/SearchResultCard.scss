@@ -14,7 +14,6 @@
 .search-result-card__title {
   flex: 1;
   padding-right: space(16);
-  padding-bottom: space(16);
 }
 
 .search-result-card__organisation {
@@ -82,5 +81,16 @@
 
 .search-result-card__location-list {
   margin-left: space(8);
-  @include link-medium;
+
+  button {
+    @include link-medium;
+  }
+}
+
+.search-result-card__intro {
+  color: $lynch;
+
+  @include for-phone-only {
+    padding: 0 space(8) space(16) space(16);
+  }
 }
