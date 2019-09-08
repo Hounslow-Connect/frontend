@@ -3,8 +3,10 @@ import { observer, inject } from 'mobx-react';
 import queryString from 'query-string';
 import find from 'lodash/find';
 
+import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
 import SearchResultCard from '../../components/SearchResultCard';
+
 class Results extends Component<{ location: Location; resultsStore: ResultStore }> {
   componentDidMount() {
     const { resultsStore, location } = this.props;
@@ -23,7 +25,7 @@ class Results extends Component<{ location: Location; resultsStore: ResultStore 
     const { resultsStore } = this.props;
 
     return (
-      <section style={{ display: 'flex', flexDirection: 'column', padding: '8px' }}>
+      <section className="results__container">
         {resultsStore.loading
           ? 'Loading'
           : resultsStore.results.map((result: any) => {

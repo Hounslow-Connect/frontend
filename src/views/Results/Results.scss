@@ -1,0 +1,12 @@
+@import '../../styles/breakpoints.scss';
+@import '../../styles/mixins.scss';
+
+.results__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  @include for-phone-only {
+    padding: space(8);
+  }
+}

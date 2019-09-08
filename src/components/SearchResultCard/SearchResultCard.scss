@@ -7,8 +7,16 @@
   border: 2px solid $san-juan;
   border-radius: 10px;
   color: $san-juan;
-  max-width: pxtorem(379px);
   margin: space(8);
+  height: max-content;
+
+  @include for-tablet-landscape-up {
+    width: 30%;
+  }
+
+  @include for-phone-only {
+    width: 100%;
+  }
 }
 
 .search-result-card__title {
@@ -19,6 +27,10 @@
 .search-result-card__organisation {
   @include body-xs;
   color: $waikawa;
+
+  @include for-phone-only {
+    margin: space(8) 0 space(16) 0;
+  }
 }
 
 .search-result-card__logo {
@@ -29,6 +41,7 @@
 
 .search-result-card__top-row {
   display: flex;
+  padding: space(24) space(16) space(16) space(24);
 
   @include for-phone-only {
     padding: space(16) space(8) space(16) space(16);
@@ -37,12 +50,15 @@
 
 .search-result-card__tag {
   @include body-m;
-
   padding: space(8);
   color: $white;
-  width: pxtorem(132px);
+  width: fit-content;
   border-radius: 4px;
   margin: space(16) 0;
+
+  @include for-phone-only {
+    margin: 0 0 space(16);
+  }
 }
 
 .search-result-card__tag--activity {
@@ -84,11 +100,13 @@
 
   button {
     @include link-medium;
+    border: none;
   }
 }
 
 .search-result-card__intro {
   color: $lynch;
+  padding: 0 space(24) space(24);
 
   @include for-phone-only {
     padding: 0 space(8) space(16) space(16);
