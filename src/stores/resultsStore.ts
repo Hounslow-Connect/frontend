@@ -73,7 +73,6 @@ export default class ResultsStore {
 
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
-    console.log(searchTerms);
     forEach(searchTerms, (key, value) => {
       if (value === 'category') {
         this.categoryId = key;
