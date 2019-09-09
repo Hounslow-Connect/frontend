@@ -7,17 +7,18 @@ import get from 'lodash/get';
 import { Link } from 'react-router-dom';
 
 import { apiBase } from '../../config/api';
+import { IResults, IOrganisation, IServiceLocation } from '../../types/types';
 
 import './SearchResultCard.scss';
 import Accordian from '../Accordian';
 
 interface IProps {
-  result: any;
-  organisation: any;
+  result: IResults;
+  organisation?: IOrganisation | null;
 }
 
 const getLocationName = (locations: []) =>
-  locations.map((location: any) =>
+  locations.map((location: IServiceLocation) =>
     location.name ? location.name : get(location, 'location.address_line_1', '')
   );
 
@@ -29,7 +30,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisatio
       <div className="search-result-card__top-row">
         <div className="search-result-card__title">
           <h2>{result.name}</h2>
-          <p className="search-result-card__organisation">{organisation.name}</p>
+          {organisation && <p className="search-result-card__organisation">{organisation.name}</p>}
           <div className={cx('search-result-card__tag', `search-result-card__tag--${result.type}`)}>
             <FontAwesomeIcon icon="users" className="search-result-card__tag--icon" />
             {capitalize(result.type)}

@@ -10,6 +10,7 @@ import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
 import SearchResultCard from '../../components/SearchResultCard';
 import CategoryFilter from './CategoryFilter';
+import { IResults } from '../../types/types';
 
 interface IProps {
   location: Location;
@@ -24,7 +25,7 @@ class Results extends Component<IProps> {
     resultsStore.getSearchTerms();
   }
 
-  componentDidUpdate(prevProps: any) {
+  componentDidUpdate(prevProps: IProps) {
     if (prevProps.location.search !== this.props.location.search) {
       const { resultsStore } = this.props;
       resultsStore.getSearchTerms();
@@ -75,11 +76,9 @@ class Results extends Component<IProps> {
                 )}
               </div>
               <main className="results__container">
-                {resultsStore.results.map((result: any) => {
-                  const organisation = find(resultsStore.organisations, [
-                    'id',
-                    result.organisation_id,
-                  ]);
+                {resultsStore.results.map((result: IResults) => {
+                  const organisation =
+                    find(resultsStore.organisations, ['id', result.organisation_id]) || null;
 
                   return (
                     <SearchResultCard key={result.id} result={result} organisation={organisation} />

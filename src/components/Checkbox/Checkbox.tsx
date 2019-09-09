@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 interface IProps {
   label: string;
   id: string;
-  onChange?: any;
+  onChange?: () => void;
   checked: boolean;
 }
 

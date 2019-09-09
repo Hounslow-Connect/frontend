@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { observer } from 'mobx-react';
 
 import './Select.scss';
@@ -10,8 +10,8 @@ interface IOption {
 
 interface IProps {
   options: IOption[];
-  onChange?: any;
-  className?: any;
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  className?: string;
   placeholder: string;
   id: string;
 }

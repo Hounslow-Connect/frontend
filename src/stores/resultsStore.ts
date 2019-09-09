@@ -5,7 +5,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import { apiBase } from '../config/api';
-import { IParams, ICategory, IPersona } from '../types/types';
+import { IParams, ICategory, IPersona, IOrganisation, IResults } from '../types/types';
 
 export default class ResultsStore {
   @observable keyword: string | null = null;
@@ -13,11 +13,11 @@ export default class ResultsStore {
   @observable category: ICategory | null = null;
   @observable personaId: string = '';
   @observable persona: IPersona | null = null;
-  @observable organisations: any[] = [];
+  @observable organisations: IOrganisation[] | null = [];
   @observable is_free: boolean = false;
   @observable wait_time: string = 'null';
   @observable order: 'relevance' | 'location' = 'relevance';
-  @observable results: [] = [];
+  @observable results: IResults[] = [];
   @observable loading: boolean = false;
   @observable currentPage: number = 1;
   @observable totalItems: number = 0;
@@ -139,7 +139,8 @@ export default class ResultsStore {
       this.totalItems = get(results, 'data.meta.total', 0);
       this.itemsPerPage = get(results, 'data.meta.per_page', 25);
 
-      forEach(this.results, (service: any) => {
+      forEach(this.results, (service: IResults) => {
+        // @ts-ignore
         this.organisations.push(service.organisation_id);
       });
 
