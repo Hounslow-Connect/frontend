@@ -15,6 +15,7 @@ interface IProps {
   category?: boolean;
   header?: boolean;
   burgerMenu?: boolean;
+  light?: boolean;
   onClick?: () => void;
 }
 
@@ -28,6 +29,7 @@ const Button: React.FunctionComponent<IProps> = ({
   category = false,
   header = false,
   burgerMenu = false,
+  light = false,
   onClick,
 }) => (
   <button
@@ -37,6 +39,7 @@ const Button: React.FunctionComponent<IProps> = ({
       'button__category button__alt button__alt--medium': category,
       button__header: header,
       'buton__burger-menu': burgerMenu,
+      'button--light': light,
     })}
     disabled={disabled}
     type={type}
