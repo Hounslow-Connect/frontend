@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { observer } from 'mobx-react';
 
 import './Select.scss';
@@ -10,14 +10,21 @@ interface IOption {
 
 interface IProps {
   options: IOption[];
-  onChange?: any;
-  className?: any;
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  className?: string;
   placeholder: string;
+  id: string;
 }
 
-const Select: React.FunctionComponent<IProps> = ({ options, onChange, className, placeholder }) => (
-  <select className={`select ${className}`} onChange={onChange}>
-    <option value="" disabled={true} selected={true} hidden={true}>
+const Select: React.FunctionComponent<IProps> = ({
+  options,
+  onChange,
+  className,
+  placeholder,
+  id,
+}) => (
+  <select className={`select ${className}`} onChange={onChange} id={id} defaultValue={placeholder}>
+    <option value={placeholder} disabled={true} hidden={true}>
       {placeholder}
     </option>
     {options.map(({ value, text }) => (

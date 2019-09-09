@@ -1,0 +1,57 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/fonts.scss';
+
+.checkbox {
+  input[type='checkbox'] {
+    position: absolute;
+    left: -99999px;
+  }
+
+  input[type='checkbox'] + label {
+    @include body-m;
+    cursor: pointer;
+    margin-bottom: 0;
+    color: $waikawa;
+
+    svg {
+      display: none;
+    }
+  }
+
+  input[type='checkbox']:checked + label {
+    display: inline-block;
+    vertical-align: middle;
+
+    svg {
+      display: inline-block;
+      font-size: 1.4rem;
+      top: 4px;
+      position: absolute;
+      left: 4px;
+      color: $san_juan;
+    }
+  }
+
+  input[type='checkbox'] + label > span {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin-right: 8px;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid $san_juan;
+    position: relative;
+  }
+
+  input[type='checkbox']:focus + label > span {
+    border-color: $puerto_rico;
+  }
+
+  input[type='checkbox'] + label span:before,
+  input[type='checkbox'] + label:hover > span:before,
+  input[type='checkbox']:checked + label span:before {
+    display: block;
+  }
+}

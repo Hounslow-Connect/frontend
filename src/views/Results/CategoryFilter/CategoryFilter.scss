@@ -1,0 +1,37 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.category_filters__container {
+  display: flex;
+  background: $white;
+  border-radius: 23px;
+  padding: space(24);
+  margin-top: space(16);
+}
+
+.category_filters__filter-cost {
+  margin-right: space(32);
+}
+
+.category_filters--header--cost {
+  @include heading-m;
+  margin-bottom: space(24);
+}
+
+.results__category-search--header {
+  @include heading-m;
+  margin-bottom: space(16);
+}
+
+.category_filters__search--layout {
+  button {
+    &:first-of-type {
+      margin-right: 5px;
+    }
+  }
+}
+.results__category-search--header {
+  @include heading-m;
+  margin-bottom: space(16);
+}

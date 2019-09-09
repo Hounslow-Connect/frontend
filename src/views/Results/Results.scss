@@ -1,0 +1,127 @@
+@import '../../styles/breakpoints.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+
+@mixin search-container {
+  background: $white;
+  border-radius: 23px;
+  padding: space(24);
+  margin-top: space(16);
+}
+
+.results__list {
+  padding: space(20);
+
+  @include for-phone-only {
+    padding: space(8);
+  }
+}
+
+.results__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.results__container-count {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  color: $san-juan;
+
+  @include for-tablet-landscape-up {
+    margin-bottom: space(40);
+  }
+}
+
+.results__search-left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-right: space(32);
+
+  h4 {
+    @include heading-l;
+  }
+}
+
+.results__search-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.results__search-box {
+  display: flex;
+  background-image: url('../../assets/images/backgrounds/results-shape.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: space(32);
+  color: $san-juan;
+}
+
+.results__search-box-info {
+  @include search-container;
+  font-size: $font-heading-l;
+
+  h5 {
+    font-size: $font-heading-l;
+    margin-bottom: space(12);
+    font-family: $font-secondary;
+  }
+
+  p {
+    color: $waikawa;
+  }
+}
+
+.results__search-filter-location {
+  width: 150px;
+  margin-right: space(40);
+}
+
+.pagnation__container {
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  margin: space(48) 0;
+
+  li {
+    margin-right: space(8);
+  }
+}
+
+.pagination--text-nav-container {
+  background: $alabaster;
+  border-radius: 2px;
+  padding: space(10);
+}
+
+.pagination--text-nav-link {
+  text-decoration: none;
+
+  span {
+    color: $elm;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.pagination--number-container {
+  padding: space(10);
+}
+
+.pagination--text-number-link {
+  color: $waikawa;
+  text-decoration: none;
+}
+
+.pagination--active {
+  background: $mercury;
+  border-radius: 2px;
+}

@@ -1,38 +1,47 @@
 import { observable, action } from 'mobx';
-import { apiBase } from '../../config/api';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
+import axios from 'axios';
+import get from 'lodash/get';
 
-export interface ICategory {
-  name: string;
-  id: string;
-  icon: IconName;
-}
+import { apiBase } from '../../config/api';
+import { ICategory, IPersona } from '../../types/types';
 
 class SearchStore {
   @observable search: string = '';
   @observable categories: ICategory[] = [];
+  @observable personas: IPersona[] = [];
+  @observable categoryId: string = '';
 
   constructor() {
     this.getCategories();
+    this.getPersonas();
   }
 
-  fetchCategories = async () => {
+  @action setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    this.categoryId = e.target.value;
+  };
+
+  @action
+  getCategories = async () => {
     try {
-      const data = await fetch(`${apiBase}/collections/categories?page=1`);
-      return data.json();
+      const categories = await axios.get(`${apiBase}/collections/categories?page=1`);
+      this.categories = get(categories, 'data.data', []);
     } catch (e) {
       console.error(e);
     }
   };
 
   @action
-  getCategories = async () => {
-    const { data } = await this.fetchCategories();
-    this.categories = data;
+  getPersonas = async () => {
+    try {
+      const personas = await axios.get(`${apiBase}/collections/personas`);
+      this.personas = get(personas, 'data.data', []);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  @action onChange = (text: string) => {
-    this.search = text;
+  @action onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.search = e.target.value;
   };
 }
 

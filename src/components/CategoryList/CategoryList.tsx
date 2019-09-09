@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react';
-import Button from '../Button';
-import { History } from 'history';
-
-import { ICategory } from '../Search/store';
 import { observer } from 'mobx-react';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-interface IProps {
-  history: History;
+import { ICategory } from '../../types/types';
+import Button from '../Button';
+
+interface IProps extends RouteComponentProps {
   categories: ICategory[];
 }
 
@@ -19,15 +18,15 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories }) 
         key={id}
         size="small"
         icon={icon}
-        onClick={() =>
+        onClick={() => {
           history.push({
             pathname: '/results',
             search: `?category=${id}`,
-          })
-        }
+          });
+        }}
       />
     ))}
   </Fragment>
 );
 
-export default observer(CategoryList);
+export default withRouter(observer(CategoryList));
