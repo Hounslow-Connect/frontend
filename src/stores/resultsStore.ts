@@ -2,18 +2,19 @@ import { observable, action, computed } from 'mobx';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import axios from 'axios';
+import queryString from 'query-string';
 
 import { apiBase } from '../config/api';
-import { IParams, ICategory } from '../types/types';
+import { IParams, ICategory, IPersona } from '../types/types';
 
 export default class ResultsStore {
   @observable keyword: string | null = null;
   @observable categoryId: string = '';
   @observable category: ICategory | null = null;
   @observable personaId: string = '';
-  @observable persona: string = '';
+  @observable persona: IPersona | null = null;
   @observable organisations: any[] = [];
-  @observable is_free: boolean | null = null;
+  @observable is_free: boolean = false;
   @observable wait_time: string = 'null';
   @observable order: 'relevance' | 'location' = 'relevance';
   @observable results: [] = [];
@@ -29,8 +30,8 @@ export default class ResultsStore {
     this.categoryId = '';
     this.category = null;
     this.personaId = '';
-    this.persona = '';
-    this.is_free = null;
+    this.persona = null;
+    this.is_free = false;
     this.wait_time = 'null';
     this.order = 'relevance';
     this.results = [];
@@ -52,10 +53,16 @@ export default class ResultsStore {
   getPersona = async () => {
     try {
       const persona = await axios.get(`${apiBase}/collections/personas/${this.personaId}`);
-      this.persona = get(persona, 'data.data.name', '');
+      this.persona = get(persona, 'data.data', '');
     } catch (e) {
       console.error(e);
     }
+  };
+
+  getSearchTerms = () => {
+    const searchTerms = queryString.parse(window.location.search);
+
+    this.setSearchTerms(searchTerms);
   };
 
   @action
@@ -65,7 +72,7 @@ export default class ResultsStore {
         this.categoryId = key;
       }
 
-      if (value === 'persona ') {
+      if (value === 'persona') {
         this.personaId = key;
       }
 
@@ -97,7 +104,7 @@ export default class ResultsStore {
     }
 
     if (this.persona) {
-      params.persona = this.persona;
+      params.persona = get(this.persona, 'name');
     }
 
     if (this.is_free) {
@@ -138,5 +145,22 @@ export default class ResultsStore {
     );
     this.organisations = get(organisations, 'data.data', []);
     this.loading = false;
+  };
+
+  @action
+  toggleIsFree = () => {
+    this.is_free = !this.is_free;
+  };
+
+  updateQueryStringParameter = (key: string, value: string | boolean) => {
+    const query = window.location.search;
+    const re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
+    const separator = query.indexOf('?') !== -1 ? '&' : '?';
+
+    if (query.match(re)) {
+      return query.replace(re, '');
+    } else {
+      return query + separator + key + '=' + value;
+    }
   };
 }

@@ -9,6 +9,7 @@
   padding: space(24);
   margin-top: space(16);
 }
+
 .results__container {
   display: flex;
   flex-wrap: wrap;
@@ -69,39 +70,7 @@
   }
 }
 
-.results__search-filter {
-  display: flex;
-  flex-direction: column;
-}
-
-.results__search-box-filters {
-  @include search-container;
-  display: flex;
-}
-
 .results__search-filter-location {
   width: 150px;
   margin-right: space(40);
-}
-
-.result__search-filter-cost {
-  margin-right: space(32);
-}
-
-.results__search--layout {
-  button {
-    &:first-of-type {
-      margin-right: 5px;
-    }
-  }
-}
-
-.results__category-search--header {
-  @include heading-m;
-  margin-bottom: space(16);
-}
-
-.results__category-search--header--cost {
-  @include heading-m;
-  margin-bottom: space(24);
 }

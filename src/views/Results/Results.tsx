@@ -1,26 +1,32 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, ReactFragment } from 'react';
 import { observer, inject } from 'mobx-react';
-import queryString from 'query-string';
 import find from 'lodash/find';
 import get from 'lodash/get';
+import { History } from 'history';
 
 import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
 import SearchResultCard from '../../components/SearchResultCard';
-import Checkbox from '../../components/Checkbox';
-import Button from '../../components/Button';
+import CategoryFilter from './CategoryFilter';
 
 interface IProps {
   location: Location;
   resultsStore: ResultStore;
+  history: History;
 }
 
 class Results extends Component<IProps> {
   componentDidMount() {
-    const { resultsStore, location } = this.props;
-    const searchTerms = queryString.parse(location.search);
+    const { resultsStore } = this.props;
 
-    resultsStore.setSearchTerms(searchTerms);
+    resultsStore.getSearchTerms();
+  }
+
+  componentDidUpdate(prevProps: any) {
+    if (prevProps.location.search !== this.props.location.search) {
+      const { resultsStore } = this.props;
+      resultsStore.getSearchTerms();
+    }
   }
 
   componentWillUnmount() {
@@ -37,9 +43,17 @@ class Results extends Component<IProps> {
           <div className="results__search-left">
             <h4>Results for</h4>
             <div className="results__search-box-info">
-              <h5>{get(resultsStore, 'category.name')}</h5>
+              <h5>
+                {resultsStore.category
+                  ? get(resultsStore, 'category.name')
+                  : get(resultsStore, 'persona.name')}
+              </h5>
               <div>
-                <p>{get(resultsStore, 'category.intro')}</p>
+                <p>
+                  {resultsStore.category
+                    ? get(resultsStore, 'category.intro')
+                    : get(resultsStore, 'persona.intro')}
+                </p>
               </div>
             </div>
           </div>
@@ -75,19 +89,5 @@ class Results extends Component<IProps> {
     );
   }
 }
-
-const CategoryFilter = () => (
-  <div className="results__search-box-filters">
-    <div className="results__search-filter result__search-filter-cost">
-      <p className="results__category-search--header--cost">Cost</p>
-      <Checkbox id="free" label="Free" />
-    </div>
-    <div className="results__search--layout">
-      <p className="results__category-search--header">View As</p>
-      <Button text="Grid" icon="th-large" size="small" />
-      <Button text="Map" icon="map" size="small" light={true} />
-    </div>
-  </div>
-);
 
 export default inject('resultsStore')(observer(Results));
