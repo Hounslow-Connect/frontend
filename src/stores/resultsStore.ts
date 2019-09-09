@@ -19,6 +19,9 @@ export default class ResultsStore {
   @observable order: 'relevance' | 'location' = 'relevance';
   @observable results: [] = [];
   @observable loading: boolean = false;
+  @observable currentPage: number = 1;
+  @observable totalItems: number = 0;
+  @observable itemsPerPage: number = 25;
 
   @computed
   get isKeywordSearch() {
@@ -37,6 +40,9 @@ export default class ResultsStore {
     this.results = [];
     this.loading = false;
     this.organisations = [];
+    this.currentPage = 1;
+    this.totalItems = 0;
+    this.itemsPerPage = 25;
   }
 
   @action
@@ -67,6 +73,7 @@ export default class ResultsStore {
 
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
+    console.log(searchTerms);
     forEach(searchTerms, (key, value) => {
       if (value === 'category') {
         this.categoryId = key;
@@ -82,6 +89,10 @@ export default class ResultsStore {
 
       if (value === 'wait_time') {
         this.wait_time = key;
+      }
+
+      if (value === 'page') {
+        this.currentPage = Number(key);
       }
     });
 
@@ -124,8 +135,10 @@ export default class ResultsStore {
   fetchResults = async (params: IParams) => {
     this.loading = true;
     try {
-      const results = await axios.post(`${apiBase}/search?page=1`, params);
+      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}`, params);
       this.results = get(results, 'data.data', []);
+      this.totalItems = get(results, 'data.meta.total', 0);
+      this.itemsPerPage = get(results, 'data.meta.per_page', 25);
 
       forEach(this.results, (service: any) => {
         this.organisations.push(service.organisation_id);
@@ -152,15 +165,22 @@ export default class ResultsStore {
     this.is_free = !this.is_free;
   };
 
-  updateQueryStringParameter = (key: string, value: string | boolean) => {
+  updateQueryStringParameter = (key: string, value: string | boolean | number) => {
     const query = window.location.search;
     const re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
     const separator = query.indexOf('?') !== -1 ? '&' : '?';
 
     if (query.match(re)) {
-      return query.replace(re, '');
+      return key === 'page'
+        ? query.replace(re, `${separator}page=${value}`)
+        : query.replace(re, '');
     } else {
       return query + separator + key + '=' + value;
     }
+  };
+
+  @action
+  paginate = (page: number) => {
+    this.currentPage = page;
   };
 }
