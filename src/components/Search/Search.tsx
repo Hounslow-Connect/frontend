@@ -43,7 +43,18 @@ class Search extends React.Component<IProps> {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => SearchStore.onChange(e)}
                 id="search"
               />
-              {!isMobile && <Button text="Search" icon="search" />}
+              {!isMobile && (
+                <Button
+                  text="Search"
+                  icon="search"
+                  onClick={() =>
+                    history.push({
+                      pathname: '/results',
+                      search: `?search_term=${SearchStore.search}`,
+                    })
+                  }
+                />
+              )}
             </div>
             <label className="search__category-heading" htmlFor="category">
               Or browse by category

@@ -16,6 +16,7 @@ export interface IParams {
   is_free?: boolean;
   wait_time?: string;
   order?: 'location' | 'relevance';
+  query?: string;
 }
 
 export interface ICategory {

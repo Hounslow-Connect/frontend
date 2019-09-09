@@ -30,6 +30,7 @@ export default class ResultsStore {
 
   @action
   clear() {
+    this.keyword = '';
     this.categoryId = '';
     this.category = null;
     this.personaId = '';
@@ -82,6 +83,10 @@ export default class ResultsStore {
         this.personaId = key;
       }
 
+      if (value === 'search_term') {
+        this.keyword = key;
+      }
+
       if (value === 'is_free') {
         this.is_free = key === 'true' ? true : false;
       }
@@ -123,6 +128,10 @@ export default class ResultsStore {
 
     if (this.wait_time !== 'null') {
       params.wait_time = this.wait_time;
+    }
+
+    if (this.keyword) {
+      params.query = this.keyword;
     }
 
     params.order = this.order;
