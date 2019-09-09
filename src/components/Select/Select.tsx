@@ -23,8 +23,8 @@ const Select: React.FunctionComponent<IProps> = ({
   placeholder,
   id,
 }) => (
-  <select className={`select ${className}`} onChange={onChange} id={id}>
-    <option value="" disabled={true} selected={true} hidden={true}>
+  <select className={`select ${className}`} onChange={onChange} id={id} defaultValue={placeholder}>
+    <option value={placeholder} disabled={true} hidden={true}>
       {placeholder}
     </option>
     {options.map(({ value, text }) => (
