@@ -16,6 +16,7 @@ import WindowSizeStore from '../../stores/windowSizeStore';
 interface IProps extends RouteComponentProps {
   windowSizeStore?: WindowSizeStore;
 }
+
 @inject('windowSizeStore')
 @observer
 class Search extends React.Component<IProps> {
@@ -54,7 +55,7 @@ class Search extends React.Component<IProps> {
                 </p>
                 <Select
                   options={options}
-                  onChange={(e: any) => SearchStore.setCategory(e)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => SearchStore.setCategory(e)}
                   className="search__category--mobile"
                   placeholder="Category List"
                   id="category"
