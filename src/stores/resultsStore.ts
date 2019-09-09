@@ -1,14 +1,15 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import axios from 'axios';
 
 import { apiBase } from '../config/api';
-import { IParams } from '../types/types';
+import { IParams, ICategory } from '../types/types';
 
 export default class ResultsStore {
+  @observable keyword: string | null = null;
   @observable categoryId: string = '';
-  @observable category: string = '';
+  @observable category: ICategory | null = null;
   @observable personaId: string = '';
   @observable persona: string = '';
   @observable organisations: any[] = [];
@@ -18,10 +19,15 @@ export default class ResultsStore {
   @observable results: [] = [];
   @observable loading: boolean = false;
 
+  @computed
+  get isKeywordSearch() {
+    return !this.keyword === null;
+  }
+
   @action
   clear() {
     this.categoryId = '';
-    this.category = '';
+    this.category = null;
     this.personaId = '';
     this.persona = '';
     this.is_free = null;
@@ -36,7 +42,7 @@ export default class ResultsStore {
   getCategory = async () => {
     try {
       const category = await axios.get(`${apiBase}/collections/categories/${this.categoryId}`);
-      this.category = get(category, 'data.data.name', '');
+      this.category = get(category, 'data.data', '');
     } catch (e) {
       console.error(e);
     }
@@ -87,7 +93,7 @@ export default class ResultsStore {
     const params: IParams = {};
 
     if (this.category) {
-      params.category = this.category;
+      params.category = get(this.category, 'name');
     }
 
     if (this.persona) {
