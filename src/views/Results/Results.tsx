@@ -1,4 +1,4 @@
-import React, { Component, Fragment, ReactFragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { observer, inject } from 'mobx-react';
 import find from 'lodash/find';
 import get from 'lodash/get';

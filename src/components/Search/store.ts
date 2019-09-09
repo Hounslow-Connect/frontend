@@ -3,7 +3,7 @@ import axios from 'axios';
 import get from 'lodash/get';
 
 import { apiBase } from '../../config/api';
-import { ICategory, IPersona, IParams } from '../../types/types';
+import { ICategory, IPersona } from '../../types/types';
 
 class SearchStore {
   @observable search: string = '';

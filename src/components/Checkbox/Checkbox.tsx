@@ -1,4 +1,4 @@
-import React, { ReactNode, FormEvent } from 'react';
+import React from 'react';
 
 import './Checkbox.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
