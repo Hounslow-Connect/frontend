@@ -13,7 +13,6 @@ interface IProps {
 
 const Checkbox: React.FunctionComponent<IProps> = ({ label, id, onChange, checked }) => (
   <div className="checkbox">
-    {console.log(checked)}
     <input type="checkbox" id={id} name={id} checked={checked} onChange={onChange} />
     <label htmlFor={id}>
       <span>
