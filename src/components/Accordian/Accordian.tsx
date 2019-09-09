@@ -1,4 +1,4 @@
-import React, { ReactChildren, Component } from 'react';
+import React, { ReactChildren, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
 
@@ -10,47 +10,37 @@ interface IProps {
   className?: string;
 }
 
-export default class Accordian extends Component<IProps> {
-  state = {
-    open: false,
-  };
+const Accordian: React.FunctionComponent<IProps> = ({ children, title, className }) => {
+  const [open, toggleAccordian] = useState(false);
 
-  toggleAccordian = () => {
-    this.setState({
-      open: !this.state.open,
-    });
-  };
-
-  render() {
-    const { children, title, className } = this.props;
-    const { open } = this.state;
-    return (
-      <div className={className}>
-        <button
-          className="flex"
-          onClick={() => this.toggleAccordian()}
-          aria-expanded={open}
-          aria-controls="accordian-content"
-          id="accordian-header"
+  return (
+    <div className={className}>
+      <button
+        className="flex"
+        onClick={() => toggleAccordian(!open)}
+        aria-expanded={open}
+        aria-controls="accordian-content"
+        id="accordian-header"
+      >
+        {title}
+        <FontAwesomeIcon
+          icon="chevron-down"
+          className={cx('accordian-icon', {
+            'accordian-icon--open': open,
+          })}
+        />
+      </button>
+      {open && (
+        <div
+          className="accordian-content"
+          id="accordian-content"
+          aria-labelledby="accordian-header"
         >
-          {title}
-          <FontAwesomeIcon
-            icon="chevron-down"
-            className={cx('accordian-icon', {
-              'accordian-icon--open': open,
-            })}
-          />
-        </button>
-        {open && (
-          <div
-            className="accordian-content"
-            id="accordian-content"
-            aria-labelledby="accordian-header"
-          >
-            {children}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Accordian;
