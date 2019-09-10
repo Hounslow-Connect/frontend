@@ -16,6 +16,10 @@ class SearchStore {
     this.getPersonas();
   }
 
+  @action clear = () => {
+    this.search = '';
+  };
+
   @action setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     this.categoryId = e.target.value;
   };
