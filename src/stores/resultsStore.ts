@@ -1,11 +1,21 @@
 import { observable, action, computed } from 'mobx';
 import forEach from 'lodash/forEach';
 import get from 'lodash/get';
+import size from 'lodash/size';
 import axios from 'axios';
 import queryString from 'query-string';
 
 import { apiBase } from '../config/api';
-import { IParams, ICategory, IPersona, IOrganisation, IResults } from '../types/types';
+import {
+  IParams,
+  ICategory,
+  IPersona,
+  IOrganisation,
+  IResults,
+  IGeoLocation,
+} from '../types/types';
+
+import { queryRegex, querySeparator } from '../utils/utils';
 
 export default class ResultsStore {
   @observable keyword: string | null = null;
@@ -22,6 +32,8 @@ export default class ResultsStore {
   @observable currentPage: number = 1;
   @observable totalItems: number = 0;
   @observable itemsPerPage: number = 25;
+  @observable postcode: string = '';
+  @observable locationCoords: IGeoLocation | {} = {};
 
   @computed
   get isKeywordSearch() {
@@ -44,6 +56,8 @@ export default class ResultsStore {
     this.currentPage = 1;
     this.totalItems = 0;
     this.itemsPerPage = 25;
+    this.postcode = '';
+    this.locationCoords = {};
   }
 
   @action
@@ -98,6 +112,10 @@ export default class ResultsStore {
       if (value === 'page') {
         this.currentPage = Number(key);
       }
+
+      if (value === 'location') {
+        this.postcode = key;
+      }
     });
 
     if (this.categoryId) {
@@ -106,6 +124,10 @@ export default class ResultsStore {
 
     if (this.personaId) {
       await this.getPersona();
+    }
+
+    if (this.postcode) {
+      await this.geolocate();
     }
 
     this.setParams();
@@ -132,6 +154,10 @@ export default class ResultsStore {
 
     if (this.keyword) {
       params.query = this.keyword;
+    }
+
+    if (size(this.locationCoords)) {
+      params.location = this.locationCoords;
     }
 
     params.order = this.order;
@@ -174,22 +200,78 @@ export default class ResultsStore {
     this.is_free = !this.is_free;
   };
 
-  updateQueryStringParameter = (key: string, value: string | boolean | number) => {
-    const query = window.location.search;
-    const re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
-    const separator = query.indexOf('?') !== -1 ? '&' : '?';
+  updateQueryStringParameter = (
+    key: string,
+    value: string | boolean | number,
+    query: string = window.location.search
+  ) => {
+    const re = queryRegex(key);
+    const separator = querySeparator(query);
 
     if (query.match(re)) {
-      return key === 'page'
-        ? query.replace(re, `${separator}page=${value}`)
-        : query.replace(re, '');
+      return query.replace(re, `$1${key}=${value}$2`);
     } else {
-      return query + separator + key + '=' + value;
+      return `${query}${separator}${key}=${value}`;
     }
+  };
+
+  removeQueryStringParameter = (key: string, query: string = window.location.search) => {
+    const re = queryRegex(key);
+
+    if (query.match(re)) {
+      return query.replace(re, '$2');
+    }
+
+    return query;
   };
 
   @action
   paginate = (page: number) => {
     this.currentPage = page;
+  };
+
+  @action
+  postcodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.postcode = e.target.value.replace(' ', '');
+  };
+
+  amendSearch = () => {
+    let url = window.location.search;
+
+    if (this.postcode) {
+      url = this.updateQueryStringParameter('location', this.postcode);
+    }
+
+    if (!this.postcode) {
+      url = this.removeQueryStringParameter('location', url);
+      this.locationCoords = {};
+    }
+
+    if (this.is_free) {
+      url = this.updateQueryStringParameter('is_free', this.is_free, url);
+    }
+
+    if (!this.is_free) {
+      url = this.removeQueryStringParameter('is_free', url);
+    }
+
+    return url;
+  };
+
+  geolocate = async () => {
+    try {
+      const geolocation = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+      );
+
+      const location = get(geolocation, 'data.results[0].geometry.location', {});
+
+      this.locationCoords = {
+        lon: location.lng,
+        lat: location.lat,
+      };
+    } catch (e) {
+      console.error(e);
+    }
   };
 }

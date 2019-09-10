@@ -31,8 +31,10 @@ class CategoryFilter extends Component<IProps> {
             label="Free"
             checked={resultsStore.is_free}
             onChange={() => {
-              history.push({ search: resultsStore.updateQueryStringParameter('is_free', true) });
               resultsStore.toggleIsFree();
+              history.push({
+                search: resultsStore.updateQueryStringParameter('is_free', resultsStore.is_free),
+              });
             }}
           />
         </div>

@@ -42,6 +42,7 @@ class Search extends React.Component<IProps> {
                 placeholder="Search for services, groups and activities"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => SearchStore.onChange(e)}
                 id="search"
+                value={SearchStore.search}
               />
               {!isMobile && (
                 <Button

@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/classnames": "^2.2.9",
     "@types/lodash": "^4.14.138",
+    "@types/node": "^12.7.4",
     "@types/react": "^16.9.2",
     "@types/react-js-pagination": "^3.0.3",
     "@types/react-router": "^5.0.3",

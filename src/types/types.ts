@@ -17,6 +17,7 @@ export interface IParams {
   wait_time?: string;
   order?: 'location' | 'relevance';
   query?: string;
+  location?: IGeoLocation | {};
 }
 
 export interface ICategory {
@@ -105,4 +106,9 @@ export interface ILocation {
   lon: number;
   postcode: string;
   updated_at: string;
+}
+
+export interface IGeoLocation {
+  lon: string;
+  lat: string;
 }
