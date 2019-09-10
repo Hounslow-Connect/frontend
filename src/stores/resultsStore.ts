@@ -25,12 +25,12 @@ export default class ResultsStore {
 
   @computed
   get isKeywordSearch() {
-    return !this.keyword === null;
+    return this.keyword !== null;
   }
 
   @action
   clear() {
-    this.keyword = '';
+    this.keyword = null;
     this.categoryId = '';
     this.category = null;
     this.personaId = '';

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-import Checkbox from '../../../components/Checkbox';
-import Button from '../../../components/Button';
-import ResultsStore from '../../../stores/resultsStore';
+import Checkbox from '../../../../components/Checkbox';
+import Button from '../../../../components/Button';
+import ResultsStore from '../../../../stores/resultsStore';
 
 import './CategoryFilter.scss';
 
