@@ -8,7 +8,6 @@ import Pagination from 'react-js-pagination';
 import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
 import SearchResultCard from '../../components/SearchResultCard';
-import CategoryFilter from './Filters/CategoryFilter';
 import { IResults } from '../../types/types';
 import Category from './Filters/Category';
 import Keyword from './Filters/Keyword';

@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, Component } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 
