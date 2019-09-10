@@ -20,6 +20,10 @@ interface IProps extends RouteComponentProps {
 @inject('windowSizeStore')
 @observer
 class Search extends React.Component<IProps> {
+  componentWillUnmount() {
+    SearchStore.clear();
+  }
+
   render() {
     const { windowSizeStore, history } = this.props;
 
@@ -48,6 +52,7 @@ class Search extends React.Component<IProps> {
                 <Button
                   text="Search"
                   icon="search"
+                  type="submit"
                   onClick={() =>
                     history.push({
                       pathname: '/results',
