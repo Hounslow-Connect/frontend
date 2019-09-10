@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 
@@ -6,31 +6,56 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import ResultsStore from '../../../stores/resultsStore';
 import KeywordFilter from './KeywordFilter';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
 }
 
-const Keyword: React.FunctionComponent<IProps> = ({ resultsStore }) => (
-  <Fragment>
-    <div className="results__search-left">
-      <h4>Search results</h4>
-      <form className="results__search-box-info">
-        <label htmlFor="keyword">I'm looking for</label>
-        <div>
-          <Input
-            onChange={() => console.log('on change')}
-            id="keyword"
-            placeholder={get(resultsStore, 'keyword', '') || ''}
-            className="results__search-box-keyword"
-            value={get(resultsStore, 'keyword', '') || ''}
-          />
-          <Button icon="search" text="Search" />
-        </div>
-      </form>
-    </div>
-    <KeywordFilter />
-  </Fragment>
-);
+@inject('resultsStore')
+@observer
+class Keyword extends Component<IProps> {
+  render() {
+    const { resultsStore, history } = this.props;
 
-export default inject('resultsStore')(observer(Keyword));
+    if (!resultsStore) {
+      return null;
+    }
+    return (
+      <Fragment>
+        <div className="results__search-left">
+          <h4>Search results</h4>
+          <form className="results__search-box-info">
+            <label htmlFor="keyword">I'm looking for</label>
+            <div>
+              <Input
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  resultsStore.handleKeywordChange(e)
+                }
+                id="keyword"
+                placeholder={get(resultsStore, 'keyword', '') || ''}
+                className="results__search-box-keyword"
+                value={get(resultsStore, 'keyword', '') || ''}
+              />
+              <Button
+                icon="search"
+                text="Search"
+                onClick={() => {
+                  history.push({
+                    search: resultsStore.updateQueryStringParameter(
+                      'search_term',
+                      resultsStore.keyword
+                    ),
+                  });
+                }}
+              />
+            </div>
+          </form>
+        </div>
+        <KeywordFilter />
+      </Fragment>
+    );
+  }
+}
+
+export default withRouter(Keyword);

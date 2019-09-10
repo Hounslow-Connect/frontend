@@ -18,7 +18,7 @@ import {
 import { queryRegex, querySeparator } from '../utils/utils';
 
 export default class ResultsStore {
-  @observable keyword: string | null = null;
+  @observable keyword: string = '';
   @observable categoryId: string = '';
   @observable category: ICategory | null = null;
   @observable personaId: string = '';
@@ -42,7 +42,7 @@ export default class ResultsStore {
 
   @action
   clear() {
-    this.keyword = null;
+    this.keyword = '';
     this.categoryId = '';
     this.category = null;
     this.personaId = '';
@@ -258,6 +258,7 @@ export default class ResultsStore {
     return url;
   };
 
+  @action
   geolocate = async () => {
     try {
       const geolocation = await axios.get(
@@ -273,5 +274,10 @@ export default class ResultsStore {
     } catch (e) {
       console.error(e);
     }
+  };
+
+  @action
+  handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.keyword = e.target.value;
   };
 }
