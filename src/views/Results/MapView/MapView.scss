@@ -1,0 +1,61 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/mixins.scss';
+@import '../../../styles/fonts.scss';
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.map {
+  position: relative;
+  width: 70%;
+  height: 600px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.map__key--container {
+  padding: 0 space(24);
+  width: 30%;
+}
+
+.map__key--heading {
+  color: $san-juan;
+  margin-left: space(16);
+  margin-bottom: space(12);
+}
+
+.map__key--description {
+  color: $san-juan;
+  font-family: $font-secondary;
+}
+
+.map__key {
+  background-color: $alabaster;
+  border-radius: 25px;
+  padding: space(24);
+}
+
+.map__key-icon {
+  margin-right: space(20);
+  height: 16px !important;
+  width: 16px !important;
+  font-size: 16px;
+}
+
+.map__key-icon--group {
+  color: $elm;
+}
+
+.map__key-icon--service {
+  color: $san-juan;
+}
+
+.map__key-icon--activity {
+  color: $cranberry;
+}
+
+.map__key--description {
+  margin-bottom: space(16);
+}

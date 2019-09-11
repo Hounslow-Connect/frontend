@@ -15,6 +15,7 @@ import Accordian from '../Accordian';
 interface IProps {
   result: IResults;
   organisation?: IOrganisation | null;
+  mapView?: boolean;
 }
 
 const getLocationName = (locations: []) =>
@@ -22,11 +23,15 @@ const getLocationName = (locations: []) =>
     location.name ? location.name : get(location, 'location.address_line_1', '')
   );
 
-const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisation }) => {
+const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisation, mapView }) => {
   const locations = getLocationName(result.service_locations);
 
   return (
-    <article className="search-result-card">
+    <article
+      className={cx('search-result-card', {
+        'search-result-card--full-width': mapView,
+      })}
+    >
       <div className="search-result-card__top-row">
         <div className="search-result-card__title">
           <h2>{result.name}</h2>
