@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-import Checkbox from '../../../components/Checkbox';
-import Button from '../../../components/Button';
-import ResultsStore from '../../../stores/resultsStore';
+import Checkbox from '../../../../components/Checkbox';
+import Button from '../../../../components/Button';
+import ResultsStore from '../../../../stores/resultsStore';
 
 import './CategoryFilter.scss';
 
@@ -31,8 +31,10 @@ class CategoryFilter extends Component<IProps> {
             label="Free"
             checked={resultsStore.is_free}
             onChange={() => {
-              history.push({ search: resultsStore.updateQueryStringParameter('is_free', true) });
               resultsStore.toggleIsFree();
+              history.push({
+                search: resultsStore.updateQueryStringParameter('is_free', resultsStore.is_free),
+              });
             }}
           />
         </div>

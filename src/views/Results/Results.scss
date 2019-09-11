@@ -6,7 +6,6 @@
 @mixin search-container {
   background: $white;
   border-radius: 23px;
-  padding: space(24);
   margin-top: space(16);
 }
 
@@ -43,6 +42,7 @@
 
   h4 {
     @include heading-l;
+    margin-left: space(16);
   }
 }
 
@@ -50,6 +50,10 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  h4 {
+    @include heading-m;
+  }
 }
 
 .results__search-box {
@@ -59,11 +63,13 @@
   background-size: 100% 100%;
   padding: space(32);
   color: $san-juan;
+  align-items: flex-end;
 }
 
 .results__search-box-info {
   @include search-container;
   font-size: $font-heading-l;
+  padding: space(24);
 
   h5 {
     font-size: $font-heading-l;
@@ -73,6 +79,10 @@
 
   p {
     color: $waikawa;
+  }
+
+  label {
+    @include heading-m;
   }
 }
 
@@ -124,4 +134,36 @@
 .pagination--active {
   background: $mercury;
   border-radius: 2px;
+}
+
+.results__search-box-keyword {
+  margin-right: space(20);
+}
+
+.results__filters {
+  @include search-container();
+  padding: space(16);
+  align-items: flex-end;
+}
+
+.results__location-filters {
+  height: pxtorem(115px);
+}
+
+.results__keyword-filters--heading {
+  @include heading-s-light;
+  margin-bottom: space(10);
+}
+
+.results__keyword-filters--heading--cost {
+  @include heading-s-light;
+  margin-bottom: space(16);
+}
+
+.results__keyword-amend {
+  margin-left: space(32);
+}
+
+.results__keyword-cost-filter {
+  margin-bottom: space(8);
 }

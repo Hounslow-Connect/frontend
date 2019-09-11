@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { observer, inject } from 'mobx-react';
 import find from 'lodash/find';
-import get from 'lodash/get';
 import { History } from 'history';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from 'react-js-pagination';
@@ -9,8 +8,9 @@ import Pagination from 'react-js-pagination';
 import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
 import SearchResultCard from '../../components/SearchResultCard';
-import CategoryFilter from './CategoryFilter';
 import { IResults } from '../../types/types';
+import Category from './Filters/Category';
+import Keyword from './Filters/Keyword';
 
 interface IProps {
   location: Location;
@@ -43,26 +43,7 @@ class Results extends Component<IProps> {
     return (
       <section>
         <div className="results__search-box">
-          <div className="results__search-left">
-            <h4>Results for</h4>
-            <div className="results__search-box-info">
-              <h5>
-                {resultsStore.category
-                  ? get(resultsStore, 'category.name')
-                  : get(resultsStore, 'persona.name')}
-              </h5>
-              <div>
-                <p>
-                  {resultsStore.category
-                    ? get(resultsStore, 'category.intro')
-                    : get(resultsStore, 'persona.intro')}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="results__search-right">
-            {resultsStore.isKeywordSearch ? null : <CategoryFilter />}
-          </div>
+          {resultsStore.isKeywordSearch ? <Keyword /> : <Category />}
         </div>
 
         <div className="results__list">

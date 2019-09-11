@@ -20,6 +20,10 @@ interface IProps extends RouteComponentProps {
 @inject('windowSizeStore')
 @observer
 class Search extends React.Component<IProps> {
+  componentWillUnmount() {
+    SearchStore.clear();
+  }
+
   render() {
     const { windowSizeStore, history } = this.props;
 
@@ -42,8 +46,21 @@ class Search extends React.Component<IProps> {
                 placeholder="Search for services, groups and activities"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => SearchStore.onChange(e)}
                 id="search"
+                value={SearchStore.search}
               />
-              {!isMobile && <Button text="Search" icon="search" />}
+              {!isMobile && (
+                <Button
+                  text="Search"
+                  icon="search"
+                  type="submit"
+                  onClick={() =>
+                    history.push({
+                      pathname: '/results',
+                      search: `?search_term=${SearchStore.search}`,
+                    })
+                  }
+                />
+              )}
             </div>
             <label className="search__category-heading" htmlFor="category">
               Or browse by category
