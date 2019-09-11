@@ -26,12 +26,7 @@
 .results__container-count {
   display: flex;
   justify-content: flex-start;
-  width: 100%;
   color: $san-juan;
-
-  @include for-tablet-landscape-up {
-    margin-bottom: space(40);
-  }
 }
 
 .results__search-left {
@@ -166,4 +161,18 @@
 
 .results__keyword-cost-filter {
   margin-bottom: space(8);
+}
+
+.results__filter-bar {
+  align-items: center;
+}
+
+.results__sort-by-label {
+  @include body-m;
+  color: $san-juan;
+}
+
+.results__sort-by {
+  align-items: center;
+  justify-content: flex-end;
 }
