@@ -21,7 +21,6 @@ class Results extends Component<IProps> {
     const { resultsStore } = this.props;
 
     resultsStore.getSearchTerms();
-    console.log(resultsStore.view);
   }
 
   componentDidUpdate(prevProps: IProps) {
