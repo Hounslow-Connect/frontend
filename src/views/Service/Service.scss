@@ -1,0 +1,35 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+
+.service__header {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: space(64);
+  color: $white;
+}
+
+.service__header--service {
+  background-image: url('../../assets/images/backgrounds/service-header-shape-lg.svg');
+}
+
+.service__header--activity {
+  background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
+}
+
+.service__header--group {
+  background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
+}
+
+.service__header__logo {
+  background-image: url('../../assets/images/backgrounds/service-logo-background.svg');
+  position: absolute;
+  top: 0;
+  right: 10%;
+  background-size: 100% 100%;
+  padding: space(20);
+
+  img {
+    height: pxtorem(175px);
+  }
+}

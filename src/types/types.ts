@@ -57,6 +57,7 @@ export interface IService {
   name: string;
   offerings: [];
   organisation_id: string;
+  organisation?: IOrganisation;
   referral_button_text: null | string;
   referral_email: null | string;
   referral_method: string;
