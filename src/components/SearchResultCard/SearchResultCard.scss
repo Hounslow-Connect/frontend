@@ -17,6 +17,10 @@
   @include for-phone-only {
     width: 100%;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .search-result-card--full-width {
