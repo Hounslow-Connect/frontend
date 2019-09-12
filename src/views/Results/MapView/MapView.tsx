@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './MapView.scss';
 import ResultsStore from '../../../stores/resultsStore';
-import { IServiceLocation, IResults } from '../../../types/types';
+import { IServiceLocation, IService } from '../../../types/types';
 import SearchResultCard from '../../../components/SearchResultCard';
 
 interface IProps {
@@ -23,7 +23,7 @@ class MapView extends Component<IProps> {
         <div className="map">
           <Map center={CENTRE_OF_KINGSTON} zoom={13} attributionControl={false}>
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
-            {resultsStore.results.map((result: IResults) => {
+            {resultsStore.results.map((result: IService) => {
               const organisation =
                 find(resultsStore.organisations, ['id', result.organisation_id]) || null;
               if (result.service_locations) {

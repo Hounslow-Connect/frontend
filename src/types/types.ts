@@ -40,7 +40,7 @@ export interface IOrganisation {
   url: string;
 }
 
-export interface IResults {
+export interface IService {
   contact_email: string;
   contact_name: string;
   contact_phone: string;
