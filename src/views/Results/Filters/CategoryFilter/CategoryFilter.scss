@@ -18,20 +18,3 @@
   @include heading-m;
   margin-bottom: space(24);
 }
-
-.results__category-search--header {
-  @include heading-m;
-  margin-bottom: space(16);
-}
-
-.category_filters__search--layout {
-  button {
-    &:first-of-type {
-      margin-right: 5px;
-    }
-  }
-}
-.results__category-search--header {
-  @include heading-m;
-  margin-bottom: space(16);
-}

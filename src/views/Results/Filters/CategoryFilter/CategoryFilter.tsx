@@ -3,10 +3,10 @@ import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import Checkbox from '../../../../components/Checkbox';
-import Button from '../../../../components/Button';
 import ResultsStore from '../../../../stores/resultsStore';
 
 import './CategoryFilter.scss';
+import ViewFilters from '../ViewFilter/ViewFilter';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
@@ -38,11 +38,7 @@ class CategoryFilter extends Component<IProps> {
             }}
           />
         </div>
-        <div className="category_filters__search--layout">
-          <p className="results__category-search--header">View As</p>
-          <Button text="Grid" icon="th-large" size="small" />
-          <Button text="Map" icon="map" size="small" light={true} />
-        </div>
+        <ViewFilters />
       </div>
     );
   }

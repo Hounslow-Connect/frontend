@@ -19,6 +19,11 @@
   }
 }
 
+.search-result-card--full-width {
+  width: 100%;
+  margin: 0;
+}
+
 .search-result-card__title {
   flex: 1;
   padding-right: space(16);

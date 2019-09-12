@@ -26,7 +26,7 @@ export default class ResultsStore {
   @observable organisations: IOrganisation[] | null = [];
   @observable is_free: boolean = false;
   @observable wait_time: string = 'null';
-  @observable order: 'relevance' | 'location' = 'relevance';
+  @observable order: 'relevance' | 'distance' = 'relevance';
   @observable results: IResults[] = [];
   @observable loading: boolean = false;
   @observable currentPage: number = 1;
@@ -34,10 +34,11 @@ export default class ResultsStore {
   @observable itemsPerPage: number = 25;
   @observable postcode: string = '';
   @observable locationCoords: IGeoLocation | {} = {};
+  @observable view: 'grid' | 'map' = 'grid';
 
   @computed
   get isKeywordSearch() {
-    return this.keyword !== null;
+    return !!this.keyword;
   }
 
   @action
@@ -58,6 +59,7 @@ export default class ResultsStore {
     this.itemsPerPage = 25;
     this.postcode = '';
     this.locationCoords = {};
+    this.view = 'grid';
   }
 
   @action
@@ -255,6 +257,7 @@ export default class ResultsStore {
       url = this.removeQueryStringParameter('is_free', url);
     }
 
+    this.results = [];
     return url;
   };
 
@@ -279,5 +282,18 @@ export default class ResultsStore {
   @action
   handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.keyword = e.target.value;
+  };
+
+  @action
+  toggleView = (view: 'map' | 'grid') => {
+    this.view = view;
+  };
+
+  @action
+  orderResults = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    this.order = e.target.value as 'relevance' | 'distance';
+    this.results = [];
+
+    this.setParams();
   };
 }

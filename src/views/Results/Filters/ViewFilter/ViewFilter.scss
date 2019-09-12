@@ -1,0 +1,27 @@
+@import '../../../../styles/fonts.scss';
+@import '../../../../styles/colors.scss';
+
+.view-filter__search-bar {
+  button {
+    &:first-of-type {
+      margin-right: 5px;
+    }
+  }
+}
+
+.view-filter__results-bar {
+  display: flex;
+  align-items: center;
+}
+
+.view-filter--header {
+  @include heading-m;
+  margin-bottom: space(16);
+}
+
+.view-filter--header--light {
+  @include body-m;
+  margin-bottom: 0;
+  color: $san-juan;
+  margin-right: space(10);
+}
