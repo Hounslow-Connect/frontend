@@ -8,6 +8,7 @@ export default class ServiceStore {
   @observable service: IService | null = null;
   @observable locations: ILocation[] = [];
   @observable loading: boolean = false;
+  @observable relatedServices: IService[] | null = null;
 
   @action
   fetchService = async (name: string) => {
@@ -16,6 +17,7 @@ export default class ServiceStore {
     this.service = get(serviceData, 'data.data');
 
     this.getServiceLocations();
+    this.getRelatedServices(name);
   };
 
   @action
@@ -28,5 +30,12 @@ export default class ServiceStore {
       this.locations = get(locationData, 'data.data');
       this.loading = true;
     }
+  };
+
+  @action
+  getRelatedServices = async (name: string) => {
+    const relatedServicesData = await axios.get(`${apiBase}/services/${name}/related`);
+
+    this.relatedServices = get(relatedServicesData, 'data.data');
   };
 }
