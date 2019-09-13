@@ -4,16 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import capitalize from 'lodash/capitalize';
 import first from 'lodash/first';
 import get from 'lodash/get';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { apiBase } from '../../config/api';
-import { IResults, IOrganisation, IServiceLocation } from '../../types/types';
+import { IService, IOrganisation, IServiceLocation } from '../../types/types';
 
 import './SearchResultCard.scss';
 import Accordian from '../Accordian';
 
-interface IProps {
-  result: IResults;
+interface IProps extends RouteComponentProps {
+  result: IService;
   organisation?: IOrganisation | null;
   mapView?: boolean;
 }
@@ -23,7 +23,12 @@ const getLocationName = (locations: []) =>
     location.name ? location.name : get(location, 'location.address_line_1', '')
   );
 
-const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisation, mapView }) => {
+const SearchResultCard: React.FunctionComponent<IProps> = ({
+  result,
+  organisation,
+  mapView,
+  history,
+}) => {
   const locations = getLocationName(result.service_locations);
 
   return (
@@ -32,7 +37,12 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisatio
         'search-result-card--full-width': mapView,
       })}
     >
-      <div className="search-result-card__top-row">
+      <div
+        className="search-result-card__top-row"
+        role="navigation"
+        aria-label={`View more information on ${result.name}`}
+        onClick={() => history.push(`/service/${result.slug}`)}
+      >
         <div className="search-result-card__title">
           <h2>{result.name}</h2>
           {organisation && <p className="search-result-card__organisation">{organisation.name}</p>}
@@ -82,7 +92,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisatio
         <p>{result.intro}</p>
       </div>
       <div className="search-result-card__footer">
-        <Link to={'/'}>
+        <Link to={`/service/${result.slug}`}>
           <span>View More</span>
           <FontAwesomeIcon icon="chevron-right" />
         </Link>
@@ -91,4 +101,4 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({ result, organisatio
   );
 };
 
-export default SearchResultCard;
+export default withRouter(SearchResultCard);

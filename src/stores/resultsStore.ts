@@ -11,7 +11,7 @@ import {
   ICategory,
   IPersona,
   IOrganisation,
-  IResults,
+  IService,
   IGeoLocation,
 } from '../types/types';
 
@@ -27,7 +27,7 @@ export default class ResultsStore {
   @observable is_free: boolean = false;
   @observable wait_time: string = 'null';
   @observable order: 'relevance' | 'distance' = 'relevance';
-  @observable results: IResults[] = [];
+  @observable results: IService[] = [];
   @observable loading: boolean = false;
   @observable currentPage: number = 1;
   @observable totalItems: number = 0;
@@ -176,7 +176,7 @@ export default class ResultsStore {
       this.totalItems = get(results, 'data.meta.total', 0);
       this.itemsPerPage = get(results, 'data.meta.per_page', 25);
 
-      forEach(this.results, (service: IResults) => {
+      forEach(this.results, (service: IService) => {
         // @ts-ignore
         this.organisations.push(service.organisation_id);
       });

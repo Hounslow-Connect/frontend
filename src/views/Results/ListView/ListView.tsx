@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 
 import SearchResultCard from '../../../components/SearchResultCard';
 
-import { IResults } from '../../../types/types';
+import { IService } from '../../../types/types';
 import ResultsStore from '../../../stores/resultsStore';
 import { History } from 'history';
 
@@ -18,7 +18,7 @@ interface IProps {
 const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) => (
   <Fragment>
     <main className="results__container">
-      {resultsStore.results.map((result: IResults) => {
+      {resultsStore.results.map((result: IService) => {
         const organisation =
           find(resultsStore.organisations, ['id', result.organisation_id]) || null;
 

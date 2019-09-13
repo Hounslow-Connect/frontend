@@ -40,7 +40,7 @@ export interface IOrganisation {
   url: string;
 }
 
-export interface IResults {
+export interface IService {
   contact_email: string;
   contact_name: string;
   contact_phone: string;
@@ -57,6 +57,7 @@ export interface IResults {
   name: string;
   offerings: [];
   organisation_id: string;
+  organisation?: IOrganisation;
   referral_button_text: null | string;
   referral_email: null | string;
   referral_method: string;
