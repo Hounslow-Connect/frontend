@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
@@ -20,7 +21,7 @@ import UIStore from './stores/uiStore';
 import ResultsStore from './stores/resultsStore';
 import ServiceStore from './stores/serviceStore';
 
-library.add(fas);
+library.add(fas, fab);
 
 const windowSizeStore = new WindowSizeStore();
 const uiStore = new UIStore();

@@ -1,35 +1,148 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/breakpoints.scss';
 
 .service__header {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: space(64);
   color: $white;
-}
-
-.service__header--service {
-  background-image: url('../../assets/images/backgrounds/service-header-shape-lg.svg');
-}
-
-.service__header--activity {
   background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
+
+  @include for-phone-only {
+    padding: space(32) space(24) 0 space(24);
+    background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
+  }
+
+  h1 {
+    margin-bottom: space(20);
+  }
+
+  button {
+    @include body-s;
+    background-color: inherit;
+    border: 2px solid $white;
+    font-family: $font-primary;
+    font-weight: normal;
+    margin-left: space(12);
+
+    @include for-phone-only {
+      visibility: hidden;
+    }
+  }
+
+  @include for-tablet-landscape-up {
+    &:after {
+      content: url('../../assets/images/trees/iceberg-small.svg');
+      position: absolute;
+      top: 0px;
+      right: 32%;
+    }
+  }
 }
 
-.service__header--group {
-  background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
+.service__section {
+  margin-bottom: space(32);
 }
 
 .service__header__logo {
-  background-image: url('../../assets/images/backgrounds/service-logo-background.svg');
   position: absolute;
-  top: 0;
+  top: pxtorem(16px);
   right: 10%;
   background-size: 100% 100%;
   padding: space(20);
 
+  @include for-phone-only {
+    right: 0;
+  }
+
+  @include for-tablet-landscape-up {
+    background-image: url('../../assets/images/backgrounds/service-logo-background.svg');
+  }
+
   img {
     height: pxtorem(175px);
+
+    @include for-phone-only {
+      height: pxtorem(50px);
+      border-radius: 50%;
+    }
   }
+
+  @include for-tablet-landscape-up {
+    &:before {
+      content: url('../../assets/images/trees/iceberg-lg.svg');
+      position: absolute;
+      bottom: -15px;
+      right: -60px;
+    }
+
+    &:after {
+      content: url('../../assets/images/trees/peurto-small.svg');
+      position: absolute;
+      bottom: -15px;
+      right: -105px;
+    }
+  }
+}
+
+.service__header__last-updated {
+  @include body-s;
+
+  span {
+    font-family: $font-secondary;
+    margin-left: space(8);
+  }
+}
+
+.service__info {
+  display: flex;
+  padding: space(88) space(96);
+}
+
+.service__info--left {
+  width: 60%;
+}
+
+.service__info--right {
+  width: 40%;
+}
+
+.service__info__cost {
+  display: flex;
+  background-color: $iceberg;
+  border-radius: 19px;
+  padding: space(32);
+  width: fit-content;
+  align-items: center;
+}
+
+.service__info__cost--header {
+  font-family: $font-secondary;
+}
+
+.service__info__cost--sub-heading {
+  color: $waikawa;
+}
+
+.service__info__cost--icon {
+  color: $puerto-rico;
+  font-size: 36px;
+}
+
+.service__info__cost--left {
+  text-align: center;
+}
+
+.service__info__cost--right {
+  margin-left: space(32);
+  color: $san-juan;
+}
+
+.react-player__preview {
+  border-radius: 19px;
 }
