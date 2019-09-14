@@ -9,6 +9,17 @@ export default class ServiceStore {
   @observable locations: ILocation[] = [];
   @observable loading: boolean = false;
   @observable relatedServices: IService[] | null = null;
+  @observable favourite: boolean = false;
+
+  checkIfFavorited = () => {
+    const favourites = localStorage.getItem('favourites');
+
+    if (favourites && this.service) {
+      const favouriteList = JSON.parse(favourites);
+
+      this.favourite = favouriteList.includes(this.service.id);
+    }
+  };
 
   @action
   fetchService = async (name: string) => {
@@ -18,6 +29,7 @@ export default class ServiceStore {
 
     this.getServiceLocations();
     this.getRelatedServices(name);
+    this.checkIfFavorited();
   };
 
   @action
@@ -37,5 +49,22 @@ export default class ServiceStore {
     const relatedServicesData = await axios.get(`${apiBase}/services/${name}/related`);
 
     this.relatedServices = get(relatedServicesData, 'data.data');
+  };
+
+  addToFavourites = () => {
+    if (this.service) {
+      if (localStorage.getItem('favourites')) {
+        const favourites = localStorage.getItem('favourites') || '';
+
+        const favouritesArr = JSON.parse(favourites);
+        favouritesArr.push(this.service.id);
+
+        localStorage.setItem('favourites', JSON.stringify(favouritesArr));
+      } else {
+        localStorage.setItem('favourites', JSON.stringify([this.service.id]));
+      }
+    }
+
+    this.favourite = true;
   };
 }
