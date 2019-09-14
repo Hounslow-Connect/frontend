@@ -73,7 +73,6 @@ class Service extends Component<IProps> {
             />
           </div>
         </div>
-
         <section className="service__info">
           <section className="service__info--left">
             <h2>Who is it for?</h2>
@@ -337,7 +336,13 @@ class Service extends Component<IProps> {
 
             <div className="service__section">
               <Button text="Print" icon="print" alt={true} />
-              <Button text="Shortlist" icon="star" alt={true} />
+              <Button
+                text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
+                icon="star"
+                alt={true}
+                onClick={() => serviceStore.addToFavourites()}
+                disabled={serviceStore.favourite}
+              />
             </div>
 
             <div className="service__section">
@@ -346,7 +351,6 @@ class Service extends Component<IProps> {
             </div>
           </section>
         </section>
-
         {relatedServices && (
           <section>
             <h2>Related Services</h2>

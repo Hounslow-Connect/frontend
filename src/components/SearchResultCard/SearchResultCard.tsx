@@ -3,25 +3,20 @@ import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import capitalize from 'lodash/capitalize';
 import first from 'lodash/first';
-import get from 'lodash/get';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { apiBase } from '../../config/api';
-import { IService, IOrganisation, IServiceLocation } from '../../types/types';
+import { IService, IOrganisation } from '../../types/types';
 
 import './SearchResultCard.scss';
 import Accordian from '../Accordian';
+import { getLocationName } from '../../utils/utils';
 
 interface IProps extends RouteComponentProps {
   result: IService;
   organisation?: IOrganisation | null;
   mapView?: boolean;
 }
-
-const getLocationName = (locations: []) =>
-  locations.map((location: IServiceLocation) =>
-    location.name ? location.name : get(location, 'location.address_line_1', '')
-  );
 
 const SearchResultCard: React.FunctionComponent<IProps> = ({
   result,
