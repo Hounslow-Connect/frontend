@@ -40,6 +40,7 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore }) => (
               service={favourite}
               organisation={organisation}
               locations={favouritesStore.getLocations(favourite.id)}
+              removeFavourite={favouritesStore.removeFavourite}
             />
           );
         })}

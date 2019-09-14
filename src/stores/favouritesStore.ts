@@ -1,9 +1,10 @@
 import { observable, action } from 'mobx';
 import axios from 'axios';
+import get from 'lodash/get';
+import remove from 'lodash/remove';
 
 import { apiBase } from '../config/api';
 import { IService, IOrganisation, IServiceLocation } from '../types/types';
-import get from 'lodash/get';
 
 class FavouritesStore {
   @observable favourites: IService[] = [];
@@ -16,19 +17,21 @@ class FavouritesStore {
 
   @action
   fetchFavourites = async () => {
-    const favouritesFromStorage = localStorage.getItem('favourites') || '';
+    const favouritesFromStorage = localStorage.getItem('favourites');
 
-    const favouriteList = JSON.parse(favouritesFromStorage);
+    if (favouritesFromStorage) {
+      const favouriteList = JSON.parse(favouritesFromStorage);
 
-    try {
-      const favouriteData = await axios.get(`${apiBase}/services?filter[id]=${favouriteList}`);
-      this.favourites = get(favouriteData, 'data.data', []);
-    } catch (e) {
-      console.error(e);
+      try {
+        const favouriteData = await axios.get(`${apiBase}/services?filter[id]=${favouriteList}`);
+        this.favourites = get(favouriteData, 'data.data', []);
+      } catch (e) {
+        console.error(e);
+      }
+
+      this.fetchOrganisations();
+      this.fetchServiceLocations();
     }
-
-    this.fetchOrganisations();
-    this.fetchServiceLocations();
   };
 
   @action
@@ -63,6 +66,24 @@ class FavouritesStore {
 
   getLocations = (id: string) => {
     return this.serviceLocations.filter((location: IServiceLocation) => location.service_id === id);
+  };
+
+  @action
+  removeFavourite = (id: string) => {
+    const favouritesFromStorage = localStorage.getItem('favourites');
+
+    if (favouritesFromStorage) {
+      const amendedFilters = JSON.parse(favouritesFromStorage).filter(
+        (favourite: string) => favourite !== id
+      );
+
+      localStorage.removeItem('favourites');
+      localStorage.setItem('favourites', JSON.stringify(amendedFilters));
+
+      const favourites = [...this.favourites];
+      remove(favourites, ['id', id]);
+      this.favourites = favourites;
+    }
   };
 }
 

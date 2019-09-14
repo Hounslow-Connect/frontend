@@ -12,8 +12,13 @@ interface IProps {
   service: IService;
   organisation: IOrganisation;
   locations: [];
+  removeFavourite: (id: string) => void;
 }
-const FavouritesCard: React.FunctionComponent<IProps> = ({ service, locations }) => {
+const FavouritesCard: React.FunctionComponent<IProps> = ({
+  service,
+  locations,
+  removeFavourite,
+}) => {
   const serviceLocations = getLocationName(locations);
   return (
     <article>
@@ -59,6 +64,18 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({ service, locations })
           <FontAwesomeIcon icon="envelope" /> Email
         </p>
         <p>{service.contact_email}</p>
+      </div>
+      <div>
+        <div role="button" onClick={() => removeFavourite(service.id)}>
+          <p>
+            Remove <FontAwesomeIcon icon="times" />
+          </p>
+        </div>
+        <div>
+          <p>
+            Remove <FontAwesomeIcon icon="chevron-right" />
+          </p>
+        </div>
       </div>
     </article>
   );
