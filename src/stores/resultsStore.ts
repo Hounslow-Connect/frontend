@@ -265,7 +265,7 @@ export default class ResultsStore {
   geolocate = async () => {
     try {
       const geolocation = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode},UK&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
       );
 
       const location = get(geolocation, 'data.results[0].geometry.location', {});
