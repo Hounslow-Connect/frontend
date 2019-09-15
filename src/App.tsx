@@ -21,6 +21,7 @@ import UIStore from './stores/uiStore';
 import ResultsStore from './stores/resultsStore';
 import ServiceStore from './stores/serviceStore';
 import FavouritesStore from './stores/favouritesStore';
+import CMSStore from './stores/CMSStore';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -30,6 +31,7 @@ const uiStore = new UIStore();
 const resultsStore = new ResultsStore();
 const serviceStore = new ServiceStore();
 const favouritesStore = new FavouritesStore();
+const cmsStore = new CMSStore();
 
 class App extends Component {
   componentDidMount() {
@@ -44,6 +46,7 @@ class App extends Component {
         resultsStore={resultsStore}
         serviceStore={serviceStore}
         favouritesStore={favouritesStore}
+        cmsStore={cmsStore}
       >
         <Header />
         <Router>
