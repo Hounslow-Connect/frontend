@@ -46,7 +46,7 @@ class Header extends Component<IProps> {
 
     return (
       <header className="header">
-        <div className="flex-col--12 mobile-hide">
+        <div className="flex-col--12 mobile-hide tablet--large-hide">
           <Button text="Translate" header={true} icon="language" />
           <Button text="Give Feedback" header={true} icon="comment" />
           <RouterLink to="/favourites">
