@@ -14,7 +14,25 @@
   background-repeat: no-repeat;
   height: auto;
   background-size: 100% 100%;
+  position: relative;
 
+  @include for-desktop-up {
+    &:after {
+      content: url('../../assets/images/telephone-boxes-shapes.svg');
+      top: -31px;
+      position: absolute;
+      left: 45%;
+      z-index: 55;
+    }
+
+    &:before {
+      content: url('../../assets/images/trees/peurto-small.svg');
+      position: absolute;
+      position: absolute;
+      top: -30px;
+      left: 40%;
+    }
+  }
   @include for-tablet-landscape-up {
     padding: space(64) space(24);
   }

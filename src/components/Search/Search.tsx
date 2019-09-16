@@ -36,7 +36,7 @@ class Search extends React.Component<IProps> {
 
     return (
       <Fragment>
-        <section className="search__container row">
+        <section className="search__container">
           <form className="search__inner-container row" aria-label="Search">
             <div className="search__input">
               <label htmlFor="search" className="search__heading">
