@@ -3,15 +3,13 @@ import ReactSVG from 'react-svg';
 import { observer, inject } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 import './Header.scss';
 
-import CranberryTreeSmall from '../../assets/images/trees/cranberry-small.svg';
-import PeurtoTreeSmall from '../../assets/images/trees/peurto-small.svg';
 import Logo from '../../assets/logo/logo.svg';
 import MobileLogo from '../../assets/logo/logo-mobile.svg';
 
-import Link from '../Link';
 import Button from '../Button';
 import WindowSizeStore from '../../stores/windowSizeStore';
 import UIStore from '../../stores/uiStore';
@@ -51,7 +49,9 @@ class Header extends Component<IProps> {
         <div className="flex-col--12 mobile-hide">
           <Button text="Translate" header={true} icon="language" />
           <Button text="Give Feedback" header={true} icon="comment" />
-          <Button text="Favourites" header={true} icon="star" />
+          <RouterLink to="/favourites">
+            <Button text="Favourites" header={true} icon="star" />
+          </RouterLink>
         </div>
 
         <div
@@ -64,9 +64,9 @@ class Header extends Component<IProps> {
         >
           <div className="flex-col flex-col--6 flex-col--tablet-large--12 header__brand">
             <figure className="logo">
-              <a href="/" aria-label="Home Link">
+              <RouterLink to="/" aria-label="Home Link">
                 <ReactSVG src={isMobile ? MobileLogo : Logo} />
-              </a>
+              </RouterLink>
             </figure>
             <button
               type="button"
@@ -84,16 +84,44 @@ class Header extends Component<IProps> {
             role="navigation"
           >
             <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
-              <Link text="Home" href="#" size="large" header={true} inline={true} />
-              <Link text="About" href="#" size="large" header={true} inline={true} />
-              <Link text="Contact Us" href="#" size="large" header={true} inline={true} />
-              <Link text="Get Involved" href="#" size="large" header={true} inline={true} />
+              <RouterLink
+                exact={true}
+                to="/"
+                className="link link__inline link--large link__header"
+                activeClassName={cx({ 'nav--active': !isMobile })}
+              >
+                Home
+              </RouterLink>
+              <RouterLink
+                to="/favourites"
+                exact={true}
+                className="link link__inline link--large link__header"
+                activeClassName={cx({ 'nav--active': !isMobile })}
+              >
+                About
+              </RouterLink>
+              <RouterLink
+                to="/contact"
+                className="link link__inline link--large link__header"
+                activeClassName={cx({ 'nav--active': !isMobile })}
+              >
+                Contact
+              </RouterLink>
+              <RouterLink
+                to="/get-involved"
+                className="link link__inline link--large link__header"
+                activeClassName={cx({ 'nav--active': !isMobile })}
+              >
+                Get Involved
+              </RouterLink>
 
               {isMobile && (
                 <Fragment>
                   <Button text="Translate" size="small" burgerMenu={true} icon="language" />
                   <Button text="Give feedback" size="small" burgerMenu={true} icon="comment" />
-                  <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
+                  <RouterLink to="/favourites">
+                    <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
+                  </RouterLink>
                 </Fragment>
               )}
             </nav>

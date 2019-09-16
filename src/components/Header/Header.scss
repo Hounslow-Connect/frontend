@@ -135,4 +135,12 @@
       margin: space(16);
     }
   }
+
+  &--active {
+    background-image: url('../../assets/images/backgrounds/nav-hover.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: auto;
+    padding: 20px;
+  }
 }
