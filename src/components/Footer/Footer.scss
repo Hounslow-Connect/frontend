@@ -1,0 +1,119 @@
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
+
+.footer {
+  color: $white;
+  padding: space(64) 0;
+  margin-top: pxtorem(160px);
+  background-image: url('../../assets/images/backgrounds/footer-shape.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: auto;
+  position: relative;
+
+  @include for-phone-only {
+    background-image: url('../../assets/images/backgrounds/footer-shape-mobile.svg');
+    margin: 0;
+    background-color: $iceberg;
+
+    &:before {
+      content: url('../../assets/images/bridge-shape.svg');
+      position: absolute;
+      top: -34px;
+      transform: scale(0.7);
+    }
+
+    &:after {
+      content: url('../../assets/images/trees/cranberry-small.svg');
+      position: absolute;
+      top: -55px;
+      right: 15px;
+    }
+  }
+
+  @include for-tablet-landscape-up {
+    &:before {
+      content: url('../../assets/images/trees/cranberry-small.svg');
+      position: absolute;
+      top: -54px;
+      left: 10%;
+    }
+
+    &:after {
+      content: url('../../assets/images/trees/jordy-lg.svg');
+      position: absolute;
+      top: -54px;
+      right: 10%;
+    }
+  }
+
+  .disclaimer {
+    position: relative;
+
+    @include for-tablet-landscape-up {
+      &:before {
+        content: url('../../assets/images/bridge-shape.svg');
+        position: absolute;
+        position: absolute;
+        top: -75px;
+        right: -70px;
+      }
+    }
+  }
+  .flex-container {
+    max-width: 1260px;
+  }
+
+  .footer__social-icons {
+    margin-right: space(10);
+  }
+
+  .footer__social-links {
+    margin: space(24) 0;
+  }
+
+  button {
+    color: $white;
+    border: 2px solid $white;
+    background: $san-juan;
+    font-family: $font-primary;
+    font-weight: normal;
+
+    &:hover {
+      background: $white;
+      color: $san-juan;
+    }
+  }
+
+  .footer-section {
+    padding: space(12);
+    position: relative;
+
+    &--button {
+      text-align: right;
+
+      @include for-tablet-landscape-up {
+        &:before {
+          content: url('../../assets/images/trees/iceberg-small.svg');
+          position: absolute;
+          top: -135px;
+          right: 40%;
+
+          @include for-desktop-up {
+            right: 15%;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-contact-links {
+    line-height: 26px;
+  }
+}
+
+.footer-mobile-menu {
+  background-color: $white;
+}

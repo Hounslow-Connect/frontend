@@ -45,13 +45,13 @@ class App extends Component {
         serviceStore={serviceStore}
         favouritesStore={favouritesStore}
       >
-        <Header />
         <Router>
+          <Header />
           <Switch>
             <Route path="/" exact={true} component={Home} />
             <Route path="/results" component={Results} />
             <Route path="/service/:service" component={Service} />
-            <Route path="/favourites" exact={true} component={Favourites} />
+            <Route path="/favourites" component={Favourites} />
             <Route component={NotFound} />
           </Switch>
         </Router>
