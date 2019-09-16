@@ -200,11 +200,13 @@
 .buton__burger-menu {
   background-color: transparent;
   color: $waikawa;
-  font-size: $font-body-xs;
+  font-size: $font-body-s;
+  font-family: $font-primary;
   display: block;
   padding: 0;
   height: auto;
   margin-bottom: space(24);
+  font-weight: normal;
 
   &:focus {
     border: inherit;

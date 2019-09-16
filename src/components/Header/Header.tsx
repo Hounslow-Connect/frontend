@@ -13,7 +13,6 @@ import MobileLogo from '../../assets/logo/logo-mobile.svg';
 
 import Link from '../Link';
 import Button from '../Button';
-import BurgerMenu from '../BurgerMenu';
 import WindowSizeStore from '../../stores/windowSizeStore';
 import UIStore from '../../stores/uiStore';
 
@@ -25,6 +24,18 @@ interface IProps {
 @inject('windowSizeStore', 'uiStore')
 @observer
 class Header extends Component<IProps> {
+  componentDidMount() {
+    const navContainer = document.querySelector('.header');
+    const navTrigger = document.querySelector('.nav-trigger');
+
+    if (navTrigger && navContainer) {
+      return navTrigger.addEventListener('click', evt => {
+        navTrigger.classList.toggle('active');
+        navContainer.classList.toggle('active');
+      });
+    }
+  }
+
   render() {
     const { windowSizeStore, uiStore } = this.props;
 
@@ -34,68 +45,60 @@ class Header extends Component<IProps> {
     }
 
     const { isMobile } = windowSizeStore;
-    const { burgerMenuOpen, toggleBurgerMenu } = uiStore;
 
     return (
-      <header
-        className={cx('header', {
-          'header--sticky': burgerMenuOpen && isMobile,
-        })}
-      >
-        <Fragment>
-          <div className={cx(isMobile ? 'flex' : 'column')}>
-            {!isMobile && (
-              <div className="header__top-bar">
-                <Button text="Translate" header={true} icon="language" />
-                <Button text="Give Feedback" header={true} icon="comment" />
-                <Button text="Favourites" header={true} icon="star" />
-              </div>
-            )}
-            <div className="header__inner-container">
-              <ReactSVG
-                src={isMobile ? MobileLogo : Logo}
-                className={cx('header__logo', {
-                  'header__logo--expanded': isMobile && burgerMenuOpen,
-                })}
-              />
-              {!isMobile && (
-                <nav className="header__desktop-nav">
-                  <Link text="Home" href="#" size="large" header={true} />
-                  <Link text="About" href="#" size="large" header={true} />
-                  <Link text="Contact Us" href="#" size="large" header={true} />
-                  <Link text="Get Involved" href="#" size="large" header={true} />
-                </nav>
-              )}
-              {isMobile && !burgerMenuOpen && (
-                <button
-                  className="header__mobile-menu-open"
-                  aria-label="Open menu"
-                  onClick={() => toggleBurgerMenu()}
-                >
-                  <span>Menu</span>
-                  <FontAwesomeIcon icon="bars" aria-hidden={true} title="Menu Trigger" />
-                  <span className="sr-only">Menu Trigger</span>
-                </button>
-              )}
-            </div>
-          </div>
+      <header className="header">
+        <div className="flex-col--12 mobile-hide">
+          <Button text="Translate" header={true} icon="language" />
+          <Button text="Give Feedback" header={true} icon="comment" />
+          <Button text="Favourites" header={true} icon="star" />
+        </div>
 
-          {isMobile && burgerMenuOpen && (
-            <div className="header__mobile-menu-close flex">
-              <button aria-label="Close menu" onClick={() => toggleBurgerMenu()}>
-                Close
-                <FontAwesomeIcon icon="times" aria-hidden={true} title="Menu Close" />
-              </button>
-            </div>
+        <div
+          className={cx(
+            {
+              'flex-container flex-container--align-center flex-container--justify': isMobile,
+            },
+            { navigation: !isMobile }
           )}
-          {isMobile && burgerMenuOpen && (
-            <div className="flex header__tree">
-              <ReactSVG src={CranberryTreeSmall} />
-              <ReactSVG src={PeurtoTreeSmall} />
-            </div>
-          )}
-        </Fragment>
-        {burgerMenuOpen && <BurgerMenu />}
+        >
+          <div className="flex-col flex-col--6 flex-col--tablet-large--12 header__brand">
+            <figure className="logo">
+              <a href="/" aria-label="Home Link">
+                <ReactSVG src={isMobile ? MobileLogo : Logo} />
+              </a>
+            </figure>
+            <button
+              type="button"
+              name="nav-trigger"
+              className="nav-trigger tablet--large-show"
+              role="button"
+            >
+              <label htmlFor="nav-trigger">Menu</label>
+              <FontAwesomeIcon icon="bars" aria-hidden={true} title="Menu Trigger" />
+              <span className="sr-only">Menu Trigger</span>
+            </button>
+          </div>
+          <div
+            className="flex-col flex-col--6 flex-col--tablet-large--12 header__navigation tablet--large-hide"
+            role="navigation"
+          >
+            <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
+              <Link text="Home" href="#" size="large" header={true} inline={true} />
+              <Link text="About" href="#" size="large" header={true} inline={true} />
+              <Link text="Contact Us" href="#" size="large" header={true} inline={true} />
+              <Link text="Get Involved" href="#" size="large" header={true} inline={true} />
+
+              {isMobile && (
+                <Fragment>
+                  <Button text="Translate" size="small" burgerMenu={true} icon="language" />
+                  <Button text="Give feedback" size="small" burgerMenu={true} icon="comment" />
+                  <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
+                </Fragment>
+              )}
+            </nav>
+          </div>
+        </div>
       </header>
     );
   }
