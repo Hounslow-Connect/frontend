@@ -13,6 +13,7 @@ import MobileLogo from '../../assets/logo/logo-mobile.svg';
 import Button from '../Button';
 import WindowSizeStore from '../../stores/windowSizeStore';
 import UIStore from '../../stores/uiStore';
+import Footer from '../Footer/Footer';
 
 interface IProps {
   windowSizeStore?: WindowSizeStore;
@@ -125,6 +126,9 @@ class Header extends Component<IProps> {
                 </Fragment>
               )}
             </nav>
+            <div className="tablet--large-hide mobile-show">
+              <Footer mobileMenu={true} />
+            </div>
           </div>
         </div>
       </header>
