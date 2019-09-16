@@ -1,87 +1,303 @@
-@mixin flex {
-  display: flex;
-  flex: 1;
-}
+@import 'breakpoint-sass';
+@import './colors.scss';
 
-@mixin grid-row($margin-left: 0, $margin-right: 0) {
+// Define grid variables
+$total-columns: 12;
+$gutter-width: 0px/105px;
+$container-width: 1260px;
+$base-line-height: 16px;
+$base-margin: 16px;
+$border-radius: 6px;
+
+$break_container: max-width $container-width;
+$break_standard: max-width 1320px;
+$break_medium: max-width 1100px;
+$break_tablet_large: max-width 1000px;
+$break_tablet: max-width 860px;
+$break_mobile: max-width 600px;
+$break_mobile_small: max-width 320px;
+
+* {
   box-sizing: border-box;
+}
+
+// BODY STYLES
+body {
+  background-color: $white;
+  color: $black;
+
+  @include breakpoint($break_tablet) {
+    &.noscroll {
+      overflow: hidden;
+    }
+  }
+
+  &.noscroll--mobile {
+    @include breakpoint($break_tablet) {
+      overflow: auto;
+    }
+
+    @include breakpoint($break_mobile) {
+      overflow: hidden;
+    }
+  }
+}
+
+// MAIN CONTAINER
+.flex-container {
   display: flex;
-  flex: 0 1 auto;
   flex-wrap: wrap;
-  margin-right: $margin-left;
-  margin-left: $margin-right;
-}
+  justify-content: space-between;
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 $base-margin * 2.5;
 
-@mixin grid-column {
-  display: flex;
-  flex-direction: column;
-}
+  @include breakpoint($break_tablet) {
+    padding: 0 $base-margin * 1.5;
+  }
 
-@mixin grid-row-direction($reverse: false) {
-  @if ($reverse) {
-    flex-direction: row-reverse;
-  } @else {
+  @include breakpoint($break_mobile) {
+    padding: 0 $base-margin;
+  }
+
+  // Mobile no padding
+  &--mobile-no-padding {
+    @include breakpoint($break_mobile) {
+      padding: 0;
+    }
+  }
+
+  // Remove padding
+  &--no-padding {
+    padding: 0;
+  }
+
+  // Mobile padding - if --no-padding is used
+  &--mobile-padding {
+    @include breakpoint($break_mobile) {
+      padding: $base-margin;
+    }
+  }
+
+  // Don't wrap elements
+  &--no-wrap {
+    flex-wrap: nowrap;
+  }
+
+  // Display elements in row
+  &--row {
     flex-direction: row;
   }
-}
 
-@mixin grid-column-direction($reverse: false) {
-  @if ($reverse) {
-    flex-direction: column-reverse;
-  } @else {
+  // Display elements in row in reverse order
+  &--row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  // Display elements in column
+  &--column {
     flex-direction: column;
   }
-}
 
-@mixin grid-row-alignment-horizontal($alignment) {
-  $justify: inherit;
-
-  @if ($alignment == center) {
-    $justify: center;
-  } @else if ($alignment == end) {
-    $justify: flex-end;
-  } @else if ($alignment == start) {
-    $justify: flex-start;
+  // Display elements in column in reverse order
+  &--column-reverse {
+    flex-direction: column-reverse;
   }
 
-  justify-content: $justify;
-  text-align: $alignment;
-}
-
-@mixin grid-row-alignment-vertical($alignment) {
-  @if ($alignment == center) {
+  // Vertical align center
+  &--align-center {
     align-items: center;
-  } @else if ($alignment == end) {
+  }
+
+  // Vertical align bottom
+  &--align-bottom {
     align-items: flex-end;
-  } @else {
-    align-items: flex-start;
+  }
+
+  // Horizontal align center
+  &--justify {
+    justify-content: center;
+  }
+
+  // Don't fill space
+  &--no-space {
+    justify-content: flex-start;
+  }
+
+  // Horizontal align left
+  &--left {
+    justify-content: center;
   }
 }
 
-@mixin grid-row-spacing($spacing) {
-  justify-content: $spacing;
+.flex-col {
+  // Columns with gutters
+  &--gutter {
+    border: solid $base-margin transparent;
+    box-sizing: border-box;
+  }
+
+  // Column width
+  @for $i from 1 to $total-columns + 1 {
+    &--#{$i} {
+      width: percentage($i/$total-columns);
+    }
+  }
+
+  &--clear {
+    clear: left;
+  }
+
+  &--padding-left {
+    padding-left: $base-margin * 2;
+  }
+
+  &--padding-right {
+    padding-right: $base-margin * 2;
+  }
+
+  @include breakpoint($break_medium) {
+    &--medium {
+      // Column width
+      @for $i from 1 to $total-columns + 1 {
+        &--#{$i} {
+          width: percentage($i/$total-columns);
+        }
+      }
+    }
+  }
+
+  @include breakpoint($break_tablet_large) {
+    &--tablet-large {
+      // Column width
+      @for $i from 1 to $total-columns + 1 {
+        &--#{$i} {
+          width: percentage($i/$total-columns);
+        }
+      }
+    }
+  }
+
+  @include breakpoint($break_tablet) {
+    &--tablet {
+      // Column width
+      @for $i from 1 to $total-columns + 1 {
+        &--#{$i} {
+          width: percentage($i/$total-columns);
+        }
+      }
+    }
+  }
+
+  @include breakpoint($break_mobile) {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: $base-margin * 2;
+
+    &.flex-col--gutter {
+      width: 100%;
+      border: none;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--mobile {
+      // Column width
+      @for $i from 1 to $total-columns + 1 {
+        &--#{$i} {
+          width: percentage($i/$total-columns);
+          margin-bottom: 0;
+
+          &:last-child {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
-.row {
-  @include grid-row;
+// Flex order
+.flex-order {
+  @for $i from 1 to 12 {
+    &--#{$i} {
+      order: $i;
+    }
+  }
+
+  @include breakpoint($break_medium) {
+    &--medium {
+      @for $i from 1 to 12 {
+        // Column width
+        &--#{$i} {
+          order: $i;
+        }
+      }
+    }
+  }
+
+  @include breakpoint($break_tablet) {
+    &--tablet {
+      @for $i from 1 to 12 {
+        // Column width
+        &--#{$i} {
+          order: $i;
+        }
+      }
+    }
+  }
+
+  @include breakpoint($break_mobile) {
+    &--mobile {
+      @for $i from 1 to 12 {
+        // Column width
+        &--#{$i} {
+          order: $i;
+        }
+      }
+    }
+  }
 }
 
-.column {
-  @include grid-column;
+// RESPONSIVE
+.mobile-show {
+  display: none !important;
 }
 
-.row.reverse {
-  @include grid-row-direction(true);
+.tablet-show {
+  display: none !important;
 }
 
-.col.reverse {
-  @include grid-column-direction($reverse: true);
+.tablet--large-show {
+  display: none !important;
 }
 
-.flex {
-  @include flex;
+@include breakpoint($break_tablet_large) {
+  .tablet--large-hide {
+    display: none !important;
+  }
+  .tablet--large-show {
+    display: block !important;
+  }
 }
 
-.flex-justify-centre {
-  @include grid-row-alignment-horizontal(center);
+@include breakpoint($break_tablet) {
+  .tablet-hide {
+    display: none !important;
+  }
+  .tablet-show {
+    display: block !important;
+  }
+}
+
+@include breakpoint($break_mobile) {
+  .mobile-hide {
+    display: none !important;
+  }
+  .mobile-show {
+    display: block !important;
+  }
 }
