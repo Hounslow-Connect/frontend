@@ -36,8 +36,10 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
     >
       <div className="search-result-card__top-row">
         <div className="search-result-card__title">
-          <h2>{result.name}</h2>
-          {organisation && <p className="search-result-card__organisation">{organisation.name}</p>}
+          <h3>{result.name}</h3>
+          {organisation && (
+            <h4 className="search-result-card__organisation">{organisation.name}</h4>
+          )}
           <div className={cx('search-result-card__tag', `search-result-card__tag--${result.type}`)}>
             <FontAwesomeIcon icon="users" className="search-result-card__tag--icon" />
             {capitalize(result.type)}
@@ -54,14 +56,14 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             <div className="search-result-card__location">
               <FontAwesomeIcon icon="map-marker-alt" />
               {locations.length === 1 ? (
-                <p>{first(locations)}</p>
+                <h4>{first(locations)}</h4>
               ) : (
                 <Accordian
                   title={`${locations.length} locations`}
                   className={'search-result-card__location-list'}
                 >
                   {locations.map(location => (
-                    <p key={`${result.id}-${location}`}>{location}</p>
+                    <h4 key={`${result.id}-${location}`}>{location}</h4>
                   ))}
                 </Accordian>
               )}

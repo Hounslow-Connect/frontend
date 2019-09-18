@@ -22,7 +22,7 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
       </div>
       {(resultsStore.category || resultsStore.persona) && (
         <div className="flex-container category__info flex-container--mobile-no-padding">
-          <div className="flex-col flex-col--7 flex-col--mobile--12">
+          <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--mobile--12">
             <h2>
               {resultsStore && resultsStore.category
                 ? get(resultsStore, 'category.name')

@@ -36,6 +36,7 @@
   @include for-phone-only {
     margin-bottom: space(8);
     color: $waikawa;
+    font-size: pxtorem(14px);
   }
 }
 

@@ -20,6 +20,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+
+  @include for-desktop-up {
+    padding: 0 space(64);
+  }
 }
 
 .results__container-count {
