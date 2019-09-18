@@ -230,6 +230,8 @@ export default class ResultsStore {
   @action
   paginate = (page: number) => {
     this.currentPage = page;
+    this.results = [];
+    this.loading = true;
   };
 
   @action

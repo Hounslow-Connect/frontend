@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 
@@ -18,7 +18,7 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
   return (
     <div className="flex-container">
       <div className="flex-col flex-col--12 flex-col--mobile--12">
-        <h1>Results for</h1>
+        <h1 className="results__keyword-heading">Results for</h1>
       </div>
       {(resultsStore.category || resultsStore.persona) && (
         <div className="flex-container category__info flex-container--mobile-no-padding">

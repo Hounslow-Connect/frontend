@@ -27,36 +27,9 @@
   justify-content: flex-start;
   color: $san-juan;
 
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     margin: space(8) 0 !important;
     justify-content: center;
-  }
-}
-
-.results__search-left {
-  h4 {
-    @include heading-l;
-    margin-left: 0;
-
-    @include for-tablet-landscape-up {
-      margin-left: space(16);
-    }
-  }
-
-  .flex-container {
-    @include for-tablet-landscape-up {
-      padding: 0;
-    }
-  }
-}
-
-.results__search-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  h4 {
-    @include heading-m;
   }
 }
 
@@ -72,29 +45,6 @@
 
   @include for-tablet-portrait-down {
     padding: space(16) space(8) space(8) !important;
-  }
-}
-
-.results__search-box-info {
-  @include search-container;
-  font-size: $font-heading-l;
-
-  @include for-tablet-landscape-up {
-    padding: space(24) !important;
-  }
-
-  h5 {
-    font-size: $font-heading-l;
-    margin-bottom: space(12);
-    font-family: $font-secondary;
-  }
-
-  p {
-    color: $waikawa;
-  }
-
-  label {
-    @include heading-m;
   }
 }
 
@@ -161,10 +111,6 @@
   }
 }
 
-.results__location-filters {
-  height: pxtorem(115px);
-}
-
 .results__keyword-filters--heading {
   font-weight: normal;
   font-family: $font-primary;
@@ -183,18 +129,15 @@
   margin-bottom: space(16);
 }
 
-.results__keyword-amend {
-  margin-left: space(32);
-}
-
-.results__keyword-cost-filter {
-  margin-bottom: space(8);
-}
-
 .results__filter-bar {
   align-items: center;
 
   @include for-phone-only {
+    flex-direction: column-reverse;
+  }
+
+  @include for-tablet-portrait-down {
+    padding: 0 !important;
     flex-direction: column-reverse;
   }
 }
@@ -331,5 +274,11 @@
 .results__keyword-edit-checkbox {
   label {
     font-size: pxtorem(19px) !important;
+  }
+}
+
+.results__sort-by-container {
+  @include for-tablet-landscape-up {
+    text-align: right;
   }
 }

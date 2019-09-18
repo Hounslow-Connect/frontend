@@ -18,9 +18,10 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
 
   return (
     <div
-      className={cx('view-filter__search-bar', {
-        'view-filter__results-bar': resultsSwitch,
-      })}
+      className={cx(
+        'view-filter__search-bar',
+        'flex-col flex-col--5 flex-col--tablet--9 flex-col--mobile--6 flex-container--mobile-no-padding'
+      )}
     >
       <p
         className={cx('view-filter--header', {

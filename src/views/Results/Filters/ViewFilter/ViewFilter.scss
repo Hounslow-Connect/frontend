@@ -1,10 +1,23 @@
 @import '../../../../styles/fonts.scss';
 @import '../../../../styles/colors.scss';
+@import '../../../../styles/breakpoints.scss';
+@import '../../../../styles/mixins.scss';
 
 .view-filter__search-bar {
+  @include for-tablet-landscape-up {
+    text-align: right;
+  }
+
   button {
     &:first-of-type {
       margin-right: 5px;
+    }
+
+    @include for-phone-only {
+      font-size: pxtorem(14px);
+      width: pxtorem(75px);
+      padding: 0 space(8);
+      height: pxtorem(35px);
     }
   }
 }
@@ -17,6 +30,15 @@
 .view-filter--header {
   @include heading-m;
   margin-bottom: space(16);
+
+  @include for-tablet-landscape-up {
+    display: inline;
+  }
+
+  @include for-phone-only {
+    margin-bottom: space(8);
+    color: $waikawa;
+  }
 }
 
 .view-filter--header--light {
