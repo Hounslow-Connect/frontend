@@ -42,7 +42,7 @@
     background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
     background-size: 110% 100%;
     background-color: $iceberg;
-    padding: space(40) space(24);
+    padding: space(40) space(24) space(80) !important;
   }
 
   input {

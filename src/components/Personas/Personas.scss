@@ -15,7 +15,7 @@
 
   @include for-phone-only {
     background-color: $iceberg;
-    padding: space(32) space(32) space(96);
+    padding: space(56) space(32) space(96);
     text-align: left;
 
     p {
@@ -23,6 +23,22 @@
     }
   }
 
+  @include for-phone-only {
+    &:before {
+      content: url('../../assets/images/trees/peurto-small.svg');
+      position: absolute;
+      top: -46px;
+      left: 15%;
+    }
+
+    &:after {
+      content: url('../../assets/images/telephone-boxes-shapes.svg');
+      position: absolute;
+      top: -51px;
+      transform: scale(0.7);
+      right: 5%;
+    }
+  }
   @include for-tablet-landscape-up {
     &:before {
       content: url('../../assets/images/trees/hawkes-small.svg');
