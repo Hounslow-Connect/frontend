@@ -37,10 +37,25 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   color: $san-juan;
+  position: relative;
 
   @include for-tablet-landscape-up {
-    padding: space(32) 0 !important;
+    padding: space(48) 0 !important;
     background-image: url('../../assets/images/backgrounds/results-shape.svg');
+
+    &:before {
+      content: url('../../assets/images/trees/peurto-small.svg');
+      position: absolute;
+      top: 3px;
+      right: 400px;
+    }
+
+    &:after {
+      content: url('../../assets/images/telephone-boxes-shapes.svg');
+      position: absolute;
+      top: 0;
+      right: 100px;
+    }
   }
 
   @include for-tablet-portrait-down {
