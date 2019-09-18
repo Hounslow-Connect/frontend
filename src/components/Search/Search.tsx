@@ -87,7 +87,10 @@ class Search extends React.Component<IProps> {
                           pathname: '/results',
                           search: `?category=${SearchStore.categoryId}`,
                         })
-                      : null
+                      : history.push({
+                          pathname: '/results',
+                          search: `?search_term=${SearchStore.search}`,
+                        })
                   }
                 />
               </Fragment>
