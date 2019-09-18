@@ -124,6 +124,7 @@ $font-link-medium: $font-base;
 @mixin heading-s-light {
   font-size: $font-heading-s;
   font-family: $font-primary;
+  font-weight: normal;
   line-height: 1.22;
 }
 

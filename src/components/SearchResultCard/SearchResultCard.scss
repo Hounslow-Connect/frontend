@@ -34,7 +34,7 @@
 }
 
 .search-result-card__organisation {
-  @include body-xs;
+  @include heading-s-light;
   color: $waikawa;
 
   @include for-phone-only {
@@ -57,7 +57,7 @@
 
   img {
     border-radius: 9px;
-    width: 100%
+    width: 100%;
   }
 }
 
