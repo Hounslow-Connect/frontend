@@ -125,6 +125,10 @@
     @include link-medium;
     border: none;
   }
+
+  h4 {
+    display: inline;
+  }
 }
 
 .search-result-card__intro {

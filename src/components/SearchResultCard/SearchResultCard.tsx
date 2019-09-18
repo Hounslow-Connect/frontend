@@ -63,7 +63,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
                   className={'search-result-card__location-list'}
                 >
                   {locations.map(location => (
-                    <p key={`${result.id}-${location}`}>{location}</p>
+                    <h4 key={`${result.id}-${location}`}>{location}</h4>
                   ))}
                 </Accordian>
               )}

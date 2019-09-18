@@ -22,7 +22,7 @@ const Accordian: React.FunctionComponent<IProps> = ({ children, title, className
         aria-controls="accordian-content"
         id="accordian-header"
       >
-        {title}
+        <h4>{title}</h4>
         <FontAwesomeIcon
           icon="chevron-down"
           className={cx('accordian-icon', {
