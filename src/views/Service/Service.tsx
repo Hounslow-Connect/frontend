@@ -205,9 +205,7 @@ class Service extends Component<IProps> {
               title={`How can I contact this ${service.type}?`}
               className="service__accordian"
             >
-              <h2>{`How can I contact this ${service.type}?`}</h2>
-
-              <div className="service__section">
+              <div className="service__accordian-inner">
                 <div>
                   <p>
                     <FontAwesomeIcon icon="globe" /> Website
@@ -245,12 +243,14 @@ class Service extends Component<IProps> {
 
             {service.testimonial && (
               <Accordian title="What people say" className="service__accordian">
-                <p>{get(service, 'testimonial')}</p>
+                <div className="service__accordian-inner">
+                  <p>{get(service, 'testimonial')}</p>
+                </div>
               </Accordian>
             )}
 
             <Accordian title="Where can I access it?" className="service__accordian">
-              <div className="service__location">
+              <div className="service__accordian-inner">
                 {locations.map((location: ILocation) => (
                   <div key={location.id}>
                     {location.has_image && (
@@ -293,16 +293,18 @@ class Service extends Component<IProps> {
             </Accordian>
 
             <Accordian title="Good to know" className="service__accordian">
-              {service.useful_infos.map((info: any) => (
-                <div key={info.title}>
-                  <p>{info.title}</p>
-                  <p>{info.description}</p>
-                </div>
-              ))}
+              <div className="service__accordian-inner">
+                {service.useful_infos.map((info: any) => (
+                  <div key={info.title}>
+                    <p>{info.title}</p>
+                    <p>{info.description}</p>
+                  </div>
+                ))}
+              </div>
             </Accordian>
 
             <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
-              <div className="service__section">
+              <div className="service__accordian-inner">
                 <div>
                   {get(service, 'organisation.name')}
                   {get(service, 'organisation.has_logo') && (

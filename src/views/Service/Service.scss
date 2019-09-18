@@ -195,6 +195,16 @@
 
   &:nth-of-type(odd) {
     background-color: $alabaster;
+
+    .service__accordian-inner {
+      background-color: $white;
+    }
+  }
+
+  &:nth-of-type(even) {
+    .service__accordian-inner {
+      background-color: $alabaster;
+    }
   }
 }
 
