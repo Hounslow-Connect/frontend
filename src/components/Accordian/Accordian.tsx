@@ -5,7 +5,7 @@ import cx from 'classnames';
 import './Accordian.scss';
 
 interface IProps {
-  children: ReactChildren | JSX.Element[];
+  children: any;
   title: string;
   className?: string;
 }

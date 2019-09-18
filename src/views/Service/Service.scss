@@ -46,7 +46,13 @@
 }
 
 .service__section {
+  margin-top: space(12);
   margin-bottom: space(32);
+  width: 100%;
+
+  .criteria_card:nth-of-type(odd) {
+    background-color: $alabaster;
+  }
 }
 
 .service__header__logo {
@@ -100,8 +106,21 @@
 }
 
 .service__info {
-  display: flex;
-  padding: space(88) space(96);
+  padding-top: space(16) !important;
+  color: $san-juan;
+
+  @include for-phone-only {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  @include for-desktop-up {
+    padding: space(88) space(96) !important;
+  }
+
+  p {
+    font-size: pxtorem(18px);
+  }
 }
 
 .service__info--left {
@@ -145,4 +164,46 @@
 
 .react-player__preview {
   border-radius: 19px;
+}
+
+.service__referral {
+  background-color: $pink;
+  padding: space(32) !important;
+}
+
+.service__refer-disclaimer {
+  padding: space(16) 0;
+}
+
+.service__markdown {
+  p {
+    margin-bottom: space(16);
+  }
+}
+
+.service__accordian {
+  padding: space(24);
+
+  button {
+    text-align: left;
+    width: 100%;
+
+    h4 {
+      display: inline;
+    }
+  }
+
+  &:nth-of-type(odd) {
+    background-color: $alabaster;
+  }
+}
+
+.service__button-container {
+  padding: space(24) !important;
+}
+
+.service__related-services {
+  background-image: url('../../assets/images/backgrounds/related-services-background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
