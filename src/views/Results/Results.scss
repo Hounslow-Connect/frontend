@@ -254,6 +254,10 @@
     padding: space(24) space(36) !important;
   }
 
+  @include for-tablet-portrait-down {
+    padding: 0 !important;
+  }
+
   &--intro {
     color: $waikawa;
     margin: space(10) 0;
@@ -272,6 +276,10 @@
   height: 100%;
   z-index: 80;
   background: $white;
+
+  @include for-tablet-portrait-up {
+    top: pxtorem(102px);
+  }
 }
 
 .results__keyword-input-box {
@@ -293,6 +301,35 @@
 .results__keyword-heading {
   @include for-tablet-landscape-up {
     margin-bottom: space(12);
+    margin-left: space(16);
   }
-  margin-left: space(16);
+}
+
+.results__keyword-edit-toggle {
+  color: $elm;
+  font-size: pxtorem(19px);
+  border-bottom: 2px solid $elm;
+}
+
+.results__keyword-edit-input {
+  margin-top: pxtorem(18px);
+}
+
+.results__keyword-edit-filters {
+  margin-top: pxtorem(18px) !important;
+
+  @include for-tablet-portrait-up {
+    padding: 0 !important;
+  }
+}
+
+.results__keyword-edit-submit {
+  padding-top: space(64);
+  text-align: center;
+}
+
+.results__keyword-edit-checkbox {
+  label {
+    font-size: pxtorem(19px) !important;
+  }
 }

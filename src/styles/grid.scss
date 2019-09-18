@@ -188,7 +188,7 @@ body {
     }
   }
 
-  @include breakpoint($break_mobile) {
+  @include breakpoint($break_tablet) {
     width: 100%;
     padding-left: 0;
     padding-right: 0;

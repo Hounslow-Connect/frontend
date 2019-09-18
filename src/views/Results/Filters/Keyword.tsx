@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
+import Checkbox from '../../../components/Checkbox';
 import ResultsStore from '../../../stores/resultsStore';
 import KeywordFilter from './KeywordFilter';
 import WindowSizeStore from '../../../stores/windowSizeStore';
@@ -47,11 +48,77 @@ class Keyword extends Component<IProps, IState> {
     }
     return (
       <Fragment>
+        {/* Mobile Dropdown */}
         {editToggled && (
           <div className="mobile-show tablet-show flex-container results__keyword-edit">
-            <div role="button" aria-label="Close edit popup" onClick={() => this.toggleEdit()}>
-              <p>Close</p> <FontAwesomeIcon icon="times" />
+            <div className="flex-col">
+              <div role="button" aria-label="Close edit popup" onClick={() => this.toggleEdit()}>
+                <span className="results__keyword-edit-toggle">
+                  <FontAwesomeIcon icon="chevron-left" /> Back
+                </span>
+              </div>
             </div>
+            <div className="flex-col">
+              <h1>Search Results</h1>
+            </div>
+            <form>
+              <div className="flex-col">
+                <label htmlFor="keyword">
+                  <h2>I'm looking for</h2>
+                </label>
+                <Input
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    resultsStore.handleKeywordChange(e)
+                  }
+                  id="keyword"
+                  placeholder={get(resultsStore, 'keyword', '') || ''}
+                  value={get(resultsStore, 'keyword', '') || ''}
+                  fullWidth={true}
+                  className="results__keyword-edit-input"
+                />
+              </div>
+              <div className="flex-col">
+                <h2>Filter results by</h2>
+                <div className="flex-container flex-container--mobile-no-padding results__keyword-edit-filters">
+                  <div className="flex-col flex-col--mobile--6">
+                    <label htmlFor="location" className="results__keyword-filters--heading">
+                      Location
+                    </label>
+                    <Input
+                      id="location"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        resultsStore.postcodeChange(e)
+                      }
+                      className="results__search-filter-location"
+                      placeholder="Postcode"
+                      value={resultsStore.postcode}
+                    />
+                  </div>
+                  <div className="flex-col flex-col--mobile--4">
+                    <p className="results__keyword-filters--heading--cost">Cost</p>
+                    <Checkbox
+                      id="is_free"
+                      label="Free"
+                      checked={get(resultsStore, 'is_free', false)}
+                      onChange={() => {
+                        resultsStore.toggleIsFree();
+                      }}
+                      className="results__keyword-edit-checkbox"
+                    />
+                  </div>
+                </div>
+                <div className="flex-col results__keyword-edit-submit">
+                  <Button
+                    icon="search"
+                    text="Search"
+                    onClick={() => {
+                      this.toggleEdit();
+                      history.push({ search: resultsStore.amendSearch(resultsStore.keyword) });
+                    }}
+                  />
+                </div>
+              </div>
+            </form>
           </div>
         )}
         <div className="flex-container">
