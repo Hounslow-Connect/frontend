@@ -20,7 +20,10 @@
     display: flex;
     width: 90%;
     margin: 0 auto;
-    padding-top: space(32);
+
+    @include for-tablet-landscape-up {
+      padding-top: space(32);
+    }
   }
 
   .flex-col {

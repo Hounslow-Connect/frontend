@@ -26,7 +26,7 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
       })}
     </main>
 
-    <div className="flex pagnation__container">
+    <div className="flex-container flex-container--justify pagnation__container">
       {resultsStore.totalItems > resultsStore.itemsPerPage && (
         <Pagination
           activePage={resultsStore.currentPage}

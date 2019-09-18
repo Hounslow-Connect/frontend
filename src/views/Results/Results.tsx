@@ -10,6 +10,7 @@ import ViewFilters from './Filters/ViewFilter/ViewFilter';
 import ListView from './ListView';
 import MapView from './MapView';
 import Select from '../../components/Select';
+
 interface IProps {
   location: Location;
   resultsStore: ResultStore;
@@ -45,24 +46,23 @@ class Results extends Component<IProps> {
         </div>
 
         <div className="results__list">
-          {resultsStore.loading ? (
-            'Loading'
-          ) : (
-            <div className="flex results__filter-bar">
-              <div className="flex results__container-count">
-                {!!resultsStore.results.length && (
-                  <p>{`${resultsStore.results.length} services found`}</p>
-                )}
-              </div>
-              {resultsStore.isKeywordSearch && (
-                <div className="flex results__sort-by">
+          <div className="flex-container flex-container results__filter-bar">
+            <div className="flex-col flex-col--4 flex-col--tablet-large--2 flex-col--mobile--12 results__container-count">
+              {!!resultsStore.results.length && (
+                <p>{`${resultsStore.results.length} services found`}</p>
+              )}
+            </div>
+            {resultsStore.isKeywordSearch && (
+              <div className="flex-col flex-col--7 flex-col--tablet-large--12">
+                <div className="flex-container flex-container--align-center results__keyword-container">
                   <ViewFilters resultsSwitch={true} />
                   {resultsStore.view === 'grid' && (
-                    <div className="flex">
+                    <div className="flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-container--mobile-no-padding results__sort-by-container">
                       <label htmlFor="orderBy" className="results__sort-by-label">
                         Sort by:
                       </label>
                       <Select
+                        className="results__sort-by-select"
                         options={[
                           { value: 'relevance', text: 'Relevance' },
                           { value: 'distance', text: 'Location' },
@@ -77,9 +77,10 @@ class Results extends Component<IProps> {
                     </div>
                   )}
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
+
           {resultsStore.view === 'grid' ? (
             <ListView resultsStore={resultsStore} history={history} />
           ) : (

@@ -230,6 +230,8 @@ export default class ResultsStore {
   @action
   paginate = (page: number) => {
     this.currentPage = page;
+    this.results = [];
+    this.loading = true;
   };
 
   @action
@@ -237,7 +239,7 @@ export default class ResultsStore {
     this.postcode = e.target.value.replace(' ', '');
   };
 
-  amendSearch = () => {
+  amendSearch = (searchTerm?: string) => {
     let url = window.location.search;
 
     if (this.postcode) {
@@ -255,6 +257,10 @@ export default class ResultsStore {
 
     if (!this.is_free) {
       url = this.removeQueryStringParameter('is_free', url);
+    }
+
+    if (searchTerm) {
+      url = this.updateQueryStringParameter('search_term', searchTerm, url);
     }
 
     this.results = [];

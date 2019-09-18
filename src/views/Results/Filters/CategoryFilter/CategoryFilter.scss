@@ -8,6 +8,10 @@
     justify-content: flex-end !important;
     border-left: 3px solid #d8d8d8;
   }
+
+  @include for-tablet-portrait-down {
+    padding: 0 !important;
+  }
 }
 
 .category_filters--header--cost {

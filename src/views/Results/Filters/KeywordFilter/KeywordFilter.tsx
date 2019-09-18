@@ -23,10 +23,12 @@ class KeywordFilter extends Component<IProps> {
     }
 
     return (
-      <div className="results__search-right results__location-filters">
-        <h4>Filter results by</h4>
-        <form className="flex results__filters">
-          <div className="column">
+      <div>
+        <div>
+          <h2 className="mobile-hide results__keyword-heading">Filter results by</h2>
+        </div>
+        <form className="flex-container flex-container--align-bottom results__filters">
+          <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-container--mobile-no-padding">
             <label htmlFor="location" className="results__keyword-filters--heading">
               Location
             </label>
@@ -38,19 +40,18 @@ class KeywordFilter extends Component<IProps> {
               value={resultsStore.postcode}
             />
           </div>
-          <div>
+          <div className="flex-col flex-col--3 flex-col--tablet--4 flex-col--mobile--3 flex-container--mobile-no-padding">
             <p className="results__keyword-filters--heading--cost">Cost</p>
             <Checkbox
               id="is_free"
               label="Free"
               checked={get(resultsStore, 'is_free', false)}
-              className="results__keyword-cost-filter"
               onChange={() => {
                 resultsStore.toggleIsFree();
               }}
             />
           </div>
-          <div className="results__keyword-amend">
+          <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-container--mobile-no-padding results__amend">
             <Button
               alt={true}
               text="Amend"
