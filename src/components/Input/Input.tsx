@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import './Input.scss';
+import cx from 'classnames';
 
 interface IProps {
   placeholder?: string;
@@ -7,6 +8,7 @@ interface IProps {
   id: string;
   value: string;
   className?: string;
+  fullWidth?: boolean;
 }
 
 const Input: React.FunctionComponent<IProps> = ({
@@ -15,9 +17,15 @@ const Input: React.FunctionComponent<IProps> = ({
   id,
   className,
   value,
+  fullWidth,
 }) => (
   <input
-    className={`input ${className}`}
+    className={cx(
+      {
+        'input--full-width': fullWidth,
+      },
+      `input ${className}`
+    )}
     type=" text"
     placeholder={placeholder}
     onChange={onChange}
