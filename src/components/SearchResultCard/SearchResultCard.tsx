@@ -32,12 +32,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
         'search-result-card--full-width': mapView,
       })}
     >
-      <div
-        className="search-result-card__top-row"
-        role="navigation"
-        aria-label={`View more information on ${result.name}`}
-        onClick={() => history.push(`/service/${result.slug}`)}
-      >
+      <div className="search-result-card__top-row">
         <div className="search-result-card__title">
           <h2>{result.name}</h2>
           {organisation && <p className="search-result-card__organisation">{organisation.name}</p>}
@@ -54,7 +49,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             {result.is_free ? 'Free' : 'Cost'}
           </div>
           {!!locations.length && (
-            <div className="flex search-result-card__location">
+            <div className="search-result-card__location">
               <FontAwesomeIcon icon="map-marker-alt" />
               {locations.length === 1 ? (
                 <p>{first(locations)}</p>
@@ -86,7 +81,12 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
       <div className="search-result-card__intro">
         <p>{result.intro}</p>
       </div>
-      <div className="search-result-card__footer">
+      <div
+        className="search-result-card__footer"
+        role="navigation"
+        aria-label={`View more information on ${result.name}`}
+        onClick={() => history.push(`/service/${result.slug}`)}
+      >
         <Link to={`/service/${result.slug}`}>
           <span>View More</span>
           <FontAwesomeIcon icon="chevron-right" />
