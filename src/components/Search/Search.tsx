@@ -39,8 +39,8 @@ class Search extends React.Component<IProps> {
         <section className="flex-container flex-container--justify search__container">
           <form className="search__inner-container flex-col" aria-label="Search">
             <div className="search__input">
-              <label htmlFor="search" className="search__heading">
-                I'm looking for
+              <label htmlFor="search">
+                <h1 className="search__heading">I'm looking for</h1>
               </label>
               <Input
                 placeholder="Search for services, groups and activities"
