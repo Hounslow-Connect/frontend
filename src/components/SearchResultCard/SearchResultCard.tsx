@@ -9,8 +9,10 @@ import { apiBase } from '../../config/api';
 import { IService, IOrganisation } from '../../types/types';
 
 import './SearchResultCard.scss';
+
 import Accordian from '../Accordian';
 import { getLocationName } from '../../utils/utils';
+import FallBackLogo from '../../assets/images/logo-fallback.png';
 
 interface IProps extends RouteComponentProps {
   result: IService;
@@ -66,7 +68,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             </div>
           )}
         </div>
-        <div>
+        <div className="search-result-card__logo">
           <img
             src={
               result.has_logo
@@ -74,7 +76,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
                 : `${apiBase}/organisations/${result.organisation_id}/logo.png?v=${result.updated_at}`
             }
             alt={result.name}
-            className="search-result-card__logo"
+            onError={(ev: any) => (ev.target.src = FallBackLogo)}
           />
         </div>
       </div>
