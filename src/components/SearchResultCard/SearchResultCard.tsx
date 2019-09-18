@@ -9,8 +9,10 @@ import { apiBase } from '../../config/api';
 import { IService, IOrganisation } from '../../types/types';
 
 import './SearchResultCard.scss';
+
 import Accordian from '../Accordian';
 import { getLocationName } from '../../utils/utils';
+import FallBackLogo from '../../assets/images/logo-fallback.png';
 
 interface IProps extends RouteComponentProps {
   result: IService;
@@ -32,12 +34,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
         'search-result-card--full-width': mapView,
       })}
     >
-      <div
-        className="search-result-card__top-row"
-        role="navigation"
-        aria-label={`View more information on ${result.name}`}
-        onClick={() => history.push(`/service/${result.slug}`)}
-      >
+      <div className="search-result-card__top-row">
         <div className="search-result-card__title">
           <h2>{result.name}</h2>
           {organisation && <p className="search-result-card__organisation">{organisation.name}</p>}
@@ -54,7 +51,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             {result.is_free ? 'Free' : 'Cost'}
           </div>
           {!!locations.length && (
-            <div className="flex search-result-card__location">
+            <div className="search-result-card__location">
               <FontAwesomeIcon icon="map-marker-alt" />
               {locations.length === 1 ? (
                 <p>{first(locations)}</p>
@@ -71,7 +68,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             </div>
           )}
         </div>
-        <div>
+        <div className="search-result-card__logo">
           <img
             src={
               result.has_logo
@@ -79,14 +76,19 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
                 : `${apiBase}/organisations/${result.organisation_id}/logo.png?v=${result.updated_at}`
             }
             alt={result.name}
-            className="search-result-card__logo"
+            onError={(ev: any) => (ev.target.src = FallBackLogo)}
           />
         </div>
       </div>
       <div className="search-result-card__intro">
         <p>{result.intro}</p>
       </div>
-      <div className="search-result-card__footer">
+      <div
+        className="search-result-card__footer"
+        role="navigation"
+        aria-label={`View more information on ${result.name}`}
+        onClick={() => history.push(`/service/${result.slug}`)}
+      >
         <Link to={`/service/${result.slug}`}>
           <span>View More</span>
           <FontAwesomeIcon icon="chevron-right" />

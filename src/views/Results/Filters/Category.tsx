@@ -10,29 +10,37 @@ interface IProps {
   resultsStore?: ResultsStore;
 }
 
-const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => (
-  <Fragment>
-    <div className="results__search-left">
-      <h4>Results for</h4>
-      <div className="results__search-box-info">
-        <h5>
-          {resultsStore && resultsStore.category
-            ? get(resultsStore, 'category.name')
-            : get(resultsStore, 'persona.name')}
-        </h5>
-        <div>
-          <p>
-            {resultsStore && resultsStore.category
-              ? get(resultsStore, 'category.intro')
-              : get(resultsStore, 'persona.intro')}
-          </p>
-        </div>
+const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
+  if (!resultsStore) {
+    return null;
+  }
+
+  return (
+    <div className="flex-container">
+      <div className="flex-col flex-col--12 flex-col--mobile--12">
+        <h1>Results for</h1>
       </div>
+      {(resultsStore.category || resultsStore.persona) && (
+        <div className="flex-container category__info flex-container--mobile-no-padding">
+          <div className="flex-col flex-col--7 flex-col--mobile--12">
+            <h2>
+              {resultsStore && resultsStore.category
+                ? get(resultsStore, 'category.name')
+                : get(resultsStore, 'persona.name')}
+            </h2>
+            <div>
+              <p className="category__info--intro">
+                {resultsStore && resultsStore.category
+                  ? get(resultsStore, 'category.intro')
+                  : get(resultsStore, 'persona.intro')}
+              </p>
+            </div>
+          </div>
+          <CategoryFilter />
+        </div>
+      )}
     </div>
-    <div className="results__search-right">
-      <CategoryFilter />
-    </div>
-  </Fragment>
-);
+  );
+};
 
 export default inject('resultsStore')(observer(Category));
