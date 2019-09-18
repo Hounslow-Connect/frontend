@@ -176,3 +176,21 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.category__info {
+  width: 100%;
+  @include search-container;
+
+  @include for-tablet-landscape-up {
+    padding: space(24) space(36) !important;
+  }
+
+  &--intro {
+    color: $waikawa;
+    margin: space(10) 0;
+
+    @include for-tablet-landscape-up {
+      padding-right: space(40);
+    }
+  }
+}
