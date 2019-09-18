@@ -112,8 +112,8 @@
   color: $elm;
   display: flex;
 
-  p {
-    @include link-medium;
+  h4 {
+    // @include link-medium;
     margin-left: space(8);
   }
 }
@@ -124,10 +124,12 @@
   button {
     @include link-medium;
     border: none;
+    background: none;
   }
 
   h4 {
     display: inline;
+    margin-left: 0;
   }
 }
 
