@@ -48,76 +48,60 @@ class Keyword extends Component<IProps, IState> {
     return (
       <Fragment>
         {editToggled && (
-          <div className="mobile-show flex-container results__keyword-edit">
+          <div className="mobile-show tablet-show flex-container results__keyword-edit">
             <div role="button" aria-label="Close edit popup" onClick={() => this.toggleEdit()}>
               <p>Close</p> <FontAwesomeIcon icon="times" />
             </div>
           </div>
         )}
         <div className="flex-container">
-          <div className="mobile-show flex-col flex-col--mobile--7">
+          {/* Mobile Edit  */}
+          <div className="mobile-show tablet-show flex-col flex-col--mobile--7">
             <h1>Search results</h1>
             <p>{searchTerm ? searchTerm[1] : ''}</p>
           </div>
-          <div className="mobile-show flex-col flex-col--mobile--5 results__mobile-edit">
+          <div className="mobile-show tablet-show flex-col flex-col--mobile--5 results__mobile-edit">
             <Button text="Edit Search" size="small" onClick={() => this.toggleEdit()} />
           </div>
+
+          {/* Desktop */}
+
+          <div className="flex-col flex-col--12 mobile-hide tablet-hide">
+            <h1 className="results__keyword-heading">Search results</h1>
+          </div>
+          <form className="flex-container flex-container--align-bottom mobile-hide tablet-hide results__keyword-search-container">
+            <div className="flex-col flex-col--6 flex-col--tablet--7 results__keyword-input-box">
+              <label htmlFor="keyword">
+                <h2>I'm looking for</h2>
+              </label>
+              <Input
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  resultsStore.handleKeywordChange(e)
+                }
+                id="keyword"
+                placeholder={get(resultsStore, 'keyword', '') || ''}
+                value={get(resultsStore, 'keyword', '') || ''}
+                className="results__search-box-keyword"
+              />
+              <Button
+                icon={windowSizeStore.isMobile ? undefined : 'search'}
+                text="Search"
+                onClick={() => {
+                  history.push({
+                    search: resultsStore.updateQueryStringParameter(
+                      'search_term',
+                      resultsStore.keyword
+                    ),
+                  });
+                }}
+              />
+            </div>
+            <div className="flex-col flex-col--5 flex-col--tablet--5">
+              <KeywordFilter />
+            </div>
+          </form>
         </div>
       </Fragment>
-      // <Fragment>
-      //   <div className="flex-col flex-col--7 flex-col--tablet--12 flex-col--mobile-4 flex-container--mobile-no-padding results__search-left">
-      //     <div className="flex-container">
-      //       <div className="flex-col flex-col--6 flex-col--mobile--6">
-      //         <h4>Search results</h4>
-      //         {windowSizeStore.isMobile && <p>{resultsStore.keyword}</p>}
-      //       </div>
-      //       {windowSizeStore.isMobile && (
-      //         <div className="flex-col flex-col--6 flex-col--mobile--6 results__mobile-edit">
-      //           <Button text="Edit Search" size="small" onClick={() => this.toggleEdit()} />
-      //         </div>
-      //       )}
-      //     </div>
-
-      //     {((windowSizeStore.isMobile && editToggled) || !windowSizeStore.isMobile) && (
-      //       <Fragment>
-      //         <form className="flex-container flex-container--align-bottom results__search-box-info">
-      //           <div className="flex-col flex-col--mobile--8">
-      //             <label htmlFor="keyword">I'm looking for</label>
-      //             <Input
-      //               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-      //                 resultsStore.handleKeywordChange(e)
-      //               }
-      //               id="keyword"
-      //               placeholder={get(resultsStore, 'keyword', '') || ''}
-      //               className="results__search-box-keyword"
-      //               value={get(resultsStore, 'keyword', '') || ''}
-      //             />
-      //           </div>
-      //           <div className="flex-col flex-col--mobile--4 results__mobile-edit">
-      //             <Button
-      //               icon={windowSizeStore.isMobile ? undefined : 'search'}
-      //               text="Search"
-      //               onClick={() => {
-      //                 history.push({
-      //                   search: resultsStore.updateQueryStringParameter(
-      //                     'search_term',
-      //                     resultsStore.keyword
-      //                   ),
-      //                 });
-      //               }}
-      //               size={windowSizeStore.isMobile ? 'small' : 'medium'}
-      //             />
-      //           </div>
-      //         </form>
-      //       </Fragment>
-      //     )}
-      //   </div>
-      //   {((windowSizeStore.isMobile && editToggled) || !windowSizeStore.isMobile) && (
-      //     <div className="flex-col flex-col--4 flex-col--tablet--12 flex-col--mobile-4 flex-container--mobile-no-padding">
-      //       <KeywordFilter />
-      //     </div>
-      //   )}
-      // </Fragment>
     );
   }
 }
