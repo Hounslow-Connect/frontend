@@ -22,16 +22,44 @@
       font-size: $font-body-s;
     }
   }
+
+  @include for-tablet-landscape-up {
+    &:before {
+      content: url('../../assets/images/trees/hawkes-small.svg');
+      position: absolute;
+      top: -55px;
+      right: 15%;
+    }
+
+    &:after {
+      content: url('../../assets/images/trees/cranberry-lg.svg');
+      position: absolute;
+      top: -65px;
+      right: 11%;
+    }
+  }
 }
 
 .personas__heading {
-  font-size: $font-heading-m;
+  @include heading-l;
+
   margin-bottom: space(8);
 }
 
 .personas__list {
+  position: relative;
+
   @include for-phone-only {
     margin-top: space(32);
+  }
+
+  @include for-tablet-landscape-up {
+    &:before {
+      content: url('../../assets/images/trees/iceberg-small.svg');
+      position: absolute;
+      top: -150px;
+      left: 10%;
+    }
   }
 }
 
