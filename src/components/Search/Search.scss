@@ -15,6 +15,7 @@
   height: auto;
   background-size: 100% 100%;
   position: relative;
+  padding: space(32) !important;
 
   @include for-desktop-up {
     &:after {
@@ -41,7 +42,7 @@
     background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
     background-size: 110% 100%;
     background-color: $iceberg;
-    padding: space(40) space(24);
+    padding: space(40) space(24) space(80) !important;
   }
 
   input {
@@ -55,9 +56,12 @@
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  max-width: 1260px;
+  position: relative;
 
   @include for-tablet-landscape-up {
     padding: space(64) space(32);
+    margin: space(64) space(32);
   }
 }
 
@@ -82,15 +86,6 @@
   @include marginLeft;
 }
 
-.search__heading {
-  @include heading-xl;
-  display: block;
-
-  @include for-phone-only {
-    margin-bottom: space(16);
-  }
-}
-
 .search__category-subtitle {
   font-size: $font-heading-s;
   margin: space(10) 0;
@@ -100,11 +95,19 @@
   margin-bottom: space(32);
 }
 
-.search__category-heading {
-  @include for-tablet-landscape-up {
-    @include marginLeft;
-  }
+.search__heading {
   @include heading-l;
+  display: block;
+
+  @include for-phone-only {
+    margin-bottom: space(16);
+  }
+
+  &--category {
+    @include for-tablet-landscape-up {
+      @include marginLeft;
+    }
+  }
 }
 
 .search__cateogry-list {

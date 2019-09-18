@@ -15,23 +15,67 @@
 
   @include for-phone-only {
     background-color: $iceberg;
-    padding: space(32) space(32) space(96);
+    padding: space(56) space(32) space(96);
     text-align: left;
 
     p {
       font-size: $font-body-s;
     }
   }
+
+  @include for-phone-only {
+    &:before {
+      content: url('../../assets/images/trees/peurto-small.svg');
+      position: absolute;
+      top: -46px;
+      left: 15%;
+    }
+
+    &:after {
+      content: url('../../assets/images/telephone-boxes-shapes.svg');
+      position: absolute;
+      top: -51px;
+      transform: scale(0.7);
+      right: 5%;
+    }
+  }
+  @include for-tablet-landscape-up {
+    &:before {
+      content: url('../../assets/images/trees/hawkes-small.svg');
+      position: absolute;
+      top: -55px;
+      right: 15%;
+    }
+
+    &:after {
+      content: url('../../assets/images/trees/cranberry-lg.svg');
+      position: absolute;
+      top: -65px;
+      right: 11%;
+    }
+  }
 }
 
 .personas__heading {
-  font-size: $font-heading-m;
+  @include heading-l;
+
   margin-bottom: space(8);
 }
 
 .personas__list {
+  position: relative;
+
   @include for-phone-only {
     margin-top: space(32);
+  }
+
+  @include for-tablet-landscape-up {
+    &:before {
+      content: url('../../assets/images/trees/iceberg-small.svg');
+      position: absolute;
+      top: -150px;
+      left: 10%;
+    }
   }
 }
 
