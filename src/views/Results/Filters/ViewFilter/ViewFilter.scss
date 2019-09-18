@@ -19,7 +19,7 @@
 }
 
 .view-filter--right-align {
-  @include for-tablet-landscape-up {
+  @include for-desktop-up {
     text-align: right;
   }
 }

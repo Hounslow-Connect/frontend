@@ -47,17 +47,17 @@ class Results extends Component<IProps> {
 
         <div className="results__list">
           <div className="flex-container flex-container results__filter-bar">
-            <div className="flex-col flex-col--4 flex-col--mobile--12 results__container-count">
+            <div className="flex-col flex-col--4 flex-col--tablet-large--2 flex-col--mobile--12 results__container-count">
               {!!resultsStore.results.length && (
                 <p>{`${resultsStore.results.length} services found`}</p>
               )}
             </div>
             {resultsStore.isKeywordSearch && (
-              <div className="flex-col flex-col--7">
+              <div className="flex-col flex-col--7 flex-col--tablet-large--12">
                 <div className="flex-container flex-container--align-center results__keyword-container">
                   <ViewFilters resultsSwitch={true} />
                   {resultsStore.view === 'grid' && (
-                    <div className="flex-col flex-col--7 flex-col--tablet--9 flex-col--mobile--5 flex-container--mobile-no-padding results__sort-by-container">
+                    <div className="flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-container--mobile-no-padding results__sort-by-container">
                       <label htmlFor="orderBy" className="results__sort-by-label">
                         Sort by:
                       </label>

@@ -27,7 +27,7 @@
   justify-content: flex-start;
   color: $san-juan;
 
-  @include for-tablet-portrait-down {
+  @include for-tablet-landscape-down {
     margin: space(8) 0 !important;
     justify-content: center;
   }
@@ -136,9 +136,13 @@
     flex-direction: column-reverse;
   }
 
-  @include for-tablet-portrait-down {
+  @include for-tablet-landscape-down {
     padding: 0 !important;
     flex-direction: column-reverse;
+  }
+
+  @include for-tablet-landscape-up {
+    margin-bottom: space(32) !important;
   }
 }
 
