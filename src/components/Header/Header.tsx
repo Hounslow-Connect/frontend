@@ -69,12 +69,7 @@ class Header extends Component<IProps> {
                 <ReactSVG src={isMobile ? MobileLogo : Logo} />
               </RouterLink>
             </figure>
-            <button
-              type="button"
-              name="nav-trigger"
-              className="nav-trigger tablet--large-show"
-              role="button"
-            >
+            <button type="button" name="nav-trigger" className="nav-trigger tablet--large-show">
               <label htmlFor="nav-trigger">Menu</label>
               <FontAwesomeIcon icon="bars" aria-hidden={true} title="Menu Trigger" />
               <span className="sr-only">Menu Trigger</span>
