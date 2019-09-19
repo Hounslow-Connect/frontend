@@ -34,6 +34,7 @@ import WheelchairAccessible from '../../assets/images/icons/accessibility/wheelc
 import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
+import RelatedServicesCard from './RelatedServicesCard';
 interface RouteParams {
   service: string;
 }
@@ -41,6 +42,8 @@ interface RouteParams {
 interface IProps extends RouteComponentProps<RouteParams> {
   serviceStore: ServiceStore;
 }
+
+const getSocialUrl = (socialObj: any) => socialObj.url;
 
 class Service extends Component<IProps> {
   componentDidMount() {
@@ -145,187 +148,227 @@ class Service extends Component<IProps> {
                 {get(service, 'criteria.other') && (
                   <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
                 )}
-              </div>
-            </div>
 
-            <div className="flex-container flex-container--align-center">
-              <div className="flex-col flex-col--mobile--12">
-                <h3>{`What is this ${get(service, 'type')}?`}</h3>
-              </div>
-              {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
-              <div className="flex-col flex-col--mobile--12 service__section">
-                {service.video_embed && (
-                  <ReactPlayer
-                    url={service.video_embed}
-                    width={'100%'}
-                    style={{ borderRadius: '19px' }}
-                    light={true}
-                  />
-                )}
-              </div>
-            </div>
+                <div className="flex-col flex-col--mobile--12 criteria_card service__info__cost">
+                  <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
+                    <div className="flex-col flex-col--mobile--3 criteria_card-img">
+                      <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
 
-            <div className="flex-container flex-container--align-center">
-              <div className="flex-col flex-col--mobile--12 service__section">
-                <ReactMarkdown source={service.intro} className="service__markdown" />
-              </div>
-              <div className="flex-col flex-col--mobile--12">
-                <h4>What do we offer?</h4>
+                      <p className="criteria_card-title">{service.is_free ? 'Free' : 'Cost'}</p>
+                    </div>
+                    <div className="flex-col flex-col--mobile--9">
+                      <p>
+                        {service.fees_text
+                          ? service.fees_text
+                          : `This ${service.type} costs no money`}
+                      </p>
+                      <p>
+                        {service.fees_url && <a href={service.fees_url}>Further Pricing Details</a>}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex-col flex-col--mobile--12">
-                {map(service.offerings, (offering: any, i) => (
-                  <Fragment key={offering.offering}>
-                    <span>{offering.offering}</span>
-                    {i < service.offerings.length - 1 ? (
-                      <FontAwesomeIcon
-                        icon="circle"
-                        style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 4px' }}
-                      />
-                    ) : null}
-                  </Fragment>
-                ))}
+              <div className="flex-container flex-container--align-center">
+                <div className="flex-col flex-col--mobile--12">
+                  <h3>{`What is this ${get(service, 'type')}?`}</h3>
+                </div>
+                {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
+                <div className="flex-col flex-col--mobile--12 service__section">
+                  {service.video_embed && (
+                    <ReactPlayer
+                      url={service.video_embed}
+                      width={'100%'}
+                      style={{ borderRadius: '19px' }}
+                      light={true}
+                    />
+                  )}
+                </div>
               </div>
-              <div className="flex-col flex-col--mobile--12 service__section">
-                <ReactMarkdown source={service.description} className="service__markdown" />
-              </div>
-            </div>
 
-            {service.referral_method !== 'none' && (
-              <div className="flex-container flex-container--align-center flex-container--justify flex-container--mobile-no-padding service__referral">
-                <Button text="Make a connection" icon="arrow-right" />
-                <p className="service__refer-disclaimer">
-                  <FontAwesomeIcon icon="info-circle" /> It can take up to 2 weeks to recieve a
-                  reply
-                </p>
-              </div>
-            )}
+              <div className="flex-container flex-container--align-center">
+                <div className="flex-col flex-col--mobile--12 service__section">
+                  <ReactMarkdown source={service.intro} className="service__markdown" />
+                </div>
+                <div className="flex-col flex-col--mobile--12">
+                  <h4>What do we offer?</h4>
+                </div>
 
-            <Accordian
-              title={`How can I contact this ${service.type}?`}
-              className="service__accordian"
-            >
-              <div className="service__accordian-inner">
-                <div>
-                  <p>
-                    <FontAwesomeIcon icon="globe" /> Website
+                <div className="flex-col flex-col--mobile--12">
+                  {map(service.offerings, (offering: any, i) => (
+                    <Fragment key={offering.offering}>
+                      <span>{offering.offering}</span>
+                      {i < service.offerings.length - 1 ? (
+                        <FontAwesomeIcon
+                          icon="circle"
+                          style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 4px' }}
+                        />
+                      ) : null}
+                    </Fragment>
+                  ))}
+                </div>
+                <div className="flex-col flex-col--mobile--12 service__section">
+                  <ReactMarkdown source={service.description} className="service__markdown" />
+                </div>
+              </div>
+
+              {service.referral_method !== 'none' && (
+                <div className="flex-container flex-container--align-center flex-container--justify flex-container--mobile-no-padding service__referral">
+                  <Button text="Make a connection" icon="arrow-right" />
+                  <p className="service__refer-disclaimer">
+                    <FontAwesomeIcon icon="info-circle" /> It can take up to 2 weeks to recieve a
+                    reply
                   </p>
-                  <p>{service.url}</p>
                 </div>
-                <div>
-                  <p>
-                    <FontAwesomeIcon icon="phone" /> Telephone
-                  </p>
-                  <p>{service.contact_phone}</p>
-                </div>
-                <div>
-                  <p>
-                    <FontAwesomeIcon icon="envelope" /> Telephone
-                  </p>
-                  <p>{service.contact_email}</p>
-                </div>
-                <div>
-                  {find(service.social_medias, { type: 'facebook' }) && (
-                    <FontAwesomeIcon icon={['fab', 'facebook-f']} />
-                  )}
-                  {find(service.social_medias, { type: 'twitter' }) && (
-                    <FontAwesomeIcon icon={['fab', 'twitter']} />
-                  )}
-                  {find(service.social_medias, { type: 'intstagram' }) && (
-                    <FontAwesomeIcon icon={['fab', 'instagram']} />
-                  )}
-                  {find(service.social_medias, { type: 'instagram' }) && (
-                    <FontAwesomeIcon icon={['fab', 'youtube']} />
-                  )}
-                </div>
-              </div>
-            </Accordian>
+              )}
 
-            {service.testimonial && (
-              <Accordian title="What people say" className="service__accordian">
-                <div className="service__accordian-inner">
-                  <p>{get(service, 'testimonial')}</p>
+              <Accordian
+                title={`How can I contact this ${service.type}?`}
+                className="service__accordian"
+              >
+                <div className="service__accordian-inner flex-container flex-container--align-center flex-container--mobile-no-padding">
+                  <div className="flex-col service__accordian--no-overflow">
+                    <h4>
+                      <FontAwesomeIcon icon="globe" /> Website
+                    </h4>
+                    <a href={service.url}>{service.url}</a>
+                  </div>
+                  <div className="flex-col">
+                    <h4>
+                      <FontAwesomeIcon icon="phone" /> Telephone
+                    </h4>
+                    <p>{service.contact_phone}</p>
+                  </div>
+                  <div className="flex-col">
+                    <h4>
+                      <FontAwesomeIcon icon="envelope" /> Email
+                    </h4>
+                    <a href={`mailto:${service.contact_email}`}>{service.contact_email}</a>
+                  </div>
+                  <div className="flex-col service__social-icon-container">
+                    {find(service.social_medias, { type: 'facebook' }) && (
+                      <a href={getSocialUrl(find(service.social_medias, { type: 'facebook' }))}>
+                        <FontAwesomeIcon
+                          icon={['fab', 'facebook-f']}
+                          className="service__social-icon"
+                        />
+                      </a>
+                    )}
+                    {find(service.social_medias, { type: 'twitter' }) && (
+                      <a href={getSocialUrl(find(service.social_medias, { type: 'twitter' }))}>
+                        <FontAwesomeIcon
+                          icon={['fab', 'twitter']}
+                          className="service__social-icon"
+                        />
+                      </a>
+                    )}
+                    {find(service.social_medias, { type: 'intstagram' }) && (
+                      <a href={getSocialUrl(find(service.social_medias, { type: 'intstagram' }))}>
+                        <FontAwesomeIcon
+                          icon={['fab', 'instagram']}
+                          className="service__social-icon"
+                        />
+                      </a>
+                    )}
+                    {find(service.social_medias, { type: 'instagram' }) && (
+                      <a href={getSocialUrl(find(service.social_medias, { type: 'instagram' }))}>
+                        <FontAwesomeIcon
+                          icon={['fab', 'youtube']}
+                          className="service__social-icon"
+                        />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Accordian>
-            )}
 
-            <Accordian title="Where can I access it?" className="service__accordian">
-              <div className="service__accordian-inner">
-                {locations.map((location: ILocation) => (
-                  <div key={location.id}>
-                    {location.has_image && (
+              {service.testimonial && (
+                <Accordian title="What people say" className="service__accordian">
+                  <div className="service__accordian-inner">
+                    <p>{get(service, 'testimonial')}</p>
+                  </div>
+                </Accordian>
+              )}
+
+              <Accordian title="Where can I access it?" className="service__accordian">
+                <div className="service__accordian-inner">
+                  {locations.map((location: ILocation) => (
+                    <div key={location.id}>
+                      {location.has_image && (
+                        <img
+                          src={`${apiBase}/service-locations/${location.id}/image.png`}
+                          alt={`${get(location, 'location.address_line_1')}`}
+                        />
+                      )}
+                      <p> {get(location, 'location.address_line_1')}</p>
+                      <p>{`${get(location, 'location.address_line_2')}, ${get(
+                        location,
+                        'location.postcode'
+                      )}`}</p>
+                      {get(location, 'location.has_wheelchair_access') && (
+                        <ReactSVG src={WheelchairAccessible} />
+                      )}
+                      {get(location, 'location.has_induction_loop') && (
+                        <ReactSVG src={InductionLoop} />
+                      )}
+
+                      {/* OPENING TIMES */}
+
+                      <Link
+                        icon="map"
+                        text="View on Google Maps"
+                        size="medium"
+                        href=""
+                        iconPosition="right"
+                      />
+                      <Link
+                        icon="map-signs"
+                        text="View on Google Maps"
+                        size="medium"
+                        href=""
+                        iconPosition="right"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </Accordian>
+
+              <Accordian title="Good to know" className="service__accordian">
+                <div className="service__accordian-inner">
+                  {service.useful_infos.map((info: any) => (
+                    <div key={info.title}>
+                      <p>{info.title}</p>
+                      <p>{info.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </Accordian>
+
+              <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
+                <div className="service__accordian-inner">
+                  <div>
+                    {get(service, 'organisation.name')}
+                    {get(service, 'organisation.has_logo') && (
                       <img
-                        src={`${apiBase}/service-locations/${location.id}/image.png`}
-                        alt={`${get(location, 'location.address_line_1')}`}
+                        src={`${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}`}
+                        alt={`${get(service, 'organisation.name')} Logo`}
                       />
                     )}
-                    <p> {get(location, 'location.address_line_1')}</p>
-                    <p>{`${get(location, 'location.address_line_2')}, ${get(
-                      location,
-                      'location.postcode'
-                    )}`}</p>
-                    {get(location, 'location.has_wheelchair_access') && (
-                      <ReactSVG src={WheelchairAccessible} />
-                    )}
-                    {get(location, 'location.has_induction_loop') && (
-                      <ReactSVG src={InductionLoop} />
-                    )}
-
-                    {/* OPENING TIMES */}
-
-                    <Link
-                      icon="map"
-                      text="View on Google Maps"
-                      size="medium"
-                      href=""
-                      iconPosition="right"
-                    />
-                    <Link
-                      icon="map-signs"
-                      text="View on Google Maps"
-                      size="medium"
-                      href=""
-                      iconPosition="right"
-                    />
                   </div>
-                ))}
-              </div>
-            </Accordian>
-
-            <Accordian title="Good to know" className="service__accordian">
-              <div className="service__accordian-inner">
-                {service.useful_infos.map((info: any) => (
-                  <div key={info.title}>
-                    <p>{info.title}</p>
-                    <p>{info.description}</p>
-                  </div>
-                ))}
-              </div>
-            </Accordian>
-
-            <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
-              <div className="service__accordian-inner">
-                <div>
-                  {get(service, 'organisation.name')}
-                  {get(service, 'organisation.has_logo') && (
-                    <img
-                      src={`${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}`}
-                      alt={`${get(service, 'organisation.name')} Logo`}
-                    />
-                  )}
                 </div>
-              </div>
-            </Accordian>
+              </Accordian>
 
-            <div className="flex-container service__button-container">
-              <Button text="Print" icon="print" alt={true} />
-              <Button
-                text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-                icon="star"
-                alt={true}
-                onClick={() => serviceStore.addToFavourites()}
-                disabled={serviceStore.favourite}
-              />
+              <div className="flex-container service__button-container">
+                <Button text="Print" icon="print" alt={true} />
+                <Button
+                  text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
+                  icon="star"
+                  alt={true}
+                  onClick={() => serviceStore.addToFavourites()}
+                  disabled={serviceStore.favourite}
+                />
+              </div>
             </div>
           </section>
 
@@ -373,10 +416,16 @@ class Service extends Component<IProps> {
         </section>
         {relatedServices && (
           <section className="service__related-services">
-            <h2>Related Services</h2>
-            {take(relatedServices, 3).map((service: IService) => (
-              <p>{service.name}</p>
-            ))}
+            <div className="flex-container">
+              <div className="flex-col flex-col--mobile--12">
+                <h4>Related Services</h4>
+              </div>
+              <div className="flex-col flex-col--mobile--12">
+                {take(relatedServices, 3).map((service: IService) => (
+                  <RelatedServicesCard service={service} key={service.id} />
+                ))}
+              </div>
+            </div>
           </section>
         )}
       </main>

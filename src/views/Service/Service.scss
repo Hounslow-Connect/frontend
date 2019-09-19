@@ -132,12 +132,7 @@
 }
 
 .service__info__cost {
-  display: flex;
-  background-color: $iceberg;
-  border-radius: 19px;
-  padding: space(32);
-  width: fit-content;
-  align-items: center;
+  background-color: $iceberg !important;
 }
 
 .service__info__cost--header {
@@ -173,20 +168,29 @@
 
 .service__refer-disclaimer {
   padding: space(16) 0;
+
+  svg {
+    color: $waikawa;
+  }
 }
 
 .service__markdown {
   p {
     margin-bottom: space(16);
   }
+
+  a {
+    color: $elm;
+    font-size: inherit;
+  }
 }
 
 .service__accordian {
   padding: space(24);
+  width: 100%;
 
   button {
     text-align: left;
-    width: 100%;
 
     h4 {
       display: inline;
@@ -198,13 +202,20 @@
 
     .service__accordian-inner {
       background-color: $white;
+      border-radius: 16px;
     }
   }
 
   &:nth-of-type(even) {
     .service__accordian-inner {
       background-color: $alabaster;
+      border-radius: 16px;
     }
+  }
+
+  &--no-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
@@ -216,4 +227,21 @@
   background-image: url('../../assets/images/backgrounds/related-services-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.service__accordian-inner {
+  font-size: $font-body-m;
+  padding: space(16) !important;
+
+  a {
+    font-size: $font-body-m;
+  }
+}
+
+.service__social-icon {
+  margin: space(12);
+}
+
+.service__social-icon-container {
+  text-align: center;
 }
