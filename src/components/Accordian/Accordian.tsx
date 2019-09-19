@@ -14,7 +14,7 @@ const Accordian: React.FunctionComponent<IProps> = ({ children, title, className
   const [open, toggleAccordian] = useState(false);
 
   return (
-    <div className={className}>
+    <div className={`accordian-container ${className}`}>
       <button
         className="flex"
         onClick={() => toggleAccordian(!open)}
