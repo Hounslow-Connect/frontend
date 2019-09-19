@@ -34,5 +34,5 @@ npm run build
 # Deploy to S3.
 echo "Deploying..."
 export $(cat .env | sed 's/#.*//g' | xargs)
-aws s3 sync build/ "s3://${S3_BUCKET_NAME}"
+aws s3 sync build/ "s3://${S3_BUCKET_NAME}" --acl public-read
 aws cloudfront create-invalidation --distribution-id "${DISTRIBUTION_ID}" --paths "/*"
