@@ -33,5 +33,5 @@ npm run build
 
 # Deploy to S3.
 echo "Deploying..."
-eval $(egrep -v '^#' .env | xargs) aws s3 sync dist/ s3://${S3_BUCKET_NAME}
+eval $(egrep -v '^#' .env | xargs) aws s3 sync build/ s3://${S3_BUCKET_NAME}
 eval $(egrep -v '^#' .env | xargs) aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID}
