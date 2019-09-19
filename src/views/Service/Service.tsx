@@ -286,7 +286,9 @@ class Service extends Component<IProps> {
               {service.testimonial && (
                 <Accordian title="What people say" className="service__accordian">
                   <div className="service__accordian-inner">
-                    <p>{get(service, 'testimonial')}</p>
+                    <div className="service__testimonial">
+                      <p>{get(service, 'testimonial')}</p>
+                    </div>
                   </div>
                 </Accordian>
               )}

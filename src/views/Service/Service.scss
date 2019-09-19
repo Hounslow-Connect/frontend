@@ -245,3 +245,9 @@
 .service__social-icon-container {
   text-align: center;
 }
+
+.service__testimonial {
+  background-image: url('../../assets/images/backgrounds/service-quote-shape.svg');
+  background-size: 100% 100%;
+  padding: space(8);
+}
