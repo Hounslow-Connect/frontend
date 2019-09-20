@@ -18,6 +18,7 @@ import Accordian from '../../../components/Accordian';
 
 interface IProps {
   location: IServiceLocation;
+  className: string;
 }
 
 const formatOpeningTimes = (openingTimes: IOpeningHour[]) => {
@@ -26,8 +27,8 @@ const formatOpeningTimes = (openingTimes: IOpeningHour[]) => {
   return orderedTimes.map((time: IOpeningHour) => humanReadableRegularOpeningHour(time));
 };
 
-const LocationCard: React.FunctionComponent<IProps> = ({ location }) => (
-  <div className="flex-col flex-col--mobile--12">
+const LocationCard: React.FunctionComponent<IProps> = ({ location, className }) => (
+  <div className={`flex-col flex-col--mobile--12 ${className} location__container`}>
     <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
       <div className="flex-col flex-col--mobile--8">
         <h4>{get(location, 'location.address_line_1', '')}</h4>
