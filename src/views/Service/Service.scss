@@ -259,3 +259,17 @@
 .service__media {
   margin: 0 !important;
 }
+
+.service__useful-info {
+  margin-bottom: space(16) !important;
+
+  p {
+    font-size: $font-base;
+    color: $gray;
+    margin-top: space(12);
+  }
+
+  svg {
+    color: #c3c3c3;
+  }
+}

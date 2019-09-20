@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
 import take from 'lodash/take';
+import filter from 'lodash/filter';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
@@ -32,6 +33,7 @@ import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import RelatedServicesCard from './RelatedServicesCard';
 import LocationCard from './LocationCard';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 interface RouteParams {
   service: string;
@@ -42,6 +44,18 @@ interface IProps extends RouteComponentProps<RouteParams> {
 }
 
 const getSocialUrl = (socialObj: any) => socialObj.url;
+
+const iconMap = [
+  { 'Getting here': 'map-signs' },
+  { 'Signing up': 'marker' },
+  { 'Meeting up': 'handshake' },
+  { 'What to wear': 'shirt' },
+  { 'What to bring': 'shopping-bag' },
+  { 'How to get here': 'map-signs' },
+  { Parking: 'car' },
+  { 'Keeping updated': 'calander-alt' },
+  { 'Additional information': 'info-circle' },
+];
 
 class Service extends Component<IProps> {
   componentDidMount() {
@@ -293,26 +307,40 @@ class Service extends Component<IProps> {
                 </Accordian>
               )}
 
-              <Accordian title="Where can I access it?" className="service__accordian">
-                {locations.map((location: IServiceLocation) => (
-                  <LocationCard
-                    location={location}
-                    key={location.id}
-                    className="service__accordian-inner"
-                  />
-                ))}
-              </Accordian>
-
-              <Accordian title="Good to know" className="service__accordian">
-                <div className="service__accordian-inner">
-                  {service.useful_infos.map((info: any) => (
-                    <div key={info.title}>
-                      <p>{info.title}</p>
-                      <p>{info.description}</p>
-                    </div>
+              {!!locations.length && (
+                <Accordian title="Where can I access it?" className="service__accordian">
+                  {locations.map((location: IServiceLocation) => (
+                    <LocationCard
+                      location={location}
+                      key={location.id}
+                      className="service__accordian-inner"
+                    />
                   ))}
-                </div>
-              </Accordian>
+                </Accordian>
+              )}
+
+              {!!service.useful_infos.length && (
+                <Accordian title="Good to know" className="service__accordian">
+                  {service.useful_infos.map((info: { title: string; description: string }) => {
+                    const iconObj = find(iconMap, info.title);
+                    const icon = get(iconObj, `${info.title}`);
+
+                    return (
+                      <div className="flex-container flex-container--mobile-no-padding flex-container--align-center service__useful-info service__accordian-inner">
+                        <div className="flex-col flex-col--mobile--1">
+                          <FontAwesomeIcon icon={icon} />
+                        </div>
+                        <div className="flex-col flex-col--mobile--11">
+                          <h4>{info.title}</h4>
+                        </div>
+                        <div className="flex-col flex-col--mobile--12">
+                          <p>{info.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </Accordian>
+              )}
 
               <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
                 <div className="service__accordian-inner">
