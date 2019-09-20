@@ -33,7 +33,7 @@ import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import RelatedServicesCard from './RelatedServicesCard';
 import LocationCard from './LocationCard';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
+import uniqueId from 'lodash/uniqueId';
 
 interface RouteParams {
   service: string;
@@ -326,7 +326,10 @@ class Service extends Component<IProps> {
                     const icon = get(iconObj, `${info.title}`);
 
                     return (
-                      <div className="flex-container flex-container--mobile-no-padding flex-container--align-center service__useful-info service__accordian-inner">
+                      <div
+                        key={uniqueId()}
+                        className="flex-container flex-container--mobile-no-padding flex-container--align-center service__useful-info service__accordian-inner"
+                      >
                         <div className="flex-col flex-col--mobile--1">
                           <FontAwesomeIcon icon={icon} />
                         </div>
@@ -344,15 +347,23 @@ class Service extends Component<IProps> {
 
               <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
                 <div className="service__accordian-inner">
-                  <div>
-                    {get(service, 'organisation.name')}
-                    {get(service, 'organisation.has_logo') && (
-                      <img
-                        src={`${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}`}
-                        alt={`${get(service, 'organisation.name')} Logo`}
-                      />
-                    )}
+                  <div className="flex-container flex-container--mobile-no-padding">
+                    <div className="flex-col service__organisation service__organisation--logo">
+                      {get(service, 'organisation.has_logo') && (
+                        <img
+                          src={`${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}&max_dimension=100`}
+                          alt={`${get(service, 'organisation.name')} Logo`}
+                        />
+                      )}
+                    </div>
+                    <div className="flex-col service__organisation">
+                      <h4>{get(service, 'organisation.name')}</h4>
+                    </div>
                   </div>
+                  {/* <div>
+                   
+                    
+                  </div> */}
                 </div>
               </Accordian>
 
@@ -368,48 +379,6 @@ class Service extends Component<IProps> {
               </div>
             </div>
           </section>
-
-          {/* <section className="flex-col flex-col--4  flex-col--mobile--12">
-            <div className="body--l service__info__cost service__section">
-              <div className="body--l service__info__cost--left">
-                <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
-                <p className="service__info__cost--sub-heading">Cost</p>
-              </div>
-              <div className="service__info__cost--right">
-                <p className="service__info__cost--header">{service.is_free ? 'Free' : 'Cost'}</p>
-                <p>
-                  {service.fees_text ? service.fees_text : `This ${service.type} costs no money`}
-                </p>
-                {service.fees_url && <a href={service.fees_url}>Further Pricing Details</a>}
-              </div>
-            </div>
-            <div className="service__section">
-              {service.video_embed && (
-                <ReactPlayer
-                  url={service.video_embed}
-                  width={'100%'}
-                  style={{ borderRadius: '19px' }}
-                  light={true}
-                />
-              )}
-            </div>
-
-            <div className="service__section">
-              <Button text="Print" icon="print" alt={true} />
-              <Button
-                text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-                icon="star"
-                alt={true}
-                onClick={() => serviceStore.addToFavourites()}
-                disabled={serviceStore.favourite}
-              />
-            </div>
-
-            <div className="service__section">
-              Share page to social media
-              {/* TODO */}
-          {/* </div> */}
-          {/* </section>  */}
         </section>
         {relatedServices && (
           <section className="service__related-services">

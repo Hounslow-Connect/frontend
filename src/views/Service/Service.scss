@@ -273,3 +273,15 @@
     color: #c3c3c3;
   }
 }
+
+.service__organisation {
+  text-align: center;
+
+  &--logo {
+    margin-bottom: space(12) !important;
+
+    img {
+      border-radius: 9px;
+    }
+  }
+}
