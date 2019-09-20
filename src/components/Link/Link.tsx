@@ -13,7 +13,6 @@ interface ILinkProps {
   size: 'large' | 'medium';
   inline?: boolean;
   header?: boolean;
-  className?: string;
 }
 
 const Link: React.FunctionComponent<ILinkProps> = ({
@@ -24,14 +23,12 @@ const Link: React.FunctionComponent<ILinkProps> = ({
   icon,
   iconPosition,
   header,
-  className,
 }) => (
   <a
     href={href}
     className={cx('link', `link--${size}`, {
       link__inline: inline,
       link__header: header,
-      [className as string]: className,
     })}
   >
     {icon && iconPosition === 'left' && (

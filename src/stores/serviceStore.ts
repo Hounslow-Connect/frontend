@@ -2,11 +2,11 @@ import { observable, action } from 'mobx';
 import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
-import { IService, IServiceLocation } from '../types/types';
+import { IService, ILocation } from '../types/types';
 
 export default class ServiceStore {
   @observable service: IService | null = null;
-  @observable locations: IServiceLocation[] = [];
+  @observable locations: ILocation[] = [];
   @observable loading: boolean = false;
   @observable relatedServices: IService[] | null = null;
   @observable favourite: boolean = false;
