@@ -168,20 +168,22 @@ class Service extends Component<IProps> {
                 </div>
               </div>
 
-              <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__media">
-                <div className="flex-col flex-col--mobile--12 ">
+              <div className="flex-container flex-container--align-center service__media">
+                <div className="flex-col flex-col--mobile--12">
                   <h3 className="">{`What is this ${get(service, 'type')}?`}</h3>
                 </div>
                 {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
-                <div className="flex-col flex-col--mobile--12 service__section">
-                  {service.video_embed && (
-                    <ReactPlayer
-                      url={service.video_embed}
-                      width={'100%'}
-                      style={{ borderRadius: '19px' }}
-                      light={true}
-                    />
-                  )}
+                <div className="flex-container flex-container--mobile-no-padding ">
+                  <div className="flex-col flex-col--mobile--12 service__section">
+                    {service.video_embed && (
+                      <ReactPlayer
+                        url={service.video_embed}
+                        width={'90vw'}
+                        style={{ borderRadius: '19px' }}
+                        light={true}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
