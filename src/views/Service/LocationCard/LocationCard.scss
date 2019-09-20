@@ -1,0 +1,77 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.location__address {
+  margin-top: space(8) !important;
+}
+
+.location__image {
+  text-align: center;
+  img {
+    border-radius: 9px;
+    border: 1px solid $black;
+  }
+}
+
+.location__accessibility {
+  margin: space(12) 0 0 0 !important;
+
+  svg {
+    margin-right: space(8);
+    height: pxtorem(27px);
+    width: pxtorem(27px);
+  }
+}
+
+.location__google-maps {
+  margin: space(12) 0 0 0 !important;
+
+  a:nth-of-type(2) {
+    margin-top: space(8);
+  }
+
+  &--link {
+    color: $elm;
+  }
+}
+
+.location__opening-times {
+  margin-top: space(24) !important;
+
+  h4 {
+    margin-bottom: space(8);
+  }
+
+  &--header {
+    svg {
+      color: #d8d8d8;
+      margin-right: space(10);
+    }
+  }
+
+  &--list {
+    p {
+      padding-bottom: space(8);
+      font-size: $font-base;
+    }
+  }
+}
+
+.location__holiday-times {
+  margin-top: space(12);
+
+  button {
+    padding: 0;
+    color: $elm;
+  }
+
+  h4 {
+    font-family: $font-primary;
+    font-weight: normal;
+  }
+}
+
+.location__container {
+  margin-bottom: space(16) !important;
+}
