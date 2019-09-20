@@ -5,10 +5,9 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
 import take from 'lodash/take';
-import ReactSVG from 'react-svg';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 
-import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactPlayer from 'react-player';
 
@@ -16,10 +15,9 @@ import { apiBase } from '../../config/api';
 
 import './Service.scss';
 
-import { ILocation, IService } from '../../types/types';
+import { IService, IServiceLocation } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
 import Button from '../../components/Button';
-import Link from '../../components/Link';
 
 import AgeGroup from '../../assets/images/icons/who-is-this-for/age-group.svg';
 import Disability from '../../assets/images/icons/who-is-this-for/disability.svg';
@@ -30,11 +28,11 @@ import Income from '../../assets/images/icons/who-is-this-for/income.svg';
 import Language from '../../assets/images/icons/who-is-this-for/language.svg';
 import Other from '../../assets/images/icons/who-is-this-for/other.svg';
 
-import WheelchairAccessible from '../../assets/images/icons/accessibility/wheelchair-accessible.svg';
-import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import RelatedServicesCard from './RelatedServicesCard';
+import LocationCard from './LocationCard';
+
 interface RouteParams {
   service: string;
 }
@@ -66,7 +64,7 @@ class Service extends Component<IProps> {
           <div className="flex-col flex-col--mobile--9">
             <h1>{get(service, 'name')}</h1>
             <p className="service__header__last-updated">
-              Page last updated <span>{format(new Date(service!.updated_at), 'do LLLL yyyy')}</span>
+              Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
               <Button text="Give feedback" icon="comment" alt={true} size="small" />
             </p>
           </div>
@@ -295,43 +293,8 @@ class Service extends Component<IProps> {
 
               <Accordian title="Where can I access it?" className="service__accordian">
                 <div className="service__accordian-inner">
-                  {locations.map((location: ILocation) => (
-                    <div key={location.id}>
-                      {location.has_image && (
-                        <img
-                          src={`${apiBase}/service-locations/${location.id}/image.png`}
-                          alt={`${get(location, 'location.address_line_1')}`}
-                        />
-                      )}
-                      <p> {get(location, 'location.address_line_1')}</p>
-                      <p>{`${get(location, 'location.address_line_2')}, ${get(
-                        location,
-                        'location.postcode'
-                      )}`}</p>
-                      {get(location, 'location.has_wheelchair_access') && (
-                        <ReactSVG src={WheelchairAccessible} />
-                      )}
-                      {get(location, 'location.has_induction_loop') && (
-                        <ReactSVG src={InductionLoop} />
-                      )}
-
-                      {/* OPENING TIMES */}
-
-                      <Link
-                        icon="map"
-                        text="View on Google Maps"
-                        size="medium"
-                        href=""
-                        iconPosition="right"
-                      />
-                      <Link
-                        icon="map-signs"
-                        text="View on Google Maps"
-                        size="medium"
-                        href=""
-                        iconPosition="right"
-                      />
-                    </div>
+                  {locations.map((location: IServiceLocation) => (
+                    <LocationCard location={location} key={location.id} />
                   ))}
                 </div>
               </Accordian>
