@@ -2,10 +2,11 @@
 @import '../../../styles/colors.scss';
 
 .criteria_card {
-  p {
-    font-size: pxtorem(19px);
-  }
   padding: space(8) !important;
+
+  p {
+    font-size: pxtorem(16px);
+  }
 }
 
 .criteria_card-img {
@@ -18,6 +19,7 @@
 
 .criteria_card-title {
   color: $waikawa;
+  font-size: pxtorem(14px) !important;
 }
 
 .service__criteria {

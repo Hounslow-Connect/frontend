@@ -12,11 +12,11 @@ interface IProps {
 const CriteriaCard: React.FunctionComponent<IProps> = ({ svg, title, info }) => (
   <div className="flex-col flex-col--mobile--12 criteria_card">
     <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-      <div className="flex-col flex-col--mobile--3 criteria_card-img">
+      <div className="flex-col flex-col--mobile--4 criteria_card-img">
         <ReactSVG src={svg} />
         <p className="criteria_card-title">{title}</p>
       </div>
-      <div className="flex-col flex-col--mobile--9">
+      <div className="flex-col flex-col--mobile--8">
         <p>{info}</p>
       </div>
     </div>
