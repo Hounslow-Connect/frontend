@@ -8,7 +8,9 @@ const formatTime = (time: string) => {
 };
 
 const timePeriod = (openingHour: { opens_at: string; closes_at: string }) => {
-  return `${formatTime(openingHour.opens_at)} to ${formatTime(openingHour.closes_at)}`;
+  return `<strong>${formatTime(openingHour.opens_at)}</strong> - <strong>${formatTime(
+    openingHour.closes_at
+  )}</strong>`;
 };
 
 const dayOfMonth = (day: number) => {
@@ -40,7 +42,7 @@ const nthOfMonth = (occurence: number) => {
   }
 };
 
-export const humanReadableRegularOpeningHour = (openingHour: IOpeningHour) => {
+export const humanReadableRegularOpeningHour = (openingHour: IOpeningHour): string => {
   switch (openingHour.frequency) {
     case 'weekly':
       return `${weekday(openingHour.weekday)} ${timePeriod(openingHour)}`;
@@ -56,6 +58,8 @@ export const humanReadableRegularOpeningHour = (openingHour: IOpeningHour) => {
       return `${nthOfMonth(openingHour.occurrence_of_month)} ${weekday(
         openingHour.weekday
       )} of each month - ${timePeriod(openingHour)}`;
+    default:
+      return '';
   }
 };
 

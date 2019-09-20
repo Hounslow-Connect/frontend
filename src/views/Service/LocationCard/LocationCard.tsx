@@ -5,6 +5,8 @@ import uniqueId from 'lodash/uniqueId';
 import orderBy from 'lodash/orderBy';
 import ReactSVG from 'react-svg';
 
+import './LocationCard.scss';
+
 import WheelchairAccessible from '../../../assets/images/icons/accessibility/wheelchair-accessible.svg';
 import InductionLoop from '../../../assets/images/icons/accessibility/induction-loop.svg';
 
@@ -27,27 +29,27 @@ const formatOpeningTimes = (openingTimes: IOpeningHour[]) => {
 const LocationCard: React.FunctionComponent<IProps> = ({ location }) => (
   <div className="flex-col flex-col--mobile--12">
     <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-      <div className="flex-col flex-col--mobile--7">
+      <div className="flex-col flex-col--mobile--8">
         <h4>{get(location, 'location.address_line_1', '')}</h4>
-        <p>{`${get(location, 'location.address_line_2', '')}, ${get(
+        <p className="location__address">{`${get(location, 'location.address_line_2', '')}, ${get(
           location,
           'location.postcode',
           ''
         )}`}</p>
       </div>
-      <div className="flex-col flex-col--mobile--5">
+      <div className="flex-col flex-col--mobile--4 location__image">
         {location.has_image && (
           <img
-            src={`${apiBase}/service-locations/${location.id}/image.png`}
+            src={`${apiBase}/service-locations/${location.id}/image.png?max_dimension=90`}
             alt={`${get(location, 'location.address_line_1')}`}
           />
         )}
       </div>
-      <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
+      <div className="flex-container flex-container--justify flex-container--mobile-no-padding location__accessibility">
         {get(location, 'location.has_wheelchair_access') && <ReactSVG src={WheelchairAccessible} />}
         {get(location, 'location.has_induction_loop') && <ReactSVG src={InductionLoop} />}
       </div>
-      <div className="flex-col flex-col--mobile--12">
+      <div className="flex-col flex-col--mobile--12 location__google-maps">
         <Link
           icon="map"
           text="View on Google Maps"
@@ -57,6 +59,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location }) => (
             'location.lat'
           )},${get(location, 'location.lon')}`}
           iconPosition="right"
+          className="location__google-maps--link"
         />
         <Link
           icon="map-signs"
@@ -67,23 +70,29 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location }) => (
             'location.lon'
           )}`}
           iconPosition="right"
+          className="location__google-maps--link"
         />
       </div>
-      <div className="flex-col flex-col--mobile--12">
-        <h4>
+      <div className="flex-col flex-col--mobile--12 location__opening-times">
+        <h4 className="location__opening-times--header">
           <FontAwesomeIcon icon="clock" /> Opening Times
         </h4>
-        {formatOpeningTimes(location.regular_opening_hours).map(openingTime => (
-          <p key={uniqueId()}>{openingTime}</p>
-        ))}
-
-        {!!location.holiday_opening_hours.length && (
-          <Accordian title="Bank holiday times">
-            {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
-              <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
+        <div className="flex-container flex-container--mobile-no-padding">
+          <div className="flex-col flex-col--mobile--12 location__opening-times--list">
+            {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
+              <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
             ))}
-          </Accordian>
-        )}
+          </div>
+          <div className="flex-col flex-col--mobile--12 location__opening-times--list">
+            {!!location.holiday_opening_hours.length && (
+              <Accordian title="Bank holiday times" className="location__holiday-times">
+                {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
+                  <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
+                ))}
+              </Accordian>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   </div>
