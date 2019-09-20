@@ -149,12 +149,12 @@ class Service extends Component<IProps> {
 
                 <div className="flex-col flex-col--mobile--12 criteria_card service__info__cost">
                   <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-                    <div className="flex-col flex-col--mobile--3 criteria_card-img">
+                    <div className="flex-col flex-col--mobile--4 criteria_card-img">
                       <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
 
                       <p className="criteria_card-title">{service.is_free ? 'Free' : 'Cost'}</p>
                     </div>
-                    <div className="flex-col flex-col--mobile--9">
+                    <div className="flex-col flex-col--mobile--8">
                       <p>
                         {service.fees_text
                           ? service.fees_text
@@ -168,9 +168,9 @@ class Service extends Component<IProps> {
                 </div>
               </div>
 
-              <div className="flex-container flex-container--align-center">
-                <div className="flex-col flex-col--mobile--12">
-                  <h3>{`What is this ${get(service, 'type')}?`}</h3>
+              <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__media">
+                <div className="flex-col flex-col--mobile--12 ">
+                  <h3 className="">{`What is this ${get(service, 'type')}?`}</h3>
                 </div>
                 {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
                 <div className="flex-col flex-col--mobile--12 service__section">
@@ -292,11 +292,13 @@ class Service extends Component<IProps> {
               )}
 
               <Accordian title="Where can I access it?" className="service__accordian">
-                <div className="service__accordian-inner">
-                  {locations.map((location: IServiceLocation) => (
-                    <LocationCard location={location} key={location.id} />
-                  ))}
-                </div>
+                {locations.map((location: IServiceLocation) => (
+                  <LocationCard
+                    location={location}
+                    key={location.id}
+                    className="service__accordian-inner"
+                  />
+                ))}
               </Accordian>
 
               <Accordian title="Good to know" className="service__accordian">
