@@ -5,7 +5,6 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
 import take from 'lodash/take';
-import filter from 'lodash/filter';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
