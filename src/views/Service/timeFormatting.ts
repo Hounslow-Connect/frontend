@@ -25,7 +25,7 @@ const fortnightWeek = (date: string) => {
   const diffInDays = moment(date, moment.HTML5_FMT.DATE).diff(thisSunday, 'days');
   const remainingDays = Math.abs(diffInDays % daysInFortnight);
 
-  return remainingDays > 6 ? 'next week' : 'this week';
+  return remainingDays > 6 ? 'Next week' : 'This week';
 };
 
 const nthOfMonth = (occurence: number) => {
