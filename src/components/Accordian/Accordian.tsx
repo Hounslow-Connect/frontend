@@ -5,7 +5,7 @@ import cx from 'classnames';
 import './Accordian.scss';
 
 interface IProps {
-  children: any;
+  children: ReactChildren | JSX.Element[];
   title: string;
   className?: string;
 }
@@ -14,7 +14,7 @@ const Accordian: React.FunctionComponent<IProps> = ({ children, title, className
   const [open, toggleAccordian] = useState(false);
 
   return (
-    <div className={`accordian-container ${className}`}>
+    <div className={className}>
       <button
         className="flex"
         onClick={() => toggleAccordian(!open)}
