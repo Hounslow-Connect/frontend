@@ -14,15 +14,26 @@
 
   &--activity {
     background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
+
+    @include for-phone-only {
+      background-image: url('../../assets/images/backgrounds/activity-header-shape-mobile.svg');
+    }
   }
 
   &--group {
     background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
+
+    @include for-phone-only {
+      background-image: url('../../assets/images/backgrounds/group-header-shape-mobile.svg');
+    }
   }
 
   &--service {
     background-image: url('../../assets/images/backgrounds/service-header-shape-lg.svg');
 
+    @include for-phone-only {
+      background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
+    }
     &:after {
       content: '' !important;
     }
@@ -30,7 +41,6 @@
 
   @include for-phone-only {
     padding: space(32) space(24) 0 space(24);
-    background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
   }
 
   h1 {
