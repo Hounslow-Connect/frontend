@@ -98,12 +98,12 @@ class Service extends Component<IProps> {
           </div>
         </div>
         <section className="flex-container service__info">
-          <section className="flex-col flex-col--8 flex-col--mobile--12">
-            <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-              <div className="flex-col flex-col--mobile--12 service__criteria">
+          <section className="flex-col flex-col--8 flex-col--mobile--12 service__left-colum">
+            <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
+              <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
                 <h2>Who is it for?</h2>
               </div>
-              <div className="service__section">
+              <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
                 {get(service, 'criteria.age_group') && (
                   <CriteriaCard
                     svg={AgeGroup}
@@ -169,7 +169,7 @@ class Service extends Component<IProps> {
                 </div>
               </div>
 
-              <div className="flex-container flex-container--align-center service__media">
+              <div className="flex-container flex-container--align-center service__media service__section--no-padding">
                 <div className="flex-col flex-col--mobile--12">
                   <h3 className="">{`What is this ${get(service, 'type')}?`}</h3>
                 </div>
@@ -181,8 +181,8 @@ class Service extends Component<IProps> {
                 )}
               </div>
 
-              <div className="flex-container flex-container--align-center">
-                <div className="flex-col flex-col--mobile--12 service__section">
+              <div className="flex-container flex-container--align-center service__section--no-padding">
+                <div className="flex-col flex-col--mobile--12 service__section ">
                   <ReactMarkdown source={service.intro} className="service__markdown" />
                 </div>
                 <div className="flex-col flex-col--mobile--12">
@@ -221,7 +221,7 @@ class Service extends Component<IProps> {
               </Accordian>
 
               {service.testimonial && (
-                <Accordian title="What people say" className="service__accordian">
+                <Accordian title="What people say" className="service__accordian mobile-show">
                   <div className="service__accordian-inner">
                     <div className="service__testimonial">
                       <p>{get(service, 'testimonial')}</p>
@@ -231,7 +231,10 @@ class Service extends Component<IProps> {
               )}
 
               {!!locations.length && (
-                <Accordian title="Where can I access it?" className="service__accordian">
+                <Accordian
+                  title="Where can I access it?"
+                  className="service__accordian mobile-show"
+                >
                   {locations.map((location: IServiceLocation) => (
                     <LocationCard
                       location={location}
@@ -243,7 +246,7 @@ class Service extends Component<IProps> {
               )}
 
               {!!service.useful_infos.length && (
-                <Accordian title="Good to know" className="service__accordian">
+                <Accordian title="Good to know" className="service__accordian mobile-show">
                   {service.useful_infos.map((info: { title: string; description: string }) => {
                     const iconObj = find(iconMap, info.title);
                     const icon = get(iconObj, `${info.title}`);
@@ -268,13 +271,18 @@ class Service extends Component<IProps> {
                 </Accordian>
               )}
 
-              <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
+              <Accordian
+                title={`Who runs this ${service.type}?`}
+                className="service__accordian mobile-show"
+              >
                 <div className="service__accordian-inner">
                   <OrganisationCard service={service} />
                 </div>
               </Accordian>
 
-              <ButtonCard serviceStore={serviceStore} />
+              <div className="mobile-show">
+                <ButtonCard serviceStore={serviceStore} />
+              </div>
             </div>
           </section>
           <section className="flex-col flex-col--4 mobile-hide">

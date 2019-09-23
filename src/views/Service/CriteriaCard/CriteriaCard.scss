@@ -11,6 +11,11 @@
 
   @include for-tablet-landscape-up {
     padding: space(20) !important;
+    border-radius: 19px;
+    background-color: $alabaster;
+    height: 100%;
+    margin: space(8);
+    width: 45%;
   }
 }
 
@@ -32,5 +37,7 @@
 }
 
 .service__criteria {
-  padding: 0 space(16) !important;
+  @include for-tablet-portrait-down {
+    padding: 0 space(16) !important;
+  }
 }

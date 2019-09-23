@@ -47,11 +47,18 @@
 
 .service__section {
   margin-top: space(12);
-  margin-bottom: space(32);
+  margin-bottom: space(32) !important;
   width: 100%;
+  align-items: stretch;
 
   .criteria_card:nth-of-type(odd) {
     background-color: $alabaster;
+  }
+
+  &--no-padding {
+    @include for-tablet-landscape-up {
+      padding: 0 !important;
+    }
   }
 }
 
@@ -318,6 +325,12 @@
   padding: 0 !important;
 }
 
+.service__left-colum {
+  @include for-tablet-landscape-up {
+    padding-right: space(32) !important;
+  }
+}
+
 .service__cost-card {
   padding: 0 !important;
 }
@@ -361,5 +374,11 @@
 
   a {
     margin: 0 space(8);
+  }
+}
+
+.criteria_card--inner {
+  @include for-tablet-landscape-up {
+    padding: 0 !important;
   }
 }
