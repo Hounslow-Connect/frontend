@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const ShareCard: React.FunctionComponent = () => (
   <div className="service__share-card service__section">
     <h4>Share</h4>
-    {console.log(window.location)}
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
       target="_blank"
