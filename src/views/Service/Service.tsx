@@ -38,6 +38,7 @@ import ContactCard from './ContactCard';
 import OrganisationCard from './OrganisationCard';
 import ButtonCard from './ButtonCard';
 import ShareCard from './ShareCard';
+import ReferralCard from './ReferralCard';
 
 interface RouteParams {
   service: string;
@@ -207,12 +208,8 @@ class Service extends Component<IProps> {
               </div>
 
               {service.referral_method !== 'none' && (
-                <div className="flex-container flex-container--align-center flex-container--justify flex-container--mobile-no-padding service__referral">
-                  <Button text="Make a connection" icon="arrow-right" />
-                  <p className="service__refer-disclaimer">
-                    <FontAwesomeIcon icon="info-circle" /> It can take up to 2 weeks to recieve a
-                    reply
-                  </p>
+                <div className="mobile-show">
+                  <ReferralCard />
                 </div>
               )}
 
@@ -292,6 +289,11 @@ class Service extends Component<IProps> {
               )}
               <div className="flex-col flex-col--12">
                 <h2>{`How can I contact this ${service.type}?`}</h2>
+                {service.referral_method !== 'none' && (
+                  <div className="service__section service__referral--desktop">
+                    <ReferralCard />
+                  </div>
+                )}
                 <div className="service__section">
                   <ContactCard service={service} />
                 </div>

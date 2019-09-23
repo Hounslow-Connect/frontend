@@ -170,6 +170,22 @@
 .service__referral {
   background-color: $pink;
   padding: space(32) !important;
+  position: relative;
+
+  @include for-tablet-landscape-up {
+    border-radius: 19px;
+
+    &:after {
+      content: url('../../assets/images/trees/iceberg-small.svg');
+      position: absolute;
+      top: -35px;
+      right: 20px;
+    }
+  }
+
+  &--desktop {
+    margin-top: space(40);
+  }
 }
 
 .service__refer-disclaimer {
