@@ -9,7 +9,6 @@ import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactPlayer from 'react-player';
 
 import { apiBase } from '../../config/api';
 
@@ -33,6 +32,14 @@ import Accordian from '../../components/Accordian';
 import RelatedServicesCard from './RelatedServicesCard';
 import LocationCard from './LocationCard';
 import uniqueId from 'lodash/uniqueId';
+import CostCard from './CostCard';
+import VideoCard from './VideoCard';
+import ContactCard from './ContactCard';
+import OrganisationCard from './OrganisationCard';
+import ButtonCard from './ButtonCard';
+import ShareCard from './ShareCard';
+import ReferralCard from './ReferralCard';
+import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 
 interface RouteParams {
   service: string;
@@ -41,8 +48,6 @@ interface RouteParams {
 interface IProps extends RouteComponentProps<RouteParams> {
   serviceStore: ServiceStore;
 }
-
-const getSocialUrl = (socialObj: any) => socialObj.url;
 
 const iconMap = [
   { 'Getting here': 'map-signs' },
@@ -94,12 +99,12 @@ class Service extends Component<IProps> {
           </div>
         </div>
         <section className="flex-container service__info">
-          <section className="flex-col flex-col--8 flex-col--mobile--12">
-            <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-              <div className="flex-col flex-col--mobile--12 service__criteria">
-                <h2>Who is it for?</h2>
+          <section className="flex-col flex-col--8 flex-col--mobile--12 service__left-column">
+            <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
+              <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
+                <h2 className="service__heading">Who is it for?</h2>
               </div>
-              <div className="service__section">
+              <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
                 {get(service, 'criteria.age_group') && (
                   <CriteriaCard
                     svg={AgeGroup}
@@ -160,55 +165,32 @@ class Service extends Component<IProps> {
                   <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
                 )}
 
-                <div className="flex-col flex-col--mobile--12 criteria_card service__info__cost">
-                  <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-                    <div className="flex-col flex-col--mobile--4 criteria_card-img">
-                      <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
-
-                      <p className="criteria_card-title">{service.is_free ? 'Free' : 'Cost'}</p>
-                    </div>
-                    <div className="flex-col flex-col--mobile--8">
-                      <p>
-                        {service.fees_text
-                          ? service.fees_text
-                          : `This ${service.type} costs no money`}
-                      </p>
-                      <p>
-                        {service.fees_url && <a href={service.fees_url}>Further Pricing Details</a>}
-                      </p>
-                    </div>
-                  </div>
+                <div className="flex-col flex-col--mobile--12 mobile-show criteria_card service__info__cost">
+                  <CostCard service={service} />
                 </div>
               </div>
 
-              <div className="flex-container flex-container--align-center service__media">
+              <div className="flex-container flex-container--align-center service__media service__section--no-padding">
                 <div className="flex-col flex-col--mobile--12">
-                  <h3 className="">{`What is this ${get(service, 'type')}?`}</h3>
+                  <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                 </div>
                 {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
-                <div className="flex-container flex-container--mobile-no-padding ">
-                  <div className="flex-col flex-col--mobile--12 service__section">
-                    {service.video_embed && (
-                      <ReactPlayer
-                        url={service.video_embed}
-                        width={'90vw'}
-                        style={{ borderRadius: '19px' }}
-                        light={true}
-                      />
-                    )}
+                {service.video_embed && (
+                  <div className="flex-container flex-container--mobile-no-padding mobile-show">
+                    <VideoCard video={service.video_embed} width="90vw" />
                   </div>
-                </div>
+                )}
               </div>
 
-              <div className="flex-container flex-container--align-center">
-                <div className="flex-col flex-col--mobile--12 service__section">
+              <div className="flex-container flex-container--align-center service__section service__section--no-padding service__information">
+                <div className="flex-col flex-col--12 flex-col--mobile--12">
                   <ReactMarkdown source={service.intro} className="service__markdown" />
                 </div>
-                <div className="flex-col flex-col--mobile--12">
-                  <h4>What do we offer?</h4>
+                <div className="flex-col flex-col--12 flex-col--mobile--12">
+                  <h3>What do we offer?</h3>
                 </div>
 
-                <div className="flex-col flex-col--mobile--12">
+                <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
                   {map(service.offerings, (offering: any, i) => (
                     <Fragment key={offering.offering}>
                       <span>{offering.offering}</span>
@@ -221,83 +203,72 @@ class Service extends Component<IProps> {
                     </Fragment>
                   ))}
                 </div>
-                <div className="flex-col flex-col--mobile--12 service__section">
+                <div className="flex-col flex-col--mobile--12 service__section service__section--no-margin">
                   <ReactMarkdown source={service.description} className="service__markdown" />
                 </div>
               </div>
 
+              {service.testimonial && (
+                <div className="mobile-hide flex-container service__section service__section--no-padding">
+                  <div className="flex-col flex-col--12 service__testimonial--header">
+                    <h2 className="service__heading">What people say</h2>
+                  </div>
+
+                  <div className="flex-col flex-col--12 service__testimonial">
+                    <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
+                      <div className="flex-col flex-col--2">
+                        <FontAwesomeIcon icon="comment" />
+                      </div>
+                      <div className="flex-col flex-col--9">
+                        <p>{`"${get(service, 'testimonial')}"`}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {!!locations.length && (
+                <div className="mobile-hide service__section">
+                  <h2 className="service__heading">Where can I access it?</h2>
+
+                  {locations.map((location: IServiceLocation) => (
+                    <LocationCard
+                      location={location}
+                      key={location.id}
+                      className="service__accordian-inner"
+                      desktop={true}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {!!service.useful_infos.length && (
+                <div className="mobile-hide">
+                  <h2 className="service__heading">Good to know</h2>
+                  {service.useful_infos.map((info: { title: string; description: string }) => {
+                    const iconObj = find(iconMap, info.title);
+                    const icon = get(iconObj, `${info.title}`);
+
+                    return <UsefulInfoCard icon={icon} info={info} key={uniqueId()} />;
+                  })}
+                </div>
+              )}
+
               {service.referral_method !== 'none' && (
-                <div className="flex-container flex-container--align-center flex-container--justify flex-container--mobile-no-padding service__referral">
-                  <Button text="Make a connection" icon="arrow-right" />
-                  <p className="service__refer-disclaimer">
-                    <FontAwesomeIcon icon="info-circle" /> It can take up to 2 weeks to recieve a
-                    reply
-                  </p>
+                <div className="mobile-show">
+                  <ReferralCard />
                 </div>
               )}
 
               <Accordian
                 title={`How can I contact this ${service.type}?`}
-                className="service__accordian"
+                className="service__accordian mobile-show"
               >
-                <div className="service__accordian-inner flex-container flex-container--align-center flex-container--mobile-no-padding">
-                  <div className="flex-col service__accordian--no-overflow">
-                    <h4>
-                      <FontAwesomeIcon icon="globe" /> Website
-                    </h4>
-                    <a href={service.url}>{service.url}</a>
-                  </div>
-                  <div className="flex-col">
-                    <h4>
-                      <FontAwesomeIcon icon="phone" /> Telephone
-                    </h4>
-                    <p>{service.contact_phone}</p>
-                  </div>
-                  <div className="flex-col">
-                    <h4>
-                      <FontAwesomeIcon icon="envelope" /> Email
-                    </h4>
-                    <a href={`mailto:${service.contact_email}`}>{service.contact_email}</a>
-                  </div>
-                  <div className="flex-col service__social-icon-container">
-                    {find(service.social_medias, { type: 'facebook' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'facebook' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'facebook-f']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                    {find(service.social_medias, { type: 'twitter' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'twitter' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'twitter']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                    {find(service.social_medias, { type: 'intstagram' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'intstagram' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'instagram']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                    {find(service.social_medias, { type: 'instagram' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'instagram' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'youtube']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                  </div>
-                </div>
+                <ContactCard service={service} accordian={true} />
               </Accordian>
 
               {service.testimonial && (
-                <Accordian title="What people say" className="service__accordian">
+                <Accordian title="What people say" className="service__accordian mobile-show">
                   <div className="service__accordian-inner">
                     <div className="service__testimonial">
                       <p>{get(service, 'testimonial')}</p>
@@ -307,7 +278,10 @@ class Service extends Component<IProps> {
               )}
 
               {!!locations.length && (
-                <Accordian title="Where can I access it?" className="service__accordian">
+                <Accordian
+                  title="Where can I access it?"
+                  className="service__accordian mobile-show"
+                >
                   {locations.map((location: IServiceLocation) => (
                     <LocationCard
                       location={location}
@@ -319,62 +293,63 @@ class Service extends Component<IProps> {
               )}
 
               {!!service.useful_infos.length && (
-                <Accordian title="Good to know" className="service__accordian">
+                <Accordian title="Good to know" className="service__accordian mobile-show">
                   {service.useful_infos.map((info: { title: string; description: string }) => {
                     const iconObj = find(iconMap, info.title);
                     const icon = get(iconObj, `${info.title}`);
 
-                    return (
-                      <div
-                        key={uniqueId()}
-                        className="flex-container flex-container--mobile-no-padding flex-container--align-center service__useful-info service__accordian-inner"
-                      >
-                        <div className="flex-col flex-col--mobile--1">
-                          <FontAwesomeIcon icon={icon} />
-                        </div>
-                        <div className="flex-col flex-col--mobile--11">
-                          <h4>{info.title}</h4>
-                        </div>
-                        <div className="flex-col flex-col--mobile--12">
-                          <p>{info.description}</p>
-                        </div>
-                      </div>
-                    );
+                    return <UsefulInfoCardAccordian icon={icon} info={info} key={uniqueId()} />;
                   })}
                 </Accordian>
               )}
 
-              <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
+              <Accordian
+                title={`Who runs this ${service.type}?`}
+                className="service__accordian mobile-show"
+              >
                 <div className="service__accordian-inner">
-                  <div className="flex-container flex-container--mobile-no-padding">
-                    <div className="flex-col service__organisation service__organisation--logo">
-                      {get(service, 'organisation.has_logo') && (
-                        <img
-                          src={`${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}&max_dimension=100`}
-                          alt={`${get(service, 'organisation.name')} Logo`}
-                        />
-                      )}
-                    </div>
-                    <div className="flex-col service__organisation">
-                      <h4>{get(service, 'organisation.name')}</h4>
-                    </div>
-                  </div>
-                  {/* <div>
-                   
-                    
-                  </div> */}
+                  <OrganisationCard service={service} />
                 </div>
               </Accordian>
 
-              <div className="flex-container service__button-container">
-                <Button text="Print" icon="print" alt={true} />
-                <Button
-                  text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-                  icon="star"
-                  alt={true}
-                  onClick={() => serviceStore.addToFavourites()}
-                  disabled={serviceStore.favourite}
-                />
+              <div className="mobile-show">
+                <ButtonCard serviceStore={serviceStore} />
+              </div>
+            </div>
+          </section>
+          <section className="flex-col flex-col--4 mobile-hide">
+            <div className="flex-container service__right-column">
+              <div className="flex-col flex-col--10 criteria_card service__info__cost service__section">
+                <CostCard service={service} />
+              </div>
+              {service.video_embed && (
+                <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">
+                  <VideoCard video={service.video_embed} width="100%" />
+                </div>
+              )}
+              <div className="flex-col flex-col--12">
+                <h2>{`How can I contact this ${service.type}?`}</h2>
+                {service.referral_method !== 'none' && (
+                  <div className="service__section service__referral--desktop">
+                    <ReferralCard />
+                  </div>
+                )}
+                <div className="service__section">
+                  <ContactCard service={service} />
+                </div>
+              </div>
+              <div className="flex-col flex-col--12">
+                <h2>{`Who runs this ${service.type}?`}</h2>
+                <div className="service__section">
+                  <OrganisationCard service={service} sidebar={true} />
+                </div>
+              </div>
+              <div className="flex-col flex-col--12">
+                <ButtonCard serviceStore={serviceStore} />
+              </div>
+
+              <div className="flex-col flex-col--12">
+                <ShareCard />
               </div>
             </div>
           </section>

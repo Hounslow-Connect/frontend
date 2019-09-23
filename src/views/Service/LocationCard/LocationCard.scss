@@ -1,6 +1,7 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/colors.scss';
 @import '../../../styles/fonts.scss';
+@import '../../../styles/breakpoints.scss';
 
 .location__address {
   margin-top: space(8) !important;
@@ -37,7 +38,9 @@
 }
 
 .location__opening-times {
-  margin-top: space(24) !important;
+  @include for-tablet-portrait-down {
+    margin-top: space(24) !important;
+  }
 
   h4 {
     margin-bottom: space(8);
@@ -69,9 +72,16 @@
   h4 {
     font-family: $font-primary;
     font-weight: normal;
+    display: inline;
   }
 }
 
 .location__container {
   margin-bottom: space(16) !important;
+
+  @include for-tablet-landscape-up {
+    background-color: $alabaster;
+    border-radius: 19px;
+    padding: space(24) !important;
+  }
 }

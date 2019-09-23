@@ -1,5 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cx from 'classnames';
+
 import get from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
 import orderBy from 'lodash/orderBy';
@@ -19,6 +21,7 @@ import Accordian from '../../../components/Accordian';
 interface IProps {
   location: IServiceLocation;
   className: string;
+  desktop?: boolean;
 }
 
 const formatOpeningTimes = (openingTimes: IOpeningHour[]) => {
@@ -27,71 +30,93 @@ const formatOpeningTimes = (openingTimes: IOpeningHour[]) => {
   return orderedTimes.map((time: IOpeningHour) => humanReadableRegularOpeningHour(time));
 };
 
-const LocationCard: React.FunctionComponent<IProps> = ({ location, className }) => (
+const LocationCard: React.FunctionComponent<IProps> = ({ location, className, desktop }) => (
   <div className={`flex-col flex-col--mobile--12 ${className} location__container`}>
-    <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-      <div className="flex-col flex-col--mobile--8">
-        <h4>{get(location, 'location.address_line_1', '')}</h4>
-        <p className="location__address">{`${get(location, 'location.address_line_2', '')}, ${get(
-          location,
-          'location.postcode',
-          ''
-        )}`}</p>
-      </div>
-      <div className="flex-col flex-col--mobile--4 location__image">
-        {location.has_image && (
-          <img
-            src={`${apiBase}/service-locations/${location.id}/image.png?max_dimension=90`}
-            alt={`${get(location, 'location.address_line_1')}`}
-          />
-        )}
-      </div>
-      <div className="flex-container flex-container--justify flex-container--mobile-no-padding location__accessibility">
-        {get(location, 'location.has_wheelchair_access') && <ReactSVG src={WheelchairAccessible} />}
-        {get(location, 'location.has_induction_loop') && <ReactSVG src={InductionLoop} />}
-      </div>
-      <div className="flex-col flex-col--mobile--12 location__google-maps">
-        <Link
-          icon="map"
-          text="View on Google Maps"
-          size="medium"
-          href={`https://www.google.com/maps/search/?api=1&query=${get(
-            location,
-            'location.lat'
-          )},${get(location, 'location.lon')}`}
-          iconPosition="right"
-          className="location__google-maps--link"
-        />
-        <Link
-          icon="map-signs"
-          text="Get directions on Google Maps"
-          size="medium"
-          href={`https://www.google.com/maps?daddr=${get(location, 'location.lat')},${get(
-            location,
-            'location.lon'
-          )}`}
-          iconPosition="right"
-          className="location__google-maps--link"
-        />
-      </div>
-      <div className="flex-col flex-col--mobile--12 location__opening-times">
-        <h4 className="location__opening-times--header">
-          <FontAwesomeIcon icon="clock" /> Opening Times
-        </h4>
-        <div className="flex-container flex-container--mobile-no-padding">
-          <div className="flex-col flex-col--mobile--12 location__opening-times--list">
-            {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
-              <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
-            ))}
+    <div
+      className="flex-container flex-container--mobile-no-padding flex-container--align-center service__section--no-padding"
+      style={{ alignItems: 'stretch' }}
+    >
+      <div className="flex-col flex-col--6 flex-col--mobile--12">
+        <div
+          className={cx(
+            'flex-container flex-container--mobile-no-padding flex-container--align-center',
+            {
+              'flex-container--row-reverse service__section--no-padding': desktop,
+            }
+          )}
+        >
+          <div
+            className={`flex-col ${
+              location.has_image ? 'flex-col--8' : 'flex-col--12'
+            } flex-col--mobile--8`}
+          >
+            <h4>{get(location, 'location.address_line_1', '')}</h4>
+            <p className="location__address">{`${get(
+              location,
+              'location.address_line_2',
+              ''
+            )}, ${get(location, 'location.postcode', '')}`}</p>
           </div>
-          <div className="flex-col flex-col--mobile--12 location__opening-times--list">
-            {!!location.holiday_opening_hours.length && (
-              <Accordian title="Bank holiday times" className="location__holiday-times">
-                {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
-                  <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
-                ))}
-              </Accordian>
-            )}
+          {location.has_image && (
+            <div className="flex-col flex-col--3 flex-col--mobile--4 location__image">
+              <img
+                src={`${apiBase}/service-locations/${location.id}/image.png?max_dimension=90`}
+                alt={`${get(location, 'location.address_line_1')}`}
+              />
+            </div>
+          )}
+        </div>
+        <div className="flex-container flex-container--justify flex-container--mobile-no-padding location__accessibility">
+          {get(location, 'location.has_wheelchair_access') && (
+            <ReactSVG src={WheelchairAccessible} />
+          )}
+          {get(location, 'location.has_induction_loop') && <ReactSVG src={InductionLoop} />}
+        </div>
+        <div className="flex-col flex-col--mobile--12 location__google-maps">
+          <Link
+            icon="map"
+            text="View on Google Maps"
+            size="medium"
+            href={`https://www.google.com/maps/search/?api=1&query=${get(
+              location,
+              'location.lat'
+            )},${get(location, 'location.lon')}`}
+            iconPosition="right"
+            className="location__google-maps--link"
+          />
+          <Link
+            icon="map-signs"
+            text="Get directions on Google Maps"
+            size="medium"
+            href={`https://www.google.com/maps?daddr=${get(location, 'location.lat')},${get(
+              location,
+              'location.lon'
+            )}`}
+            iconPosition="right"
+            className="location__google-maps--link"
+          />
+        </div>
+      </div>
+      <div className="flex-col flex-col--6 flex-col--mobile--12">
+        <div className="flex-col flex-col--mobile--12 location__opening-times">
+          <h4 className="location__opening-times--header">
+            <FontAwesomeIcon icon="clock" /> Opening Times
+          </h4>
+          <div className="flex-container flex-container--mobile-no-padding">
+            <div className="flex-col flex-col--mobile--12 location__opening-times--list">
+              {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
+                <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
+              ))}
+            </div>
+            <div className="flex-col flex-col--mobile--12 location__opening-times--list">
+              {!!location.holiday_opening_hours.length && (
+                <Accordian title="Bank holiday times" className="location__holiday-times">
+                  {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
+                    <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
+                  ))}
+                </Accordian>
+              )}
+            </div>
           </div>
         </div>
       </div>
