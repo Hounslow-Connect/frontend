@@ -1,11 +1,16 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/colors.scss';
+@import '../../../styles/breakpoints.scss';
 
 .criteria_card {
   padding: space(8) !important;
 
   p {
     font-size: pxtorem(16px);
+  }
+
+  @include for-tablet-landscape-up {
+    padding: space(20) !important;
   }
 }
 
@@ -20,6 +25,10 @@
 .criteria_card-title {
   color: $waikawa;
   font-size: pxtorem(14px) !important;
+
+  @include for-tablet-landscape-up {
+    margin-top: space(8);
+  }
 }
 
 .service__criteria {
