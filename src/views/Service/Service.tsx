@@ -39,6 +39,7 @@ import OrganisationCard from './OrganisationCard';
 import ButtonCard from './ButtonCard';
 import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
+import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 
 interface RouteParams {
   service: string;
@@ -98,10 +99,10 @@ class Service extends Component<IProps> {
           </div>
         </div>
         <section className="flex-container service__info">
-          <section className="flex-col flex-col--8 flex-col--mobile--12 service__left-colum">
+          <section className="flex-col flex-col--8 flex-col--mobile--12 service__left-column">
             <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
               <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
-                <h2>Who is it for?</h2>
+                <h2 className="service__heading">Who is it for?</h2>
               </div>
               <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
                 {get(service, 'criteria.age_group') && (
@@ -171,7 +172,7 @@ class Service extends Component<IProps> {
 
               <div className="flex-container flex-container--align-center service__media service__section--no-padding">
                 <div className="flex-col flex-col--mobile--12">
-                  <h3 className="">{`What is this ${get(service, 'type')}?`}</h3>
+                  <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                 </div>
                 {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
                 {service.video_embed && (
@@ -181,15 +182,15 @@ class Service extends Component<IProps> {
                 )}
               </div>
 
-              <div className="flex-container flex-container--align-center service__section--no-padding">
-                <div className="flex-col flex-col--mobile--12 service__section ">
+              <div className="flex-container flex-container--align-center service__section service__section--no-padding service__information">
+                <div className="flex-col flex-col--12 flex-col--mobile--12">
                   <ReactMarkdown source={service.intro} className="service__markdown" />
                 </div>
-                <div className="flex-col flex-col--mobile--12">
-                  <h4>What do we offer?</h4>
+                <div className="flex-col flex-col--12 flex-col--mobile--12">
+                  <h3>What do we offer?</h3>
                 </div>
 
-                <div className="flex-col flex-col--mobile--12">
+                <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
                   {map(service.offerings, (offering: any, i) => (
                     <Fragment key={offering.offering}>
                       <span>{offering.offering}</span>
@@ -202,10 +203,56 @@ class Service extends Component<IProps> {
                     </Fragment>
                   ))}
                 </div>
-                <div className="flex-col flex-col--mobile--12 service__section">
+                <div className="flex-col flex-col--mobile--12 service__section service__section--no-margin">
                   <ReactMarkdown source={service.description} className="service__markdown" />
                 </div>
               </div>
+
+              {service.testimonial && (
+                <div className="mobile-hide flex-container service__section service__section--no-padding">
+                  <div className="flex-col flex-col--12 service__testimonial--header">
+                    <h2 className="service__heading">What people say</h2>
+                  </div>
+
+                  <div className="flex-col flex-col--12 service__testimonial">
+                    <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
+                      <div className="flex-col flex-col--2">
+                        <FontAwesomeIcon icon="comment" />
+                      </div>
+                      <div className="flex-col flex-col--9">
+                        <p>{`"${get(service, 'testimonial')}"`}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {!!locations.length && (
+                <div className="mobile-hide service__section">
+                  <h2 className="service__heading">Where can I access it?</h2>
+
+                  {locations.map((location: IServiceLocation) => (
+                    <LocationCard
+                      location={location}
+                      key={location.id}
+                      className="service__accordian-inner"
+                      desktop={true}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {!!service.useful_infos.length && (
+                <div className="mobile-hide">
+                  <h2 className="service__heading">Good to know</h2>
+                  {service.useful_infos.map((info: { title: string; description: string }) => {
+                    const iconObj = find(iconMap, info.title);
+                    const icon = get(iconObj, `${info.title}`);
+
+                    return <UsefulInfoCard icon={icon} info={info} key={uniqueId()} />;
+                  })}
+                </div>
+              )}
 
               {service.referral_method !== 'none' && (
                 <div className="mobile-show">
@@ -251,22 +298,7 @@ class Service extends Component<IProps> {
                     const iconObj = find(iconMap, info.title);
                     const icon = get(iconObj, `${info.title}`);
 
-                    return (
-                      <div
-                        key={uniqueId()}
-                        className="flex-container flex-container--mobile-no-padding flex-container--align-center service__useful-info service__accordian-inner"
-                      >
-                        <div className="flex-col flex-col--mobile--1">
-                          <FontAwesomeIcon icon={icon} />
-                        </div>
-                        <div className="flex-col flex-col--mobile--11">
-                          <h4>{info.title}</h4>
-                        </div>
-                        <div className="flex-col flex-col--mobile--12">
-                          <p>{info.description}</p>
-                        </div>
-                      </div>
-                    );
+                    return <UsefulInfoCardAccordian icon={icon} info={info} key={uniqueId()} />;
                   })}
                 </Accordian>
               )}
