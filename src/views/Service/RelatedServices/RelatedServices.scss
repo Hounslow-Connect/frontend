@@ -1,0 +1,69 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/fonts.scss';
+@import '../../../styles/breakpoints.scss';
+
+.related-services {
+  background-image: url('../../../assets/images/backgrounds/related-services-background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: space(96) space(64);
+  text-align: center;
+  color: $san-juan;
+
+  @include for-tablet-landscape-down {
+    padding: space(64) space(24);
+  }
+
+  &--button {
+    margin: space(24) 0;
+  }
+
+  button.button__alt {
+    background-color: inherit !important;
+  }
+
+  &--logo {
+    width: pxtorem(60px);
+    height: pxtorem(60px);
+    border: 1px solid $nobel;
+    border-radius: 9px;
+    background-color: $white;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+
+    img {
+      border-radius: 9px;
+      width: 100%;
+    }
+  }
+
+  &--container {
+    align-items: flex-start;
+    margin-top: space(48) !important;
+  }
+
+  &--card {
+    background-color: $alabaster;
+    padding: space(24) !important;
+    border-radius: 19px;
+    text-align: left;
+    margin: space(8);
+
+    &--no-padding {
+      padding: 0 !important;
+    }
+
+    &--info {
+      margin: space(12) 0 !important;
+      color: $mid-grey;
+      font-size: $font-body-xs;
+    }
+  }
+}
