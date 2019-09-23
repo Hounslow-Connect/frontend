@@ -4,7 +4,6 @@ import { RouteComponentProps } from 'react-router';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
-import take from 'lodash/take';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
@@ -14,7 +13,7 @@ import { apiBase } from '../../config/api';
 
 import './Service.scss';
 
-import { IService, IServiceLocation } from '../../types/types';
+import { IServiceLocation } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
 import Button from '../../components/Button';
 
@@ -29,7 +28,6 @@ import Other from '../../assets/images/icons/who-is-this-for/other.svg';
 
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
-import RelatedServicesCard from './RelatedServicesCard';
 import LocationCard from './LocationCard';
 import uniqueId from 'lodash/uniqueId';
 import CostCard from './CostCard';
@@ -40,6 +38,7 @@ import ButtonCard from './ButtonCard';
 import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
+import RelatedServices from './RelatedServices';
 
 interface RouteParams {
   service: string;
@@ -66,6 +65,14 @@ class Service extends Component<IProps> {
     const { serviceStore, match } = this.props;
 
     serviceStore.fetchService(match.params.service);
+  }
+
+  componentDidUpdate(prevProps: IProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      const { serviceStore, match } = this.props;
+
+      serviceStore.fetchService(match.params.service);
+    }
   }
 
   render() {
@@ -354,20 +361,7 @@ class Service extends Component<IProps> {
             </div>
           </section>
         </section>
-        {relatedServices && (
-          <section className="service__related-services">
-            <div className="flex-container">
-              <div className="flex-col flex-col--mobile--12">
-                <h4>Related Services</h4>
-              </div>
-              <div className="flex-col flex-col--mobile--12">
-                {take(relatedServices, 3).map((service: IService) => (
-                  <RelatedServicesCard service={service} key={service.id} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        {relatedServices && <RelatedServices relatedServices={relatedServices} />}
       </main>
     );
   }
