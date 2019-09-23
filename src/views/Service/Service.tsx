@@ -9,7 +9,6 @@ import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactPlayer from 'react-player';
 
 import { apiBase } from '../../config/api';
 
@@ -33,6 +32,12 @@ import Accordian from '../../components/Accordian';
 import RelatedServicesCard from './RelatedServicesCard';
 import LocationCard from './LocationCard';
 import uniqueId from 'lodash/uniqueId';
+import CostCard from './CostCard';
+import VideoCard from './VideoCard';
+import ContactCard from './ContactCard';
+import OrganisationCard from './OrganisationCard';
+import ButtonCard from './ButtonCard';
+import ShareCard from './ShareCard';
 
 interface RouteParams {
   service: string;
@@ -41,8 +46,6 @@ interface RouteParams {
 interface IProps extends RouteComponentProps<RouteParams> {
   serviceStore: ServiceStore;
 }
-
-const getSocialUrl = (socialObj: any) => socialObj.url;
 
 const iconMap = [
   { 'Getting here': 'map-signs' },
@@ -160,24 +163,8 @@ class Service extends Component<IProps> {
                   <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
                 )}
 
-                <div className="flex-col flex-col--mobile--12 criteria_card service__info__cost">
-                  <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-                    <div className="flex-col flex-col--mobile--4 criteria_card-img">
-                      <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
-
-                      <p className="criteria_card-title">{service.is_free ? 'Free' : 'Cost'}</p>
-                    </div>
-                    <div className="flex-col flex-col--mobile--8">
-                      <p>
-                        {service.fees_text
-                          ? service.fees_text
-                          : `This ${service.type} costs no money`}
-                      </p>
-                      <p>
-                        {service.fees_url && <a href={service.fees_url}>Further Pricing Details</a>}
-                      </p>
-                    </div>
-                  </div>
+                <div className="flex-col flex-col--mobile--12 mobile-show criteria_card service__info__cost">
+                  <CostCard service={service} />
                 </div>
               </div>
 
@@ -186,18 +173,11 @@ class Service extends Component<IProps> {
                   <h3 className="">{`What is this ${get(service, 'type')}?`}</h3>
                 </div>
                 {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
-                <div className="flex-container flex-container--mobile-no-padding ">
-                  <div className="flex-col flex-col--mobile--12 service__section">
-                    {service.video_embed && (
-                      <ReactPlayer
-                        url={service.video_embed}
-                        width={'90vw'}
-                        style={{ borderRadius: '19px' }}
-                        light={true}
-                      />
-                    )}
+                {service.video_embed && (
+                  <div className="flex-container flex-container--mobile-no-padding mobile-show">
+                    <VideoCard video={service.video_embed} width="90vw" />
                   </div>
-                </div>
+                )}
               </div>
 
               <div className="flex-container flex-container--align-center">
@@ -238,62 +218,9 @@ class Service extends Component<IProps> {
 
               <Accordian
                 title={`How can I contact this ${service.type}?`}
-                className="service__accordian"
+                className="service__accordian mobile-show"
               >
-                <div className="service__accordian-inner flex-container flex-container--align-center flex-container--mobile-no-padding">
-                  <div className="flex-col service__accordian--no-overflow">
-                    <h4>
-                      <FontAwesomeIcon icon="globe" /> Website
-                    </h4>
-                    <a href={service.url}>{service.url}</a>
-                  </div>
-                  <div className="flex-col">
-                    <h4>
-                      <FontAwesomeIcon icon="phone" /> Telephone
-                    </h4>
-                    <p>{service.contact_phone}</p>
-                  </div>
-                  <div className="flex-col">
-                    <h4>
-                      <FontAwesomeIcon icon="envelope" /> Email
-                    </h4>
-                    <a href={`mailto:${service.contact_email}`}>{service.contact_email}</a>
-                  </div>
-                  <div className="flex-col service__social-icon-container">
-                    {find(service.social_medias, { type: 'facebook' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'facebook' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'facebook-f']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                    {find(service.social_medias, { type: 'twitter' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'twitter' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'twitter']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                    {find(service.social_medias, { type: 'intstagram' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'intstagram' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'instagram']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                    {find(service.social_medias, { type: 'instagram' }) && (
-                      <a href={getSocialUrl(find(service.social_medias, { type: 'instagram' }))}>
-                        <FontAwesomeIcon
-                          icon={['fab', 'youtube']}
-                          className="service__social-icon"
-                        />
-                      </a>
-                    )}
-                  </div>
-                </div>
+                <ContactCard service={service} accordian={true} />
               </Accordian>
 
               {service.testimonial && (
@@ -346,35 +273,41 @@ class Service extends Component<IProps> {
 
               <Accordian title={`Who runs this ${service.type}?`} className="service__accordian">
                 <div className="service__accordian-inner">
-                  <div className="flex-container flex-container--mobile-no-padding">
-                    <div className="flex-col service__organisation service__organisation--logo">
-                      {get(service, 'organisation.has_logo') && (
-                        <img
-                          src={`${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}&max_dimension=100`}
-                          alt={`${get(service, 'organisation.name')} Logo`}
-                        />
-                      )}
-                    </div>
-                    <div className="flex-col service__organisation">
-                      <h4>{get(service, 'organisation.name')}</h4>
-                    </div>
-                  </div>
-                  {/* <div>
-                   
-                    
-                  </div> */}
+                  <OrganisationCard service={service} />
                 </div>
               </Accordian>
 
-              <div className="flex-container service__button-container">
-                <Button text="Print" icon="print" alt={true} />
-                <Button
-                  text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-                  icon="star"
-                  alt={true}
-                  onClick={() => serviceStore.addToFavourites()}
-                  disabled={serviceStore.favourite}
-                />
+              <ButtonCard serviceStore={serviceStore} />
+            </div>
+          </section>
+          <section className="flex-col flex-col--4 mobile-hide">
+            <div className="flex-container service__right-column">
+              <div className="flex-col flex-col--10 criteria_card service__info__cost service__section">
+                <CostCard service={service} />
+              </div>
+              {service.video_embed && (
+                <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">
+                  <VideoCard video={service.video_embed} width="100%" />
+                </div>
+              )}
+              <div className="flex-col flex-col--12">
+                <h2>{`How can I contact this ${service.type}?`}</h2>
+                <div className="service__section">
+                  <ContactCard service={service} />
+                </div>
+              </div>
+              <div className="flex-col flex-col--12">
+                <h2>{`Who runs this ${service.type}?`}</h2>
+                <div className="service__section">
+                  <OrganisationCard service={service} sidebar={true} />
+                </div>
+              </div>
+              <div className="flex-col flex-col--12">
+                <ButtonCard serviceStore={serviceStore} />
+              </div>
+
+              <div className="flex-col flex-col--12">
+                <ShareCard />
               </div>
             </div>
           </section>
