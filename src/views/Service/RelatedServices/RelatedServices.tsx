@@ -28,7 +28,6 @@ class RelatedServices extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    console.log(this.props.relatedServices.slice(3));
     this.setState({
       fullList: this.props.relatedServices,
       preview: this.props.relatedServices.slice(0, 3),
