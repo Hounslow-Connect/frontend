@@ -103,12 +103,12 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
             <FontAwesomeIcon icon="clock" /> Opening Times
           </h4>
           <div className="flex-container flex-container--mobile-no-padding">
-            <div className="flex-col flex-col--mobile--12 location__opening-times--list">
+            <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
               {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
                 <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
               ))}
             </div>
-            <div className="flex-col flex-col--mobile--12 location__opening-times--list">
+            <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
               {!!location.holiday_opening_hours.length && (
                 <Accordian title="Bank holiday times" className="location__holiday-times">
                   {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
