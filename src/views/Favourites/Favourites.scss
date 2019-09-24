@@ -176,3 +176,14 @@
     padding: 0 space(24) !important;
   }
 }
+
+.favourites__add-more {
+  background-image: url('../../assets/images/backgrounds/favourites-add-more-shape.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: space(64) !important;
+
+  button {
+    background-color: $elm;
+  }
+}

@@ -8,8 +8,9 @@ import { IService } from '../../types/types';
 import FavouritesCard from './FavouritesCard';
 
 import './Favourites.scss';
+import { Link, withRouter } from 'react-router-dom';
 
-const Favourites: React.FunctionComponent<any> = ({ favouritesStore }) => (
+const Favourites: React.FunctionComponent<any> = ({ favouritesStore, history }) => (
   <section>
     <div className="favourites__header flex-container">
       <div className="flex-col flex-col--12 favourites__header--heading">
@@ -57,10 +58,18 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore }) => (
               })}
             </div>
           </div>
+
+          <div className="flex-container favourites__add-more">
+            <div className="flex-col">
+              <Link to="/">
+                <Button text="Add more" icon="plus" onClick={() => history.push('/')} />
+              </Link>
+            </div>
+          </div>
         </Fragment>
       )}
     </div>
   </section>
 );
 
-export default inject('favouritesStore')(observer(Favourites));
+export default inject('favouritesStore')(withRouter(observer(Favourites)));
