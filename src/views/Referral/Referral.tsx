@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import get from 'lodash/get';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cx from 'classnames';
 
 import ReferralStore from '../../stores/referralStore';
 
@@ -74,7 +75,11 @@ class Referral extends Component<IProps> {
           </div>
         </div>
 
-        <div className="flex-container flex-container--mobile-no-padding referral--container">
+        <div
+          className={cx('flex-container flex-container--mobile-no-padding referral--container', {
+            'referral--container--flex-end': referralStore.step === 1,
+          })}
+        >
           {this.displayStep()}
           <div className="mobile-hide tablet-hide flex-col--5 flex-col--tablet-large--6">
             <div className="flex-container referral--right-column">
@@ -151,9 +156,10 @@ class Referral extends Component<IProps> {
               />
             </div>
             <div className="flex-col flex-col--12 referral--step">
-              <span className="body--s">
-                <strong>First step -</strong> Who would you like to be connected?
-              </span>
+              <span
+                className="body--s"
+                dangerouslySetInnerHTML={{ __html: referralStore.stepDescription }}
+              ></span>
             </div>
           </div>
         </div>
