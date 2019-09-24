@@ -38,7 +38,6 @@ class ReferralStore {
         return '<strong>First step - </strong> Who would you like to be connected?';
       default:
         return '';
-        break;
     }
   }
 }
