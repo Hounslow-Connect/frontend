@@ -28,7 +28,7 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore, history }) 
     </div>
 
     <div className="flex-container flex-container--mobile-no-padding flex-container--align-center">
-      {!!favouritesStore.favourites.length && (
+      {!!favouritesStore.favourites.length ? (
         <Fragment>
           <div className="flex-col flex-col--12 favourites__count">
             <p>{`${favouritesStore.favourites.length} results found`}</p>
@@ -61,6 +61,12 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore, history }) 
             <FavouriteShare />
           </div>
         </Fragment>
+      ) : (
+        <div className="flex-container favourites__no-favourites">
+          <div className="flex-col flex-col--12">
+            <h3>No favourites saved</h3>
+          </div>
+        </div>
       )}
     </div>
   </section>

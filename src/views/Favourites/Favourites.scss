@@ -204,3 +204,12 @@
     background-color: $elm;
   }
 }
+
+.favourites__no-favourites {
+  color: $san-juan;
+  padding: space(64) !important;
+
+  @include for-tablet-portrait-down {
+    padding: space(24) !important;
+  }
+}

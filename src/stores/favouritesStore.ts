@@ -22,15 +22,17 @@ class FavouritesStore {
     if (favouritesFromStorage) {
       const favouriteList = JSON.parse(favouritesFromStorage);
 
-      try {
-        const favouriteData = await axios.get(`${apiBase}/services?filter[id]=${favouriteList}`);
-        this.favourites = get(favouriteData, 'data.data', []);
-      } catch (e) {
-        console.error(e);
-      }
+      if (favouriteList.length) {
+        try {
+          const favouriteData = await axios.get(`${apiBase}/services?filter[id]=${favouriteList}`);
+          this.favourites = get(favouriteData, 'data.data', []);
+        } catch (e) {
+          console.error(e);
+        }
 
-      this.fetchOrganisations();
-      this.fetchServiceLocations();
+        this.fetchOrganisations();
+        this.fetchServiceLocations();
+      }
     }
   };
 
