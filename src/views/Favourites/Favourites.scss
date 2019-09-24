@@ -1,0 +1,159 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
+
+.favourites__header {
+  background-image: url('../../assets/images/backgrounds/favourites-shape.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: $san-juan;
+
+  @include for-tablet-landscape-up {
+    padding: space(64) !important;
+    padding-bottom: space(24) !important;
+  }
+
+  @include for-tablet-portrait-down {
+    background-image: none;
+  }
+
+  .flex-container {
+    margin: 0 !important;
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  &--heading {
+    margin-bottom: space(20) !important;
+  }
+
+  &--header-container {
+    background-color: $white;
+    padding: space(32);
+    border-radius: 23px;
+
+    &:first-of-type {
+      margin-right: space(32);
+    }
+
+    &:last-of-type {
+      padding: space(20) !important;
+    }
+  }
+
+  &--inner-container {
+    justify-content: flex-start !important;
+  }
+
+  &--share {
+    p {
+      display: inline;
+      margin-right: space(24);
+    }
+
+    svg {
+      margin: 0 space(10);
+    }
+  }
+
+  &--print {
+    button {
+      font-weight: normal !important;
+    }
+  }
+}
+
+.favourites__logo {
+  width: pxtorem(65px) !important;
+  height: pxtorem(65px);
+  border: 1px solid $nobel;
+  border-radius: 9px;
+  background-color: $white;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  img {
+    border-radius: 9px;
+    width: 100%;
+  }
+}
+
+.favourites__card {
+  color: $san-juan;
+  border: 2px solid $san-juan;
+  border-radius: 10px;
+  max-width: pxtorem(380px);
+
+  &--no-padding {
+    padding: 0 !important;
+  }
+
+  &--inner {
+    padding: space(24) !important;
+  }
+
+  &--organisation {
+    color: $waikawa;
+  }
+
+  &--location {
+    @include heading-s;
+    color: $elm;
+    margin: space(12) 0;
+  }
+
+  &--intro {
+    color: $mid-grey;
+  }
+
+  &--button-row {
+    border-top: 2px solid $san-juan;
+  }
+
+  &--button {
+    text-align: center;
+    padding: space(16);
+
+    &:first-of-type {
+      border-right: 2px solid $san-juan;
+    }
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    }
+
+    &--more {
+      background-color: $san-juan;
+      color: $white;
+    }
+  }
+
+  &--contact {
+    border-left: 3px solid $waikawa;
+    padding-left: space(12) !important;
+    margin: space(8) 0 !important;
+
+    svg {
+      color: $waikawa;
+    }
+
+    &--heading {
+      @include heading-s;
+    }
+
+    .flex-col {
+      margin-bottom: space(8) !important;
+    }
+  }
+}
+
+.favourites__count {
+  margin: space(32);
+}
