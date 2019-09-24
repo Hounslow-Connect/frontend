@@ -10,6 +10,7 @@ import NotFound from './views/NotFound';
 import Results from './views/Results';
 import Service from './views/Service';
 import Favourites from './views/Favourites';
+import Referral from './views/Referral';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header';
@@ -21,6 +22,7 @@ import UIStore from './stores/uiStore';
 import ResultsStore from './stores/resultsStore';
 import ServiceStore from './stores/serviceStore';
 import FavouritesStore from './stores/favouritesStore';
+import ReferralStore from './stores/referralStore';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -30,6 +32,7 @@ const uiStore = new UIStore();
 const resultsStore = new ResultsStore();
 const serviceStore = new ServiceStore();
 const favouritesStore = new FavouritesStore();
+const referralStore = new ReferralStore();
 
 class App extends Component {
   componentDidMount() {
@@ -44,6 +47,7 @@ class App extends Component {
         resultsStore={resultsStore}
         serviceStore={serviceStore}
         favouritesStore={favouritesStore}
+        referralStore={referralStore}
       >
         <Router>
           <Header />
@@ -52,6 +56,7 @@ class App extends Component {
             <Route path="/results" component={Results} />
             <Route path="/service/:service" component={Service} />
             <Route path="/favourites" component={Favourites} />
+            <Route path="/referral" component={Referral} />
             <Route component={NotFound} />
           </Switch>
         </Router>
