@@ -16,6 +16,7 @@
 
   @include for-tablet-portrait-down {
     background-image: none;
+    padding: space(24) !important;
   }
 
   .flex-container {
@@ -39,6 +40,10 @@
 
     &:last-of-type {
       padding: space(20) !important;
+    }
+
+    @include for-tablet-portrait-down {
+      padding: 0 !important;
     }
   }
 
@@ -89,6 +94,7 @@
   border: 2px solid $san-juan;
   border-radius: 10px;
   max-width: pxtorem(380px);
+  margin-bottom: space(24);
 
   &--no-padding {
     padding: 0 !important;
@@ -96,6 +102,13 @@
 
   &--inner {
     padding: space(24) !important;
+  }
+
+  &--outer {
+    @include for-tablet-portrait-down {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   &--organisation {
@@ -155,5 +168,11 @@
 }
 
 .favourites__count {
+  color: $san-juan;
   margin: space(32);
+
+  @include for-tablet-portrait-down {
+    margin: 0;
+    padding: 0 space(24) !important;
+  }
 }

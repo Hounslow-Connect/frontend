@@ -36,7 +36,7 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore }) => (
       </div>
     </div>
 
-    <div className="flex-container flex-container--mobile-no-padding">
+    <div className="flex-container flex-container--mobile-no-padding flex-container--align-center">
       {!!favouritesStore.favourites.length && (
         <Fragment>
           <div className="flex-col flex-col--12 favourites__count">

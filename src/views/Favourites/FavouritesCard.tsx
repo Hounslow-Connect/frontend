@@ -36,12 +36,12 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
   const organisation = find(favouritesStore.organisations, ['id', service.organisation_id]);
 
   return (
-    <article className="flex-col flex-col--4">
+    <article className="flex-col flex-col--4 flex-col--mobile--12 flex-col--tablet-large--6 favourites__card--outer">
       <div className="favourites__card">
         <div className="flex-container favourites__card--inner">
           <div className="flex-col flex-col--12">
             <div className="flex-container favourites__card--no-padding">
-              <div className="flex-col flex-col--8">
+              <div className="flex-col flex-col--8 flex-col--mobile--8">
                 <h3>{service.name}</h3>
                 <p className="body--s favourites__card--organisation">
                   {get(organisation, 'name')}
@@ -97,7 +97,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
         <div className="flex-col flex-col--12 favourites__card--button-row">
           <div className="flex-container favourites__card--no-padding">
             <div
-              className="flex-col flex-col--6 favourites__card--button"
+              className="flex-col flex-col--6 flex-col--mobile--6 favourites__card--button"
               role="button"
               aria-label="Remove favourite"
               onClick={() => removeFavourite(service.id)}
@@ -107,7 +107,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
               </p>
             </div>
             <div
-              className="flex-col flex-col--6 favourites__card--button favourites__card--button--more"
+              className="flex-col flex-col--6 flex-col--mobile--6 favourites__card--button favourites__card--button--more"
               role="navigation"
               aria-label={`View more information about ${service.name}`}
               onClick={() => history.push(`/service/${service.slug}`)}
