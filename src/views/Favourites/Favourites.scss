@@ -3,6 +3,10 @@
 @import '../../styles/breakpoints.scss';
 @import '../../styles/fonts.scss';
 
+.favourites {
+  padding-bottom: space(64);
+}
+
 .favourites__header {
   background-image: url('../../assets/images/backgrounds/favourites-shape.svg');
   background-size: 100% 100%;
@@ -52,6 +56,13 @@
   }
 
   &--share {
+    color: $san-juan;
+
+    @include for-tablet-portrait-down {
+      text-align: center;
+      margin-top: space(16);
+    }
+
     p {
       display: inline;
       margin-right: space(24);
@@ -63,7 +74,13 @@
   }
 
   &--print {
+    @include for-tablet-portrait-down {
+      text-align: center;
+      margin: space(16) 0;
+    }
+
     button {
+      color: $san-juan;
       font-weight: normal !important;
     }
   }

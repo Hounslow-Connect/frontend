@@ -38,7 +38,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
   return (
     <article className="flex-col flex-col--4 flex-col--mobile--12 flex-col--tablet-large--6 favourites__card--outer">
       <div className="favourites__card">
-        <div className="flex-container favourites__card--inner">
+        <div className="flex-container favourites__card--inner flex-container--mobile-no-padding">
           <div className="flex-col flex-col--12">
             <div className="flex-container favourites__card--no-padding">
               <div className="flex-col flex-col--8 flex-col--mobile--8">

@@ -6,12 +6,13 @@ import { inject, observer } from 'mobx-react';
 import { IService } from '../../types/types';
 
 import FavouritesCard from './FavouritesCard';
+import FavouriteShare from './FavouriteShare';
 
 import './Favourites.scss';
 import { Link, withRouter } from 'react-router-dom';
 
 const Favourites: React.FunctionComponent<any> = ({ favouritesStore, history }) => (
-  <section>
+  <section className="favourites">
     <div className="favourites__header flex-container">
       <div className="flex-col flex-col--12 favourites__header--heading">
         <h1>Favourites</h1>
@@ -21,18 +22,7 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore, history }) 
           <p>You can print or share a list of your favourite services</p>
         </div>
         <div className="flex-col flex-col--5 flex-col--tablet-large--6 mobile-hide tablet-hide favourites__header--header-container">
-          <div className="flex-container flex-container--align-center">
-            <div className="flex-col flex-col--8 flex-col--tablet-large--7 favourites__header--share">
-              <p>Share</p>
-              <FontAwesomeIcon icon={['fab', 'facebook-f']} />
-              <FontAwesomeIcon icon={['fab', 'twitter']} />
-              <FontAwesomeIcon icon="link" />
-              <FontAwesomeIcon icon="envelope" />
-            </div>
-            <div className="flex-col flex-col--4 flex-col--tablet-large--5 favourites__header--print">
-              <Button text="Print page" icon="print" alt={true} size="small" />
-            </div>
-          </div>
+          <FavouriteShare />
         </div>
       </div>
     </div>
@@ -65,6 +55,10 @@ const Favourites: React.FunctionComponent<any> = ({ favouritesStore, history }) 
                 <Button text="Add more" icon="plus" onClick={() => history.push('/')} />
               </Link>
             </div>
+          </div>
+
+          <div className="flex-container mobile-show tablet-show">
+            <FavouriteShare />
           </div>
         </Fragment>
       )}
