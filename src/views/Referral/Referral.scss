@@ -1,0 +1,12 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.referral {
+  &--back {
+    color: $elm;
+    line-height: 26px;
+    svg {
+      margin-right: space(12);
+    }
+  }
+}
