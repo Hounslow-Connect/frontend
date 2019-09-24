@@ -89,7 +89,7 @@ class Header extends Component<IProps> {
                 Home
               </RouterLink>
               <RouterLink
-                to="/favourites"
+                to="/about"
                 exact={true}
                 className="link link__inline link--large link__header"
                 activeClassName={cx({ 'nav--active': !isMobile })}
