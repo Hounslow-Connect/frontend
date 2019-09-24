@@ -11,6 +11,8 @@ import ReferralStore from '../../stores/referralStore';
 import './Referral.scss';
 import Button from '../../components/Button';
 import { apiBase } from '../../config/api';
+import StepOne from './Steps/StepOne';
+import StepTwo from './Steps/StepTwo';
 
 interface IProps extends RouteComponentProps {
   referralStore?: ReferralStore;
@@ -31,6 +33,19 @@ class Referral extends Component<IProps> {
       referralStore.getServiceInfo(serviceId as string);
     }
   }
+
+  displayStep = () => {
+    const { referralStore } = this.props;
+
+    switch (get(referralStore, 'step')) {
+      case 1:
+        return <StepOne name={get(referralStore, 'service.name')} />;
+      case 2:
+        return <StepTwo name={get(referralStore, 'service.name')} />;
+      default:
+        break;
+    }
+  };
 
   render() {
     const { referralStore } = this.props;
@@ -60,51 +75,7 @@ class Referral extends Component<IProps> {
         </div>
 
         <div className="flex-container flex-container--mobile-no-padding referral--container">
-          <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet-large--6 referral--intro">
-            <div className="flex-container flex-container--mobile-no-padding referral--intro--no-padding">
-              <div className="flex-col flex-col--12">
-                <div className="flex-container referral--intro--row referral--intro--no-padding">
-                  <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1">
-                    <FontAwesomeIcon icon="envelope" />
-                  </div>
-                  <div className="flex-col flex-col--11 flex-col--mobile--11">
-                    <p className="body--s referral--intro--heading">
-                      By completing this short form we will:
-                    </p>
-                    <p className="referral--intro--description">{`Send the provided name and contact details to the organisers of ${referralStore.service.name}.`}</p>
-                  </div>
-                </div>
-                <div className="flex-container referral--intro--row referral--intro--no-padding">
-                  <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1">
-                    <FontAwesomeIcon icon="calendar" />
-                  </div>
-                  <div className="flex-col flex-col--11 flex-col--mobile--11">
-                    <p
-                      className="body--s referral--intro--heading"
-                      dangerouslySetInnerHTML={{
-                        __html: `Within 10 working days, <em>${referralStore.service.name}</em> will:`,
-                      }}
-                    />
-                    <p className="referral--intro--description">
-                      Get in touch to help access/provide more information about their service.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-container referral--intro--row referral--intro--no-padding">
-                  <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1">
-                    <FontAwesomeIcon icon="user-friends" />
-                  </div>
-                  <div className="flex-col flex-col--11 flex-col--mobile--11">
-                    <p className="referral--intro--description">
-                      You have the option to complete this form on someone else's behalf, with their
-                      permission.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          {this.displayStep()}
           <div className="mobile-hide tablet-hide flex-col--5 flex-col--tablet-large--6">
             <div className="flex-container referral--right-column">
               <div className="flex-col flex-col--12">
@@ -124,51 +95,60 @@ class Referral extends Component<IProps> {
                 </div>
               </div>
 
-              <div className="flex-col flex-col--12 flex-col--mobile--12 mobile-hide tablet-hide">
-                <div className="flex-container flex-container--align-center referral--intro--no-padding">
-                  <div className="flex-col flex-col--12  flex-col--mobile--12 referral--form-time">
-                    <div className="flex-container flex-container--align-center referral--intro--no-padding">
-                      <div
-                        className="flex-col flex-col--2 flex-col--mobile--2"
-                        style={{ textAlign: 'center' }}
-                      >
-                        <FontAwesomeIcon icon="clock" />
-                      </div>
-                      <div className="flex-col flex-col--10 flex-col--mobile--10">
-                        <p>
-                          This form should take no longer than <strong>5 minutes</strong> to
-                          complete.
-                        </p>
+              {referralStore.step === 1 && (
+                <div className="flex-col flex-col--12 flex-col--mobile--12 mobile-hide tablet-hide">
+                  <div className="flex-container flex-container--align-center referral--intro--no-padding">
+                    <div className="flex-col flex-col--12  flex-col--mobile--12 referral--form-time">
+                      <div className="flex-container flex-container--align-center referral--intro--no-padding">
+                        <div
+                          className="flex-col flex-col--2 flex-col--mobile--2"
+                          style={{ textAlign: 'center' }}
+                        >
+                          <FontAwesomeIcon icon="clock" />
+                        </div>
+                        <div className="flex-col flex-col--10 flex-col--mobile--10">
+                          <p>
+                            This form should take no longer than <strong>5 minutes</strong> to
+                            complete.
+                          </p>
+                        </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {referralStore.step === 1 && (
+          <div className="flex-col flex-col--mobile--12 mobile-show tablet-show">
+            <div className="flex-container flex-container--align-center">
+              <div className="flex-col flex-col--mobile--12 referral--form-time">
+                <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
+                  <div className="flex-col flex-col--mobile--2">
+                    <FontAwesomeIcon icon="clock" />
+                  </div>
+                  <div className="flex-col flex-col--mobile--10">
+                    <p>
+                      This form should take no longer than <strong>5 minutes</strong> to complete.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex-col flex-col--mobile--12 mobile-show tablet-show">
-          <div className="flex-container flex-container--align-center">
-            <div className="flex-col flex-col--mobile--12 referral--form-time">
-              <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-                <div className="flex-col flex-col--mobile--2">
-                  <FontAwesomeIcon icon="clock" />
-                </div>
-                <div className="flex-col flex-col--mobile--10">
-                  <p>
-                    This form should take no longer than <strong>5 minutes</strong> to complete.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
 
         <div className="flex-col flex-col--12 flex-col--mobile--12">
           <div className="flex-container referral--next-step referral--intro--no-padding">
             <div className="flex-col flex-col--12 flex-col--mobile--12">
-              <Button text="Continue" icon="chevron-right" />
+              <Button
+                text="Continue"
+                icon="chevron-right"
+                onClick={() => referralStore.nextStep()}
+                disabled={referralStore.step === 2 && !referralStore.whoFor}
+              />
             </div>
             <div className="flex-col flex-col--12 referral--step">
               <span className="body--s">
