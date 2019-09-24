@@ -3,7 +3,7 @@ import first from 'lodash/first';
 import find from 'lodash/find';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { IService } from '../../types/types';
+import { IService, IServiceLocation } from '../../types/types';
 import { getLocationName } from '../../utils/utils';
 import Accordian from '../../components/Accordian';
 
@@ -15,7 +15,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 interface IProps extends RouteComponentProps {
   service: IService;
-  locations: [];
+  locations: IServiceLocation[];
   removeFavourite: (id: string) => void;
   favouritesStore?: FavouritesStore;
 }

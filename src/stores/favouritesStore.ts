@@ -8,32 +8,41 @@ import { IService, IOrganisation, IServiceLocation } from '../types/types';
 
 class FavouritesStore {
   @observable favourites: IService[] = [];
+  @observable favouritesList: string[] | null = [];
   @observable organisations: IOrganisation[] = [];
   @observable serviceLocations: IServiceLocation[] = [];
 
-  constructor() {
-    this.fetchFavourites();
-  }
+  @action
+  setFavourites = (favourites: string) => {
+    this.favouritesList = favourites.split(',');
+  };
 
   @action
-  fetchFavourites = async () => {
+  getFavouritesFromStorage = () => {
     const favouritesFromStorage = localStorage.getItem('favourites');
 
     if (favouritesFromStorage) {
       const favouriteList = JSON.parse(favouritesFromStorage);
 
-      if (favouriteList.length) {
-        try {
-          const favouriteData = await axios.get(`${apiBase}/services?filter[id]=${favouriteList}`);
-          this.favourites = get(favouriteData, 'data.data', []);
-        } catch (e) {
-          console.error(e);
-        }
-
-        this.fetchOrganisations();
-        this.fetchServiceLocations();
-      }
+      this.favouritesList = favouriteList;
+    } else {
+      this.favouritesList = null;
     }
+  };
+
+  @action
+  fetchFavourites = async () => {
+    try {
+      const favouriteData = await axios.get(
+        `${apiBase}/services?filter[id]=${this.favouritesList}`
+      );
+      this.favourites = get(favouriteData, 'data.data', []);
+    } catch (e) {
+      console.error(e);
+    }
+
+    this.fetchOrganisations();
+    this.fetchServiceLocations();
   };
 
   @action
@@ -85,6 +94,14 @@ class FavouritesStore {
       const favourites = [...this.favourites];
       remove(favourites, ['id', id]);
       this.favourites = favourites;
+    }
+  };
+
+  generateShareLink = () => {
+    if (this.favouritesList) {
+      const idList = this.favouritesList.join(',');
+
+      return `?ids=${idList}`;
     }
   };
 }
