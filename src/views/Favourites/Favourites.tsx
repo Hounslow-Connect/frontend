@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../../components/Button';
 import { inject, observer } from 'mobx-react';
 import queryString from 'query-string';
