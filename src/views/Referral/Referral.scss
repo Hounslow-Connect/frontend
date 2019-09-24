@@ -1,13 +1,41 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/fonts.scss';
+@import '../../styles/breakpoints.scss';
+
+@mixin greenContainer {
+  background-color: $iceberg;
+  border-radius: 19px;
+
+  @include for-tablet-landscape-down {
+    padding: space(12) space(24) !important;
+  }
+}
 
 .referral {
   color: $san-juan;
 
+  @include for-tablet-landscape-down {
+    padding-top: space(40) !important;
+  }
+
+  &--next-step {
+    margin: space(20) 0 !important;
+  }
+
+  &--mobile-connect {
+    @include greenContainer;
+
+    &--name {
+      font-family: $font-secondary;
+    }
+  }
+
   &--back {
     color: $elm;
     line-height: 26px;
+    padding-left: space(16) !important;
+
     svg {
       margin-right: space(12);
     }
@@ -18,15 +46,40 @@
     color: $san-juan;
   }
 
+  &--form-time {
+    @include greenContainer;
+
+    svg {
+      font-size: $font-base;
+      color: $waikawa;
+      margin-right: space(20) !important;
+    }
+  }
+
   &--intro {
     background-color: $alabaster;
     border-radius: 19px;
     padding: space(32);
     color: $san-juan;
-    margin: space(24) 0;
+    margin: space(24) 0 !important;
+
+    @include for-tablet-landscape-down {
+      border-radius: 0;
+      background-color: $white;
+      padding: 0;
+    }
+
+    &--heading {
+      @include for-tablet-landscape-down {
+        font-family: $font-secondary;
+        margin-bottom: space(8);
+      }
+    }
 
     &--no-padding {
-      padding: 0 !important;
+      @include for-tablet-landscape-up {
+        padding: 0 !important;
+      }
     }
 
     svg {
@@ -36,11 +89,32 @@
 
     &--row {
       margin-bottom: space(32) !important;
+
+      @include for-tablet-landscape-down {
+        padding: space(12) !important;
+        margin-bottom: 0 !important;
+
+        &:nth-of-type(odd) {
+          background-color: $alabaster;
+        }
+      }
+
+      @include for-tablet-landscape-up {
+        &:last-of-type {
+          margin-bottom: 0 !important;
+        }
+      }
     }
 
     &--description {
       font-size: $font-body-l;
       font-family: $font-secondary;
+
+      @include for-tablet-landscape-down {
+        font-family: $font-primary;
+        font-size: $font-base;
+        color: $waikawa;
+      }
     }
   }
 }
