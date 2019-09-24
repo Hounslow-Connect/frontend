@@ -6,6 +6,7 @@
 @mixin greenContainer {
   background-color: $iceberg;
   border-radius: 19px;
+  padding: space(24) !important;
 
   @include for-tablet-landscape-down {
     padding: space(12) space(24) !important;
@@ -19,6 +20,15 @@
     padding-top: space(40) !important;
   }
 
+  &--container {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  &--right-column {
+    margin-bottom: space(24) !important;
+  }
+
   &--next-step {
     margin: space(20) 0 !important;
   }
@@ -28,6 +38,29 @@
 
     &--name {
       font-family: $font-secondary;
+    }
+  }
+
+  &--connect {
+    @include greenContainer;
+
+    &--logo {
+      width: pxtorem(65px);
+      height: pxtorem(65px);
+
+      border-radius: 9px;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
+      img {
+        border-radius: 9px;
+        width: 100%;
+      }
     }
   }
 
@@ -53,6 +86,15 @@
       font-size: $font-base;
       color: $waikawa;
       margin-right: space(20) !important;
+    }
+
+    @include for-tablet-landscape-up {
+      margin-top: space(20);
+
+      svg {
+        font-size: pxtorem(29px);
+        margin-right: space(16);
+      }
     }
   }
 
