@@ -32,7 +32,6 @@ class Favourites extends Component<IProps> {
     if (favouritesStore.favouritesList && favouritesStore.favouritesList.length) {
       favouritesStore.fetchFavourites();
     }
-    console.log(favouritesStore.generateShareLink());
   }
 
   render() {
