@@ -13,6 +13,7 @@ interface IReferral {
   feedback_consented: boolean;
   comments: null | string;
   postcode_outward_code: null;
+  referee_name: null;
 }
 
 class ReferralStore {
@@ -28,6 +29,7 @@ class ReferralStore {
     feedback_consented: false,
     comments: null,
     postcode_outward_code: null,
+    referee_name: null,
   };
   @observable showConfirmation: boolean = false;
 
@@ -45,6 +47,7 @@ class ReferralStore {
       feedback_consented: false,
       comments: null,
       postcode_outward_code: null,
+      referee_name: null,
     };
     this.showConfirmation = false;
   };
@@ -111,7 +114,7 @@ class ReferralStore {
         if (this.whoFor === 'Myself') {
           return '<strong>Next step - </strong>Confirmation and what’s next';
         }
-        return '';
+        return '<strong>Next step - </strong>Enter your contact information';
       default:
         return '';
     }
