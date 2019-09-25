@@ -5,6 +5,7 @@ import { IconName } from '@fortawesome/fontawesome-svg-core';
 import cx from 'classnames';
 
 import ReferralStore from '../../../stores/referralStore';
+import Button from '../../../components/Button';
 
 interface IProps {
   name: string;
@@ -59,8 +60,8 @@ const StepTwo: React.FunctionComponent<IProps> = ({ name, referralStore }) => {
   }
 
   return (
-    <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet-large--6 referral__step-container">
-      <div className="flex-container flex-container--mobile-no-padding referral--intro--no-padding">
+    <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet-large--6">
+      <div className="flex-container flex-container--mobile-no-padding referral--intro--no-padding referral__step-container referral__form">
         <div className="flex-col flex-col--12 flex-col--mobile--12">
           <p className="referral__step-container--question body--s">{`Who would like to be connected to ${name}?`}</p>
         </div>
@@ -94,6 +95,25 @@ const StepTwo: React.FunctionComponent<IProps> = ({ name, referralStore }) => {
                 subText="A client, customer, or member of the public"
               />
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex-col flex-col--12 flex-col--mobile--12">
+        <div className="flex-container referral--next-step referral--intro--no-padding">
+          <div className="flex-col flex-col--12 flex-col--mobile--12">
+            <Button
+              text="Continue"
+              type="submit"
+              icon="chevron-right"
+              onClick={() => referralStore.nextStep()}
+              disabled={referralStore.step === 2 && !referralStore.whoFor}
+            />
+          </div>
+          <div className="flex-col flex-col--12 referral--step">
+            <span
+              className="body--s"
+              dangerouslySetInnerHTML={{ __html: referralStore.stepDescription }}
+            />
           </div>
         </div>
       </div>
