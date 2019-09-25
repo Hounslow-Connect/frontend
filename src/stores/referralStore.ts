@@ -4,10 +4,16 @@ import { apiBase } from '../config/api';
 import { IService } from '../types/types';
 import get from 'lodash/get';
 
+interface IReferral {
+  name: string;
+}
 class ReferralStore {
   @observable service: IService | null = null;
   @observable step: number = 1;
   @observable whoFor: 'Myself' | 'A friend or family member' | 'Someone else' | null = null;
+  @observable referral: IReferral = {
+    name: '',
+  };
 
   @action
   getServiceInfo = async (id: string) => {
@@ -36,10 +42,25 @@ class ReferralStore {
         return '<strong>First step - </strong> Who would you like to be connected?';
       case 2:
         return '<strong>First step - </strong> Who would you like to be connected?';
+      case 3:
+        return `<strong>Next step - </strong> Enter ${
+          this.whoFor === 'Myself' ? 'your' : 'their'
+        } contact information`;
       default:
         return '';
     }
   }
+
+  @computed
+  get totalSteps() {
+    return this.whoFor === 'Myself' ? 3 : 5;
+  }
+
+  @action
+  handleInput = (field: string, input: string) => {
+    // @ts-ignore
+    this.referral[field] = input;
+  };
 }
 
 export default ReferralStore;
