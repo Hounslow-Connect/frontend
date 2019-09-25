@@ -19,6 +19,7 @@ import StepFour from './Steps/StepFour';
 import TermsAndConditions from './Steps/TermsAndConditions';
 import Confirmation from './Steps/Confirmation';
 import StepFive from './Steps/StepFive/StepFive';
+import StepSix from './Steps/StepSix';
 
 interface IProps extends RouteComponentProps {
   referralStore?: ReferralStore;
@@ -65,6 +66,8 @@ class Referral extends Component<IProps> {
           return <TermsAndConditions />;
         }
         return <StepFive />;
+      case 6:
+        return <StepSix />;
       default:
         break;
     }
