@@ -11,6 +11,10 @@ import Results from './views/Results';
 import Service from './views/Service';
 import Favourites from './views/Favourites';
 import Referral from './views/Referral';
+import About from './views/About';
+import Contact from './views/Contact';
+import GetInvolved from './views/GetInvolved';
+import Privacy from './views/Privacy';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header';
@@ -24,10 +28,7 @@ import ServiceStore from './stores/serviceStore';
 import FavouritesStore from './stores/favouritesStore';
 import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
-import About from './About';
-import Contact from './Contact';
-import GetInvolved from './GetInvolved';
-import Privacy from './Privacy';
+import Terms from './views/Terms';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -68,6 +69,7 @@ class App extends Component {
             <Route path="/contact" component={Contact} />
             <Route path="/get-involved" component={GetInvolved} />
             <Route path="/privacy-policy" component={Privacy} />
+            <Route path="/terms-and-conditions" component={Terms} />
             <Route component={NotFound} />
           </Switch>
         </Router>
