@@ -68,6 +68,8 @@ class Referral extends Component<IProps> {
         return <StepFive />;
       case 6:
         return <StepSix />;
+      case 7:
+        return <TermsAndConditions />;
       default:
         break;
     }
