@@ -12,12 +12,15 @@ import Select from '../Select';
 import Button from '../Button';
 import Personas from '../Personas';
 import WindowSizeStore from '../../stores/windowSizeStore';
+import CMSStore from '../../stores/CMSStore';
+import get from 'lodash/get';
 
 interface IProps extends RouteComponentProps {
   windowSizeStore?: WindowSizeStore;
+  cmsStore?: CMSStore;
 }
 
-@inject('windowSizeStore')
+@inject('windowSizeStore', 'cmsStore')
 @observer
 class Search extends React.Component<IProps> {
   componentWillUnmount() {
@@ -25,22 +28,21 @@ class Search extends React.Component<IProps> {
   }
 
   render() {
-    const { windowSizeStore, history } = this.props;
+    const { windowSizeStore, cmsStore, history } = this.props;
 
     // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
-    if (!windowSizeStore) {
+    if (!windowSizeStore || !cmsStore) {
       return null;
     }
     const { isMobile } = windowSizeStore;
     const options = map(SearchStore.categories, ({ name, id }) => ({ value: id, text: name }));
-
     return (
       <Fragment>
         <section className="flex-container flex-container--justify search__container">
           <form className="search__inner-container flex-col" aria-label="Search">
             <div className="search__input">
               <label htmlFor="search">
-                <h1 className="search__heading">I'm looking for</h1>
+                <h1 className="search__heading">{get(cmsStore, 'home.search_title')}</h1>
               </label>
               <Input
                 placeholder="Search for services, groups and activities"
@@ -63,12 +65,12 @@ class Search extends React.Component<IProps> {
               )}
             </div>
             <label className="search__heading search__heading--category" htmlFor="category">
-              Or browse by category
+              {get(cmsStore, 'home.categories_title')}
             </label>
             {isMobile && (
               <Fragment>
                 <p className="search__category-subtitle">
-                  Sometimes it's hard to know where to start - here are some suggestions
+                  {get(cmsStore, 'home.personas_content')}
                 </p>
                 <Select
                   options={options}
