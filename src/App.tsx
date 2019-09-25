@@ -24,6 +24,7 @@ import ServiceStore from './stores/serviceStore';
 import FavouritesStore from './stores/favouritesStore';
 import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
+import About from './About';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -60,6 +61,7 @@ class App extends Component {
             <Route path="/service/:service" component={Service} />
             <Route path="/favourites" component={Favourites} />
             <Route path="/referral" component={Referral} />
+            <Route path="/about" component={About} />
             <Route component={NotFound} />
           </Switch>
         </Router>
