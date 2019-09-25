@@ -26,6 +26,7 @@ import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
 import About from './About';
 import Contact from './Contact';
+import GetInvolved from './GetInvolved';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -64,6 +65,7 @@ class App extends Component {
             <Route path="/referral" component={Referral} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+            <Route path="/get-involved" component={GetInvolved} />
             <Route component={NotFound} />
           </Switch>
         </Router>
