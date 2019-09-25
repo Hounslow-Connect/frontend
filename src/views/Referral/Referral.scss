@@ -22,11 +22,14 @@
 
   &--container {
     align-items: center !important;
+    height: 100%;
 
     &--flex-end {
       align-items: flex-end !important;
     }
+
     padding: 0 !important;
+    width: 100%;
   }
 
   &--right-column {
@@ -85,6 +88,7 @@
 
   &--form-time {
     @include greenContainer;
+    margin-top: space(20);
 
     svg {
       font-size: $font-base;
@@ -93,8 +97,6 @@
     }
 
     @include for-tablet-landscape-up {
-      margin-top: space(20);
-
       svg {
         font-size: pxtorem(29px);
         margin-right: space(16);
@@ -103,12 +105,14 @@
   }
 
   &--intro {
-    background-color: $alabaster;
     border-radius: 19px;
     padding: space(32);
     color: $san-juan;
     margin: space(24) 0 !important;
 
+    &--inner {
+      background-color: $alabaster;
+    }
     @include for-tablet-landscape-down {
       border-radius: 0;
       background-color: $white;
@@ -228,8 +232,37 @@
   margin: space(24) 0 !important;
   padding: space(32);
 
-  @include for-tablet-landscape-up {
+  @include for-tablet-portrait-up {
     border-radius: 19px;
+  }
+
+  &--steps {
+    color: $waikawa;
+    margin-bottom: space(6);
+  }
+
+  &--subtitle {
+    margin-top: space(12);
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--input {
+    width: 100%;
+  }
+
+  &--label {
+    margin-bottom: space(24) !important;
+  }
+
+  &--form {
+    padding: space(16) !important;
+  }
+
+  &--intro {
+    padding: 0 space(16) !important;
   }
 
   &--question {
@@ -240,9 +273,22 @@
       font-size: $font-heading-m;
       padding: 0 !important;
     }
+
+    &--large {
+      font-size: $font-body-l;
+      font-family: $font-secondary;
+    }
   }
 
   &--inner {
     margin-top: space(20) !important;
+  }
+}
+
+.referral__form {
+  padding: space(24) !important;
+
+  @include for-tablet-portrait-down {
+    padding: space(20) 0 !important;
   }
 }
