@@ -1,0 +1,73 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/colors.scss';
+
+.cms__header {
+  background-image: url('../../assets/images/backgrounds/cms-page-header.svg');
+  position: relative;
+  background-size: 110% 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  padding: space(40) 0;
+  margin: space(32) 0 space(72);
+
+  .flex-container {
+    max-width: 1260px;
+  }
+
+  @include for-tablet-portrait-down {
+    background-image: url('../../assets/images/backgrounds/cms-page-header-mobile.svg');
+
+    margin-bottom: space(32);
+    margin-top: space(52);
+
+    .flex-col {
+      width: 41.66667%;
+    }
+  }
+
+  @include for-tablet-landscape-up {
+    &:before {
+      position: absolute;
+      content: url('../../assets/images/trees/jordy-lg.svg');
+      top: -25px;
+      right: 20%;
+    }
+
+    &:after {
+      position: absolute;
+      content: url('../../assets/images/trees/iceberg-lg.svg');
+      top: -25px;
+      right: 15%;
+    }
+  }
+}
+
+.cms__title-card {
+  background-image: url('../../assets/images/backgrounds/cms-page-header-inner.svg');
+  background-size: 100% 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  padding: space(48);
+  box-sizing: border-box;
+
+  @include for-phone-only {
+    padding: space(48) space(24);
+    background-size: 110% 100%;
+  }
+
+  @include for-tablet-portrait-down {
+    padding: space(48);
+    background-size: 100% 100%;
+  }
+
+  &--title {
+    font-size: pxtorem(32px);
+    color: $san-juan;
+    margin-bottom: space(32);
+
+    @include for-tablet-landscape-down {
+      margin-bottom: space(16);
+    }
+  }
+}
