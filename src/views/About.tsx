@@ -1,10 +1,11 @@
 import React from 'react';
-import CMSPage from './components/CMSPageLayout';
 import { inject, observer } from 'mobx-react';
-import CMSStore from './stores/CMSStore';
 import get from 'lodash/get';
 import ReactMarkdown from 'react-markdown';
 import ReactPlayer from 'react-player';
+
+import CMSStore from '../stores/CMSStore';
+import CMSPage from '../components/CMSPageLayout';
 
 interface IProps {
   cmsStore: CMSStore;
