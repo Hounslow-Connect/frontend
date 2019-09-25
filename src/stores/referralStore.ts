@@ -1,8 +1,10 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
-import { apiBase } from '../config/api';
-import { IService } from '../types/types';
 import get from 'lodash/get';
+import orderBy from 'lodash/orderBy';
+
+import { apiBase } from '../config/api';
+import { IService, IPartnerOrganistion } from '../types/types';
 
 interface IReferral {
   name: string;
@@ -13,6 +15,9 @@ interface IReferral {
   feedback_consented: boolean;
   comments: null | string;
   postcode_outward_code: null;
+  referee_name: null | string;
+  organisation: null | string;
+  organisation_taxonomy_id: null | string;
 }
 
 class ReferralStore {
@@ -28,8 +33,12 @@ class ReferralStore {
     feedback_consented: false,
     comments: null,
     postcode_outward_code: null,
+    referee_name: null,
+    organisation: null,
+    organisation_taxonomy_id: null,
   };
   @observable showConfirmation: boolean = false;
+  @observable partnerOrganisations: IPartnerOrganistion[] = [];
 
   @action
   clear = () => {
@@ -45,6 +54,9 @@ class ReferralStore {
       feedback_consented: false,
       comments: null,
       postcode_outward_code: null,
+      referee_name: null,
+      organisation: null,
+      organisation_taxonomy_id: null,
     };
     this.showConfirmation = false;
   };
@@ -54,6 +66,16 @@ class ReferralStore {
     try {
       const serviceData = await axios.get(`${apiBase}/services/${id}`);
       this.service = get(serviceData, 'data.data');
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  @action
+  getPartnerOrganisations = async () => {
+    try {
+      const organisationData = await axios.get(`${apiBase}/taxonomies/organisations`);
+      this.partnerOrganisations = get(organisationData, 'data.data');
     } catch (e) {
       console.error(e);
     }
@@ -111,7 +133,7 @@ class ReferralStore {
         if (this.whoFor === 'Myself') {
           return '<strong>Next step - </strong>Confirmation and what’s next';
         }
-        return '';
+        return '<strong>Next step - </strong>Enter your contact information';
       default:
         return '';
     }
@@ -132,6 +154,15 @@ class ReferralStore {
   toggleConsent = () => {
     this.referral.referral_consented = !this.referral.referral_consented;
     this.referral.feedback_consented = !this.referral.feedback_consented;
+  };
+
+  partnerOrganisationLabels = () => {
+    const orderedList = orderBy(this.partnerOrganisations, 'name', 'asc');
+
+    return orderedList.map(org => ({
+      value: org.id,
+      text: org.name,
+    }));
   };
 }
 

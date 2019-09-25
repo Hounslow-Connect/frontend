@@ -238,6 +238,12 @@
     border-radius: 19px;
   }
 
+  &--select {
+    @include for-tablet-landscape-down {
+      max-width: 100% !important;
+    }
+  }
+
   &--steps {
     color: $waikawa;
     margin-bottom: space(6);
@@ -415,4 +421,9 @@
   ul {
     margin: space(24) 0;
   }
+}
+
+.referral__other-organisation {
+  padding: 0 !important;
+  margin-top: space(12);
 }

@@ -131,3 +131,11 @@ export interface IHolidayTimes {
   opens_at: string;
   starts_at: string;
 }
+
+export interface IPartnerOrganistion {
+  id: string;
+  name: string;
+  order: number;
+  created_at: string;
+  updated_at: string;
+}
