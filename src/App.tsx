@@ -11,6 +11,10 @@ import Results from './views/Results';
 import Service from './views/Service';
 import Favourites from './views/Favourites';
 import Referral from './views/Referral';
+import About from './views/About';
+import Contact from './views/Contact';
+import GetInvolved from './views/GetInvolved';
+import Privacy from './views/Privacy';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header';
@@ -22,7 +26,9 @@ import UIStore from './stores/uiStore';
 import ResultsStore from './stores/resultsStore';
 import ServiceStore from './stores/serviceStore';
 import FavouritesStore from './stores/favouritesStore';
+import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
+import Terms from './views/Terms';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -32,6 +38,7 @@ const uiStore = new UIStore();
 const resultsStore = new ResultsStore();
 const serviceStore = new ServiceStore();
 const favouritesStore = new FavouritesStore();
+const cmsStore = new CMSStore();
 const referralStore = new ReferralStore();
 
 class App extends Component {
@@ -47,6 +54,7 @@ class App extends Component {
         resultsStore={resultsStore}
         serviceStore={serviceStore}
         favouritesStore={favouritesStore}
+        cmsStore={cmsStore}
         referralStore={referralStore}
       >
         <Router>
@@ -57,6 +65,11 @@ class App extends Component {
             <Route path="/service/:service" component={Service} />
             <Route path="/favourites" component={Favourites} />
             <Route path="/referral" component={Referral} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/get-involved" component={GetInvolved} />
+            <Route path="/privacy-policy" component={Privacy} />
+            <Route path="/terms-and-conditions" component={Terms} />
             <Route component={NotFound} />
           </Switch>
         </Router>
