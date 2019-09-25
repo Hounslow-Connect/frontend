@@ -32,4 +32,5 @@
 .link__header {
   @include link-header;
   margin-right: space(32);
+  position: relative;
 }

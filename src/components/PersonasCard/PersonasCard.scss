@@ -4,6 +4,8 @@
 @import '../../styles/fonts.scss';
 
 .card {
+  display: flex;
+  align-content: center;
   background-color: $alabaster;
   font-family: $font-secondary;
   color: $san-juan;
@@ -13,7 +15,7 @@
 
   @include for-phone-only {
     background-color: $white;
-    margin: space(20) space(32);
+    margin: space(20) 0;
 
     img {
       width: pxtorem(75px);

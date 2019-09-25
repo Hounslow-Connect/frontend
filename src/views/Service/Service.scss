@@ -11,11 +11,36 @@
   background-size: 100% 100%;
   padding: space(64);
   color: $white;
-  background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
+
+  &--activity {
+    background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
+
+    @include for-phone-only {
+      background-image: url('../../assets/images/backgrounds/activity-header-shape-mobile.svg');
+    }
+  }
+
+  &--group {
+    background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
+
+    @include for-phone-only {
+      background-image: url('../../assets/images/backgrounds/group-header-shape-mobile.svg');
+    }
+  }
+
+  &--service {
+    background-image: url('../../assets/images/backgrounds/service-header-shape-lg.svg');
+
+    @include for-phone-only {
+      background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
+    }
+    &:after {
+      content: '' !important;
+    }
+  }
 
   @include for-phone-only {
     padding: space(32) space(24) 0 space(24);
-    background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
   }
 
   h1 {
@@ -46,7 +71,24 @@
 }
 
 .service__section {
-  margin-bottom: space(32);
+  margin-top: space(12);
+  margin-bottom: space(32) !important;
+  width: 100%;
+  align-items: stretch;
+
+  .criteria_card:nth-of-type(odd) {
+    background-color: $alabaster;
+  }
+
+  &--no-padding {
+    @include for-tablet-landscape-up {
+      padding: 0 !important;
+    }
+  }
+
+  &--no-margin {
+    margin-bottom: 0 !important;
+  }
 }
 
 .service__header__logo {
@@ -100,8 +142,21 @@
 }
 
 .service__info {
-  display: flex;
-  padding: space(88) space(96);
+  padding-top: space(16) !important;
+  color: $san-juan;
+
+  @include for-phone-only {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  @include for-desktop-up {
+    padding: space(88) space(96) !important;
+  }
+
+  p {
+    font-size: pxtorem(18px);
+  }
 }
 
 .service__info--left {
@@ -113,12 +168,13 @@
 }
 
 .service__info__cost {
-  display: flex;
-  background-color: $iceberg;
-  border-radius: 19px;
-  padding: space(32);
-  width: fit-content;
-  align-items: center;
+  background-color: $iceberg !important;
+
+  @include for-tablet-landscape-up {
+    border-radius: 19px;
+    padding: space(24);
+    margin-right: 20%;
+  }
 }
 
 .service__info__cost--header {
@@ -145,4 +201,265 @@
 
 .react-player__preview {
   border-radius: 19px;
+}
+
+.service__referral {
+  background-color: $pink;
+  padding: space(32) !important;
+  position: relative;
+
+  @include for-tablet-landscape-up {
+    border-radius: 19px;
+
+    &:after {
+      content: url('../../assets/images/trees/iceberg-small.svg');
+      position: absolute;
+      top: -35px;
+      right: 20px;
+    }
+  }
+
+  &--desktop {
+    margin-top: space(40);
+  }
+}
+
+.service__refer-disclaimer {
+  padding: space(16) 0;
+
+  svg {
+    color: $waikawa;
+  }
+}
+
+.service__markdown {
+  p {
+    margin-bottom: space(16);
+  }
+
+  a {
+    color: $elm;
+    font-size: inherit;
+  }
+}
+
+.service__accordian {
+  padding: space(24) space(12);
+  width: 100%;
+
+  button {
+    text-align: left;
+
+    h4 {
+      display: inline;
+    }
+  }
+
+  &:nth-of-type(odd) {
+    background-color: $alabaster;
+
+    .service__accordian-inner {
+      background-color: $white;
+      border-radius: 16px;
+    }
+  }
+
+  &:nth-of-type(even) {
+    .service__accordian-inner {
+      background-color: $alabaster;
+      border-radius: 16px;
+    }
+  }
+
+  &--no-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.service__button-container {
+  padding: space(24) !important;
+}
+
+.service__accordian-inner {
+  font-size: $font-body-m;
+  padding: space(16) !important;
+
+  a {
+    font-size: $font-body-m;
+  }
+}
+
+.service__social-icon {
+  margin: space(12);
+}
+
+.service__social-icon-container {
+  text-align: center;
+}
+
+.service__testimonial {
+  background-image: url('../../assets/images/backgrounds/service-quote-shape.svg');
+  background-size: 100% 100%;
+  padding: space(8);
+
+  p {
+    font-family: $font-tertiary;
+    font-size: pxtorem(30px);
+  }
+
+  svg {
+    font-size: pxtorem(46px);
+  }
+
+  @include for-tablet-landscape-up {
+    padding: space(32);
+  }
+
+  &--header {
+    margin-top: space(32);
+  }
+}
+
+.service__criteria {
+  padding: 0 !important;
+}
+
+.service__media {
+  margin: 0 !important;
+}
+
+.service__useful-info {
+  margin-bottom: space(16) !important;
+
+  @include for-tablet-landscape-up {
+    background-color: $alabaster;
+    border-radius: 19px;
+  }
+
+  p {
+    font-size: $font-base;
+    color: $gray;
+    margin-top: space(12);
+  }
+
+  svg {
+    color: #c3c3c3;
+
+    @include for-tablet-landscape-up {
+      font-size: pxtorem(36px);
+      float: right;
+    }
+  }
+}
+
+.service__organisation {
+  text-align: center;
+
+  &--logo {
+    margin-bottom: space(12) !important;
+
+    img {
+      border-radius: 9px;
+    }
+  }
+
+  &--sidebar {
+    background-color: $alabaster;
+    padding: space(20) !important;
+    border-radius: 19px;
+  }
+}
+
+.service__right-column {
+  padding: 0 !important;
+}
+
+.service__left-column {
+  @include for-tablet-landscape-up {
+    padding-right: space(32) !important;
+  }
+}
+
+.service__cost-card {
+  padding: 0 !important;
+}
+
+.service__video {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+}
+
+.service__contact-card {
+  padding: 40 !important;
+  background-color: $alabaster;
+  border-radius: 19px;
+
+  a {
+    text-decoration: none;
+  }
+
+  &--row {
+    margin-top: space(40);
+
+    svg {
+      margin-right: space(8);
+      color: $waikawa;
+    }
+  }
+}
+
+.service__share-card {
+  background-image: url('../../assets/images/backgrounds/service-share-background.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: space(20);
+
+  h4 {
+    display: inline;
+    font-weight: normal;
+    font-family: $font-primary;
+  }
+
+  a {
+    margin: 0 space(8);
+  }
+}
+
+.criteria_card--inner {
+  @include for-tablet-landscape-up {
+    padding: 0 !important;
+  }
+}
+
+.service__information {
+  @include for-tablet-landscape-up {
+    background: $alabaster;
+    border-radius: 19px;
+    padding: space(32) !important;
+    margin-top: space(16) !important;
+  }
+}
+
+.service__offerings {
+  font-size: $font-body-m;
+  font-family: $font-secondary;
+  margin-top: space(16);
+
+  span {
+    color: $waikawa;
+  }
+
+  svg {
+    color: $downy;
+    margin: space(8);
+  }
+}
+
+.service__heading {
+  @include for-tablet-landscape-up {
+    padding-left: 40px !important;
+    margin-bottom: space(32);
+  }
 }

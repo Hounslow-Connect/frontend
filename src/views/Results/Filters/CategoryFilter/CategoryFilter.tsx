@@ -4,9 +4,9 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 import Checkbox from '../../../../components/Checkbox';
 import ResultsStore from '../../../../stores/resultsStore';
+import Button from '../../../../components/Button';
 
 import './CategoryFilter.scss';
-import ViewFilters from '../ViewFilter/ViewFilter';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
@@ -23,22 +23,40 @@ class CategoryFilter extends Component<IProps> {
     }
 
     return (
-      <div className="category_filters__container">
-        <div className="column category_filters__filter-cost">
-          <p className="category_filters--header--cost">Cost</p>
-          <Checkbox
-            id="is_free"
-            label="Free"
-            checked={resultsStore.is_free}
-            onChange={() => {
-              resultsStore.toggleIsFree();
-              history.push({
-                search: resultsStore.updateQueryStringParameter('is_free', resultsStore.is_free),
-              });
-            }}
-          />
+      <div className="flex-col flex-col--5 flex-col--tablet-large--7 flex-col--mobile--12">
+        <div className="flex-container flex-container--mobile-no-padding category__filters">
+          <div className="flex-col flex-col--4 flex-col--tablet-large--5 flex-col--mobile--6 flex-container--mobile-no-padding">
+            <p className="category_filters--header--cost">Cost</p>
+            <Checkbox
+              id="is_free"
+              label="Free"
+              checked={resultsStore.is_free}
+              onChange={() => {
+                resultsStore.toggleIsFree();
+                history.push({
+                  search: resultsStore.updateQueryStringParameter('is_free', resultsStore.is_free),
+                });
+              }}
+            />
+          </div>
+          <div className="flex-col flex-col--7 flex-col--tablet-large--7 flex-col--mobile--6 flex-container--mobile-no-padding view-filter__search-bar">
+            <p className="view-filter--header">View As</p>
+            <Button
+              text="Grid"
+              icon="th-large"
+              size="small"
+              light={resultsStore.view !== 'grid'}
+              onClick={() => resultsStore.toggleView('grid')}
+            />
+            <Button
+              text="Map"
+              icon="map"
+              size="small"
+              light={resultsStore.view !== 'map'}
+              onClick={() => resultsStore.toggleView('map')}
+            />
+          </div>
         </div>
-        <ViewFilters />
       </div>
     );
   }

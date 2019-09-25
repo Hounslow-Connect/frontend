@@ -75,6 +75,11 @@
 .button--small {
   height: pxtorem(50px);
   padding: 0px space(16);
+
+  @include for-phone-only {
+    font-family: $font-primary;
+    font-weight: normal;
+  }
 }
 
 .button--medium {
@@ -169,8 +174,8 @@
 }
 
 .button__header {
-  height: pxtorem(30px);
-  padding: 0 space(16);
+  height: pxtorem(40px);
+  padding: pxtorem(4px) space(16) space(8);
   margin: 0 space(24);
   border-radius: 16px;
   border: 1px solid $waikawa;
@@ -200,11 +205,13 @@
 .buton__burger-menu {
   background-color: transparent;
   color: $waikawa;
-  font-size: $font-body-xs;
+  font-size: $font-body-s;
+  font-family: $font-primary;
   display: block;
   padding: 0;
   height: auto;
   margin-bottom: space(24);
+  font-weight: normal;
 
   &:focus {
     border: inherit;

@@ -1,0 +1,429 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/breakpoints.scss';
+
+@mixin greenContainer {
+  background-color: $iceberg;
+  border-radius: 19px;
+  padding: space(24) !important;
+
+  @include for-tablet-landscape-down {
+    padding: space(12) space(24) !important;
+  }
+}
+
+.referral {
+  color: $san-juan;
+
+  @include for-tablet-landscape-down {
+    padding-top: space(40) !important;
+  }
+
+  &--container {
+    align-items: center !important;
+    height: 100%;
+
+    &--flex-end {
+      align-items: flex-end !important;
+    }
+
+    padding: 0 !important;
+    width: 100%;
+  }
+
+  &--right-column {
+    margin-bottom: space(24) !important;
+  }
+
+  &--next-step {
+    margin: space(20) 0 !important;
+  }
+
+  &--mobile-connect {
+    @include greenContainer;
+
+    &--name {
+      font-family: $font-secondary;
+    }
+  }
+
+  &--connect {
+    @include greenContainer;
+
+    &--logo {
+      width: pxtorem(65px);
+      height: pxtorem(65px);
+
+      border-radius: 9px;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
+      img {
+        border-radius: 9px;
+        width: 100%;
+      }
+    }
+  }
+
+  &--back {
+    color: $elm;
+    line-height: 26px;
+    padding-left: space(16) !important;
+    text-decoration: underline;
+    cursor: pointer;
+
+    svg {
+      margin-right: space(12);
+    }
+  }
+
+  &--step {
+    margin: space(20) 0;
+    color: $san-juan;
+  }
+
+  &--form-time {
+    @include greenContainer;
+    margin-top: space(20);
+
+    svg {
+      font-size: $font-base;
+      color: $waikawa;
+      margin-right: space(20) !important;
+    }
+
+    @include for-tablet-landscape-up {
+      svg {
+        font-size: pxtorem(29px);
+        margin-right: space(16);
+      }
+    }
+  }
+
+  &--intro {
+    border-radius: 19px;
+    padding: space(32);
+    color: $san-juan;
+    margin: space(24) 0 !important;
+
+    &--inner {
+      background-color: $alabaster;
+    }
+    @include for-tablet-landscape-down {
+      border-radius: 0;
+      background-color: $white;
+      padding: 0;
+    }
+
+    &--heading {
+      @include for-tablet-landscape-down {
+        font-family: $font-secondary;
+        margin-bottom: space(8);
+      }
+    }
+
+    &--no-padding {
+      @include for-tablet-landscape-up {
+        padding: 0 !important;
+      }
+    }
+
+    svg {
+      font-size: pxtorem(29px);
+      color: #c3c3c3;
+    }
+
+    &--row {
+      margin-bottom: space(32) !important;
+
+      @include for-tablet-landscape-down {
+        padding: space(12) !important;
+        margin-bottom: 0 !important;
+
+        &:nth-of-type(odd) {
+          background-color: $alabaster;
+        }
+      }
+
+      @include for-tablet-landscape-up {
+        &:last-of-type {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+
+    &--description {
+      font-size: $font-body-l;
+      font-family: $font-secondary;
+
+      @include for-tablet-landscape-down {
+        font-family: $font-primary;
+        font-size: $font-base;
+        color: $waikawa;
+      }
+    }
+  }
+}
+
+.referral__button {
+  border: 2px solid $san-juan;
+  border-radius: 9px;
+  padding: space(16) !important;
+  margin-bottom: space(12) !important;
+  background-color: $white;
+  text-align: left;
+
+  @include for-desktop-up {
+    text-align: center;
+    margin: 0 space(8) !important;
+    height: 100%;
+  }
+
+  @include for-tablet-landscape-down {
+    width: 100%;
+  }
+
+  &--active {
+    background-color: $hawkes-blue;
+
+    svg {
+      color: $san-juan;
+    }
+  }
+
+  h4 {
+    @include for-desktop-up {
+      margin-bottom: space(24);
+    }
+  }
+
+  &--small-margin {
+    h4 {
+      @include for-desktop-up {
+        margin-bottom: space(16) !important;
+      }
+    }
+
+    svg {
+      @include for-desktop-up {
+        margin-bottom: space(16) !important;
+      }
+    }
+  }
+
+  svg {
+    font-size: pxtorem(36px);
+    color: #c3c3c3;
+    margin-bottom: space(24);
+
+    @include for-tablet-landscape-down {
+      font-size: pxtorem(25px);
+      margin-bottom: 0;
+    }
+  }
+}
+
+.referral__step-container {
+  background-color: $alabaster;
+  margin: space(24) 0 !important;
+  padding: space(32);
+
+  @include for-tablet-portrait-up {
+    border-radius: 19px;
+  }
+
+  &--select {
+    @include for-tablet-landscape-down {
+      max-width: 100% !important;
+    }
+  }
+
+  &--steps {
+    color: $waikawa;
+    margin-bottom: space(6);
+  }
+
+  &--subtitle {
+    margin-top: space(12);
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--input {
+    width: 100%;
+  }
+
+  &--label {
+    margin-bottom: space(24) !important;
+  }
+
+  &--form {
+    padding: space(16) !important;
+  }
+
+  &--intro {
+    padding: 0 space(16) !important;
+  }
+
+  &--question {
+    padding: 0 space(16);
+    font-family: $font-secondary;
+
+    @include for-tablet-landscape-up {
+      font-size: $font-heading-m;
+      padding: 0 !important;
+    }
+
+    &--large {
+      font-size: $font-body-l;
+      font-family: $font-secondary;
+    }
+  }
+
+  &--inner {
+    margin-top: space(20) !important;
+  }
+
+  &--text-area {
+    @include body-m;
+
+    border: 2px solid $san-juan;
+    resize: none;
+    height: pxtorem(100px);
+    padding: space(12) !important;
+    margin-top: space(12);
+  }
+
+  &--other-contact {
+    margin: space(20) 0 !important;
+
+    @include for-tablet-landscape-up {
+      box-sizing: border-box;
+      border-left: 2px solid $nobel;
+    }
+
+    .flex-col {
+      margin-bottom: 0 !important;
+    }
+
+    label {
+      p {
+        margin-top: space(12);
+      }
+    }
+
+    &--toggle {
+      font-size: pxtorem(18px);
+      color: $elm;
+      text-decoration: underline;
+
+      &--open {
+        margin-bottom: space(12) !important;
+      }
+    }
+  }
+}
+
+.referral__form {
+  padding: space(24) !important;
+
+  @include for-tablet-portrait-down {
+    padding: space(20) 0 !important;
+  }
+}
+
+.referral__terms {
+  a {
+    @include body-s;
+    color: $elm;
+    cursor: pointer;
+  }
+
+  &--heading {
+    margin-bottom: space(40);
+
+    @include for-tablet-landscape-down {
+      margin-bottom: space(24);
+    }
+  }
+
+  &--privacy {
+    margin-top: space(16);
+  }
+
+  &--checkbox {
+    margin: space(20) 0;
+
+    label {
+      color: $san-juan !important;
+    }
+  }
+}
+
+.referral__confirmation {
+  color: $san-juan;
+  max-width: pxtorem(1000px);
+
+  @include for-phone-only {
+    margin-bottom: space(64) !important;
+  }
+
+  &--info {
+    background-color: $alabaster;
+    border-radius: 19px;
+    padding: space(48) space(60) !important;
+    margin-top: space(48);
+
+    @include for-tablet-landscape-down {
+      margin-top: space(24);
+    }
+  }
+
+  &--logo {
+    text-align: center;
+    margin-bottom: space(24);
+
+    @include for-tablet-landscape-down {
+      margin-top: space(24);
+    }
+  }
+
+  img {
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid $waikawa;
+  }
+
+  a {
+    color: $elm;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: pxtorem(24px);
+  }
+
+  li {
+    font-size: pxtorem(18px);
+  }
+
+  ul {
+    margin: space(24) 0;
+  }
+}
+
+.referral__other-organisation {
+  padding: 0 !important;
+  margin-top: space(12);
+}

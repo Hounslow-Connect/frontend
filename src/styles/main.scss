@@ -1,4 +1,5 @@
 @import './reset.scss';
+@import './mixins.scss';
 @import './fonts.scss';
 
 html,
@@ -11,7 +12,7 @@ body {
 }
 
 h1 {
-  @include heading-xl;
+  @include heading-l;
 }
 
 h2 {
@@ -40,7 +41,7 @@ p {
     @include body-l;
   }
 
-  &--m {
+  &--m-tertiary {
     @include body-m-tertiary;
   }
 
@@ -71,4 +72,15 @@ p {
   &--alt {
     @include body-alt;
   }
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  @include body-s;
+  color: inherit;
+}
+li {
+  display: list-item;
+  margin: space(8) 0;
 }

@@ -36,11 +36,11 @@ class Search extends React.Component<IProps> {
 
     return (
       <Fragment>
-        <section className="search__container row">
-          <form className="search__inner-container row" aria-label="Search">
+        <section className="flex-container flex-container--justify search__container">
+          <form className="search__inner-container flex-col" aria-label="Search">
             <div className="search__input">
-              <label htmlFor="search" className="search__heading">
-                I'm looking for
+              <label htmlFor="search">
+                <h1 className="search__heading">I'm looking for</h1>
               </label>
               <Input
                 placeholder="Search for services, groups and activities"
@@ -62,7 +62,7 @@ class Search extends React.Component<IProps> {
                 />
               )}
             </div>
-            <label className="search__category-heading" htmlFor="category">
+            <label className="search__heading search__heading--category" htmlFor="category">
               Or browse by category
             </label>
             {isMobile && (
@@ -87,7 +87,10 @@ class Search extends React.Component<IProps> {
                           pathname: '/results',
                           search: `?category=${SearchStore.categoryId}`,
                         })
-                      : null
+                      : history.push({
+                          pathname: '/results',
+                          search: `?search_term=${SearchStore.search}`,
+                        })
                   }
                 />
               </Fragment>

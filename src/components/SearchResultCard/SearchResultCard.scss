@@ -34,7 +34,7 @@
 }
 
 .search-result-card__organisation {
-  @include body-xs;
+  @include heading-s-light;
   color: $waikawa;
 
   @include for-phone-only {
@@ -44,8 +44,21 @@
 
 .search-result-card__logo {
   width: pxtorem(65px);
+  height: pxtorem(65px);
   border: 1px solid $nobel;
   border-radius: 9px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  img {
+    border-radius: 9px;
+    width: 100%;
+  }
 }
 
 .search-result-card__top-row {
@@ -97,9 +110,9 @@
 
 .search-result-card__location {
   color: $elm;
+  display: flex;
 
-  p {
-    @include link-medium;
+  h4 {
     margin-left: space(8);
   }
 }
@@ -110,6 +123,12 @@
   button {
     @include link-medium;
     border: none;
+    background: none;
+  }
+
+  h4 {
+    display: inline;
+    margin-left: 0;
   }
 }
 

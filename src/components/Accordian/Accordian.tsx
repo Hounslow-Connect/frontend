@@ -1,11 +1,11 @@
-import React, { ReactChildren, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
 
 import './Accordian.scss';
 
 interface IProps {
-  children: ReactChildren | JSX.Element[];
+  children: any;
   title: string;
   className?: string;
 }
@@ -14,7 +14,7 @@ const Accordian: React.FunctionComponent<IProps> = ({ children, title, className
   const [open, toggleAccordian] = useState(false);
 
   return (
-    <div className={className}>
+    <div className={`accordian-container ${className}`}>
       <button
         className="flex"
         onClick={() => toggleAccordian(!open)}
@@ -22,7 +22,7 @@ const Accordian: React.FunctionComponent<IProps> = ({ children, title, className
         aria-controls="accordian-content"
         id="accordian-header"
       >
-        {title}
+        <h4>{title}</h4>
         <FontAwesomeIcon
           icon="chevron-down"
           className={cx('accordian-icon', {

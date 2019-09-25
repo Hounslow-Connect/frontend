@@ -113,3 +113,29 @@ export interface IGeoLocation {
   lon: string;
   lat: string;
 }
+
+export interface IOpeningHour {
+  closes_at: string;
+  frequency: string;
+  opens_at: string;
+  weekday: number;
+  day_of_month: number;
+  occurrence_of_month: number;
+  starts_at: string;
+}
+
+export interface IHolidayTimes {
+  closes_at: string;
+  ends_at: string;
+  is_closed: boolean;
+  opens_at: string;
+  starts_at: string;
+}
+
+export interface IPartnerOrganistion {
+  id: string;
+  name: string;
+  order: number;
+  created_at: string;
+  updated_at: string;
+}

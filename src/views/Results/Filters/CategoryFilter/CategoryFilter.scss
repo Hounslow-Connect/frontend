@@ -1,20 +1,26 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/colors.scss';
 @import '../../../../styles/fonts.scss';
+@import '../../../../styles/breakpoints.scss';
 
-.category_filters__container {
-  display: flex;
-  background: $white;
-  border-radius: 23px;
-  padding: space(24);
-  margin-top: space(16);
-}
+.category__filters {
+  @include for-tablet-landscape-up {
+    justify-content: flex-end !important;
+    border-left: 3px solid #d8d8d8;
+  }
 
-.category_filters__filter-cost {
-  margin-right: space(32);
+  @include for-tablet-portrait-down {
+    padding: 0 !important;
+  }
 }
 
 .category_filters--header--cost {
   @include heading-m;
   margin-bottom: space(24);
+
+  @include for-phone-only {
+    font-size: pxtorem(14px);
+    color: $waikawa;
+    margin-bottom: space(8);
+  }
 }
