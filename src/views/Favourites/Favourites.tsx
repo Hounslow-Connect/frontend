@@ -11,9 +11,12 @@ import FavouriteShare from './FavouriteShare';
 import './Favourites.scss';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import FavouritesStore from '../../stores/favouritesStore';
+import CMSStore from '../../stores/CMSStore';
+import get from 'lodash/get';
 
 interface IProps extends RouteComponentProps {
   favouritesStore: FavouritesStore;
+  cmsStore: CMSStore;
 }
 class Favourites extends Component<IProps> {
   componentDidMount() {
@@ -33,17 +36,17 @@ class Favourites extends Component<IProps> {
   }
 
   render() {
-    const { favouritesStore, history } = this.props;
+    const { favouritesStore, cmsStore, history } = this.props;
 
     return (
       <section className="favourites">
         <div className="favourites__header flex-container">
           <div className="flex-col flex-col--12 favourites__header--heading">
-            <h1>Favourites</h1>
+            <h1>{get(cmsStore, 'favourites.title')}</h1>
           </div>
           <div className="flex-container flex-container--mobile-no-padding flex-container--align-center favourites__header--inner-container">
             <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet-large--5 favourites__header--header-container">
-              <p>You can print or share a list of your favourite services</p>
+              <p>{get(cmsStore, 'favourites.content')}</p>
             </div>
             <div className="flex-col flex-col--5 flex-col--tablet-large--6 mobile-hide tablet-hide favourites__header--header-container">
               <FavouriteShare />
@@ -98,4 +101,4 @@ class Favourites extends Component<IProps> {
   }
 }
 
-export default inject('favouritesStore')(withRouter(observer(Favourites)));
+export default inject('favouritesStore', 'cmsStore')(withRouter(observer(Favourites)));
