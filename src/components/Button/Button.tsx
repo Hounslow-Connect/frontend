@@ -16,7 +16,7 @@ interface IProps {
   header?: boolean;
   burgerMenu?: boolean;
   light?: boolean;
-  onClick?: () => void;
+  onClick?: any;
 }
 
 const Button: React.FunctionComponent<IProps> = ({
