@@ -29,7 +29,25 @@ class ReferralStore {
     comments: null,
     postcode_outward_code: null,
   };
-  @observable showConfirmation: boolean = true;
+  @observable showConfirmation: boolean = false;
+
+  @action
+  clear = () => {
+    this.service = null;
+    this.step = 1;
+    this.whoFor = null;
+    this.referral = {
+      name: '',
+      email: '',
+      phone: '',
+      other_contact: null,
+      referral_consented: false,
+      feedback_consented: false,
+      comments: null,
+      postcode_outward_code: null,
+    };
+    this.showConfirmation = false;
+  };
 
   @action
   getServiceInfo = async (id: string) => {

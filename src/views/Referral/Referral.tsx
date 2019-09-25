@@ -39,6 +39,14 @@ class Referral extends Component<IProps> {
     }
   }
 
+  componentWillUnmount() {
+    const { referralStore } = this.props;
+
+    if(referralStore) {
+      referralStore.clear();
+    }
+  }
+
   displayStep = () => {
     const { referralStore } = this.props;
 
