@@ -55,6 +55,7 @@ class Referral extends Component<IProps> {
         if (get(referralStore, 'whoFor') === 'Myself') {
           return <TermsAndConditions />;
         }
+        break;
       default:
         break;
     }

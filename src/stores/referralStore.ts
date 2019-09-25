@@ -88,6 +88,7 @@ class ReferralStore {
         if (this.whoFor === 'Myself') {
           return '<strong>Next step - </strong>Confirmation and what’s next';
         }
+        return '';
       default:
         return '';
     }
