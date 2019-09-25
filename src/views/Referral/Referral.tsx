@@ -42,7 +42,7 @@ class Referral extends Component<IProps> {
   componentWillUnmount() {
     const { referralStore } = this.props;
 
-    if(referralStore) {
+    if (referralStore) {
       referralStore.clear();
     }
   }
@@ -83,12 +83,19 @@ class Referral extends Component<IProps> {
     return (
       <div className="flex-container flex-container--mobile-no-padding referral">
         <div className="flex-col flex-col--12 referral--back">
-          <Link to={`/service/${referralStore.service.slug}`}>
-            <p className="body--s">
+          {referralStore.step === 1 ? (
+            <Link to={`/service/${referralStore.service.slug}`}>
+              <p className="body--s">
+                <FontAwesomeIcon icon="angle-left" />
+                Back to service
+              </p>
+            </Link>
+          ) : (
+            <p className="body--s" role="button" onClick={() => referralStore.goBackStep()}>
               <FontAwesomeIcon icon="angle-left" />
-              Back to service
+              Back
             </p>
-          </Link>
+          )}
         </div>
 
         <div className="mobile-show tablet-show flex-col--mobile--12">

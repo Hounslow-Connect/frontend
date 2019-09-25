@@ -75,6 +75,8 @@
     color: $elm;
     line-height: 26px;
     padding-left: space(16) !important;
+    text-decoration: underline;
+    cursor: pointer;
 
     svg {
       margin-right: space(12);

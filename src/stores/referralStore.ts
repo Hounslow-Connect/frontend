@@ -83,6 +83,11 @@ class ReferralStore {
   };
 
   @action
+  goBackStep = () => {
+    this.step = this.step - 1;
+  };
+
+  @action
   setWhoFor = (who: 'Myself' | 'A friend or family member' | 'Someone else') => {
     this.whoFor = who;
   };
