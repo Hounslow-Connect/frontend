@@ -48,6 +48,19 @@ class Form extends Component<IProps, IState> {
   validate = async () => {
     const { referralStore } = this.props;
 
+    if (
+      !referralStore.referral.email &&
+      !referralStore.referral.phone &&
+      referralStore.referral.other_contact
+    ) {
+      return this.setState({
+        errors: {
+          email: false,
+          phone: false,
+        },
+      });
+    }
+
     return this.setState({
       errors: {
         email: !referralStore.referral.email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/),
@@ -58,6 +71,7 @@ class Form extends Component<IProps, IState> {
 
   handleSubmit = async () => {
     const { referralStore } = this.props;
+
     await this.validate();
 
     const canSubmit = Object.values(this.state.errors).every(error => error === false);
