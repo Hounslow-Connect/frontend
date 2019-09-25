@@ -18,7 +18,9 @@ const CMSPage: React.FunctionComponent<IProps> = ({ title, children }) => (
         </div>
       </div>
     </div>
-    <main className="flex-container">{children}</main>
+    <main className="flex-container flex-container--justify">
+      <div className="flex-col flex-col--6 cms__content">{children}</div>
+    </main>
   </section>
 );
 
