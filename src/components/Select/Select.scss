@@ -5,20 +5,24 @@
 
 select,
 .select {
+  @include body-m;
   width: 100%;
   max-width: 320px;
   border: 2px solid $mid-grey;
   box-shadow: none;
-  background: transparent;
   background-image: url('../../assets/images/icons/icon-cheveron-selection.svg');
   background-repeat: no-repeat;
-  background-position: calc(100% - 10px) 10px;
+  background-position: calc(100% - 10px) 5px;
   color: $san-juan;
   appearance: none;
   padding: space(12);
+  padding-right: space(40);
 
-  @include for-phone-only {
-    font-size: $font-body-m;
-    background-size: pxtorem(22px);
+  background-color: $white;
+  position: relative;
+  background-size: pxtorem(35px);
+
+  svg {
+    fill: red;
   }
 }
