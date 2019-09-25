@@ -9,6 +9,7 @@ interface IProps {
   value: string;
   className?: string;
   fullWidth?: boolean;
+  required?: boolean;
 }
 
 const Input: React.FunctionComponent<IProps> = ({
@@ -18,6 +19,7 @@ const Input: React.FunctionComponent<IProps> = ({
   className,
   value,
   fullWidth,
+  required,
 }) => (
   <input
     className={cx(
@@ -31,6 +33,7 @@ const Input: React.FunctionComponent<IProps> = ({
     onChange={onChange}
     id={id}
     value={value}
+    required={required}
   />
 );
 
