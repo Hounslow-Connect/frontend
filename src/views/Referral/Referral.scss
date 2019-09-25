@@ -283,6 +283,45 @@
   &--inner {
     margin-top: space(20) !important;
   }
+
+  &--text-area {
+    @include body-m;
+
+    border: 2px solid $san-juan;
+    resize: none;
+    height: pxtorem(100px);
+    padding: space(12) !important;
+    margin-top: space(12);
+  }
+
+  &--other-contact {
+    margin: space(20) 0 !important;
+
+    @include for-tablet-landscape-up {
+      box-sizing: border-box;
+    border-left: 2px solid $nobel;
+    }
+
+    .flex-col {
+      margin-bottom: 0 !important;
+    }
+
+    label {
+      p {
+        margin-top: space(12);
+      }
+    }
+
+    &--toggle {
+      font-size: pxtorem(18px);
+      color: $elm;
+      text-decoration: underline;
+
+      &--open {
+        margin-bottom: space(12) !important;
+      }
+    }
+  }
 }
 
 .referral__form {

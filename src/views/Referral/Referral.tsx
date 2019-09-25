@@ -15,6 +15,7 @@ import { apiBase } from '../../config/api';
 import StepOne from './Steps/StepOne';
 import StepTwo from './Steps/StepTwo';
 import StepThree from './Steps/StepThree';
+import StepFour from './Steps/StepFour';
 
 interface IProps extends RouteComponentProps {
   referralStore?: ReferralStore;
@@ -46,6 +47,8 @@ class Referral extends Component<IProps> {
         return <StepTwo name={get(referralStore, 'service.name')} />;
       case 3:
         return <StepThree />;
+      case 4:
+        return <StepFour />;
       default:
         break;
     }

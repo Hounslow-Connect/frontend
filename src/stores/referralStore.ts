@@ -6,6 +6,9 @@ import get from 'lodash/get';
 
 interface IReferral {
   name: string;
+  email: string;
+  phone: string;
+  other_contact: null | string;
 }
 class ReferralStore {
   @observable service: IService | null = null;
@@ -13,6 +16,9 @@ class ReferralStore {
   @observable whoFor: 'Myself' | 'A friend or family member' | 'Someone else' | null = null;
   @observable referral: IReferral = {
     name: '',
+    email: '',
+    phone: '',
+    other_contact: null,
   };
 
   @action
@@ -39,13 +45,18 @@ class ReferralStore {
   get stepDescription() {
     switch (this.step) {
       case 1:
-        return '<strong>First step - </strong> Who would you like to be connected?';
+        return '<strong>First step - </strong>Who would you like to be connected?';
       case 2:
-        return '<strong>First step - </strong> Who would you like to be connected?';
+        return '<strong>First step - </strong>Who would you like to be connected?';
       case 3:
-        return `<strong>Next step - </strong> Enter ${
+        return `<strong>Next step - </strong>Enter ${
           this.whoFor === 'Myself' ? 'your' : 'their'
         } contact information`;
+      case 4:
+        return `<strong>Next step - </strong>${
+          this.whoFor === 'Myself' ? 'Terms and conditions' : 'Your name'
+        }`;
+
       default:
         return '';
     }

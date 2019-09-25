@@ -8,8 +8,32 @@
   border: 2px solid $san-juan;
   height: pxtorem(50px);
   padding: space(16);
+
+  &--error {
+    border-left: 2px solid $cranberry;
+    padding-left: space(16);
+  }
 }
 
 .input--full-width {
   width: 100%;
+}
+
+.input__error-message {
+  display: none;
+  position: relative;
+
+  &--show {
+    display: inline-block;
+    color: $cranberry;
+    margin-top: space(8);
+  }
+}
+
+input:invalid {
+  &:after {
+    content: 'I';
+    position: absolute;
+    top: 0;
+  }
 }
