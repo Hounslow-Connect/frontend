@@ -31,7 +31,7 @@ const Input: React.FunctionComponent<IProps> = ({
   error,
   errorMessage,
 }) => (
-  <div className={cx({ 'input--error': error })}>
+  <div className={cx('input--container', { 'input--error': error })}>
     <input
       className={cx(
         {

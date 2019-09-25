@@ -9,7 +9,12 @@
   height: pxtorem(50px);
   padding: space(16);
 
+  &--container {
+    display: inline;
+  }
+
   &--error {
+    display: block;
     border-left: 2px solid $cranberry;
     padding-left: space(16);
   }

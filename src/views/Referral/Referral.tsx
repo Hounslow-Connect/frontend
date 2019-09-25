@@ -16,6 +16,8 @@ import StepOne from './Steps/StepOne';
 import StepTwo from './Steps/StepTwo';
 import StepThree from './Steps/StepThree';
 import StepFour from './Steps/StepFour';
+import TermsAndConditions from './Steps/TermsAndConditions';
+import Confirmation from './Steps/Confirmation';
 
 interface IProps extends RouteComponentProps {
   referralStore?: ReferralStore;
@@ -49,6 +51,10 @@ class Referral extends Component<IProps> {
         return <StepThree />;
       case 4:
         return <StepFour />;
+      case 5:
+        if (get(referralStore, 'whoFor') === 'Myself') {
+          return <TermsAndConditions />;
+        }
       default:
         break;
     }
@@ -59,6 +65,10 @@ class Referral extends Component<IProps> {
 
     if (!referralStore || !referralStore.service) {
       return null;
+    }
+
+    if (get(referralStore, 'showConfirmation')) {
+      return <Confirmation />;
     }
 
     return (
