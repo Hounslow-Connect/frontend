@@ -18,7 +18,7 @@ import StepThree from './Steps/StepThree';
 import StepFour from './Steps/StepFour';
 import TermsAndConditions from './Steps/TermsAndConditions';
 import Confirmation from './Steps/Confirmation';
-import StepFive from './Steps/StepFive';
+import StepFive from './Steps/StepFive/StepFive';
 
 interface IProps extends RouteComponentProps {
   referralStore?: ReferralStore;
