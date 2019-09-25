@@ -16,6 +16,8 @@ interface IReferral {
   comments: null | string;
   postcode_outward_code: null;
   referee_name: null | string;
+  referee_email: null | string;
+  referee_phone: null | string;
   organisation: null | string;
   organisation_taxonomy_id: null | string;
 }
@@ -34,6 +36,8 @@ class ReferralStore {
     comments: null,
     postcode_outward_code: null,
     referee_name: null,
+    referee_email: null,
+    referee_phone: null,
     organisation: null,
     organisation_taxonomy_id: null,
   };
@@ -55,6 +59,8 @@ class ReferralStore {
       comments: null,
       postcode_outward_code: null,
       referee_name: null,
+      referee_email: null,
+      referee_phone: null,
       organisation: null,
       organisation_taxonomy_id: null,
     };
@@ -134,6 +140,8 @@ class ReferralStore {
           return '<strong>Next step - </strong>Confirmation and what’s next';
         }
         return '<strong>Next step - </strong>Enter your contact information';
+      case 6:
+        return '<strong>Next step - </strong>Terms and Conditions';
       default:
         return '';
     }
