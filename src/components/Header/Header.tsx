@@ -1,7 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactSVG from 'react-svg';
 import { observer, inject } from 'mobx-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
 import { NavLink as RouterLink } from 'react-router-dom';
 
@@ -23,18 +22,6 @@ interface IProps {
 @inject('windowSizeStore', 'uiStore')
 @observer
 class Header extends Component<IProps> {
-  componentDidMount() {
-    const navContainer = document.querySelector('.header');
-    const navTrigger = document.querySelector('.nav-trigger');
-
-    if (navTrigger && navContainer) {
-      return navTrigger.addEventListener('click', evt => {
-        navTrigger.classList.toggle('active');
-        navContainer.classList.toggle('active');
-      });
-    }
-  }
-
   render() {
     const { windowSizeStore, uiStore } = this.props;
 
@@ -44,9 +31,14 @@ class Header extends Component<IProps> {
     }
 
     const { isMobile } = windowSizeStore;
+    const { burgerMenuOpen, toggleBurgerMenu, toggleFeedbackModal } = uiStore;
 
     return (
-      <header className="header">
+      <header
+        className={cx('header', {
+          active: burgerMenuOpen,
+        })}
+      >
         <div className="flex-col--12 mobile-hide tablet--large-hide">
           <div id="google_translate_element" />
           <Button
@@ -59,77 +51,115 @@ class Header extends Component<IProps> {
             <Button text="Favourites" header={true} icon="star" />
           </RouterLink>
         </div>
-
-        <div
-          className={cx(
-            {
-              'flex-container flex-container--align-center flex-container--justify': isMobile,
-            },
-            { navigation: !isMobile }
-          )}
-        >
-          <div className="flex-col flex-col--6 flex-col--tablet-large--12 header__brand">
+        <div className="flex-container flex-container--align-center flex-container--justify header__container">
+          <div
+            className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
+              'header__brand--active': burgerMenuOpen,
+            })}
+          >
             <figure className="logo">
               <RouterLink to="/" aria-label="Home Link">
                 <ReactSVG src={isMobile ? MobileLogo : Logo} />
               </RouterLink>
             </figure>
-            <button type="button" name="nav-trigger" className="nav-trigger tablet--large-show">
-              <label htmlFor="nav-trigger">Menu</label>
-              <FontAwesomeIcon icon="bars" aria-hidden={true} title="Menu Trigger" />
+
+            <button
+              name="nav-trigger"
+              className="nav-trigger tablet--large-show"
+              onClick={() => toggleBurgerMenu()}
+            >
+              <label htmlFor="nav-trigger"></label>
+              <i className="bars fa fa-bars" aria-hidden title="Menu Trigger"></i>
               <span className="sr-only">Menu Trigger</span>
             </button>
           </div>
-          <div
-            className="flex-col flex-col--6 flex-col--tablet-large--12 header__navigation tablet--large-hide"
-            role="navigation"
-          >
-            <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
-              <RouterLink
-                exact={true}
-                to="/"
-                className="link link__inline link--large link__header"
-                activeClassName={cx({ 'nav--active': !isMobile })}
-              >
-                Home
-              </RouterLink>
-              <RouterLink
-                to="/about"
-                exact={true}
-                className="link link__inline link--large link__header"
-                activeClassName={cx({ 'nav--active': !isMobile })}
-              >
-                About
-              </RouterLink>
-              <RouterLink
-                to="/contact"
-                className="link link__inline link--large link__header"
-                activeClassName={cx({ 'nav--active': !isMobile })}
-              >
-                Contact
-              </RouterLink>
-              <RouterLink
-                to="/get-involved"
-                className="link link__inline link--large link__header"
-                activeClassName={cx({ 'nav--active': !isMobile })}
-              >
-                Get Involved
-              </RouterLink>
 
-              {isMobile && (
-                <Fragment>
-                  <Button text="Translate" size="small" burgerMenu={true} icon="language" />
-                  <Button text="Give feedback" size="small" burgerMenu={true} icon="comment" />
+          <div
+            className={cx('flex-container header__content', {
+              'header__content--active': burgerMenuOpen,
+            })}
+          >
+            <div
+              className="flex-col flex-col--12 flex-col--tablet-large--12 header__navigation tablet--large-hide"
+              role="navigation"
+            >
+              <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
+                <RouterLink
+                  exact={true}
+                  to="/"
+                  className="link link__inline link--large link__header"
+                  activeClassName={cx({ 'nav--active': !isMobile })}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
+                >
+                  Home
+                </RouterLink>
+                <RouterLink
+                  to="/about"
+                  exact={true}
+                  className="link link__inline link--large link__header"
+                  activeClassName={cx({ 'nav--active': !isMobile })}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
+                >
+                  About
+                </RouterLink>
+                <RouterLink
+                  to="/contact"
+                  className="link link__inline link--large link__header"
+                  activeClassName={cx({ 'nav--active': !isMobile })}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
+                >
+                  Contact
+                </RouterLink>
+                <RouterLink
+                  to="/get-involved"
+                  className="link link__inline link--large link__header"
+                  activeClassName={cx({ 'nav--active': !isMobile })}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
+                >
+                  Get Involved
+                </RouterLink>
+
+                <div className="mobile-show tablet-show tablet--large-show">
+                  <div id="google_translate_element" />
+
+                  <Button
+                    text="Give feedback"
+                    size="small"
+                    burgerMenu={true}
+                    icon="comment"
+                    onClick={() => {
+                      toggleBurgerMenu();
+                      toggleFeedbackModal();
+                    }}
+                  />
                   <RouterLink to="/favourites">
                     <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
                   </RouterLink>
-                </Fragment>
-              )}
-            </nav>
-            <div className="tablet--large-hide mobile-show">
-              <Footer mobileMenu={true} />
+                </div>
+              </nav>
             </div>
           </div>
+          {burgerMenuOpen && (
+            <div className="header__footer">
+              <Footer mobileMenu={true} />
+            </div>
+          )}
         </div>
       </header>
     );
