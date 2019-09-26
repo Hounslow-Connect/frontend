@@ -2,6 +2,25 @@
 @import '../../styles/fonts.scss';
 @import '../../styles/colors.scss';
 
+.cms {
+  color: $san-juan;
+  font-family: $font-primary;
+
+  &--contact-card {
+    padding: space(12) space(24);
+    background-color: $alabaster;
+    border-radius: 19px;
+
+    h3 {
+      padding: space(8) 0;
+    }
+
+    &--email {
+      display: block;
+    }
+  }
+}
+
 .cms__header {
   background-image: url('../../assets/images/backgrounds/cms-page-header.svg');
   position: relative;

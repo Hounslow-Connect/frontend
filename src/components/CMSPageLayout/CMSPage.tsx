@@ -5,10 +5,11 @@ import './CMSPage.scss';
 interface IProps {
   title: string;
   children: any;
+  twoColumn?: boolean;
 }
 
-const CMSPage: React.FunctionComponent<IProps> = ({ title, children }) => (
-  <section>
+const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn }) => (
+  <section className="cms">
     <div className="cms__header">
       <div className="flex-container flex-container--mobile-no-padding">
         <div className="flex-col flex-col--5">
@@ -19,7 +20,7 @@ const CMSPage: React.FunctionComponent<IProps> = ({ title, children }) => (
       </div>
     </div>
     <main className="flex-container flex-container--justify">
-      <div className="flex-col flex-col--6 cms__content">{children}</div>
+      {twoColumn ? children : <div className="flex-col flex-col--6 cms__content">{children}</div>}
     </main>
   </section>
 );
