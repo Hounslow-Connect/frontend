@@ -118,3 +118,15 @@
 .footer-mobile-menu {
   background-color: $white;
 }
+
+.footer__content {
+  margin: space(16) 0;
+
+  a {
+    @include body-xs;
+  }
+
+  p {
+    @include body-xs;
+  }
+}

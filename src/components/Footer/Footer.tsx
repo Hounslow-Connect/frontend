@@ -22,11 +22,18 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore }) => (
     })}
   >
     <div className="flex-container">
-      <div className="flex-col flex-col--6 flex-col--tablet--12 mobile-hide footer-section disclaimer">
+      <div className="flex-col flex-col--6 flex-col--tablet--12 footer-section disclaimer">
         <h4>{get(cmsStore, 'global.footer_title')}</h4>
-        <ReactMarkdown className="body--xs" source={get(cmsStore, 'global.footer_content')} />
+        <ReactMarkdown
+          className="body--xs footer__content"
+          source={get(cmsStore, 'global.footer_content')}
+        />
+
+        <Link to="/privacy-policy" className="body--xs">
+          Privacy Policy
+        </Link>
       </div>
-      <div className="flex-col flex-col--6 flex-col--tablet--12 mobile-hide footer-section">
+      <div className="flex-col flex-col--6 flex-col--tablet--12 footer-section">
         <div className="flex-container flex-container--no-padding">
           <div className="flex-col flex-col--6">
             <h4>Get in touch with Connected Kingston</h4>
