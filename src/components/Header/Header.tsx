@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactSVG from 'react-svg';
 import { observer, inject } from 'mobx-react';
 import cx from 'classnames';
@@ -64,10 +64,8 @@ class Header extends Component<IProps> {
             </figure>
 
             <button
-              type="button"
               name="nav-trigger"
               className="nav-trigger tablet--large-show"
-              role="button"
               onClick={() => toggleBurgerMenu()}
             >
               <label htmlFor="nav-trigger"></label>
