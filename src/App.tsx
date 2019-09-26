@@ -30,6 +30,7 @@ import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
 import Terms from './views/Terms';
 import FeedbackModal from './components/FeedbackModal';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -59,22 +60,24 @@ class App extends Component {
         referralStore={referralStore}
       >
         <Router>
-          <Header />
-          <Switch>
-            <Route path="/" exact={true} component={Home} />
-            <Route path="/results" component={Results} />
-            <Route path="/service/:service" component={Service} />
-            <Route path="/favourites" component={Favourites} />
-            <Route path="/referral" component={Referral} />
-            <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/get-involved" component={GetInvolved} />
-            <Route path="/privacy-policy" component={Privacy} />
-            <Route path="/terms-and-conditions" component={Terms} />
-            <Route component={NotFound} />
-          </Switch>
-          <FeedbackModal />
-          <Footer />
+          <ScrollToTop>
+            <Header />
+            <Switch>
+              <Route path="/" exact={true} component={Home} />
+              <Route path="/results" component={Results} />
+              <Route path="/service/:service" component={Service} />
+              <Route path="/favourites" component={Favourites} />
+              <Route path="/referral" component={Referral} />
+              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/get-involved" component={GetInvolved} />
+              <Route path="/privacy-policy" component={Privacy} />
+              <Route path="/terms-and-conditions" component={Terms} />
+              <Route component={NotFound} />
+            </Switch>
+            <FeedbackModal />
+            <Footer />
+          </ScrollToTop>
         </Router>
       </Provider>
     );

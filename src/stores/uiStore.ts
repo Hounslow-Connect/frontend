@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 
 export default class UIStore {
   @observable burgerMenuOpen: boolean = false;
-  @observable feedbackModalOpen: boolean = true;
+  @observable feedbackModalOpen: boolean = false;
 
   @action
   toggleBurgerMenu = () => {
