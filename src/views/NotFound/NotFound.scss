@@ -1,0 +1,14 @@
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/mixins.scss';
+
+.not__found {
+  padding: space(72) !important;
+  max-width: 1260px;
+  color: $san-juan;
+
+  &--heading {
+    @include heading-xl;
+    margin-bottom: space(32);
+  }
+}
