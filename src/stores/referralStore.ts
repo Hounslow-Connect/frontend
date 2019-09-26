@@ -19,7 +19,7 @@ interface IReferral {
   referee_email: null | string;
   referee_phone: null | string;
   organisation: null | string;
-  organisation_taxonomy_id: null | string;
+  organisation_taxonomy_id: null | string | undefined;
 }
 
 class ReferralStore {
@@ -90,10 +90,18 @@ class ReferralStore {
   @action
   submitReferral = async () => {
     if (this.service) {
+      const params = {
+        service_id: this.service.id,
+        ...this.referral,
+      };
+
+      if (this.whoFor === 'A friend or family member') {
+        params.organisation_taxonomy_id = process.env.REACT_APP_FRIENDS_FAMILY_TAXONOMY;
+      }
+
       try {
         const referral = await axios.post(`${apiBase}/referrals`, {
-          service_id: this.service.id,
-          ...this.referral,
+          ...params,
         });
 
         if (referral.data) {
@@ -167,7 +175,9 @@ class ReferralStore {
   partnerOrganisationLabels = () => {
     const orderedList = orderBy(this.partnerOrganisations, 'name', 'asc');
 
-    return orderedList.map(org => ({
+    const filteredList = orderedList.filter(org => org.name !== 'Family/Friend');
+
+    return filteredList.map(org => ({
       value: org.id,
       text: org.name,
     }));
