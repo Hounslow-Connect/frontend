@@ -12,6 +12,7 @@
   border-radius: 25px;
   margin: space(64);
   max-width: pxtorem(300px);
+  cursor: pointer;
 
   @include for-phone-only {
     background-color: $white;
