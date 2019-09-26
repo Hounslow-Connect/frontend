@@ -21,8 +21,8 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore }) => (
       'footer-mobile-menu': mobileMenu,
     })}
   >
-    <div className="flex-container footer--container">
-      <div className="flex-col flex-col--6 flex-col--tablet--12 footer-section disclaimer">
+    <div className="flex-container footer--inner-container">
+      <div className="flex-col flex-col--5 flex-col--tablet--12">
         <h4>{get(cmsStore, 'global.footer_title')}</h4>
         <ReactMarkdown
           className="body--xs footer__content"
@@ -33,7 +33,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore }) => (
           Privacy Policy
         </Link>
       </div>
-      <div className="flex-col flex-col--6 flex-col--tablet--12 footer-section">
+      <div className="flex-col flex-col--6 flex-col--tablet--12 footer__section">
         <div className="flex-container flex-container--no-padding">
           <div className="flex-col flex-col--5 flex-col--mobile--7">
             <h4>Get in touch with Connected Kingston</h4>
@@ -53,19 +53,18 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore }) => (
                 <FontAwesomeIcon icon={['fab', 'twitter']} className="footer__social-icons" />
               </a>
             </nav>
+            <div className="flex-col flex-col--6 flex-col--mobile--6">
+              <Link to={'/contact'} className="body--xs footer-contact-links">
+                Contact us
+              </Link>
+              <p className="body--xs footer-contact-links">Give feedback</p>
+            </div>
           </div>
-          <div className="flex-col flex-col--6 text-right text-left--mobile footer-section footer-section--button">
+
+          <div className="flex-col flex-col--5 flex-col--mobile--12 footer__section footer__button">
             <a href="https://admin.connectedkingston.uk" target="_blank" rel="noopener noreferrer">
-              <Button text="Members Area" size="small" alt={true} />
+              <Button text="Members Area" size="medium" alt={true} />
             </a>
-          </div>
-        </div>
-        <div className="flex-container flex-container--no-padding">
-          <div className="flex-col flex-col--6 flex-col--mobile--6">
-            <Link to={'/contact'} className="body--xs footer-contact-links">
-              Contact us
-            </Link>
-            <p className="body--xs footer-contact-links">Give feedback</p>
           </div>
         </div>
       </div>
