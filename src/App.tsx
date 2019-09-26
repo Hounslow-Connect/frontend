@@ -72,8 +72,8 @@ class App extends Component {
             <Route path="/terms-and-conditions" component={Terms} />
             <Route component={NotFound} />
           </Switch>
+          <Footer />
         </Router>
-        <Footer />
       </Provider>
     );
   }
