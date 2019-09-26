@@ -66,7 +66,6 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                 </Link>
                 <button
                   className="body--xs footer-contact-links"
-                  role="button"
                   onClick={() => uiStore.toggleFeedbackModal()}
                 >
                   Give feedback
