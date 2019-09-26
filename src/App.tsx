@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
 import Home from './views/Home';
-import NotFound from './views/NotFound';
+import NotFound from './views/NotFound/NotFound';
 import Results from './views/Results';
 import Service from './views/Service';
 import Favourites from './views/Favourites';
