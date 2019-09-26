@@ -13,10 +13,13 @@
   height: auto;
   position: relative;
 
+  &--container {
+    padding-top: pxtorem(100px) !important;
+  }
+
   @include for-phone-only {
     background-image: url('../../assets/images/backgrounds/footer-shape-mobile.svg');
     margin: 0;
-    background-color: $iceberg;
 
     &:before {
       content: url('../../assets/images/bridge-shape.svg');
@@ -57,7 +60,7 @@
         content: url('../../assets/images/bridge-shape.svg');
         position: absolute;
         position: absolute;
-        top: -75px;
+        top: -163px;
         right: -70px;
         z-index: -1;
       }
@@ -99,7 +102,7 @@
         &:before {
           content: url('../../assets/images/trees/iceberg-small.svg');
           position: absolute;
-          top: -135px;
+          top: -235px;
           right: 40%;
 
           @include for-desktop-up {
