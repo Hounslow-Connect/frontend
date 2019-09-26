@@ -49,7 +49,12 @@ class Header extends Component<IProps> {
       <header className="header">
         <div className="flex-col--12 mobile-hide tablet--large-hide">
           <div id="google_translate_element" />
-          <Button text="Give Feedback" header={true} icon="comment" />
+          <Button
+            text="Give Feedback"
+            header={true}
+            icon="comment"
+            onClick={() => uiStore.toggleFeedbackModal()}
+          />
           <RouterLink to="/favourites">
             <Button text="Favourites" header={true} icon="star" />
           </RouterLink>

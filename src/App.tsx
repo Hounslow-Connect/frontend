@@ -29,6 +29,7 @@ import FavouritesStore from './stores/favouritesStore';
 import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
 import Terms from './views/Terms';
+import FeedbackModal from './components/FeedbackModal';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -72,6 +73,7 @@ class App extends Component {
             <Route path="/terms-and-conditions" component={Terms} />
             <Route component={NotFound} />
           </Switch>
+          <FeedbackModal />
           <Footer />
         </Router>
       </Provider>

@@ -1,0 +1,78 @@
+@import '../../styles/breakpoints.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/colors.scss';
+
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background: white;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: $san-juan;
+
+  .flex-container {
+    padding: 0 !important;
+  }
+
+  button {
+    margin: space(16) 0;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  textarea {
+    @include body-m;
+    width: 100%;
+    border: 2px solid $san-juan;
+    resize: none;
+    height: pxtorem(260px);
+    padding: space(12) !important;
+    margin-top: space(12);
+  }
+
+  a {
+    color: $elm;
+  }
+
+  @include for-phone-only {
+    max-width: 100%;
+    border-radius: 0;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.ReactModal__Overlay {
+  z-index: 999;
+  background-color: rgba(45, 45, 45, 0.6) !important;
+}
+
+.modal__close {
+  color: #1f8275;
+  cursor: pointer;
+  text-align: right;
+
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.modal__question {
+  margin: space(16) 0;
+}

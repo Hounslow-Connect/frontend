@@ -22,20 +22,6 @@
     }
   }
 
-  button {
-    color: $white;
-    border: 2px solid $white;
-    background: $san-juan;
-    font-family: $font-primary;
-    font-weight: normal;
-    font-size: pxtorem(18px);
-
-    &:hover {
-      background: $white;
-      color: $san-juan;
-    }
-  }
-
   &--service {
     margin-top: 0;
 
@@ -169,10 +155,27 @@
 
 .footer-contact-links {
   line-height: 26px;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .footer__button {
   position: relative;
+
+  button {
+    color: $white;
+    border: 2px solid $white;
+    background: $san-juan;
+    font-family: $font-primary;
+    font-weight: normal;
+    font-size: pxtorem(18px);
+
+    &:hover {
+      background: $white;
+      color: $san-juan;
+    }
+  }
 
   @include for-phone-only {
     margin-top: space(32);

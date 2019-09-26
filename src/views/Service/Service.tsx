@@ -39,6 +39,7 @@ import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
+import UIStore from '../../stores/uiStore';
 
 interface RouteParams {
   service: string;
@@ -46,6 +47,7 @@ interface RouteParams {
 
 interface IProps extends RouteComponentProps<RouteParams> {
   serviceStore: ServiceStore;
+  uiStore: UIStore;
 }
 
 const iconMap = [
@@ -76,7 +78,7 @@ class Service extends Component<IProps> {
   }
 
   render() {
-    const { serviceStore } = this.props;
+    const { serviceStore, uiStore } = this.props;
     const { service, locations, relatedServices } = serviceStore;
 
     if (!service) {
@@ -90,7 +92,13 @@ class Service extends Component<IProps> {
             <h1>{get(service, 'name')}</h1>
             <p className="service__header__last-updated">
               Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
-              <Button text="Give feedback" icon="comment" alt={true} size="small" />
+              <Button
+                text="Give feedback"
+                icon="comment"
+                alt={true}
+                size="small"
+                onClick={() => uiStore.toggleFeedbackModal()}
+              />
             </p>
           </div>
           <div className="flex-col flex-col--mobile--3">
@@ -367,4 +375,4 @@ class Service extends Component<IProps> {
   }
 }
 
-export default inject('serviceStore')(observer(Service));
+export default inject('serviceStore', 'uiStore')(observer(Service));

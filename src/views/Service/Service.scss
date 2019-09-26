@@ -12,6 +12,12 @@
   padding: space(64);
   color: $white;
 
+  button {
+    &:hover {
+      border-color: $white;
+    }
+  }
+
   &--activity {
     background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
 
