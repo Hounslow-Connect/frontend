@@ -89,7 +89,11 @@ class Header extends Component<IProps> {
                   to="/"
                   className="link link__inline link--large link__header"
                   activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => toggleBurgerMenu()}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
                 >
                   Home
                 </RouterLink>
@@ -98,7 +102,11 @@ class Header extends Component<IProps> {
                   exact={true}
                   className="link link__inline link--large link__header"
                   activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => toggleBurgerMenu()}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
                 >
                   About
                 </RouterLink>
@@ -106,7 +114,11 @@ class Header extends Component<IProps> {
                   to="/contact"
                   className="link link__inline link--large link__header"
                   activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => toggleBurgerMenu()}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
                 >
                   Contact
                 </RouterLink>
@@ -114,7 +126,11 @@ class Header extends Component<IProps> {
                   to="/get-involved"
                   className="link link__inline link--large link__header"
                   activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => toggleBurgerMenu()}
+                  onClick={() => {
+                    if (burgerMenuOpen) {
+                      toggleBurgerMenu();
+                    }
+                  }}
                 >
                   Get Involved
                 </RouterLink>
