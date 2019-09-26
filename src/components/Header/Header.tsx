@@ -48,7 +48,7 @@ class Header extends Component<IProps> {
     return (
       <header className="header">
         <div className="flex-col--12 mobile-hide tablet--large-hide">
-          <Button text="Translate" header={true} icon="language" />
+          <div id="google_translate_element" />
           <Button text="Give Feedback" header={true} icon="comment" />
           <RouterLink to="/favourites">
             <Button text="Favourites" header={true} icon="star" />
