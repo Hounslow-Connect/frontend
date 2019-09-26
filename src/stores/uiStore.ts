@@ -12,6 +12,5 @@ export default class UIStore {
   @action
   toggleFeedbackModal = () => {
     this.feedbackModalOpen = !this.feedbackModalOpen;
-    console.log(this.feedbackModalOpen);
   };
 }
