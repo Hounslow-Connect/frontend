@@ -155,8 +155,19 @@ body {
     padding-right: $base-margin * 2;
   }
 
-  @include breakpoint($break_medium) {
+  @include breakpoint(max-width 1320px) {
     &--medium {
+      // Column width
+      @for $i from 1 to $total-columns + 1 {
+        &--#{$i} {
+          width: percentage($i/$total-columns);
+        }
+      }
+    }
+  }
+
+  @include breakpoint($break_standard) {
+    &--standard {
       // Column width
       @for $i from 1 to $total-columns + 1 {
         &--#{$i} {
