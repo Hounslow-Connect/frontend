@@ -50,7 +50,7 @@ class Keyword extends Component<IProps, IState> {
       <Fragment>
         {/* Mobile Dropdown */}
         {editToggled && (
-          <div className="mobile-show tablet-show flex-container results__keyword-edit">
+          <div className="mobile-show tablet-show tablet--large-show flex-container results__keyword-edit">
             <div className="flex-col">
               <div role="button" aria-label="Close edit popup" onClick={() => this.toggleEdit()}>
                 <span className="results__keyword-edit-toggle">
@@ -123,21 +123,21 @@ class Keyword extends Component<IProps, IState> {
         )}
         <div className="flex-container">
           {/* Mobile Edit  */}
-          <div className="mobile-show tablet-show flex-col flex-col--mobile--7">
+          <div className="mobile-show tablet-show tablet--large-show flex-col flex-col--mobile--7">
             <h1>Search results</h1>
             <p>{searchTerm ? searchTerm[1] : ''}</p>
           </div>
-          <div className="mobile-show tablet-show flex-col flex-col--mobile--5 results__mobile-edit">
+          <div className="mobile-show tablet-show tablet--large-show  flex-col flex-col--mobile--5 results__mobile-edit">
             <Button text="Edit Search" size="small" onClick={() => this.toggleEdit()} />
           </div>
 
           {/* Desktop */}
 
-          <div className="flex-col flex-col--12 mobile-hide tablet-hide">
+          <div className="flex-col flex-col--12 mobile-hide tablet-hide tablet--large-hide">
             <h1 className="results__keyword-heading">Search results</h1>
           </div>
-          <form className="flex-container flex-container--align-bottom mobile-hide tablet-hide results__keyword-search-container">
-            <div className="flex-col flex-col--6 flex-col--tablet--7 results__keyword-input-box">
+          <form className="flex-container flex-container--align-bottom mobile-hide tablet-hide tablet--large-hide results__keyword-search-container">
+            <div className="flex-col flex-col--6 flex-col--tablet-large--6 flex-col--tablet--7 results__keyword-input-box">
               <label htmlFor="keyword">
                 <h2>I'm looking for</h2>
               </label>
@@ -163,7 +163,7 @@ class Keyword extends Component<IProps, IState> {
                 }}
               />
             </div>
-            <div className="flex-col flex-col--5 flex-col--tablet--5">
+            <div className="flex-col flex-col--5 flex-col--tablet-large--6 flex-col--tablet--5">
               <KeywordFilter />
             </div>
           </form>

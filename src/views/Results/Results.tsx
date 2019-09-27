@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { History } from 'history';
+import cx from 'classnames';
 
 import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
@@ -53,11 +54,18 @@ class Results extends Component<IProps> {
               )}
             </div>
             {resultsStore.isKeywordSearch && (
-              <div className="flex-col flex-col--7 flex-col--tablet-large--12">
+              <div className="flex-col flex-col--8 flex-col--tablet-large--12 flex-col--medium--12 flex-container--tablet--12">
                 <div className="flex-container flex-container--align-center results__keyword-container">
                   <ViewFilters resultsSwitch={true} />
-                  {resultsStore.view === 'grid' && (
-                    <div className="flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-container--mobile-no-padding results__sort-by-container">
+                  {resultsStore.view === 'grid' && resultsStore.postcode && (
+                    <div
+                      className={cx(
+                        'flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-col--medium--5 flex-container--mobile-no-padding results__sort-by-container',
+                        {
+                          'flex-col--medium--6': !resultsStore.postcode,
+                        }
+                      )}
+                    >
                       <label htmlFor="orderBy" className="results__sort-by-label">
                         Sort by:
                       </label>

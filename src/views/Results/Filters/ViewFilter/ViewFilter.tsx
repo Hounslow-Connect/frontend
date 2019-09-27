@@ -20,8 +20,11 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
     <div
       className={cx(
         'view-filter__search-bar',
-        'flex-col flex-col--5 flex-col--tablet-large--6 flex-col--mobile--6 flex-container--mobile-no-padding',
-        { 'view-filter--right-align': resultsSwitch }
+        'flex-col flex-col--5 flex-col--tablet-large--6 flex-col--mobile--7 flex-container--mobile-no-padding flex-col--medium--6',
+        { 'view-filter--right-align': resultsSwitch },
+        {
+          'flex-col--6 flex-col--mobile--12 flex-col--medium--7 view-filter--right-align--float-right': !resultsStore.postcode,
+        }
       )}
     >
       <p
