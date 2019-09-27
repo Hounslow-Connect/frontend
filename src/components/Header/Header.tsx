@@ -39,7 +39,7 @@ class Header extends Component<IProps> {
           active: burgerMenuOpen,
         })}
       >
-        <div className="flex-col--12 mobile-hide tablet--large-hide">
+        <div className="flex-col--12 mobile-hide tablet--large-hide medium-hide">
           <div id="google_translate_element" />
           <Button
             text="Give Feedback"
@@ -53,9 +53,12 @@ class Header extends Component<IProps> {
         </div>
         <div className="flex-container flex-container--align-center flex-container--justify header__container">
           <div
-            className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
-              'header__brand--active': burgerMenuOpen,
-            })}
+            className={cx(
+              'flex-col flex-col--6 flex-col--tablet-large--12 flex-col--medium--12 header__brand',
+              {
+                'header__brand--active': burgerMenuOpen,
+              }
+            )}
           >
             <figure className="logo">
               <RouterLink to="/" aria-label="Home Link">
@@ -65,7 +68,7 @@ class Header extends Component<IProps> {
 
             <button
               name="nav-trigger"
-              className="nav-trigger tablet--large-show"
+              className="nav-trigger tablet--large-show medium-show"
               onClick={() => toggleBurgerMenu()}
             >
               <label htmlFor="nav-trigger"></label>
@@ -80,7 +83,7 @@ class Header extends Component<IProps> {
             })}
           >
             <div
-              className="flex-col flex-col--12 flex-col--tablet-large--12 header__navigation tablet--large-hide"
+              className="flex-col flex-col--12 flex-col--tablet-large--12 header__navigation tablet--large-hide medium-hide"
               role="navigation"
             >
               <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
@@ -135,7 +138,7 @@ class Header extends Component<IProps> {
                   Get Involved
                 </RouterLink>
 
-                <div className="mobile-show tablet-show tablet--large-show">
+                <div className="mobile-show tablet-show tablet--large-show medium-show">
                   <div id="google_translate_element" />
 
                   <Button

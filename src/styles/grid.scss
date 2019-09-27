@@ -11,7 +11,7 @@ $border-radius: 6px;
 
 $break_container: max-width $container-width;
 $break_standard: max-width 1320px;
-$break_medium: max-width 1100px;
+$break_medium: max-width 1199px;
 $break_tablet_large: max-width 1024px;
 $break_tablet: max-width 860px;
 $break_mobile: max-width 600px;
@@ -285,6 +285,10 @@ body {
   display: none !important;
 }
 
+.medium-show {
+  display: none !important;
+}
+
 @include breakpoint($break_tablet_large) {
   .tablet--large-hide {
     display: none !important;
@@ -308,6 +312,15 @@ body {
     display: none !important;
   }
   .mobile-show {
+    display: block !important;
+  }
+}
+
+@include breakpoint($break_medium) {
+  .medium-hide {
+    display: none !important;
+  }
+  .medium-show {
     display: block !important;
   }
 }
