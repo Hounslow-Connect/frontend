@@ -59,7 +59,7 @@
   max-width: 1260px;
   position: relative;
 
-  @include for-tablet-landscape-up {
+  @include for-tablet-portrait-up {
     padding: space(64) space(32);
     margin: space(64) space(32);
   }
@@ -67,7 +67,6 @@
 
 .search__input {
   @include for-tablet-landscape-up {
-    @include marginLeft;
   }
   width: 100%;
 
@@ -79,6 +78,11 @@
     width: 100%;
     max-width: pxtorem(400px);
     margin-bottom: space(24);
+  }
+
+  &--row {
+    padding: 0 !important;
+    justify-content: flex-start !important;
   }
 }
 
@@ -111,7 +115,5 @@
 }
 
 .search__cateogry-list {
-  @include marginLeft;
-
   margin-top: space(24);
 }
