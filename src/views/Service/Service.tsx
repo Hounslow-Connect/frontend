@@ -40,6 +40,7 @@ import ReferralCard from './ReferralCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
 import UIStore from '../../stores/uiStore';
+import { removeQuotesRegex } from '../../utils/utils';
 
 interface RouteParams {
   service: string;
@@ -76,6 +77,10 @@ class Service extends Component<IProps> {
       serviceStore.fetchService(match.params.service);
     }
   }
+
+  formatTestimonial = (testimonial: string) => {
+    return `" ${testimonial.replace(removeQuotesRegex, '')} "`;
+  };
 
   render() {
     const { serviceStore, uiStore } = this.props;
@@ -235,7 +240,7 @@ class Service extends Component<IProps> {
                         <FontAwesomeIcon icon="comment" />
                       </div>
                       <div className="flex-col flex-col--9">
-                        <p>{`"${get(service, 'testimonial')}"`}</p>
+                        <p>{this.formatTestimonial(service.testimonial)}</p>
                       </div>
                     </div>
                   </div>
@@ -286,7 +291,7 @@ class Service extends Component<IProps> {
                 <Accordian title="What people say" className="service__accordian mobile-show">
                   <div className="service__accordian-inner">
                     <div className="service__testimonial">
-                      <p>{get(service, 'testimonial')}</p>
+                      <p>{this.formatTestimonial(service.testimonial)}</p>
                     </div>
                   </div>
                 </Accordian>
