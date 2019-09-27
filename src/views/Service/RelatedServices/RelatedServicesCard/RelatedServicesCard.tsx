@@ -23,7 +23,7 @@ const RelatedServicesCard: React.FunctionComponent<IProps> = ({ service, history
           text="View more"
           size="small"
           icon="chevron-right"
-          onClick={() => history.replace(`/service/${service.slug}`)}
+          onClick={() => history.replace(`/services/${service.slug}`)}
         />
       </div>
       <div className="flex-col flex-col--3">

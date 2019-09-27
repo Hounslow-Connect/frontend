@@ -110,7 +110,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
               className="flex-col flex-col--6 flex-col--mobile--6 favourites__card--button favourites__card--button--more"
               role="navigation"
               aria-label={`View more information about ${service.name}`}
-              onClick={() => history.push(`/service/${service.slug}`)}
+              onClick={() => history.push(`/services/${service.slug}`)}
             >
               <p>
                 View More <FontAwesomeIcon icon="chevron-right" />

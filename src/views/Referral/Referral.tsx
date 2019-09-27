@@ -90,7 +90,7 @@ class Referral extends Component<IProps> {
       <div className="flex-container flex-container--mobile-no-padding referral">
         <div className="flex-col flex-col--12 referral--back">
           {referralStore.step === 1 ? (
-            <Link to={`/service/${referralStore.service.slug}`}>
+            <Link to={`/services/${referralStore.service.slug}`}>
               <p className="body--s">
                 <FontAwesomeIcon icon="angle-left" />
                 Back to service
