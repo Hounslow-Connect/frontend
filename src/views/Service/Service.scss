@@ -316,6 +316,12 @@
 
   svg {
     font-size: pxtorem(46px);
+
+    padding-right: space(10);
+
+    @include for-tablet-landscape-down {
+      padding-right: space(16);
+    }
   }
 
   @include for-tablet-landscape-up {

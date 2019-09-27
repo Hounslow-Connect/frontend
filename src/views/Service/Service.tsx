@@ -236,10 +236,10 @@ class Service extends Component<IProps> {
 
                   <div className="flex-col flex-col--12 service__testimonial">
                     <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
-                      <div className="flex-col flex-col--2">
+                      <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
                         <FontAwesomeIcon icon="comment" />
                       </div>
-                      <div className="flex-col flex-col--9">
+                      <div className="flex-col--9 flex-col--tablet--9">
                         <p>{this.formatTestimonial(service.testimonial)}</p>
                       </div>
                     </div>
