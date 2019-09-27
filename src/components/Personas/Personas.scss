@@ -9,6 +9,10 @@
   text-align: center;
   padding: space(32) space(16);
 
+  .flex-container {
+    max-width: 1260px;
+  }
+
   p {
     margin-top: space(10);
   }
