@@ -13,6 +13,7 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import FavouritesStore from '../../stores/favouritesStore';
 import CMSStore from '../../stores/CMSStore';
 import get from 'lodash/get';
+import Breadcrumb from '../../components/Breadcrumb';
 
 interface IProps extends RouteComponentProps {
   favouritesStore: FavouritesStore;
@@ -39,6 +40,7 @@ class Favourites extends Component<IProps> {
 
     return (
       <section className="favourites">
+        <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Favourites', url: '' }]} />
         <div className="favourites__header flex-container">
           <div className="flex-col flex-col--12 favourites__header--heading">
             <h1>{get(cmsStore, 'favourites.title')}</h1>
