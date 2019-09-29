@@ -17,7 +17,7 @@ const About: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   }
 
   return (
-    <CMSPage title={get(cmsStore, 'about.title')}>
+    <CMSPage title={get(cmsStore, 'about.title')} breadcrumb="About">
       <ReactMarkdown source={get(cmsStore, 'about.content')} />
       <ReactPlayer
         url={get(cmsStore, 'about.video_url')}

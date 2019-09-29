@@ -1,15 +1,18 @@
 import React from 'react';
 
 import './CMSPage.scss';
+import Breadcrumb from '../Breadcrumb';
 
 interface IProps {
   title: string;
   children: any;
   twoColumn?: boolean;
+  breadcrumb: string;
 }
 
-const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn }) => (
+const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn, breadcrumb }) => (
   <section className="cms">
+    <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: breadcrumb, url: '' }]} />
     <div className="cms__header">
       <div className="flex-container flex-container--mobile-no-padding">
         <div className="flex-col flex-col--5">

@@ -17,7 +17,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   }
 
   return (
-    <CMSPage title={get(cmsStore, 'contact.title')} twoColumn={true}>
+    <CMSPage title={get(cmsStore, 'contact.title')} twoColumn={true} breadcrumb="Contact">
       <div className="flex-col flex-col--7 cms__content">
         <ReactMarkdown source={get(cmsStore, 'contact.content')} />
       </div>
