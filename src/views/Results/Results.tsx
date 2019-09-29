@@ -11,6 +11,7 @@ import ViewFilters from './Filters/ViewFilter/ViewFilter';
 import ListView from './ListView';
 import MapView from './MapView';
 import Select from '../../components/Select';
+import Breadcrumb from '../../components/Breadcrumb';
 
 interface IProps {
   location: Location;
@@ -42,6 +43,7 @@ class Results extends Component<IProps> {
     const { resultsStore, history } = this.props;
     return (
       <section>
+        <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search', url: '' }]} />
         <div className="results__search-box">
           {resultsStore.isKeywordSearch ? <Keyword /> : <Category />}
         </div>

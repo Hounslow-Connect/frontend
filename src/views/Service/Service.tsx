@@ -40,6 +40,7 @@ import ReferralCard from './ReferralCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
 import UIStore from '../../stores/uiStore';
+import Breadcrumb from '../../components/Breadcrumb';
 
 interface RouteParams {
   service: string;
@@ -80,13 +81,13 @@ class Service extends Component<IProps> {
   render() {
     const { serviceStore, uiStore } = this.props;
     const { service, locations, relatedServices } = serviceStore;
-
     if (!service) {
       return <div>Service not found</div>;
     }
 
     return (
       <main>
+        <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search', url: '/' }, { text: service.name, url: ''}]} />
         <div className={`service__header service__header--${get(service, 'type')}`}>
           <div className="flex-col flex-col--mobile--9">
             <h1>{get(service, 'name')}</h1>
