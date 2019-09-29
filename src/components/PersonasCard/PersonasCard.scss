@@ -10,8 +10,13 @@
   font-family: $font-secondary;
   color: $san-juan;
   border-radius: 25px;
-  margin: space(64);
+  margin: space(32);
   max-width: pxtorem(300px);
+  cursor: pointer;
+
+  @include for-tablet-portrait-down {
+    margin: space(12);
+  }
 
   @include for-phone-only {
     background-color: $white;

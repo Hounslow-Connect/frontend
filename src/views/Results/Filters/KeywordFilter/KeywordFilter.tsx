@@ -28,7 +28,7 @@ class KeywordFilter extends Component<IProps> {
           <h2 className="mobile-hide results__keyword-heading">Filter results by</h2>
         </div>
         <form className="flex-container flex-container--align-bottom results__filters">
-          <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-container--mobile-no-padding">
+          <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-col--tablet-large--5 flex-container--mobile-no-padding">
             <label htmlFor="location" className="results__keyword-filters--heading">
               Location
             </label>
@@ -40,7 +40,7 @@ class KeywordFilter extends Component<IProps> {
               value={resultsStore.postcode}
             />
           </div>
-          <div className="flex-col flex-col--3 flex-col--tablet--4 flex-col--mobile--3 flex-container--mobile-no-padding">
+          <div className="flex-col flex-col--3 flex-col--tablet--4 flex-col--mobile--3 flex-col--tablet-large--3 flex-container--mobile-no-padding">
             <p className="results__keyword-filters--heading--cost">Cost</p>
             <Checkbox
               id="is_free"
@@ -51,7 +51,7 @@ class KeywordFilter extends Component<IProps> {
               }}
             />
           </div>
-          <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-container--mobile-no-padding results__amend">
+          <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-col--tablet-large--3 flex-container--mobile-no-padding results__amend">
             <Button
               alt={true}
               text="Amend"

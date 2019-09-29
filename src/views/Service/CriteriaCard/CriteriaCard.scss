@@ -1,0 +1,43 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/breakpoints.scss';
+
+.criteria_card {
+  padding: space(8) !important;
+
+  p {
+    font-size: pxtorem(16px);
+  }
+
+  @include for-tablet-landscape-up {
+    padding: space(20) !important;
+    border-radius: 19px;
+    background-color: $alabaster;
+    height: 100%;
+    margin: space(8);
+    width: 45%;
+  }
+}
+
+.criteria_card-img {
+  text-align: center;
+
+  svg {
+    width: pxtorem(36px);
+  }
+}
+
+.criteria_card-title {
+  color: $waikawa;
+  font-size: pxtorem(14px) !important;
+
+  @include for-tablet-landscape-up {
+    margin-top: space(8);
+  }
+}
+
+.service__criteria {
+  @include for-tablet-portrait-down {
+    padding: 0 space(16) !important;
+  }
+}

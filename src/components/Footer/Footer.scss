@@ -1,78 +1,167 @@
-@import '../../styles/colors.scss';
-@import '../../styles/fonts.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
 @import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
 
 .footer {
+  position: relative;
   color: $white;
+  background-color: $san_juan;
   padding: space(64) 0;
   margin-top: pxtorem(160px);
-  background-image: url('../../assets/images/backgrounds/footer-shape.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  height: auto;
-  position: relative;
 
   @include for-phone-only {
-    background-image: url('../../assets/images/backgrounds/footer-shape-mobile.svg');
-    margin: 0;
-    background-color: $iceberg;
-
-    &:before {
-      content: url('../../assets/images/bridge-shape.svg');
-      position: absolute;
-      top: -34px;
-      transform: scale(0.7);
-    }
-
-    &:after {
-      content: url('../../assets/images/trees/cranberry-small.svg');
-      position: absolute;
-      top: -55px;
-      right: 15px;
-    }
+    padding: space(24) 0 space(64) 0;
   }
 
-  @include for-tablet-landscape-up {
-    &:before {
-      content: url('../../assets/images/trees/cranberry-small.svg');
-      position: absolute;
-      top: -54px;
-      left: 10%;
-    }
-
-    &:after {
-      content: url('../../assets/images/trees/jordy-lg.svg');
-      position: absolute;
-      top: -54px;
-      right: 10%;
-    }
-  }
-
-  .disclaimer {
+  &--inner-container {
     position: relative;
 
-    @include for-tablet-landscape-up {
-      &:before {
-        content: url('../../assets/images/bridge-shape.svg');
-        position: absolute;
-        position: absolute;
-        top: -75px;
-        right: -70px;
+    @include for-tablet-portrait-up {
+      padding-top: pxtorem(30px) !important;
+    }
+  }
+
+  &--service {
+    margin-top: 0;
+
+    > .flex-container {
+      &:before,
+      &:after {
+        display: none !important;
       }
     }
   }
-  .flex-container {
+
+  &:before {
+    content: '';
+    background-image: url('../../assets/images/backgrounds/footer-shape.svg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: block;
+    width: 100%;
+    height: 110px;
+    position: absolute;
+    top: -83px;
+    left: 0;
+
+    @include for-tablet-portrait-down {
+      background-image: url('../../assets/images/backgrounds/footer-shape-mobile.svg');
+    }
+  }
+
+  > .flex-container {
+    position: relative;
     max-width: 1260px;
+
+    &:before,
+    &::after {
+      position: absolute;
+    }
+
+    @include for-tablet-landscape-up {
+      &:before {
+        content: url('../../assets/images/trees/pink-lg.svg');
+        top: -208px;
+        left: 68px;
+
+        @include for-big-desktop-up {
+          left: -145px;
+        }
+      }
+
+      &:after {
+        content: url('../../assets/images/bridge-shape.svg');
+        top: -158px;
+        left: 30%;
+        z-index: -1;
+
+        @include for-desktop-up {
+          top: -140px;
+        }
+
+        @include for-big-desktop-up {
+          top: -120px;
+        }
+      }
+    }
+
+    @include for-tablet-portrait-down {
+      &:before {
+        content: url('../../assets/images/bridge-shape.svg');
+        top: -133px;
+        left: 143px;
+        transform: scale(0.7);
+        z-index: -1;
+
+        @include for-phone-only {
+          top: -126px;
+          left: 0px;
+        }
+      }
+
+      &:after {
+        content: url('../../assets/images/trees/pink-lg.svg');
+        top: -168px;
+        right: 72px;
+
+        @include for-phone-only {
+          right: 14px;
+          top: -142px;
+        }
+      }
+    }
   }
 
-  .footer__social-icons {
-    margin-right: space(10);
+  &__disclaimer {
+    padding-right: space(56);
+
+    @include for-tablet-portrait-down {
+      padding-right: 0;
+      padding-bottom: space(56);
+    }
+
+    @include for-phone-only {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.footer__content {
+  margin: space(16) 0;
+
+  a {
+    @include body-xs;
   }
 
-  .footer__social-links {
-    margin: space(24) 0;
+  p {
+    @include body-xs;
+    line-height: 1.25rem;
   }
+}
+
+.footer__social-icons {
+  margin-right: space(10);
+}
+
+.footer__social-links {
+  margin: space(24) 0;
+}
+
+.footer__section {
+  padding: space(12);
+}
+
+.footer-contact-links {
+  line-height: 26px;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.footer__button {
+  position: relative;
 
   button {
     color: $white;
@@ -80,6 +169,7 @@
     background: $san-juan;
     font-family: $font-primary;
     font-weight: normal;
+    font-size: pxtorem(18px);
 
     &:hover {
       background: $white;
@@ -87,33 +177,47 @@
     }
   }
 
-  .footer-section {
-    padding: space(12);
-    position: relative;
+  @include for-phone-only {
+    margin-top: space(32);
+  }
 
-    &--button {
-      text-align: right;
+  @include for-tablet-landscape-up {
+    &:before {
+      position: absolute;
+      content: url('../../assets/images/trees/peurto-lg.svg');
+      top: -245px;
+      right: 50px;
 
-      @include for-tablet-landscape-up {
-        &:before {
-          content: url('../../assets/images/trees/iceberg-small.svg');
-          position: absolute;
-          top: -135px;
-          right: 40%;
+      @include for-desktop-up {
+        right: -20px;
+      }
 
-          @include for-desktop-up {
-            right: 15%;
-          }
-        }
+      @include for-big-desktop-up {
+        right: -200px;
+      }
+    }
+
+    &:after {
+      position: absolute;
+      content: url('../../assets/images/trees/cranberry-lg.svg');
+      top: -240px;
+      right: 0px;
+
+      @include for-desktop-up {
+        right: -70px;
+      }
+
+      @include for-big-desktop-up {
+        right: -260px;
       }
     }
   }
+}
 
-  .footer-contact-links {
-    line-height: 26px;
-  }
+.header__footer {
+  background-color: $iceberg;
 }
 
 .footer-mobile-menu {
-  background-color: $white;
+  text-align: left;
 }
