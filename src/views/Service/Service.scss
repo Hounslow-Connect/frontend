@@ -148,21 +148,8 @@
 }
 
 .service__info {
-  padding-top: space(16) !important;
-  color: $san-juan;
-
-  @include for-phone-only {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  @include for-desktop-up {
-    padding: space(88) space(96) !important;
-  }
-
-  p {
-    font-size: pxtorem(18px);
-  }
+  display: flex;
+  padding: space(88) space(96);
 }
 
 .service__info--left {
