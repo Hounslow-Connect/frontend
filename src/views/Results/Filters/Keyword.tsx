@@ -21,6 +21,7 @@ interface IState {
   editToggled: boolean;
   keyword: string;
   postcode: string;
+  errors: any;
 }
 
 @inject('resultsStore', 'windowSizeStore')
@@ -33,6 +34,9 @@ class Keyword extends Component<IProps, IState> {
       editToggled: false,
       keyword: '',
       postcode: '',
+      errors: {
+        keyword: false,
+      },
     };
   }
 
@@ -63,6 +67,26 @@ class Keyword extends Component<IProps, IState> {
     this.setState({
       [field]: string,
     });
+  };
+
+  validate = async () => {
+    return this.setState({
+      errors: {
+        keyword: !this.state.keyword,
+      },
+    });
+  };
+
+  handleAmend = async (callback: () => void) => {
+    await this.validate();
+
+    const canSubmit = Object.values(this.state.errors).every(error => error === false);
+
+    if (canSubmit) {
+      return callback();
+    } else {
+      return;
+    }
   };
 
   render() {
@@ -100,6 +124,8 @@ class Keyword extends Component<IProps, IState> {
                   value={this.state.keyword}
                   fullWidth={true}
                   className="results__keyword-edit-input"
+                  error={this.state.errors.keyword}
+                  errorMessage="Please enter a search term"
                 />
               </div>
               <div className="flex-col">
@@ -137,9 +163,11 @@ class Keyword extends Component<IProps, IState> {
                     icon="search"
                     text="Search"
                     onClick={() => {
-                      resultsStore.postcodeChange(this.state.postcode);
-                      this.toggleEdit();
-                      history.push({ search: resultsStore.amendSearch(this.state.keyword) });
+                      this.handleAmend(() => {
+                        resultsStore.postcodeChange(this.state.postcode);
+                        this.toggleEdit();
+                        history.push({ search: resultsStore.amendSearch(this.state.keyword) });
+                      });
                     }}
                   />
                 </div>
@@ -174,6 +202,7 @@ class Keyword extends Component<IProps, IState> {
                 id="keyword"
                 value={this.state.keyword}
                 className="results__search-box-keyword"
+                error={this.state.errors.keyword}
               />
               <Button
                 icon={windowSizeStore.isMobile ? undefined : 'search'}
@@ -186,6 +215,7 @@ class Keyword extends Component<IProps, IState> {
                     ),
                   });
                 }}
+                disabled={!this.state.keyword}
               />
             </div>
             <div className="flex-col flex-col--5 flex-col--tablet-large--6 flex-col--tablet--5">
