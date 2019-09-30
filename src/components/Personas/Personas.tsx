@@ -21,7 +21,7 @@ const Personas: React.FunctionComponent<IProps> = ({ personas, history, cmsStore
   return (
     <section className="personas" role="button">
       <div className="flex-container">
-        <div className="flex-col flex-col--12">
+        <div className="flex-col flex-col--12 personas--intro">
           <h2 className="personas__heading">{get(cmsStore, 'home.personas_title')}</h2>
           <p>{get(cmsStore, 'home.personas_content')}</p>
         </div>

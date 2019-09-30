@@ -8,6 +8,12 @@
   position: relative;
   padding: space(32) space(16);
 
+  &--intro {
+    @include for-tablet-landscape-up {
+      text-align: center;
+    }
+  }
+
   .flex-container {
     max-width: 1260px;
   }
