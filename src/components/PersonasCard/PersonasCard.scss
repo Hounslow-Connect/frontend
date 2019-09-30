@@ -63,6 +63,10 @@
   @include for-phone-only {
     font-size: $font-heading-s;
   }
+
+  @include for-desktop-up {
+    font-size: pxtorem(27px);
+  }
 }
 
 .card__description {
