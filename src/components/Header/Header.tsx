@@ -53,12 +53,9 @@ class Header extends Component<IProps> {
         </div>
         <div className="flex-container flex-container--align-center flex-container--justify header__container">
           <div
-            className={cx(
-              'flex-col flex-col--6 flex-col--tablet-large--12 flex-col--medium--12 header__brand',
-              {
-                'header__brand--active': burgerMenuOpen,
-              }
-            )}
+            className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
+              'header__brand--active': burgerMenuOpen,
+            })}
           >
             <figure className="logo">
               <RouterLink to="/" aria-label="Home Link">

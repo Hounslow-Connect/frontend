@@ -54,6 +54,7 @@
       justify-content: space-between;
       margin-bottom: space(16);
       background-color: $iceberg;
+      width: 100% !important;
 
       &--active {
         padding-bottom: space(48) !important;
