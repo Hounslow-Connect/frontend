@@ -17,6 +17,7 @@ const PersonasCard: React.FunctionComponent<IProps> = ({ persona, action, window
     className="flex-col--4 flex-col--medium--3 flex-col--tablet--5 flex-col--mobile--12 card"
     onClick={action}
     role="navigation"
+    tabIndex={0}
   >
     <img src={`${apiBase}/collections/personas/${persona.id}/image.png`} alt={persona.name} />
     <div className="card__description">
