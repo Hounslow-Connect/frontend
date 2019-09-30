@@ -21,7 +21,7 @@ const About: React.FunctionComponent<IProps> = ({ cmsStore }) => {
       <ReactMarkdown source={get(cmsStore, 'about.content')} />
       <ReactPlayer
         url={get(cmsStore, 'about.video_url')}
-        style={{ borderRadius: '19px' }}
+        style={{ borderRadius: '19px', margin: 'auto' }}
         width={'90%'}
         light={true}
       />
