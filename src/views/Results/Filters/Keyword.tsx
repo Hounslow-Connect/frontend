@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import { withRouter, RouteComponentProps } from 'react-router';
+import queryString from 'query-string';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
@@ -18,6 +19,8 @@ interface IProps extends RouteComponentProps {
 
 interface IState {
   editToggled: boolean;
+  keyword: string;
+  postcode: string;
 }
 
 @inject('resultsStore', 'windowSizeStore')
@@ -28,7 +31,25 @@ class Keyword extends Component<IProps, IState> {
 
     this.state = {
       editToggled: false,
+      keyword: '',
+      postcode: '',
     };
+  }
+
+  componentDidMount() {
+    const { search_term, location } = queryString.parse(this.props.location.search);
+
+    if (search_term) {
+      this.setState({
+        keyword: search_term as string,
+      });
+    }
+
+    if (location) {
+      this.setState({
+        postcode: location as string,
+      });
+    }
   }
 
   toggleEdit = () => {
@@ -37,11 +58,16 @@ class Keyword extends Component<IProps, IState> {
     });
   };
 
-  render() {
-    const { resultsStore, windowSizeStore, history, location } = this.props;
-    const { editToggled } = this.state;
+  handleInputChange = (string: string, field: string) => {
+    // @ts-ignore
+    this.setState({
+      [field]: string,
+    });
+  };
 
-    const searchTerm = location.search.match(/\?search_term=(.*)/);
+  render() {
+    const { resultsStore, windowSizeStore, history } = this.props;
+    const { editToggled } = this.state;
 
     if (!resultsStore || !windowSizeStore) {
       return null;
@@ -68,11 +94,10 @@ class Keyword extends Component<IProps, IState> {
                 </label>
                 <Input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    resultsStore.handleKeywordChange(e)
+                    this.handleInputChange(e.target.value, 'keyword')
                   }
                   id="keyword"
-                  placeholder={get(resultsStore, 'keyword', '') || ''}
-                  value={get(resultsStore, 'keyword', '') || ''}
+                  value={this.state.keyword}
                   fullWidth={true}
                   className="results__keyword-edit-input"
                 />
@@ -87,11 +112,11 @@ class Keyword extends Component<IProps, IState> {
                     <Input
                       id="location"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        resultsStore.postcodeChange(e)
+                        this.handleInputChange(e.target.value, 'postcode')
                       }
                       className="results__search-filter-location"
                       placeholder="Postcode"
-                      value={resultsStore.postcode}
+                      value={this.state.postcode}
                     />
                   </div>
                   <div className="flex-col flex-col--mobile--4">
@@ -112,8 +137,9 @@ class Keyword extends Component<IProps, IState> {
                     icon="search"
                     text="Search"
                     onClick={() => {
+                      resultsStore.postcodeChange(this.state.postcode);
                       this.toggleEdit();
-                      history.push({ search: resultsStore.amendSearch(resultsStore.keyword) });
+                      history.push({ search: resultsStore.amendSearch(this.state.keyword) });
                     }}
                   />
                 </div>
@@ -125,7 +151,7 @@ class Keyword extends Component<IProps, IState> {
           {/* Mobile Edit  */}
           <div className="mobile-show tablet-show tablet--large-show flex-col flex-col--mobile--7">
             <h1>Search results</h1>
-            <p>{searchTerm ? searchTerm[1] : ''}</p>
+            <p>{this.state.keyword}</p>
           </div>
           <div className="mobile-show tablet-show tablet--large-show  flex-col flex-col--mobile--5 results__mobile-edit">
             <Button text="Edit Search" size="small" onClick={() => this.toggleEdit()} />
@@ -143,11 +169,10 @@ class Keyword extends Component<IProps, IState> {
               </label>
               <Input
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  resultsStore.handleKeywordChange(e)
+                  this.handleInputChange(e.target.value, 'keyword')
                 }
                 id="keyword"
-                placeholder={get(resultsStore, 'keyword', '') || ''}
-                value={get(resultsStore, 'keyword', '') || ''}
+                value={this.state.keyword}
                 className="results__search-box-keyword"
               />
               <Button
@@ -157,7 +182,7 @@ class Keyword extends Component<IProps, IState> {
                   history.push({
                     search: resultsStore.updateQueryStringParameter(
                       'search_term',
-                      resultsStore.keyword
+                      this.state.keyword
                     ),
                   });
                 }}

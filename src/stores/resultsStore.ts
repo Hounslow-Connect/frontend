@@ -235,8 +235,8 @@ export default class ResultsStore {
   };
 
   @action
-  postcodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.postcode = e.target.value.replace(' ', '');
+  postcodeChange = (postcode: string) => {
+    this.postcode = postcode.replace(' ', '');
   };
 
   amendSearch = (searchTerm?: string) => {
