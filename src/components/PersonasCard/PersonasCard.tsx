@@ -19,10 +19,17 @@ const PersonasCard: React.FunctionComponent<IProps> = ({ persona, action, window
     role="navigation"
     tabIndex={0}
   >
-    <img src={`${apiBase}/collections/personas/${persona.id}/image.png`} alt={persona.name} />
-    <div className="card__description">
-      <h3 className="card__heading">{persona.name}</h3>
-      {!windowSizeStore!.isMobile && <p>{persona.intro}</p>}
+    <div className="flex-container flex-container--mobile-no-padding flex-container--align-center">
+      <div className="flex-col--12 flex-col--mobile--4">
+        <img
+          src={`${apiBase}/collections/personas/${persona.id}/image.png?max_dimension=300`}
+          alt={persona.name}
+        />
+      </div>
+      <div className="flex-col--12 flex-col--mobile--8 card__description">
+        <h3 className="card__header">{persona.name}</h3>
+        <p className="mobile-hide tablet-hide">{persona.intro}</p>
+      </div>
     </div>
   </section>
 );

@@ -6,7 +6,6 @@
 .personas {
   color: $san-juan;
   position: relative;
-  text-align: center;
   padding: space(32) space(16);
 
   .flex-container {
@@ -68,6 +67,7 @@
 
 .personas__list {
   position: relative;
+  padding-bottom: space(32) !important;
 
   @include for-phone-only {
     margin-top: space(32);
