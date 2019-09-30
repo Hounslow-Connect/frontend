@@ -31,7 +31,6 @@
 
   @include for-tablet-portrait-down {
     margin: space(12);
-    // height: pxtorem(90px);
   }
 
   @include for-phone-only {
