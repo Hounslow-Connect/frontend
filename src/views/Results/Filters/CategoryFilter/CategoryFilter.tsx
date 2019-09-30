@@ -23,9 +23,9 @@ class CategoryFilter extends Component<IProps> {
     }
 
     return (
-      <div className="flex-col flex-col--5 flex-col--tablet-large--7 flex-col--mobile--12">
+      <div className="flex-col flex-col--5 flex-col--tablet-large--7 flex-col--medium--6 flex-col--mobile--12">
         <div className="flex-container flex-container--mobile-no-padding category__filters">
-          <div className="flex-col flex-col--4 flex-col--tablet-large--5 flex-col--mobile--6 flex-container--mobile-no-padding">
+          <div className="flex-col flex-col--4 flex-col--tablet-large--4 flex-col--mobile--6 flex-col--medium--4 flex-container--mobile-no-padding">
             <p className="category_filters--header--cost">Cost</p>
             <Checkbox
               id="is_free"
@@ -39,7 +39,7 @@ class CategoryFilter extends Component<IProps> {
               }}
             />
           </div>
-          <div className="flex-col flex-col--7 flex-col--tablet-large--7 flex-col--mobile--6 flex-container--mobile-no-padding view-filter__search-bar">
+          <div className="flex-col flex-col--7 flex-col--tablet-large--8 flex-col--mobile--6 flex-col--medium--8 flex-container--mobile-no-padding view-filter__search-bar">
             <p className="view-filter--header">View As</p>
             <Button
               text="Grid"
