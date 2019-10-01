@@ -212,11 +212,15 @@
 }
 
 .results__amend {
+  button {
+    font-size: pxtorem(22px);
+    padding: 0 space(20) !important;
+  }
+
   @include for-phone-only {
     button {
       font-size: pxtorem(14px);
       font-weight: normal;
-      font-family: $font-primary;
       padding: 0 space(8);
       height: pxtorem(35px);
     }
@@ -224,6 +228,7 @@
 
   @include for-tablet-portrait-down {
     padding: 0 !important;
+    font-size: pxtorem(16px);
   }
 }
 
