@@ -150,6 +150,7 @@
 .service__info {
   padding-top: space(16) !important;
   color: $san-juan;
+  max-width: 1260px;
 
   @include for-phone-only {
     padding-left: 0 !important;
