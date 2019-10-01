@@ -1,6 +1,7 @@
 @import '../../../styles/colors.scss';
 @import '../../../styles/mixins.scss';
 @import '../../../styles/fonts.scss';
+@import '../../../styles/breakpoints.scss';
 
 .leaflet-container {
   height: 100%;
@@ -16,6 +17,11 @@
 }
 
 .map__key--container {
+  @include for-tablet-portrait-down {
+    margin-top: space(24);
+    padding: 0;
+  }
+
   padding: 0 space(24);
   width: 30%;
 }

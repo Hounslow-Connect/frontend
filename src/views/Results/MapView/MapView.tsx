@@ -19,8 +19,8 @@ class MapView extends Component<IProps> {
     const { resultsStore } = this.props;
 
     return (
-      <main className="flex">
-        <div className="map">
+      <main className="flex-container">
+        <div className="flex-col--9 flex-col--mobile--12 map">
           <Map center={CENTRE_OF_KINGSTON} zoom={13} attributionControl={false}>
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
             {resultsStore.results.map((result: IService) => {
@@ -47,7 +47,7 @@ class MapView extends Component<IProps> {
             })}
           </Map>
         </div>
-        <div className="map__key--container">
+        <div className="flex-col--3 flex-col--mobile--12 map__key--container">
           <h3 className="map__key--heading">Map key</h3>
           <div className="map__key">
             <p className="map__key--description">

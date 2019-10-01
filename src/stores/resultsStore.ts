@@ -34,7 +34,7 @@ export default class ResultsStore {
   @observable itemsPerPage: number = 25;
   @observable postcode: string = '';
   @observable locationCoords: IGeoLocation | {} = {};
-  @observable view: 'grid' | 'map' = 'grid';
+  @observable view: 'grid' | 'map' = 'map';
 
   @computed
   get isKeywordSearch() {
