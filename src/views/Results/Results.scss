@@ -30,6 +30,7 @@
   display: flex;
   justify-content: flex-start;
   color: $san-juan;
+  padding: space(16) 0;
 
   @include for-tablet-landscape-down {
     margin: space(8) 0 !important;
@@ -199,8 +200,11 @@
 }
 
 .results__keyword-container {
-  justify-content: flex-end !important;
   padding: 0 !important;
+
+  @include for-tablet-landscape-down {
+    padding-left: space(16) !important;
+  }
 }
 
 .results__mobile-edit {
@@ -256,7 +260,7 @@
 
 .results__keyword-edit {
   position: fixed;
-  top: pxtorem(94px);
+  top: pxtorem(63px);
   left: 0;
   width: 100%;
   height: 100%;
@@ -265,9 +269,22 @@
   background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
   background-repeat: no-repeat;
   background-size: 110% 100%;
+  padding: space(32) !important;
+
+  .flex-col {
+    margin-bottom: space(32);
+  }
 
   @include for-tablet-portrait-up {
     top: 94px;
+  }
+
+  h1 {
+    @include heading-m;
+  }
+
+  h2 {
+    font-size: pxtorem(20px);
   }
 }
 
@@ -308,7 +325,7 @@
 
 .results__keyword-edit-toggle {
   color: $elm;
-  font-size: pxtorem(19px);
+  font-size: pxtorem(16px);
   border-bottom: 2px solid $elm;
 }
 
