@@ -148,7 +148,7 @@
 .results__keyword-filters--heading {
   font-weight: normal;
   font-family: $font-primary;
-  font-size: pxtorem(27px);
+  font-size: $font-heading-s;
   margin-bottom: space(10);
 
   @include for-phone-only {
@@ -159,7 +159,7 @@
 .results__keyword-filters--heading--cost {
   font-weight: normal;
   font-family: $font-primary;
-  font-size: pxtorem(27px);
+  font-size: $font-heading-s;
   margin-bottom: space(16);
 }
 
