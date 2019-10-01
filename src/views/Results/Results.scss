@@ -337,3 +337,11 @@
     text-align: right;
   }
 }
+
+.results__category-sidebar {
+  margin-bottom: space(32) !important;
+
+  @include for-tablet-portrait-down {
+    margin-bottom: space(16) !important;
+  }
+}
