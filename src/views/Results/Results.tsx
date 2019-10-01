@@ -119,7 +119,7 @@ class Results extends Component<IProps> {
           {resultsStore.view === 'grid' ? (
             <ListView resultsStore={resultsStore} history={history} />
           ) : (
-            <MapView resultsStore={resultsStore} />
+            <MapView />
           )}
         </div>
       </section>

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import find from 'lodash/find';
+import map from 'lodash/map';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { latLngBounds, LatLngBounds } from 'leaflet';
+import { observer, inject } from 'mobx-react';
 
 import './MapView.scss';
 import ResultsStore from '../../../stores/resultsStore';
@@ -9,38 +12,79 @@ import { IServiceLocation, IService } from '../../../types/types';
 import SearchResultCard from '../../../components/SearchResultCard';
 
 interface IProps {
-  resultsStore: ResultsStore;
+  resultsStore?: ResultsStore;
 }
 
-const CENTRE_OF_KINGSTON: [number, number] = [51.4175006, -0.3182182];
+interface IState {
+  markers: [];
+  bounds: LatLngBounds;
+}
 
-class MapView extends Component<IProps> {
+const CENTRE_OF_KINGSTON: [number, number] = [51.378583, -0.280582];
+const TOP_LEFT_CORNER: [number, number] = [51.431705, -0.348497];
+const BOTTOM_RIGHT_CORNER: [number, number] = [51.369157, -0.217336];
+
+class MapView extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      markers: [],
+      bounds: latLngBounds(TOP_LEFT_CORNER, BOTTOM_RIGHT_CORNER),
+    };
+  }
+
+  addMarkets = (results: IService[]) => {
+    if (results) {
+      map(results, (result: IService) => {
+        if (result.service_locations) {
+          result.service_locations.forEach((location: IServiceLocation) =>
+            this.state.bounds.extend([location.location.lat, location.location.lon])
+          );
+        }
+      });
+    }
+  };
+
   render() {
     const { resultsStore } = this.props;
+
+    if (!resultsStore) {
+      return;
+    }
+
+    this.addMarkets(resultsStore.results);
 
     return (
       <main className="flex-container">
         <div className="flex-col--9 flex-col--mobile--12 map">
-          <Map center={CENTRE_OF_KINGSTON} zoom={13} attributionControl={false}>
+          <Map
+            cente={CENTRE_OF_KINGSTON}
+            zoom={13}
+            attributionControl={false}
+            bounds={this.state.bounds}
+          >
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
             {resultsStore.results.map((result: IService) => {
               const organisation =
                 find(resultsStore.organisations, ['id', result.organisation_id]) || null;
               if (result.service_locations) {
-                return result.service_locations.map((serviceLocation: IServiceLocation) => (
-                  <Marker
-                    key={serviceLocation.id}
-                    position={[serviceLocation.location.lat, serviceLocation.location.lon]}
-                  >
-                    <Popup>
-                      <SearchResultCard
-                        result={result}
-                        organisation={organisation}
-                        mapView={true}
-                      />
-                    </Popup>
-                  </Marker>
-                ));
+                return result.service_locations.map((serviceLocation: IServiceLocation) => {
+                  return (
+                    <Marker
+                      key={serviceLocation.id}
+                      position={[serviceLocation.location.lat, serviceLocation.location.lon]}
+                    >
+                      <Popup>
+                        <SearchResultCard
+                          result={result}
+                          organisation={organisation}
+                          mapView={true}
+                        />
+                      </Popup>
+                    </Marker>
+                  );
+                });
               }
 
               return null;
@@ -72,4 +116,4 @@ class MapView extends Component<IProps> {
   }
 }
 
-export default MapView;
+export default inject('resultsStore')(observer(MapView));
