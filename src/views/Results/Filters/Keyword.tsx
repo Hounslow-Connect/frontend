@@ -195,28 +195,34 @@ class Keyword extends Component<IProps, IState> {
               <label htmlFor="keyword">
                 <h2>I'm looking for</h2>
               </label>
-              <Input
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  this.handleInputChange(e.target.value, 'keyword')
-                }
-                id="keyword"
-                value={this.state.keyword}
-                className="results__search-box-keyword"
-                error={this.state.errors.keyword}
-              />
-              <Button
-                icon={windowSizeStore.isMobile ? undefined : 'search'}
-                text="Search"
-                onClick={() => {
-                  history.push({
-                    search: resultsStore.updateQueryStringParameter(
-                      'search_term',
-                      this.state.keyword
-                    ),
-                  });
-                }}
-                disabled={!this.state.keyword}
-              />
+              <div className="flex-container flex-container--align-center" style={{ padding: 0 }}>
+                <div className="flex-col--8 flex-col--medium--7">
+                  <Input
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      this.handleInputChange(e.target.value, 'keyword')
+                    }
+                    id="keyword"
+                    value={this.state.keyword}
+                    className="results__search-box-keyword"
+                    error={this.state.errors.keyword}
+                  />
+                </div>
+                <div className="flex-col--3 flex-col--medium--4">
+                  <Button
+                    icon={windowSizeStore.isMobile ? undefined : 'search'}
+                    text="Search"
+                    onClick={() => {
+                      history.push({
+                        search: resultsStore.updateQueryStringParameter(
+                          'search_term',
+                          this.state.keyword
+                        ),
+                      });
+                    }}
+                    disabled={!this.state.keyword}
+                  />
+                </div>
+              </div>
             </div>
             <div className="flex-col flex-col--5 flex-col--tablet-large--6 flex-col--tablet--5">
               <KeywordFilter />

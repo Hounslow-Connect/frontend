@@ -271,9 +271,16 @@
 .results__keyword-input-box {
   @include search-container;
   padding: space(32);
+  margin-right: space(32);
 
   @include for-tablet-portrait-down {
     padding: 0;
+  }
+
+  button {
+    svg {
+      margin-left: space(16);
+    }
   }
 }
 
@@ -281,11 +288,12 @@
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;
+  justify-content: start !important;
 }
 
 .results__search-box-keyword {
   margin-right: space(20);
-  width: 50%;
+  width: 100%;
 }
 
 .results__keyword-heading {
