@@ -256,15 +256,18 @@
 
 .results__keyword-edit {
   position: fixed;
-  top: pxtorem(75px);
+  top: pxtorem(94px);
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 80;
-  background: $white;
+  background: $iceberg;
+  background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
+  background-repeat: no-repeat;
+  background-size: 110% 100%;
 
   @include for-tablet-portrait-up {
-    top: pxtorem(102px);
+    top: 94px;
   }
 }
 
