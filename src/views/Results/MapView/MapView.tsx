@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { latLngBounds, LatLngBounds } from 'leaflet';
 import { observer, inject } from 'mobx-react';
 
+import { ActivityMarker, GroupMarker, ServiceMarker } from './icons';
+
 import './MapView.scss';
 import ResultsStore from '../../../stores/resultsStore';
 import { IServiceLocation, IService } from '../../../types/types';
@@ -34,7 +36,7 @@ class MapView extends Component<IProps, IState> {
     };
   }
 
-  addMarkets = (results: IService[]) => {
+  addMarkers = (results: IService[]) => {
     if (results) {
       map(results, (result: IService) => {
         if (result.service_locations) {
@@ -46,6 +48,19 @@ class MapView extends Component<IProps, IState> {
     }
   };
 
+  getMarker = (type: string) => {
+    switch (true) {
+      case type === 'service':
+        return ServiceMarker;
+      case type === 'group':
+        return GroupMarker;
+      case type === 'activity':
+        return ActivityMarker;
+      default:
+        break;
+    }
+  };
+
   render() {
     const { resultsStore } = this.props;
 
@@ -53,14 +68,14 @@ class MapView extends Component<IProps, IState> {
       return;
     }
 
-    this.addMarkets(resultsStore.results);
+    this.addMarkers(resultsStore.results);
 
     return (
       <main className="flex-container">
         <div className="flex-col--9 flex-col--mobile--12 map">
           <Map
             cente={CENTRE_OF_KINGSTON}
-            zoom={13}
+            zoom={6}
             attributionControl={false}
             bounds={this.state.bounds}
           >
@@ -74,6 +89,7 @@ class MapView extends Component<IProps, IState> {
                     <Marker
                       key={serviceLocation.id}
                       position={[serviceLocation.location.lat, serviceLocation.location.lon]}
+                      icon={this.getMarker(result.type)}
                     >
                       <Popup>
                         <SearchResultCard
