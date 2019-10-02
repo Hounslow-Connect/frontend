@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import { withRouter, RouteComponentProps } from 'react-router';
+import queryString from 'query-string';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
@@ -10,49 +11,98 @@ import ResultsStore from '../../../stores/resultsStore';
 import KeywordFilter from './KeywordFilter';
 import WindowSizeStore from '../../../stores/windowSizeStore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UIStore from '../../../stores/uiStore';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
   windowSizeStore?: WindowSizeStore;
+  uiStore?: UIStore;
 }
 
 interface IState {
-  editToggled: boolean;
+  keyword: string;
+  postcode: string;
+  errors: any;
 }
 
-@inject('resultsStore', 'windowSizeStore')
+@inject('resultsStore', 'windowSizeStore', 'uiStore')
 @observer
 class Keyword extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
     this.state = {
-      editToggled: false,
+      keyword: '',
+      postcode: '',
+      errors: {
+        keyword: false,
+      },
     };
   }
 
-  toggleEdit = () => {
+  componentDidMount() {
+    const { search_term, location } = queryString.parse(this.props.location.search);
+
+    if (search_term) {
+      this.setState({
+        keyword: search_term as string,
+      });
+    }
+
+    if (location) {
+      this.setState({
+        postcode: location as string,
+      });
+    }
+  }
+
+  handleInputChange = (string: string, field: string) => {
+    // @ts-ignore
     this.setState({
-      editToggled: !this.state.editToggled,
+      [field]: string,
     });
   };
 
+  validate = async () => {
+    return this.setState({
+      errors: {
+        keyword: !this.state.keyword,
+      },
+    });
+  };
+
+  handleAmend = async (callback: () => void) => {
+    await this.validate();
+
+    const canSubmit = Object.values(this.state.errors).every(error => error === false);
+
+    if (canSubmit) {
+      return callback();
+    } else {
+      return;
+    }
+  };
+
   render() {
-    const { resultsStore, windowSizeStore, history, location } = this.props;
-    const { editToggled } = this.state;
+    const { resultsStore, windowSizeStore, uiStore, history } = this.props;
 
-    const searchTerm = location.search.match(/\?search_term=(.*)/);
-
-    if (!resultsStore || !windowSizeStore) {
+    if (!resultsStore || !windowSizeStore || !uiStore) {
       return null;
     }
     return (
       <Fragment>
         {/* Mobile Dropdown */}
-        {editToggled && (
+        {uiStore.keywordEditOpen && (
           <div className="mobile-show tablet-show tablet--large-show flex-container results__keyword-edit">
             <div className="flex-col">
-              <div role="button" aria-label="Close edit popup" onClick={() => this.toggleEdit()}>
+              <div
+                role="button"
+                aria-label="Close edit popup"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  uiStore.toggleKeywordEdit();
+                }}
+              >
                 <span className="results__keyword-edit-toggle">
                   <FontAwesomeIcon icon="chevron-left" /> Back
                 </span>
@@ -68,13 +118,14 @@ class Keyword extends Component<IProps, IState> {
                 </label>
                 <Input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    resultsStore.handleKeywordChange(e)
+                    this.handleInputChange(e.target.value, 'keyword')
                   }
                   id="keyword"
-                  placeholder={get(resultsStore, 'keyword', '') || ''}
-                  value={get(resultsStore, 'keyword', '') || ''}
+                  value={this.state.keyword}
                   fullWidth={true}
                   className="results__keyword-edit-input"
+                  error={this.state.errors.keyword}
+                  errorMessage="Please enter a search term"
                 />
               </div>
               <div className="flex-col">
@@ -87,11 +138,11 @@ class Keyword extends Component<IProps, IState> {
                     <Input
                       id="location"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        resultsStore.postcodeChange(e)
+                        this.handleInputChange(e.target.value, 'postcode')
                       }
                       className="results__search-filter-location"
                       placeholder="Postcode"
-                      value={resultsStore.postcode}
+                      value={this.state.postcode}
                     />
                   </div>
                   <div className="flex-col flex-col--mobile--4">
@@ -112,8 +163,11 @@ class Keyword extends Component<IProps, IState> {
                     icon="search"
                     text="Search"
                     onClick={() => {
-                      this.toggleEdit();
-                      history.push({ search: resultsStore.amendSearch(resultsStore.keyword) });
+                      this.handleAmend(() => {
+                        resultsStore.postcodeChange(this.state.postcode);
+                        uiStore.toggleKeywordEdit();
+                        history.push({ search: resultsStore.amendSearch(this.state.keyword) });
+                      });
                     }}
                   />
                 </div>
@@ -125,10 +179,10 @@ class Keyword extends Component<IProps, IState> {
           {/* Mobile Edit  */}
           <div className="mobile-show tablet-show tablet--large-show flex-col flex-col--mobile--7">
             <h1>Search results</h1>
-            <p>{searchTerm ? searchTerm[1] : ''}</p>
+            <p>{this.state.keyword}</p>
           </div>
           <div className="mobile-show tablet-show tablet--large-show  flex-col flex-col--mobile--5 results__mobile-edit">
-            <Button text="Edit Search" size="small" onClick={() => this.toggleEdit()} />
+            <Button text="Edit Search" size="small" onClick={() => uiStore.toggleKeywordEdit()} />
           </div>
 
           {/* Desktop */}
@@ -141,27 +195,34 @@ class Keyword extends Component<IProps, IState> {
               <label htmlFor="keyword">
                 <h2>I'm looking for</h2>
               </label>
-              <Input
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  resultsStore.handleKeywordChange(e)
-                }
-                id="keyword"
-                placeholder={get(resultsStore, 'keyword', '') || ''}
-                value={get(resultsStore, 'keyword', '') || ''}
-                className="results__search-box-keyword"
-              />
-              <Button
-                icon={windowSizeStore.isMobile ? undefined : 'search'}
-                text="Search"
-                onClick={() => {
-                  history.push({
-                    search: resultsStore.updateQueryStringParameter(
-                      'search_term',
-                      resultsStore.keyword
-                    ),
-                  });
-                }}
-              />
+              <div className="flex-container flex-container--align-center" style={{ padding: 0 }}>
+                <div className="flex-col--8 flex-col--medium--7">
+                  <Input
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      this.handleInputChange(e.target.value, 'keyword')
+                    }
+                    id="keyword"
+                    value={this.state.keyword}
+                    className="results__search-box-keyword"
+                    error={this.state.errors.keyword}
+                  />
+                </div>
+                <div className="flex-col--4 flex-col--medium--4" style={{ textAlign: 'right' }}>
+                  <Button
+                    icon={windowSizeStore.isMobile ? undefined : 'search'}
+                    text="Search"
+                    onClick={() => {
+                      history.push({
+                        search: resultsStore.updateQueryStringParameter(
+                          'search_term',
+                          this.state.keyword
+                        ),
+                      });
+                    }}
+                    disabled={!this.state.keyword}
+                  />
+                </div>
+              </div>
             </div>
             <div className="flex-col flex-col--5 flex-col--tablet-large--6 flex-col--tablet--5">
               <KeywordFilter />

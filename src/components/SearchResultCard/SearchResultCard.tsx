@@ -33,6 +33,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
       className={cx('search-result-card', {
         'search-result-card--full-width': mapView,
       })}
+      onClick={() => history.push(`/services/${result.slug}`)}
     >
       <div className="search-result-card__top-row">
         <div className="search-result-card__title">
@@ -53,7 +54,7 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             {result.is_free ? 'Free' : 'Cost'}
           </div>
           {!!locations.length && (
-            <div className="search-result-card__location">
+            <div className="search-result-card__location" onClick={(e: any) => e.stopPropagation()}>
               <FontAwesomeIcon icon="map-marker-alt" />
               {locations.length === 1 ? (
                 <h4>{first(locations)}</h4>
@@ -83,13 +84,12 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
         </div>
       </div>
       <div className="search-result-card__intro">
-        <p>{result.intro}</p>
+        <p className="body--s">{result.intro}</p>
       </div>
       <div
         className="search-result-card__footer"
         role="navigation"
         aria-label={`View more information on ${result.name}`}
-        onClick={() => history.push(`/services/${result.slug}`)}
       >
         <Link to={`/services/${result.slug}`}>
           <span>View More</span>

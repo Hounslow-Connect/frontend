@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { History } from 'history';
 import cx from 'classnames';
+import get from 'lodash/get';
 
 import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
@@ -12,6 +13,9 @@ import ListView from './ListView';
 import MapView from './MapView';
 import Select from '../../components/Select';
 import Breadcrumb from '../../components/Breadcrumb';
+import map from 'lodash/map';
+import SideboxCard from './SideboxCard';
+import { ISidebox } from '../../types/types';
 
 interface IProps {
   location: Location;
@@ -25,6 +29,20 @@ class Results extends Component<IProps> {
 
     resultsStore.getSearchTerms();
   }
+
+  hasCategories = () => {
+    const { resultsStore } = this.props;
+
+    if (resultsStore.category) {
+      return get(resultsStore, 'category.sideboxes', []);
+    }
+
+    if (resultsStore.persona) {
+      return get(resultsStore, 'persona.sideboxes', []);
+    }
+
+    return null;
+  };
 
   componentDidUpdate(prevProps: IProps) {
     if (prevProps.location.search !== this.props.location.search) {
@@ -49,15 +67,29 @@ class Results extends Component<IProps> {
         </div>
 
         <div className="results__list">
+          {this.hasCategories() && (
+            <div className="flex-container flex-container--mobile-no-padding results__category-sidebar">
+              {map(this.hasCategories(), (sidebox: ISidebox) => {
+                return <SideboxCard sidebox={sidebox} />;
+              })}
+            </div>
+          )}
           <div className="flex-container flex-container results__filter-bar">
             <div className="flex-col flex-col--4 flex-col--tablet-large--2 flex-col--mobile--12 results__container-count">
-              {!!resultsStore.results.length && (
+              {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>{`${resultsStore.results.length} services found`}</p>
               )}
             </div>
             {resultsStore.isKeywordSearch && (
               <div className="flex-col flex-col--8 flex-col--tablet-large--12 flex-col--medium--12 flex-container--tablet--12">
-                <div className="flex-container flex-container--align-center results__keyword-container">
+                <div
+                  className={cx(
+                    'flex-container flex-container--align-center results__keyword-container',
+                    {
+                      'results__keyword-container--end': !resultsStore.postcode,
+                    }
+                  )}
+                >
                   <ViewFilters resultsSwitch={true} />
                   {resultsStore.view === 'grid' && resultsStore.postcode && (
                     <div
@@ -94,7 +126,7 @@ class Results extends Component<IProps> {
           {resultsStore.view === 'grid' ? (
             <ListView resultsStore={resultsStore} history={history} />
           ) : (
-            <MapView resultsStore={resultsStore} />
+            <MapView />
           )}
         </div>
       </section>
