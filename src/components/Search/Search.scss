@@ -18,6 +18,8 @@
   padding: space(32) !important;
 
   @include for-desktop-up {
+    margin-top: space(20) !important;
+
     &:after {
       content: url('../../assets/images/telephone-boxes-shapes.svg');
       top: -31px;
@@ -43,10 +45,6 @@
     background-size: 110% 100%;
     background-color: $iceberg;
     padding: space(40) space(24) space(80) !important;
-  }
-
-  input {
-    margin-bottom: space(24);
   }
 }
 
@@ -76,7 +74,6 @@
 
   input {
     width: 100%;
-    max-width: pxtorem(400px);
   }
 
   &--row {
