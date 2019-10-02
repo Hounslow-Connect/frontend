@@ -19,7 +19,7 @@
 .results__container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 
   @include for-desktop-up {
     padding: 0 space(64);
