@@ -60,7 +60,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                   <FontAwesomeIcon icon={['fab', 'twitter']} className="footer__social-icons" />
                 </a>
               </nav>
-              <div className="flex-col flex-col--6 flex-col--mobile--6">
+              <div className="flex-col flex-col--12">
                 <Link to={'/contact'} className="body--xs footer-contact-links">
                   Contact us
                 </Link>
