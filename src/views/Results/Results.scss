@@ -205,6 +205,10 @@
   @include for-tablet-landscape-down {
     padding-left: space(16) !important;
   }
+
+  &--end {
+    justify-content: flex-end !important;
+  }
 }
 
 .results__mobile-edit {

@@ -82,7 +82,14 @@ class Results extends Component<IProps> {
             </div>
             {resultsStore.isKeywordSearch && (
               <div className="flex-col flex-col--8 flex-col--tablet-large--12 flex-col--medium--12 flex-container--tablet--12">
-                <div className="flex-container flex-container--align-center results__keyword-container">
+                <div
+                  className={cx(
+                    'flex-container flex-container--align-center results__keyword-container',
+                    {
+                      'results__keyword-container--end': !resultsStore.postcode,
+                    }
+                  )}
+                >
                   <ViewFilters resultsSwitch={true} />
                   {resultsStore.view === 'grid' && resultsStore.postcode && (
                     <div
