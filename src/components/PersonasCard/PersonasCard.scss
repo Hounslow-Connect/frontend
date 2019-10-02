@@ -55,6 +55,11 @@
     height: 100%;
     border-top-left-radius: 11px;
     border-top-right-radius: 11px;
+
+    @include for-tablet-portrait-down {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
   }
 }
 
