@@ -1,0 +1,51 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/breakpoints.scss';
+
+.breadcrumb {
+  margin-bottom: space(24) !important;
+
+  @include for-tablet-landscape-down {
+    margin-top: space(24) !important;
+  }
+
+  &--active {
+    color: $mid-grey !important;
+  }
+
+  ul > li:first-child {
+    margin-left: 0 !important;
+  }
+
+  ul {
+    list-style-type: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    a {
+      text-decoration-color: $elm;
+    }
+  }
+
+  li {
+    display: inline;
+    margin-left: space(16);
+    color: $elm;
+    font-size: pxtorem(16px) !important;
+
+    @include for-phone-only {
+      font-size: pxtorem(12px) !important;
+      margin-left: space(8) !important;
+    }
+  }
+
+  svg {
+    margin-left: space(16);
+    color: $elm;
+
+    @include for-phone-only {
+      margin-left: space(8);
+    }
+  }
+}

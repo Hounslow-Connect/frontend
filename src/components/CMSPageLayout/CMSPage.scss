@@ -10,6 +10,8 @@
     padding: space(12) space(24);
     background-color: $alabaster;
     border-radius: 19px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     h3 {
       padding: space(8) 0;
@@ -17,6 +19,11 @@
 
     &--email {
       display: block;
+    }
+
+    a {
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 }

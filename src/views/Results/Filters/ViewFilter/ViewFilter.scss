@@ -19,8 +19,14 @@
 }
 
 .view-filter--right-align {
-  @include for-desktop-up {
-    text-align: right;
+  @include for-tablet-landscape-up {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    &--float-right {
+      text-align: right;
+    }
   }
 }
 

@@ -89,9 +89,9 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
         className="search-result-card__footer"
         role="navigation"
         aria-label={`View more information on ${result.name}`}
-        onClick={() => history.push(`/service/${result.slug}`)}
+        onClick={() => history.push(`/services/${result.slug}`)}
       >
-        <Link to={`/service/${result.slug}`}>
+        <Link to={`/services/${result.slug}`}>
           <span>View More</span>
           <FontAwesomeIcon icon="chevron-right" />
         </Link>

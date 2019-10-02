@@ -6,8 +6,17 @@
 .personas {
   color: $san-juan;
   position: relative;
-  text-align: center;
   padding: space(32) space(16);
+
+  &--intro {
+    @include for-tablet-landscape-up {
+      text-align: center;
+    }
+  }
+
+  .flex-container {
+    max-width: 1260px;
+  }
 
   p {
     margin-top: space(10);
@@ -15,7 +24,7 @@
 
   @include for-phone-only {
     background-color: $iceberg;
-    padding: space(56) space(32) space(96);
+    padding: space(56) space(32) space(56);
     text-align: left;
 
     p {
@@ -64,6 +73,7 @@
 
 .personas__list {
   position: relative;
+  padding-bottom: space(32) !important;
 
   @include for-phone-only {
     margin-top: space(32);
