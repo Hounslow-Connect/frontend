@@ -59,7 +59,9 @@ class RelatedServices extends Component<IProps, IState> {
           ))}
         </div>
         <div className="related-services--button">
-          {!showMore && <Button alt={true} text="Show more" onClick={() => this.showMore()} />}
+          {!showMore && (
+            <Button alt={true} text="View more related services" onClick={() => this.showMore()} />
+          )}
         </div>
       </section>
     );
