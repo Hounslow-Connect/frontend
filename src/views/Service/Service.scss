@@ -313,10 +313,17 @@
   p {
     font-family: $font-tertiary;
     font-size: pxtorem(30px);
+    padding: space(8);
   }
 
   svg {
     font-size: pxtorem(46px);
+
+    padding-right: space(10);
+
+    @include for-tablet-landscape-down {
+      padding-right: space(16);
+    }
   }
 
   @include for-tablet-landscape-up {
