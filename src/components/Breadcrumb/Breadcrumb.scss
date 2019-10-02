@@ -26,6 +26,14 @@
     a {
       text-decoration-color: $elm;
     }
+
+    svg {
+      font-size: pxtorem(16px);
+
+      @include for-phone-only {
+        font-size: pxtorem(12px);
+      }
+    }
   }
 
   li {
