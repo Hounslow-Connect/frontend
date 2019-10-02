@@ -53,7 +53,7 @@
     }
   }
 
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     .flex-col {
       width: 100%;
     }
