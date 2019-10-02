@@ -73,7 +73,7 @@
 
 .personas__list {
   position: relative;
-  padding-bottom: space(32) !important;
+  padding: 0 0 space(32) !important;
 
   @include for-phone-only {
     margin-top: space(32);
