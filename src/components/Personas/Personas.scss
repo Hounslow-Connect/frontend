@@ -69,6 +69,10 @@
   @include heading-l;
 
   margin-bottom: space(8);
+
+  @include for-phone-only {
+    font-size: $font-body-l;
+  }
 }
 
 .personas__list {
