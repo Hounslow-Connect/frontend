@@ -53,7 +53,7 @@ class RelatedServices extends Component<IProps, IState> {
           </div>
         </div>
 
-        <div className="flex-container related-services--container">
+        <div className="flex-container flex-container--justify related-services--container">
           {relatedServices.map((service: IService) => (
             <RelatedServicesCard service={service} key={service.id} />
           ))}
