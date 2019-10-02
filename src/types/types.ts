@@ -5,7 +5,7 @@ export interface IPersona {
   id: string;
   intro: string;
   name: string;
-  sideboxes: [];
+  sideboxes: ISidebox[];
   subtitle: string;
   updated_at: string;
 }
@@ -25,6 +25,7 @@ export interface ICategory {
   intro: string;
   name: string;
   icon: IconName | undefined;
+  sideboxes: ISidebox[];
 }
 
 export interface IOrganisation {
@@ -138,4 +139,9 @@ export interface IPartnerOrganistion {
   order: number;
   created_at: string;
   updated_at: string;
+}
+
+export interface ISidebox {
+  content: string;
+  title: string;
 }

@@ -15,6 +15,7 @@
 
 .referral {
   color: $san-juan;
+  max-width: 1260px;
 
   @include for-tablet-landscape-down {
     padding-top: space(40) !important;

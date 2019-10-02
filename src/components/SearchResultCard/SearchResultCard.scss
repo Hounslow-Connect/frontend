@@ -9,9 +9,15 @@
   color: $san-juan;
   margin: space(8);
   height: max-content;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+  }
 
   @include for-tablet-landscape-up {
     width: 30%;
+    margin-bottom: space(16);
   }
 
   @include for-phone-only {
@@ -31,7 +37,9 @@
 
 .search-result-card__organisation {
   @include heading-s-light;
+  font-weight: normal;
   color: $waikawa;
+  margin-top: space(8);
 
   @include for-phone-only {
     margin: space(8) 0 space(16) 0;
@@ -67,7 +75,7 @@
 }
 
 .search-result-card__tag {
-  @include body-m;
+  @include body-xs;
   padding: space(8);
   color: $white;
   width: fit-content;
@@ -110,6 +118,7 @@
 
   h4 {
     margin-left: space(8);
+    font-size: $font-base;
   }
 }
 
@@ -126,6 +135,7 @@
   h4 {
     display: inline;
     margin-left: 0;
+    font-size: $font-base;
   }
 }
 

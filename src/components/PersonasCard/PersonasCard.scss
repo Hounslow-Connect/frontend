@@ -60,7 +60,7 @@
 
 .card__header {
   @include for-phone-only {
-    font-size: $font-heading-s;
+    font-size: $font-base;
   }
 
   @include for-desktop-up {

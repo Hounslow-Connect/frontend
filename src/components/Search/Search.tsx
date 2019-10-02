@@ -43,7 +43,7 @@ class Search extends React.Component<IProps> {
           <form className="flex--col--12 search__inner-container">
             <div className="flex-container flex-container--mobile-no-padding">
               <div
-                className={cx('flex-col--12 search__input flex-col--mobile--9', {
+                className={cx('flex-col--12 search__input flex-col--mobile--12', {
                   'flex-col--mobile--12': isMobile,
                 })}
               >
@@ -59,12 +59,11 @@ class Search extends React.Component<IProps> {
                       width: '100%',
                       padding: 0,
                       justifyContent: 'end',
-                      alignItems: 'baseline',
                       marginBottom: 24,
                     }}
                   >
                     <div
-                      className={cx('flex-col--4 flex-col--tablet-large--6', {
+                      className={cx('flex-col--6 flex-col--tablet-large--6', {
                         'flex-col--mobile--12': isMobile,
                       })}
                     >

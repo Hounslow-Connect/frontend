@@ -69,11 +69,16 @@
   @include heading-l;
 
   margin-bottom: space(8);
+
+  @include for-phone-only {
+    font-size: $font-body-l;
+    margin-bottom: space(20);
+  }
 }
 
 .personas__list {
   position: relative;
-  padding-bottom: space(32) !important;
+  padding: 0 0 space(32) !important;
 
   @include for-phone-only {
     margin-top: space(32);

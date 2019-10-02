@@ -1,0 +1,32 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+@import '../../../styles/fonts.scss';
+@import '../../../styles/breakpoints.scss';
+
+.sidebox {
+  padding: space(24) !important;
+  background: $alabaster;
+  margin: 0 space(8) !important;
+  border-radius: 25px;
+
+  h3 {
+    color: $san-juan;
+  }
+
+  p {
+    @include body-s;
+    color: $mid-grey;
+    margin: space(8) 0;
+  }
+
+  a {
+    @include body-s;
+    color: $elm;
+  }
+
+  &--container {
+    @include for-tablet-portrait-down {
+      margin-bottom: space(24) !important;
+    }
+  }
+}

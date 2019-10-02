@@ -40,7 +40,6 @@ export default class ServiceStore {
       );
 
       this.locations = get(locationData, 'data.data');
-      this.loading = true;
     }
   };
 
@@ -49,6 +48,8 @@ export default class ServiceStore {
     const relatedServicesData = await axios.get(`${apiBase}/services/${name}/related`);
 
     this.relatedServices = get(relatedServicesData, 'data.data');
+
+    this.loading = false;
   };
 
   addToFavourites = () => {

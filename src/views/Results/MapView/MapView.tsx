@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import find from 'lodash/find';
+import map from 'lodash/map';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { latLngBounds, LatLngBounds } from 'leaflet';
+import { observer, inject } from 'mobx-react';
+
+import { ActivityMarker, GroupMarker, ServiceMarker } from './icons';
 
 import './MapView.scss';
 import ResultsStore from '../../../stores/resultsStore';
@@ -9,45 +14,100 @@ import { IServiceLocation, IService } from '../../../types/types';
 import SearchResultCard from '../../../components/SearchResultCard';
 
 interface IProps {
-  resultsStore: ResultsStore;
+  resultsStore?: ResultsStore;
 }
 
-const CENTRE_OF_KINGSTON: [number, number] = [51.4175006, -0.3182182];
+interface IState {
+  markers: [];
+  bounds: LatLngBounds;
+}
 
-class MapView extends Component<IProps> {
+const CENTRE_OF_KINGSTON: [number, number] = [51.378583, -0.280582];
+const TOP_LEFT_CORNER: [number, number] = [51.431705, -0.348497];
+const BOTTOM_RIGHT_CORNER: [number, number] = [51.369157, -0.217336];
+
+class MapView extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      markers: [],
+      bounds: latLngBounds(TOP_LEFT_CORNER, BOTTOM_RIGHT_CORNER),
+    };
+  }
+
+  addMarkers = (results: IService[]) => {
+    if (results) {
+      map(results, (result: IService) => {
+        if (result.service_locations) {
+          result.service_locations.forEach((location: IServiceLocation) =>
+            this.state.bounds.extend([location.location.lat, location.location.lon])
+          );
+        }
+      });
+    }
+  };
+
+  getMarker = (type: string) => {
+    switch (true) {
+      case type === 'service':
+        return ServiceMarker;
+      case type === 'group':
+        return GroupMarker;
+      case type === 'activity':
+        return ActivityMarker;
+      default:
+        break;
+    }
+  };
+
   render() {
     const { resultsStore } = this.props;
 
+    if (!resultsStore) {
+      return;
+    }
+
+    this.addMarkers(resultsStore.results);
+
     return (
-      <main className="flex">
-        <div className="map">
-          <Map center={CENTRE_OF_KINGSTON} zoom={13} attributionControl={false}>
+      <main className="flex-container">
+        <div className="flex-col--9 flex-col--mobile--12 map">
+          <Map
+            cente={CENTRE_OF_KINGSTON}
+            zoom={6}
+            attributionControl={false}
+            bounds={this.state.bounds}
+          >
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
             {resultsStore.results.map((result: IService) => {
               const organisation =
                 find(resultsStore.organisations, ['id', result.organisation_id]) || null;
               if (result.service_locations) {
-                return result.service_locations.map((serviceLocation: IServiceLocation) => (
-                  <Marker
-                    key={serviceLocation.id}
-                    position={[serviceLocation.location.lat, serviceLocation.location.lon]}
-                  >
-                    <Popup>
-                      <SearchResultCard
-                        result={result}
-                        organisation={organisation}
-                        mapView={true}
-                      />
-                    </Popup>
-                  </Marker>
-                ));
+                return result.service_locations.map((serviceLocation: IServiceLocation) => {
+                  return (
+                    <Marker
+                      key={serviceLocation.id}
+                      position={[serviceLocation.location.lat, serviceLocation.location.lon]}
+                      icon={this.getMarker(result.type)}
+                    >
+                      <Popup>
+                        <SearchResultCard
+                          result={result}
+                          organisation={organisation}
+                          mapView={true}
+                        />
+                      </Popup>
+                    </Marker>
+                  );
+                });
               }
 
               return null;
             })}
           </Map>
         </div>
-        <div className="map__key--container">
+        <div className="flex-col--3 flex-col--mobile--12 map__key--container">
           <h3 className="map__key--heading">Map key</h3>
           <div className="map__key">
             <p className="map__key--description">
@@ -72,4 +132,4 @@ class MapView extends Component<IProps> {
   }
 }
 
-export default MapView;
+export default inject('resultsStore')(observer(MapView));
