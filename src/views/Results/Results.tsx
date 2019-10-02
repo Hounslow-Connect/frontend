@@ -76,7 +76,7 @@ class Results extends Component<IProps> {
           )}
           <div className="flex-container flex-container results__filter-bar">
             <div className="flex-col flex-col--4 flex-col--tablet-large--2 flex-col--mobile--12 results__container-count">
-              {!!resultsStore.results.length && (
+              {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>{`${resultsStore.results.length} services found`}</p>
               )}
             </div>
