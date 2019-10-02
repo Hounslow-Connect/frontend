@@ -11,27 +11,27 @@ import ResultsStore from '../../../stores/resultsStore';
 import KeywordFilter from './KeywordFilter';
 import WindowSizeStore from '../../../stores/windowSizeStore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UIStore from '../../../stores/uiStore';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
   windowSizeStore?: WindowSizeStore;
+  uiStore?: UIStore;
 }
 
 interface IState {
-  editToggled: boolean;
   keyword: string;
   postcode: string;
   errors: any;
 }
 
-@inject('resultsStore', 'windowSizeStore')
+@inject('resultsStore', 'windowSizeStore', 'uiStore')
 @observer
 class Keyword extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
     this.state = {
-      editToggled: false,
       keyword: '',
       postcode: '',
       errors: {
@@ -55,12 +55,6 @@ class Keyword extends Component<IProps, IState> {
       });
     }
   }
-
-  toggleEdit = () => {
-    this.setState({
-      editToggled: !this.state.editToggled,
-    });
-  };
 
   handleInputChange = (string: string, field: string) => {
     // @ts-ignore
@@ -90,19 +84,25 @@ class Keyword extends Component<IProps, IState> {
   };
 
   render() {
-    const { resultsStore, windowSizeStore, history } = this.props;
-    const { editToggled } = this.state;
+    const { resultsStore, windowSizeStore, uiStore, history } = this.props;
 
-    if (!resultsStore || !windowSizeStore) {
+    if (!resultsStore || !windowSizeStore || !uiStore) {
       return null;
     }
     return (
       <Fragment>
         {/* Mobile Dropdown */}
-        {editToggled && (
+        {uiStore.keywordEditOpen && (
           <div className="mobile-show tablet-show tablet--large-show flex-container results__keyword-edit">
             <div className="flex-col">
-              <div role="button" aria-label="Close edit popup" onClick={() => this.toggleEdit()}>
+              <div
+                role="button"
+                aria-label="Close edit popup"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  uiStore.toggleKeywordEdit();
+                }}
+              >
                 <span className="results__keyword-edit-toggle">
                   <FontAwesomeIcon icon="chevron-left" /> Back
                 </span>
@@ -165,7 +165,7 @@ class Keyword extends Component<IProps, IState> {
                     onClick={() => {
                       this.handleAmend(() => {
                         resultsStore.postcodeChange(this.state.postcode);
-                        this.toggleEdit();
+                        uiStore.toggleKeywordEdit();
                         history.push({ search: resultsStore.amendSearch(this.state.keyword) });
                       });
                     }}
@@ -182,7 +182,7 @@ class Keyword extends Component<IProps, IState> {
             <p>{this.state.keyword}</p>
           </div>
           <div className="mobile-show tablet-show tablet--large-show  flex-col flex-col--mobile--5 results__mobile-edit">
-            <Button text="Edit Search" size="small" onClick={() => this.toggleEdit()} />
+            <Button text="Edit Search" size="small" onClick={() => uiStore.toggleKeywordEdit()} />
           </div>
 
           {/* Desktop */}
@@ -207,7 +207,7 @@ class Keyword extends Component<IProps, IState> {
                     error={this.state.errors.keyword}
                   />
                 </div>
-                <div className="flex-col--3 flex-col--medium--4">
+                <div className="flex-col--4 flex-col--medium--4" style={{ textAlign: 'right' }}>
                   <Button
                     icon={windowSizeStore.isMobile ? undefined : 'search'}
                     text="Search"

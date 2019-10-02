@@ -59,6 +59,10 @@
       &--active {
         padding-bottom: space(48) !important;
       }
+
+      &--sticky {
+        position: fixed;
+      }
     }
   }
 

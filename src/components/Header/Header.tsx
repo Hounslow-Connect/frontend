@@ -55,6 +55,7 @@ class Header extends Component<IProps> {
           <div
             className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
               'header__brand--active': burgerMenuOpen,
+              'header__brand--sticky': uiStore.keywordEditOpen,
             })}
           >
             <figure className="logo">
