@@ -1,6 +1,9 @@
+@import '../../styles/mixins.scss';
+
 .loading {
   opacity: 1;
   animation: fadeinout 4s infinite forwards;
+  padding-top: space(64);
 }
 
 @keyframes fadeinout {
