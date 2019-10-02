@@ -5,8 +5,8 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 
-import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { apiBase } from '../../config/api';
@@ -16,7 +16,6 @@ import './Service.scss';
 import { IServiceLocation } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
 import Button from '../../components/Button';
-import Link from '../../components/Link';
 
 import AgeGroup from '../../assets/images/icons/who-is-this-for/age-group.svg';
 import Disability from '../../assets/images/icons/who-is-this-for/disability.svg';
@@ -185,7 +184,7 @@ class Service extends Component<IProps> {
                 <div className="flex-col flex-col--mobile--12 mobile-show criteria_card service__info__cost">
                   <CostCard service={service} />
                 </div>
-              )}
+              </div>
 
               <div className="flex-container flex-container--align-center service__media service__section--no-padding">
                 <div className="flex-col flex-col--mobile--12">
@@ -206,7 +205,6 @@ class Service extends Component<IProps> {
                 <div className="flex-col flex-col--12 flex-col--mobile--12">
                   <h3>What do we offer?</h3>
                 </div>
-              )}
 
                 <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
                   {map(service.offerings, (offering: any, i) => (
@@ -224,7 +222,7 @@ class Service extends Component<IProps> {
                 <div className="flex-col flex-col--mobile--12 service__section service__section--no-margin">
                   <ReactMarkdown source={service.description} className="service__markdown" />
                 </div>
-              )}
+              </div>
 
               {service.testimonial && (
                 <div className="mobile-hide flex-container service__section service__section--no-padding">
@@ -292,11 +290,8 @@ class Service extends Component<IProps> {
                       <p>{get(service, 'testimonial')}</p>
                     </div>
                   </div>
-                </div>
+                </Accordian>
               )}
-            </div>
-
-            <div className="service__section">IMAGES</div>
 
               {!!locations.length && (
                 <Accordian
@@ -309,71 +304,9 @@ class Service extends Component<IProps> {
                       key={location.id}
                       className="service__accordian-inner"
                     />
-                  )}
-                  <p> {get(location, 'location.address_line_1')}</p>
-                  <p>{`${get(location, 'location.address_line_2')}, ${get(
-                    location,
-                    'location.postcode'
-                  )}`}</p>
-                  {get(location, 'location.has_wheelchair_access') && (
-                    <ReactSVG src={WheelchairAccessible} />
-                  )}
-                  {get(location, 'location.has_induction_loop') && <ReactSVG src={InductionLoop} />}
-
-                  {/* OPENING TIMES */}
-
-                  <Link
-                    icon="map"
-                    text="View on Google Maps"
-                    size="medium"
-                    href=""
-                    iconPosition="right"
-                  />
-                  <Link
-                    icon="map-signs"
-                    text="View on Google Maps"
-                    size="medium"
-                    href=""
-                    iconPosition="right"
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="service__section">
-              <h2>Good to know</h2>
-              {service.useful_infos.map((info: any) => (
-                <div key={info.title}>
-                  <p>{info.title}</p>
-                  <p>{info.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-          <section className="service__info--right">
-            <div className="body--l service__info__cost service__section">
-              <div className="body--l service__info__cost--left">
-                <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
-                <p className="service__info__cost--sub-heading">Cost</p>
-              </div>
-              <div className="service__info__cost--right">
-                <p className="service__info__cost--header">{service.is_free ? 'Free' : 'Cost'}</p>
-                <p>
-                  {service.fees_text ? service.fees_text : `This ${service.type} costs no money`}
-                </p>
-                {service.fees_url && <a href={service.fees_url}>Further Pricing Details</a>}
-              </div>
-            </div>
-            <div className="service__section">
-              {service.video_embed && (
-                <ReactPlayer
-                  url={service.video_embed}
-                  width={'100%'}
-                  style={{ borderRadius: '19px' }}
-                  light={true}
-                />
+                  ))}
+                </Accordian>
               )}
-            </div>
 
               {!!service.useful_infos.length && (
                 <Accordian title="Good to know" className="service__accordian mobile-show">
@@ -398,22 +331,6 @@ class Service extends Component<IProps> {
               <div className="mobile-show">
                 <ButtonCard serviceStore={serviceStore} />
               </div>
-            </div>
-
-            <div className="service__section">
-              <Button text="Print" icon="print" alt={true} />
-              <Button
-                text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-                icon="star"
-                alt={true}
-                onClick={() => serviceStore.addToFavourites()}
-                disabled={serviceStore.favourite}
-              />
-            </div>
-
-            <div className="service__section">
-              Share page to social media
-              {/* TODO */}
             </div>
           </section>
           <section className="flex-col flex-col--4 mobile-hide">
