@@ -310,8 +310,13 @@ class Service extends Component<IProps> {
                 {service.testimonial && (
                   <Accordian title="What people say" className="service__accordian mobile-show">
                     <div className="service__accordian-inner">
-                      <div className="service__testimonial">
-                        <p>{get(service, 'testimonial')}</p>
+                      <div className="flex-container flex-container--mobile-no-padding flex-container--justify service__testimonial service__testimonial--mobile">
+                        <div className="flex-col--1">
+                          <FontAwesomeIcon icon="comment" />
+                        </div>
+                        <div className="flex-col--12">
+                          <p>{this.formatTestimonial(service.testimonial)}</p>
+                        </div>
                       </div>
                     </div>
                   </Accordian>
@@ -352,7 +357,7 @@ class Service extends Component<IProps> {
                   </div>
                 </Accordian>
 
-                <div className="mobile-show">
+                <div className="flex-col mobile-show">
                   <ButtonCard serviceStore={serviceStore} />
                 </div>
               </div>
