@@ -258,6 +258,7 @@
 
   &--description {
     p {
+      @include body-m;
       color: $lynch;
       margin: space(24) 0;
 
@@ -368,6 +369,19 @@
   background-size: 100% 100%;
   padding: space(8);
 
+  &--mobile {
+    background-image: none;
+    background-color: $white;
+    border: 1px solid $san-juan;
+    padding: space(16) space(24) space(24) !important;
+    border-radius: 17px 33px 47px 29px;
+
+    svg {
+      width: auto !important;
+      font-size: pxtorem(36px) !important;
+    }
+  }
+
   p {
     font-family: $font-tertiary;
     font-size: pxtorem(30px);
@@ -376,7 +390,8 @@
 
   svg {
     font-size: pxtorem(46px);
-
+    width: auto !important;
+    color: $waikawa;
     padding-right: space(10);
 
     @include for-tablet-landscape-down {
@@ -536,10 +551,16 @@
     padding: space(32) !important;
     margin-top: space(16) !important;
   }
+
+  @include for-phone-only {
+    h3 {
+      font-size: $font-body-l;
+    }
+  }
 }
 
 .service__offerings {
-  font-size: $font-body-m;
+  @include body-m;
   font-family: $font-secondary;
   margin-top: space(24);
   margin-bottom: space(40) !important;
@@ -558,5 +579,10 @@
   @include for-tablet-landscape-up {
     padding-left: 40px !important;
     margin-bottom: space(32);
+  }
+
+  @include for-phone-only {
+    font-size: $font-body-l !important;
+    margin-bottom: space(12);
   }
 }
