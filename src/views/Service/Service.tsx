@@ -101,28 +101,30 @@ class Service extends Component<IProps> {
           ]}
         />
         <div className={`service__header service__header--${get(service, 'type')}`}>
-          <div className="flex-col flex-col--mobile--9">
-            <h1>{get(service, 'name')}</h1>
-            <p className="service__header__last-updated">
-              Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
-              <Button
-                text="Give feedback"
-                icon="comment"
-                alt={true}
-                size="small"
-                onClick={() => uiStore.toggleFeedbackModal()}
-              />
-            </p>
-          </div>
-          <div className="flex-col flex-col--mobile--3">
-            <div className="service__header__logo">
-              <img
-                src={`${apiBase}/organisations/${get(service, 'organisation.id')}/logo.png?v=${get(
-                  service,
-                  'organisation.id'
-                )}`}
-                alt={`${service.name} logo`}
-              />
+          <div className="flex-container flex-container--mobile-no-padding">
+            <div className="flex-col flex-col--mobile--9">
+              <h1>{get(service, 'name')}</h1>
+              <p className="service__header__last-updated">
+                Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
+                <Button
+                  text="Give feedback"
+                  icon="comment"
+                  alt={true}
+                  size="small"
+                  onClick={() => uiStore.toggleFeedbackModal()}
+                />
+              </p>
+            </div>
+            <div className="flex-col flex-col--mobile--3">
+              <div className="service__header__logo">
+                <img
+                  src={`${apiBase}/organisations/${get(
+                    service,
+                    'organisation.id'
+                  )}/logo.png?v=${get(service, 'organisation.id')}`}
+                  alt={`${service.name} logo`}
+                />
+              </div>
             </div>
           </div>
         </div>
