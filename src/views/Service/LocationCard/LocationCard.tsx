@@ -66,7 +66,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
             </div>
           )}
         </div>
-        <div className="flex-container flex-container--justify flex-container--mobile-no-padding location__accessibility">
+        <div className="flex-container flex-container--mobile-no-padding location__accessibility">
           {get(location, 'location.has_wheelchair_access') && (
             <ReactSVG src={WheelchairAccessible} />
           )}
@@ -100,7 +100,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
       <div className="flex-col flex-col--6 flex-col--mobile--12">
         <div className="flex-col flex-col--mobile--12 location__opening-times">
           <h4 className="location__opening-times--header">
-            <FontAwesomeIcon icon="clock" /> Opening Times
+            <FontAwesomeIcon icon="clock" /> Opening hours
           </h4>
           <div className="flex-container flex-container--mobile-no-padding">
             <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
