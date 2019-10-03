@@ -84,6 +84,12 @@ ul {
   @include body-s;
   color: inherit;
 }
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
 li {
   display: list-item;
   margin: space(8) 0;
