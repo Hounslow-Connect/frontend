@@ -14,8 +14,20 @@
     text-overflow: ellipsis;
     margin-left: space(16);
 
+    &--row {
+      margin-top: space(24);
+    }
+
+    &--socials {
+      text-align: center;
+    }
+
     h3 {
       padding: space(8) 0;
+    }
+
+    h4 {
+      margin-bottom: space(8);
     }
 
     &--email {
