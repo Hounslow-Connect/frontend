@@ -303,8 +303,15 @@
   padding: space(24) space(12);
   width: 100%;
 
+  svg {
+    font-size: pxtorem(18px);
+  }
+
   button {
     text-align: left;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 
     h4 {
       display: inline;
