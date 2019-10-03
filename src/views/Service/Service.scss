@@ -287,6 +287,7 @@
   &--no-overflow {
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
 }
 
@@ -416,8 +417,18 @@
   background-color: $alabaster;
   border-radius: 19px;
 
+  .flex-col {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   a {
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &--row {
