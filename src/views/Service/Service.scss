@@ -246,8 +246,49 @@
 }
 
 .service__markdown {
-  p {
-    margin-bottom: space(16);
+  &--intro {
+    p {
+      @include body-l;
+      margin-bottom: space(40);
+      color: $san-juan;
+    }
+  }
+
+  &--description {
+    p {
+      color: $lynch;
+      margin: space(24) 0;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+
+    ul li {
+      display: inline;
+
+      &:before {
+        content: '•';
+        margin: 0 pxtorem(4px);
+        color: $downy;
+      }
+    }
+
+    li > p {
+      display: inline;
+      hyphens: auto;
+    }
+
+    li {
+      color: $lynch;
+      font-family: $font-primary;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    @include heading-s;
   }
 
   a {
@@ -491,10 +532,11 @@
 .service__offerings {
   font-size: $font-body-m;
   font-family: $font-secondary;
-  margin-top: space(16);
+  margin-top: space(24);
+  margin-bottom: space(40) !important;
 
   span {
-    color: $waikawa;
+    color: $lynch;
   }
 
   svg {
