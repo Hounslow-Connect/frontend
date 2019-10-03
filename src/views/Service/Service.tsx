@@ -138,7 +138,10 @@ class Service extends Component<IProps> {
                 <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
                   <h2 className="service__heading">Who is it for?</h2>
                 </div>
-                <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
+                <div
+                  className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding"
+                  style={{ alignItems: 'stretch' }}
+                >
                   {get(service, 'criteria.age_group') && (
                     <CriteriaCard
                       svg={AgeGroup}
