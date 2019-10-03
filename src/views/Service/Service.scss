@@ -343,7 +343,23 @@
 }
 
 .service__button-container {
-  padding: space(24) !important;
+  padding: space(24) 0 !important;
+
+  @include for-tablet-landscape-down {
+    svg {
+      display: none;
+    }
+  }
+
+  @include for-phone-only {
+    padding: space(24) !important;
+
+    justify-content: space-evenly !important;
+  }
+
+  &--mobile {
+    text-align: center;
+  }
 }
 
 .service__accordian-inner {

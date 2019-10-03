@@ -7,15 +7,19 @@ interface IProps {
 }
 
 const ButtonCard: React.FunctionComponent<IProps> = ({ serviceStore }) => (
-  <div className="flex-container service__button-container">
-    <Button text="Print" icon="print" alt={true} onClick={() => window.print()} />
-    <Button
-      text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-      icon="star"
-      alt={true}
-      onClick={() => serviceStore.addToFavourites()}
-      disabled={serviceStore.favourite}
-    />
+  <div className="flex-container flex-container--mobile-no-padding flex-container--justify service__button-container">
+    <div className="flex-col--mobile--3 flex-col--5">
+      <Button text="Print" icon="print" alt={true} onClick={() => window.print()} />
+    </div>
+    <div className="flex-col--mobile--7 flex-col--7 service__button-container--mobile">
+      <Button
+        text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
+        icon="star"
+        alt={true}
+        onClick={() => serviceStore.addToFavourites()}
+        disabled={serviceStore.favourite}
+      />
+    </div>
   </div>
 );
 

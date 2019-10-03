@@ -357,7 +357,7 @@ class Service extends Component<IProps> {
                   </div>
                 </Accordian>
 
-                <div className="mobile-show">
+                <div className="flex-col mobile-show">
                   <ButtonCard serviceStore={serviceStore} />
                 </div>
               </div>
