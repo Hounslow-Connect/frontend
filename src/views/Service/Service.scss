@@ -310,6 +310,7 @@
 
 .service__social-icon-container {
   text-align: center;
+  padding-bottom: space(32);
 }
 
 .service__testimonial {
@@ -429,6 +430,10 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  h4 {
+    margin-bottom: space(8);
   }
 
   &--row {
