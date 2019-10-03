@@ -122,7 +122,7 @@ class Service extends Component<IProps> {
                   src={`${apiBase}/organisations/${get(
                     service,
                     'organisation.id'
-                  )}/logo.png?v=${get(service, 'organisation.id')}&max_dimension=175`}
+                  )}/logo.png?v=${get(service, 'organisation.id')}`}
                   alt={`${service.name} logo`}
                 />
               </div>
