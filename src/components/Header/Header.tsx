@@ -32,7 +32,6 @@ class Header extends Component<IProps> {
 
   render() {
     const { windowSizeStore, uiStore } = this.props;
-    console.log(this.props.location);
 
     // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
     if (!windowSizeStore || !uiStore) {
