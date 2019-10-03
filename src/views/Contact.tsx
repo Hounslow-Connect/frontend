@@ -24,12 +24,16 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
       <div className="flex-col flex-col--3 flex-col--mobile--5 flex-col--tablet-large--4">
         <div className="cms--contact-card">
           <h3>Contact</h3>
-          <div className="service__contact-card--row">
-            <FontAwesomeIcon icon="phone" /> Telephone
+          <div className="cms--contact-card--row">
+            <h4>
+              <FontAwesomeIcon icon="phone" /> Telephone
+            </h4>
             <p>{get(cmsStore, 'global.contact_phone')}</p>
           </div>
-          <div className="service__contact-card--row">
-            <FontAwesomeIcon icon="envelope" /> Email
+          <div className="cms--contact-card--row">
+            <h4>
+              <FontAwesomeIcon icon="envelope" /> Email
+            </h4>
             <a
               className="cms--contact-card--email"
               href={`mailto:${get(cmsStore, 'global.contact_email')}`}
@@ -37,7 +41,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               {get(cmsStore, 'global.contact_email')}
             </a>
           </div>
-          <div className="flex-col flex-col--12 service__social-icon-container">
+          <div className="flex-col flex-col--12 cms--contact-card--socials service__contact-card--row">
             <a
               href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
               target="_blank"
