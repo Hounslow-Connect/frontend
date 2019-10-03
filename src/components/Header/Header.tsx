@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactSVG from 'react-svg';
 import { observer, inject } from 'mobx-react';
 import cx from 'classnames';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import './Header.scss';
 
@@ -14,7 +14,7 @@ import WindowSizeStore from '../../stores/windowSizeStore';
 import UIStore from '../../stores/uiStore';
 import Footer from '../Footer/Footer';
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   windowSizeStore?: WindowSizeStore;
   uiStore?: UIStore;
 }
@@ -22,8 +22,17 @@ interface IProps {
 @inject('windowSizeStore', 'uiStore')
 @observer
 class Header extends Component<IProps> {
+  getBackgroundColor = () => {
+    if (this.props.location.pathname.includes('/services/')) {
+      return true;
+    }
+
+    return false;
+  };
+
   render() {
     const { windowSizeStore, uiStore } = this.props;
+    console.log(this.props.location);
 
     // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
     if (!windowSizeStore || !uiStore) {
@@ -56,6 +65,7 @@ class Header extends Component<IProps> {
             className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
               'header__brand--active': burgerMenuOpen,
               'header__brand--sticky': uiStore.keywordEditOpen,
+              'header__brand--white': this.getBackgroundColor(),
             })}
           >
             <figure className="logo">
@@ -167,4 +177,4 @@ class Header extends Component<IProps> {
   }
 }
 
-export default Header;
+export default withRouter(Header);

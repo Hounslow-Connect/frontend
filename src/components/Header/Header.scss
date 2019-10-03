@@ -62,6 +62,10 @@
       &--sticky {
         position: fixed;
       }
+
+      &--white {
+        background-color: $white;
+      }
     }
   }
 
