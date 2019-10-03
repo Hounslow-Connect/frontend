@@ -424,6 +424,16 @@
     white-space: nowrap;
   }
 
+  &--accordian {
+    h4 {
+      margin-bottom: space(8);
+    }
+
+    .service__social-icon-container {
+      padding-bottom: 0;
+    }
+  }
+
   a {
     text-decoration: none;
 

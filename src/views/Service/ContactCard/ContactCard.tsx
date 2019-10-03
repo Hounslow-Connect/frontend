@@ -17,7 +17,7 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
     className={cx(
       'flex-container flex-container--align-center flex-container--mobile-no-padding service__section',
       {
-        'service__accordian-inner': accordian,
+        'service__accordian-inner service__contact-card--accordian': accordian,
         'service__contact-card': !accordian,
       }
     )}
