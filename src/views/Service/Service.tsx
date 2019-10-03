@@ -43,6 +43,7 @@ import UIStore from '../../stores/uiStore';
 import { removeQuotesRegex } from '../../utils/utils';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
+import capitalize from 'lodash/capitalize';
 
 interface RouteParams {
   service: string;
@@ -217,27 +218,33 @@ class Service extends Component<IProps> {
 
                 <div className="flex-container flex-container--align-center service__section service__section--no-padding service__information">
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
-                    <ReactMarkdown source={service.intro} className="service__markdown" />
+                    <ReactMarkdown
+                      source={service.intro}
+                      className="service__markdown service__markdown--intro"
+                    />
                   </div>
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
-                    <h3>What do we offer?</h3>
+                    <h3>What we offer?</h3>
                   </div>
 
                   <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
                     {map(service.offerings, (offering: any, i) => (
                       <Fragment key={offering.offering}>
-                        <span>{offering.offering}</span>
+                        <span>{capitalize(offering.offering)}</span>
                         {i < service.offerings.length - 1 ? (
                           <FontAwesomeIcon
                             icon="circle"
-                            style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 4px' }}
+                            style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 10px' }}
                           />
                         ) : null}
                       </Fragment>
                     ))}
                   </div>
-                  <div className="flex-col flex-col--mobile--12 service__section service__section--no-margin">
-                    <ReactMarkdown source={service.description} className="service__markdown" />
+                  <div className="flex-col flex-col--mobile--12 service__section--no-margin">
+                    <ReactMarkdown
+                      source={service.description}
+                      className="service__markdown service__markdown--description"
+                    />
                   </div>
                 </div>
 
