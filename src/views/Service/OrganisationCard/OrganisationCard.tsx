@@ -25,7 +25,7 @@ const OrganisationCard: React.FunctionComponent<IProps> = ({ service, sidebar })
           alt={`${get(service, 'organisation.name')} Logo`}
         />
       ) : (
-        <img src={FallBackLogo} style={{ width: 100 }} />
+        <img src={FallBackLogo} style={{ width: 100 }} alt="No logo" />
       )}
     </div>
     <div className="flex-col flex-col--8 flex-col--mobile--12 service__organisation">
