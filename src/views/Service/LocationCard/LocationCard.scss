@@ -17,6 +17,7 @@
 
 .location__accessibility {
   margin: space(12) 0 0 0 !important;
+  justify-content: flex-start !important;
 
   svg {
     margin-right: space(8);
@@ -43,7 +44,11 @@
   }
 
   h4 {
-    margin-bottom: space(8);
+    margin-bottom: space(12);
+
+    svg {
+      font-size: pxtorem(19px);
+    }
   }
 
   &--header {
