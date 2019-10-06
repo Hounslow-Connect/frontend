@@ -74,7 +74,7 @@
 
   &__brand {
     position: relative;
-    padding: space(12) !important;
+    padding: space(12);
     z-index: 1;
 
     @include for-tablet-landscape-down {
@@ -100,8 +100,11 @@
 
     @include for-phone-only {
       padding: space(12) !important;
-
       background-color: $iceberg;
+
+      &--active {
+        padding-bottom: space(48) !important;
+      }
     }
   }
 
