@@ -29,6 +29,7 @@
     height: 100%;
     z-index: 999;
     overflow: auto;
+    background-color: $iceberg;
   }
 
   .flex-container {
@@ -42,17 +43,46 @@
     }
   }
 
+  &--top-row {
+    align-items: stretch !important;
+    padding-bottom: space(12) !important;
+
+    @include for-desktop-up {
+      justify-content: flex-end !important;
+    }
+
+    @include for-tablet-landscape-down {
+      button {
+        svg {
+          margin-left: 6px;
+        }
+      }
+    }
+
+    @include for-phone-only {
+      background-color: $iceberg;
+
+      button {
+        border: none;
+      }
+
+      .goog-te-gadget-simple {
+        border: none !important;
+      }
+    }
+  }
+
   &__brand {
     position: relative;
     padding: space(12) !important;
     z-index: 1;
 
     @include for-tablet-landscape-down {
+      padding: space(12) space(24) !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: space(16);
-      background-color: $iceberg;
       width: 100% !important;
 
       &--active {
@@ -66,6 +96,12 @@
       &--white {
         background-color: $white;
       }
+    }
+
+    @include for-phone-only {
+      padding: space(12) !important;
+
+      background-color: $iceberg;
     }
   }
 
@@ -162,8 +198,12 @@
     }
 
     &.active {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+
       label:before {
-        content: 'Close menu';
+        content: 'Close';
       }
 
       i:before {

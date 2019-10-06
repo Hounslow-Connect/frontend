@@ -47,17 +47,29 @@ class Header extends Component<IProps> {
           active: burgerMenuOpen,
         })}
       >
-        <div className="flex-col--12 mobile-hide tablet--large-hide medium-hide">
-          <div id="google_translate_element" />
-          <Button
-            text="Give Feedback"
-            header={true}
-            icon="comment"
-            onClick={() => uiStore.toggleFeedbackModal()}
-          />
-          <RouterLink to="/favourites">
-            <Button text="Favourites" header={true} icon="star" />
-          </RouterLink>
+        <div
+          className={cx('flex-col--12', {
+            'mobile-hide tablet--large-hide medium-hide': burgerMenuOpen,
+          })}
+        >
+          <div className="flex-container flex-container--mobile-no-padding flex-container--justify header--top-row">
+            <div className="flex-col flex-col--mobile--5">
+              <div id="google_translate_element" />
+            </div>
+            <div className="flex-col mobile-hide tablet--large-hide medium-hide">
+              <Button
+                text="Give Feedback"
+                header={true}
+                icon="comment"
+                onClick={() => uiStore.toggleFeedbackModal()}
+              />
+            </div>
+            <div className="flex-col flex-col--mobile--7">
+              <RouterLink to="/favourites">
+                <Button text="Favourites" header={true} icon="star" />
+              </RouterLink>
+            </div>
+          </div>
         </div>
         <div className="flex-container flex-container--align-center flex-container--justify header__container">
           <div
@@ -75,7 +87,9 @@ class Header extends Component<IProps> {
 
             <button
               name="nav-trigger"
-              className="nav-trigger tablet--large-show medium-show"
+              className={cx('nav-trigger tablet--large-show medium-show', {
+                active: burgerMenuOpen,
+              })}
               onClick={() => toggleBurgerMenu()}
             >
               <label htmlFor="nav-trigger"></label>

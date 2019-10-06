@@ -121,7 +121,6 @@ button {
   padding: 0.25rem 1rem 0.5rem;
   margin: 0 1.5rem;
   background-color: #fff;
-  font-size: 1.125rem;
   font-weight: normal;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
@@ -144,6 +143,7 @@ button {
     color: $waikawa;
     content: 'Translate';
     font-family: 'Museo Sans 500', sans-serif;
+    font-size: pxtorem(18px);
   }
 
   span &:after {
