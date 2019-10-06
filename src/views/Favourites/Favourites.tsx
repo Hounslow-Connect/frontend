@@ -77,14 +77,6 @@ class Favourites extends Component<IProps> {
                 </div>
               </div>
 
-              <div className="flex-container favourites__add-more">
-                <div className="flex-col">
-                  <Link to="/">
-                    <Button text="Add more" icon="plus" onClick={() => history.push('/')} />
-                  </Link>
-                </div>
-              </div>
-
               <div className="flex-container mobile-show tablet-show">
                 <FavouriteShare />
               </div>
@@ -96,6 +88,13 @@ class Favourites extends Component<IProps> {
               </div>
             </div>
           )}
+        </div>
+        <div className="flex-container flex-container--justify">
+          <div className="favourites__add-more">
+            <Link to="/">
+              <Button text="Add more" icon="plus" onClick={() => history.push('/')} />
+            </Link>
+          </div>
         </div>
       </section>
     );
