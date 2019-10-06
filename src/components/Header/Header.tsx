@@ -39,7 +39,7 @@ class Header extends Component<IProps> {
     }
 
     const { isMobile } = windowSizeStore;
-    const { burgerMenuOpen, toggleBurgerMenu, toggleFeedbackModal } = uiStore;
+    const { burgerMenuOpen, toggleBurgerMenu, toggleFeedbackModal, keywordEditOpen } = uiStore;
 
     return (
       <header
@@ -49,7 +49,7 @@ class Header extends Component<IProps> {
       >
         <div
           className={cx('flex-col--12', {
-            'mobile-hide tablet--large-hide medium-hide': burgerMenuOpen,
+            'mobile-hide tablet--large-hide medium-hide': burgerMenuOpen || keywordEditOpen,
           })}
         >
           <div className="flex-container flex-container--mobile-no-padding flex-container--justify header--top-row">
