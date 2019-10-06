@@ -42,6 +42,31 @@
     }
   }
 
+  &--top-row {
+    align-items: stretch !important;
+
+    @include for-desktop-up {
+      justify-content: flex-end !important;
+    }
+
+    @include for-tablet-landscape-down {
+      background-color: $iceberg;
+      padding-bottom: space(12) !important;
+
+      button {
+        border: none;
+
+        svg {
+          margin-left: 6px;
+        }
+      }
+
+      .goog-te-gadget-simple {
+        border: none !important;
+      }
+    }
+  }
+
   &__brand {
     position: relative;
     padding: space(12) !important;
