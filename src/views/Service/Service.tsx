@@ -211,7 +211,6 @@ class Service extends Component<IProps> {
                   <div className="flex-col flex-col--mobile--12">
                     <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                   </div>
-                  {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
                   {service.video_embed && (
                     <div className="flex-container flex-container--mobile-no-padding mobile-show">
                       <VideoCard video={service.video_embed} width="90vw" />
