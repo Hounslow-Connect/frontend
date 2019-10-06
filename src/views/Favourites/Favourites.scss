@@ -163,6 +163,17 @@
       background-color: $san-juan;
       color: $white;
     }
+
+    @include for-phone-only {
+      p {
+        font-size: pxtorem(18px);
+        vertical-align: middle;
+      }
+
+      svg {
+        vertical-align: middle;
+      }
+    }
   }
 
   &--contact {
