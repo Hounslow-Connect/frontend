@@ -87,7 +87,9 @@ class Header extends Component<IProps> {
 
             <button
               name="nav-trigger"
-              className="nav-trigger tablet--large-show medium-show"
+              className={cx('nav-trigger tablet--large-show medium-show', {
+                active: burgerMenuOpen,
+              })}
               onClick={() => toggleBurgerMenu()}
             >
               <label htmlFor="nav-trigger"></label>
