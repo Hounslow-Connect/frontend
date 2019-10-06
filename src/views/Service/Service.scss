@@ -257,6 +257,8 @@
   }
 
   &--description {
+    word-break: break-word;
+
     p {
       @include body-m;
       color: $lynch;
@@ -285,6 +287,14 @@
     li {
       color: $lynch;
       font-family: $font-primary;
+    }
+
+    &--tight {
+      p {
+        &:first-of-type {
+          margin-top: space(24);
+        }
+      }
     }
   }
 
@@ -592,8 +602,14 @@
 }
 
 .service__heading {
+  margin-bottom: space(32);
+
   @include for-tablet-landscape-up {
     padding-left: 40px !important;
+    margin-bottom: space(32);
+  }
+
+  @include for-tablet-landscape-down {
     margin-bottom: space(32);
   }
 

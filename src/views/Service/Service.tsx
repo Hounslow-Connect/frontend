@@ -6,6 +6,7 @@ import map from 'lodash/map';
 import find from 'lodash/find';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
+import cx from 'classnames';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -229,23 +230,28 @@ class Service extends Component<IProps> {
                     <h3>What we offer?</h3>
                   </div>
 
-                  <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
-                    {map(service.offerings, (offering: any, i) => (
-                      <Fragment key={offering.offering}>
-                        <span>{capitalize(offering.offering)}</span>
-                        {i < service.offerings.length - 1 ? (
-                          <FontAwesomeIcon
-                            icon="circle"
-                            style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 10px' }}
-                          />
-                        ) : null}
-                      </Fragment>
-                    ))}
-                  </div>
-                  <div className="flex-col flex-col--mobile--12 service__section--no-margin">
+                  {!!service.offerings.length && (
+                    <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
+                      {map(service.offerings, (offering: any, i) => (
+                        <Fragment key={offering.offering}>
+                          <span>{capitalize(offering.offering)}</span>
+                          {i < service.offerings.length - 1 ? (
+                            <FontAwesomeIcon
+                              icon="circle"
+                              style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 10px' }}
+                            />
+                          ) : null}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex-col flex-col--mobile--12 service__section">
                     <ReactMarkdown
                       source={service.description}
-                      className="service__markdown service__markdown--description"
+                      className={cx('service__markdown service__markdown--description', {
+                        'service__markdown--description--tight': !service.offerings.length,
+                      })}
                     />
                   </div>
                 </div>
