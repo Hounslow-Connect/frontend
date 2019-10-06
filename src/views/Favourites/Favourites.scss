@@ -199,9 +199,18 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: space(64) !important;
+  margin-top: space(64);
 
   button {
     background-color: $elm;
+  }
+
+  @include for-phone-only {
+    padding: space(32) !important;
+
+    button {
+      font-size: pxtorem(18px);
+    }
   }
 }
 
