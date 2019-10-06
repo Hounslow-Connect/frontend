@@ -152,7 +152,13 @@
 
   &--button {
     text-align: center;
+
     padding: space(16);
+
+    svg {
+      margin-left: space(8);
+      vertical-align: middle;
+    }
 
     &:first-of-type {
       border-right: 2px solid $san-juan;
@@ -173,10 +179,6 @@
         font-size: pxtorem(18px);
         vertical-align: middle;
       }
-
-      svg {
-        vertical-align: middle;
-      }
     }
   }
 
@@ -191,6 +193,7 @@
 
     &--heading {
       @include heading-s;
+      margin: space(8) 0;
     }
 
     .flex-col {
