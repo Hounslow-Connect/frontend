@@ -14,6 +14,10 @@
   height: 600px;
   border-radius: 25px;
   overflow: hidden;
+
+  @include for-phone-only {
+    height: 200px;
+  }
 }
 
 .map__key--container {
