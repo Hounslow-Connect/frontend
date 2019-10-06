@@ -46,10 +46,10 @@ class Favourites extends Component<IProps> {
             <h1>{get(cmsStore, 'favourites.title')}</h1>
           </div>
           <div className="flex-container flex-container--mobile-no-padding flex-container--align-center favourites__header--inner-container">
-            <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet-large--5 favourites__header--header-container">
+            <div className="flex-col flex-col--5 flex-col--mobile--12 flex-col--tablet-large--4 favourites__header--header-container">
               <p>{get(cmsStore, 'favourites.content')}</p>
             </div>
-            <div className="flex-col flex-col--5 flex-col--tablet-large--6 mobile-hide tablet-hide favourites__header--header-container">
+            <div className="flex-col flex-col--4 flex-col--medium--6 flex-col--tablet-large--7 mobile-hide tablet-hide favourites__header--header-container">
               <FavouriteShare />
             </div>
           </div>

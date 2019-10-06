@@ -27,9 +27,7 @@
     padding: space(24) !important;
   }
 
-  .flex-container {
-    margin: 0 !important;
-    width: 100%;
+  &--share-container {
     padding: 0 !important;
   }
 
@@ -57,6 +55,8 @@
 
   &--inner-container {
     justify-content: flex-start !important;
+    width: 100%;
+    padding: 0 !important;
   }
 
   &--share {
@@ -69,7 +69,7 @@
 
     p {
       display: inline;
-      margin-right: space(24);
+      margin-right: space(8);
     }
 
     svg {
