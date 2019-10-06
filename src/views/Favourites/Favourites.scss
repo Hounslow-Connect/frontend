@@ -5,6 +5,10 @@
 
 .favourites {
   padding-bottom: space(64);
+
+  &--container {
+    max-width: 1260px;
+  }
 }
 
 .favourites__header {
@@ -23,9 +27,7 @@
     padding: space(24) !important;
   }
 
-  .flex-container {
-    margin: 0 !important;
-    width: 100%;
+  &--share-container {
     padding: 0 !important;
   }
 
@@ -53,6 +55,8 @@
 
   &--inner-container {
     justify-content: flex-start !important;
+    width: 100%;
+    padding: 0 !important;
   }
 
   &--share {
@@ -65,7 +69,7 @@
 
     p {
       display: inline;
-      margin-right: space(24);
+      margin-right: space(8);
     }
 
     svg {
@@ -148,7 +152,13 @@
 
   &--button {
     text-align: center;
+
     padding: space(16);
+
+    svg {
+      margin-left: space(8);
+      vertical-align: middle;
+    }
 
     &:first-of-type {
       border-right: 2px solid $san-juan;
@@ -163,6 +173,13 @@
       background-color: $san-juan;
       color: $white;
     }
+
+    @include for-phone-only {
+      p {
+        font-size: pxtorem(18px);
+        vertical-align: middle;
+      }
+    }
   }
 
   &--contact {
@@ -176,6 +193,7 @@
 
     &--heading {
       @include heading-s;
+      margin: space(8) 0;
     }
 
     .flex-col {
@@ -199,9 +217,18 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: space(64) !important;
+  margin-top: space(64);
 
   button {
     background-color: $elm;
+  }
+
+  @include for-phone-only {
+    padding: space(32) !important;
+
+    button {
+      font-size: pxtorem(18px);
+    }
   }
 }
 
