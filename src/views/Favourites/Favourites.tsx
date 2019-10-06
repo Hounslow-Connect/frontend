@@ -55,7 +55,7 @@ class Favourites extends Component<IProps> {
           </div>
         </div>
 
-        <div className="flex-container flex-container--mobile-no-padding flex-container--align-center">
+        <div className="flex-container flex-container--mobile-no-padding flex-container--align-center ">
           {!!favouritesStore.favourites.length ? (
             <Fragment>
               <div className="flex-col flex-col--12 favourites__count">
@@ -63,7 +63,7 @@ class Favourites extends Component<IProps> {
               </div>
 
               <div className="flex-col flex-col--12">
-                <div className="flex-container flex-container--justify">
+                <div className="flex-container flex-container--justify favourites--container">
                   {favouritesStore.favourites.map((favourite: IService) => {
                     return (
                       <FavouritesCard

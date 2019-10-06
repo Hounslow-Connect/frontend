@@ -5,6 +5,10 @@
 
 .favourites {
   padding-bottom: space(64);
+
+  &--container {
+    max-width: 1260px;
+  }
 }
 
 .favourites__header {
