@@ -57,7 +57,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           text="Print page"
           icon="print"
           alt={true}
-          size="small"
+          size="medium"
           onClick={() => window.print()}
         />
       </div>
