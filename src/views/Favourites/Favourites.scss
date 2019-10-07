@@ -33,12 +33,19 @@
 
   &--heading {
     margin-bottom: space(20) !important;
+
+    @include for-phone-only {
+      h1 {
+        font-size: $font-body-l;
+      }
+    }
   }
 
   &--header-container {
     background-color: $white;
     padding: space(32);
     border-radius: 23px;
+    color: $waikawa;
 
     &:first-of-type {
       margin-right: space(32);
@@ -238,5 +245,9 @@
 
   @include for-tablet-portrait-down {
     padding: space(24) !important;
+
+    h3 {
+      font-size: $font-heading-s;
+    }
   }
 }
