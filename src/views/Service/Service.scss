@@ -97,7 +97,7 @@
   }
 
   &--no-padding {
-    @include for-tablet-landscape-up {
+    @include for-tablet-portrait-up {
       padding: 0 !important;
     }
   }
