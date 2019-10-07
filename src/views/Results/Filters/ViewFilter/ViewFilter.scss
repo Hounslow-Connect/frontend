@@ -23,7 +23,7 @@
     text-align: right;
   }
 
-  @include for-tablet-landscape-up {
+  @include for-tablet-portrait-up {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
