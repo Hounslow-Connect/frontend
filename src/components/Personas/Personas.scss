@@ -48,6 +48,14 @@
       right: 5%;
     }
   }
+
+  @include for-small-phone {
+    &:after {
+      transform: scale(0.6);
+      right: 0;
+    }
+  }
+
   @include for-tablet-landscape-up {
     &:before {
       content: url('../../assets/images/trees/hawkes-small.svg');
