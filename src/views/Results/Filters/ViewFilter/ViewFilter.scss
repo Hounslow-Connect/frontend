@@ -59,4 +59,8 @@
   @include for-tablet-landscape-up {
     display: inline;
   }
+
+  @include for-phone-only {
+    margin-bottom: space(8);
+  }
 }

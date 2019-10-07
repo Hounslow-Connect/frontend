@@ -77,6 +77,12 @@
       content: none;
     }
   }
+
+  @include for-phone-only {
+    h1 {
+      font-size: $font-body-l;
+    }
+  }
 }
 
 .results__search-filter-location {
