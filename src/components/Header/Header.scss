@@ -69,7 +69,7 @@
     padding-bottom: space(12) !important;
 
     &--favourites {
-      @include for-tablet-portrait-down {
+      @include for-tablet-landscape-down {
         background-color: $iceberg;
       }
     }
@@ -85,7 +85,7 @@
         background-color: $iceberg;
       }
 
-      @include for-phone-only {
+      @include for-tablet-landscape-down {
         button {
           border: none;
         }
@@ -108,6 +108,8 @@
 
     @include for-tablet-landscape-down {
       button {
+        color: $san-juan;
+
         svg {
           margin-left: 6px;
         }
