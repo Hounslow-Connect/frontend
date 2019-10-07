@@ -47,6 +47,22 @@
     align-items: stretch !important;
     padding-bottom: space(12) !important;
 
+    &--iceberg {
+      @include for-phone-only {
+        background-color: $iceberg;
+      }
+
+      @include for-phone-only {
+        button {
+          border: none;
+        }
+
+        .goog-te-gadget-simple {
+          border: none !important;
+        }
+      }
+    }
+
     @include for-desktop-up {
       justify-content: flex-end !important;
     }
@@ -56,18 +72,6 @@
         svg {
           margin-left: 6px;
         }
-      }
-    }
-
-    @include for-phone-only {
-      background-color: $iceberg;
-
-      button {
-        border: none;
-      }
-
-      .goog-te-gadget-simple {
-        border: none !important;
       }
     }
   }
@@ -94,14 +98,15 @@
         background-color: $iceberg;
       }
 
-      &--white {
-        background-color: $white;
+      &--iceberg {
+        @include for-phone-only {
+          background-color: $iceberg;
+        }
       }
     }
 
     @include for-phone-only {
       padding: space(12) !important;
-      background-color: $iceberg;
 
       &--active {
         padding-bottom: space(48) !important;

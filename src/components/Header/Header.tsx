@@ -22,16 +22,8 @@ interface IProps extends RouteComponentProps {
 @inject('windowSizeStore', 'uiStore')
 @observer
 class Header extends Component<IProps> {
-  getBackgroundColor = () => {
-    if (this.props.location.pathname.includes('/services/')) {
-      return true;
-    }
-
-    return false;
-  };
-
   render() {
-    const { windowSizeStore, uiStore } = this.props;
+    const { windowSizeStore, uiStore, location } = this.props;
 
     // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
     if (!windowSizeStore || !uiStore) {
@@ -52,7 +44,14 @@ class Header extends Component<IProps> {
             'mobile-hide tablet--large-hide medium-hide': burgerMenuOpen || keywordEditOpen,
           })}
         >
-          <div className="flex-container flex-container--mobile-no-padding flex-container--justify header--top-row">
+          <div
+            className={cx(
+              'flex-container flex-container--mobile-no-padding flex-container--justify header--top-row',
+              {
+                'header--top-row--iceberg': location.pathname === '/',
+              }
+            )}
+          >
             <div className="flex-col flex-col--mobile--5">
               <div id="google_translate_element" />
             </div>
@@ -76,7 +75,7 @@ class Header extends Component<IProps> {
             className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
               'header__brand--active': burgerMenuOpen,
               'header__brand--sticky': uiStore.keywordEditOpen,
-              'header__brand--white': this.getBackgroundColor(),
+              'header__brand--iceberg': location.pathname === '/',
             })}
           >
             <figure className="logo">
