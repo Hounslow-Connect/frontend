@@ -53,7 +53,7 @@ class Header extends Component<IProps> {
               }
             )}
           >
-            <div className="flex-col flex-col--mobile--5">
+            <div className="flex-col flex-col--mobile--5 flex-col--mobile-small--6">
               <div id="google_translate_element" />
             </div>
             <div className="flex-col mobile-hide tablet--large-hide medium-hide">
@@ -64,7 +64,7 @@ class Header extends Component<IProps> {
                 onClick={() => uiStore.toggleFeedbackModal()}
               />
             </div>
-            <div className="flex-col flex-col--mobile--7 header--top-row--favourites">
+            <div className="flex-col flex-col--mobile--7 flex-col--mobile-small--6 header--top-row--favourites">
               <RouterLink to="/favourites">
                 <Button text="Favourites" header={true} icon="star" />
               </RouterLink>

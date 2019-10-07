@@ -90,6 +90,12 @@
       }
     }
 
+    @include for-small-phone {
+      .goog-te-gadget-simple {
+        margin: 0;
+      }
+    }
+
     @include for-desktop-up {
       justify-content: flex-end !important;
     }
@@ -187,7 +193,9 @@
     }
 
     @include for-small-phone {
-      max-width: 210px;
+      svg {
+        max-width: 230px;
+      }
     }
   }
 
