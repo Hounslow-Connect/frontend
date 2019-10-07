@@ -23,7 +23,11 @@ const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn, 
       </div>
     </div>
     <main className="flex-container flex-container--justify">
-      {twoColumn ? children : <div className="flex-col flex-col--6 cms__content">{children}</div>}
+      {twoColumn ? (
+        children
+      ) : (
+        <div className="flex-col flex-col--6 flex-col--tablet--8 cms__content">{children}</div>
+      )}
     </main>
   </section>
 );
