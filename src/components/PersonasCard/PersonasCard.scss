@@ -41,7 +41,7 @@
     margin: space(20) 0;
   }
 
-  @include for-tablet-portrait-down {
+  @include for-phone-only {
     border-radius: 11px;
 
     img {
@@ -59,7 +59,7 @@
     border-top-left-radius: 11px;
     border-top-right-radius: 11px;
 
-    @include for-tablet-portrait-down {
+    @include for-phone-only {
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
     }
@@ -81,7 +81,7 @@
   padding: space(16) space(20);
   height: 100%;
 
-  @include for-tablet-portrait-down {
+  @include for-phone-only {
     display: flex;
     flex-direction: column;
     justify-content: center;
