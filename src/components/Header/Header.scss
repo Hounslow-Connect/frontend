@@ -70,6 +70,12 @@
 
     &--favourites {
       @include for-tablet-portrait-down {
+        background-color: $iceberg;
+      }
+    }
+
+    &--favourite {
+      @include for-tablet-portrait-down {
         text-align: center;
       }
     }
@@ -135,6 +141,14 @@
       &--iceberg {
         @include for-phone-only {
           background-color: $iceberg;
+        }
+      }
+
+      &--favourites {
+        @include for-tablet-landscape-down {
+          background-image: url('../../assets/images/backgrounds/favourites-shape-mobile.svg');
+          background-repeat: no-repeat;
+          background-size: 110% 100%;
         }
       }
     }
