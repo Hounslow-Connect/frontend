@@ -32,7 +32,7 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       </h4>
       <a href={service.url}>{service.url}</a>
     </div>
-    <div className="flex-col flex-col--12">
+    <div className="flex-col flex-col--12 service__accordian--no-overflow">
       <h4
         className={cx({
           'service__contact-card--row': !accordian,
@@ -42,7 +42,7 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       </h4>
       <p>{service.contact_phone}</p>
     </div>
-    <div className="flex-col flex-col--12">
+    <div className="flex-col flex-col--12 service__accordian--no-overflow">
       <h4
         className={cx({
           'service__contact-card--row': !accordian,
