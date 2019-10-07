@@ -64,7 +64,7 @@ class Header extends Component<IProps> {
                 onClick={() => uiStore.toggleFeedbackModal()}
               />
             </div>
-            <div className="flex-col flex-col--mobile--7">
+            <div className="flex-col flex-col--mobile--7 header--top-row--favourites">
               <RouterLink to="/favourites">
                 <Button text="Favourites" header={true} icon="star" />
               </RouterLink>
