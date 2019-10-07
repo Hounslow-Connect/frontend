@@ -36,7 +36,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
   const organisation = find(favouritesStore.organisations, ['id', service.organisation_id]);
 
   return (
-    <article className="flex-col flex-col--4 flex-col--mobile--12 flex-col--tablet-large--6 favourites__card--outer">
+    <article className="flex-col flex-col--mobile--12 flex-col--4 flex-col--tablet-large--5 flex-col--tablet--8 favourites__card--outer">
       <div className="favourites__card">
         <div className="flex-container favourites__card--inner flex-container--mobile-no-padding">
           <div className="flex-col flex-col--12">
