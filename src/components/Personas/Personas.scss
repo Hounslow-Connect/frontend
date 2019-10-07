@@ -84,7 +84,13 @@
     margin-top: space(32);
   }
 
+  @include for-tablet-portrait-up {
+    padding-top: space(24) !important;
+  }
+
   @include for-tablet-landscape-up {
+    padding-top: 0 !important;
+
     &:before {
       content: url('../../assets/images/trees/iceberg-small.svg');
       position: absolute;

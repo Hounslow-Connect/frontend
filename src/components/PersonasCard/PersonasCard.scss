@@ -11,7 +11,6 @@
   color: $san-juan;
   border-radius: 25px;
   margin: space(32);
-  max-width: pxtorem(300px);
   cursor: pointer;
 
   .flex-container {
@@ -27,6 +26,10 @@
 
   &:hover {
     box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+  }
+
+  @include for-tablet-landscape-up {
+    max-width: pxtorem(300px);
   }
 
   @include for-tablet-portrait-down {
