@@ -37,6 +37,7 @@ class Header extends Component<IProps> {
       <header
         className={cx('header', {
           active: burgerMenuOpen,
+          'header--grey': location.pathname.includes('/referral'),
         })}
       >
         <div
