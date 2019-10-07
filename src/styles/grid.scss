@@ -199,7 +199,7 @@ body {
     }
   }
 
-  @include breakpoint($break_tablet) {
+  @include breakpoint($break_mobile) {
     width: 100%;
     padding-left: 0;
     padding-right: 0;
@@ -227,14 +227,14 @@ body {
         }
       }
     }
+  }
 
-    @include breakpoint($break_mobile_small) {
-      &--mobile-small {
-        // Column width
-        @for $i from 1 to $total-columns + 1 {
-          &--#{$i} {
-            width: percentage($i/$total-columns);
-          }
+  @include breakpoint($break_mobile_small) {
+    &--mobile-small {
+      // Column width
+      @for $i from 1 to $total-columns + 1 {
+        &--#{$i} {
+          width: percentage($i/$total-columns);
         }
       }
     }
