@@ -97,7 +97,7 @@
   }
 
   &--no-padding {
-    @include for-tablet-landscape-up {
+    @include for-tablet-portrait-up {
       padding: 0 !important;
     }
   }
@@ -290,9 +290,11 @@
     }
 
     &--tight {
-      p {
-        &:first-of-type {
-          margin-top: space(24);
+      @include for-tablet-portrait-up {
+        p {
+          &:first-of-type {
+            margin-top: space(24);
+          }
         }
       }
     }

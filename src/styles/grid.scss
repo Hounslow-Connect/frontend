@@ -227,6 +227,17 @@ body {
         }
       }
     }
+
+    @include breakpoint($break_mobile_small) {
+      &--mobile-small {
+        // Column width
+        @for $i from 1 to $total-columns + 1 {
+          &--#{$i} {
+            width: percentage($i/$total-columns);
+          }
+        }
+      }
+    }
   }
 }
 

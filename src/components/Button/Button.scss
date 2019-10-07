@@ -200,6 +200,10 @@
   &:disabled:hover {
     @include disabled-btn-hover;
   }
+
+  @include for-small-phone {
+    margin: 0;
+  }
 }
 
 .buton__burger-menu {

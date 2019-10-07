@@ -49,11 +49,13 @@ class Header extends Component<IProps> {
             className={cx(
               'flex-container flex-container--mobile-no-padding flex-container--justify header--top-row',
               {
-                'header--top-row--iceberg': location.pathname === '/',
+                'header--top-row--iceberg':
+                  location.pathname === '/' || location.pathname.includes('/favourites'),
+                'header--top-row--favourites': location.pathname.includes('/favourites'),
               }
             )}
           >
-            <div className="flex-col flex-col--mobile--5">
+            <div className="flex-col flex-col--mobile--5 flex-col--mobile-small--6">
               <div id="google_translate_element" />
             </div>
             <div className="flex-col mobile-hide tablet--large-hide medium-hide">
@@ -64,7 +66,7 @@ class Header extends Component<IProps> {
                 onClick={() => uiStore.toggleFeedbackModal()}
               />
             </div>
-            <div className="flex-col flex-col--mobile--7 header--top-row--favourites">
+            <div className="flex-col flex-col--mobile--7 flex-col--mobile-small--6 header--top-row--favourite">
               <RouterLink to="/favourites">
                 <Button text="Favourites" header={true} icon="star" />
               </RouterLink>
@@ -77,6 +79,7 @@ class Header extends Component<IProps> {
               'header__brand--active': burgerMenuOpen,
               'header__brand--sticky': uiStore.keywordEditOpen,
               'header__brand--iceberg': location.pathname === '/',
+              'header__brand--favourites': location.pathname.includes('/favourites'),
             })}
           >
             <figure className="logo">

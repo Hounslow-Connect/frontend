@@ -39,7 +39,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
       <div className="flex-col flex-col--6 flex-col--mobile--12">
         <div
           className={cx(
-            'flex-container flex-container--mobile-no-padding flex-container--align-center',
+            'flex-container flex-container--mobile-no-padding flex-container--align-center location__container--address',
             {
               'flex-container--row-reverse service__section--no-padding': desktop,
             }
@@ -98,27 +98,29 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
         </div>
       </div>
       <div className="flex-col flex-col--6 flex-col--mobile--12">
-        <div className="flex-col flex-col--mobile--12 location__opening-times">
-          <h4 className="location__opening-times--header">
-            <FontAwesomeIcon icon="clock" /> Opening hours
-          </h4>
-          <div className="flex-container flex-container--mobile-no-padding">
-            <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
-              {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
-                <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
-              ))}
-            </div>
-            <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
-              {!!location.holiday_opening_hours.length && (
-                <Accordian title="Bank holiday times" className="location__holiday-times">
-                  {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
-                    <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
-                  ))}
-                </Accordian>
-              )}
+        {!!location.regular_opening_hours.length && (
+          <div className="flex-col flex-col--mobile--12 location__opening-times">
+            <h4 className="location__opening-times--header">
+              <FontAwesomeIcon icon="clock" /> Opening hours
+            </h4>
+            <div className="flex-container flex-container--mobile-no-padding">
+              <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
+                {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
+                  <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
+                ))}
+              </div>
+              <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
+                {!!location.holiday_opening_hours.length && (
+                  <Accordian title="Bank holiday times" className="location__holiday-times">
+                    {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
+                      <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
+                    ))}
+                  </Accordian>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   </div>

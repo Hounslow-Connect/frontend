@@ -84,6 +84,16 @@
 .location__container {
   margin-bottom: space(16) !important;
 
+  &--address {
+    @include for-tablet-portrait-up {
+      justify-content: flex-end !important;
+    }
+
+    @include for-desktop-up {
+      justify-content: space-between !important;
+    }
+  }
+
   @include for-tablet-landscape-up {
     background-color: $alabaster;
     border-radius: 19px;

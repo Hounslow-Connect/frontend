@@ -118,6 +118,10 @@
     @include for-tablet-landscape-down {
       margin-bottom: space(16);
     }
+
+    @include for-phone-only {
+      font-size: $font-heading-mobile-l;
+    }
   }
 }
 
