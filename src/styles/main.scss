@@ -2,6 +2,7 @@
 @import './mixins.scss';
 @import './fonts.scss';
 @import './colors.scss';
+@import './breakpoints.scss';
 
 html,
 body {
@@ -139,11 +140,16 @@ button {
   span {
     display: none;
   }
+
   span &:before {
     color: $waikawa;
     content: 'Translate';
     font-family: 'Museo Sans 500', sans-serif;
     font-size: pxtorem(18px);
+
+    @include for-tablet-landscape-down {
+      color: $san-juan;
+    }
   }
 
   span &:after {
@@ -151,5 +157,9 @@ button {
     font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
     font-weight: 900;
     color: $waikawa;
+
+    @include for-tablet-landscape-down {
+      color: $san-juan;
+    }
   }
 }
