@@ -187,6 +187,10 @@
   border-top-right-radius: 0px;
   border-top: 0;
 
+  @include for-tablet-landscape-down {
+    color: $san-juan;
+  }
+
   &:hover {
     border: 2px solid $waikawa;
     border-top: 0;
