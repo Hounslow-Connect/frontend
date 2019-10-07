@@ -18,7 +18,7 @@
   max-width: 1260px;
 
   @include for-tablet-landscape-down {
-    padding-top: space(40) !important;
+    padding-top: space(16) !important;
   }
 
   &--container {
