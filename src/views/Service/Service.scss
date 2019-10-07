@@ -97,9 +97,7 @@
   }
 
   &--no-padding {
-    @include for-tablet-landscape-up {
-      padding: 0 !important;
-    }
+    padding: 0 !important;
   }
 
   &--no-margin {
