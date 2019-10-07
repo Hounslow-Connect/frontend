@@ -104,9 +104,9 @@ class Referral extends Component<IProps> {
           )}
         </div>
 
-        <div className="mobile-show tablet-show flex-col--mobile--12">
+        <div className="mobile-show tablet-show flex-col--mobile--12 flex-col--tablet--12">
           <div className="flex-container">
-            <div className="flex-col flex-col--mobile--12 referral--mobile-connect">
+            <div className="flex-col flex-col--mobile--12 flex-col--tablet--12 referral--mobile-connect">
               <p className="body--s">Connect to</p>
               <p className="body--s referral--mobile-connect--name">{referralStore.service.name}</p>
             </div>
@@ -119,7 +119,7 @@ class Referral extends Component<IProps> {
           })}
         >
           {this.displayStep()}
-          <div className="mobile-hide tablet-hide flex-col--5 flex-col--tablet-large--6">
+          <div className="mobile-hide tablet-hide flex-col--5 flex-col--tablet--12 flex-col--tablet-large--6">
             <div className="flex-container referral--right-column">
               <div className="flex-col flex-col--12">
                 <div className="flex-container flex-container--align-center referral--connect">
@@ -166,9 +166,9 @@ class Referral extends Component<IProps> {
 
         {referralStore.step === 1 && (
           <Fragment>
-            <div className="flex-col flex-col--mobile--12 mobile-show tablet-show">
+            <div className="flex-col flex-col--mobile--12 flex-col--tablet--12 mobile-show tablet-show">
               <div className="flex-container flex-container--align-center">
-                <div className="flex-col flex-col--mobile--12 referral--form-time">
+                <div className="flex-col flex-col--mobile--12 flex-col--tablet--12 referral--form-time">
                   <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
                     <div className="flex-col flex-col--mobile--2">
                       <FontAwesomeIcon icon="clock" />

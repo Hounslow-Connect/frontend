@@ -49,7 +49,7 @@ const StepFive: React.FunctionComponent<IProps> = ({ referralStore }) => {
 
   return (
     <form
-      className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet-large--6"
+      className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--6"
       style={{ margin: '24px 0' }}
     >
       {chooseForm(referralStore)}

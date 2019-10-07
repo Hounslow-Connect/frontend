@@ -44,6 +44,14 @@
   &--mobile-connect {
     @include greenContainer;
 
+    @include for-tablet-portrait-down {
+      margin-top: space(32);
+    }
+
+    @include for-phone-only {
+      margin-top: 0;
+    }
+
     &--name {
       font-family: $font-secondary;
     }
