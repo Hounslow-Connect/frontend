@@ -133,8 +133,8 @@ class Service extends Component<IProps> {
         {serviceStore.loading ? (
           <Loading />
         ) : (
-          <section className="flex-container service__info">
-            <section className="flex-col flex-col--8 flex-col--mobile--12 service__left-column">
+          <section className="flex-container flex-container--justify service__info">
+            <section className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
               <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
                 <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
                   <h2 className="service__heading">Who is it for?</h2>
@@ -203,7 +203,7 @@ class Service extends Component<IProps> {
                     <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
                   )}
 
-                  <div className="flex-col flex-col--mobile--12 mobile-show criteria_card service__info__cost">
+                  <div className="flex-col flex-col--mobile--12 mobile-show tablet-show criteria_card service__info__cost">
                     <CostCard service={service} />
                   </div>
                 </div>
@@ -370,9 +370,9 @@ class Service extends Component<IProps> {
                 </div>
               </div>
             </section>
-            <section className="flex-col flex-col--4 mobile-hide">
+            <section className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
               <div className="flex-container service__right-column">
-                <div className="flex-col flex-col--10 criteria_card service__info__cost service__section">
+                <div className="tablet-hide flex-col flex-col--10 criteria_card service__info__cost service__section">
                   <CostCard service={service} />
                 </div>
                 {service.video_embed && (
@@ -397,11 +397,11 @@ class Service extends Component<IProps> {
                     <OrganisationCard service={service} sidebar={true} />
                   </div>
                 </div>
-                <div className="flex-col flex-col--12">
+                <div className="flex-col flex-col--12 flex-col--tablet--5">
                   <ButtonCard serviceStore={serviceStore} />
                 </div>
 
-                <div className="flex-col flex-col--12">
+                <div className="flex-col flex-col--12 flex-col--tablet--5">
                   <ShareCard />
                 </div>
               </div>

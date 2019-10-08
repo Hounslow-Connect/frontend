@@ -57,6 +57,10 @@
     text-align: left;
     margin: space(8);
 
+    @include for-tablet-portrait-down {
+      padding: sapce(24) space(16) !important;
+    }
+
     &--no-padding {
       padding: 0 !important;
     }

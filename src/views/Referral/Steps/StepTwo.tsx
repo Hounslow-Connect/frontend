@@ -60,7 +60,7 @@ const StepTwo: React.FunctionComponent<IProps> = ({ name, referralStore }) => {
   }
 
   return (
-    <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet-large--6">
+    <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--6">
       <div className="flex-container flex-container--mobile-no-padding referral--intro--no-padding referral__step-container referral__form">
         <div className="flex-col flex-col--12 flex-col--mobile--12">
           <p className="referral__step-container--question body--s">{`Who would like to be connected to ${name}?`}</p>

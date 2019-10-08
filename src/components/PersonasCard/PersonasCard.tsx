@@ -28,7 +28,7 @@ const PersonasCard: React.FunctionComponent<IProps> = ({ persona, action, window
       </div>
       <div className="flex-col--12 flex-col--mobile--8 card__description">
         <h3 className="card__header">{persona.name}</h3>
-        <p className="mobile-hide tablet-hide">{persona.intro}</p>
+        <p className="mobile-hide">{persona.intro}</p>
       </div>
     </div>
   </section>

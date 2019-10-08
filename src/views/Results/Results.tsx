@@ -75,7 +75,7 @@ class Results extends Component<IProps> {
             </div>
           )}
           <div className="flex-container flex-container results__filter-bar">
-            <div className="flex-col flex-col--4 flex-col--tablet-large--2 flex-col--mobile--12 results__container-count">
+            <div className="flex-col flex-col--4 flex-col--tablet--12 flex-col--mobile--12 results__container-count">
               {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>{`${resultsStore.results.length} services found`}</p>
               )}
@@ -94,7 +94,7 @@ class Results extends Component<IProps> {
                   {resultsStore.view === 'grid' && resultsStore.postcode && (
                     <div
                       className={cx(
-                        'flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-col--medium--5 flex-container--mobile-no-padding results__sort-by-container',
+                        'flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-col--medium--5 flex-col--mobile-small--12 flex-container--mobile-no-padding results__sort-by-container',
                         {
                           'flex-col--medium--6': !resultsStore.postcode,
                         }

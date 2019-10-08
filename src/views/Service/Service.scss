@@ -245,6 +245,10 @@
   svg {
     color: $waikawa;
   }
+
+  @include for-tablet-portrait-down {
+    text-align: center;
+  }
 }
 
 .service__markdown {
@@ -447,7 +451,7 @@
 .service__useful-info {
   margin-bottom: space(16) !important;
 
-  @include for-tablet-landscape-up {
+  @include for-tablet-portrait-up {
     background-color: $alabaster;
     border-radius: 19px;
   }
@@ -497,7 +501,10 @@
 }
 
 .service__cost-card {
-  padding: 0 !important;
+  @include for-tablet-landscape-up {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 }
 
 .service__video {

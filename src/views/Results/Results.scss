@@ -356,6 +356,10 @@
 .results__keyword-edit-submit {
   padding-top: space(64);
   text-align: center;
+
+  @include for-small-phone {
+    padding-top: 0;
+  }
 }
 
 .results__keyword-edit-checkbox {
@@ -367,6 +371,10 @@
 .results__sort-by-container {
   @include for-tablet-landscape-up {
     text-align: right;
+  }
+
+  @include for-small-phone {
+    margin-top: space(8);
   }
 }
 
