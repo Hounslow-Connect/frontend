@@ -11,10 +11,10 @@ const StepOne: React.FunctionComponent<IProps> = ({ name }) => (
     <div className="flex-container flex-container--mobile-no-padding referral--intro--no-padding">
       <div className="flex-col flex-col--12">
         <div className="flex-container referral--intro--row flex-container--align-center referral--intro--no-padding">
-          <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1">
+          <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1 flex-col--tablet-large--2">
             <FontAwesomeIcon icon="envelope" />
           </div>
-          <div className="flex-col flex-col--11 flex-col--mobile--11 flex-col--tablet-large--11">
+          <div className="flex-col flex-col--11 flex-col--mobile--11 flex-col--tablet-large--10">
             <p className="body--s referral--intro--heading">
               By completing this short form we will:
             </p>
@@ -22,10 +22,10 @@ const StepOne: React.FunctionComponent<IProps> = ({ name }) => (
           </div>
         </div>
         <div className="flex-container referral--intro--row  flex-container--align-center referral--intro--no-padding">
-          <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1">
+          <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1 flex-col--tablet-large--2">
             <FontAwesomeIcon icon="calendar" />
           </div>
-          <div className="flex-col flex-col--11 flex-col--mobile--11 flex-col--tablet-large--11">
+          <div className="flex-col flex-col--11 flex-col--mobile--11 flex-col--tablet-large--10">
             <p
               className="body--s referral--intro--heading"
               dangerouslySetInnerHTML={{
@@ -38,10 +38,10 @@ const StepOne: React.FunctionComponent<IProps> = ({ name }) => (
           </div>
         </div>
         <div className="flex-container referral--intro--row flex-container--align-center referral--intro--no-padding">
-          <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1">
+          <div className="flex-col mobile-hide flex-col--1 flex-col--mobile--1 flex-col--tablet-large--2">
             <FontAwesomeIcon icon="user-friends" />
           </div>
-          <div className="flex-col flex-col--11 flex-col--mobile--11 flex-col--tablet-large--11">
+          <div className="flex-col flex-col--11 flex-col--mobile--11 flex-col--tablet-large--10">
             <p className="referral--intro--description">
               You have the option to complete this form on someone else's behalf, with their
               permission.

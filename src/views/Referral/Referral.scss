@@ -107,9 +107,10 @@
       margin-right: space(20) !important;
     }
 
-    @include for-tablet-landscape-up {
-      svg {
-        font-size: pxtorem(29px);
+    svg {
+      font-size: pxtorem(29px);
+
+      @include for-tablet-landscape-up {
         margin-right: space(16);
       }
     }

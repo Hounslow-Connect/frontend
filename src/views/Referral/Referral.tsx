@@ -170,10 +170,10 @@ class Referral extends Component<IProps> {
               <div className="flex-container flex-container--align-center">
                 <div className="flex-col flex-col--mobile--12 flex-col--tablet--12 referral--form-time">
                   <div className="flex-container flex-container--align-center flex-container--mobile-no-padding">
-                    <div className="flex-col flex-col--mobile--2">
+                    <div className="flex-col flex-col--mobile--2 flex-col--tablet--1">
                       <FontAwesomeIcon icon="clock" />
                     </div>
-                    <div className="flex-col flex-col--mobile--10">
+                    <div className="flex-col flex-col--mobile--10 flex-col--tablet--11">
                       <p>
                         This form should take no longer than <strong>5 minutes</strong> to complete.
                       </p>
