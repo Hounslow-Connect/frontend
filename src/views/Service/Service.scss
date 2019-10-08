@@ -185,9 +185,9 @@
 .service__info__cost {
   background-color: $iceberg !important;
 
-  @include for-tablet-portrait-down {
-    width: 100% !important;
-  }
+  // @include for-tablet-portrait-down {
+  //   width: 100% !important;
+  // }
 
   @include for-tablet-landscape-up {
     border-radius: 19px;
@@ -505,7 +505,10 @@
 }
 
 .service__cost-card {
-  padding: 0 !important;
+  @include for-tablet-landscape-up {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 }
 
 .service__video {
