@@ -185,10 +185,6 @@
 .service__info__cost {
   background-color: $iceberg !important;
 
-  // @include for-tablet-portrait-down {
-  //   width: 100% !important;
-  // }
-
   @include for-tablet-landscape-up {
     border-radius: 19px;
     padding: space(24);
