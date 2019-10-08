@@ -21,12 +21,12 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
       className={cx(
         'view-filter__search-bar',
         {
-          'flex-col flex-col--5 flex-col--tablet--6 flex-col--tablet-large--4 flex-col--mobile--7 flex-col--mobile-small--12 flex-container--mobile-no-padding flex-col--medium--6':
+          'flex-col flex-col--5 flex-col--tablet--6 flex-col--tablet-large--5 flex-col--mobile--7 flex-col--mobile-small--12 flex-container--mobile-no-padding flex-col--medium--6':
             resultsStore.postcode,
         },
         { 'view-filter--right-align': resultsSwitch },
         {
-          'flex-col--tablet--4 flex-col--6 flex-col--mobile--12 flex-col--medium--7 view-filter--right-align--float-right': !resultsStore.postcode,
+          'flex-col--tablet--6 flex-col--6 flex-col--mobile--12 flex-col--medium--7 view-filter--right-align--float-right': !resultsStore.postcode,
         }
       )}
     >

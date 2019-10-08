@@ -185,6 +185,10 @@
 .service__info__cost {
   background-color: $iceberg !important;
 
+  @include for-tablet-portrait-down {
+    width: 100% !important;
+  }
+
   @include for-tablet-landscape-up {
     border-radius: 19px;
     padding: space(24);
@@ -244,6 +248,10 @@
 
   svg {
     color: $waikawa;
+  }
+
+  @include for-tablet-portrait-down {
+    text-align: center;
   }
 }
 
@@ -447,7 +455,7 @@
 .service__useful-info {
   margin-bottom: space(16) !important;
 
-  @include for-tablet-landscape-up {
+  @include for-tablet-portrait-up {
     background-color: $alabaster;
     border-radius: 19px;
   }
