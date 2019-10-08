@@ -173,6 +173,7 @@
 
 .results__filter-bar {
   align-items: center;
+  max-width: 1260px;
 
   @include for-phone-only {
     flex-direction: column-reverse;
@@ -321,6 +322,10 @@
   padding: 0 !important;
   width: 100%;
   justify-content: start !important;
+
+  h2 {
+    font-size: $font-heading-m !important;
+  }
 }
 
 .results__search-box-keyword {
