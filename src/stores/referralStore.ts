@@ -115,6 +115,7 @@ class ReferralStore {
 
   @action
   nextStep = () => {
+    window.scrollTo(0, 0);
     this.step = this.step + 1;
   };
 
