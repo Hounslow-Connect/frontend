@@ -18,6 +18,7 @@ class SearchStore {
 
   @action clear = () => {
     this.search = '';
+    this.categoryId = '';
   };
 
   @action setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
