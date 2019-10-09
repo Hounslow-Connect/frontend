@@ -40,11 +40,14 @@
     padding: space(64) space(24);
   }
 
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
     background-size: 110% 100%;
-    background-color: $iceberg;
+  }
+
+  @include for-phone-only {
     padding: space(40) space(24) space(80) !important;
+    background-color: $iceberg;
   }
 }
 
@@ -57,7 +60,7 @@
   max-width: 1260px;
   position: relative;
 
-  @include for-tablet-portrait-up {
+  @include for-tablet-landscape-up {
     padding: space(64);
     margin: space(64) space(32);
   }
