@@ -126,6 +126,14 @@ button {
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border-top: 0 !important;
+  box-sizing: border-box;
+
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    cursor: pointer;
+    border: 2px solid $waikawa !important;
+    border-top: 0 !important;
+  }
 }
 
 .goog-te-menu2 {
