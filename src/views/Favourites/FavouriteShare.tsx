@@ -23,6 +23,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           }/favourites${favouritesStore.generateShareLink()}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share to Facebook"
         >
           <FontAwesomeIcon icon={['fab', 'facebook-f']} />
         </a>
@@ -32,6 +33,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           }/favourites${favouritesStore.generateShareLink()}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share to Twitter"
         >
           <FontAwesomeIcon icon={['fab', 'twitter']} />
         </a>
@@ -41,6 +43,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           onClick={() =>
             window.alert(`${window.origin}/favourites${favouritesStore.generateShareLink()}`)
           }
+          aria-label="Share favourites via link"
         >
           <FontAwesomeIcon icon="link" />
         </a>
@@ -48,6 +51,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           href={`mailto:?subject=Connected Kingston&amp;body=${
             window.origin
           }/favourites${favouritesStore.generateShareLink()}"`}
+          aria-label="Email favourites link"
         >
           <FontAwesomeIcon icon="envelope" />
         </a>
