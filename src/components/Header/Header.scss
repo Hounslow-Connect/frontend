@@ -84,7 +84,7 @@
         background-color: $iceberg;
       }
 
-      @include for-tablet-landscape-down {
+      @include for-phone-only {
         button {
           border: none;
         }
