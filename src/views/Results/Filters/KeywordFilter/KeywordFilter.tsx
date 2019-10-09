@@ -58,7 +58,11 @@ class KeywordFilter extends Component<IProps, IState> {
         </div>
         <form className="flex-container flex-container--align-bottom results__filters">
           <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-col--tablet-large--5 flex-col--medium--3 flex-container--mobile-no-padding">
-            <label htmlFor="location" className="results__keyword-filters--heading">
+            <label
+              htmlFor="location"
+              className="results__keyword-filters--heading"
+              aria-label="Enter a postcode to filter results"
+            >
               Location
             </label>
             <Input
@@ -80,6 +84,7 @@ class KeywordFilter extends Component<IProps, IState> {
               onChange={() => {
                 resultsStore.toggleIsFree();
               }}
+              aria="Filter free services"
             />
           </div>
           <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-col--tablet-large--3 flex-col--medium--5 flex-container--mobile-no-padding results__amend">
