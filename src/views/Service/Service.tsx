@@ -59,7 +59,7 @@ const iconMap = [
   { 'Getting here': 'map-signs' },
   { 'Signing up': 'marker' },
   { 'Meeting up': 'handshake' },
-  { 'What to wear': 'shirt' },
+  { 'What to wear': 'tshirt' },
   { 'What to bring': 'shopping-bag' },
   { 'How to get here': 'map-signs' },
   { Parking: 'car' },
