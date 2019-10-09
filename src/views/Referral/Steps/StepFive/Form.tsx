@@ -101,6 +101,9 @@ class Form extends Component<IProps, IState> {
                   className={cx('referral__step-container--other-contact--toggle', {
                     'referral__step-container--other-contact--toggle--open': !open,
                   })}
+                  tabIndex={0}
+                  aria-pressed={open}
+                  onKeyDown={e => (e.key === 'Enter' ? this.toggleOrganisation() : null)}
                 >
                   I can't see my organisation
                 </p>
