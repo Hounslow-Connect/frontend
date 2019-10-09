@@ -56,7 +56,7 @@
     }
   }
 
-  @include for-tablet-portrait-up {
+  @include for-tablet-landscape-up {
     &:before {
       content: url('../../assets/images/trees/hawkes-small.svg');
       position: absolute;
@@ -96,7 +96,7 @@
     padding-top: space(24) !important;
   }
 
-  @include for-tablet-portrait-up {
+  @include for-tablet-landscape-up {
     padding-top: 0 !important;
 
     &:before {
