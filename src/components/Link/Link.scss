@@ -33,4 +33,8 @@
   @include link-header;
   margin-right: space(32);
   position: relative;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
