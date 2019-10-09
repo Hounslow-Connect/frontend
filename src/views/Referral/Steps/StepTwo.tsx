@@ -19,10 +19,11 @@ interface IButtonProps {
   setWho: (who: 'Myself' | 'A friend or family member' | 'Someone else') => void;
   active: boolean;
   smallPadding?: boolean;
+  autoFocus?: boolean;
 }
 
 const ReferButton: React.FunctionComponent<IButtonProps> = observer(
-  ({ icon, text, setWho, active, subText, smallPadding }) => (
+  ({ icon, text, setWho, active, subText, smallPadding, autoFocus }) => (
     <button
       className={cx(
         'flex-container flex-container--mobile-no-padding flex-container--justify referral__button flex-container--align-center',
@@ -32,6 +33,7 @@ const ReferButton: React.FunctionComponent<IButtonProps> = observer(
       )}
       aria-label={`Connect ${text}`}
       onClick={() => setWho(text)}
+      autoFocus={autoFocus}
     >
       <div
         className={cx('flex-col flex-col--12 flex-col--mobile--2 flex-col--tablet-large--2', {
@@ -74,6 +76,7 @@ const StepTwo: React.FunctionComponent<IProps> = ({ name, referralStore }) => {
                 setWho={referralStore.setWhoFor}
                 active={referralStore.whoFor === 'Myself'}
                 subText="Filling in my own details"
+                autoFocus={true}
               />
             </div>
             <div className="flex-col flex-col--4 flex-col--mobile--12 flex-col--tablet-large--12">
