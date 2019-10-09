@@ -7,6 +7,7 @@
   background-image: url('../../../assets/images/backgrounds/related-services-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: $font-primary;
 
   padding: space(96) space(64);
   text-align: center;
@@ -55,6 +56,10 @@
     border-radius: 19px;
     text-align: left;
     margin: space(8);
+
+    @include for-tablet-portrait-down {
+      padding: sapce(24) space(16) !important;
+    }
 
     &--no-padding {
       padding: 0 !important;

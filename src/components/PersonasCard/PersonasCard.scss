@@ -11,7 +11,6 @@
   color: $san-juan;
   border-radius: 25px;
   margin: space(32);
-  max-width: pxtorem(300px);
   cursor: pointer;
 
   .flex-container {
@@ -29,6 +28,10 @@
     box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
   }
 
+  @include for-tablet-landscape-up {
+    max-width: pxtorem(300px);
+  }
+
   @include for-tablet-portrait-down {
     margin: space(12);
   }
@@ -38,7 +41,7 @@
     margin: space(20) 0;
   }
 
-  @include for-tablet-portrait-down {
+  @include for-phone-only {
     border-radius: 11px;
 
     img {
@@ -55,6 +58,11 @@
     height: 100%;
     border-top-left-radius: 11px;
     border-top-right-radius: 11px;
+
+    @include for-phone-only {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
   }
 }
 
@@ -73,7 +81,7 @@
   padding: space(16) space(20);
   height: 100%;
 
-  @include for-tablet-portrait-down {
+  @include for-phone-only {
     display: flex;
     flex-direction: column;
     justify-content: center;

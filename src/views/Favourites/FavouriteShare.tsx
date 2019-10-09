@@ -14,8 +14,8 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
   }
 
   return (
-    <div className="flex-container flex-container--align-center">
-      <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet-large--7 favourites__header--share">
+    <div className="flex-container flex-container--align-center favourites__header--share-container">
+      <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--7 favourites__header--share">
         <p>Share</p>
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${
@@ -23,6 +23,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           }/favourites${favouritesStore.generateShareLink()}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share to Facebook"
         >
           <FontAwesomeIcon icon={['fab', 'facebook-f']} />
         </a>
@@ -32,6 +33,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           }/favourites${favouritesStore.generateShareLink()}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Share to Twitter"
         >
           <FontAwesomeIcon icon={['fab', 'twitter']} />
         </a>
@@ -41,6 +43,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           onClick={() =>
             window.alert(`${window.origin}/favourites${favouritesStore.generateShareLink()}`)
           }
+          aria-label="Share favourites via link"
         >
           <FontAwesomeIcon icon="link" />
         </a>
@@ -48,16 +51,17 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           href={`mailto:?subject=Connected Kingston&amp;body=${
             window.origin
           }/favourites${favouritesStore.generateShareLink()}"`}
+          aria-label="Email favourites link"
         >
           <FontAwesomeIcon icon="envelope" />
         </a>
       </div>
-      <div className="flex-col flex-col--4 flex-col--mobile--12 flex-col--tablet-large--5 favourites__header--print">
+      <div className="flex-col flex-col--5 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--5 favourites__header--print">
         <Button
           text="Print page"
           icon="print"
           alt={true}
-          size="small"
+          size="medium"
           onClick={() => window.print()}
         />
       </div>

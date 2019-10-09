@@ -16,7 +16,7 @@ const Accordian: React.FunctionComponent<IProps> = ({ children, title, className
   return (
     <div className={`accordian-container ${className}`}>
       <button
-        className="flex"
+        className="flex-container flex-container--align-center"
         onClick={() => toggleAccordian(!open)}
         aria-expanded={open}
         aria-controls="accordian-content"

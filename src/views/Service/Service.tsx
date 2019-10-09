@@ -6,6 +6,7 @@ import map from 'lodash/map';
 import find from 'lodash/find';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
+import cx from 'classnames';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -40,8 +41,10 @@ import ReferralCard from './ReferralCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
 import UIStore from '../../stores/uiStore';
+import { removeQuotesRegex } from '../../utils/utils';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
+import capitalize from 'lodash/capitalize';
 
 interface RouteParams {
   service: string;
@@ -56,7 +59,7 @@ const iconMap = [
   { 'Getting here': 'map-signs' },
   { 'Signing up': 'marker' },
   { 'Meeting up': 'handshake' },
-  { 'What to wear': 'shirt' },
+  { 'What to wear': 'tshirt' },
   { 'What to bring': 'shopping-bag' },
   { 'How to get here': 'map-signs' },
   { Parking: 'car' },
@@ -79,6 +82,10 @@ class Service extends Component<IProps> {
     }
   }
 
+  formatTestimonial = (testimonial: string) => {
+    return `" ${testimonial.replace(removeQuotesRegex, '')} "`;
+  };
+
   render() {
     const { serviceStore, uiStore } = this.props;
     const { service, locations, relatedServices } = serviceStore;
@@ -96,41 +103,46 @@ class Service extends Component<IProps> {
           ]}
         />
         <div className={`service__header service__header--${get(service, 'type')}`}>
-          <div className="flex-col flex-col--mobile--9">
-            <h1>{get(service, 'name')}</h1>
-            <p className="service__header__last-updated">
-              Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
-              <Button
-                text="Give feedback"
-                icon="comment"
-                alt={true}
-                size="small"
-                onClick={() => uiStore.toggleFeedbackModal()}
-              />
-            </p>
-          </div>
-          <div className="flex-col flex-col--mobile--3">
-            <div className="service__header__logo">
-              <img
-                src={`${apiBase}/organisations/${get(service, 'organisation.id')}/logo.png?v=${get(
-                  service,
-                  'organisation.id'
-                )}`}
-                alt={`${service.name} logo`}
-              />
+          <div className="flex-container flex-container--mobile-no-padding">
+            <div className="flex-col flex-col--mobile--9">
+              <h1>{get(service, 'name')}</h1>
+              <p className="service__header__last-updated">
+                Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
+                <Button
+                  text="Give feedback"
+                  icon="comment"
+                  alt={true}
+                  size="small"
+                  onClick={() => uiStore.toggleFeedbackModal()}
+                />
+              </p>
+            </div>
+            <div className="flex-col flex-col--mobile--3">
+              <div className="service__header__logo">
+                <img
+                  src={`${apiBase}/organisations/${get(
+                    service,
+                    'organisation.id'
+                  )}/logo.png?v=${get(service, 'organisation.id')}`}
+                  alt={`${service.name} logo`}
+                />
+              </div>
             </div>
           </div>
         </div>
         {serviceStore.loading ? (
           <Loading />
         ) : (
-          <section className="flex-container service__info">
-            <section className="flex-col flex-col--8 flex-col--mobile--12 service__left-column">
+          <section className="flex-container flex-container--justify service__info">
+            <section className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
               <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
                 <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
                   <h2 className="service__heading">Who is it for?</h2>
                 </div>
-                <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
+                <div
+                  className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding"
+                  style={{ alignItems: 'stretch' }}
+                >
                   {get(service, 'criteria.age_group') && (
                     <CriteriaCard
                       svg={AgeGroup}
@@ -191,7 +203,7 @@ class Service extends Component<IProps> {
                     <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
                   )}
 
-                  <div className="flex-col flex-col--mobile--12 mobile-show criteria_card service__info__cost">
+                  <div className="flex-col flex-col--mobile--12 mobile-show tablet-show criteria_card service__info__cost">
                     <CostCard service={service} />
                   </div>
                 </div>
@@ -200,7 +212,6 @@ class Service extends Component<IProps> {
                   <div className="flex-col flex-col--mobile--12">
                     <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                   </div>
-                  {!!service.gallery_items.length && <div className="service__section">IMAGES</div>}
                   {service.video_embed && (
                     <div className="flex-container flex-container--mobile-no-padding mobile-show">
                       <VideoCard video={service.video_embed} width="90vw" />
@@ -210,27 +221,38 @@ class Service extends Component<IProps> {
 
                 <div className="flex-container flex-container--align-center service__section service__section--no-padding service__information">
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
-                    <ReactMarkdown source={service.intro} className="service__markdown" />
+                    <ReactMarkdown
+                      source={service.intro}
+                      className="service__markdown service__markdown--intro"
+                    />
                   </div>
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
-                    <h3>What do we offer?</h3>
+                    <h3>What we offer?</h3>
                   </div>
 
-                  <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
-                    {map(service.offerings, (offering: any, i) => (
-                      <Fragment key={offering.offering}>
-                        <span>{offering.offering}</span>
-                        {i < service.offerings.length - 1 ? (
-                          <FontAwesomeIcon
-                            icon="circle"
-                            style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 4px' }}
-                          />
-                        ) : null}
-                      </Fragment>
-                    ))}
-                  </div>
-                  <div className="flex-col flex-col--mobile--12 service__section service__section--no-margin">
-                    <ReactMarkdown source={service.description} className="service__markdown" />
+                  {!!service.offerings.length && (
+                    <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
+                      {map(service.offerings, (offering: any, i) => (
+                        <Fragment key={offering.offering}>
+                          <span>{capitalize(offering.offering)}</span>
+                          {i < service.offerings.length - 1 ? (
+                            <FontAwesomeIcon
+                              icon="circle"
+                              style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 10px' }}
+                            />
+                          ) : null}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex-col flex-col--mobile--12 service__section">
+                    <ReactMarkdown
+                      source={service.description}
+                      className={cx('service__markdown service__markdown--description', {
+                        'service__markdown--description--tight': !service.offerings.length,
+                      })}
+                    />
                   </div>
                 </div>
 
@@ -242,11 +264,11 @@ class Service extends Component<IProps> {
 
                     <div className="flex-col flex-col--12 service__testimonial">
                       <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
-                        <div className="flex-col flex-col--2">
+                        <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
                           <FontAwesomeIcon icon="comment" />
                         </div>
-                        <div className="flex-col flex-col--9">
-                          <p>{`"${get(service, 'testimonial')}"`}</p>
+                        <div className="flex-col--9 flex-col--tablet--9">
+                          <p>{this.formatTestimonial(service.testimonial)}</p>
                         </div>
                       </div>
                     </div>
@@ -296,8 +318,13 @@ class Service extends Component<IProps> {
                 {service.testimonial && (
                   <Accordian title="What people say" className="service__accordian mobile-show">
                     <div className="service__accordian-inner">
-                      <div className="service__testimonial">
-                        <p>{get(service, 'testimonial')}</p>
+                      <div className="flex-container flex-container--mobile-no-padding flex-container--justify service__testimonial service__testimonial--mobile">
+                        <div className="flex-col--1">
+                          <FontAwesomeIcon icon="comment" />
+                        </div>
+                        <div className="flex-col--12">
+                          <p>{this.formatTestimonial(service.testimonial)}</p>
+                        </div>
                       </div>
                     </div>
                   </Accordian>
@@ -338,14 +365,14 @@ class Service extends Component<IProps> {
                   </div>
                 </Accordian>
 
-                <div className="mobile-show">
+                <div className="flex-col mobile-show">
                   <ButtonCard serviceStore={serviceStore} />
                 </div>
               </div>
             </section>
-            <section className="flex-col flex-col--4 mobile-hide">
+            <section className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
               <div className="flex-container service__right-column">
-                <div className="flex-col flex-col--10 criteria_card service__info__cost service__section">
+                <div className="tablet-hide flex-col flex-col--10 criteria_card service__info__cost service__section">
                   <CostCard service={service} />
                 </div>
                 {service.video_embed && (
@@ -370,11 +397,11 @@ class Service extends Component<IProps> {
                     <OrganisationCard service={service} sidebar={true} />
                   </div>
                 </div>
-                <div className="flex-col flex-col--12">
+                <div className="flex-col flex-col--12 flex-col--tablet--5">
                   <ButtonCard serviceStore={serviceStore} />
                 </div>
 
-                <div className="flex-col flex-col--12">
+                <div className="flex-col flex-col--12 flex-col--tablet--5">
                   <ShareCard />
                 </div>
               </div>

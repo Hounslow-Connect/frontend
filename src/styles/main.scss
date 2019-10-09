@@ -2,6 +2,7 @@
 @import './mixins.scss';
 @import './fonts.scss';
 @import './colors.scss';
+@import './breakpoints.scss';
 
 html,
 body {
@@ -84,6 +85,12 @@ ul {
   @include body-s;
   color: inherit;
 }
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
 li {
   display: list-item;
   margin: space(8) 0;
@@ -113,13 +120,20 @@ button {
   zoom: 1;
   height: 2.5rem;
   padding: 0.25rem 1rem 0.5rem;
-  margin: 0 1.5rem;
+  margin: 0 0.75rem;
   background-color: #fff;
-  font-size: 1.125rem;
   font-weight: normal;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border-top: 0 !important;
+  box-sizing: border-box;
+
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    cursor: pointer;
+    border: 2px solid $waikawa !important;
+    border-top: 0 !important;
+  }
 }
 
 .goog-te-menu2 {
@@ -134,10 +148,16 @@ button {
   span {
     display: none;
   }
+
   span &:before {
     color: $waikawa;
     content: 'Translate';
     font-family: 'Museo Sans 500', sans-serif;
+    font-size: pxtorem(18px);
+
+    @include for-tablet-landscape-down {
+      color: $san-juan;
+    }
   }
 
   span &:after {
@@ -145,5 +165,9 @@ button {
     font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
     font-weight: 900;
     color: $waikawa;
+
+    @include for-tablet-landscape-down {
+      color: $san-juan;
+    }
   }
 }

@@ -17,6 +17,7 @@
 
 .location__accessibility {
   margin: space(12) 0 0 0 !important;
+  justify-content: flex-start !important;
 
   svg {
     margin-right: space(8);
@@ -43,7 +44,9 @@
   }
 
   h4 {
-    margin-bottom: space(8);
+    svg {
+      font-size: pxtorem(19px);
+    }
   }
 
   &--header {
@@ -78,6 +81,16 @@
 
 .location__container {
   margin-bottom: space(16) !important;
+
+  &--address {
+    @include for-tablet-portrait-up {
+      justify-content: flex-end !important;
+    }
+
+    @include for-desktop-up {
+      justify-content: space-between !important;
+    }
+  }
 
   @include for-tablet-landscape-up {
     background-color: $alabaster;

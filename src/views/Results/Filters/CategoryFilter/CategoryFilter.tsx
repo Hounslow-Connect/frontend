@@ -23,10 +23,18 @@ class CategoryFilter extends Component<IProps> {
     }
 
     return (
-      <div className="flex-col flex-col--5 flex-col--tablet-large--7 flex-col--medium--6 flex-col--mobile--12">
-        <div className="flex-container flex-container--mobile-no-padding category__filters">
-          <div className="flex-col flex-col--4 flex-col--tablet-large--4 flex-col--mobile--6 flex-col--medium--4 flex-container--mobile-no-padding">
-            <p className="category_filters--header--cost">Cost</p>
+      <div className="flex-col flex-col--5 flex-col--tablet-large--7 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
+        <div
+          className="flex-container flex-container--mobile-no-padding category__filters"
+          aria-label={`${resultsStore.results.length} services found. Refine results`}
+        >
+          <div className="flex-col flex-col--4 flex-col--tablet-large--4 flex-col--mobile--6 flex-col--medium--4 flex-col--tablet--6 flex-col--mobile-small--5 flex-container--mobile-no-padding">
+            <p
+              className="category_filters--header--cost"
+              aria-label={resultsStore.is_free ? 'View paid services' : 'View free services'}
+            >
+              Cost
+            </p>
             <Checkbox
               id="is_free"
               label="Free"
@@ -39,7 +47,7 @@ class CategoryFilter extends Component<IProps> {
               }}
             />
           </div>
-          <div className="flex-col flex-col--7 flex-col--tablet-large--8 flex-col--mobile--6 flex-col--medium--8 flex-container--mobile-no-padding view-filter__search-bar">
+          <div className="flex-col flex-col--7 flex-col--tablet-large--8 flex-col--mobile--6 flex-col--medium--8 flex-col--tablet--6 flex-col--mobile-small--7 flex-container--mobile-no-padding view-filter__search-bar">
             <p className="view-filter--header">View As</p>
             <Button
               text="Grid"

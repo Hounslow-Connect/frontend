@@ -12,13 +12,13 @@ interface IProps extends RouteComponentProps {
 }
 
 const RelatedServicesCard: React.FunctionComponent<IProps> = ({ service, history }) => (
-  <div className="flex-col flex-col--3 flex-col--medium--4 related-services--card">
+  <div className="flex-col flex-col--3 flex-col--medium--4 flex-col--tablet--5 related-services--card">
     <div className="flex-col flex-col--12 flex-col--mobile--12">
       <h3>{service.name}</h3>
     </div>
     <div className="flex-col flex-col--12 related-services--card--info">{service.intro}</div>
     <div className="flex-container flex-container--align-center related-services--card--no-padding">
-      <div className="flex-col flex-col--9 flex-col--mobile--10">
+      <div className="flex-col flex-col--9 flex-col--mobile--10 flex-col--mobile-small--12">
         <Button
           text="View more"
           size="small"

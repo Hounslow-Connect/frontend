@@ -176,7 +176,7 @@
 .button__header {
   height: pxtorem(40px);
   padding: pxtorem(4px) space(16) space(8);
-  margin: 0 space(24);
+  margin: 0 space(12);
   border-radius: 16px;
   border: 1px solid $waikawa;
   background-color: $white;
@@ -186,6 +186,10 @@
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   border-top: 0;
+
+  @include for-tablet-landscape-down {
+    color: $san-juan;
+  }
 
   &:hover {
     border: 2px solid $waikawa;
@@ -199,6 +203,10 @@
 
   &:disabled:hover {
     @include disabled-btn-hover;
+  }
+
+  @include for-small-phone {
+    margin: 0;
   }
 }
 

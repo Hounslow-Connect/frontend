@@ -34,14 +34,21 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
         'search-result-card--full-width': mapView,
       })}
       onClick={() => history.push(`/services/${result.slug}`)}
+      tabIndex={0}
     >
       <div className="search-result-card__top-row">
         <div className="search-result-card__title">
           <h3>{result.name}</h3>
           {organisation && (
-            <h4 className="search-result-card__organisation">{organisation.name}</h4>
+            <h4 className="search-result-card__organisation">
+              <span className="sr-only">{`This ${result.type} is ran by`}</span>
+              {organisation.name}
+            </h4>
           )}
-          <div className={cx('search-result-card__tag', `search-result-card__tag--${result.type}`)}>
+          <div
+            className={cx('search-result-card__tag', `search-result-card__tag--${result.type}`)}
+            aria-label={`This ${result.type} ${result.is_free ? 'is free' : 'has a cost'}`}
+          >
             <FontAwesomeIcon icon="users" className="search-result-card__tag--icon" />
             {capitalize(result.type)}
             <FontAwesomeIcon
@@ -55,6 +62,8 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
           </div>
           {!!locations.length && (
             <div className="search-result-card__location" onClick={(e: any) => e.stopPropagation()}>
+              <span className="sr-only">{`This ${result.type} is located at`}</span>
+
               <FontAwesomeIcon icon="map-marker-alt" />
               {locations.length === 1 ? (
                 <h4>{first(locations)}</h4>

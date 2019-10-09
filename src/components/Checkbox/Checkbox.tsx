@@ -10,11 +10,26 @@ interface IProps {
   onChange?: () => void;
   checked: boolean;
   className?: string;
+  aria?: string;
 }
 
-const Checkbox: React.FunctionComponent<IProps> = ({ label, id, onChange, checked, className }) => (
+const Checkbox: React.FunctionComponent<IProps> = ({
+  label,
+  id,
+  onChange,
+  checked,
+  className,
+  aria,
+}) => (
   <div className={`checkbox ${className}`}>
-    <input type="checkbox" id={id} name={id} checked={checked} onChange={onChange} />
+    <input
+      type="checkbox"
+      id={id}
+      name={id}
+      checked={checked}
+      onChange={onChange}
+      aria-label={aria}
+    />
     <label htmlFor={id}>
       <span>
         <span>

@@ -8,6 +8,7 @@ const ShareCard: React.FunctionComponent = () => (
       href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Share to Facebook"
     >
       <FontAwesomeIcon icon={['fab', 'facebook-f']} />
     </a>
@@ -16,6 +17,7 @@ const ShareCard: React.FunctionComponent = () => (
       href={`http://twitter.com/share?text=Connected Kingston&url=${window.location.href}`}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Share to Twitter"
     >
       <FontAwesomeIcon icon={['fab', 'twitter']} />
     </a>
@@ -23,10 +25,14 @@ const ShareCard: React.FunctionComponent = () => (
       role="button"
       href={window.location.href}
       onClick={() => window.alert(`${window.location.href}`)}
+      aria-label="Share service via link"
     >
       <FontAwesomeIcon icon="link" />
     </a>
-    <a href={`mailto:?subject=Connected Kingston&amp;body=${window.location.href}"`}>
+    <a
+      href={`mailto:?subject=Connected Kingston&amp;body=${window.location.href}"`}
+      aria-label="Email service link"
+    >
       <FontAwesomeIcon icon="envelope" />
     </a>
   </div>

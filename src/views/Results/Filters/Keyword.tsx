@@ -190,7 +190,15 @@ class Keyword extends Component<IProps, IState> {
           <div className="flex-col flex-col--12 mobile-hide tablet-hide tablet--large-hide">
             <h1 className="results__keyword-heading">Search results</h1>
           </div>
-          <form className="flex-container flex-container--align-bottom mobile-hide tablet-hide tablet--large-hide results__keyword-search-container">
+          <form
+            className="flex-container flex-container--align-bottom mobile-hide tablet-hide tablet--large-hide results__keyword-search-container"
+            onSubmit={e => {
+              e.preventDefault();
+              history.push({
+                search: resultsStore.updateQueryStringParameter('search_term', this.state.keyword),
+              });
+            }}
+          >
             <div className="flex-col flex-col--6 flex-col--tablet-large--6 flex-col--tablet--7 results__keyword-input-box">
               <label htmlFor="keyword">
                 <h2>I'm looking for</h2>

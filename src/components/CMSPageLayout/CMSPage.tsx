@@ -15,7 +15,7 @@ const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn, 
     <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: breadcrumb, url: '' }]} />
     <div className="cms__header">
       <div className="flex-container flex-container--mobile-no-padding">
-        <div className="flex-col flex-col--5">
+        <div className="flex-col flex-col--5 flex-col--tablet-large--6">
           <div className="cms__title-card">
             <h1 className="cms__title-card--title">{title}</h1>
           </div>
@@ -23,7 +23,11 @@ const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn, 
       </div>
     </div>
     <main className="flex-container flex-container--justify">
-      {twoColumn ? children : <div className="flex-col flex-col--6 cms__content">{children}</div>}
+      {twoColumn ? (
+        children
+      ) : (
+        <div className="flex-col flex-col--6 flex-col--tablet--8 cms__content">{children}</div>
+      )}
     </main>
   </section>
 );

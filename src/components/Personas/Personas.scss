@@ -9,7 +9,7 @@
   padding: space(32) space(16);
 
   &--intro {
-    @include for-tablet-landscape-up {
+    @include for-tablet-portrait-up {
       text-align: center;
     }
   }
@@ -48,6 +48,14 @@
       right: 5%;
     }
   }
+
+  @include for-small-phone {
+    &:after {
+      transform: scale(0.6);
+      right: 0;
+    }
+  }
+
   @include for-tablet-landscape-up {
     &:before {
       content: url('../../assets/images/trees/hawkes-small.svg');
@@ -84,7 +92,13 @@
     margin-top: space(32);
   }
 
+  @include for-tablet-portrait-up {
+    padding-top: space(24) !important;
+  }
+
   @include for-tablet-landscape-up {
+    padding-top: 0 !important;
+
     &:before {
       content: url('../../assets/images/trees/iceberg-small.svg');
       position: absolute;

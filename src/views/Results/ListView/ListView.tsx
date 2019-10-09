@@ -24,12 +24,16 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
   return (
     <Fragment>
       <main className="results__container">
-        {resultsStore.results.map((result: IService) => {
-          const organisation =
-            find(resultsStore.organisations, ['id', result.organisation_id]) || null;
+        {!!resultsStore.results.length ? (
+          resultsStore.results.map((result: IService) => {
+            const organisation =
+              find(resultsStore.organisations, ['id', result.organisation_id]) || null;
 
-          return <SearchResultCard key={result.id} result={result} organisation={organisation} />;
-        })}
+            return <SearchResultCard key={result.id} result={result} organisation={organisation} />;
+          })
+        ) : (
+          <h1>No results found</h1>
+        )}
       </main>
 
       <div className="flex-container flex-container--justify pagnation__container">

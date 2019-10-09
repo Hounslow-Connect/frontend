@@ -6,6 +6,10 @@
 .leaflet-container {
   height: 100%;
   width: 100%;
+
+  a {
+    color: inherit;
+  }
 }
 
 .map {
@@ -14,6 +18,10 @@
   height: 600px;
   border-radius: 25px;
   overflow: hidden;
+
+  @include for-phone-only {
+    height: 400px;
+  }
 }
 
 .map__key--container {
@@ -64,4 +72,11 @@
 
 .map__key--description {
   margin-bottom: space(16);
+}
+
+.leaflet-popup-content {
+  @include for-phone-only {
+    width: 70vw;
+    height: 90%;
+  }
 }

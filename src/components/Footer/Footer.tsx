@@ -49,6 +49,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                   href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Link to Connected Kingston Facebook"
                 >
                   <FontAwesomeIcon icon={['fab', 'facebook-f']} className="footer__social-icons" />
                 </a>
@@ -56,6 +57,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                   href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Link to Connected Kingston Twitter"
                 >
                   <FontAwesomeIcon icon={['fab', 'twitter']} className="footer__social-icons" />
                 </a>
@@ -73,7 +75,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
               </div>
             </div>
 
-            <div className="flex-col flex-col--6 flex-col--mobile--12 footer__section footer__button">
+            <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__section footer__button">
               <a
                 href="https://admin.connectedkingston.uk"
                 target="_blank"

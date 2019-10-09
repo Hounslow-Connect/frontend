@@ -23,8 +23,8 @@ interface IState {
 }
 
 const CENTRE_OF_KINGSTON: [number, number] = [51.378583, -0.280582];
-const TOP_LEFT_CORNER: [number, number] = [51.431705, -0.348497];
-const BOTTOM_RIGHT_CORNER: [number, number] = [51.369157, -0.217336];
+const TOP_LEFT_CORNER: [number, number] = [51.412437, -0.329297];
+const BOTTOM_RIGHT_CORNER: [number, number] = [51.403871, -0.288459];
 
 class MapView extends Component<IProps, IState> {
   constructor(props: IProps) {
@@ -73,12 +73,7 @@ class MapView extends Component<IProps, IState> {
     return (
       <main className="flex-container">
         <div className="flex-col--9 flex-col--mobile--12 map">
-          <Map
-            cente={CENTRE_OF_KINGSTON}
-            zoom={6}
-            attributionControl={false}
-            bounds={this.state.bounds}
-          >
+          <Map cente={CENTRE_OF_KINGSTON} attributionControl={false} bounds={this.state.bounds}>
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
             {resultsStore.results.map((result: IService) => {
               const organisation =

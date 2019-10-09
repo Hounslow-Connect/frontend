@@ -46,16 +46,16 @@ class Favourites extends Component<IProps> {
             <h1>{get(cmsStore, 'favourites.title')}</h1>
           </div>
           <div className="flex-container flex-container--mobile-no-padding flex-container--align-center favourites__header--inner-container">
-            <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet-large--5 favourites__header--header-container">
+            <div className="flex-col flex-col--5 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--4 favourites__header--header-container">
               <p>{get(cmsStore, 'favourites.content')}</p>
             </div>
-            <div className="flex-col flex-col--5 flex-col--tablet-large--6 mobile-hide tablet-hide favourites__header--header-container">
+            <div className="flex-col flex-col--4 flex-col--medium--6 flex-col--tablet-large--7 mobile-hide tablet-hide favourites__header--header-container">
               <FavouriteShare />
             </div>
           </div>
         </div>
 
-        <div className="flex-container flex-container--mobile-no-padding flex-container--align-center">
+        <div className="flex-container flex-container--mobile-no-padding flex-container--align-center ">
           {!!favouritesStore.favourites.length ? (
             <Fragment>
               <div className="flex-col flex-col--12 favourites__count">
@@ -63,7 +63,7 @@ class Favourites extends Component<IProps> {
               </div>
 
               <div className="flex-col flex-col--12">
-                <div className="flex-container flex-container--justify">
+                <div className="flex-container flex-container--justify favourites--container">
                   {favouritesStore.favourites.map((favourite: IService) => {
                     return (
                       <FavouritesCard
@@ -74,14 +74,6 @@ class Favourites extends Component<IProps> {
                       />
                     );
                   })}
-                </div>
-              </div>
-
-              <div className="flex-container favourites__add-more">
-                <div className="flex-col">
-                  <Link to="/">
-                    <Button text="Add more" icon="plus" onClick={() => history.push('/')} />
-                  </Link>
                 </div>
               </div>
 
@@ -96,6 +88,13 @@ class Favourites extends Component<IProps> {
               </div>
             </div>
           )}
+        </div>
+        <div className="flex-container flex-container--justify">
+          <div className="favourites__add-more">
+            <Link to="/">
+              <Button text="Add more" icon="plus" onClick={() => history.push('/')} />
+            </Link>
+          </div>
         </div>
       </section>
     );

@@ -12,6 +12,7 @@ import { observer, inject } from 'mobx-react';
 import FavouritesStore from '../../stores/favouritesStore';
 import get from 'lodash/get';
 import { withRouter, RouteComponentProps } from 'react-router';
+import { gaEvent } from '../../utils/gaEvent';
 
 interface IProps extends RouteComponentProps {
   service: IService;
@@ -36,7 +37,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
   const organisation = find(favouritesStore.organisations, ['id', service.organisation_id]);
 
   return (
-    <article className="flex-col flex-col--4 flex-col--mobile--12 flex-col--tablet-large--6 favourites__card--outer">
+    <article className="flex-col flex-col--mobile--12 flex-col--4 flex-col--tablet-large--5 flex-col--tablet--8 favourites__card--outer">
       <div className="favourites__card">
         <div className="flex-container favourites__card--inner flex-container--mobile-no-padding">
           <div className="flex-col flex-col--12">
@@ -83,13 +84,23 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
                 <p className="favourites__card--contact--heading">
                   <FontAwesomeIcon icon="phone" /> Telephone
                 </p>
-                <p className="body--s">{service.contact_phone}</p>
+                <p
+                  className="body--s"
+                  onClick={() => gaEvent(service.name, 'Phone', service.contact_phone)}
+                >
+                  {service.contact_phone}
+                </p>
               </div>
               <div className="flex-col flex-col--12">
                 <p className="favourites__card--contact--heading">
                   <FontAwesomeIcon icon="envelope" /> Email
                 </p>
-                <p className="body--s">{service.contact_email}</p>
+                <p
+                  className="body--s"
+                  onClick={() => gaEvent(service.name, 'Email', service.contact_email)}
+                >
+                  {service.contact_email}
+                </p>
               </div>
             </div>
           </div>
@@ -101,6 +112,8 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
               role="button"
               aria-label="Remove favourite"
               onClick={() => removeFavourite(service.id)}
+              onKeyPress={e => (e.key === 'Enter' ? removeFavourite(service.id) : null)}
+              tabIndex={0}
             >
               <p>
                 Remove <FontAwesomeIcon icon="times" />
@@ -111,6 +124,10 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
               role="navigation"
               aria-label={`View more information about ${service.name}`}
               onClick={() => history.push(`/services/${service.slug}`)}
+              onKeyPress={e =>
+                e.key === 'Enter' ? history.push(`/services/${service.slug}`) : null
+              }
+              tabIndex={0}
             >
               <p>
                 View More <FontAwesomeIcon icon="chevron-right" />

@@ -5,13 +5,32 @@
 @import '../../styles/fonts.scss';
 
 .header {
-  position: relative;
   background: $white;
-  padding: space(8) 0;
   overflow: hidden;
   color: $san-juan;
   text-align: right;
   padding-bottom: space(40);
+
+  &--grey {
+    background-image: url('../../assets/images/backgrounds/referral-header-shape.svg');
+    background-repeat: no-repeat;
+    background-size: 110% 100%;
+
+    .header__container {
+      @include for-tablet-portrait-up {
+        padding-bottom: space(24) !important;
+      }
+    }
+
+    @include for-tablet-landscape-down {
+      padding-bottom: space(32) !important;
+    }
+
+    @include for-phone-only {
+      padding-bottom: space(24) !important;
+      background-image: url('../../assets/images/backgrounds/referral-header-shape-mobile.svg');
+    }
+  }
 
   @include for-tablet-landscape-down {
     z-index: 999;
@@ -30,6 +49,7 @@
     height: 100%;
     z-index: 999;
     overflow: auto;
+    background-color: $iceberg;
   }
 
   .flex-container {
@@ -43,25 +63,102 @@
     }
   }
 
+  &--top-row {
+    align-items: stretch !important;
+    padding-bottom: space(12) !important;
+
+    &--favourites {
+      @include for-tablet-landscape-down {
+        background-color: $iceberg;
+      }
+    }
+
+    &--favourite {
+      @include for-tablet-portrait-down {
+        text-align: center;
+      }
+    }
+
+    &--iceberg {
+      @include for-phone-only {
+        background-color: $iceberg;
+      }
+
+      @include for-phone-only {
+        button {
+          border: none;
+        }
+
+        .goog-te-gadget-simple {
+          border: none !important;
+        }
+      }
+    }
+
+    @include for-small-phone {
+      .goog-te-gadget-simple {
+        margin: 0;
+      }
+    }
+
+    @include for-desktop-up {
+      justify-content: flex-end !important;
+    }
+
+    @include for-tablet-landscape-down {
+      button {
+        color: $san-juan;
+
+        svg {
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+
   &__brand {
     position: relative;
-    padding: space(12) !important;
+    padding: space(12);
     z-index: 1;
 
     @include for-tablet-landscape-down {
+      padding: space(12) space(24) !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: space(16);
-      background-color: $iceberg;
       width: 100% !important;
 
       &--active {
         padding-bottom: space(48) !important;
+        background-color: $iceberg;
       }
 
       &--sticky {
         position: fixed;
+        background-color: $iceberg;
+      }
+
+      &--iceberg {
+        @include for-phone-only {
+          background-color: $iceberg;
+        }
+      }
+
+      &--favourites {
+        @include for-tablet-landscape-down {
+          background-image: url('../../assets/images/backgrounds/favourites-shape-mobile.svg');
+          background-repeat: no-repeat;
+          background-size: 110% 100%;
+        }
+      }
+    }
+
+    @include for-phone-only {
+      padding: space(12) !important;
+
+      &--active {
+        padding-bottom: space(48) !important;
       }
     }
   }
@@ -111,7 +208,9 @@
     }
 
     @include for-small-phone {
-      max-width: 210px;
+      svg {
+        max-width: 230px;
+      }
     }
   }
 
@@ -133,7 +232,7 @@
       outline: none;
     }
 
-    label {
+    &--button {
       display: inline-block;
       max-width: 43px;
       margin-right: space(8);
@@ -159,8 +258,12 @@
     }
 
     &.active {
-      label:before {
-        content: 'Close menu';
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+
+      span:before {
+        content: 'Close';
       }
 
       i:before {
@@ -205,6 +308,10 @@
         z-index: 50;
       }
     }
+  }
+
+  @include for-desktop-up {
+    padding: 0 !important;
   }
 }
 

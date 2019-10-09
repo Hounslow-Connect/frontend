@@ -9,13 +9,16 @@
     font-size: pxtorem(16px);
   }
 
-  @include for-tablet-landscape-up {
-    padding: space(20) !important;
+  @include for-tablet-portrait-up {
     border-radius: 19px;
     background-color: $alabaster;
-    height: 100%;
     margin: space(8);
     width: 45%;
+    display: flex;
+  }
+
+  @include for-tablet-landscape-up {
+    padding: space(20) !important;
   }
 }
 

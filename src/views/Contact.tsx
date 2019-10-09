@@ -18,18 +18,22 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
 
   return (
     <CMSPage title={get(cmsStore, 'contact.title')} twoColumn={true} breadcrumb="Contact">
-      <div className="flex-col flex-col--7 cms__content">
+      <div className="flex-col flex-col--7 flex-col--tablet--8 cms__content">
         <ReactMarkdown source={get(cmsStore, 'contact.content')} />
       </div>
-      <div className="flex-col flex-col--3 flex-col--mobile--5 flex-col--tablet-large--4">
+      <div className="flex-col flex-col--3 flex-col--mobile--10 flex-col--tablet--8 flex-col--tablet-large--4">
         <div className="cms--contact-card">
           <h3>Contact</h3>
-          <div className="service__contact-card--row">
-            <FontAwesomeIcon icon="phone" /> Telephone
+          <div className="cms--contact-card--row">
+            <h4>
+              <FontAwesomeIcon icon="phone" /> Telephone
+            </h4>
             <p>{get(cmsStore, 'global.contact_phone')}</p>
           </div>
-          <div className="service__contact-card--row">
-            <FontAwesomeIcon icon="envelope" /> Email
+          <div className="cms--contact-card--row">
+            <h4>
+              <FontAwesomeIcon icon="envelope" /> Email
+            </h4>
             <a
               className="cms--contact-card--email"
               href={`mailto:${get(cmsStore, 'global.contact_email')}`}
@@ -37,11 +41,12 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               {get(cmsStore, 'global.contact_email')}
             </a>
           </div>
-          <div className="flex-col flex-col--12 service__social-icon-container">
+          <div className="flex-col flex-col--12 cms--contact-card--socials service__contact-card--row">
             <a
               href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Connected Kingston Facbook"
             >
               <FontAwesomeIcon icon={['fab', 'facebook-f']} className="service__social-icon" />
             </a>
@@ -49,6 +54,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Connected Kingston Twitter"
             >
               <FontAwesomeIcon icon={['fab', 'twitter']} className="service__social-icon" />
             </a>
