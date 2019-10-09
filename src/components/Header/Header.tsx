@@ -101,85 +101,87 @@ class Header extends Component<IProps> {
             </button>
           </div>
 
-          <div
-            className={cx('flex-container header__content', {
-              'header__content--active': burgerMenuOpen,
-            })}
-          >
+          <div className="flex-col flex-col--6 flex-col--tablet-large--12 flex-col--tablet--12 flex-col--medium--6">
             <div
-              className="flex-col flex-col--12 flex-col--tablet-large--12 header__navigation tablet--large-hide medium-hide"
-              role="navigation"
+              className={cx('flex-container header__content', {
+                'header__content--active': burgerMenuOpen,
+              })}
             >
-              <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
-                <RouterLink
-                  exact={true}
-                  to="/"
-                  className="link link__inline link--large link__header"
-                  activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => {
-                    if (burgerMenuOpen) {
-                      toggleBurgerMenu();
-                    }
-                  }}
-                >
-                  Home
-                </RouterLink>
-                <RouterLink
-                  to="/about"
-                  exact={true}
-                  className="link link__inline link--large link__header"
-                  activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => {
-                    if (burgerMenuOpen) {
-                      toggleBurgerMenu();
-                    }
-                  }}
-                >
-                  About
-                </RouterLink>
-                <RouterLink
-                  to="/contact"
-                  className="link link__inline link--large link__header"
-                  activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => {
-                    if (burgerMenuOpen) {
-                      toggleBurgerMenu();
-                    }
-                  }}
-                >
-                  Contact
-                </RouterLink>
-                <RouterLink
-                  to="/get-involved"
-                  className="link link__inline link--large link__header"
-                  activeClassName={cx({ 'nav--active': !isMobile })}
-                  onClick={() => {
-                    if (burgerMenuOpen) {
-                      toggleBurgerMenu();
-                    }
-                  }}
-                >
-                  Get Involved
-                </RouterLink>
-
-                <div className="mobile-show tablet-show tablet--large-show medium-show">
-                  <div id="google_translate_element" />
-
-                  <Button
-                    text="Give feedback"
-                    size="small"
-                    burgerMenu={true}
-                    icon="comment"
+              <div
+                className="flex-col flex-col--12 flex-col--tablet-large--12 header__navigation tablet--large-hide medium-hide"
+                role="navigation"
+              >
+                <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
+                  <RouterLink
+                    exact={true}
+                    to="/"
+                    className="link link__inline link--large link__header"
+                    activeClassName={cx({ 'nav--active': !isMobile })}
                     onClick={() => {
-                      toggleBurgerMenu();
-                      toggleFeedbackModal();
+                      if (burgerMenuOpen) {
+                        toggleBurgerMenu();
+                      }
                     }}
-                  />
-                  <RouterLink to="/favourites">
-                    <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
+                  >
+                    Home
                   </RouterLink>
-                </div>
-              </nav>
+                  <RouterLink
+                    to="/about"
+                    exact={true}
+                    className="link link__inline link--large link__header"
+                    activeClassName={cx({ 'nav--active': !isMobile })}
+                    onClick={() => {
+                      if (burgerMenuOpen) {
+                        toggleBurgerMenu();
+                      }
+                    }}
+                  >
+                    About
+                  </RouterLink>
+                  <RouterLink
+                    to="/contact"
+                    className="link link__inline link--large link__header"
+                    activeClassName={cx({ 'nav--active': !isMobile })}
+                    onClick={() => {
+                      if (burgerMenuOpen) {
+                        toggleBurgerMenu();
+                      }
+                    }}
+                  >
+                    Contact
+                  </RouterLink>
+                  <RouterLink
+                    to="/get-involved"
+                    className="link link__inline link--large link__header"
+                    activeClassName={cx({ 'nav--active': !isMobile })}
+                    onClick={() => {
+                      if (burgerMenuOpen) {
+                        toggleBurgerMenu();
+                      }
+                    }}
+                  >
+                    Get Involved
+                  </RouterLink>
+
+                  <div className="mobile-show tablet-show tablet--large-show medium-show">
+                    <div id="google_translate_element" />
+
+                    <Button
+                      text="Give feedback"
+                      size="small"
+                      burgerMenu={true}
+                      icon="comment"
+                      onClick={() => {
+                        toggleBurgerMenu();
+                        toggleFeedbackModal();
+                      }}
+                    />
+                    <RouterLink to="/favourites">
+                      <Button text="View favourites" size="small" burgerMenu={true} icon="star" />
+                    </RouterLink>
+                  </div>
+                </nav>
+              </div>
             </div>
           </div>
           {burgerMenuOpen && (
