@@ -12,6 +12,7 @@ import { observer, inject } from 'mobx-react';
 import FavouritesStore from '../../stores/favouritesStore';
 import get from 'lodash/get';
 import { withRouter, RouteComponentProps } from 'react-router';
+import { gaEvent } from '../../utils/gaEvent';
 
 interface IProps extends RouteComponentProps {
   service: IService;
@@ -83,13 +84,23 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
                 <p className="favourites__card--contact--heading">
                   <FontAwesomeIcon icon="phone" /> Telephone
                 </p>
-                <p className="body--s">{service.contact_phone}</p>
+                <p
+                  className="body--s"
+                  onClick={() => gaEvent(service.name, 'Phone', service.contact_phone)}
+                >
+                  {service.contact_phone}
+                </p>
               </div>
               <div className="flex-col flex-col--12">
                 <p className="favourites__card--contact--heading">
                   <FontAwesomeIcon icon="envelope" /> Email
                 </p>
-                <p className="body--s">{service.contact_email}</p>
+                <p
+                  className="body--s"
+                  onClick={() => gaEvent(service.name, 'Email', service.contact_email)}
+                >
+                  {service.contact_email}
+                </p>
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import find from 'lodash/find';
 
 import { IService } from '../../../types/types';
+import { gaEvent } from '../../../utils/gaEvent';
 
 interface IProps {
   service: IService;
@@ -40,7 +41,9 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       >
         <FontAwesomeIcon icon="phone" /> Telephone
       </h4>
-      <p>{service.contact_phone}</p>
+      <p onClick={() => gaEvent(service.name, 'Phone', service.contact_phone)}>
+        {service.contact_phone}
+      </p>
     </div>
     <div className="flex-col flex-col--12 service__accordian--no-overflow">
       <h4
@@ -50,7 +53,12 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       >
         <FontAwesomeIcon icon="envelope" /> Email
       </h4>
-      <a href={`mailto:${service.contact_email}`}>{service.contact_email}</a>
+      <a
+        href={`mailto:${service.contact_email}`}
+        onClick={() => gaEvent(service.name, 'Email', service.contact_email)}
+      >
+        {service.contact_email}
+      </a>
     </div>
     <div
       className={cx('flex-col flex-col--12 service__social-icon-container', {
