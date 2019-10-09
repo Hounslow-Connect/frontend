@@ -232,7 +232,7 @@
       outline: none;
     }
 
-    label {
+    &--button {
       display: inline-block;
       max-width: 43px;
       margin-right: space(8);
@@ -262,7 +262,7 @@
       right: 12px;
       bottom: 10px;
 
-      label:before {
+      span:before {
         content: 'Close';
       }
 

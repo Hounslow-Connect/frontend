@@ -160,8 +160,10 @@
 
   &--button {
     text-align: center;
+    border-bottom-left-radius: 8px;
 
     padding: space(16);
+    box-sizing: border-box;
 
     svg {
       margin-left: space(8);
@@ -177,9 +179,15 @@
       box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
     }
 
+    &:focus {
+      border: 2px solid $puerto-rico;
+    }
+
     &--more {
       background-color: $san-juan;
       color: $white;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 8px;
     }
 
     @include for-phone-only {

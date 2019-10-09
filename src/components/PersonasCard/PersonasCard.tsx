@@ -23,7 +23,7 @@ const PersonasCard: React.FunctionComponent<IProps> = ({ persona, action, window
       <div className="flex-col--12 flex-col--mobile--4">
         <img
           src={`${apiBase}/collections/personas/${persona.id}/image.png?max_dimension=300`}
-          alt={persona.name}
+          alt={`Services relating to ${persona.name}`}
         />
       </div>
       <div className="flex-col--12 flex-col--mobile--8 card__description">

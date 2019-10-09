@@ -101,6 +101,8 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
               role="button"
               aria-label="Remove favourite"
               onClick={() => removeFavourite(service.id)}
+              onKeyPress={e => (e.key === 'Enter' ? removeFavourite(service.id) : null)}
+              tabIndex={0}
             >
               <p>
                 Remove <FontAwesomeIcon icon="times" />
@@ -111,6 +113,10 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
               role="navigation"
               aria-label={`View more information about ${service.name}`}
               onClick={() => history.push(`/services/${service.slug}`)}
+              onKeyPress={e =>
+                e.key === 'Enter' ? history.push(`/services/${service.slug}`) : null
+              }
+              tabIndex={0}
             >
               <p>
                 View More <FontAwesomeIcon icon="chevron-right" />

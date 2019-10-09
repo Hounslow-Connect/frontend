@@ -95,7 +95,7 @@ class Header extends Component<IProps> {
               })}
               onClick={() => toggleBurgerMenu()}
             >
-              <label htmlFor="nav-trigger"></label>
+              <span className="nav-trigger--button" />
               <i className="bars fa fa-bars" aria-hidden title="Menu Trigger"></i>
               <span className="sr-only">Menu Trigger</span>
             </button>
