@@ -67,6 +67,29 @@
     align-items: stretch !important;
     padding-bottom: space(12) !important;
 
+    &--button-box {
+      display: flex;
+      margin-right: space(8);
+
+      &:last-of-type {
+        margin-right: 0;
+        margin-left: space(8);
+      }
+
+      button {
+        margin: 0;
+      }
+
+      @include for-small-phone {
+        margin: 0;
+        justify-content: center;
+
+        &:last-of-type {
+          margin: 0;
+        }
+      }
+    }
+
     &--favourites {
       @include for-tablet-landscape-down {
         background-color: $iceberg;
