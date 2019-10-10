@@ -223,6 +223,15 @@
   padding: space(32) !important;
   position: relative;
 
+  .flex-col {
+    display: flex;
+    justify-content: center;
+  }
+
+  @include for-tablet-landscape-down {
+    padding: space(32) space(16) !important;
+  }
+
   @include for-tablet-landscape-up {
     border-radius: 19px;
 
@@ -240,10 +249,15 @@
 }
 
 .service__refer-disclaimer {
-  padding: space(16) 0;
+  padding-top: space(16) !important;
 
   svg {
     color: $waikawa;
+  }
+
+  p {
+    text-align: left;
+    padding-left: space(8);
   }
 
   @include for-tablet-portrait-down {
