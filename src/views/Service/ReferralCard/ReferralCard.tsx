@@ -11,7 +11,7 @@ interface IProps extends RouteComponentProps {
 
 const ReferralCard: React.FunctionComponent<IProps> = ({ history, id }) => (
   <div className="flex-container flex-container--align-center flex-container--justify flex-container--mobile-no-padding service__referral">
-    <div className="flex-col flex-col--tablet--5 flex-col--mobile--8 flex-col--mobile-small--12">
+    <div className="flex-col flex-col--tablet--6 flex-col--mobile--12 flex-col--mobile-small--12">
       <Button
         text="Make a connection"
         icon="arrow-right"
@@ -19,9 +19,16 @@ const ReferralCard: React.FunctionComponent<IProps> = ({ history, id }) => (
       />
     </div>
     <div className="flex-col flex-col--tablet--12">
-      <p className="service__refer-disclaimer">
-        <FontAwesomeIcon icon="info-circle" /> It can take up to 2 weeks to recieve a reply
-      </p>
+      <div className="flex-container flex-container--justify flex-container--mobile-no-padding service__refer-disclaimer">
+        <div className="flex-col--1">
+          <FontAwesomeIcon icon="info-circle" />
+        </div>
+        <div className="flex-col--11">
+          <p>
+            It can take up to <strong>2 weeks</strong> to recieve a reply
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 );
