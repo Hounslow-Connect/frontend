@@ -510,7 +510,7 @@
 
 .service__left-column {
   @include for-tablet-landscape-up {
-    padding-right: space(32) !important;
+    padding-right: space(64) !important;
   }
 }
 
@@ -640,4 +640,10 @@
     font-size: $font-body-l !important;
     margin-bottom: space(12);
   }
+}
+
+.service__gallery {
+  padding: 0 !important;
+  width: 100%;
+  margin: 0 !important;
 }

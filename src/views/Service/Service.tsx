@@ -38,6 +38,7 @@ import OrganisationCard from './OrganisationCard';
 import ButtonCard from './ButtonCard';
 import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
+import GalleryCard from './GalleryCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
 import UIStore from '../../stores/uiStore';
@@ -212,6 +213,11 @@ class Service extends Component<IProps> {
                   <div className="flex-col flex-col--mobile--12">
                     <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                   </div>
+                  {!!service.gallery_items.length && (
+                    <div className="flex-container flex-container--mobile-no-padding service__gallery">
+                      <GalleryCard gallery={service.gallery_items} />
+                    </div>
+                  )}
                   {service.video_embed && (
                     <div className="flex-container flex-container--mobile-no-padding mobile-show">
                       <VideoCard video={service.video_embed} width="90vw" />
