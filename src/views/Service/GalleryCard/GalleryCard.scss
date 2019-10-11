@@ -8,6 +8,28 @@
   height: 100%;
 }
 
+@mixin overlay-icon {
+  content: '\f302';
+  font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: pxtorem(20px);
+}
+
+@mixin overlay {
+  background-image: linear-gradient(to bottom right, #46c0b0, #46c0b0);
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
 .gallery-card {
   padding: 0 !important;
   margin-bottom: space(8) !important;
@@ -24,9 +46,39 @@
     padding: 0;
   }
 
+  &--one-container {
+    position: relative;
+    &:before {
+      @include overlay();
+      border-top-right-radius: 17px;
+      border-top-left-radius: 17px;
+    }
+
+    &:after {
+      @include overlay-icon();
+    }
+  }
+
   &--image {
+    position: relative;
     @include for-phone-only {
       display: flex;
+    }
+
+    &:last-of-type {
+      &:before {
+        @include overlay();
+        text-align: center;
+        vertical-align: middle;
+
+        @include for-tablet-portrait-up {
+          border-top-right-radius: 17px;
+        }
+      }
+
+      &:after {
+        @include overlay-icon();
+      }
     }
 
     &--left {

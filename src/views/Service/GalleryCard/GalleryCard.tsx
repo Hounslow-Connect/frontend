@@ -20,7 +20,7 @@ interface IGalleryItem {
 }
 
 const GalleryOne: React.FunctionComponent<IProps> = ({ gallery }) => (
-  <div className="flex-col--12 gallery-card--image--container">
+  <div className="flex-col--12 gallery-card--image--container gallery-card--one-container">
     <img src={gallery[0].url} className="gallery-card--image--one" alt="1 of 1" />
   </div>
 );
@@ -28,11 +28,11 @@ const GalleryOne: React.FunctionComponent<IProps> = ({ gallery }) => (
 const GalleryTwo: React.FunctionComponent<IProps> = ({ gallery }) => (
   <div className="flex-col--12 ">
     <div className="flex-container flex-container--mobile-no-padding">
-      <div className="flex-col--6 gallery-card--image--container">
+      <div className="flex-col--6 gallery-card--image--container gallery-card--image">
         <img src={gallery[0].url} className="gallery-card--image--left" alt="1 of 2" />
       </div>
 
-      <div className="flex-col--6 gallery-card--image--container">
+      <div className="flex-col--6 gallery-card--image--container gallery-card--image">
         <img src={gallery[1].url} className="gallery-card--image--right" alt="2 of 2" />
       </div>
     </div>
@@ -49,12 +49,12 @@ const GalleryThree: React.FunctionComponent<IProps> = ({ gallery }) => (
         <div className="flex-container flex-container--mobile-no-padding">
           {gallery.slice(1).map((image: IGalleryItem, i: number) => (
             <div
-              className="flex-col--6 flex-col--mobile--12 gallery-card--image"
+              className="flex-col--6 flex-col--mobile--12 gallery-card--image  gallery-card--img"
               key={image.file_id}
             >
               <img
                 src={image.url}
-                className={cx('gallery-card--image--right gallery-card--image--small', {
+                className={cx('gallery-card--image--right  gallery-card--image--small', {
                   'gallery-card--image--center': i === 0,
                   'gallery-card--image--square': i === 1,
                 })}
