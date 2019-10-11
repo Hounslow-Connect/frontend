@@ -214,7 +214,7 @@ class Service extends Component<IProps> {
                     <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                   </div>
                   {!!service.gallery_items.length && (
-                    <div className="flex-container flex-container--mobile-no-padding">
+                    <div className="flex-container flex-container--mobile-no-padding service__gallery">
                       <GalleryCard gallery={service.gallery_items} />
                     </div>
                   )}
