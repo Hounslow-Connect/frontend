@@ -26,13 +26,13 @@ const GalleryOne: React.FunctionComponent<IProps> = ({ gallery }) => (
 );
 
 const GalleryTwo: React.FunctionComponent<IProps> = ({ gallery }) => (
-  <div className="flex-col--12 gallery-card--image--container">
+  <div className="flex-col--12 ">
     <div className="flex-container flex-container--mobile-no-padding">
-      <div className="flex-col--6">
+      <div className="flex-col--6 gallery-card--image--container">
         <img src={gallery[0].url} className="gallery-card--image--left" alt="1 of 2" />
       </div>
 
-      <div className="flex-col--6">
+      <div className="flex-col--6 gallery-card--image--container">
         <img src={gallery[1].url} className="gallery-card--image--right" alt="2 of 2" />
       </div>
     </div>

@@ -215,7 +215,7 @@ class Service extends Component<IProps> {
                   </div>
                   {!!service.gallery_items.length && (
                     <div className="flex-container flex-container--mobile-no-padding service__gallery">
-                      <GalleryCard gallery={service.gallery_items} />
+                      <GalleryCard gallery={service.gallery_items.slice(0, 3)} />
                     </div>
                   )}
                   {service.video_embed && (

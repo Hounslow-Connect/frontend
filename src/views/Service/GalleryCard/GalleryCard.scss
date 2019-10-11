@@ -53,7 +53,7 @@
     }
 
     &--container {
-      height: 200px;
+      height: 180px;
       @include for-phone-only {
         height: 150px;
       }
