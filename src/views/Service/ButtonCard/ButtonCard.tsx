@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import Button from '../../../components/Button';
 import ServiceStore from '../../../stores/serviceStore';
 
@@ -23,4 +24,4 @@ const ButtonCard: React.FunctionComponent<IProps> = ({ serviceStore }) => (
   </div>
 );
 
-export default ButtonCard;
+export default observer(ButtonCard);
