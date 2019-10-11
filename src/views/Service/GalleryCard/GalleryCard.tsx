@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -19,13 +20,13 @@ interface IGalleryItem {
 }
 
 const GalleryOne: React.FunctionComponent<IProps> = ({ gallery }) => (
-  <div className="flex-col--12" style={{ height: '140px' }}>
+  <div className="flex-col--12 gallery-card--image--container">
     <img src={gallery[0].url} className="gallery-card--image--one" alt="1 of 1" />
   </div>
 );
 
 const GalleryTwo: React.FunctionComponent<IProps> = ({ gallery }) => (
-  <div className="flex-col--12">
+  <div className="flex-col--12 gallery-card--image--container">
     <div className="flex-container flex-container--mobile-no-padding">
       <div className="flex-col--6">
         <img src={gallery[0].url} className="gallery-card--image--left" alt="1 of 2" />
@@ -53,9 +54,10 @@ const GalleryThree: React.FunctionComponent<IProps> = ({ gallery }) => (
             >
               <img
                 src={image.url}
-                className={cx(
-                  'gallery-card--image--right gallery-card--image--small gallery-card--image--square'
-                )}
+                className={cx('gallery-card--image--right gallery-card--image--small', {
+                  'gallery-card--image--center': i === 0,
+                  'gallery-card--image--square': i === 1,
+                })}
                 alt={`${i + 2} of 3`}
               />
             </div>
@@ -106,4 +108,4 @@ const GalleryCard: React.FunctionComponent<IProps> = ({ gallery }) => {
   );
 };
 
-export default GalleryCard;
+export default observer(GalleryCard);

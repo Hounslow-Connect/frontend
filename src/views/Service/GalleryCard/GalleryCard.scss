@@ -10,13 +10,24 @@
 
 .gallery-card {
   padding: 0 !important;
+  margin-bottom: space(8) !important;
+
+  @include for-tablet-portrait-down {
+    margin-bottom: space(24) !important;
+  }
+
+  @include for-phone-only {
+    margin-bottom: space(8) !important;
+  }
 
   .flex-container {
     padding: 0;
   }
 
   &--image {
-    display: flex;
+    @include for-phone-only {
+      display: flex;
+    }
 
     &--left {
       @include image;
@@ -33,6 +44,19 @@
 
       border-top-left-radius: 17px;
       border-top-right-radius: 17px;
+    }
+
+    &--center {
+      @include for-tablet-portrait-up {
+        border-radius: 0;
+      }
+    }
+
+    &--container {
+      height: 200px;
+      @include for-phone-only {
+        height: 150px;
+      }
     }
 
     &--small {
