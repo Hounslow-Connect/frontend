@@ -31,7 +31,15 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       >
         <FontAwesomeIcon icon="globe" /> Website
       </h4>
-      <a href={service.url}>{service.url}</a>
+      <a
+        href={service.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${service.name} website`}
+        onClick={() => gaEvent(service.url, 'Website', service.url)}
+      >
+        {service.url}
+      </a>
     </div>
     <div className="flex-col flex-col--12 service__accordian--no-overflow">
       <h4
@@ -41,9 +49,12 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       >
         <FontAwesomeIcon icon="phone" /> Telephone
       </h4>
-      <p onClick={() => gaEvent(service.name, 'Phone', service.contact_phone)}>
+      <a
+        onClick={() => gaEvent(service.name, 'Phone', service.contact_phone)}
+        href={`tel:${service.contact_phone}`}
+      >
         {service.contact_phone}
-      </p>
+      </a>
     </div>
     <div className="flex-col flex-col--12 service__accordian--no-overflow">
       <h4
@@ -55,7 +66,10 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
       </h4>
       <a
         href={`mailto:${service.contact_email}`}
-        onClick={() => gaEvent(service.name, 'Email', service.contact_email)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Email ${service.name}`}
+        onClick={() => gaEvent(service.name, 'Email', service.contact_email.replace('@', '(at)'))}
       >
         {service.contact_email}
       </a>
