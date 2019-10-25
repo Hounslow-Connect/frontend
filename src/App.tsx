@@ -34,6 +34,8 @@ import Terms from './views/Terms';
 import FeedbackModal from './components/FeedbackModal';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
+import { withTracker } from './utils/withTracker';
+
 // add all free font awesome icons to project
 library.add(fas, fab);
 
@@ -49,6 +51,7 @@ class App extends Component {
   componentDidMount() {
     windowSizeStore.setWindow();
     ReactGA.initialize('UA-124057892-1');
+    // ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {
@@ -66,16 +69,16 @@ class App extends Component {
           <ScrollToTop>
             <Header />
             <Switch>
-              <Route path="/" exact={true} component={Home} />
-              <Route path="/results" component={Results} />
-              <Route path="/services/:service" component={Service} />
-              <Route path="/favourites" component={Favourites} />
-              <Route path="/referral" component={Referral} />
-              <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/get-involved" component={GetInvolved} />
-              <Route path="/privacy-policy" component={Privacy} />
-              <Route path="/terms-and-conditions" component={Terms} />
+              <Route path="/" exact={true} component={withTracker(Home)} />
+              <Route path="/results" component={withTracker(Results)} />
+              <Route path="/services/:service" component={withTracker(Service)} />
+              <Route path="/favourites" component={withTracker(Favourites)} />
+              <Route path="/referral" component={withTracker(Referral)} />
+              <Route path="/about" component={withTracker(About)} />
+              <Route path="/contact" component={withTracker(Contact)} />
+              <Route path="/get-involved" component={withTracker(GetInvolved)} />
+              <Route path="/privacy-policy" component={withTracker(Privacy)} />
+              <Route path="/terms-and-conditions" component={withTracker(Terms)} />
               <Route component={NotFound} />
             </Switch>
             <FeedbackModal />
