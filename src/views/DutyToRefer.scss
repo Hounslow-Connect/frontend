@@ -1,0 +1,39 @@
+@import '../styles/colors.scss';
+@import '../styles/breakpoints.scss';
+@import '../styles/mixins.scss';
+
+.pod {
+  text-align: center;
+
+  > a {
+    display: block;
+    text-decoration: none;
+  }
+
+  &--title {
+    margin-bottom: space(12);
+  }
+
+  &__image {
+    text-align: center;
+
+    img {
+      display: block;
+      width: 120px;
+      height: auto;
+      margin: 0 auto;
+      border: 10px solid $white;
+      border-radius: 50%;
+    }
+  }
+}
+
+.cta {
+  &--content {
+    > a {
+      display: block;
+      text-decoration: none;
+      margin-bottom: space(16);
+    }
+  }
+}
