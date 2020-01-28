@@ -82,12 +82,13 @@ class Search extends React.Component<IProps> {
                           text="Search"
                           icon="search"
                           type="submit"
-                          onClick={() =>
+                          onClick={(e: React.FormEvent) => {
+                            e.preventDefault();
                             history.push({
                               pathname: '/results',
                               search: `?search_term=${SearchStore.search}`,
-                            })
-                          }
+                            });
+                          }}
                         />
                       </div>
                     )}
