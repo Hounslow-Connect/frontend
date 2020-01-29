@@ -1,12 +1,30 @@
 import 'react-app-polyfill/ie11';
+import "react-app-polyfill/stable";
+
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/main.scss';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { detectBrowser } from './utils/browserDetector';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const isSupportedBrowser = detectBrowser()
+
+const UnsupportedBrowserPage = () => (
+    <div>
+      <p>This website is not supported on Internet Explorer 11 or older, please upgrade your browser.</p>
+    </div>
+  );
+
+  if(isSupportedBrowser) {
+      ReactDOM.render(<App />, document.getElementById('root'));
+  } else {
+    ReactDOM.render(<UnsupportedBrowserPage />, document.getElementById('root'));
+
+  }
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
