@@ -1,0 +1,28 @@
+@import '../styles/mixins.scss';
+@import '../styles/colors.scss';
+@import '../styles/fonts.scss';
+
+.unsupported {
+  &--title {
+    @include heading-xl;
+    margin-bottom: space(12);
+  }
+
+  &--about {
+    @include body-l;
+    text-align: center;
+  }
+
+  &--container {
+    padding: space(32);
+  }
+
+  &--icon {
+    text-align: center;
+    margin-bottom: space(12);
+  }
+
+  &--info {
+    text-align: center;
+  }
+}

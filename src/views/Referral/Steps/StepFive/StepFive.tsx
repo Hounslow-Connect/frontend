@@ -60,7 +60,10 @@ const StepFive: React.FunctionComponent<IProps> = ({ referralStore }) => {
               text="Continue"
               type="submit"
               icon="chevron-right"
-              onClick={() => referralStore.nextStep()}
+              onClick={(e: React.FormEvent) => {
+                e.preventDefault();
+                referralStore.nextStep();
+              }}
               disabled={!referralStore.referral.referee_name}
             />
           </div>
