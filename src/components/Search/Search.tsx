@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import map from 'lodash/map';
 import { withRouter, RouteComponentProps } from 'react-router';
 import cx from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SearchStore from './store';
 
@@ -96,6 +97,23 @@ class Search extends React.Component<IProps> {
                 </div>
               </div>
               <div className="flex-col--12">
+                {!!SearchStore.covidCategories.length && (
+                  <Fragment>
+                    <label className="search__heading" htmlFor="category">
+                      COVID-19 <FontAwesomeIcon icon="virus" />
+                    </label>
+                    <div className="flex-col--6">
+                      <p>
+                        Taking care of yourself and your community while staying at home to help
+                        stop the spread of coronavirus.
+                      </p>
+                    </div>
+                    <div className="search__cateogry-list">
+                      <CategoryList categories={SearchStore.covidCategories} />
+                    </div>
+                  </Fragment>
+                )}
+
                 <label className="search__heading" htmlFor="category">
                   {get(cmsStore, 'home.categories_title')}
                 </label>
