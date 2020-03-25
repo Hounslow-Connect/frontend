@@ -17,6 +17,7 @@ interface IProps {
   burgerMenu?: boolean;
   light?: boolean;
   onClick?: any;
+  covid?: boolean;
 }
 
 const Button: React.FunctionComponent<IProps> = ({
@@ -31,6 +32,7 @@ const Button: React.FunctionComponent<IProps> = ({
   burgerMenu = false,
   light = false,
   onClick,
+  covid = false,
 }) => (
   <button
     className={cx('button', `button--${size}`, {
@@ -40,6 +42,7 @@ const Button: React.FunctionComponent<IProps> = ({
       button__header: header,
       'buton__burger-menu': burgerMenu,
       'button--light': light,
+      'button--green': covid,
     })}
     disabled={disabled}
     type={type}

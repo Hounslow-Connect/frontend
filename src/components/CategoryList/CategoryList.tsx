@@ -7,9 +7,10 @@ import Button from '../Button';
 
 interface IProps extends RouteComponentProps {
   categories: ICategory[];
+  covid?: boolean;
 }
 
-const CategoryList: React.FunctionComponent<IProps> = ({ history, categories }) => (
+const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, covid = false }) => (
   <Fragment>
     {categories.map(({ name, id, icon }) => (
       <Button
@@ -24,6 +25,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories }) 
             search: `?category=${id}`,
           });
         }}
+        covid={covid}
       />
     ))}
   </Fragment>

@@ -56,6 +56,18 @@
   }
 }
 
+.button--green {
+  background-color: $elm !important;
+  color: $white !important;
+  border: 2px solid $elm !important;
+
+  &:focus {
+    border: 2px solid $puerto-rico !important;
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
 .button--light {
   background-color: $white;
   color: $san-juan;
