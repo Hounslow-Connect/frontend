@@ -108,7 +108,7 @@ class Search extends React.Component<IProps> {
                         stop the spread of coronavirus.
                       </p>
                     </div>
-                    <div className="search__cateogry-list">
+                    <div className="search__cateogry-list" style={{ marginBottom: 24 }}>
                       <CategoryList categories={SearchStore.covidCategories} covid={true} />
                     </div>
                   </Fragment>
