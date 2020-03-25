@@ -38,6 +38,11 @@ class Search extends React.Component<IProps> {
     }
     const { isMobile } = windowSizeStore;
     const options = map(SearchStore.categories, ({ name, id }) => ({ value: id, text: name }));
+    const covidOptions = map(SearchStore.covidCategories, ({ name, id }) => ({
+      value: id,
+      text: name,
+    }));
+
     return (
       <Fragment>
         <section className="flex-container flex-container--justify search__container">
@@ -102,15 +107,31 @@ class Search extends React.Component<IProps> {
                     <label className="search__heading" htmlFor="category">
                       COVID-19 <FontAwesomeIcon icon="virus" />
                     </label>
-                    <div className="flex-col--6">
-                      <p>
+                    <div className="flex-col--6 flex-col--mobile--12">
+                      <p className="search__category-subtitle">
                         Taking care of yourself and your community while staying at home to help
                         stop the spread of coronavirus.
                       </p>
                     </div>
-                    <div className="search__cateogry-list" style={{ marginBottom: 24 }}>
-                      <CategoryList categories={SearchStore.covidCategories} covid={true} />
-                    </div>
+                    {!isMobile && (
+                      <div className="search__cateogry-list" style={{ marginBottom: 24 }}>
+                        <CategoryList categories={SearchStore.covidCategories} covid={true} />
+                      </div>
+                    )}
+
+                    {isMobile && (
+                      <Fragment>
+                        <Select
+                          options={covidOptions}
+                          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                            SearchStore.setCategory(e)
+                          }
+                          className="search__category--mobile"
+                          placeholder="Category List"
+                          id="category"
+                        />
+                      </Fragment>
+                    )}
                   </Fragment>
                 )}
 
