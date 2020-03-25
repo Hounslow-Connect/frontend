@@ -109,7 +109,7 @@ class Search extends React.Component<IProps> {
                       </p>
                     </div>
                     <div className="search__cateogry-list">
-                      <CategoryList categories={SearchStore.covidCategories} />
+                      <CategoryList categories={SearchStore.covidCategories} covid={true} />
                     </div>
                   </Fragment>
                 )}
