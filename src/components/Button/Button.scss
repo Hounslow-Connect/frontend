@@ -60,7 +60,8 @@
   color: $white !important;
   border: 2px solid $elm !important;
 
-  &:focus {
+  &:focus,
+  &:hover {
     border: 2px solid $puerto-rico !important;
     outline: 0;
     text-decoration: none;
