@@ -58,7 +58,7 @@ class Search extends React.Component<IProps> {
                     style={{
                       width: '100%',
                       padding: 0,
-                      justifyContent: 'end',
+                      justifyContent: 'start',
                       marginBottom: 24,
                     }}
                   >
