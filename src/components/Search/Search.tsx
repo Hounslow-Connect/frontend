@@ -109,8 +109,9 @@ class Search extends React.Component<IProps> {
                     </label>
                     <div className="flex-col--6 flex-col--mobile--12">
                       <p className="search__category-subtitle">
-                        Taking care of yourself and your community while staying at home to help
-                        stop the spread of coronavirus.
+                        The government has now stated that everyone must stay at home to help stop
+                        the spread of coronavirus. Here you can find out what you can do to take
+                        care of yourself and your community whilst staying at home.
                       </p>
                     </div>
                     {!isMobile && (
