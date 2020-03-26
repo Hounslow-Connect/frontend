@@ -23,7 +23,6 @@
 .button {
   background-color: $san-juan;
   color: $white;
-  font-weight: bold;
   font-size: pxtorem(22px);
   line-height: 1.15;
   border-radius: 10px;
@@ -53,6 +52,19 @@
   &:disabled:hover {
     box-shadow: none;
     cursor: not-allowed;
+  }
+}
+
+.button--green {
+  background-color: $elm !important;
+  color: $white !important;
+  border: 2px solid $elm !important;
+
+  &:focus,
+  &:hover {
+    border: 2px solid $puerto-rico !important;
+    outline: 0;
+    text-decoration: none;
   }
 }
 

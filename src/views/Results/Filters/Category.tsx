@@ -25,7 +25,7 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
           <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
             <h2>
               {resultsStore && resultsStore.category
-                ? get(resultsStore, 'category.name')
+                ? get(resultsStore, 'category.name').replace('COVID-19:', '')
                 : get(resultsStore, 'persona.name')}
             </h2>
             <div>
