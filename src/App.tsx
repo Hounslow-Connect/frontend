@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -51,8 +50,6 @@ const referralStore = new ReferralStore();
 class App extends Component {
   componentDidMount() {
     windowSizeStore.setWindow();
-    ReactGA.initialize('UA-124057892-1');
-    // ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {
