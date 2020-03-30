@@ -30,7 +30,6 @@
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.2",
     "react-dom": "^16.9.0",
-    "react-ga": "^2.7.0",
     "react-image-lightbox": "^5.1.0",
     "react-js-pagination": "^3.0.2",
     "react-leaflet": "^2.4.0",
