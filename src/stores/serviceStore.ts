@@ -1,7 +1,8 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
+import every from 'lodash/every';
 import { IService, IServiceLocation } from '../types/types';
 
 export default class ServiceStore {
@@ -20,6 +21,15 @@ export default class ServiceStore {
       this.favourite = favouriteList.includes(this.service.id);
     }
   };
+
+  @computed
+  get hasCriteria() {
+    if (this.service) {
+      return every(this.service.criteria, criteria => criteria === null) ? false : true;
+    }
+
+    return false;
+  }
 
   @action
   fetchService = async (name: string) => {
