@@ -407,7 +407,6 @@
 
 .service__social-icon-container {
   text-align: center;
-  padding-bottom: space(32);
 }
 
 .service__testimonial {
@@ -528,7 +527,8 @@
 }
 
 .service__contact-card {
-  padding: 40 !important;
+  padding: 40px !important;
+  padding-top: 0 !important;
   background-color: $alabaster;
   border-radius: 19px;
 
