@@ -137,9 +137,11 @@ class Service extends Component<IProps> {
           <section className="flex-container flex-container--justify service__info">
             <section className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
               <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
-                <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
-                  <h2 className="service__heading">Who is it for?</h2>
-                </div>
+                {serviceStore.hasCriteria && (
+                  <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
+                    <h2 className="service__heading">Who is it for?</h2>
+                  </div>
+                )}
                 <div
                   className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding"
                   style={{ alignItems: 'stretch' }}
