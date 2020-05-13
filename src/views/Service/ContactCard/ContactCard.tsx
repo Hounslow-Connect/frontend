@@ -2,9 +2,9 @@ import React from 'react';
 import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import find from 'lodash/find';
+import size from 'lodash/size';
 
 import { IService } from '../../../types/types';
-import size from 'lodash/size';
 
 interface IProps {
   service: IService;
