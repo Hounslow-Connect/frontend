@@ -12,3 +12,7 @@ export const GroupMarker = L.icon({
   iconUrl: require('../../../assets/images/icons/maps/group-pin.svg'),
   iconSize: [50, 95],
 });
+export const ClubMarker = L.icon({
+  iconUrl: require('../../../assets/images/icons/maps/club-pin.svg'),
+  iconSize: [50, 95],
+});

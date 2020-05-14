@@ -32,6 +32,14 @@
     }
   }
 
+  &--club {
+    background-image: url('../../assets/images/backgrounds/club-header-shape-lg.svg');
+
+    @include for-tablet-portrait-down {
+      background-image: url('../../assets/images/backgrounds/club-header-shape-mobile.svg');
+    }
+  }
+
   &--group {
     background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
 
