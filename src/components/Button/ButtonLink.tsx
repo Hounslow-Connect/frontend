@@ -7,14 +7,13 @@ import './Button.scss';
 
 interface IProps {
   text: string;
-  size?: string;
   icon?: IconName;
   href: string;
 }
 
-const ButtonLink: React.FunctionComponent<IProps> = ({ text, size = 'medium', icon, href }) => (
-  <a className={cx('button', `button--${size}`, 'button__link')} href={href} target="__blank">
-    {text}
+const ButtonLink: React.FunctionComponent<IProps> = ({ text, icon, href }) => (
+  <a className={cx('button', 'button__link')} href={href} target="__blank">
+    <span>{text}</span>
     {icon && <FontAwesomeIcon icon={icon} className={cx('button__icon')} />}
   </a>
 );

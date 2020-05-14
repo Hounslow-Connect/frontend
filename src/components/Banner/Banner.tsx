@@ -13,23 +13,18 @@ interface IProps {
 const Banner: FunctionComponent<IProps> = ({ banner }) => (
   <div className="flex-col--12 banner">
     {console.log(banner)}
-    <div className="flex-container flex-container--justify">
+    <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
       <div className="flex-col--12 banner__container">
         <div className="flex-container flex-container--no-padding">
-          <div className="flex-col--8">
+          <div className="flex-col--8 flex-col--tablet--10 flex-col--mobile--9">
             <p className="banner__title banner__row">{banner.title}</p>
             <ReactMarkdown className="banner__row" source={banner.content} />
-            <ButtonLink
-              text={banner.button_text}
-              href={banner.button_url}
-              size="medium"
-              icon="arrow-right"
-            />
+            <ButtonLink text={banner.button_text} href={banner.button_url} icon="arrow-right" />
           </div>
           {banner.has_image && (
             <div>
               <div className="banner__image">
-                <img src={`${apiBase}/settings/banner-image.png`} />
+                <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" />
               </div>
             </div>
           )}
