@@ -45,6 +45,7 @@ import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
+import ServiceDisabled from './ServiceDisabled';
 
 interface RouteParams {
   service: string;
@@ -91,6 +92,11 @@ class Service extends Component<IProps> {
     const { service, locations, relatedServices } = serviceStore;
     if (!service) {
       return null;
+    }
+
+    // service is disabled
+    if (service.status === 'inactive') {
+      return <ServiceDisabled />;
     }
 
     return (
