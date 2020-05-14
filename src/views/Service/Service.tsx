@@ -7,6 +7,7 @@ import find from 'lodash/find';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 import cx from 'classnames';
+import uniqueId from 'lodash/uniqueId';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -14,9 +15,10 @@ import { apiBase } from '../../config/api';
 
 import './Service.scss';
 
+import { removeQuotesRegex, capitalise } from '../../utils/utils';
 import { IServiceLocation } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
-import Button from '../../components/Button';
+import UIStore from '../../stores/uiStore';
 
 import AgeGroup from '../../assets/images/icons/who-is-this-for/age-group.svg';
 import Disability from '../../assets/images/icons/who-is-this-for/disability.svg';
@@ -27,10 +29,10 @@ import Income from '../../assets/images/icons/who-is-this-for/income.svg';
 import Language from '../../assets/images/icons/who-is-this-for/language.svg';
 import Other from '../../assets/images/icons/who-is-this-for/other.svg';
 
+import Button from '../../components/Button';
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import LocationCard from './LocationCard';
-import uniqueId from 'lodash/uniqueId';
 import CostCard from './CostCard';
 import VideoCard from './VideoCard';
 import ContactCard from './ContactCard';
@@ -41,11 +43,8 @@ import ReferralCard from './ReferralCard';
 import GalleryCard from './GalleryCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
-import UIStore from '../../stores/uiStore';
-import { removeQuotesRegex } from '../../utils/utils';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
-import capitalize from 'lodash/capitalize';
 
 interface RouteParams {
   service: string;
@@ -242,7 +241,7 @@ class Service extends Component<IProps> {
                     <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
                       {map(service.offerings, (offering: any, i) => (
                         <Fragment key={offering.offering}>
-                          <span>{capitalize(offering.offering)}</span>
+                          <span>{capitalise(offering.offering)}</span>
                           {i < service.offerings.length - 1 ? (
                             <FontAwesomeIcon
                               icon="circle"
