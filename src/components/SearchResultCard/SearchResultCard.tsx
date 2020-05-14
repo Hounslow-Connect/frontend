@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import capitalize from 'lodash/capitalize';
 import first from 'lodash/first';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
@@ -19,6 +20,21 @@ interface IProps extends RouteComponentProps {
   organisation?: IOrganisation | null;
   mapView?: boolean;
 }
+
+const getIcon = (type: string) => {
+  switch (true) {
+    case type === 'service':
+      return 'clipboard';
+    case type === 'group':
+      return 'users';
+    case type === 'activity':
+      return 'paper-plane';
+    case type === 'club':
+      return 'tshirt';
+    default:
+      break;
+  }
+};
 
 const SearchResultCard: React.FunctionComponent<IProps> = ({
   result,
@@ -49,7 +65,10 @@ const SearchResultCard: React.FunctionComponent<IProps> = ({
             className={cx('search-result-card__tag', `search-result-card__tag--${result.type}`)}
             aria-label={`This ${result.type} ${result.is_free ? 'is free' : 'has a cost'}`}
           >
-            <FontAwesomeIcon icon="users" className="search-result-card__tag--icon" />
+            <FontAwesomeIcon
+              icon={getIcon(result.type) as IconProp}
+              className="search-result-card__tag--icon"
+            />
             {capitalize(result.type)}
             <FontAwesomeIcon
               icon={result.is_free ? 'circle' : 'pound-sign'}

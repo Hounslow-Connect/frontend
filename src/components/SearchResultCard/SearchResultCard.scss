@@ -78,7 +78,7 @@
   @include body-xs;
   padding: space(8);
   color: $white;
-  width: fit-content;
+  width: max-content;
   border-radius: 4px;
   margin: space(16) 0;
 
@@ -89,6 +89,10 @@
 
 .search-result-card__tag--activity {
   background-color: $cranberry;
+}
+
+.search-result-card__tag--club {
+  background-color: $club-blue;
 }
 
 .search-result-card__tag--service {
