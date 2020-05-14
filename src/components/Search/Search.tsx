@@ -109,9 +109,8 @@ class Search extends React.Component<IProps> {
                     </label>
                     <div className="flex-col--6 flex-col--mobile--12">
                       <p className="search__category-subtitle">
-                        The government has now stated that everyone must stay at home to help stop
-                        the spread of coronavirus. Here you can find out what you can do to take
-                        care of yourself and your community whilst staying at home.
+                        Find up to date information and support in Kingston to help you take care of
+                        yourself and your community.
                       </p>
                     </div>
                     {!isMobile && (
@@ -157,6 +156,7 @@ class Search extends React.Component<IProps> {
                       text="Search"
                       icon="search"
                       size="small"
+                      type="submit"
                       onClick={() =>
                         SearchStore.categoryId
                           ? history.push({
