@@ -15,7 +15,7 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
     {console.log(banner)}
     <div className="flex-container flex-container--justify">
       <div className="flex-col--12 banner__container">
-        <div className="flex-container">
+        <div className="flex-container flex-container--no-padding">
           <div className="flex-col--8">
             <p className="banner__title banner__row">{banner.title}</p>
             <ReactMarkdown className="banner__row" source={banner.content} />
@@ -27,7 +27,7 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
             />
           </div>
           {banner.has_image && (
-            <div className="flex-col--2">
+            <div>
               <div className="banner__image">
                 <img src={`${apiBase}/settings/banner-image.png`} />
               </div>
