@@ -53,6 +53,16 @@
     box-shadow: none;
     cursor: not-allowed;
   }
+
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    line-height: pxtorem(65px);
+
+    svg {
+      margin-left: space(8);
+    }
+  }
 }
 
 .button--green {
