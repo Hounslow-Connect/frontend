@@ -157,3 +157,11 @@ export interface ICriteria {
   language: string;
   other: string;
 }
+
+export interface IBanner {
+  title: string;
+  content: string;
+  button_text: string;
+  button_url: string;
+  has_image: true;
+}
