@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { apiBase } from '../config/api';
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 import get from 'lodash/get';
 import forEach from 'lodash/forEach';
+import omit from 'lodash/omit';
+import every from 'lodash/every';
+
+import { IBanner } from '../types/types';
 
 interface IAbout {
   content: string;
@@ -30,6 +34,7 @@ interface IHome {
   personas_title: string;
   search_title: string;
 }
+
 class CMSStore {
   @observable about: IAbout | null = null;
   @observable contact: IContent | null = null;
@@ -39,6 +44,7 @@ class CMSStore {
   @observable terms_and_conditions: IContent | null = null;
   @observable global: IGlobal | null = null;
   @observable home: IHome | null = null;
+  @observable banner: IBanner | null = null;
 
   constructor() {
     this.getCMSFields();
@@ -57,6 +63,13 @@ class CMSStore {
       console.error(e);
     }
   };
+
+  @computed
+  get hasBanner() {
+    const bannerFields = omit(this.banner, 'has_image');
+
+    return every(bannerFields, field => field === null) ? false : true;
+  }
 }
 
 export default CMSStore;
