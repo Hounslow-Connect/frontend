@@ -463,6 +463,7 @@
 
 .service__useful-info {
   margin-bottom: space(16) !important;
+  justify-content: space-evenly !important;
 
   @include for-tablet-portrait-up {
     background-color: $alabaster;
@@ -473,6 +474,11 @@
     font-size: $font-base;
     color: $gray;
     margin-top: space(12);
+  }
+
+  a {
+    font-size: $font-base;
+    color: $gray;
   }
 
   svg {
