@@ -157,6 +157,7 @@ class Search extends React.Component<IProps> {
                       text="Search"
                       icon="search"
                       size="small"
+                      type="submit"
                       onClick={() =>
                         SearchStore.categoryId
                           ? history.push({
