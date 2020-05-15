@@ -16,7 +16,7 @@ import { apiBase } from '../../config/api';
 import './Service.scss';
 
 import { removeQuotesRegex, capitalise } from '../../utils/utils';
-import { IServiceLocation } from '../../types/types';
+import { IServiceLocation, IService } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
 import UIStore from '../../stores/uiStore';
 
@@ -67,6 +67,17 @@ const iconMap = [
   { 'Keeping updated': 'calander-alt' },
   { 'Additional information': 'info-circle' },
 ];
+
+const getImg = (service: IService) => {
+  if (service.has_logo) {
+    return `${apiBase}/services/${service.id}/logo.png?`;
+  } else {
+    return `${apiBase}/organisations/${get(service, 'organisation.id')}/logo.png?v=${get(
+      service,
+      'organisation.id'
+    )}`;
+  }
+};
 
 class Service extends Component<IProps> {
   componentDidMount() {
@@ -125,13 +136,7 @@ class Service extends Component<IProps> {
             </div>
             <div className="flex-col flex-col--mobile--3">
               <div className="service__header__logo">
-                <img
-                  src={`${apiBase}/organisations/${get(
-                    service,
-                    'organisation.id'
-                  )}/logo.png?v=${get(service, 'organisation.id')}`}
-                  alt={`${service.name} logo`}
-                />
+                <img src={getImg(service)} alt={`${service.name} logo`} />
               </div>
             </div>
           </div>
