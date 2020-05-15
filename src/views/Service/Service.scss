@@ -133,6 +133,7 @@
   img {
     height: pxtorem(175px);
     width: pxtorem(175px);
+    object-fit: contain;
 
     @include for-tablet-portrait-down {
       height: pxtorem(50px);
