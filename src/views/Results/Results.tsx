@@ -77,7 +77,13 @@ class Results extends Component<IProps> {
           <div className="flex-container flex-container results__filter-bar">
             <div className="flex-col flex-col--4 flex-col--tablet--12 flex-col--mobile--12 results__container-count">
               {!!resultsStore.results.length && !resultsStore.loading && (
-                <p>{`${resultsStore.results.length} services found`}</p>
+                <p>
+                  {resultsStore.view === 'grid'
+                    ? `${
+                        resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
+                      } services found`
+                    : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
+                </p>
               )}
             </div>
             {resultsStore.isKeywordSearch && (

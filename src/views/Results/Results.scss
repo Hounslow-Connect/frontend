@@ -34,7 +34,7 @@
   padding: space(16) 0;
 
   @include for-tablet-landscape-down {
-    margin: space(8) 0 !important;
+    margin: space(8) !important;
     justify-content: center;
   }
 }
