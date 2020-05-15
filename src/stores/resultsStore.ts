@@ -302,4 +302,11 @@ export default class ResultsStore {
 
     this.setParams();
   };
+
+  @computed
+  get serviceWithLocations() {
+    const locations = this.results.filter(service => service.service_locations.length);
+
+    return locations.length;
+  }
 }
