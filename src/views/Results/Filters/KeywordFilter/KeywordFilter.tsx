@@ -90,7 +90,7 @@ class KeywordFilter extends Component<IProps, IState> {
           <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-col--tablet-large--3 flex-col--medium--5 flex-container--mobile-no-padding results__amend">
             <Button
               alt={true}
-              text="Amend"
+              text="Refresh"
               icon="sync-alt"
               onClick={() => {
                 resultsStore.postcodeChange(this.state.postcode);

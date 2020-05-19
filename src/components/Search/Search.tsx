@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import map from 'lodash/map';
 import { withRouter, RouteComponentProps } from 'react-router';
 import cx from 'classnames';
+import get from 'lodash/get';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SearchStore from './store';
@@ -13,9 +14,9 @@ import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
 import Personas from '../Personas';
+import Banner from '../Banner/Banner';
 import WindowSizeStore from '../../stores/windowSizeStore';
 import CMSStore from '../../stores/CMSStore';
-import get from 'lodash/get';
 
 interface IProps extends RouteComponentProps {
   windowSizeStore?: WindowSizeStore;
@@ -36,6 +37,7 @@ class Search extends React.Component<IProps> {
     if (!windowSizeStore || !cmsStore) {
       return null;
     }
+
     const { isMobile } = windowSizeStore;
     const options = map(SearchStore.categories, ({ name, id }) => ({ value: id, text: name }));
     const covidOptions = map(SearchStore.covidCategories, ({ name, id }) => ({
@@ -46,6 +48,7 @@ class Search extends React.Component<IProps> {
     return (
       <Fragment>
         <section className="flex-container flex-container--justify search__container">
+          {cmsStore.hasBanner && cmsStore.banner && <Banner banner={cmsStore.banner} />}
           <form className="flex--col--12 search__inner-container">
             <div className="flex-container flex-container--mobile-no-padding">
               <div
@@ -109,9 +112,8 @@ class Search extends React.Component<IProps> {
                     </label>
                     <div className="flex-col--6 flex-col--mobile--12">
                       <p className="search__category-subtitle">
-                        The government has now stated that everyone must stay at home to help stop
-                        the spread of coronavirus. Here you can find out what you can do to take
-                        care of yourself and your community whilst staying at home.
+                        Find up to date information and support in Kingston to help you take care of
+                        yourself and your community.
                       </p>
                     </div>
                     {!isMobile && (
@@ -157,6 +159,7 @@ class Search extends React.Component<IProps> {
                       text="Search"
                       icon="search"
                       size="small"
+                      type="submit"
                       onClick={() =>
                         SearchStore.categoryId
                           ? history.push({

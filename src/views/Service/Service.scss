@@ -32,6 +32,14 @@
     }
   }
 
+  &--club {
+    background-image: url('../../assets/images/backgrounds/club-header-shape-lg.svg');
+
+    @include for-tablet-portrait-down {
+      background-image: url('../../assets/images/backgrounds/club-header-shape-mobile.svg');
+    }
+  }
+
   &--group {
     background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
 
@@ -125,6 +133,7 @@
   img {
     height: pxtorem(175px);
     width: pxtorem(175px);
+    object-fit: contain;
 
     @include for-tablet-portrait-down {
       height: pxtorem(50px);
@@ -287,9 +296,11 @@
       }
     }
 
-    ul li {
-      display: inline;
+    ul {
+      list-style-type: none;
+    }
 
+    ul li {
       &:before {
         content: '•';
         margin: 0 pxtorem(4px);
@@ -407,7 +418,6 @@
 
 .service__social-icon-container {
   text-align: center;
-  padding-bottom: space(32);
 }
 
 .service__testimonial {
@@ -464,6 +474,7 @@
 
 .service__useful-info {
   margin-bottom: space(16) !important;
+  justify-content: space-evenly !important;
 
   @include for-tablet-portrait-up {
     background-color: $alabaster;
@@ -474,6 +485,11 @@
     font-size: $font-base;
     color: $gray;
     margin-top: space(12);
+  }
+
+  a {
+    font-size: $font-base;
+    color: $gray;
   }
 
   svg {
@@ -528,7 +544,8 @@
 }
 
 .service__contact-card {
-  padding: 40 !important;
+  padding: 40px !important;
+  padding-top: 0 !important;
   background-color: $alabaster;
   border-radius: 19px;
 

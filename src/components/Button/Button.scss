@@ -53,6 +53,24 @@
     box-shadow: none;
     cursor: not-allowed;
   }
+
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+
+    @include for-tablet-portrait-down {
+      padding: 0.5rem 1rem;
+    }
+
+    svg {
+      margin-left: space(8);
+
+      @include for-tablet-portrait-down {
+        margin-left: space(16);
+      }
+    }
+  }
 }
 
 .button--green {

@@ -45,6 +45,7 @@ export interface IService {
   contact_email: string;
   contact_name: string;
   contact_phone: string;
+  criteria: ICriteria;
   created_at: string;
   description: string;
   fees_text: null | string;
@@ -144,4 +145,23 @@ export interface IPartnerOrganistion {
 export interface ISidebox {
   content: string;
   title: string;
+}
+
+export interface ICriteria {
+  age_group: string;
+  disability: string;
+  employment: string;
+  gender: string;
+  housing: string;
+  income: string;
+  language: string;
+  other: string;
+}
+
+export interface IBanner {
+  title: string;
+  content: string;
+  button_text: string;
+  button_url: string;
+  has_image: true;
 }

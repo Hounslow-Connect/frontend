@@ -7,6 +7,7 @@ import find from 'lodash/find';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 import cx from 'classnames';
+import uniqueId from 'lodash/uniqueId';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -14,9 +15,10 @@ import { apiBase } from '../../config/api';
 
 import './Service.scss';
 
-import { IServiceLocation } from '../../types/types';
+import { removeQuotesRegex, capitalise } from '../../utils/utils';
+import { IServiceLocation, IService } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
-import Button from '../../components/Button';
+import UIStore from '../../stores/uiStore';
 
 import AgeGroup from '../../assets/images/icons/who-is-this-for/age-group.svg';
 import Disability from '../../assets/images/icons/who-is-this-for/disability.svg';
@@ -27,10 +29,10 @@ import Income from '../../assets/images/icons/who-is-this-for/income.svg';
 import Language from '../../assets/images/icons/who-is-this-for/language.svg';
 import Other from '../../assets/images/icons/who-is-this-for/other.svg';
 
+import Button from '../../components/Button';
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import LocationCard from './LocationCard';
-import uniqueId from 'lodash/uniqueId';
 import CostCard from './CostCard';
 import VideoCard from './VideoCard';
 import ContactCard from './ContactCard';
@@ -41,11 +43,9 @@ import ReferralCard from './ReferralCard';
 import GalleryCard from './GalleryCard';
 import { UsefulInfoCardAccordian, UsefulInfoCard } from './UsefulInfoCard';
 import RelatedServices from './RelatedServices';
-import UIStore from '../../stores/uiStore';
-import { removeQuotesRegex } from '../../utils/utils';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
-import capitalize from 'lodash/capitalize';
+import ServiceDisabled from './ServiceDisabled';
 
 interface RouteParams {
   service: string;
@@ -67,6 +67,17 @@ const iconMap = [
   { 'Keeping updated': 'calander-alt' },
   { 'Additional information': 'info-circle' },
 ];
+
+const getImg = (service: IService) => {
+  if (service.has_logo) {
+    return `${apiBase}/services/${service.id}/logo.png?`;
+  } else {
+    return `${apiBase}/organisations/${get(service, 'organisation.id')}/logo.png?v=${get(
+      service,
+      'organisation.id'
+    )}`;
+  }
+};
 
 class Service extends Component<IProps> {
   componentDidMount() {
@@ -92,6 +103,11 @@ class Service extends Component<IProps> {
     const { service, locations, relatedServices } = serviceStore;
     if (!service) {
       return null;
+    }
+
+    // service is disabled
+    if (service.status === 'inactive') {
+      return <ServiceDisabled />;
     }
 
     return (
@@ -120,13 +136,7 @@ class Service extends Component<IProps> {
             </div>
             <div className="flex-col flex-col--mobile--3">
               <div className="service__header__logo">
-                <img
-                  src={`${apiBase}/organisations/${get(
-                    service,
-                    'organisation.id'
-                  )}/logo.png?v=${get(service, 'organisation.id')}`}
-                  alt={`${service.name} logo`}
-                />
+                <img src={getImg(service)} alt={`${service.name} logo`} />
               </div>
             </div>
           </div>
@@ -137,9 +147,11 @@ class Service extends Component<IProps> {
           <section className="flex-container flex-container--justify service__info">
             <section className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
               <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
-                <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
-                  <h2 className="service__heading">Who is it for?</h2>
-                </div>
+                {serviceStore.hasCriteria && (
+                  <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
+                    <h2 className="service__heading">Who is it for?</h2>
+                  </div>
+                )}
                 <div
                   className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding"
                   style={{ alignItems: 'stretch' }}
@@ -240,7 +252,7 @@ class Service extends Component<IProps> {
                     <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
                       {map(service.offerings, (offering: any, i) => (
                         <Fragment key={offering.offering}>
-                          <span>{capitalize(offering.offering)}</span>
+                          <span>{capitalise(offering.offering)}</span>
                           {i < service.offerings.length - 1 ? (
                             <FontAwesomeIcon
                               icon="circle"

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { latLngBounds, LatLngBounds } from 'leaflet';
 import { observer, inject } from 'mobx-react';
 
-import { ActivityMarker, GroupMarker, ServiceMarker } from './icons';
+import { ActivityMarker, GroupMarker, ServiceMarker, ClubMarker } from './icons';
 
 import './MapView.scss';
 import ResultsStore from '../../../stores/resultsStore';
@@ -56,6 +56,8 @@ class MapView extends Component<IProps, IState> {
         return GroupMarker;
       case type === 'activity':
         return ActivityMarker;
+      case type === 'club':
+        return ClubMarker;
       default:
         break;
     }
@@ -119,6 +121,10 @@ class MapView extends Component<IProps, IState> {
             <p className="map__key--description">
               <FontAwesomeIcon icon="users" className="map__key-icon map__key-icon--group" />
               Group
+            </p>
+            <p className="map__key--description">
+              <FontAwesomeIcon icon="tshirt" className="map__key-icon map__key-icon--club" />
+              Club
             </p>
           </div>
         </div>

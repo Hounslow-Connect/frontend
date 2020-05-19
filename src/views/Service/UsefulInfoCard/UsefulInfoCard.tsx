@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
+import ReactMarkdown from 'react-markdown';
 
 interface IInfo {
   title: string;
@@ -21,23 +22,23 @@ const UsefulInfoCardAccordian: React.FunctionComponent<IProps> = ({ icon, info }
       <h4>{info.title}</h4>
     </div>
     <div className="flex-col flex-col--mobile--12">
-      <p>{info.description}</p>
+      <ReactMarkdown source={info.description} />
     </div>
   </div>
 );
 
 const UsefulInfoCard: React.FunctionComponent<IProps> = ({ icon, info }) => (
   <div className="flex-container flex-container--mobile-no-padding flex-container--align-center service__useful-info service__accordian-inner">
-    <div className="flex-col flex-col--1 flex-col--mobile--1">
+    <div>
       <FontAwesomeIcon icon={icon} />
     </div>
-    <div className="flex-col flex-col--11">
+    <div className="flex-col flex-col--10">
       <div className="flex-container">
         <div className="flex-col flex-col--12">
           <h4>{info.title}</h4>
         </div>
         <div className="flex-col flex-col--12">
-          <p>{info.description}</p>
+          <ReactMarkdown source={info.description} />
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ const ReferralCard: React.FunctionComponent<IProps> = ({ history, id }) => (
         </div>
         <div className="flex-col--11">
           <p>
-            It can take up to <strong>2 weeks</strong> to recieve a reply
+            It can take up to <strong>2 weeks</strong> to receive a reply
           </p>
         </div>
       </div>
