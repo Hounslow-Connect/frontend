@@ -2,6 +2,7 @@ import { observable, action, computed } from 'mobx';
 import axios from 'axios';
 import get from 'lodash/get';
 import orderBy from 'lodash/orderBy';
+import isString from 'lodash/isString';
 
 import { apiBase } from '../config/api';
 import { IService, IPartnerOrganistion } from '../types/types';
@@ -90,6 +91,14 @@ class ReferralStore {
   @action
   submitReferral = async () => {
     if (this.service) {
+      Object.keys(this.referral).forEach(key => {
+        // @ts-ignore
+        if (key.includes('phone') && isString(this.referral[key])) {
+          // @ts-ignore
+          this.referral[key] = this.formatPhone(this.referral[key] as string);
+        }
+      });
+
       const params = {
         service_id: this.service.id,
         ...this.referral,
@@ -111,6 +120,10 @@ class ReferralStore {
         console.error(e);
       }
     }
+  };
+
+  formatPhone = (input: string) => {
+    return input.replace(/\s/g, '');
   };
 
   @action
