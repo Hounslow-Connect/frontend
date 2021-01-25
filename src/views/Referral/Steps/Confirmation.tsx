@@ -44,7 +44,7 @@ const Confirmation: React.FunctionComponent<IProps> = ({ referralStore }) => {
 
         <p>
           If you have any questions or issues, please contact the admin team at{' '}
-          <a href="mailto:info@connectedkingston.uk">info@connectedkingston.uk</a>
+          <a href="mailto:info@connectedHounslow.uk">info@connectedHounslow.uk</a>
         </p>
       </div>
     </div>

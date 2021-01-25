@@ -112,7 +112,7 @@ class Search extends React.Component<IProps> {
                     </label>
                     <div className="flex-col--6 flex-col--mobile--12">
                       <p className="search__category-subtitle">
-                        Find up to date information and support in Kingston to help you take care of
+                        Find up to date information and support in Hounslow to help you take care of
                         yourself and your community.
                       </p>
                     </div>

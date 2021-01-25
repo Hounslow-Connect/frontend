@@ -77,7 +77,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
 
             <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__section footer__button">
               <a
-                href="https://admin.connectedkingston.uk"
+                href="https://admin.connectedHounslow.uk"
                 target="_blank"
                 rel="noopener noreferrer"
               >
