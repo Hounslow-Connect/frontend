@@ -89,7 +89,6 @@ class Search extends React.Component<IProps> {
                     {!isMobile && (
                       <div className="flex-col--3 flex-col--tablet-large--5">
                         <Button
-                          size="small"
                           text="Search"
                           icon="search"
                           type="submit"

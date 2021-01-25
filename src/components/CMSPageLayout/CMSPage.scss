@@ -46,22 +46,15 @@
 }
 
 .cms__header {
-  background-image: url('../../assets/images/backgrounds/cms-page-header.svg');
+  background-color: $east-side;
   position: relative;
-  background-size: 110% 100%;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  padding: space(40) 0;
-  margin: space(32) 0 space(72);
+  padding: space(16) 0;
 
   .flex-container {
     max-width: 1260px;
   }
 
   @include for-tablet-portrait-down {
-    background-image: url('../../assets/images/backgrounds/cms-page-header-mobile.svg');
-
-    margin-bottom: space(32);
     margin-top: space(52);
 
     .flex-col {
@@ -74,50 +67,17 @@
       width: 100%;
     }
   }
-
-  @include for-tablet-landscape-up {
-    &:before {
-      position: absolute;
-      content: url('../../assets/images/trees/jordy-lg.svg');
-      top: -25px;
-      right: 20%;
-    }
-
-    &:after {
-      position: absolute;
-      content: url('../../assets/images/trees/iceberg-lg.svg');
-      top: -25px;
-      right: 15%;
-    }
-  }
 }
 
 .cms__title-card {
-  background-image: url('../../assets/images/backgrounds/cms-page-header-inner.svg');
-  background-size: 100% 100%;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  padding: space(48);
-  box-sizing: border-box;
-
-  @include for-phone-only {
-    padding: space(48) space(24);
-    background-size: 110% 100%;
-  }
-
-  @include for-tablet-portrait-down {
-    padding: space(48);
-    background-size: 100% 100%;
-  }
+  display: block;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
 
   &--title {
     font-size: pxtorem(32px);
-    color: $san-juan;
-    margin-bottom: space(32);
-
-    @include for-tablet-landscape-down {
-      margin-bottom: space(16);
-    }
+    color: $white;
 
     @include for-phone-only {
       font-size: $font-heading-mobile-l;
@@ -126,7 +86,12 @@
 }
 
 .cms__content {
-  max-width: 1260px;
+  padding: space(64) 0;
+  background-color: $mercury;
+
+  > .flex-container {
+    max-width: 1260px;
+  }
 
   h1 {
     @include heading-xl;
@@ -141,7 +106,7 @@
   }
 
   a {
-    color: $elm;
+    color: $east-side;
   }
 
   li p {

@@ -3,14 +3,15 @@
 @import '../../styles/breakpoints.scss';
 
 .breadcrumb {
-  margin-bottom: space(24) !important;
+  background-color: $mercury;
+  padding: space(16) 0;
 
-  @include for-tablet-landscape-down {
-    margin-top: space(24) !important;
+  > .flex-container {
+    max-width: 1260px;
   }
 
   &--active {
-    color: $mid-grey !important;
+    color: $san-juan !important;
   }
 
   ul > li:first-child {
@@ -24,7 +25,7 @@
     text-overflow: ellipsis;
 
     a {
-      text-decoration-color: $elm;
+      text-decoration-color: $east-side;
     }
 
     svg {
@@ -39,8 +40,12 @@
   li {
     display: inline;
     margin-left: space(16);
-    color: $elm;
+    color: $east-side;
     font-size: pxtorem(16px) !important;
+
+    &:first-child {
+      margin-left: 0;
+    }
 
     @include for-phone-only {
       font-size: pxtorem(12px) !important;
@@ -50,7 +55,7 @@
 
   svg {
     margin-left: space(16);
-    color: $elm;
+    color: $east-side;
 
     @include for-phone-only {
       margin-left: space(8);

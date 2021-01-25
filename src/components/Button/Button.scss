@@ -100,7 +100,7 @@
 }
 
 .button--small {
-  height: pxtorem(50px);
+  height: pxtorem(32px);
   padding: 0px space(16);
 
   @include for-phone-only {
@@ -110,8 +110,8 @@
 }
 
 .button--medium {
-  height: pxtorem(65px);
-  padding: 0px space(24);
+  height: pxtorem(56px);
+  padding: 0px space(20);
 }
 
 .button--large {
