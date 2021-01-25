@@ -1,6 +1,6 @@
-# Connected Kingston - Frontend
+# Hounslow Connect - Frontend
 
-The frontend website component to the [API](https://github.com/RoyalBoroughKingston/ck-api).
+The frontend website component to the [API](https://github.com/LBHounslow/hounslow-connect-api).
 
 ## Getting started
 
@@ -9,7 +9,7 @@ development and testing purposes.
 
 ### Prerequisites
 
-- [Connected Kingston - API](https://github.com/RoyalBoroughKingston/ck-api)
+- [Hounslow Connect - API](https://github.com/LBHounslow/hounslow-connect-api)
 - [Docker](https://www.docker.com)
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
@@ -40,5 +40,5 @@ This project is intended to be deployed onto AWS to a S3 bucket.
 
 - [Ayup Digital](https://ayup.agency/)
 
-See also the list of [contributors](https://github.com/RoyalBoroughKingston/ck-frontend/contributors) who
+See also the list of [contributors](https://github.com/LBHounslow/hounslow-connect-frontend/contributors) who
 participated in this project.
