@@ -6,9 +6,8 @@
   @include body-m;
   width: 400px;
   border: 2px solid $san-juan;
-  border-radius: 8px;
   height: pxtorem(50px);
-  padding: space(16);
+  padding: space(12) space(16);
   color: $san-juan;
 
   &--container {

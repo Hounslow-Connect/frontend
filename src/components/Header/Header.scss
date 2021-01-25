@@ -54,6 +54,7 @@
 
   .flex-container {
     position: relative;
+    margin: 0 auto;
 
     @include for-tablet-landscape-down {
       height: fit-content;
@@ -353,10 +354,9 @@
 
   &--active {
     @include for-desktop-up {
-      background-color: $monte-carlo;
+      background-color: $east-side;
       color: $white;
-      padding: space(12) space(16);
-      border-radius: 16px;
+      padding: space(8) space(10);
     }
   }
 }

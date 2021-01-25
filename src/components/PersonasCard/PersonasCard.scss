@@ -6,11 +6,10 @@
 .card {
   display: flex;
   align-content: center;
-  background-color: $alabaster;
+  background-color: $deluge;
   font-family: $font-secondary;
-  color: $san-juan;
-  border-radius: 25px;
-  margin: space(32);
+  color: $white;
+  margin: space(32) space(16);
   cursor: pointer;
 
   .flex-container {
@@ -42,14 +41,6 @@
     margin: space(20) 0;
   }
 
-  @include for-phone-only {
-    border-radius: 11px;
-
-    img {
-      border-radius: 11px;
-    }
-  }
-
   @include for-tablet-portrait-up {
     flex-direction: column;
   }
@@ -57,24 +48,11 @@
   img {
     width: 100%;
     height: 100%;
-    border-top-left-radius: 11px;
-    border-top-right-radius: 11px;
-
-    @include for-phone-only {
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
-    }
   }
 }
 
 .card__header {
-  @include for-phone-only {
-    font-size: $font-base;
-  }
-
-  @include for-desktop-up {
-    font-size: pxtorem(27px);
-  }
+  
 }
 
 .card__image {
@@ -87,7 +65,7 @@
 
 .card__description {
   box-sizing: border-box;
-  padding: space(16) space(20);
+  padding: space(24);
 
   @include for-phone-only {
     display: flex;
