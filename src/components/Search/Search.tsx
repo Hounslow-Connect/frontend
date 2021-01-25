@@ -68,6 +68,7 @@ class Search extends React.Component<IProps> {
                       width: '100%',
                       padding: 0,
                       justifyContent: 'start',
+                      alignItems: 'normal',
                       marginBottom: 24,
                     }}
                   >

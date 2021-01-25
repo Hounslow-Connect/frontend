@@ -5,11 +5,11 @@
 @import '../../styles/fonts.scss';
 
 .header {
-  background: $white;
   overflow: hidden;
+  padding-bottom: space(16);
+  background: $white;
   color: $san-juan;
   text-align: right;
-  padding-bottom: space(40);
 
   &--grey {
     background-image: url('../../assets/images/backgrounds/referral-header-shape.svg');
@@ -141,7 +141,7 @@
 
   &__brand {
     position: relative;
-    padding: space(12);
+    padding: 0;
     z-index: 1;
 
     @include for-tablet-landscape-down {
@@ -186,6 +186,10 @@
     }
   }
 
+  &__menu {
+    padding: 0;
+  }
+
   &__navigation {
     margin-top: space(8);
 
@@ -219,21 +223,10 @@
   .logo {
     display: block;
     float: left;
-    max-width: 510px;
-    height: auto;
-
-    @include for-tablet-landscape-down {
-      max-width: 360px;
-    }
-
-    @include for-phone-only {
-      max-width: 250px;
-    }
-
-    @include for-small-phone {
-      svg {
-        max-width: 230px;
-      }
+    
+    img {
+      max-width: 180px;
+      height: auto;
     }
   }
 
@@ -296,13 +289,16 @@
   }
 }
 
+.header__actions {
+  padding: 0 !important;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
 .header__container {
   padding: 0 !important;
-
-  @include for-desktop-up {
-    width: 90%;
-    margin: 0 auto;
-  }
+  max-width: 1260px;
+  margin: 0 auto;
 }
 
 .header__content {
@@ -340,27 +336,27 @@
 
 .nav {
   display: inline-block;
+  padding: space(12) space(16);
 
   &--primary {
     position: relative;
     z-index: 1;
+    padding: 0;
 
     @include for-tablet-landscape-down {
       float: none;
       display: block;
       margin: space(16);
-      padding: 0 space(10) space(32);
       text-align: left;
     }
   }
 
   &--active {
     @include for-desktop-up {
-      background-image: url('../../assets/images/backgrounds/nav-hover.svg');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      height: auto;
-      padding: 20px;
+      background-color: $monte-carlo;
+      color: $white;
+      padding: space(12) space(16);
+      border-radius: 16px;
     }
   }
 }

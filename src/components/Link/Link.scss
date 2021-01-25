@@ -31,10 +31,15 @@
 
 .link__header {
   @include link-header;
-  margin-right: space(32);
+  margin-left: space(24);
   position: relative;
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  &:hover {
+    font-weight: bold;
+    text-decoration: none;
   }
 }

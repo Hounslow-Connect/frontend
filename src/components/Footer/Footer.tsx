@@ -81,7 +81,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button text="Members Area" size="medium" alt={true} />
+                <Button text="Members Area" size="medium" light={true} />
               </a>
             </div>
           </div>

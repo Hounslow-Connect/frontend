@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import ReactSVG from 'react-svg';
+// import ReactSVG from 'react-svg';
 import { observer, inject } from 'mobx-react';
 import cx from 'classnames';
 import { NavLink as RouterLink, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import './Header.scss';
 
-import Logo from '../../assets/logo/logo.svg';
-import MobileLogo from '../../assets/logo/logo-mobile.svg';
+import Logo from '../../assets/logo/logo.png';
+// import MobileLogo from '../../assets/logo/logo-mobile.svg';
 
 import Button from '../Button';
 import WindowSizeStore from '../../stores/windowSizeStore';
@@ -47,7 +47,7 @@ class Header extends Component<IProps> {
         >
           <div
             className={cx(
-              'flex-container flex-container--mobile-no-padding flex-container--justify header--top-row',
+              'flex-container flex-container--mobile-no-padding flex-container--justify header--top-row header__actions',
               {
                 'header--top-row--iceberg':
                   location.pathname === '/' || location.pathname.includes('/favourites'),
@@ -84,7 +84,8 @@ class Header extends Component<IProps> {
           >
             <figure className="logo">
               <RouterLink to="/" aria-label="Home Link">
-                <ReactSVG src={isMobile ? MobileLogo : Logo} />
+                <img src={Logo} alt="Hounslow Connect"/>
+                {/* <ReactSVG src={isMobile ? MobileLogo : Logo} /> */}
               </RouterLink>
             </figure>
 

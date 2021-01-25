@@ -21,7 +21,7 @@
 }
 
 .button {
-  background-color: $san-juan;
+  background-color: $jelly-bean;
   color: $white;
   font-size: pxtorem(22px);
   line-height: 1.15;
@@ -74,13 +74,13 @@
 }
 
 .button--green {
-  background-color: $elm !important;
+  background-color: $ming !important;
   color: $white !important;
-  border: 2px solid $elm !important;
+  border: 2px solid $ming !important;
 
   &:focus,
   &:hover {
-    border: 2px solid $puerto-rico !important;
+    border: 2px solid $monte-carlo !important;
     outline: 0;
     text-decoration: none;
   }
@@ -157,7 +157,8 @@
   &:hover {
     box-shadow: none;
     cursor: pointer;
-    border: 3px solid $san-juan;
+    background-color: $san-juan;
+    color: $white;
   }
 
   &:disabled {

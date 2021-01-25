@@ -16,7 +16,8 @@
   .flex-container {
     padding: 0 !important;
     width: 100%;
-    align-items: stretch;
+    align-items: flex-start;
+    align-content: flex-start;
     height: 100%;
 
     @include for-phone-only {
@@ -76,10 +77,17 @@
   }
 }
 
+.card__image {
+  height: 280px;
+
+  .image {
+    object-fit: cover;
+  }
+}
+
 .card__description {
   box-sizing: border-box;
   padding: space(16) space(20);
-  height: 100%;
 
   @include for-phone-only {
     display: flex;
