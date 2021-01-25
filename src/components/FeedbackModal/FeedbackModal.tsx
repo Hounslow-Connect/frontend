@@ -87,7 +87,7 @@ class FeedbackModal extends Component<IProps, any> {
           {feedbackStore.submitted ? (
             <div className="flex-container">
               <p className="body-l modal__question">
-                Your feedback has been submitted to the Connected Kingston admin team.
+                Your feedback has been submitted to the Hounslow Connect admin team.
               </p>
             </div>
           ) : (

@@ -14,7 +14,7 @@ const ShareCard: React.FunctionComponent = () => (
     </a>
 
     <a
-      href={`http://twitter.com/share?text=Connected Kingston&url=${window.location.href}`}
+      href={`http://twitter.com/share?text=Hounslow Connect&url=${window.location.href}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Share to Twitter"
@@ -30,7 +30,7 @@ const ShareCard: React.FunctionComponent = () => (
       <FontAwesomeIcon icon="link" />
     </a>
     <a
-      href={`mailto:?subject=Connected Kingston&amp;body=${window.location.href}"`}
+      href={`mailto:?subject=Hounslow Connect&amp;body=${window.location.href}"`}
       aria-label="Email service link"
     >
       <FontAwesomeIcon icon="envelope" />

@@ -10,7 +10,7 @@ import uuid
 # ==================================================
 # Template details.
 # ==================================================
-template = Template('Create the infrastructure needed to run the Connected Kingston Client')
+template = Template('Create the infrastructure needed to run the Hounslow Connect Client')
 template.add_version('2010-09-09')
 
 # ==================================================

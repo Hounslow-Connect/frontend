@@ -43,13 +43,13 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
         <div className="flex-col flex-col--6 flex-col--tablet--12 footer__section">
           <div className="flex-container flex-container--no-padding">
             <div className="flex-col flex-col--5 flex-col--mobile--7">
-              <h4>Get in touch with Connected Kingston</h4>
+              <h4>Get in touch with Hounslow Connect</h4>
               <nav className="footer__social-links" role="menubar" aria-label="Social Media Links">
                 <a
                   href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Link to Connected Kingston Facebook"
+                  aria-label="Link to Hounslow Connect Facebook"
                 >
                   <FontAwesomeIcon icon={['fab', 'facebook-f']} className="footer__social-icons" />
                 </a>
@@ -57,7 +57,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                   href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Link to Connected Kingston Twitter"
+                  aria-label="Link to Hounslow Connect Twitter"
                 >
                   <FontAwesomeIcon icon={['fab', 'twitter']} className="footer__social-icons" />
                 </a>

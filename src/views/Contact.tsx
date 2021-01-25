@@ -46,7 +46,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Connected Kingston Facbook"
+              aria-label="Hounslow Connect Facbook"
             >
               <FontAwesomeIcon icon={['fab', 'facebook-f']} className="service__social-icon" />
             </a>
@@ -54,7 +54,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Connected Kingston Twitter"
+              aria-label="Hounslow Connect Twitter"
             >
               <FontAwesomeIcon icon={['fab', 'twitter']} className="service__social-icon" />
             </a>
