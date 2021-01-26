@@ -5,7 +5,6 @@
 
 @mixin greenContainer {
   background-color: $iceberg;
-  border-radius: 19px;
   padding: space(24) !important;
 
   @include for-tablet-landscape-down {
@@ -64,8 +63,6 @@
       width: pxtorem(65px);
       height: pxtorem(65px);
 
-      border-radius: 9px;
-
       &:before {
         content: '';
         display: inline-block;
@@ -74,7 +71,6 @@
       }
 
       img {
-        border-radius: 9px;
         width: 100%;
       }
     }
@@ -117,7 +113,6 @@
   }
 
   &--intro {
-    border-radius: 19px;
     padding: space(32);
     color: $san-juan;
     margin: space(24) 0 !important;
@@ -126,7 +121,6 @@
       background-color: $alabaster;
     }
     @include for-tablet-landscape-down {
-      border-radius: 0;
       background-color: $white;
       padding: 0;
     }
@@ -183,7 +177,6 @@
 
 .referral__button {
   border: 2px solid $san-juan;
-  border-radius: 9px;
   padding: space(16) !important;
   margin-bottom: space(12) !important;
   background-color: $white;
@@ -243,10 +236,6 @@
   background-color: $alabaster;
   margin: space(24) 0 !important;
   padding: space(32);
-
-  @include for-tablet-portrait-up {
-    border-radius: 19px;
-  }
 
   &--select {
     @include for-tablet-landscape-down {
@@ -388,7 +377,6 @@
 
   &--info {
     background-color: $alabaster;
-    border-radius: 19px;
     padding: space(48) space(60) !important;
     margin-top: space(48);
 
@@ -408,7 +396,6 @@
 
   img {
     height: 100px;
-    border-radius: 50%;
     border: 4px solid $waikawa;
   }
 

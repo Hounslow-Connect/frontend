@@ -39,7 +39,6 @@
 
   li {
     display: inline;
-    margin-left: space(16);
     color: $deluge;
     font-size: pxtorem(16px) !important;
 
@@ -55,6 +54,7 @@
 
   svg {
     margin-left: space(16);
+    margin-right: space(16);
     color: $deluge;
 
     @include for-phone-only {

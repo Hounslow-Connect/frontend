@@ -10,7 +10,6 @@
 .location__image {
   text-align: center;
   img {
-    border-radius: 9px;
     border: 1px solid $black;
   }
 }
@@ -94,7 +93,6 @@
 
   @include for-tablet-landscape-up {
     background-color: $alabaster;
-    border-radius: 19px;
     padding: space(24) !important;
   }
 }

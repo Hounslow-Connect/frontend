@@ -390,7 +390,7 @@ class Service extends Component<IProps> {
             </section>
             <section className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
               <div className="flex-container service__right-column">
-                <div className="tablet-hide flex-col flex-col--10 criteria_card service__info__cost service__section">
+                <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
                   <CostCard service={service} />
                 </div>
                 {service.video_embed && (

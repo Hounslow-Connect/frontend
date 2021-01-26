@@ -4,12 +4,9 @@
 @import '../../../styles/breakpoints.scss';
 
 .related-services {
-  background-image: url('../../../assets/images/backgrounds/related-services-background.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: $mercury;
   font-family: $font-primary;
-
-  padding: space(96) space(64);
+  padding: space(48) 0;
   text-align: center;
   color: $san-juan;
 
@@ -29,7 +26,6 @@
     width: pxtorem(60px);
     height: pxtorem(60px);
     border: 1px solid $nobel;
-    border-radius: 9px;
     background-color: $white;
 
     &:before {
@@ -40,7 +36,6 @@
     }
 
     img {
-      border-radius: 9px;
       width: 100%;
     }
   }
@@ -51,11 +46,10 @@
   }
 
   &--card {
-    background-color: $alabaster;
+    width: 32.5%;
     padding: space(24) !important;
-    border-radius: 19px;
+    background-color: $white;
     text-align: left;
-    margin: space(8);
 
     @include for-tablet-portrait-down {
       padding: sapce(24) space(16) !important;

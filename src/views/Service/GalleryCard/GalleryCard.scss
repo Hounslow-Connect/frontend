@@ -98,12 +98,6 @@
       border-top-right-radius: 17px;
     }
 
-    &--center {
-      @include for-tablet-portrait-up {
-        border-radius: 0;
-      }
-    }
-
     &--container {
       height: 180px;
       @include for-phone-only {
@@ -114,12 +108,6 @@
     &--small {
       @include for-phone-only {
         height: pxtorem(70px);
-      }
-    }
-
-    &--square {
-      @include for-phone-only {
-        border-radius: 0;
       }
     }
   }

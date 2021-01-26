@@ -3,16 +3,12 @@
 @import '../../../styles/breakpoints.scss';
 
 .criteria_card {
-  padding: space(8) !important;
-
   p {
     font-size: pxtorem(16px);
   }
 
   @include for-tablet-portrait-up {
-    border-radius: 19px;
     background-color: $alabaster;
-    margin: space(8);
     width: 45%;
     display: flex;
   }

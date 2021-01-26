@@ -5,9 +5,8 @@
 
 .service__header {
   position: relative;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  padding: space(64);
+  background-color: $deluge;
+  padding: space(32) 0;
   color: $white;
 
   .flex-container {
@@ -24,40 +23,40 @@
     }
   }
 
-  &--activity {
-    background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
+  // &--activity {
+  //   background-image: url('../../assets/images/backgrounds/activity-header-shape-lg.svg');
 
-    @include for-tablet-portrait-down {
-      background-image: url('../../assets/images/backgrounds/activity-header-shape-mobile.svg');
-    }
-  }
+  //   @include for-tablet-portrait-down {
+  //     background-image: url('../../assets/images/backgrounds/activity-header-shape-mobile.svg');
+  //   }
+  // }
 
-  &--club {
-    background-image: url('../../assets/images/backgrounds/club-header-shape-lg.svg');
+  // &--club {
+  //   background-image: url('../../assets/images/backgrounds/club-header-shape-lg.svg');
 
-    @include for-tablet-portrait-down {
-      background-image: url('../../assets/images/backgrounds/club-header-shape-mobile.svg');
-    }
-  }
+  //   @include for-tablet-portrait-down {
+  //     background-image: url('../../assets/images/backgrounds/club-header-shape-mobile.svg');
+  //   }
+  // }
 
-  &--group {
-    background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
+  // &--group {
+  //   background-image: url('../../assets/images/backgrounds/group-header-shape-lg.svg');
 
-    @include for-tablet-portrait-down {
-      background-image: url('../../assets/images/backgrounds/group-header-shape-mobile.svg');
-    }
-  }
+  //   @include for-tablet-portrait-down {
+  //     background-image: url('../../assets/images/backgrounds/group-header-shape-mobile.svg');
+  //   }
+  // }
 
-  &--service {
-    background-image: url('../../assets/images/backgrounds/service-header-shape-lg.svg');
+  // &--service {
+  //   background-image: url('../../assets/images/backgrounds/service-header-shape-lg.svg');
 
-    @include for-tablet-portrait-down {
-      background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
-    }
-    &:after {
-      content: '' !important;
-    }
-  }
+  //   @include for-tablet-portrait-down {
+  //     background-image: url('../../assets/images/backgrounds/service-header-shape-mobile.svg');
+  //   }
+  //   &:after {
+  //     content: '' !important;
+  //   }
+  // }
 
   @include for-phone-only {
     padding: space(32) space(24) 0 space(24) !important;
@@ -81,15 +80,6 @@
 
     @include for-phone-only {
       visibility: hidden;
-    }
-  }
-
-  @include for-tablet-landscape-up {
-    &:after {
-      content: url('../../assets/images/trees/iceberg-small.svg');
-      position: absolute;
-      top: 0px;
-      right: 32%;
     }
   }
 }
@@ -116,18 +106,10 @@
 }
 
 .service__header__logo {
-  position: absolute;
-  top: pxtorem(16px);
-  right: 10%;
-  background-size: 100% 100%;
-  padding: space(20);
+  background-color: $white;
 
   @include for-phone-only {
     right: 0;
-  }
-
-  @include for-tablet-landscape-up {
-    background-image: url('../../assets/images/backgrounds/service-logo-background.svg');
   }
 
   img {
@@ -138,23 +120,6 @@
     @include for-tablet-portrait-down {
       height: pxtorem(50px);
       width: pxtorem(50px);
-      border-radius: 50%;
-    }
-  }
-
-  @include for-tablet-landscape-up {
-    &:before {
-      content: url('../../assets/images/trees/iceberg-lg.svg');
-      position: absolute;
-      bottom: -15px;
-      right: -60px;
-    }
-
-    &:after {
-      content: url('../../assets/images/trees/peurto-small.svg');
-      position: absolute;
-      bottom: -15px;
-      right: -105px;
     }
   }
 }
@@ -195,9 +160,7 @@
   background-color: $iceberg !important;
 
   @include for-tablet-landscape-up {
-    border-radius: 19px;
     padding: space(24);
-    margin-right: 20%;
   }
 }
 
@@ -246,8 +209,6 @@
   }
 
   @include for-tablet-landscape-up {
-    border-radius: 19px;
-
     &:after {
       content: url('../../assets/images/trees/iceberg-small.svg');
       position: absolute;
@@ -369,14 +330,12 @@
 
     .service__accordian-inner {
       background-color: $white;
-      border-radius: 16px;
     }
   }
 
   &:nth-of-type(even) {
     .service__accordian-inner {
       background-color: $alabaster;
-      border-radius: 16px;
     }
   }
 
@@ -434,7 +393,6 @@
     background-color: $white;
     border: 1px solid $san-juan;
     padding: space(16) space(24) space(24) !important;
-    border-radius: 17px 33px 47px 29px;
 
     svg {
       width: auto !important;
@@ -482,7 +440,6 @@
 
   @include for-tablet-portrait-up {
     background-color: $alabaster;
-    border-radius: 19px;
   }
 
   p {
@@ -511,16 +468,11 @@
 
   &--logo {
     margin-bottom: space(12) !important;
-
-    img {
-      border-radius: 9px;
-    }
   }
 
   &--sidebar {
     background-color: $alabaster;
     padding: space(20) !important;
-    border-radius: 19px;
   }
 }
 
@@ -551,7 +503,6 @@
   padding: 40px !important;
   padding-top: 0 !important;
   background-color: $alabaster;
-  border-radius: 19px;
 
   .flex-col {
     overflow: hidden;
@@ -592,10 +543,9 @@
 }
 
 .service__share-card {
-  background-image: url('../../assets/images/backgrounds/service-share-background.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
   padding: space(20);
+  background-color: $mercury;
+  text-align: center;
 
   h4 {
     display: inline;
@@ -617,9 +567,7 @@
 .service__information {
   @include for-tablet-landscape-up {
     background: $alabaster;
-    border-radius: 19px;
     padding: space(32) !important;
-    margin-top: space(16) !important;
   }
 
   @include for-phone-only {
@@ -646,20 +594,10 @@
 }
 
 .service__heading {
-  margin-bottom: space(32);
-
-  @include for-tablet-landscape-up {
-    padding-left: 40px !important;
-    margin-bottom: space(32);
-  }
-
-  @include for-tablet-landscape-down {
-    margin-bottom: space(32);
-  }
+  margin-bottom: space(16);
 
   @include for-phone-only {
     font-size: $font-body-l !important;
-    margin-bottom: space(12);
   }
 }
 
