@@ -109,6 +109,7 @@
 }
 
 .favourites__card {
+  background-color: $white;
   color: $san-juan;
   border: 2px solid $san-juan;
   margin-bottom: space(24);
@@ -148,7 +149,6 @@
 
   &--button {
     text-align: center;
-    border-bottom-left-radius: 8px;
 
     padding: space(16);
     box-sizing: border-box;
@@ -174,8 +174,6 @@
     &--more {
       background-color: $san-juan;
       color: $white;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 8px;
     }
 
     @include for-phone-only {
@@ -213,7 +211,8 @@
 
 .favourites__count {
   color: $san-juan;
-  margin: space(32);
+  margin: space(32) 0;
+  text-align: center;
 
   @include for-tablet-portrait-down {
     margin: 0;
