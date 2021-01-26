@@ -15,7 +15,7 @@ interface IProps {
 
 const Breadcrumb: FunctionComponent<IProps> = ({ crumbs }) => (
   <div className="breadcrumb">
-    <div className="flex-container flex-container--no-padding">
+    <div className="flex-container">
       <ul>
         {crumbs.map((crumb: ICrumb, i: number) => (
           <Fragment key={crumb.text}>

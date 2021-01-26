@@ -9,8 +9,12 @@
   background-color: $deluge;
   font-family: $font-secondary;
   color: $white;
-  margin: space(32) space(16);
+  margin: space(32) 0;
   cursor: pointer;
+
+  @include for-tablet-portrait-up {
+    width: 31.5% !important;
+  }
 
   .flex-container {
     padding: 0 !important;
@@ -26,14 +30,6 @@
 
   &:hover {
     box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
-  }
-
-  @include for-tablet-landscape-up {
-    max-width: pxtorem(300px);
-  }
-
-  @include for-tablet-portrait-down {
-    margin: space(12);
   }
 
   @include for-phone-only {

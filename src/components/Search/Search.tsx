@@ -50,7 +50,7 @@ class Search extends React.Component<IProps> {
         <section className="flex-container flex-container--justify search__container">
           {cmsStore.hasBanner && cmsStore.banner && <Banner banner={cmsStore.banner} />}
           <form className="flex--col--12 search__inner-container">
-            <div className="flex-container flex-container--mobile-no-padding">
+            <div className="flex-container flex-container--no-padding">
               <div
                 className={cx('flex-col--12 search__input flex-col--mobile--12', {
                   'flex-col--mobile--12': isMobile,

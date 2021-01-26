@@ -7,15 +7,26 @@
   font-family: $font-primary;
 
   &--contact-card {
+    position: relative;
     padding: space(12) space(24);
     background-color: $alabaster;
-    border-radius: 19px;
-    overflow: hidden;
     text-overflow: ellipsis;
     margin-left: space(16);
 
     @include for-tablet-portrait-down {
       margin-left: 0;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -16px;
+      right: space(32);
+      width: 0; 
+      height: 0; 
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-top: 16px solid $white;
     }
 
     &--row {
@@ -46,7 +57,7 @@
 }
 
 .cms__header {
-  background-color: $east-side;
+  background-color: $deluge;
   position: relative;
   padding: space(16) 0;
 
@@ -106,7 +117,7 @@
   }
 
   a {
-    color: $east-side;
+    color: $deluge;
   }
 
   li p {
@@ -121,5 +132,10 @@
   ul {
     margin-left: space(24);
     margin-bottom: space(24);
+  }
+
+
+  > div {
+    width: 100% !important;
   }
 }

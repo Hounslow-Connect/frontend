@@ -27,7 +27,7 @@ const Personas: React.FunctionComponent<IProps> = ({ personas, history, cmsStore
         </div>
       </div>
 
-      <div className="personas__list flex-container flex-container--left">
+      <div className="personas__list flex-container flex-container--space-between">
         {personas.map(persona => (
           <PersonasCard
             key={persona.id}

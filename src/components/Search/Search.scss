@@ -9,17 +9,10 @@
 }
 
 .search__container {
+  position: relative;
   background-color: $east-side;
   color: $san-juan;
-  background-repeat: no-repeat;
   height: auto;
-  background-size: 100% 100%;
-  position: relative;
-  padding: space(40) space(24) !important;
-
-  @include for-phone-only {
-    background-color: $iceberg;
-  }
 }
 
 .search__inner-container {
@@ -35,7 +28,7 @@
   z-index: 999;
 
   @include for-tablet-landscape-up {
-    padding: space(40) 0 space(32);
+    padding: space(40) space(32);
     margin-top: space(40);
   }
 

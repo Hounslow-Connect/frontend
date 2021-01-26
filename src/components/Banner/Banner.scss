@@ -4,7 +4,7 @@
 @import '../../styles/breakpoints.scss';
 
 .banner {
-  margin-top: space(32);
+  margin-top: space(40);
 
   @include for-tablet-portrait-down {
     margin-bottom: space(32);

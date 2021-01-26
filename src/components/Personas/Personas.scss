@@ -7,7 +7,8 @@
   background-color: $mercury;
   color: $san-juan;
   position: relative;
-  padding: 160px space(16) space(48) space(16);
+  padding-top: 188px !important;
+  padding-bottom: space(48) !important;
 
   &--intro {
     @include for-tablet-portrait-up {
@@ -16,7 +17,7 @@
   }
 
   .flex-container {
-    max-width: 1260px;
+    max-width: 1030px;
   }
 
   p {
@@ -24,10 +25,6 @@
   }
 
   @include for-phone-only {
-    background-color: $iceberg;
-    padding: space(56) space(32) space(56);
-    text-align: left;
-
     p {
       font-size: $font-body-s;
     }
@@ -47,7 +44,9 @@
 
 .personas__list {
   position: relative;
-
+  max-width: 1030px;
+  margin: 0 auto;
+  
   @include for-phone-only {
     margin-top: space(32);
   }

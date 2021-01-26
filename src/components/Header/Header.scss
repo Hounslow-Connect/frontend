@@ -290,16 +290,9 @@
   }
 }
 
-.header__actions {
-  padding: 0 !important;
-  max-width: 1260px;
-  margin: 0 auto;
-}
-
+.header__actions,
 .header__container {
-  padding: 0 !important;
   max-width: 1260px;
-  margin: 0 auto;
 }
 
 .header__content {
@@ -354,7 +347,7 @@
 
   &--active {
     @include for-desktop-up {
-      background-color: $east-side;
+      background-color: $deluge;
       color: $white;
       padding: space(8) space(10);
     }

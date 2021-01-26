@@ -224,7 +224,11 @@
 }
 
 .react-player__preview {
-  border-radius: 19px;
+  background-color: $white;
+}
+
+.react-player__shadow {
+  background-color: $deluge !important;
 }
 
 .service__referral {
@@ -582,7 +586,7 @@
 
     svg {
       margin-right: space(8);
-      color: $waikawa;
+      color: $san-juan;
     }
   }
 }
