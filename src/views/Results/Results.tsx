@@ -68,14 +68,16 @@ class Results extends Component<IProps> {
 
         <div className="results__list">
           {this.hasCategories() && (
-            <div className="flex-container flex-container--mobile-no-padding results__category-sidebar">
-              {map(this.hasCategories(), (sidebox: ISidebox) => {
-                return <SideboxCard sidebox={sidebox} />;
-              })}
+            <div className="results__category-sidebar">
+              <div className="flex-container flex-container--mobile-no-padding">
+                {map(this.hasCategories(), (sidebox: ISidebox) => {
+                  return <SideboxCard sidebox={sidebox} />;
+                })}
+              </div>
             </div>
           )}
           <div className="flex-container flex-container results__filter-bar">
-            <div className="flex-col flex-col--4 flex-col--tablet--12 flex-col--mobile--12 results__container-count">
+            <div className="flex-col flex-col--12 results__container-count">
               {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>
                   {resultsStore.view === 'grid'

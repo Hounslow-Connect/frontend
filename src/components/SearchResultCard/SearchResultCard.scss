@@ -4,8 +4,8 @@
 @import '../../styles/fonts.scss';
 
 .search-result-card {
+  background-color: $white;
   border: 2px solid $san-juan;
-  border-radius: 10px;
   color: $san-juan;
   margin: space(8);
   height: max-content;
@@ -50,7 +50,6 @@
   width: pxtorem(65px);
   height: pxtorem(65px);
   border: 1px solid $nobel;
-  border-radius: 9px;
 
   &:before {
     content: '';
@@ -60,7 +59,6 @@
   }
 
   img {
-    border-radius: 9px;
     width: 100%;
     object-fit: contain;
     height: 100%;
@@ -81,7 +79,6 @@
   padding: space(8);
   color: $white;
   width: max-content;
-  border-radius: 4px;
   margin: space(16) 0;
 
   @include for-phone-only {
@@ -159,8 +156,6 @@
   padding: space(16);
   color: $white;
   text-align: center;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
 
   a {
     font-size: $font-body-m;

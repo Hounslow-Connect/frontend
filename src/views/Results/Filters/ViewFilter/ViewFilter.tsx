@@ -40,14 +40,12 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
       <Button
         text="Grid"
         icon="th-large"
-        size="small"
         light={resultsStore.view !== 'grid'}
         onClick={() => resultsStore.toggleView('grid')}
       />
       <Button
         text="Map"
         icon="map"
-        size="small"
         light={resultsStore.view !== 'map'}
         onClick={() => resultsStore.toggleView('map')}
       />

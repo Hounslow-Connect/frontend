@@ -5,83 +5,53 @@
 
 @mixin search-container {
   background: $white;
-  border-radius: 23px;
 }
 
 .results__list {
-  padding: space(20);
-
-  @include for-phone-only {
-    padding: space(8);
-  }
+  background-color: $mercury;
+  padding-bottom: space(40);
 }
 
 .results__container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 1260px;
+  margin: 0 auto;
   color: $san-juan;
-
-  @include for-desktop-up {
-    padding: 0 space(64);
-  }
 }
 
 .results__container-count {
   display: flex;
   justify-content: flex-start;
   color: $san-juan;
-  padding: space(16) 0;
 
   @include for-tablet-landscape-down {
-    margin: space(8) !important;
     justify-content: center;
   }
 }
 
 .results__search-box {
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  color: $san-juan;
+  background-color: $deluge;
+  color: $white;
   position: relative;
 
   @include for-tablet-landscape-up {
     padding: space(48) 0 !important;
-    background-image: url('../../assets/images/backgrounds/results-shape.svg');
-
-    &:before {
-      content: url('../../assets/images/trees/peurto-small.svg');
-      position: absolute;
-      top: 3px;
-      right: 400px;
-    }
-
-    &:after {
-      content: url('../../assets/images/telephone-boxes-shapes.svg');
-      position: absolute;
-      top: 0;
-      right: 100px;
-    }
   }
 
   @include for-tablet-landscape-down {
     padding: space(16) space(8) space(8) !important;
-
-    background-image: none;
-
-    &:after {
-      content: none;
-    }
-
-    &:before {
-      content: none;
-    }
   }
 
   @include for-phone-only {
     h1 {
       font-size: $font-body-l;
     }
+  }
+
+  > .flex-container {
+    max-width: 1260px;
   }
 }
 
@@ -106,7 +76,6 @@
 
 .pagination--text-nav-container {
   background: $alabaster;
-  border-radius: 2px;
   padding: space(10);
 }
 
@@ -133,7 +102,6 @@
 
 .pagination--active {
   background: $mercury;
-  border-radius: 2px;
 }
 
 .results__filters {
@@ -249,7 +217,9 @@
 }
 
 .category__info {
+  position: relative;
   width: 100%;
+  color: $san-juan;
   @include search-container;
 
   @include for-tablet-landscape-up {
@@ -260,8 +230,19 @@
     padding: 0 !important;
   }
 
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    right: space(32);
+    width: 0; 
+    height: 0; 
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-top: 24px solid $white;
+  }
+
   &--intro {
-    color: $waikawa;
     margin: space(10) 0;
 
     @include for-tablet-landscape-up {
@@ -334,10 +315,7 @@
 }
 
 .results__keyword-heading {
-  @include for-tablet-landscape-up {
-    margin-bottom: space(12);
-    margin-left: space(16);
-  }
+  margin-bottom: space(16);
 }
 
 .results__keyword-edit-toggle {
@@ -384,7 +362,9 @@
 }
 
 .results__category-sidebar {
-  margin-bottom: space(32) !important;
+  background-color: $white;
+  margin-bottom: space(40) !important;
+  padding: space(48) 0 !important;
 
   @include for-tablet-portrait-down {
     margin-bottom: space(16) !important;

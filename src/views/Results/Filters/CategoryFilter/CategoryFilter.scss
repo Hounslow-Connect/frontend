@@ -16,11 +16,5 @@
 
 .category_filters--header--cost {
   @include heading-m;
-  margin-bottom: space(24);
-
-  @include for-phone-only {
-    font-size: pxtorem(14px);
-    color: $waikawa;
-    margin-bottom: space(8);
-  }
+  margin-bottom: space(16);
 }

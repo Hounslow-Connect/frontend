@@ -5,9 +5,8 @@
 
 .sidebox {
   padding: space(24) !important;
-  background: $alabaster;
+  background: $mercury;
   margin: 0 space(8) !important;
-  border-radius: 25px;
 
   h3 {
     color: $san-juan;
@@ -15,13 +14,13 @@
 
   p {
     @include body-s;
-    color: $mid-grey;
+    color: $san-juan;
     margin: space(8) 0;
   }
 
   a {
     @include body-s;
-    color: $elm;
+    color: $san-juan;
   }
 
   &--container {
