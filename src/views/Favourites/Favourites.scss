@@ -4,6 +4,7 @@
 @import '../../styles/fonts.scss';
 
 .favourites {
+  background-color: $mercury;
   padding-bottom: space(64);
 
   &--container {
@@ -14,27 +15,20 @@
 }
 
 .favourites__header {
-  background-image: url('../../assets/images/backgrounds/favourites-shape.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  color: $san-juan;
-
-  @include for-tablet-landscape-up {
-    padding: space(64) !important;
-    padding-bottom: space(24) !important;
-  }
-
-  @include for-tablet-portrait-down {
-    background-image: none;
-    padding: space(24) !important;
-  }
+  padding: space(32) 0;
+  background-color: $deluge;
+  color: $white;
 
   &--share-container {
     padding: 0 !important;
   }
 
   &--heading {
-    margin-bottom: space(20) !important;
+    margin-bottom: space(16) !important;
+
+    h1 {
+      margin-bottom: space(8) !important;
+    }
 
     @include for-phone-only {
       h1 {
@@ -44,16 +38,13 @@
   }
 
   &--header-container {
+    flex-wrap: wrap;
     background-color: $white;
-    padding: space(32);
-    color: $waikawa;
+    padding: space(16);
+    color: $san-juan;
 
     &:first-of-type {
-      margin-right: space(32);
-    }
-
-    &:last-of-type {
-      padding: space(20) !important;
+      margin-right: space(16);
     }
 
     @include for-tablet-portrait-down {
@@ -68,6 +59,7 @@
   }
 
   &--share {
+    margin-right: space(24);
     color: $san-juan;
 
     @include for-tablet-portrait-down {
@@ -231,10 +223,6 @@
 }
 
 .favourites__add-more {
-  background-image: url('../../assets/images/backgrounds/favourites-add-more-shape.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding: space(64) !important;
   margin-top: space(64);
 
   button {
