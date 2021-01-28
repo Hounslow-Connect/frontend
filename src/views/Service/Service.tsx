@@ -124,7 +124,7 @@ class Service extends Component<IProps> {
             <div className="flex-col flex-col--mobile--9">
               <h1>{get(service, 'name')}</h1>
               <p className="service__header__last-updated">
-                Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
+                Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong><br />
                 <Button
                   text="Give feedback"
                   icon="comment"

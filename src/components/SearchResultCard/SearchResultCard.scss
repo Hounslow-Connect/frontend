@@ -72,6 +72,9 @@
 
 .search-result-card__tag {
   @include body-xs;
+  line-height: 0.875rem;
+  display: flex;
+  align-items: center;
   padding: 6px;
   color: $white;
   width: max-content;

@@ -5,21 +5,14 @@
 
 .service__header {
   position: relative;
-  background-color: $brink-pink;
-  padding: space(32) 0;
-  color: $white;
+  background-color: $bermuda;
+  padding: space(48) 0;
 
   .flex-container {
     max-width: 1260px;
 
     @include for-tablet-landscape-down {
       padding: 0 !important;
-    }
-  }
-
-  button {
-    &:hover {
-      border-color: $white;
     }
   }
 
@@ -73,10 +66,10 @@
   button {
     @include body-s;
     background-color: inherit;
-    border: 2px solid $white;
     font-family: $font-primary;
     font-weight: normal;
-    margin-left: space(12);
+    padding: 4px space(12);
+    margin-top: space(12);
 
     @include for-phone-only {
       visibility: hidden;
@@ -157,23 +150,14 @@
 }
 
 .service__info__cost {
-  background-color: $iceberg !important;
+  background-color: $bright-sun !important;
 
   @include for-tablet-landscape-up {
-    padding: space(24);
+    padding: space(12);
   }
 }
 
-.service__info__cost--header {
-  font-family: $font-primary;
-}
-
-.service__info__cost--sub-heading {
-  color: $lynch;
-}
-
 .service__info__cost--icon {
-  color: $downy;
   font-size: 36px;
 }
 
@@ -183,7 +167,6 @@
 
 .service__info__cost--right {
   margin-left: space(32);
-  color: $black;
 }
 
 .react-player__preview {
@@ -225,10 +208,6 @@
 .service__refer-disclaimer {
   padding-top: space(16) !important;
 
-  svg {
-    color: $lynch;
-  }
-
   p {
     text-align: left;
     padding-left: space(8);
@@ -253,7 +232,6 @@
 
     p {
       @include body-m;
-      color: $lynch;
       margin: space(24) 0;
 
       &:first-of-type {
@@ -279,7 +257,6 @@
     }
 
     li {
-      color: $lynch;
       font-family: $font-primary;
     }
 
@@ -409,7 +386,6 @@
   svg {
     font-size: pxtorem(46px);
     width: auto !important;
-    color: $lynch;
     padding-right: space(10);
 
     @include for-tablet-landscape-down {
@@ -444,7 +420,6 @@
 
   p {
     font-size: $font-base;
-    color: $gray;
     margin-top: space(12);
   }
 
@@ -454,8 +429,6 @@
   }
 
   svg {
-    color: #c3c3c3;
-
     @include for-tablet-landscape-up {
       font-size: pxtorem(36px);
       float: right;
@@ -582,10 +555,6 @@
   font-family: $font-primary;
   margin-top: space(24);
   margin-bottom: space(40) !important;
-
-  span {
-    color: $lynch;
-  }
 
   svg {
     color: $brink-pink;

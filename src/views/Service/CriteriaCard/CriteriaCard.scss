@@ -3,18 +3,12 @@
 @import '../../../styles/breakpoints.scss';
 
 .criteria_card {
-  p {
-    font-size: pxtorem(16px);
-  }
+  padding: space(16);
+  background-color: $mercury;
 
-  @include for-tablet-portrait-up {
-    background-color: $mercury;
+  @include for-tablet-portrait-up { 
     width: 45%;
     display: flex;
-  }
-
-  @include for-tablet-landscape-up {
-    padding: space(20) !important;
   }
 }
 
@@ -27,7 +21,6 @@
 }
 
 .criteria_card-title {
-  color: $lynch;
   font-size: pxtorem(14px) !important;
 
   @include for-tablet-landscape-up {
