@@ -223,7 +223,6 @@
     p {
       @include body-l;
       margin-bottom: space(40);
-      color: $black;
     }
   }
 
@@ -278,7 +277,6 @@
   }
 
   a {
-    color: $downy;
     font-size: inherit;
   }
 }
@@ -460,6 +458,8 @@
 }
 
 .service__cost-card {
+  width: 100%;
+
   @include for-tablet-landscape-up {
     padding: 0 !important;
     margin: 0 !important;
@@ -473,14 +473,18 @@
 }
 
 .service__contact-card {
-  padding: 40px !important;
-  padding-top: 0 !important;
+  padding: space(24) !important;
   background-color: $mercury;
 
   .flex-col {
+    margin-bottom: space(24);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &--accordian {
@@ -506,8 +510,6 @@
   }
 
   &--row {
-    margin-top: space(40);
-
     svg {
       margin-right: space(8);
       color: $black;
@@ -522,8 +524,8 @@
 
   h4 {
     display: inline;
-    font-weight: normal;
-    font-family: $font-primary;
+    margin-right: space(16);
+    font-weight: 900;
   }
 
   a {
@@ -532,6 +534,8 @@
 }
 
 .criteria_card--inner {
+  width: 100%;
+
   @include for-tablet-landscape-up {
     padding: 0 !important;
   }
@@ -551,14 +555,15 @@
 }
 
 .service__offerings {
-  @include body-m;
-  font-family: $font-primary;
+  display: flex;
+  align-items: center;
   margin-top: space(24);
   margin-bottom: space(40) !important;
+  @include body-m;
+  font-family: $font-primary;
 
   svg {
-    color: $brink-pink;
-    margin: space(8);
+    margin: 0 space(8);
   }
 }
 

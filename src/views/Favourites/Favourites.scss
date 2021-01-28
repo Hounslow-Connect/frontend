@@ -4,7 +4,6 @@
 @import '../../styles/fonts.scss';
 
 .favourites {
-  background-color: $mercury;
   padding-bottom: space(64);
 
   &--container {
@@ -15,9 +14,8 @@
 }
 
 .favourites__header {
-  padding: space(32) 0;
-  background-color: $brink-pink;
-  color: $white;
+  padding: space(48) 0;
+  background-color: $bermuda;
 
   &--share-container {
     padding: 0 !important;
@@ -119,7 +117,7 @@
   }
 
   &--inner {
-    padding: space(24) !important;
+    padding: space(16) !important;
   }
 
   &--outer {
@@ -130,17 +128,12 @@
   }
 
   &--organisation {
-    color: $lynch;
+    margin-top: space(8);
   }
 
   &--location {
     @include heading-s;
-    color: $downy;
     margin: space(12) 0;
-  }
-
-  &--intro {
-    color: $lynch;
   }
 
   &--button-row {
@@ -148,14 +141,14 @@
   }
 
   &--button {
-    text-align: center;
-
-    padding: space(16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: space(12);
     box-sizing: border-box;
 
     svg {
       margin-left: space(8);
-      vertical-align: middle;
     }
 
     &:first-of-type {
@@ -185,13 +178,9 @@
   }
 
   &--contact {
-    border-left: 3px solid $lynch;
+    border-left: 3px solid $black;
     padding-left: space(12) !important;
     margin: space(8) 0 !important;
-
-    svg {
-      color: $lynch;
-    }
 
     &--heading {
       @include heading-s;
@@ -223,10 +212,6 @@
 
 .favourites__add-more {
   margin-top: space(64);
-
-  button {
-    background-color: $downy;
-  }
 
   @include for-phone-only {
     padding: space(32) !important;

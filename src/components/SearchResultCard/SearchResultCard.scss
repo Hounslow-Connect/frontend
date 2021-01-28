@@ -38,7 +38,6 @@
 .search-result-card__organisation {
   @include heading-s-light;
   font-weight: normal;
-  color: $lynch;
   margin-top: space(8);
 
   @include for-phone-only {
@@ -60,14 +59,14 @@
 
   img {
     width: 100%;
-    object-fit: contain;
     height: 100%;
+    object-fit: contain;
   }
 }
 
 .search-result-card__top-row {
   display: flex;
-  padding: space(16) space(12) space(12) space(16);
+  padding: space(16);
 }
 
 .search-result-card__tag {
@@ -78,7 +77,7 @@
   padding: 6px;
   color: $white;
   width: max-content;
-  margin: space(16) 0;
+  margin-top: space(16);
 
   @include for-phone-only {
     margin: 0 0 space(16);
@@ -116,6 +115,7 @@
 
 .search-result-card__location {
   display: flex;
+  margin-top: space(16);
 
   h4 {
     margin-left: space(8);
@@ -140,7 +140,6 @@
 }
 
 .search-result-card__intro {
-  color: $lynch;
   padding: 0 space(16) space(16);
 
   @include for-phone-only {

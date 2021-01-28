@@ -13,6 +13,7 @@
 }
 
 .criteria_card-img {
+  padding-right: space(16);
   text-align: center;
 
   svg {
@@ -22,6 +23,7 @@
 
 .criteria_card-title {
   font-size: pxtorem(14px) !important;
+  font-weight: 900;
 
   @include for-tablet-landscape-up {
     margin-top: space(8);

@@ -57,7 +57,7 @@ class Favourites extends Component<IProps> {
           {!!favouritesStore.favourites.length ? (
             <Fragment>
               <div className="flex-col flex-col--12 favourites__count">
-                <p>{`${favouritesStore.favourites.length} results found`}</p>
+                <p><strong>{`${favouritesStore.favourites.length} results found`}</strong></p>
               </div>
 
               <div className="flex-col flex-col--12">
