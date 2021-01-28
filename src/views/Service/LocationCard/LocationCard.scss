@@ -33,7 +33,7 @@
   }
 
   &--link {
-    color: $elm;
+    color: $downy;
   }
 }
 
@@ -68,7 +68,7 @@
 
   button {
     padding: 0;
-    color: $elm;
+    color: $downy;
   }
 
   h4 {
@@ -92,7 +92,7 @@
   }
 
   @include for-tablet-landscape-up {
-    background-color: $alabaster;
+    background-color: $mercury;
     padding: space(24) !important;
   }
 }

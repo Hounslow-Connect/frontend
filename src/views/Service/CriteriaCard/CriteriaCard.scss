@@ -8,7 +8,7 @@
   }
 
   @include for-tablet-portrait-up {
-    background-color: $alabaster;
+    background-color: $mercury;
     width: 45%;
     display: flex;
   }
@@ -27,7 +27,7 @@
 }
 
 .criteria_card-title {
-  color: $waikawa;
+  color: $lynch;
   font-size: pxtorem(14px) !important;
 
   @include for-tablet-landscape-up {

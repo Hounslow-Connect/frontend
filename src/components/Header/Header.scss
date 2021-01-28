@@ -9,28 +9,8 @@
   padding-bottom: space(16);
   background: $white;
   color: $black;
+  border-bottom: 2px solid $brink-pink;
   text-align: right;
-
-  &--grey {
-    background-image: url('../../assets/images/backgrounds/referral-header-shape.svg');
-    background-repeat: no-repeat;
-    background-size: 110% 100%;
-
-    .header__container {
-      @include for-tablet-portrait-up {
-        padding-bottom: space(24) !important;
-      }
-    }
-
-    @include for-tablet-landscape-down {
-      padding-bottom: space(32) !important;
-    }
-
-    @include for-phone-only {
-      padding-bottom: space(24) !important;
-      background-image: url('../../assets/images/backgrounds/referral-header-shape-mobile.svg');
-    }
-  }
 
   @include for-tablet-landscape-down {
     z-index: 999;
@@ -66,7 +46,6 @@
 
   &--top-row {
     align-items: stretch !important;
-    padding-bottom: space(12) !important;
 
     &--button-box {
       display: flex;
@@ -226,7 +205,7 @@
     float: left;
     
     img {
-      max-width: 180px;
+      width: 240px;
       height: auto;
     }
   }
@@ -290,9 +269,15 @@
   }
 }
 
-.header__actions,
 .header__container {
   max-width: 1260px;
+  align-items: flex-end !important;
+}
+
+.header__actions {
+  background-color: $mercury;
+  padding: space(8) 0;
+  margin-bottom: space(24);
 }
 
 .header__content {
@@ -334,6 +319,9 @@
 
   &--primary {
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     z-index: 1;
     padding: 0;
 
@@ -346,10 +334,13 @@
   }
 
   &--active {
-    @include for-desktop-up {
-      background-color: $deluge;
-      color: $white;
-      padding: space(8) space(10);
+    border: 2px solid $brink-pink;
+    color: $black;
+    padding: space(8) space(12);
+
+    &:hover {
+      background-color: $brink-pink;
+      text-decoration: none;
     }
   }
 }

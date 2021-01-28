@@ -60,7 +60,7 @@ class Search extends React.Component<IProps> {
                   <div className="flex-container flex-container--align-center flex-container--mobile-no-padding search__input--row">
                     <div className="flex-col--12">
                       <label htmlFor="search">
-                        <h1 className="search__heading">{get(cmsStore, 'home.search_title')}</h1>
+                        <h2 className="search__heading">{get(cmsStore, 'home.search_title')}</h2>
                       </label>
                     </div>
                     <div
@@ -110,7 +110,7 @@ class Search extends React.Component<IProps> {
                   {!!SearchStore.covidCategories.length && (
                     <Fragment>
                       <label className="search__heading" htmlFor="category">
-                        COVID-19 <FontAwesomeIcon icon="virus" />
+                        <h2>COVID-19 <FontAwesomeIcon icon="virus" /></h2>
                       </label>
                       <div className="flex-col--6 flex-col--mobile--12">
                         <p className="search__category-subtitle">

@@ -10,37 +10,33 @@
 
 .search__container {
   position: relative;
-  background-color: $east-side;
   height: auto;
 }
 
 .search__inner-container {
-  background-color: $white;
   width: 100%;
   max-width: 1030px;
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
   position: relative;
   padding: space(24) space(20) space(32);
   margin-bottom: -120px;
-  z-index: 999;
+  background-color: $bermuda;
+  z-index: 10;
 
   @include for-tablet-landscape-up {
     padding: space(40) space(32);
-    margin-top: space(40);
   }
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -16px;
+    bottom: -24px;
     right: space(32);
     width: 0; 
     height: 0; 
     border-left: 24px solid transparent;
     border-right: 24px solid transparent;
-    border-top: 24px solid $white;
+    border-top: 24px solid $bermuda;
   }
 }
 
@@ -76,13 +72,8 @@
 }
 
 .search__heading {
-  @include heading-l;
   display: block;
   margin-bottom: space(16);
-
-  @include for-phone-only {
-    font-size: $font-body-l;
-  }
 
   &--category {
     @include for-tablet-landscape-up {

@@ -47,7 +47,7 @@ class Header extends Component<IProps> {
         >
           <div
             className={cx(
-              'flex-container flex-container--mobile-no-padding flex-container--justify header--top-row header__actions',
+              'header--top-row header__actions',
               {
                 'header--top-row--iceberg':
                   location.pathname === '/' || location.pathname.includes('/favourites'),
@@ -55,21 +55,23 @@ class Header extends Component<IProps> {
               }
             )}
           >
-            <div className="flex-col flex-col--mobile--5 flex-col--mobile-small--6 header--top-row--button-box">
-              <div id="google_translate_element" />
-            </div>
-            <div className="flex-col mobile-hide tablet--large-hide medium-hide">
-              <Button
-                text="Give Feedback"
-                header={true}
-                icon="comment"
-                onClick={() => uiStore.toggleFeedbackModal()}
-              />
-            </div>
-            <div className="flex-col flex-col--mobile--5 flex-col--mobile-small--6 header--top-row--favourite header--top-row--button-box">
-              <RouterLink to="/favourites">
-                <Button text="Favourites" header={true} icon="star" />
-              </RouterLink>
+            <div className="flex-container flex-container--mobile-no-padding flex-container--right">
+              <div className="flex-col flex-col--mobile--5 flex-col--mobile-small--6 header--top-row--button-box">
+                <div id="google_translate_element" />
+              </div>
+              <div className="flex-col mobile-hide tablet--large-hide medium-hide">
+                <Button
+                  text="Give Feedback"
+                  header={true}
+                  icon="comment"
+                  onClick={() => uiStore.toggleFeedbackModal()}
+                />
+              </div>
+              <div className="flex-col flex-col--mobile--5 flex-col--mobile-small--6 header--top-row--favourite header--top-row--button-box">
+                <RouterLink to="/favourites">
+                  <Button text="Favourites" header={true} icon="star" />
+                </RouterLink>
+              </div>
             </div>
           </div>
         </div>

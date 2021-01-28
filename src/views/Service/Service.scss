@@ -5,7 +5,7 @@
 
 .service__header {
   position: relative;
-  background-color: $deluge;
+  background-color: $brink-pink;
   padding: space(32) 0;
   color: $white;
 
@@ -91,7 +91,7 @@
   align-items: stretch;
 
   .criteria_card:nth-of-type(odd) {
-    background-color: $alabaster;
+    background-color: $mercury;
   }
 
   &--no-padding {
@@ -169,11 +169,11 @@
 }
 
 .service__info__cost--sub-heading {
-  color: $waikawa;
+  color: $lynch;
 }
 
 .service__info__cost--icon {
-  color: $puerto-rico;
+  color: $downy;
   font-size: 36px;
 }
 
@@ -191,11 +191,11 @@
 }
 
 .react-player__shadow {
-  background-color: $deluge !important;
+  background-color: $brink-pink !important;
 }
 
 .service__referral {
-  background-color: $pink;
+  background-color: $brink-pink;
   padding: space(32) !important;
   position: relative;
 
@@ -226,7 +226,7 @@
   padding-top: space(16) !important;
 
   svg {
-    color: $waikawa;
+    color: $lynch;
   }
 
   p {
@@ -269,7 +269,7 @@
       &:before {
         content: '•';
         margin: 0 pxtorem(4px);
-        color: $downy;
+        color: $brink-pink;
       }
     }
 
@@ -301,7 +301,7 @@
   }
 
   a {
-    color: $elm;
+    color: $downy;
     font-size: inherit;
   }
 }
@@ -326,7 +326,7 @@
   }
 
   &:nth-of-type(odd) {
-    background-color: $alabaster;
+    background-color: $mercury;
 
     .service__accordian-inner {
       background-color: $white;
@@ -335,7 +335,7 @@
 
   &:nth-of-type(even) {
     .service__accordian-inner {
-      background-color: $alabaster;
+      background-color: $mercury;
     }
   }
 
@@ -409,7 +409,7 @@
   svg {
     font-size: pxtorem(46px);
     width: auto !important;
-    color: $waikawa;
+    color: $lynch;
     padding-right: space(10);
 
     @include for-tablet-landscape-down {
@@ -439,7 +439,7 @@
   justify-content: space-evenly !important;
 
   @include for-tablet-portrait-up {
-    background-color: $alabaster;
+    background-color: $mercury;
   }
 
   p {
@@ -471,7 +471,7 @@
   }
 
   &--sidebar {
-    background-color: $alabaster;
+    background-color: $mercury;
     padding: space(20) !important;
   }
 }
@@ -502,7 +502,7 @@
 .service__contact-card {
   padding: 40px !important;
   padding-top: 0 !important;
-  background-color: $alabaster;
+  background-color: $mercury;
 
   .flex-col {
     overflow: hidden;
@@ -566,7 +566,7 @@
 
 .service__information {
   @include for-tablet-landscape-up {
-    background: $alabaster;
+    background: $mercury;
     padding: space(32) !important;
   }
 
@@ -588,7 +588,7 @@
   }
 
   svg {
-    color: $downy;
+    color: $brink-pink;
     margin: space(8);
   }
 }

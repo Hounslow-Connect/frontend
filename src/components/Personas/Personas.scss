@@ -4,11 +4,9 @@
 @import '../../styles/fonts.scss';
 
 .personas {
-  background-color: $mercury;
-  color: $black;
   position: relative;
   padding-top: 188px !important;
-  padding-bottom: space(48) !important;
+  padding-bottom: space(12) !important;
 
   &--intro {
     @include for-tablet-portrait-up {

@@ -25,7 +25,7 @@
   &--logo {
     width: pxtorem(60px);
     height: pxtorem(60px);
-    border: 1px solid $nobel;
+    border: 1px solid $gray;
     background-color: $white;
 
     &:before {
@@ -61,7 +61,7 @@
 
     &--info {
       margin: space(12) 0 !important;
-      color: $mid-grey;
+      color: $lynch;
       font-size: $font-body-xs;
       line-height: 17px;
     }

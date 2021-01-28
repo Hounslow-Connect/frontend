@@ -16,7 +16,7 @@
 
 .favourites__header {
   padding: space(32) 0;
-  background-color: $deluge;
+  background-color: $brink-pink;
   color: $white;
 
   &--share-container {
@@ -93,7 +93,7 @@
 .favourites__logo {
   width: pxtorem(65px) !important;
   height: pxtorem(65px);
-  border: 1px solid $nobel;
+  border: 1px solid $gray;
   background-color: $white;
 
   &:before {
@@ -130,17 +130,17 @@
   }
 
   &--organisation {
-    color: $waikawa;
+    color: $lynch;
   }
 
   &--location {
     @include heading-s;
-    color: $elm;
+    color: $downy;
     margin: space(12) 0;
   }
 
   &--intro {
-    color: $mid-grey;
+    color: $lynch;
   }
 
   &--button-row {
@@ -168,7 +168,7 @@
     }
 
     &:focus {
-      border: 2px solid $puerto-rico;
+      border: 2px solid $downy;
     }
 
     &--more {
@@ -185,12 +185,12 @@
   }
 
   &--contact {
-    border-left: 3px solid $waikawa;
+    border-left: 3px solid $lynch;
     padding-left: space(12) !important;
     margin: space(8) 0 !important;
 
     svg {
-      color: $waikawa;
+      color: $lynch;
     }
 
     &--heading {
@@ -225,7 +225,7 @@
   margin-top: space(64);
 
   button {
-    background-color: $elm;
+    background-color: $downy;
   }
 
   @include for-phone-only {

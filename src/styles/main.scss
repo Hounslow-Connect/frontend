@@ -100,6 +100,7 @@ li {
 }
 
 a {
+  color: $black;
   cursor: pointer;
 }
 
@@ -115,22 +116,20 @@ button {
 }
 
 .goog-te-gadget-simple {
-  border: 1px solid  $deluge !important;
-  line-height: 2.4375rem !important;
+  background-color: $white;
+  border: 2px solid $black;
+  line-height: 2rem !important;
   height: auto !important;
   display: inline-block;
   cursor: pointer;
   zoom: 1;
-  padding: 0 space(12);
+  padding: 0 space(8);
   margin: 0;
   font-weight: normal;
-  border-top-left-radius: 0px !important;
-  border-top-right-radius: 0px !important;
-  border-top: 0 !important;
   box-sizing: border-box;
 
   &:hover {
-    background-color: $deluge;
+    background-color: $black;
 
     span .goog-te-menu-value:before,
     span .goog-te-menu-value:after, {
@@ -153,24 +152,17 @@ button {
   }
 
   span &:before {
-    color: $deluge;
+    color: $black;
     content: 'Translate';
     font-family: 'Museo Sans 500', sans-serif;
-    font-size: pxtorem(18px);
-
-    @include for-tablet-landscape-down {
-      color: $black;
-    }
+    font-size: pxtorem(14px);
   }
 
   span &:after {
     content: '\f1ab';
+    font-size: pxtorem(14px);
     font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
     font-weight: 900;
-    color: $deluge;
-
-    @include for-tablet-landscape-down {
-      color: $black;
-    }
+    color: $black;
   }
 }

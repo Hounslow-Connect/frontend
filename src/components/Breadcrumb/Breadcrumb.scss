@@ -25,7 +25,7 @@
     text-overflow: ellipsis;
 
     a {
-      text-decoration-color: $deluge;
+      text-decoration-color: $brink-pink;
     }
 
     svg {
@@ -39,7 +39,7 @@
 
   li {
     display: inline;
-    color: $deluge;
+    color: $brink-pink;
     font-size: pxtorem(16px) !important;
 
     &:first-child {
@@ -55,7 +55,7 @@
   svg {
     margin-left: space(16);
     margin-right: space(16);
-    color: $deluge;
+    color: $brink-pink;
 
     @include for-phone-only {
       margin-left: space(8);

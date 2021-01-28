@@ -38,7 +38,7 @@
 .search-result-card__organisation {
   @include heading-s-light;
   font-weight: normal;
-  color: $waikawa;
+  color: $lynch;
   margin-top: space(8);
 
   @include for-phone-only {
@@ -49,7 +49,7 @@
 .search-result-card__logo {
   width: pxtorem(65px);
   height: pxtorem(65px);
-  border: 1px solid $nobel;
+  border: 1px solid $gray;
 
   &:before {
     content: '';
@@ -87,11 +87,11 @@
 }
 
 .search-result-card__tag--activity {
-  background-color: $cranberry;
+  background-color: $brink-pink;
 }
 
 .search-result-card__tag--club {
-  background-color: $club-blue;
+  background-color: $lynch;
 }
 
 .search-result-card__tag--service {
@@ -99,7 +99,7 @@
 }
 
 .search-result-card__tag--group {
-  background-color: $elm;
+  background-color: $downy;
 }
 
 .search-result-card__tag--icon {
@@ -116,7 +116,7 @@
 }
 
 .search-result-card__location {
-  color: $elm;
+  color: $downy;
   display: flex;
 
   h4 {

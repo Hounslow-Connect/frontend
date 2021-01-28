@@ -7,9 +7,9 @@ import ReactMarkdown from 'react-markdown';
 import get from 'lodash/get';
 
 import './Footer.scss';
-import Button from '../Button';
 import CMSStore from '../../stores/CMSStore';
 import UIStore from '../../stores/uiStore';
+import ButtonLink from '../Button/ButtonLink';
 
 interface IProps {
   mobileMenu?: boolean;
@@ -76,13 +76,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
             </div>
 
             <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__button">
-              <a
-                href="https://admin.connectedhounslow.uk"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button text="Members Area" size="medium" />
-              </a>
+              <ButtonLink href="https://admin.connectedhounslow.uk" text="Members Area" />
             </div>
           </div>
         </div>

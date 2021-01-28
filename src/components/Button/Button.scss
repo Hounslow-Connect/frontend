@@ -33,11 +33,11 @@
   }
 
   &:active {
-    border: 2px solid $puerto-rico;
+    border: 2px solid $downy;
   }
 
   &:focus {
-    border: 2px solid $puerto-rico;
+    border: 2px solid $downy;
     outline: 0;
     text-decoration: none;
   }
@@ -71,10 +71,36 @@
   }
 }
 
-.button--green {
-  background-color: $ming !important;
+.button--black {
+  background-color: $black !important;
   color: $white !important;
-  border: 2px solid $ming !important;
+  border: 2px solid $black !important;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+.button--pink {
+  background-color: $brink-pink !important;
+  color: $white !important;
+  border: 2px solid $brink-pink !important;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+.button--yellow {
+  background-color: $supernova !important;
+  color: $black !important;
+  border: 2px solid $supernova !important;
 
   &:focus,
   &:hover {
@@ -138,7 +164,7 @@
 }
 
 .button__icon--medium {
-  margin-left: space(24);
+  margin-left: space(12);
 }
 
 .button__icon--large {
@@ -201,24 +227,21 @@
 
 .button__header {
   height: auto;
-  padding: 0 space(12);
+  padding: 0 space(8);
   margin: 0 space(12);
-  border: 1px solid $deluge;
+  border: 2px solid $black;
   background-color: $white;
-  color: $deluge;
-  font-size: $font-body-m;
+  color: $black;
+  font-size: pxtorem(14px);
   font-weight: normal;
-  line-height: 40px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-top: 0;
+  line-height: 2rem;
 
   @include for-tablet-landscape-down {
     color: $black;
   }
 
   &:hover {
-    background-color: $deluge;
+    background-color: $black;
     color: $white;
     box-shadow: none;
   }
@@ -239,7 +262,7 @@
 
 .buton__burger-menu {
   background-color: transparent;
-  color: $deluge;
+  color: $brink-pink;
   font-size: $font-body-s;
   font-family: $font-primary;
   display: block;

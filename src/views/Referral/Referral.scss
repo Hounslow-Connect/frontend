@@ -77,7 +77,7 @@
   }
 
   &--back {
-    color: $elm;
+    color: $downy;
     line-height: 26px;
     padding-left: space(16) !important;
     text-decoration: underline;
@@ -99,7 +99,7 @@
 
     svg {
       font-size: $font-base;
-      color: $waikawa;
+      color: $lynch;
       margin-right: space(20) !important;
     }
 
@@ -118,7 +118,7 @@
     margin: space(24) 0 !important;
 
     &--inner {
-      background-color: $alabaster;
+      background-color: $mercury;
     }
     @include for-tablet-landscape-down {
       background-color: $white;
@@ -151,7 +151,7 @@
         margin-bottom: 0 !important;
 
         &:nth-of-type(odd) {
-          background-color: $alabaster;
+          background-color: $mercury;
         }
       }
 
@@ -169,7 +169,7 @@
       @include for-tablet-landscape-down {
         font-family: $font-primary;
         font-size: $font-base;
-        color: $waikawa;
+        color: $lynch;
       }
     }
   }
@@ -193,7 +193,7 @@
   }
 
   &--active {
-    background-color: $hawkes-blue;
+    background-color: $iceberg;
 
     svg {
       color: $black;
@@ -233,7 +233,7 @@
 }
 
 .referral__step-container {
-  background-color: $alabaster;
+  background-color: $mercury;
   margin: space(24) 0 !important;
   padding: space(32);
 
@@ -244,7 +244,7 @@
   }
 
   &--steps {
-    color: $waikawa;
+    color: $lynch;
     margin-bottom: space(6);
   }
 
@@ -306,7 +306,7 @@
 
     @include for-tablet-landscape-up {
       box-sizing: border-box;
-      border-left: 2px solid $nobel;
+      border-left: 2px solid $gray;
     }
 
     .flex-col {
@@ -321,7 +321,7 @@
 
     &--toggle {
       font-size: pxtorem(18px);
-      color: $elm;
+      color: $downy;
       text-decoration: underline;
 
       &--open {
@@ -342,7 +342,7 @@
 .referral__terms {
   a {
     @include body-s;
-    color: $elm;
+    color: $downy;
     cursor: pointer;
   }
 
@@ -376,7 +376,7 @@
   }
 
   &--info {
-    background-color: $alabaster;
+    background-color: $mercury;
     padding: space(48) space(60) !important;
     margin-top: space(48);
 
@@ -396,11 +396,11 @@
 
   img {
     height: 100px;
-    border: 4px solid $waikawa;
+    border: 4px solid $lynch;
   }
 
   a {
-    color: $elm;
+    color: $downy;
   }
 
   h1 {

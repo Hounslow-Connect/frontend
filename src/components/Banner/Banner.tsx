@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import './Banner.scss';
 import { IBanner } from '../../types/types';
 import ButtonLink from '../Button/ButtonLink';
-import { apiBase } from '../../config/api';
+// import { apiBase } from '../../config/api';
 
 interface IProps {
   banner: IBanner;
@@ -24,7 +24,7 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
           {banner.has_image && (
             <div>
               <div className="banner__image">
-                <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" />
+                {/* <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" /> */}
               </div>
             </div>
           )}

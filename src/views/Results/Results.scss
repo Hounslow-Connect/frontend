@@ -32,7 +32,7 @@
 }
 
 .results__search-box {
-  background-color: $deluge;
+  background-color: $brink-pink;
   color: $white;
   position: relative;
 
@@ -75,7 +75,7 @@
 }
 
 .pagination--text-nav-container {
-  background: $alabaster;
+  background: $mercury;
   padding: space(10);
 }
 
@@ -83,7 +83,7 @@
   text-decoration: none;
 
   span {
-    color: $elm;
+    color: $downy;
   }
 
   &:hover {
@@ -96,7 +96,7 @@
 }
 
 .pagination--text-number-link {
-  color: $waikawa;
+  color: $lynch;
   text-decoration: none;
 }
 
@@ -319,9 +319,9 @@
 }
 
 .results__keyword-edit-toggle {
-  color: $elm;
+  color: $downy;
   font-size: pxtorem(16px);
-  border-bottom: 2px solid $elm;
+  border-bottom: 2px solid $downy;
 }
 
 .results__keyword-edit-input {
