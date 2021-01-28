@@ -3,8 +3,7 @@
 @import '../../styles/breakpoints.scss';
 
 .breadcrumb {
-  background-color: $mercury;
-  padding: space(16) 0;
+  padding: space(8) 0;
 
   > .flex-container {
     max-width: 1260px;

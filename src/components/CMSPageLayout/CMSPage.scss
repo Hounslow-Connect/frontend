@@ -9,7 +9,7 @@
   &--contact-card {
     position: relative;
     padding: space(12) space(24);
-    background-color: $mercury;
+    background-color: $bermuda;
     text-overflow: ellipsis;
     margin-left: space(16);
 
@@ -20,13 +20,13 @@
     &::after {
       content: "";
       position: absolute;
-      bottom: -16px;
+      bottom: -24px;
       right: space(32);
       width: 0; 
       height: 0; 
-      border-left: 16px solid transparent;
-      border-right: 16px solid transparent;
-      border-top: 16px solid $white;
+      border-left: 24px solid transparent;
+      border-right: 24px solid transparent;
+      border-top: 24px solid $bermuda;
     }
 
     &--row {
@@ -57,7 +57,7 @@
 }
 
 .cms__header {
-  background-color: $brink-pink;
+  background-color: $bright-sun;
   position: relative;
   padding: space(16) 0;
 
@@ -88,7 +88,6 @@
 
   &--title {
     font-size: pxtorem(32px);
-    color: $white;
 
     @include for-phone-only {
       font-size: $font-heading-mobile-l;
@@ -97,8 +96,7 @@
 }
 
 .cms__content {
-  padding: space(64) 0;
-  background-color: $mercury;
+  padding: space(32) 0;
 
   > .flex-container {
     max-width: 1260px;
@@ -114,10 +112,6 @@
     word-break: break-word;
     margin-bottom: space(16);
     line-height: 1.75rem;
-  }
-
-  a {
-    color: $brink-pink;
   }
 
   li p {
