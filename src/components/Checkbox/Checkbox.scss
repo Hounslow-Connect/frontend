@@ -10,9 +10,10 @@
 
   input[type='checkbox'] + label {
     @include body-m;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     margin-bottom: 0;
-    color: $lynch;
 
     svg {
       display: none;
@@ -37,7 +38,7 @@
     display: inline-block;
     width: 35px;
     height: 35px;
-    margin-right: 8px;
+    margin-right: space(12);
     vertical-align: middle;
     cursor: pointer;
     background-color: transparent;

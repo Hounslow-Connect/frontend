@@ -80,11 +80,13 @@ class Results extends Component<IProps> {
             <div className="flex-col flex-col--12 results__container-count">
               {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>
-                  {resultsStore.view === 'grid'
-                    ? `${
-                        resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
-                      } services found`
-                    : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
+                  <strong>
+                    {resultsStore.view === 'grid'
+                      ? `${
+                          resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
+                        } services found`
+                      : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
+                  </strong>
                 </p>
               )}
             </div>
