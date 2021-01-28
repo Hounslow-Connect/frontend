@@ -55,7 +55,7 @@
 .view-filter--header--light {
   @include body-m;
   margin-bottom: 0;
-  color: $san-juan;
+  color: $black;
   margin-right: space(10);
 
   @include for-tablet-landscape-up {

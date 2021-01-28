@@ -13,7 +13,7 @@
 }
 
 .referral {
-  color: $san-juan;
+  color: $black;
   max-width: 1260px;
 
   @include for-tablet-landscape-down {
@@ -52,7 +52,7 @@
     }
 
     &--name {
-      font-family: $font-secondary;
+      font-family: $font-primary;
     }
   }
 
@@ -90,7 +90,7 @@
 
   &--step {
     margin: space(20) 0;
-    color: $san-juan;
+    color: $black;
   }
 
   &--form-time {
@@ -114,7 +114,7 @@
 
   &--intro {
     padding: space(32);
-    color: $san-juan;
+    color: $black;
     margin: space(24) 0 !important;
 
     &--inner {
@@ -127,7 +127,7 @@
 
     &--heading {
       @include for-tablet-landscape-down {
-        font-family: $font-secondary;
+        font-family: $font-primary;
         margin-bottom: space(8);
       }
     }
@@ -164,7 +164,7 @@
 
     &--description {
       font-size: $font-body-l;
-      font-family: $font-secondary;
+      font-family: $font-primary;
 
       @include for-tablet-landscape-down {
         font-family: $font-primary;
@@ -176,7 +176,7 @@
 }
 
 .referral__button {
-  border: 2px solid $san-juan;
+  border: 2px solid $black;
   padding: space(16) !important;
   margin-bottom: space(12) !important;
   background-color: $white;
@@ -196,7 +196,7 @@
     background-color: $hawkes-blue;
 
     svg {
-      color: $san-juan;
+      color: $black;
     }
   }
 
@@ -274,7 +274,7 @@
 
   &--question {
     padding: 0 space(16);
-    font-family: $font-secondary;
+    font-family: $font-primary;
 
     @include for-tablet-landscape-up {
       font-size: $font-heading-m;
@@ -283,7 +283,7 @@
 
     &--large {
       font-size: $font-body-l;
-      font-family: $font-secondary;
+      font-family: $font-primary;
     }
   }
 
@@ -294,7 +294,7 @@
   &--text-area {
     @include body-m;
 
-    border: 2px solid $san-juan;
+    border: 2px solid $black;
     resize: none;
     height: pxtorem(100px);
     padding: space(12) !important;
@@ -362,13 +362,13 @@
     margin: space(20) 0;
 
     label {
-      color: $san-juan !important;
+      color: $black !important;
     }
   }
 }
 
 .referral__confirmation {
-  color: $san-juan;
+  color: $black;
   max-width: pxtorem(1000px);
 
   @include for-phone-only {

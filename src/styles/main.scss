@@ -17,7 +17,7 @@ html {
 }
 
 h1 {
-  @include heading-l;
+  @include heading-xl;
 }
 
 h2 {
@@ -38,7 +38,6 @@ a,
 button,
 p {
   @include body-m;
-  color: inherit;
 }
 
 .body {
@@ -160,7 +159,7 @@ button {
     font-size: pxtorem(18px);
 
     @include for-tablet-landscape-down {
-      color: $san-juan;
+      color: $black;
     }
   }
 
@@ -171,7 +170,7 @@ button {
     color: $deluge;
 
     @include for-tablet-landscape-down {
-      color: $san-juan;
+      color: $black;
     }
   }
 }

@@ -5,8 +5,8 @@
 
 .search-result-card {
   background-color: $white;
-  border: 2px solid $san-juan;
-  color: $san-juan;
+  border: 2px solid $black;
+  color: $black;
   margin: space(8);
   height: max-content;
   cursor: pointer;
@@ -95,7 +95,7 @@
 }
 
 .search-result-card__tag--service {
-  background-color: $san-juan;
+  background-color: $black;
 }
 
 .search-result-card__tag--group {
@@ -152,7 +152,7 @@
 }
 
 .search-result-card__footer {
-  background-color: $san-juan;
+  background-color: $black;
   padding: space(16);
   color: $white;
   text-align: center;

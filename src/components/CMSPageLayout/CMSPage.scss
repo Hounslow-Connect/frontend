@@ -3,7 +3,7 @@
 @import '../../styles/colors.scss';
 
 .cms {
-  color: $san-juan;
+  color: $black;
   font-family: $font-primary;
 
   &--contact-card {
@@ -110,7 +110,7 @@
 
   p {
     @include body-m;
-    color: $san-juan;
+    color: $black;
     word-break: break-word;
     margin-bottom: space(16);
     line-height: 1.75rem;

@@ -9,18 +9,18 @@
   margin: 0 space(8) !important;
 
   h3 {
-    color: $san-juan;
+    color: $black;
   }
 
   p {
     @include body-s;
-    color: $san-juan;
+    color: $black;
     margin: space(8) 0;
   }
 
   a {
     @include body-s;
-    color: $san-juan;
+    color: $black;
   }
 
   &--container {

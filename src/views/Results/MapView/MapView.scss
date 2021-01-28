@@ -34,14 +34,14 @@
 }
 
 .map__key--heading {
-  color: $san-juan;
+  color: $black;
   margin-left: space(16);
   margin-bottom: space(12);
 }
 
 .map__key--description {
-  color: $san-juan;
-  font-family: $font-secondary;
+  color: $black;
+  font-family: $font-primary;
 }
 
 .map__key {
@@ -61,7 +61,7 @@
 }
 
 .map__key-icon--service {
-  color: $san-juan;
+  color: $black;
 }
 
 .map__key-icon--activity {

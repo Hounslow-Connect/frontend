@@ -8,7 +8,7 @@
   overflow: hidden;
   padding-bottom: space(16);
   background: $white;
-  color: $san-juan;
+  color: $black;
   text-align: right;
 
   &--grey {
@@ -131,7 +131,7 @@
 
     @include for-tablet-landscape-down {
       button {
-        color: $san-juan;
+        color: $black;
 
         svg {
           margin-left: 6px;
@@ -206,10 +206,10 @@
 
       a {
         display: block;
-        color: $san-juan;
+        color: $black;
         margin-bottom: space(32);
         font-size: pxtorem(20px);
-        font-family: $font-secondary;
+        font-family: $font-primary;
         cursor: pointer;
         text-decoration: none;
         text-align: left;

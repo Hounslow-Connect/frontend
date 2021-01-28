@@ -21,7 +21,8 @@
 }
 
 .button {
-  background-color: $san-juan;
+  font-weight: 400;
+  background-color: $black;
   color: $white;
   border: none;
   box-sizing: border-box;
@@ -85,8 +86,8 @@
 
 .button--light {
   background-color: $white;
-  color: $san-juan;
-  border: 2px solid $san-juan;
+  color: $black;
+  border: 2px solid $black;
 }
 
 .button--disabled {
@@ -148,11 +149,11 @@
   font-size: inherit;
   background-color: $white;
   color: inherit;
-  border: 2px solid $san-juan;
+  border: 2px solid $black;
 
   &:hover {
     cursor: pointer;
-    background-color: $san-juan;
+    background-color: $black;
     color: $white;
   }
 
@@ -213,7 +214,7 @@
   border-top: 0;
 
   @include for-tablet-landscape-down {
-    color: $san-juan;
+    color: $black;
   }
 
   &:hover {

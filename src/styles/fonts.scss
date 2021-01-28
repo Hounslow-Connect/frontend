@@ -1,9 +1,9 @@
 @import './mixins.scss';
 @import './breakpoints.scss';
 
-$font-primary: 'Museo Sans 500', sans-serif;
-$font-secondary: 'Museo Sans 700', sans-serif;
-$font-tertiary: 'Skippy Sharpie';
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;900&display=swap');
+
+$font-primary: 'Nunito Sans', sans-serif;
 
 $font-base: pxtorem(16px);
 
@@ -37,45 +37,11 @@ $font-breadcrumb-mobile: pxtorem(10px);
 
 $font-link-medium: $font-base;
 
-@font-face {
-  font-family: 'Museo Sans 500';
-  src: url('../assets/fonts/museosans_500.woff2') format('woff2'),
-    url('../assets/fonts/museosans_500.woff') format('woff'),
-    url('../assets/fonts/museosans_500.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Museo Sans 500 Italic';
-  src: url('../assets/fonts/museosans_500_italic.woff2') format('woff2'),
-    url('../assets/fonts/museosans_500_italic.woff') format('woff'),
-    url('../assets/fonts/museosans_500_italic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Museo Sans 700';
-  src: url('../assets/fonts/museosans-700.woff2') format('woff2'),
-    url('../assets/fonts/museosans-700.woff') format('woff'),
-    url('../assets/fonts/museosans-700.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Museo Sans 700 Italic';
-  src: url('../assets/fonts/museosans-700-italic.woff2') format('woff2'),
-    url('../assets/fonts/museosans-700-italic.woff') format('woff'),
-    url('../assets/fonts/museosans-700-italic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Skippy Sharpie';
-  src: url('../assets/fonts/skippy_sharpie_regular.woff2') format('woff2'),
-    url('../assets/fonts/skippy_sharpie_regular.woff') format('woff'),
-    url('../assets/fonts/skippy_sharpie_regular.ttf') format('truetype');
-}
-
 /* Headings */
 @mixin heading-xl {
   font-size: $font-heading-xl;
-  font-family: $font-secondary;
+  font-family: $font-primary;
+  font-weight: 900;
   line-height: 1.2;
 
   @include for-phone-only {
@@ -86,7 +52,8 @@ $font-link-medium: $font-base;
 
 @mixin heading-l {
   font-size: $font-heading-l;
-  font-family: $font-secondary;
+  font-family: $font-primary;
+  font-weight: 900;
   line-height: 1.17;
 
   @include for-phone-only {
@@ -97,7 +64,8 @@ $font-link-medium: $font-base;
 
 @mixin heading-m {
   font-size: $font-heading-m;
-  font-family: $font-secondary;
+  font-family: $font-primary;
+  font-weight: 900;
   line-height: 1.14;
 
   @include for-phone-only {
@@ -107,12 +75,14 @@ $font-link-medium: $font-base;
 
 @mixin heading-s {
   font-size: $font-heading-s;
-  font-family: $font-secondary;
+  font-family: $font-primary;
+  font-weight: 900;
   line-height: 1.22;
 }
 
 @mixin heading-s-regular {
-  font-family: $font-secondary;
+  font-family: $font-primary;
+  font-weight: 400;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-s;
@@ -123,7 +93,7 @@ $font-link-medium: $font-base;
 @mixin heading-s-light {
   font-size: $font-heading-s;
   font-family: $font-primary;
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1.22;
 }
 
@@ -143,7 +113,7 @@ $font-link-medium: $font-base;
 @mixin body-m {
   font-size: $font-body-m;
   font-family: $font-primary;
-  line-height: 1.22;
+  line-height: 1.5rem;
 
   @include for-phone-only {
     font-size: $font-body-mobile-m;
@@ -199,7 +169,7 @@ $font-link-medium: $font-base;
 
 @mixin body-alt {
   font-size: $font-body-alt;
-  font-family: $font-tertiary;
+  font-family: $font-primary;
   line-height: 1;
 
   @include for-phone-only {
@@ -210,17 +180,18 @@ $font-link-medium: $font-base;
 @mixin link-header {
   font-size: $font-body-m;
   font-family: $font-primary;
+  font-weight: 900;
 }
 
 @mixin link-large {
   font-size: $font-heading-m;
-  font-family: $font-secondary;
+  font-family: $font-primary;
   display: block;
 }
 
 @mixin link-medium {
   font-size: $font-link-medium;
-  font-family: $font-secondary;
+  font-family: $font-primary;
 }
 
 @mixin breadcrumb {

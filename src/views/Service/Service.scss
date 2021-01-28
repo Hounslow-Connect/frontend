@@ -128,14 +128,14 @@
   @include body-s;
 
   span {
-    font-family: $font-secondary;
+    font-family: $font-primary;
     margin-left: space(8);
   }
 }
 
 .service__info {
   padding-top: space(32) !important;
-  color: $san-juan;
+  color: $black;
   max-width: 1260px;
 
   @include for-phone-only {
@@ -165,7 +165,7 @@
 }
 
 .service__info__cost--header {
-  font-family: $font-secondary;
+  font-family: $font-primary;
 }
 
 .service__info__cost--sub-heading {
@@ -183,7 +183,7 @@
 
 .service__info__cost--right {
   margin-left: space(32);
-  color: $san-juan;
+  color: $black;
 }
 
 .react-player__preview {
@@ -244,7 +244,7 @@
     p {
       @include body-l;
       margin-bottom: space(40);
-      color: $san-juan;
+      color: $black;
     }
   }
 
@@ -391,7 +391,7 @@
   &--mobile {
     background-image: none;
     background-color: $white;
-    border: 1px solid $san-juan;
+    border: 1px solid $black;
     padding: space(16) space(24) space(24) !important;
 
     svg {
@@ -401,7 +401,7 @@
   }
 
   p {
-    font-family: $font-tertiary;
+    font-family: $font-primary;
     font-size: pxtorem(30px);
     padding: space(8);
   }
@@ -537,7 +537,7 @@
 
     svg {
       margin-right: space(8);
-      color: $san-juan;
+      color: $black;
     }
   }
 }
@@ -579,7 +579,7 @@
 
 .service__offerings {
   @include body-m;
-  font-family: $font-secondary;
+  font-family: $font-primary;
   margin-top: space(24);
   margin-bottom: space(40) !important;
 

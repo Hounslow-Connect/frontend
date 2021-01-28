@@ -18,13 +18,13 @@
   justify-content: center;
   max-width: 1260px;
   margin: 0 auto;
-  color: $san-juan;
+  color: $black;
 }
 
 .results__container-count {
   display: flex;
   justify-content: flex-start;
-  color: $san-juan;
+  color: $black;
 
   @include for-tablet-landscape-down {
     justify-content: center;
@@ -159,7 +159,7 @@
 
 .results__sort-by-label {
   @include body-m;
-  color: $san-juan;
+  color: $black;
 }
 
 .results__sort-by {
@@ -219,7 +219,7 @@
 .category__info {
   position: relative;
   width: 100%;
-  color: $san-juan;
+  color: $black;
   @include search-container;
 
   @include for-tablet-landscape-up {
