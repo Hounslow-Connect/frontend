@@ -44,11 +44,12 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
           <div className="flex-container flex-container--no-padding">
             <div className="flex-col flex-col--5 flex-col--mobile--7">
               <h4>Get in touch with <br/><span className="pink">One</span> Hounslow Connect</h4>
-              <nav className="footer__social-links" role="menubar" aria-label="Social Media Links">
+              <nav className="footer__social-links" role="menu" aria-label="Social Media Links">
                 <a
                   href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  role="menuitem"
                   aria-label="Link to Hounslow Connect Facebook"
                 >
                   <FontAwesomeIcon icon={['fab', 'facebook-f']} className="footer__social-icons" />
@@ -57,6 +58,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                   href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  role="menuitem"
                   aria-label="Link to Hounslow Connect Twitter"
                 >
                   <FontAwesomeIcon icon={['fab', 'twitter']} className="footer__social-icons" />

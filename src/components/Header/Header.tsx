@@ -114,7 +114,7 @@ class Header extends Component<IProps> {
                 className="flex-col flex-col--12 flex-col--tablet-large--12 header__navigation tablet--large-hide medium-hide"
                 role="navigation"
               >
-                <nav className="nav nav--primary" role="menubar" aria-label="Primary Navigation">
+                <nav className="nav nav--primary" role="navigation" aria-label="Primary Navigation">
                   <RouterLink
                     exact={true}
                     to="/"
