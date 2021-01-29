@@ -23,17 +23,17 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
       </div>
       <div className="flex-col flex-col--3 flex-col--mobile--10 flex-col--tablet--8 flex-col--tablet-large--4">
         <div className="cms--contact-card">
-          <h3>Contact</h3>
+          <h2>Contact</h2>
           <div className="cms--contact-card--row">
-            <h4>
+            <h3>
               <FontAwesomeIcon icon="phone" /> Telephone
-            </h4>
+            </h3>
             <p>{get(cmsStore, 'global.contact_phone')}</p>
           </div>
           <div className="cms--contact-card--row">
-            <h4>
+            <h3>
               <FontAwesomeIcon icon="envelope" /> Email
-            </h4>
+            </h3>
             <a
               className="cms--contact-card--email"
               href={`mailto:${get(cmsStore, 'global.contact_email')}`}
