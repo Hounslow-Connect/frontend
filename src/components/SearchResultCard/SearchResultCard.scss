@@ -4,11 +4,11 @@
 @import '../../styles/fonts.scss';
 
 .search-result-card {
-  background-color: $white;
-  border: 2px solid $black;
-  color: $black;
+  display: flex;
+  flex-wrap: wrap;
   margin: space(8);
-  height: max-content;
+  background-color: $kournikova;
+  color: $black;
   cursor: pointer;
 
   &:hover {
@@ -48,6 +48,7 @@
 .search-result-card__logo {
   width: pxtorem(65px);
   height: pxtorem(65px);
+  background-color: $white;
   border: 1px solid $gray;
 
   &:before {
@@ -140,6 +141,7 @@
 }
 
 .search-result-card__intro {
+  align-self: flex-start;
   padding: 0 space(16) space(16);
 
   @include for-phone-only {
@@ -148,8 +150,10 @@
 }
 
 .search-result-card__footer {
-  background-color: $black;
+  flex: 0 0 100%;
+  align-self: flex-end;
   padding: space(12);
+  background-color: $black;
   text-align: center;
 
   a {

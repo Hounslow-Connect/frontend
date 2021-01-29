@@ -85,6 +85,10 @@
   @include for-tablet-portrait-down {
     padding: space(12) 0;
   }
+
+  h4 .pink {
+    color: $brink-pink;
+  }
 }
 
 .footer-contact-links {
