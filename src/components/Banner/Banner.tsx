@@ -12,7 +12,6 @@ interface IProps {
 
 const Banner: FunctionComponent<IProps> = ({ banner }) => (
   <div className="flex-col--12 banner">
-    {console.log(banner)}
     <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
       <div className="flex-col--12 banner__container">
         <div className="flex-container flex-container--no-padding">
