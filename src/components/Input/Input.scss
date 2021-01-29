@@ -6,8 +6,7 @@
   @include body-m;
   width: 400px;
   border: 2px solid $black;
-  height: pxtorem(50px);
-  padding: space(12) space(16);
+  padding: space(8) space(12);
   color: $black;
 
   &--container {

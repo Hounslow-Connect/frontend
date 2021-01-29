@@ -132,8 +132,20 @@
   }
 
   &--location {
-    @include heading-s;
+    display: flex;
+    align-items: center;
     margin: space(12) 0;
+    font-size: pxtorem(14px);
+    font-weight: 900;
+
+    p {
+      font-size: pxtorem(14px);
+      line-height: pxtorem(14px);
+    }
+
+    svg {
+      margin-right: space(8);
+    }
   }
 
   &--button-row {

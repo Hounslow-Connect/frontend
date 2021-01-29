@@ -85,9 +85,16 @@
   @include for-tablet-portrait-down {
     padding: space(12) 0;
   }
+}
 
-  h4 .pink {
-    color: $brink-pink;
+.footer__heading {
+  @include heading-s;
+
+  .pink {
+    display: inline-block;
+    margin-top: 2px;
+    padding: 2px 4px;
+    background-color: $brink-pink;
   }
 }
 

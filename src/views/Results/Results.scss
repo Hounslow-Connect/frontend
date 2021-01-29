@@ -9,6 +9,7 @@
 
 .results__list {
   background-color: $mercury;
+  padding-top: space(40);
   padding-bottom: space(40);
 }
 
@@ -23,11 +24,6 @@
 
 .results__container-count {
   display: flex;
-  justify-content: center;
-
-  @include for-tablet-landscape-down {
-    justify-content: center;
-  }
 }
 
 .results__search-box {
@@ -68,7 +64,6 @@
 
 .results__search-filter-location {
   width: 100%;
-  margin-top: space(8);
 }
 
 .pagnation__container {
@@ -116,38 +111,17 @@
 }
 
 .results__filters {
-  @include for-tablet-landscape-up {
-    @include search-container();
-
-    padding: space(20) !important;
-    align-items: flex-end;
-  }
-
-  @include for-tablet-portrait-down {
-    padding: 0 !important;
-  }
-
-  @include for-desktop-up {
-    padding: space(20) space(32) !important;
-  }
+  @include search-container();
+  padding: space(16) !important;
 }
 
 .results__keyword-filters--heading {
+  display: block;
+  margin-bottom: space(8);
   font-weight: normal;
   font-family: $font-primary;
   font-size: $font-heading-s;
-  margin-bottom: space(10);
-
-  @include for-phone-only {
-    margin-bottom: space(8);
-  }
-}
-
-.results__keyword-filters--heading--cost {
-  font-weight: normal;
-  font-family: $font-primary;
-  font-size: $font-heading-s;
-  margin-bottom: space(16);
+  line-height: $font-heading-s;
 }
 
 .results__filter-bar {
@@ -208,6 +182,7 @@
 
 .results__amend {
   button {
+    float: right;
     font-size: pxtorem(22px);
     padding: 0 space(20) !important;
   }
@@ -283,8 +258,7 @@
 
 .results__keyword-input-box {
   @include search-container;
-  padding: space(32);
-  margin-right: space(32);
+  padding: space(16);
 
   @include for-tablet-portrait-down {
     padding: 0;

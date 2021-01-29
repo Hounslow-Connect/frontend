@@ -71,34 +71,19 @@
 }
 
 .search-result-card__tag {
-  @include body-xs;
-  line-height: 0.875rem;
   display: flex;
   align-items: center;
-  padding: 6px;
-  color: $white;
   width: max-content;
+  padding: 6px;
   margin-top: space(16);
+  @include body-xs;
+  line-height: 0.875rem;
+  background-color: $black;
+  color: $white;
 
   @include for-phone-only {
     margin: 0 0 space(16);
   }
-}
-
-.search-result-card__tag--activity {
-  background-color: $brink-pink;
-}
-
-.search-result-card__tag--club {
-  background-color: $lynch;
-}
-
-.search-result-card__tag--service {
-  background-color: $black;
-}
-
-.search-result-card__tag--group {
-  background-color: $downy;
 }
 
 .search-result-card__tag--icon {
@@ -107,7 +92,6 @@
 
 .search-result-card__tag--cost {
   margin: 0 space(8);
-  vertical-align: middle;
 }
 
 .search-result-card__tag--cost--free {

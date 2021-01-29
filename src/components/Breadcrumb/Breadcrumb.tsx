@@ -20,9 +20,11 @@ const Breadcrumb: FunctionComponent<IProps> = ({ crumbs }) => (
         {crumbs.map((crumb: ICrumb, i: number) => (
           <Fragment key={crumb.text}>
             {crumb.url ? (
-              <Link to={crumb.url}>
-                <li>{crumb.text}</li>
-              </Link>
+              <li>
+                <Link to={crumb.url}>
+                  {crumb.text}
+                </Link>
+              </li>
             ) : (
               <li className="breadcrumb--active">{crumb.text}</li>
             )}

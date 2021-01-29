@@ -25,13 +25,13 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
   >
     {service.url && (
       <div className={cx('flex-col flex-col--12 service__accordian--no-overflow')}>
-        <h4
+        <h3
           className={cx({
             'service__contact-card--row': !accordian,
           })}
         >
           <FontAwesomeIcon icon="globe" /> Website
-        </h4>
+        </h3>
         <a
           href={service.url}
           target="_blank"
@@ -44,25 +44,25 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
     )}
     {service.contact_phone && (
       <div className="flex-col flex-col--12 service__accordian--no-overflow">
-        <h4
+        <h3
           className={cx({
             'service__contact-card--row': !accordian,
           })}
         >
           <FontAwesomeIcon icon="phone" /> Telephone
-        </h4>
+        </h3>
         <a href={`tel:${service.contact_phone}`}>{service.contact_phone}</a>
       </div>
     )}
     {service.contact_email && (
       <div className="flex-col flex-col--12 service__accordian--no-overflow">
-        <h4
+        <h3
           className={cx({
             'service__contact-card--row': !accordian,
           })}
         >
           <FontAwesomeIcon icon="envelope" /> Email
-        </h4>
+        </h3>
         <a
           href={`mailto:${service.contact_email}`}
           target="_blank"

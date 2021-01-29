@@ -295,7 +295,7 @@
     padding: 0;
     width: 100%;
 
-    h4 {
+    h3 {
       display: inline;
     }
   }
@@ -488,7 +488,7 @@
   }
 
   &--accordian {
-    h4 {
+    h3 {
       margin-bottom: space(8);
     }
 
@@ -505,7 +505,7 @@
     }
   }
 
-  h4 {
+  h3 {
     margin-bottom: space(8);
   }
 
@@ -522,7 +522,7 @@
   background-color: $mercury;
   text-align: center;
 
-  h4 {
+  h3 {
     display: inline;
     margin-right: space(16);
     font-weight: 900;

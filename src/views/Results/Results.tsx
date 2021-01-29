@@ -76,8 +76,8 @@ class Results extends Component<IProps> {
               </div>
             </div>
           )}
-          <div className="flex-container flex-container results__filter-bar">
-            <div className="flex-col flex-col--12 results__container-count">
+          <div className="flex-container flex-container--wrap results__filter-bar">
+            <div className="flex-col flex-col--6 results__container-count">
               {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>
                   <strong>
@@ -91,7 +91,7 @@ class Results extends Component<IProps> {
               )}
             </div>
             {resultsStore.isKeywordSearch && (
-              <div className="flex-col flex-col--8 flex-col--tablet-large--12 flex-col--medium--12 flex-container--tablet--12">
+              <div className="flex-col flex-col--6">
                 <div
                   className={cx(
                     'flex-container flex-container--align-center results__keyword-container',

@@ -30,7 +30,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
     >
       <div className="flex-container footer--inner-container">
         <div className="flex-col flex-col--5 flex-col--tablet--12">
-          <h4>{get(cmsStore, 'global.footer_title')}</h4>
+          <p className="footer__heading">{get(cmsStore, 'global.footer_title')}</p>
           <ReactMarkdown
             className="body--xs footer__content"
             source={get(cmsStore, 'global.footer_content')}
@@ -43,7 +43,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
         <div className="flex-col flex-col--6 flex-col--tablet--12 footer__section">
           <div className="flex-container flex-container--no-padding">
             <div className="flex-col flex-col--5 flex-col--mobile--7">
-              <h4>Get in touch with <br/><span className="pink">One</span> Hounslow Connect</h4>
+              <p className="footer__heading">Get in touch with <br/><span className="pink">One</span> Hounslow Connect</p>
               <nav className="footer__social-links" role="menu" aria-label="Social Media Links">
                 <a
                   href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
