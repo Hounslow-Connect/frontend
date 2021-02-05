@@ -8,17 +8,16 @@ select,
   @include body-m;
   width: 100%;
   max-width: 320px;
+  position: relative;
+  padding: space(12);
+  padding-right: space(40);
   border: 2px solid $lynch;
   box-shadow: none;
   background-image: url('../../assets/images/icons/icon-cheveron-selection.svg');
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) 5px;
-  color: $black;
-  appearance: none;
-  padding: space(12);
-  padding-right: space(40);
-
   background-color: $white;
-  position: relative;
   background-size: pxtorem(35px);
+  color: $black;
+  -webkit-appearance: none;
 }

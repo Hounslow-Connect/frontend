@@ -8,7 +8,7 @@
 
   &--contact-card {
     position: relative;
-    padding: space(12) space(24);
+    padding: space(16);
     background-color: $bermuda;
     text-overflow: ellipsis;
     margin-left: space(16);
@@ -34,7 +34,12 @@
     }
 
     &--socials {
-      text-align: center;
+      margin-top: space(16);
+
+      .service__social-icon {
+        margin-left: 0;
+        margin-right: space(16);
+      }
     }
 
     h3 {

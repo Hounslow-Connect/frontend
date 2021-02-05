@@ -41,10 +41,6 @@
     margin-top: space(12);
   }
 
-  a {
-    color: $downy;
-  }
-
   @include for-phone-only {
     max-width: 100%;
     height: 100vh;

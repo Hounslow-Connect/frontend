@@ -29,7 +29,6 @@
     height: 100%;
     z-index: 999;
     overflow: auto;
-    background-color: $iceberg;
   }
 
   .flex-container {
@@ -61,8 +60,7 @@
       }
 
       @include for-small-phone {
-        margin: 0;
-        justify-content: center;
+        flex: 0 0 auto;
 
         &:last-of-type {
           margin: 0;
@@ -79,22 +77,6 @@
     &--favourite {
       @include for-tablet-portrait-down {
         text-align: center;
-      }
-    }
-
-    &--iceberg {
-      @include for-phone-only {
-        background-color: $iceberg;
-      }
-
-      @include for-phone-only {
-        button {
-          border: none;
-        }
-
-        .goog-te-gadget-simple {
-          border: none !important;
-        }
       }
     }
 
@@ -125,7 +107,7 @@
     z-index: 1;
 
     @include for-tablet-landscape-down {
-      padding: space(12) space(24) !important;
+      padding: space(16) space(24) !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -158,7 +140,7 @@
     }
 
     @include for-phone-only {
-      padding: space(12) !important;
+      padding: space(12) 0 !important;
 
       &--active {
         padding-bottom: space(48) !important;
@@ -207,6 +189,10 @@
     img {
       width: 240px;
       height: auto;
+
+      @include for-phone-only {
+        width: 90px;
+      }
     }
   }
 
@@ -278,6 +264,10 @@
   background-color: $mercury;
   padding: space(8) 0;
   margin-bottom: space(24);
+
+  @include for-tablet-portrait-down {
+    margin-bottom: 0;
+  }
 }
 
 .header__content {
@@ -286,7 +276,6 @@
     width: 100%;
     background-repeat: no-repeat;
     background-size: 110% 100%;
-    background-color: $iceberg;
 
     &--active {
       margin-bottom: 0 !important;

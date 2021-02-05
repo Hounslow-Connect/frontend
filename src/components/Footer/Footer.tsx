@@ -42,7 +42,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
         </div>
         <div className="flex-col flex-col--6 flex-col--tablet--12 footer__section">
           <div className="flex-container flex-container--no-padding">
-            <div className="flex-col flex-col--5 flex-col--mobile--7">
+            <div className="flex-col flex-col--5 flex-col--mobile--12">
               <p className="footer__heading">Get in touch with <br/><span className="pink">One</span> Hounslow Connect</p>
               <nav className="footer__social-links" role="menu" aria-label="Social Media Links">
                 <a

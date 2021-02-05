@@ -20,14 +20,14 @@ const PersonasCard: React.FunctionComponent<IProps> = ({ persona, action, window
     tabIndex={0}
   >
     <div className="flex-container flex-container--mobile-no-padding flex-container--align-center">
-      <div className="flex-col--12 flex-col--mobile--4 card__image">
+      <div className="flex-col--12 card__image">
         <img
           src={`${apiBase}/collections/personas/${persona.id}/image.png?max_dimension=300`}
           alt={`Services relating to ${persona.name}`}
           className="image"
         />
       </div>
-      <div className="flex-col--12 flex-col--mobile--8 card__description">
+      <div className="flex-col--12 card__description">
         <h3 className="card__header">{persona.name}</h3>
         <p className="mobile-hide">{persona.intro}</p>
       </div>

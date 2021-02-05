@@ -10,6 +10,7 @@
   margin-bottom: space(40);
 
   @include for-tablet-portrait-down {
+    margin-top: space(32);
     margin-bottom: space(32);
   }
 

@@ -10,7 +10,7 @@
   margin-top: pxtorem(0px);
 
   @include for-phone-only {
-    padding: space(24) 0 space(64) 0;
+    padding: space(24) 0 space(24) 0;
   }
 
   &--inner-container {
@@ -83,7 +83,7 @@
   }
 
   @include for-tablet-portrait-down {
-    padding: space(12) 0;
+    padding: 0;
   }
 }
 
@@ -122,6 +122,7 @@
 
   @include for-phone-only {
     margin-top: space(32);
+    text-align: left;
   }
 }
 

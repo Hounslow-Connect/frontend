@@ -45,11 +45,14 @@
 
     @include for-phone-only {
       font-size: pxtorem(12px) !important;
-      margin-left: space(8) !important;
     }
 
     a {
       font-size: pxtorem(16px) !important;
+
+      @include for-phone-only {
+        font-size: pxtorem(12px) !important;
+      }
     }
   }
 
@@ -60,6 +63,8 @@
 
     @include for-phone-only {
       margin-left: space(8);
+      margin-right: space(8);
+      font-size: pxtorem(11px) !important;
     }
   }
 }
