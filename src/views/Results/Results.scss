@@ -76,7 +76,7 @@
   list-style: none;
 
   li {
-    margin-right: space(8);
+    margin: 0 space(8);
   }
 }
 
@@ -88,10 +88,6 @@
 .pagination--text-nav-link {
   text-decoration: none;
 
-  span {
-    color: $downy;
-  }
-
   &:hover {
     text-decoration: underline;
   }
@@ -102,7 +98,7 @@
 }
 
 .pagination--text-number-link {
-  color: $lynch;
+  color: $black;
   text-decoration: none;
 }
 
