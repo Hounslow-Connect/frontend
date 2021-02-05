@@ -11,7 +11,7 @@
   color: $black;
 
   @include for-tablet-landscape-down {
-    padding: space(64) space(24);
+    padding: space(32) space(24);
   }
 
   &--button {
@@ -43,6 +43,10 @@
   &--container {
     align-items: flex-start;
     margin-top: space(48) !important;
+
+    @include for-tablet-portrait-down {
+      margin-top: space(24) !important;
+    }
   }
 
   &--card {
@@ -52,6 +56,8 @@
     text-align: left;
 
     @include for-tablet-portrait-down {
+      width: 100%;
+      margin-bottom: space(16);
       padding: sapce(24) space(16) !important;
     }
 
