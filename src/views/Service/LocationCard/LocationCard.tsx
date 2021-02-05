@@ -50,7 +50,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
               location.has_image ? 'flex-col--8' : 'flex-col--12'
             } flex-col--mobile--8`}
           >
-            <h4>{get(location, 'location.address_line_1', '')}</h4>
+            <h3>{get(location, 'location.address_line_1', '')}</h3>
             <p className="location__address">{`${get(
               location,
               'location.address_line_2',
@@ -100,9 +100,9 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
       <div className="flex-col flex-col--6 flex-col--mobile--12">
         {!!location.regular_opening_hours.length && (
           <div className="flex-col flex-col--mobile--12 location__opening-times">
-            <h4 className="location__opening-times--header">
+            <h3 className="location__opening-times--header">
               <FontAwesomeIcon icon="clock" /> Opening hours
-            </h4>
+            </h3>
             <div className="flex-container flex-container--mobile-no-padding">
               <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
                 {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (

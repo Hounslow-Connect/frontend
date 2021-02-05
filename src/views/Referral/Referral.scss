@@ -4,8 +4,7 @@
 @import '../../styles/breakpoints.scss';
 
 @mixin greenContainer {
-  background-color: $iceberg;
-  border-radius: 19px;
+  background-color: $bermuda;
   padding: space(24) !important;
 
   @include for-tablet-landscape-down {
@@ -14,12 +13,8 @@
 }
 
 .referral {
-  color: $san-juan;
-  max-width: 1260px;
-
-  @include for-tablet-landscape-down {
-    padding-top: space(16) !important;
-  }
+  padding: space(40) 0;
+  color: $black;
 
   &--container {
     align-items: center !important;
@@ -53,7 +48,7 @@
     }
 
     &--name {
-      font-family: $font-secondary;
+      font-family: $font-primary;
     }
   }
 
@@ -64,8 +59,6 @@
       width: pxtorem(65px);
       height: pxtorem(65px);
 
-      border-radius: 9px;
-
       &:before {
         content: '';
         display: inline-block;
@@ -74,14 +67,12 @@
       }
 
       img {
-        border-radius: 9px;
         width: 100%;
       }
     }
   }
 
   &--back {
-    color: $elm;
     line-height: 26px;
     padding-left: space(16) !important;
     text-decoration: underline;
@@ -94,7 +85,7 @@
 
   &--step {
     margin: space(20) 0;
-    color: $san-juan;
+    color: $black;
   }
 
   &--form-time {
@@ -103,7 +94,6 @@
 
     svg {
       font-size: $font-base;
-      color: $waikawa;
       margin-right: space(20) !important;
     }
 
@@ -117,23 +107,21 @@
   }
 
   &--intro {
-    border-radius: 19px;
     padding: space(32);
-    color: $san-juan;
+    color: $black;
     margin: space(24) 0 !important;
 
     &--inner {
-      background-color: $alabaster;
+      background-color: $mercury;
     }
     @include for-tablet-landscape-down {
-      border-radius: 0;
       background-color: $white;
       padding: 0;
     }
 
     &--heading {
       @include for-tablet-landscape-down {
-        font-family: $font-secondary;
+        font-family: $font-primary;
         margin-bottom: space(8);
       }
     }
@@ -146,7 +134,6 @@
 
     svg {
       font-size: pxtorem(29px);
-      color: #c3c3c3;
     }
 
     &--row {
@@ -157,7 +144,7 @@
         margin-bottom: 0 !important;
 
         &:nth-of-type(odd) {
-          background-color: $alabaster;
+          background-color: $mercury;
         }
       }
 
@@ -170,20 +157,18 @@
 
     &--description {
       font-size: $font-body-l;
-      font-family: $font-secondary;
+      font-family: $font-primary;
 
       @include for-tablet-landscape-down {
         font-family: $font-primary;
         font-size: $font-base;
-        color: $waikawa;
       }
     }
   }
 }
 
 .referral__button {
-  border: 2px solid $san-juan;
-  border-radius: 9px;
+  border: 2px solid $black;
   padding: space(16) !important;
   margin-bottom: space(12) !important;
   background-color: $white;
@@ -200,10 +185,10 @@
   }
 
   &--active {
-    background-color: $hawkes-blue;
+    background-color: $bright-sun;
 
     svg {
-      color: $san-juan;
+      color: $black;
     }
   }
 
@@ -229,7 +214,6 @@
 
   svg {
     font-size: pxtorem(36px);
-    color: #c3c3c3;
     margin-bottom: space(24);
 
     @include for-tablet-landscape-down {
@@ -240,13 +224,9 @@
 }
 
 .referral__step-container {
-  background-color: $alabaster;
+  background-color: $mercury;
   margin: space(24) 0 !important;
   padding: space(32);
-
-  @include for-tablet-portrait-up {
-    border-radius: 19px;
-  }
 
   &--select {
     @include for-tablet-landscape-down {
@@ -255,7 +235,6 @@
   }
 
   &--steps {
-    color: $waikawa;
     margin-bottom: space(6);
   }
 
@@ -285,7 +264,7 @@
 
   &--question {
     padding: 0 space(16);
-    font-family: $font-secondary;
+    font-family: $font-primary;
 
     @include for-tablet-landscape-up {
       font-size: $font-heading-m;
@@ -294,7 +273,7 @@
 
     &--large {
       font-size: $font-body-l;
-      font-family: $font-secondary;
+      font-family: $font-primary;
     }
   }
 
@@ -305,7 +284,7 @@
   &--text-area {
     @include body-m;
 
-    border: 2px solid $san-juan;
+    border: 2px solid $black;
     resize: none;
     height: pxtorem(100px);
     padding: space(12) !important;
@@ -317,7 +296,7 @@
 
     @include for-tablet-landscape-up {
       box-sizing: border-box;
-      border-left: 2px solid $nobel;
+      border-left: 2px solid $gray;
     }
 
     .flex-col {
@@ -332,7 +311,6 @@
 
     &--toggle {
       font-size: pxtorem(18px);
-      color: $elm;
       text-decoration: underline;
 
       &--open {
@@ -353,7 +331,6 @@
 .referral__terms {
   a {
     @include body-s;
-    color: $elm;
     cursor: pointer;
   }
 
@@ -373,13 +350,13 @@
     margin: space(20) 0;
 
     label {
-      color: $san-juan !important;
+      color: $black !important;
     }
   }
 }
 
 .referral__confirmation {
-  color: $san-juan;
+  color: $black;
   max-width: pxtorem(1000px);
 
   @include for-phone-only {
@@ -387,8 +364,7 @@
   }
 
   &--info {
-    background-color: $alabaster;
-    border-radius: 19px;
+    background-color: $mercury;
     padding: space(48) space(60) !important;
     margin-top: space(48);
 
@@ -408,12 +384,6 @@
 
   img {
     height: 100px;
-    border-radius: 50%;
-    border: 4px solid $waikawa;
-  }
-
-  a {
-    color: $elm;
   }
 
   h1 {

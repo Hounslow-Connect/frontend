@@ -11,15 +11,13 @@
   bottom: 40px;
   background: white;
   overflow: auto;
-  border-radius: 4px;
   outline: none;
   padding: 20px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
   box-sizing: border-box;
-  border-radius: 10px;
-  color: $san-juan;
+  color: $black;
 
   .flex-container {
     padding: 0 !important;
@@ -36,20 +34,15 @@
   textarea {
     @include body-m;
     width: 100%;
-    border: 2px solid $san-juan;
+    border: 2px solid $black;
     resize: none;
     height: pxtorem(260px);
     padding: space(12) !important;
     margin-top: space(12);
   }
 
-  a {
-    color: $elm;
-  }
-
   @include for-phone-only {
     max-width: 100%;
-    border-radius: 0;
     height: 100vh;
     top: 0;
     left: 0;

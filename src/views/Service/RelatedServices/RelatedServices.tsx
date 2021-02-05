@@ -53,14 +53,14 @@ class RelatedServices extends Component<IProps, IState> {
           </div>
         </div>
 
-        <div className="flex-container flex-container--justify flex-container--mobile-no-padding related-services--container">
+        <div className="flex-container flex-container--space-between flex-container--mobile-no-padding related-services--container">
           {relatedServices.map((service: IService) => (
             <RelatedServicesCard service={service} key={service.id} />
           ))}
         </div>
         <div className="related-services--button">
           {!showMore && (
-            <Button alt={true} text="View more related services" onClick={() => this.showMore()} />
+            <Button text="View more related services" onClick={() => this.showMore()} />
           )}
         </div>
       </section>

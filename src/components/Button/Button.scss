@@ -21,11 +21,9 @@
 }
 
 .button {
-  background-color: $san-juan;
+  font-weight: 400;
+  background-color: $black;
   color: $white;
-  font-size: pxtorem(22px);
-  line-height: 1.15;
-  border-radius: 10px;
   border: none;
   box-sizing: border-box;
 
@@ -35,11 +33,11 @@
   }
 
   &:active {
-    border: 2px solid $puerto-rico;
+    border: 2px solid $downy;
   }
 
   &:focus {
-    border: 2px solid $puerto-rico;
+    border: 2px solid $downy;
     outline: 0;
     text-decoration: none;
   }
@@ -73,14 +71,40 @@
   }
 }
 
-.button--green {
-  background-color: $elm !important;
+.button--black {
+  background-color: $black !important;
   color: $white !important;
-  border: 2px solid $elm !important;
+  border: 2px solid $black !important;
 
   &:focus,
   &:hover {
-    border: 2px solid $puerto-rico !important;
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+.button--pink {
+  background-color: $brink-pink !important;
+  color: $white !important;
+  border: 2px solid $brink-pink !important;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+.button--yellow {
+  background-color: $supernova !important;
+  color: $black !important;
+  border: 2px solid $supernova !important;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
     outline: 0;
     text-decoration: none;
   }
@@ -88,8 +112,8 @@
 
 .button--light {
   background-color: $white;
-  color: $san-juan;
-  border: 2px solid $san-juan;
+  color: $black;
+  border: 2px solid $black;
 }
 
 .button--disabled {
@@ -103,7 +127,7 @@
 }
 
 .button--small {
-  height: pxtorem(50px);
+  height: pxtorem(32px);
   padding: 0px space(16);
 
   @include for-phone-only {
@@ -113,8 +137,8 @@
 }
 
 .button--medium {
-  height: pxtorem(65px);
-  padding: 0px space(24);
+  height: pxtorem(56px);
+  padding: 0px space(20);
 }
 
 .button--large {
@@ -140,7 +164,7 @@
 }
 
 .button__icon--medium {
-  margin-left: space(24);
+  margin-left: space(12);
 }
 
 .button__icon--large {
@@ -149,15 +173,14 @@
 
 .button__alt {
   font-size: inherit;
-  border-radius: 40px;
   background-color: $white;
   color: inherit;
-  border: 2px solid $san-juan;
+  border: 2px solid $black;
 
   &:hover {
-    box-shadow: none;
     cursor: pointer;
-    border: 3px solid $san-juan;
+    background-color: $black;
+    color: $white;
   }
 
   &:disabled {
@@ -198,32 +221,28 @@
   font-size: $font-body-m;
   height: pxtorem(50px);
   padding: 0 space(16);
-  border-radius: 9px;
   margin-right: space(20);
   margin-bottom: space(16);
 }
 
 .button__header {
-  height: pxtorem(40px);
-  padding: pxtorem(4px) space(16) space(8);
+  height: auto;
+  padding: 0 space(8);
   margin: 0 space(12);
-  border-radius: 16px;
-  border: 1px solid $waikawa;
   background-color: $white;
-  color: $waikawa;
-  font-size: $font-body-m;
+  color: $black;
+  font-size: pxtorem(14px);
   font-weight: normal;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-top: 0;
+  line-height: 2rem;
 
   @include for-tablet-landscape-down {
-    color: $san-juan;
+    color: $black;
   }
 
   &:hover {
-    border: 2px solid $waikawa;
-    border-top: 0;
+    background-color: $black;
+    color: $white;
+    box-shadow: none;
   }
 
   &:disabled {
@@ -242,7 +261,7 @@
 
 .buton__burger-menu {
   background-color: transparent;
-  color: $waikawa;
+  color: $brink-pink;
   font-size: $font-body-s;
   font-family: $font-primary;
   display: block;

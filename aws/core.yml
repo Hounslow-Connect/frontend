@@ -1,0 +1,227 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create the core infrastructure needed to run the Connected Together Frontend
+
+Outputs:
+  BucketName:
+    Description: The S3 bucket name
+    Value:
+      Fn::Join:
+      - "-"
+      - - frontend
+        - Ref: Environment
+        - Ref: Uuid
+
+  CloudFrontDomain:
+    Description: The domain name of the CloudFront distribution
+    Value:
+      Fn::GetAtt:
+      - Distribution
+      - DomainName
+
+  WwwCloudFrontDomain:
+    Description: The domain name of the CloudFront distribution for the www
+      subdomain
+    Value:
+      Fn::GetAtt:
+      - WwwDistribution
+      - DomainName
+
+  CloudFrontId:
+    Description: The ID of the CloudFront distribution
+    Value:
+      Ref: Distribution
+
+Parameters:
+  CertificateArn:
+    Description: The ARN for the CloudFront distribution SSL certificate (must
+      be in us-east-1).
+    Type: String
+
+  WwwCertificateArn:
+    Description: The ARN for the CloudFront distribution SSL certificate for the
+      www subdomain (must be in us-east-1).
+    Type: String
+
+  LambdaOriginRewriteFunctionArn:
+    Description: The ARN for the Lambda origin rewrite function (must be in us-east-1).
+    Type: String
+
+  LambdaRedirectFunctionArn:
+    Description: The ARN for the Lambda redirect function (must be in us-east-1).
+    Type: String
+
+  Cname:
+    AllowedPattern: "^(?!:\\/\\/)([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\\.[a-zA-Z]{2,11}?$"
+    ConstraintDescription: Must be a valid domain
+    Description: The CNAME for the site.
+    MinLength: '1'
+    Type: String
+
+  Environment:
+    Description: The environment this stack is for (e.g. production or staging).
+    MinLength: '1'
+    Type: String
+
+  Uuid:
+    Default: 3f10123b-9cd5-41e5-965b-0b7276cfef39
+    Description: The unique ID for this stack.
+    MaxLength: '36'
+    MinLength: '36'
+    Type: String
+
+Resources:
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName:
+        Fn::Join:
+        - "-"
+        - - frontend
+          - Ref: Environment
+          - Ref: Uuid
+
+  WwwBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName:
+        Fn::Join:
+        - "."
+        - - www
+          - Ref: Cname
+      WebsiteConfiguration:
+        RedirectAllRequestsTo:
+          HostName:
+            Ref: Cname
+          Protocol: https
+
+  CiUser:
+    Type: AWS::IAM::User
+    Properties:
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: s3:*
+            Effect: Allow
+            Resource: "*"
+          - Action: secretsmanager:GetSecretValue
+            Effect: Allow
+            Resource: "*"
+          - Action: cloudfront:CreateInvalidation
+            Effect: Allow
+            Resource: "*"
+          Version: '2012-10-17'
+        PolicyName: CiUserPolicy
+      UserName:
+        Fn::Join:
+        - "-"
+        - - ci-frontend
+          - Ref: Environment
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+        - Ref: Cname
+        CustomErrorResponses:
+        - ErrorCode: 404
+          ResponseCode: 200
+          ResponsePagePath: "/index.html"
+        CacheBehaviors:
+        - AllowedMethods:
+          - HEAD
+          - GET
+          CachedMethods:
+          - HEAD
+          - GET
+          DefaultTTL: 0
+          MaxTTL: 0
+          MinTTL: 0
+          ForwardedValues:
+            QueryString: False
+          PathPattern: "/covid19*"
+          TargetOriginId:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: Bucket
+          LambdaFunctionAssociations:
+          - EventType: origin-request
+            LambdaFunctionARN:
+              Ref: LambdaOriginRewriteFunctionArn
+          ViewerProtocolPolicy: redirect-to-https
+        DefaultCacheBehavior:
+          AllowedMethods:
+          - HEAD
+          - GET
+          CachedMethods:
+          - HEAD
+          - GET
+          ForwardedValues:
+            QueryString: False
+          TargetOriginId:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: Bucket
+          LambdaFunctionAssociations:
+          - EventType: viewer-request
+            LambdaFunctionARN:
+              Ref: LambdaRedirectFunctionArn
+          ViewerProtocolPolicy: redirect-to-https
+          ViewerProtocolPolicy: redirect-to-https
+        DefaultRootObject: index.html
+        Enabled: True
+        IPV6Enabled: True
+        Origins:
+        - DomainName:
+            Fn::GetAtt:
+            - Bucket
+            - DomainName
+          Id:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: Bucket
+          S3OriginConfig: {}
+        ViewerCertificate:
+          AcmCertificateArn:
+            Ref: CertificateArn
+          SslSupportMethod: sni-only
+
+  WwwDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+        - Fn::Join:
+          - "."
+          - - www
+            - Ref: Cname
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: False
+          TargetOriginId:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: WwwBucket
+          ViewerProtocolPolicy: redirect-to-https
+        Enabled: True
+        IPV6Enabled: True
+        Origins:
+        - DomainName:
+            Fn::Sub: www.${Cname}.s3-website-${AWS::Region}.amazonaws.com
+          Id:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: WwwBucket
+          CustomOriginConfig:
+            OriginProtocolPolicy: http-only
+        ViewerCertificate:
+          AcmCertificateArn:
+            Ref: WwwCertificateArn
+          SslSupportMethod: sni-only

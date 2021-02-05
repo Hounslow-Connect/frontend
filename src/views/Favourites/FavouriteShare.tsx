@@ -15,7 +15,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
 
   return (
     <div className="flex-container flex-container--align-center favourites__header--share-container">
-      <div className="flex-col flex-col--7 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--7 favourites__header--share">
+      <div className="flex-col favourites__header--share">
         <p>Share</p>
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${
@@ -28,7 +28,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           <FontAwesomeIcon icon={['fab', 'facebook-f']} />
         </a>
         <a
-          href={`http://twitter.com/share?text=Connected Kingston&url=${
+          href={`http://twitter.com/share?text=Hounslow Connect&url=${
             window.origin
           }/favourites${favouritesStore.generateShareLink()}`}
           target="_blank"
@@ -48,7 +48,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           <FontAwesomeIcon icon="link" />
         </a>
         <a
-          href={`mailto:?subject=Connected Kingston&amp;body=${
+          href={`mailto:?subject=Hounslow Connect&amp;body=${
             window.origin
           }/favourites${favouritesStore.generateShareLink()}"`}
           aria-label="Email favourites link"
@@ -56,7 +56,7 @@ const FavouriteShare: React.FunctionComponent<IProps> = ({ favouritesStore }) =>
           <FontAwesomeIcon icon="envelope" />
         </a>
       </div>
-      <div className="flex-col flex-col--5 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--5 favourites__header--print">
+      <div className="flex-col favourites__header--print">
         <Button
           text="Print page"
           icon="print"

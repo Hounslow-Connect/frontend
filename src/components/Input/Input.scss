@@ -5,10 +5,9 @@
 .input {
   @include body-m;
   width: 400px;
-  border: 2px solid $san-juan;
-  height: pxtorem(50px);
-  padding: space(16);
-  color: $san-juan;
+  border: 2px solid $black;
+  padding: space(8) space(12);
+  color: $black;
 
   &--container {
     display: inline;
@@ -16,7 +15,7 @@
 
   &--error {
     display: block;
-    border-left: 2px solid $cranberry;
+    border-left: 2px solid $brink-pink;
     padding-left: space(16);
   }
 }
@@ -31,7 +30,7 @@
 
   &--show {
     display: inline-block;
-    color: $cranberry;
+    color: $brink-pink;
     margin-top: space(8);
   }
 }

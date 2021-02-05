@@ -22,7 +22,7 @@ const DutyToRefer: React.FunctionComponent = () => {
                 please take a minute to see if a service may be able to make a more immediate
                 impact. Your intervention could keep the roof over someone’s head.
               </p>
-              <a href="mailto:dutytorefer@kingston.gov.uk">
+              <a href="mailto:dutytorefer@Hounslow.gov.uk">
                 Click to report <i className="fas fa-envelope" aria-hidden></i>
               </a>
             </div>

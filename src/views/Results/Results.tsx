@@ -68,26 +68,30 @@ class Results extends Component<IProps> {
 
         <div className="results__list">
           {this.hasCategories() && (
-            <div className="flex-container flex-container--mobile-no-padding results__category-sidebar">
-              {map(this.hasCategories(), (sidebox: ISidebox) => {
-                return <SideboxCard sidebox={sidebox} />;
-              })}
+            <div className="results__category-sidebar">
+              <div className="flex-container">
+                {map(this.hasCategories(), (sidebox: ISidebox) => {
+                  return <SideboxCard sidebox={sidebox} />;
+                })}
+              </div>
             </div>
           )}
-          <div className="flex-container flex-container results__filter-bar">
-            <div className="flex-col flex-col--4 flex-col--tablet--12 flex-col--mobile--12 results__container-count">
+          <div className="flex-container flex-container--wrap results__filter-bar">
+            <div className="flex-col flex-col--6 results__container-count">
               {!!resultsStore.results.length && !resultsStore.loading && (
                 <p>
-                  {resultsStore.view === 'grid'
-                    ? `${
-                        resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
-                      } services found`
-                    : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
+                  <strong>
+                    {resultsStore.view === 'grid'
+                      ? `${
+                          resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
+                        } services found`
+                      : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
+                  </strong>
                 </p>
               )}
             </div>
             {resultsStore.isKeywordSearch && (
-              <div className="flex-col flex-col--8 flex-col--tablet-large--12 flex-col--medium--12 flex-container--tablet--12">
+              <div className="flex-col flex-col--6">
                 <div
                   className={cx(
                     'flex-container flex-container--align-center results__keyword-container',

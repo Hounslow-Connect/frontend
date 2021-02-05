@@ -3,26 +3,17 @@
 @import '../../../styles/breakpoints.scss';
 
 .criteria_card {
-  padding: space(8) !important;
+  padding: space(16);
+  background-color: $mercury;
 
-  p {
-    font-size: pxtorem(16px);
-  }
-
-  @include for-tablet-portrait-up {
-    border-radius: 19px;
-    background-color: $alabaster;
-    margin: space(8);
+  @include for-tablet-portrait-up { 
     width: 45%;
     display: flex;
-  }
-
-  @include for-tablet-landscape-up {
-    padding: space(20) !important;
   }
 }
 
 .criteria_card-img {
+  padding-right: space(16);
   text-align: center;
 
   svg {
@@ -31,8 +22,8 @@
 }
 
 .criteria_card-title {
-  color: $waikawa;
   font-size: pxtorem(14px) !important;
+  font-weight: 900;
 
   @include for-tablet-landscape-up {
     margin-top: space(8);

@@ -29,7 +29,7 @@ const OrganisationCard: React.FunctionComponent<IProps> = ({ service, sidebar })
       )}
     </div>
     <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__organisation">
-      <h4>{get(service, 'organisation.name')}</h4>
+      <h3>{get(service, 'organisation.name')}</h3>
     </div>
   </div>
 );

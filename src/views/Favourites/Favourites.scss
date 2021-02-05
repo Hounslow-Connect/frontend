@@ -6,6 +6,10 @@
 .favourites {
   padding-bottom: space(64);
 
+  @include for-phone-only {
+    padding-bottom: space(32);
+  }
+
   &--container {
     @include for-tablet-portrait-up {
       padding: 0 !important;
@@ -14,27 +18,19 @@
 }
 
 .favourites__header {
-  background-image: url('../../assets/images/backgrounds/favourites-shape.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  color: $san-juan;
-
-  @include for-tablet-landscape-up {
-    padding: space(64) !important;
-    padding-bottom: space(24) !important;
-  }
-
-  @include for-tablet-portrait-down {
-    background-image: none;
-    padding: space(24) !important;
-  }
+  padding: space(48) 0;
+  background-color: $bermuda;
 
   &--share-container {
     padding: 0 !important;
   }
 
   &--heading {
-    margin-bottom: space(20) !important;
+    margin-bottom: space(16) !important;
+
+    h1 {
+      margin-bottom: space(8) !important;
+    }
 
     @include for-phone-only {
       h1 {
@@ -44,17 +40,13 @@
   }
 
   &--header-container {
+    flex-wrap: wrap;
     background-color: $white;
-    padding: space(32);
-    border-radius: 23px;
-    color: $waikawa;
+    padding: space(16);
+    color: $black;
 
     &:first-of-type {
-      margin-right: space(32);
-    }
-
-    &:last-of-type {
-      padding: space(20) !important;
+      margin-right: space(16);
     }
 
     @include for-tablet-portrait-down {
@@ -69,7 +61,8 @@
   }
 
   &--share {
-    color: $san-juan;
+    margin-right: space(24);
+    color: $black;
 
     @include for-tablet-portrait-down {
       text-align: center;
@@ -93,7 +86,7 @@
     }
 
     button {
-      color: $san-juan;
+      color: $black;
       font-weight: normal !important;
     }
   }
@@ -102,8 +95,7 @@
 .favourites__logo {
   width: pxtorem(65px) !important;
   height: pxtorem(65px);
-  border: 1px solid $nobel;
-  border-radius: 9px;
+  border: 1px solid $gray;
   background-color: $white;
 
   &:before {
@@ -114,15 +106,14 @@
   }
 
   img {
-    border-radius: 9px;
     width: 100%;
   }
 }
 
 .favourites__card {
-  color: $san-juan;
-  border: 2px solid $san-juan;
-  border-radius: 10px;
+  background-color: $white;
+  color: $black;
+  border: 2px solid $black;
   margin-bottom: space(24);
 
   &--no-padding {
@@ -130,7 +121,7 @@
   }
 
   &--inner {
-    padding: space(24) !important;
+    padding: space(16) !important;
   }
 
   &--outer {
@@ -141,37 +132,43 @@
   }
 
   &--organisation {
-    color: $waikawa;
+    margin-top: space(8);
   }
 
   &--location {
-    @include heading-s;
-    color: $elm;
+    display: flex;
+    align-items: center;
     margin: space(12) 0;
-  }
+    font-size: pxtorem(14px);
+    font-weight: 900;
 
-  &--intro {
-    color: $mid-grey;
+    p {
+      font-size: pxtorem(14px);
+      line-height: pxtorem(14px);
+    }
+
+    svg {
+      margin-right: space(8);
+    }
   }
 
   &--button-row {
-    border-top: 2px solid $san-juan;
+    border-top: 2px solid $black;
   }
 
   &--button {
-    text-align: center;
-    border-bottom-left-radius: 8px;
-
-    padding: space(16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: space(12);
     box-sizing: border-box;
 
     svg {
       margin-left: space(8);
-      vertical-align: middle;
     }
 
     &:first-of-type {
-      border-right: 2px solid $san-juan;
+      border-right: 2px solid $black;
     }
 
     &:hover {
@@ -180,14 +177,12 @@
     }
 
     &:focus {
-      border: 2px solid $puerto-rico;
+      border: 2px solid $downy;
     }
 
     &--more {
-      background-color: $san-juan;
+      background-color: $black;
       color: $white;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 8px;
     }
 
     @include for-phone-only {
@@ -199,13 +194,9 @@
   }
 
   &--contact {
-    border-left: 3px solid $waikawa;
+    border-left: 3px solid $black;
     padding-left: space(12) !important;
     margin: space(8) 0 !important;
-
-    svg {
-      color: $waikawa;
-    }
 
     &--heading {
       @include heading-s;
@@ -224,28 +215,21 @@
 }
 
 .favourites__count {
-  color: $san-juan;
-  margin: space(32);
+  color: $black;
+  margin: space(32) 0;
+  text-align: center;
 
   @include for-tablet-portrait-down {
-    margin: 0;
+    margin: space(16) 0 !important;
     padding: 0 space(24) !important;
-    margin-bottom: space(16);
   }
 }
 
 .favourites__add-more {
-  background-image: url('../../assets/images/backgrounds/favourites-add-more-shape.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding: space(64) !important;
   margin-top: space(64);
 
-  button {
-    background-color: $elm;
-  }
-
   @include for-phone-only {
+    margin-top: space(32);
     padding: space(32) !important;
 
     button {
@@ -255,7 +239,7 @@
 }
 
 .favourites__no-favourites {
-  color: $san-juan;
+  color: $black;
   padding: space(64) !important;
 
   @include for-tablet-portrait-down {

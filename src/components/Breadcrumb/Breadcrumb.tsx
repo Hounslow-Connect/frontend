@@ -14,21 +14,25 @@ interface IProps {
 }
 
 const Breadcrumb: FunctionComponent<IProps> = ({ crumbs }) => (
-  <div className="flex-container breadcrumb">
-    <ul>
-      {crumbs.map((crumb: ICrumb, i: number) => (
-        <Fragment key={crumb.text}>
-          {crumb.url ? (
-            <Link to={crumb.url}>
-              <li>{crumb.text}</li>
-            </Link>
-          ) : (
-            <li className="breadcrumb--active">{crumb.text}</li>
-          )}
-          {i !== crumbs.length - 1 && <FontAwesomeIcon icon="chevron-right" />}
-        </Fragment>
-      ))}
-    </ul>
+  <div className="breadcrumb">
+    <div className="flex-container">
+      <ul>
+        {crumbs.map((crumb: ICrumb, i: number) => (
+          <Fragment key={crumb.text}>
+            {crumb.url ? (
+              <li>
+                <Link to={crumb.url}>
+                  {crumb.text}
+                </Link>
+              </li>
+            ) : (
+              <li className="breadcrumb--active">{crumb.text}</li>
+            )}
+            {i !== crumbs.length - 1 && <FontAwesomeIcon icon="chevron-right" />}
+          </Fragment>
+        ))}
+      </ul>
+    </div>
   </div>
 );
 

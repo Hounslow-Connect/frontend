@@ -3,14 +3,14 @@
 @import '../../styles/breakpoints.scss';
 
 .breadcrumb {
-  margin-bottom: space(24) !important;
+  padding: space(8) 0;
 
-  @include for-tablet-landscape-down {
-    margin-top: space(24) !important;
+  > .flex-container {
+    max-width: 1260px;
   }
 
   &--active {
-    color: $mid-grey !important;
+    color: $black !important;
   }
 
   ul > li:first-child {
@@ -18,14 +18,12 @@
   }
 
   ul {
+    display: flex;
+    align-items: center;
     list-style-type: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    a {
-      text-decoration-color: $elm;
-    }
 
     svg {
       font-size: pxtorem(16px);
@@ -38,22 +36,35 @@
 
   li {
     display: inline;
-    margin-left: space(16);
-    color: $elm;
     font-size: pxtorem(16px) !important;
+    margin: 0;
+
+    &:first-child {
+      margin-left: 0;
+    }
 
     @include for-phone-only {
       font-size: pxtorem(12px) !important;
-      margin-left: space(8) !important;
+    }
+
+    a {
+      font-size: pxtorem(16px) !important;
+
+      @include for-phone-only {
+        font-size: pxtorem(12px) !important;
+      }
     }
   }
 
   svg {
-    margin-left: space(16);
-    color: $elm;
+    margin-left: space(12);
+    margin-right: space(12);
+    font-size: pxtorem(13px) !important;
 
     @include for-phone-only {
       margin-left: space(8);
+      margin-right: space(8);
+      font-size: pxtorem(11px) !important;
     }
   }
 }

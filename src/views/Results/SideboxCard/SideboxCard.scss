@@ -4,29 +4,35 @@
 @import '../../../styles/breakpoints.scss';
 
 .sidebox {
-  padding: space(24) !important;
-  background: $alabaster;
+  align-content: flex-start;
+  height: 100%;
   margin: 0 space(8) !important;
-  border-radius: 25px;
+  padding: space(24) !important;
+  background: $mercury;
+
+  @include for-phone-only {
+    margin: 0 !important;
+    padding: space(16) !important;
+  }
 
   h3 {
-    color: $san-juan;
+    color: $black;
   }
 
   p {
     @include body-s;
-    color: $mid-grey;
+    color: $black;
     margin: space(8) 0;
   }
 
   a {
     @include body-s;
-    color: $elm;
+    color: $black;
   }
 
   &--container {
     @include for-tablet-portrait-down {
-      margin-bottom: space(24) !important;
+      margin-bottom: space(16) !important;
     }
   }
 }

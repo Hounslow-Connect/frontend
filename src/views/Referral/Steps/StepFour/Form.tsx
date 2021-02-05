@@ -192,7 +192,7 @@ class Form extends Component<IProps, IState> {
                       onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                         referralStore.handleInput('other_contact', e.target.value)
                       }
-                      placeholder={'Wood St\nKingston upon Thames\nKT1 1UJ'}
+                      placeholder={'Wood St\nHounslow\nKT1 1UJ'}
                     />
                   </div>
                 </div>

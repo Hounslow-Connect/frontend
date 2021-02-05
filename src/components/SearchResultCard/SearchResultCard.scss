@@ -4,11 +4,11 @@
 @import '../../styles/fonts.scss';
 
 .search-result-card {
-  border: 2px solid $san-juan;
-  border-radius: 10px;
-  color: $san-juan;
+  display: flex;
+  flex-wrap: wrap;
   margin: space(8);
-  height: max-content;
+  background-color: $kournikova;
+  color: $black;
   cursor: pointer;
 
   &:hover {
@@ -38,7 +38,6 @@
 .search-result-card__organisation {
   @include heading-s-light;
   font-weight: normal;
-  color: $waikawa;
   margin-top: space(8);
 
   @include for-phone-only {
@@ -49,8 +48,8 @@
 .search-result-card__logo {
   width: pxtorem(65px);
   height: pxtorem(65px);
-  border: 1px solid $nobel;
-  border-radius: 9px;
+  background-color: $white;
+  border: 1px solid $gray;
 
   &:before {
     content: '';
@@ -60,58 +59,41 @@
   }
 
   img {
-    border-radius: 9px;
     width: 100%;
-    object-fit: contain;
     height: 100%;
+    object-fit: contain;
   }
 }
 
 .search-result-card__top-row {
   display: flex;
-  padding: space(24) space(16) space(16) space(24);
-
-  @include for-phone-only {
-    padding: space(16) space(8) space(16) space(16);
-  }
+  justify-content: space-between;
+  width: 100%;
+  padding: space(16);
 }
 
 .search-result-card__tag {
-  @include body-xs;
-  padding: space(8);
-  color: $white;
+  display: flex;
+  align-items: center;
   width: max-content;
-  border-radius: 4px;
-  margin: space(16) 0;
+  padding: 6px;
+  margin-top: space(16);
+  @include body-xs;
+  line-height: 0.875rem;
+  background-color: $black;
+  color: $white;
 
   @include for-phone-only {
     margin: 0 0 space(16);
   }
 }
 
-.search-result-card__tag--activity {
-  background-color: $cranberry;
-}
-
-.search-result-card__tag--club {
-  background-color: $club-blue;
-}
-
-.search-result-card__tag--service {
-  background-color: $san-juan;
-}
-
-.search-result-card__tag--group {
-  background-color: $elm;
-}
-
 .search-result-card__tag--icon {
-  margin-right: pxtorem(4px);
+  margin-right: space(8);
 }
 
 .search-result-card__tag--cost {
-  margin: 0 pxtorem(4px);
-  vertical-align: middle;
+  margin: 0 space(8);
 }
 
 .search-result-card__tag--cost--free {
@@ -119,12 +101,12 @@
 }
 
 .search-result-card__location {
-  color: $elm;
   display: flex;
+  margin-top: space(16);
 
   h4 {
     margin-left: space(8);
-    font-size: $font-base;
+    font-size: $font-body-xs;
   }
 }
 
@@ -141,13 +123,12 @@
   h4 {
     display: inline;
     margin-left: 0;
-    font-size: $font-base;
   }
 }
 
 .search-result-card__intro {
-  color: $lynch;
-  padding: 0 space(24) space(24);
+  align-self: flex-start;
+  padding: 0 space(16) space(16);
 
   @include for-phone-only {
     padding: 0 space(8) space(16) space(16);
@@ -155,14 +136,14 @@
 }
 
 .search-result-card__footer {
-  background-color: $san-juan;
-  padding: space(16);
-  color: $white;
+  flex: 0 0 100%;
+  align-self: flex-end;
+  padding: space(12);
+  background-color: $black;
   text-align: center;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
 
   a {
+    color: $white;
     font-size: $font-body-m;
     text-decoration: none;
   }

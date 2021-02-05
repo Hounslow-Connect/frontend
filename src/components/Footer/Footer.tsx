@@ -7,9 +7,9 @@ import ReactMarkdown from 'react-markdown';
 import get from 'lodash/get';
 
 import './Footer.scss';
-import Button from '../Button';
 import CMSStore from '../../stores/CMSStore';
 import UIStore from '../../stores/uiStore';
+import ButtonLink from '../Button/ButtonLink';
 
 interface IProps {
   mobileMenu?: boolean;
@@ -30,7 +30,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
     >
       <div className="flex-container footer--inner-container">
         <div className="flex-col flex-col--5 flex-col--tablet--12">
-          <h4>{get(cmsStore, 'global.footer_title')}</h4>
+          <p className="footer__heading">{get(cmsStore, 'global.footer_title')}</p>
           <ReactMarkdown
             className="body--xs footer__content"
             source={get(cmsStore, 'global.footer_content')}
@@ -42,14 +42,15 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
         </div>
         <div className="flex-col flex-col--6 flex-col--tablet--12 footer__section">
           <div className="flex-container flex-container--no-padding">
-            <div className="flex-col flex-col--5 flex-col--mobile--7">
-              <h4>Get in touch with Connected Kingston</h4>
-              <nav className="footer__social-links" role="menubar" aria-label="Social Media Links">
+            <div className="flex-col flex-col--5 flex-col--mobile--12">
+              <p className="footer__heading">Get in touch with <br/><span className="pink">One</span> Hounslow Connect</p>
+              <nav className="footer__social-links" role="menu" aria-label="Social Media Links">
                 <a
                   href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Link to Connected Kingston Facebook"
+                  role="menuitem"
+                  aria-label="Link to Hounslow Connect Facebook"
                 >
                   <FontAwesomeIcon icon={['fab', 'facebook-f']} className="footer__social-icons" />
                 </a>
@@ -57,7 +58,8 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
                   href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Link to Connected Kingston Twitter"
+                  role="menuitem"
+                  aria-label="Link to Hounslow Connect Twitter"
                 >
                   <FontAwesomeIcon icon={['fab', 'twitter']} className="footer__social-icons" />
                 </a>
@@ -75,14 +77,8 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
               </div>
             </div>
 
-            <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__section footer__button">
-              <a
-                href="https://admin.connectedkingston.uk"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button text="Members Area" size="medium" alt={true} />
-              </a>
+            <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__button">
+              <ButtonLink href="https://admin.connectedhounslow.uk" text="Members Area" />
             </div>
           </div>
         </div>

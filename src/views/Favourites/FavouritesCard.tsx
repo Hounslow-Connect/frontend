@@ -41,22 +41,22 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
         <div className="flex-container favourites__card--inner flex-container--mobile-no-padding">
           <div className="flex-col flex-col--12">
             <div className="flex-container favourites__card--no-padding">
-              <div className="flex-col flex-col--8 flex-col--mobile--8">
-                <h3>{service.name}</h3>
+              <div className="flex-col flex-col--12">
+                <h2>{service.name}</h2>
                 <p className="body--s favourites__card--organisation">
                   {get(organisation, 'name')}
                 </p>
                 <div className="search-result-card__location favourites__card--location">
                   <FontAwesomeIcon icon="map-marker-alt" />
                   {serviceLocations.length === 1 ? (
-                    <h4>{first(serviceLocations)}</h4>
+                    <p>{first(serviceLocations)}</p>
                   ) : (
                     <Accordian
                       title={`${serviceLocations.length} locations`}
                       className={'search-result-card__location-list'}
                     >
                       {serviceLocations.map(location => (
-                        <h4 key={`${location.id}-${location}`}>{location}</h4>
+                        <p key={`${location.id}-${location}`}>{location}</p>
                       ))}
                     </Accordian>
                   )}

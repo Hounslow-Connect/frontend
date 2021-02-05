@@ -5,6 +5,8 @@
 
 .view-filter__search-bar {
   button {
+    height: 2.25rem;
+
     &:first-of-type {
       margin-right: 5px;
     }
@@ -45,15 +47,13 @@
 
   @include for-phone-only {
     margin-bottom: space(8);
-    color: $waikawa;
-    font-size: pxtorem(14px);
   }
 }
 
 .view-filter--header--light {
   @include body-m;
   margin-bottom: 0;
-  color: $san-juan;
+  color: $black;
   margin-right: space(10);
 
   @include for-tablet-landscape-up {

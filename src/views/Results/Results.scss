@@ -5,77 +5,41 @@
 
 @mixin search-container {
   background: $white;
-  border-radius: 23px;
 }
 
 .results__list {
-  padding: space(20);
-
-  @include for-phone-only {
-    padding: space(8);
-  }
+  background-color: $mercury;
+  padding-bottom: space(40);
 }
 
 .results__container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  color: $san-juan;
+  max-width: 1260px;
+  margin: 0 auto;
+  color: $black;
 
-  @include for-desktop-up {
-    padding: 0 space(64);
+  @include for-tablet-portrait-down {
+    margin-top: space(16);
+    padding: 0 space(8) !important;
   }
 }
 
 .results__container-count {
   display: flex;
-  justify-content: flex-start;
-  color: $san-juan;
-  padding: space(16) 0;
-
-  @include for-tablet-landscape-down {
-    margin: space(8) !important;
-    justify-content: center;
-  }
 }
 
 .results__search-box {
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  color: $san-juan;
+  background-color: $bermuda;
   position: relative;
 
   @include for-tablet-landscape-up {
     padding: space(48) 0 !important;
-    background-image: url('../../assets/images/backgrounds/results-shape.svg');
-
-    &:before {
-      content: url('../../assets/images/trees/peurto-small.svg');
-      position: absolute;
-      top: 3px;
-      right: 400px;
-    }
-
-    &:after {
-      content: url('../../assets/images/telephone-boxes-shapes.svg');
-      position: absolute;
-      top: 0;
-      right: 100px;
-    }
   }
 
-  @include for-tablet-landscape-down {
-    padding: space(16) space(8) space(8) !important;
-
-    background-image: none;
-
-    &:after {
-      content: none;
-    }
-
-    &:before {
-      content: none;
-    }
+  @include for-tablet-portrait-down {
+    padding: space(16) 0 !important;
   }
 
   @include for-phone-only {
@@ -83,11 +47,31 @@
       font-size: $font-body-l;
     }
   }
+
+  > .flex-container {
+    position: relative;
+    max-width: 1260px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -72px;
+      right: space(40);
+      width: 0; 
+      height: 0; 
+      border-left: 24px solid transparent;
+      border-right: 24px solid transparent;
+      border-top: 24px solid $bermuda;
+
+      @include for-tablet-portrait-down {
+        bottom: -40px;
+      }
+    }
+  }
 }
 
 .results__search-filter-location {
   width: 100%;
-  margin-top: space(8);
 }
 
 .pagnation__container {
@@ -100,22 +84,17 @@
   list-style: none;
 
   li {
-    margin-right: space(8);
+    margin: 0;
   }
 }
 
 .pagination--text-nav-container {
-  background: $alabaster;
-  border-radius: 2px;
+  background: $mercury;
   padding: space(10);
 }
 
 .pagination--text-nav-link {
   text-decoration: none;
-
-  span {
-    color: $elm;
-  }
 
   &:hover {
     text-decoration: underline;
@@ -127,48 +106,26 @@
 }
 
 .pagination--text-number-link {
-  color: $waikawa;
+  color: $black;
   text-decoration: none;
 }
 
 .pagination--active {
   background: $mercury;
-  border-radius: 2px;
 }
 
 .results__filters {
-  @include for-tablet-landscape-up {
-    @include search-container();
-
-    padding: space(20) !important;
-    align-items: flex-end;
-  }
-
-  @include for-tablet-portrait-down {
-    padding: 0 !important;
-  }
-
-  @include for-desktop-up {
-    padding: space(20) space(32) !important;
-  }
+  @include search-container();
+  padding: space(16) !important;
 }
 
 .results__keyword-filters--heading {
+  display: block;
+  margin-bottom: space(8);
   font-weight: normal;
   font-family: $font-primary;
   font-size: $font-heading-s;
-  margin-bottom: space(10);
-
-  @include for-phone-only {
-    margin-bottom: space(8);
-  }
-}
-
-.results__keyword-filters--heading--cost {
-  font-weight: normal;
-  font-family: $font-primary;
-  font-size: $font-heading-s;
-  margin-bottom: space(16);
+  line-height: $font-heading-s;
 }
 
 .results__filter-bar {
@@ -180,7 +137,7 @@
   }
 
   @include for-tablet-landscape-down {
-    padding: 0 !important;
+    padding: 0 space(16) !important;
     flex-direction: column-reverse;
   }
 
@@ -191,7 +148,7 @@
 
 .results__sort-by-label {
   @include body-m;
-  color: $san-juan;
+  color: $black;
 }
 
 .results__sort-by {
@@ -229,6 +186,7 @@
 
 .results__amend {
   button {
+    float: right;
     font-size: pxtorem(22px);
     padding: 0 space(20) !important;
   }
@@ -249,7 +207,9 @@
 }
 
 .category__info {
+  position: relative;
   width: 100%;
+  color: $black;
   @include search-container;
 
   @include for-tablet-landscape-up {
@@ -257,11 +217,10 @@
   }
 
   @include for-tablet-portrait-down {
-    padding: 0 !important;
+    padding: space(16) !important;
   }
 
   &--intro {
-    color: $waikawa;
     margin: space(10) 0;
 
     @include for-tablet-landscape-up {
@@ -303,8 +262,7 @@
 
 .results__keyword-input-box {
   @include search-container;
-  padding: space(32);
-  margin-right: space(32);
+  padding: space(16);
 
   @include for-tablet-portrait-down {
     padding: 0;
@@ -334,16 +292,13 @@
 }
 
 .results__keyword-heading {
-  @include for-tablet-landscape-up {
-    margin-bottom: space(12);
-    margin-left: space(16);
-  }
+  margin-bottom: space(16);
 }
 
 .results__keyword-edit-toggle {
-  color: $elm;
+  color: $downy;
   font-size: pxtorem(16px);
-  border-bottom: 2px solid $elm;
+  border-bottom: 2px solid $downy;
 }
 
 .results__keyword-edit-input {
@@ -384,9 +339,11 @@
 }
 
 .results__category-sidebar {
-  margin-bottom: space(32) !important;
+  background-color: $white;
+  margin-bottom: space(40) !important;
+  padding: space(48) 0 !important;
 
   @include for-tablet-portrait-down {
-    margin-bottom: space(16) !important;
+    margin-bottom: space(24) !important;
   }
 }

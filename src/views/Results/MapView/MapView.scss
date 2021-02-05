@@ -16,7 +16,6 @@
   position: relative;
   width: 70%;
   height: 600px;
-  border-radius: 25px;
   overflow: hidden;
 
   @include for-phone-only {
@@ -35,19 +34,18 @@
 }
 
 .map__key--heading {
-  color: $san-juan;
+  color: $black;
   margin-left: space(16);
   margin-bottom: space(12);
 }
 
 .map__key--description {
-  color: $san-juan;
-  font-family: $font-secondary;
+  color: $black;
+  font-family: $font-primary;
 }
 
 .map__key {
-  background-color: $alabaster;
-  border-radius: 25px;
+  background-color: $mercury;
   padding: space(24);
 }
 
@@ -59,19 +57,19 @@
 }
 
 .map__key-icon--group {
-  color: $elm;
+  color: $downy;
 }
 
 .map__key-icon--service {
-  color: $san-juan;
+  color: $black;
 }
 
 .map__key-icon--activity {
-  color: $cranberry;
+  color: $brink-pink;
 }
 
 .map__key-icon--club {
-  color: $club-blue;
+  color: $lynch;
 }
 
 .map__key--description {

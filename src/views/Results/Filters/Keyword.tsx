@@ -146,7 +146,7 @@ class Keyword extends Component<IProps, IState> {
                     />
                   </div>
                   <div className="flex-col flex-col--mobile--4">
-                    <p className="results__keyword-filters--heading--cost">Cost</p>
+                    <p className="results__keyword-filters--heading">Cost</p>
                     <Checkbox
                       id="is_free"
                       label="Free"
@@ -191,7 +191,7 @@ class Keyword extends Component<IProps, IState> {
             <h1 className="results__keyword-heading">Search results</h1>
           </div>
           <form
-            className="flex-container flex-container--align-bottom mobile-hide tablet-hide tablet--large-hide results__keyword-search-container"
+            className="flex-container mobile-hide tablet-hide tablet--large-hide results__keyword-search-container"
             onSubmit={e => {
               e.preventDefault();
               history.push({
@@ -199,7 +199,7 @@ class Keyword extends Component<IProps, IState> {
               });
             }}
           >
-            <div className="flex-col flex-col--6 flex-col--tablet-large--6 flex-col--tablet--7 results__keyword-input-box">
+            <div className="flex-col flex-col--6 results__keyword-input-box">
               <label htmlFor="keyword">
                 <h2>I'm looking for</h2>
               </label>
@@ -232,7 +232,7 @@ class Keyword extends Component<IProps, IState> {
                 </div>
               </div>
             </div>
-            <div className="flex-col flex-col--5 flex-col--tablet-large--6 flex-col--tablet--5">
+            <div className="flex-col flex-col--6">
               <KeywordFilter />
             </div>
           </form>

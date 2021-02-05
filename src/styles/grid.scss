@@ -127,6 +127,11 @@ body {
   &--left {
     justify-content: center;
   }
+
+  // Horizontal align right
+  &--right {
+    justify-content: flex-end;
+  }
 }
 
 .flex-col {

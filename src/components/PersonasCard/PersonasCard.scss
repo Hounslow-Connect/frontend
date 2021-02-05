@@ -4,22 +4,32 @@
 @import '../../styles/fonts.scss';
 
 .card {
+  position: relative;
   display: flex;
   align-content: center;
-  background-color: $alabaster;
-  font-family: $font-secondary;
-  color: $san-juan;
-  border-radius: 25px;
-  margin: space(32);
+  margin: space(32) 0;
+  background-color: $bright-sun;
+  border: 2px solid $bright-sun;
+  font-family: $font-primary;
   cursor: pointer;
+
+  @include for-tablet-portrait-up {
+    width: 31.5% !important;
+  }
+
+  @include for-phone-only {
+    margin-bottom: space(8) !important;
+  }
 
   .flex-container {
     padding: 0 !important;
     width: 100%;
-    align-items: stretch;
+    align-items: flex-start;
+    align-content: flex-start;
     height: 100%;
 
     @include for-phone-only {
+      flex-wrap: wrap;
       margin: 0 !important;
     }
   }
@@ -28,63 +38,62 @@
     box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
   }
 
-  @include for-tablet-landscape-up {
-    max-width: pxtorem(300px);
-  }
-
-  @include for-tablet-portrait-down {
-    margin: space(12);
-  }
-
-  @include for-phone-only {
-    background-color: $white;
-    margin: space(20) 0;
-  }
-
-  @include for-phone-only {
-    border-radius: 11px;
-
-    img {
-      border-radius: 11px;
-    }
-  }
-
-  @include for-tablet-portrait-up {
-    flex-direction: column;
-  }
-
   img {
     width: 100%;
     height: 100%;
-    border-top-left-radius: 11px;
-    border-top-right-radius: 11px;
+  }
 
-    @include for-phone-only {
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
+  &:last-child {
+    .card__description::after {
+      display: none;
     }
   }
 }
 
-.card__header {
-  @include for-phone-only {
-    font-size: $font-base;
-  }
+.card__image {
+  height: 280px;
 
-  @include for-desktop-up {
-    font-size: pxtorem(27px);
+  .image {
+    object-fit: cover;
   }
 }
 
 .card__description {
+  position: relative;
   box-sizing: border-box;
-  padding: space(16) space(20);
-  height: 100%;
+  padding: space(24);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -48px;
+    width: 0; 
+    height: 0; 
+    border-left: 24px solid $bright-sun;
+    border-right: 24px solid transparent;
+    border-top: 24px solid transparent;
+    border-bottom: 24px solid transparent;
+
+    @include for-phone-only {
+      top: auto;
+      left: 50%;
+      bottom: -48px;
+      right: auto;
+      transform: translateX(-50%);
+      border-left: 24px solid transparent;
+      border-right: 24px solid transparent;
+      border-top: 24px solid $bright-sun;
+      border-bottom: 24px solid transparent;
+    }
+  }
 
   @include for-phone-only {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
   }
 
   @include for-phone-only {

@@ -18,22 +18,22 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
 
   return (
     <CMSPage title={get(cmsStore, 'contact.title')} twoColumn={true} breadcrumb="Contact">
-      <div className="flex-col flex-col--7 flex-col--tablet--8 cms__content">
+      <div className="flex-col flex-col--7 flex-col--tablet--8">
         <ReactMarkdown source={get(cmsStore, 'contact.content')} />
       </div>
-      <div className="flex-col flex-col--3 flex-col--mobile--10 flex-col--tablet--8 flex-col--tablet-large--4">
+      <div className="flex-col flex-col--3 flex-col--mobile--12 flex-col--tablet--8 flex-col--tablet-large--4">
         <div className="cms--contact-card">
-          <h3>Contact</h3>
+          <h2>Contact</h2>
           <div className="cms--contact-card--row">
-            <h4>
+            <h3>
               <FontAwesomeIcon icon="phone" /> Telephone
-            </h4>
+            </h3>
             <p>{get(cmsStore, 'global.contact_phone')}</p>
           </div>
           <div className="cms--contact-card--row">
-            <h4>
+            <h3>
               <FontAwesomeIcon icon="envelope" /> Email
-            </h4>
+            </h3>
             <a
               className="cms--contact-card--email"
               href={`mailto:${get(cmsStore, 'global.contact_email')}`}
@@ -46,7 +46,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               href={`https://facebook.com/${get(cmsStore, 'global.facebook_handle')}`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Connected Kingston Facbook"
+              aria-label="Hounslow Connect Facbook"
             >
               <FontAwesomeIcon icon={['fab', 'facebook-f']} className="service__social-icon" />
             </a>
@@ -54,7 +54,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
               href={`https://twitter.com/${get(cmsStore, 'global.twitter_handle')}`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Connected Kingston Twitter"
+              aria-label="Hounslow Connect Twitter"
             >
               <FontAwesomeIcon icon={['fab', 'twitter']} className="service__social-icon" />
             </a>

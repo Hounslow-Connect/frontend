@@ -41,15 +41,13 @@ class Favourites extends Component<IProps> {
     return (
       <section className="favourites">
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Favourites', url: '' }]} />
-        <div className="favourites__header flex-container">
-          <div className="flex-col flex-col--12 favourites__header--heading">
-            <h1>{get(cmsStore, 'favourites.title')}</h1>
-          </div>
-          <div className="flex-container flex-container--mobile-no-padding flex-container--align-center favourites__header--inner-container">
-            <div className="flex-col flex-col--5 flex-col--mobile--12 flex-col--tablet--12 flex-col--tablet-large--4 favourites__header--header-container">
+        <div className="favourites__header">
+          <div className="flex-container flex-container--align-center">
+            <div className="flex-col flex-col--6 favourites__header--heading">
+              <h1>{get(cmsStore, 'favourites.title')}</h1>
               <p>{get(cmsStore, 'favourites.content')}</p>
             </div>
-            <div className="flex-col flex-col--4 flex-col--medium--6 flex-col--tablet-large--7 mobile-hide tablet-hide favourites__header--header-container">
+            <div className="flex-col flex-col--6 flex-col--tablet--12 mobile-hide tablet-hide favourites__header--header-container">
               <FavouriteShare />
             </div>
           </div>
@@ -59,7 +57,7 @@ class Favourites extends Component<IProps> {
           {!!favouritesStore.favourites.length ? (
             <Fragment>
               <div className="flex-col flex-col--12 favourites__count">
-                <p>{`${favouritesStore.favourites.length} results found`}</p>
+                <p><strong>{`${favouritesStore.favourites.length} results found`}</strong></p>
               </div>
 
               <div className="flex-col flex-col--12">

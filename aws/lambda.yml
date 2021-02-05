@@ -1,0 +1,138 @@
+# Needs to be created in us-east-1
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create the lambda infrastructure needed to run the Connected Together Frontend
+
+Resources:
+  LambdaOriginRewriteFunctionVersion:
+    Type: AWS::Lambda::Version
+    Properties:
+      FunctionName:
+        Ref: LambdaOriginRewriteFunction
+
+  LambdaOriginRewriteFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Lambda function performing origin request URL rewriting
+      Code:
+        ZipFile: |
+          'use strict';
+          exports.handler = (event, context, callback) => {
+            // Extract the request from the CloudFront event that is sent to Lambda@Edge
+            const request = event.Records[0].cf.request;
+
+            // Extract the URI from the request
+            const oldUri = request.uri;
+            let newUri = oldUri;
+
+            // Ensure '/index.html' is appended for the '/covid19' path
+            newUri = newUri.replace(
+              /^(\/covid19)(\/|\/\?.*|\?.*)?$/g,
+              '/covid19/index.html$2'
+            );
+            newUri = newUri.replace(
+              /^\/covid19\/index\.html(\/)*/,
+              '/covid19/index.html'
+            );
+
+            // Log the URI as received by CloudFront and the new URI to be used to fetch from origin
+            console.log(`Old URI: ${oldUri}`);
+            console.log(`New URI: ${newUri}`);
+
+            // Replace the received URI with the URI that includes the index page
+            request.uri = newUri;
+
+            // Return to CloudFront
+            return callback(null, request);
+          };
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Role:
+        Fn::GetAtt:
+        - LambdaRole
+        - Arn
+
+  LambdaRedirectFunctionVersion:
+    Type: AWS::Lambda::Version
+    Properties:
+      FunctionName:
+        Ref: LambdaRedirectFunction
+
+  LambdaRedirectFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Lambda function performing HTTP redirects
+      Code:
+        ZipFile: |
+          'use strict';
+          exports.handler = (event, context, callback) => {
+            // Extract the request from the CloudFront event that is sent to Lambda@Edge
+            const request = event.Records[0].cf.request;
+
+            // Extract the URI from the request
+            const oldUri = request.uri;
+            let newUri = oldUri;
+            let hasChanged = false;
+
+            // Initialise the path mapping
+            const map = {
+              about: 'about-connect',
+              'get-involved': 'providers'
+            };
+
+            // Rewrite URLs
+            for (const [from, to] of Object.entries(map)) {
+              const regex = new RegExp(`^(\\/${from})(\\/|\\/\\?.*|\\?.*)?$`);
+
+              if (regex.test(newUri)) {
+                hasChanged = true;
+              }
+
+              newUri = newUri.replace(from, to);
+            }
+
+            // Continue as normal
+            if (!hasChanged) {
+              return callback(null, request);
+            }
+
+            // Log the URI as received by CloudFront and the new URI to be used to fetch from origin
+            console.log(`Old URI: ${oldUri}`);
+            console.log(`New URI: ${newUri}`);
+
+            // Create the redirect response
+            const response = {
+              status: '302',
+              statusDescription: 'Found',
+              headers: {
+                location: [{
+                  key: 'Location',
+                  value: newUri,
+                }],
+              },
+            };
+
+            // Immediately return response to CloudFront
+            return callback(null, response);
+          };
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Role:
+        Fn::GetAtt:
+        - LambdaRole
+        - Arn
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - edgelambda.amazonaws.com
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole

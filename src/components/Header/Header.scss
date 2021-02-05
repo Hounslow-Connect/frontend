@@ -5,32 +5,12 @@
 @import '../../styles/fonts.scss';
 
 .header {
-  background: $white;
   overflow: hidden;
-  color: $san-juan;
+  padding-bottom: space(16);
+  background: $white;
+  color: $black;
+  border-bottom: 2px solid $brink-pink;
   text-align: right;
-  padding-bottom: space(40);
-
-  &--grey {
-    background-image: url('../../assets/images/backgrounds/referral-header-shape.svg');
-    background-repeat: no-repeat;
-    background-size: 110% 100%;
-
-    .header__container {
-      @include for-tablet-portrait-up {
-        padding-bottom: space(24) !important;
-      }
-    }
-
-    @include for-tablet-landscape-down {
-      padding-bottom: space(32) !important;
-    }
-
-    @include for-phone-only {
-      padding-bottom: space(24) !important;
-      background-image: url('../../assets/images/backgrounds/referral-header-shape-mobile.svg');
-    }
-  }
 
   @include for-tablet-landscape-down {
     z-index: 999;
@@ -49,11 +29,11 @@
     height: 100%;
     z-index: 999;
     overflow: auto;
-    background-color: $iceberg;
   }
 
   .flex-container {
     position: relative;
+    margin: 0 auto;
 
     @include for-tablet-landscape-down {
       height: fit-content;
@@ -65,7 +45,6 @@
 
   &--top-row {
     align-items: stretch !important;
-    padding-bottom: space(12) !important;
 
     &--button-box {
       display: flex;
@@ -81,8 +60,7 @@
       }
 
       @include for-small-phone {
-        margin: 0;
-        justify-content: center;
+        flex: 0 0 auto;
 
         &:last-of-type {
           margin: 0;
@@ -102,22 +80,6 @@
       }
     }
 
-    &--iceberg {
-      @include for-phone-only {
-        background-color: $iceberg;
-      }
-
-      @include for-phone-only {
-        button {
-          border: none;
-        }
-
-        .goog-te-gadget-simple {
-          border: none !important;
-        }
-      }
-    }
-
     @include for-small-phone {
       .goog-te-gadget-simple {
         margin: 0;
@@ -130,7 +92,7 @@
 
     @include for-tablet-landscape-down {
       button {
-        color: $san-juan;
+        color: $black;
 
         svg {
           margin-left: 6px;
@@ -141,11 +103,11 @@
 
   &__brand {
     position: relative;
-    padding: space(12);
+    padding: 0;
     z-index: 1;
 
     @include for-tablet-landscape-down {
-      padding: space(12) space(24) !important;
+      padding: space(16) space(24) !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -178,12 +140,16 @@
     }
 
     @include for-phone-only {
-      padding: space(12) !important;
+      padding: space(12) 0 !important;
 
       &--active {
         padding-bottom: space(48) !important;
       }
     }
+  }
+
+  &__menu {
+    padding: 0;
   }
 
   &__navigation {
@@ -201,10 +167,10 @@
 
       a {
         display: block;
-        color: $san-juan;
+        color: $black;
         margin-bottom: space(32);
         font-size: pxtorem(20px);
-        font-family: $font-secondary;
+        font-family: $font-primary;
         cursor: pointer;
         text-decoration: none;
         text-align: left;
@@ -219,20 +185,13 @@
   .logo {
     display: block;
     float: left;
-    max-width: 510px;
-    height: auto;
+    
+    img {
+      width: 240px;
+      height: auto;
 
-    @include for-tablet-landscape-down {
-      max-width: 360px;
-    }
-
-    @include for-phone-only {
-      max-width: 250px;
-    }
-
-    @include for-small-phone {
-      svg {
-        max-width: 230px;
+      @include for-phone-only {
+        width: 90px;
       }
     }
   }
@@ -297,11 +256,17 @@
 }
 
 .header__container {
-  padding: 0 !important;
+  max-width: 1260px;
+  align-items: flex-end !important;
+}
 
-  @include for-desktop-up {
-    width: 90%;
-    margin: 0 auto;
+.header__actions {
+  background-color: $mercury;
+  padding: space(8) 0;
+  margin-bottom: space(24);
+
+  @include for-tablet-portrait-down {
+    margin-bottom: 0;
   }
 }
 
@@ -311,7 +276,6 @@
     width: 100%;
     background-repeat: no-repeat;
     background-size: 110% 100%;
-    background-color: $iceberg;
 
     &--active {
       margin-bottom: 0 !important;
@@ -340,27 +304,32 @@
 
 .nav {
   display: inline-block;
+  padding: space(12) space(16);
 
   &--primary {
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     z-index: 1;
+    padding: 0;
 
     @include for-tablet-landscape-down {
       float: none;
       display: block;
       margin: space(16);
-      padding: 0 space(10) space(32);
       text-align: left;
     }
   }
 
   &--active {
-    @include for-desktop-up {
-      background-image: url('../../assets/images/backgrounds/nav-hover.svg');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      height: auto;
-      padding: 20px;
+    border: 2px solid $brink-pink;
+    color: $black;
+    padding: space(8) space(12);
+
+    &:hover {
+      background-color: $brink-pink;
+      text-decoration: none;
     }
   }
 }

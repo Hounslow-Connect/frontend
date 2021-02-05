@@ -98,12 +98,6 @@
       border-top-right-radius: 17px;
     }
 
-    &--center {
-      @include for-tablet-portrait-up {
-        border-radius: 0;
-      }
-    }
-
     &--container {
       height: 180px;
       @include for-phone-only {
@@ -116,16 +110,10 @@
         height: pxtorem(70px);
       }
     }
-
-    &--square {
-      @include for-phone-only {
-        border-radius: 0;
-      }
-    }
   }
 
   &--view {
-    background-color: $alabaster;
+    background-color: $mercury;
     text-align: center;
     padding: space(16);
     border-bottom-right-radius: 17px;
@@ -133,14 +121,14 @@
     cursor: pointer;
 
     p {
-      font-family: $font-secondary;
+      font-family: $font-primary;
 
       &:hover {
         text-decoration: underline;
       }
 
       svg {
-        color: $waikawa;
+        color: $lynch;
         margin-right: space(8);
       }
     }

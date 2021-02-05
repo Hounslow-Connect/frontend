@@ -9,67 +9,40 @@
 }
 
 .search__container {
-  background-image: url('../../assets/images/backgrounds/home-header-shape.svg');
-  color: $san-juan;
-  background-repeat: no-repeat;
-  height: auto;
-  background-size: 100% 100%;
   position: relative;
-  padding: space(32) !important;
-
-  @include for-desktop-up {
-    margin-top: space(20) !important;
-
-    &:after {
-      content: url('../../assets/images/telephone-boxes-shapes.svg');
-      top: -31px;
-      position: absolute;
-      left: 45%;
-      z-index: 55;
-    }
-
-    &:before {
-      content: url('../../assets/images/trees/peurto-small.svg');
-      position: absolute;
-      position: absolute;
-      top: -30px;
-      left: 40%;
-    }
-  }
-  @include for-tablet-landscape-up {
-    padding: space(64) space(24);
-  }
-
-  @include for-tablet-portrait-down {
-    background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
-    background-size: 110% 100%;
-  }
-
-  @include for-phone-only {
-    padding: space(40) space(24) space(80) !important;
-    background-color: $iceberg;
-  }
+  height: auto;
 }
 
 .search__inner-container {
-  background-image: url('../../assets/images/backgrounds/home-search-shape.svg');
   width: 100%;
+  max-width: 1030px;
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  max-width: 1260px;
   position: relative;
+  padding: space(24) space(20) space(32);
+  margin-bottom: -120px;
+  background-color: $bermuda;
+  z-index: 10;
 
   @include for-tablet-landscape-up {
-    padding: space(64);
-    margin: space(64) space(32);
+    padding: space(40) space(32);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -24px;
+    right: space(32);
+    width: 0; 
+    height: 0; 
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-top: 24px solid $bermuda;
   }
 }
 
 .search__input {
-  @include for-tablet-landscape-up {
-  }
   width: 100%;
+  margin-bottom: space(16);
 
   button {
     margin: 0 space(20);
@@ -77,6 +50,7 @@
 
   input {
     width: 100%;
+    height: 100%;
   }
 
   &--row {
@@ -90,7 +64,6 @@
 }
 
 .search__category-subtitle {
-  font-size: $font-base;
   margin: space(10) 0;
 }
 
@@ -99,13 +72,8 @@
 }
 
 .search__heading {
-  @include heading-l;
   display: block;
-
-  @include for-phone-only {
-    font-size: $font-body-l;
-    margin-bottom: space(16);
-  }
+  margin-bottom: space(16);
 
   &--category {
     @include for-tablet-landscape-up {

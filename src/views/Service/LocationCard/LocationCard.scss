@@ -10,7 +10,6 @@
 .location__image {
   text-align: center;
   img {
-    border-radius: 9px;
     border: 1px solid $black;
   }
 }
@@ -32,10 +31,6 @@
   a:nth-of-type(2) {
     margin-top: space(8);
   }
-
-  &--link {
-    color: $elm;
-  }
 }
 
 .location__opening-times {
@@ -43,7 +38,7 @@
     margin-top: space(24) !important;
   }
 
-  h4 {
+  h3 {
     svg {
       font-size: pxtorem(19px);
     }
@@ -51,7 +46,6 @@
 
   &--header {
     svg {
-      color: #d8d8d8;
       margin-right: space(10);
     }
   }
@@ -69,10 +63,10 @@
 
   button {
     padding: 0;
-    color: $elm;
+    color: $downy;
   }
 
-  h4 {
+  h3 {
     font-family: $font-primary;
     font-weight: normal;
     display: inline;
@@ -93,8 +87,7 @@
   }
 
   @include for-tablet-landscape-up {
-    background-color: $alabaster;
-    border-radius: 19px;
+    background-color: $mercury;
     padding: space(24) !important;
   }
 }

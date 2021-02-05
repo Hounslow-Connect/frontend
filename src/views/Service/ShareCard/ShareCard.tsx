@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ShareCard: React.FunctionComponent = () => (
   <div className="service__share-card service__section">
-    <h4>Share</h4>
+    <h3>Share</h3>
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
       target="_blank"
@@ -14,7 +14,7 @@ const ShareCard: React.FunctionComponent = () => (
     </a>
 
     <a
-      href={`http://twitter.com/share?text=Connected Kingston&url=${window.location.href}`}
+      href={`http://twitter.com/share?text=Hounslow Connect&url=${window.location.href}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Share to Twitter"
@@ -30,7 +30,7 @@ const ShareCard: React.FunctionComponent = () => (
       <FontAwesomeIcon icon="link" />
     </a>
     <a
-      href={`mailto:?subject=Connected Kingston&amp;body=${window.location.href}"`}
+      href={`mailto:?subject=Hounslow Connect&amp;body=${window.location.href}"`}
       aria-label="Email service link"
     >
       <FontAwesomeIcon icon="envelope" />

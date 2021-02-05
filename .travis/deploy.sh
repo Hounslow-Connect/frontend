@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
 
 # Requires the following environment variables:
-# $TRAVIS_BRANCH = The branch the build is against.
+# $ENVIRONMENT = The environment (production/release/staging).
+# $AWS_ACCESS_KEY_ID = The AWS access key.
+# $AWS_SECRET_ACCESS_KEY = The AWS secret access key.
+# $AWS_DEFAULT_REGION = The AWS region.
+# $S3_BUCKET_NAME = The S3 bucket to deploy to.
+# $DISTRIBUTION_ID = The CloudFront distribution to invalidate.
 
 # Bail out on first error.
 set -e
 
-# Get the environment from the branch.
-case ${TRAVIS_BRANCH} in
-    master )
-        ENVIRONMENT=production
-        ;;
-    develop )
-        ENVIRONMENT=staging
-        ;;
-esac
-
 # Declare the configuration variables for the deployment.
 echo "Setting deployment configuration for ${ENVIRONMENT}..."
-ENV_SECRET_ID=".env.client.${ENVIRONMENT}"
+ENV_SECRET_ID=".env.frontend.${ENVIRONMENT}"
 
 # Get the .env file.
 echo "Downloading .env file..."
@@ -33,6 +28,5 @@ npm run build
 
 # Deploy to S3.
 echo "Deploying..."
-export $(cat .env | sed 's/#.*//g' | xargs)
-aws s3 sync build/ "s3://${S3_BUCKET_NAME}" --acl public-read
+aws s3 sync build/ "s3://${S3_BUCKET_NAME}" --acl public-read --delete
 aws cloudfront create-invalidation --distribution-id "${DISTRIBUTION_ID}" --paths "/*"

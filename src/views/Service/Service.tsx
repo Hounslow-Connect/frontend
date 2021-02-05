@@ -124,7 +124,7 @@ class Service extends Component<IProps> {
             <div className="flex-col flex-col--mobile--9">
               <h1>{get(service, 'name')}</h1>
               <p className="service__header__last-updated">
-                Page last updated <span>{moment(service!.updated_at).format('Do MMMM YYYY')}</span>
+                Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong><br />
                 <Button
                   text="Give feedback"
                   icon="comment"
@@ -390,7 +390,7 @@ class Service extends Component<IProps> {
             </section>
             <section className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
               <div className="flex-container service__right-column">
-                <div className="tablet-hide flex-col flex-col--10 criteria_card service__info__cost service__section">
+                <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
                   <CostCard service={service} />
                 </div>
                 {service.video_embed && (

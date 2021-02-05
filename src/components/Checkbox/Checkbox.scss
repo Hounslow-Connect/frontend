@@ -10,9 +10,10 @@
 
   input[type='checkbox'] + label {
     @include body-m;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     margin-bottom: 0;
-    color: $waikawa;
 
     svg {
       display: none;
@@ -29,24 +30,29 @@
       top: 4px;
       position: absolute;
       left: 4px;
-      color: $san_juan;
+      color: $black;
     }
   }
 
   input[type='checkbox'] + label > span {
     display: inline-block;
-    width: 35px;
-    height: 35px;
-    margin-right: 8px;
+    width: 36px;
+    height: 36px;
+    margin-right: space(12);
     vertical-align: middle;
     cursor: pointer;
     background-color: transparent;
-    border: 2px solid $san_juan;
+    border: 2px solid $black;
     position: relative;
+
+    @include for-phone-only {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   input[type='checkbox']:focus + label > span {
-    border-color: $puerto_rico;
+    border-color: $downy;
   }
 
   input[type='checkbox'] + label span:before,
