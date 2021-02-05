@@ -6,6 +6,10 @@
 .favourites {
   padding-bottom: space(64);
 
+  @include for-phone-only {
+    padding-bottom: space(32);
+  }
+
   &--container {
     @include for-tablet-portrait-up {
       padding: 0 !important;
@@ -216,9 +220,8 @@
   text-align: center;
 
   @include for-tablet-portrait-down {
-    margin: 0;
+    margin: space(16) 0 !important;
     padding: 0 space(24) !important;
-    margin-bottom: space(16);
   }
 }
 
@@ -226,6 +229,7 @@
   margin-top: space(64);
 
   @include for-phone-only {
+    margin-top: space(32);
     padding: space(32) !important;
 
     button {
