@@ -36,14 +36,19 @@
 
   input[type='checkbox'] + label > span {
     display: inline-block;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     margin-right: space(12);
     vertical-align: middle;
     cursor: pointer;
     background-color: transparent;
     border: 2px solid $black;
     position: relative;
+
+    @include for-phone-only {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   input[type='checkbox']:focus + label > span {

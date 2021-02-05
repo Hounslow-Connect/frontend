@@ -10,6 +10,11 @@
   padding: space(24) !important;
   background: $mercury;
 
+  @include for-phone-only {
+    margin: 0 !important;
+    padding: space(16) !important;
+  }
+
   h3 {
     color: $black;
   }
@@ -27,7 +32,7 @@
 
   &--container {
     @include for-tablet-portrait-down {
-      margin-bottom: space(24) !important;
+      margin-bottom: space(16) !important;
     }
   }
 }

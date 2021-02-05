@@ -51,7 +51,6 @@ class Header extends Component<IProps> {
               {
                 'header--top-row--iceberg':
                   location.pathname === '/' || location.pathname.includes('/favourites'),
-                'header--top-row--favourites': location.pathname.includes('/favourites'),
               }
             )}
           >
@@ -80,7 +79,6 @@ class Header extends Component<IProps> {
             className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
               'header__brand--active': burgerMenuOpen,
               'header__brand--sticky': uiStore.keywordEditOpen,
-              'header__brand--favourites': location.pathname.includes('/favourites'),
             })}
           >
             <figure className="logo">

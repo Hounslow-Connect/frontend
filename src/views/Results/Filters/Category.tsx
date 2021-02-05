@@ -21,7 +21,7 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
         <h1 className="results__keyword-heading">Results for</h1>
       </div>
       {(resultsStore.category || resultsStore.persona) && (
-        <div className="flex-container category__info flex-container--mobile-no-padding">
+        <div className="flex-container category__info">
           <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
             <h2>
               {resultsStore && resultsStore.category
