@@ -69,7 +69,7 @@ class Results extends Component<IProps> {
         <div className="results__list">
           {this.hasCategories() && (
             <div className="results__category-sidebar">
-              <div className="flex-container flex-container--mobile-no-padding">
+              <div className="flex-container">
                 {map(this.hasCategories(), (sidebox: ISidebox) => {
                   return <SideboxCard sidebox={sidebox} />;
                 })}
