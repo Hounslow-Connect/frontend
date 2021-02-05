@@ -27,7 +27,7 @@ const CMSPage: React.FunctionComponent<IProps> = ({ title, children, twoColumn, 
         {twoColumn ? (
           children
         ) : (
-          <div className="flex-col flex-col--6 flex-col--tablet--8">{children}</div>
+          <div className="flex-col flex-col--9 flex-col--tablet--12">{children}</div>
         )}
       </div>
     </main>
