@@ -117,15 +117,16 @@ button {
 }
 
 .goog-te-gadget-simple {
+  height: 32px !important;
   background-color: $white;
-  border: none;
-  font-size: pxtorem(14px);
+  border: none !important;
+  font-size: pxtorem(14px) !important;
   line-height: 2rem !important;
   height: auto !important;
   display: inline-block;
   cursor: pointer;
   zoom: 1;
-  padding: 0 space(8);
+  padding: 0 space(8) !important;
   margin: 0;
   font-weight: normal;
   box-sizing: border-box;
