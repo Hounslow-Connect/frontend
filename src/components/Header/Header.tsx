@@ -6,8 +6,7 @@ import { NavLink as RouterLink, withRouter, RouteComponentProps } from 'react-ro
 
 import './Header.scss';
 
-import Logo from '../../assets/logo/logo.png';
-// import MobileLogo from '../../assets/logo/logo-mobile.svg';
+import Logo from '../../assets/logo/logo.svg';
 
 import Button from '../Button';
 import WindowSizeStore from '../../stores/windowSizeStore';
