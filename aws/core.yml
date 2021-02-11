@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create the core infrastructure needed to run the Connected Together Frontend
+Description: Create the core infrastructure needed to run the One Hounslow Connect Frontend
 
 Outputs:
   BucketName:
@@ -63,7 +63,7 @@ Parameters:
     Type: String
 
   Uuid:
-    Default: 3f10123b-9cd5-41e5-965b-0b7276cfef39
+    Default: 13247d04-8f6c-41c6-b991-3dc61d2f674b
     Description: The unique ID for this stack.
     MaxLength: '36'
     MinLength: '36'
