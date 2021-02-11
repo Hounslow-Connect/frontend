@@ -39,4 +39,8 @@
   &:last-of-type {
     margin-right: 0;
   }
+
+  @include for-tablet-landscape-down {
+    margin-left: 0;
+  }
 }
