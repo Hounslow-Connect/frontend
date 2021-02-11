@@ -109,7 +109,9 @@ class Referral extends Component<IProps> {
             <div className="flex-container">
               <div className="flex-col flex-col--mobile--12 flex-col--tablet--12 referral--mobile-connect">
                 <p className="body--s">Connect to</p>
-                <p className="body--s referral--mobile-connect--name">{referralStore.service.name}</p>
+                <p className="body--s referral--mobile-connect--name">
+                  {referralStore.service.name}
+                </p>
               </div>
             </div>
           </div>
@@ -176,7 +178,8 @@ class Referral extends Component<IProps> {
                       </div>
                       <div className="flex-col flex-col--mobile--10 flex-col--tablet--11">
                         <p>
-                          This form should take no longer than <strong>5 minutes</strong> to complete.
+                          This form should take no longer than <strong>5 minutes</strong> to
+                          complete.
                         </p>
                       </div>
                     </div>
@@ -218,7 +221,7 @@ class Referral extends Component<IProps> {
                   <span
                     className="body--s"
                     dangerouslySetInnerHTML={{ __html: referralStore.stepDescription }}
-                  ></span>
+                  />
                 </div>
               </div>
             </div>

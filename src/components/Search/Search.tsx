@@ -110,12 +110,14 @@ class Search extends React.Component<IProps> {
                   {!!SearchStore.covidCategories.length && (
                     <Fragment>
                       <label className="search__heading" htmlFor="category">
-                        <h2>COVID-19 <FontAwesomeIcon icon="virus" /></h2>
+                        <h2>
+                          COVID-19 <FontAwesomeIcon icon="virus" />
+                        </h2>
                       </label>
                       <div className="flex-col--6 flex-col--mobile--12">
                         <p className="search__category-subtitle">
-                          Find up to date information and support in Hounslow to help you take care of
-                          yourself and your community.
+                          Find up to date information and support in Hounslow to help you take care
+                          of yourself and your community.
                         </p>
                       </div>
                       {!isMobile && (
