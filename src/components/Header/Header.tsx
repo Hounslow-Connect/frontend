@@ -45,13 +45,10 @@ class Header extends Component<IProps> {
           })}
         >
           <div
-            className={cx(
-              'header--top-row header__actions',
-              {
-                'header--top-row--iceberg':
-                  location.pathname === '/' || location.pathname.includes('/favourites'),
-              }
-            )}
+            className={cx('header--top-row header__actions', {
+              'header--top-row--iceberg':
+                location.pathname === '/' || location.pathname.includes('/favourites'),
+            })}
           >
             <div className="flex-container flex-container--no-wrap flex-container--right">
               <div className="flex-col header--top-row--button-box">
@@ -82,7 +79,7 @@ class Header extends Component<IProps> {
           >
             <figure className="logo">
               <RouterLink to="/" aria-label="Home Link">
-                <img src={Logo} alt="Hounslow Connect"/>
+                <img src={Logo} alt="Hounslow Connect" />
                 {/* <ReactSVG src={isMobile ? MobileLogo : Logo} /> */}
               </RouterLink>
             </figure>
@@ -95,7 +92,7 @@ class Header extends Component<IProps> {
               onClick={() => toggleBurgerMenu()}
             >
               <span className="nav-trigger--button" />
-              <i className="bars fa fa-bars" aria-hidden title="Menu Trigger"></i>
+              <i className="bars fa fa-bars" aria-hidden={true} title="Menu Trigger" />
               <span className="sr-only">Menu Trigger</span>
             </button>
           </div>
