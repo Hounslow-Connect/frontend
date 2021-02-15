@@ -129,3 +129,15 @@
 .footer-mobile-menu {
   text-align: left;
 }
+
+.footer-hounslow-logo {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin-top: space(32);
+  margin-left: auto;
+
+  @include for-phone-only {
+    margin-left: 0;
+  }
+}
