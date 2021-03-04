@@ -22,9 +22,9 @@ interface IState {
   bounds: LatLngBounds;
 }
 
-const CENTRE_OF_Hounslow: [number, number] = [51.378583, -0.280582];
-const TOP_LEFT_CORNER: [number, number] = [51.412437, -0.329297];
-const BOTTOM_RIGHT_CORNER: [number, number] = [51.403871, -0.288459];
+const CENTRE_OF_Hounslow: [number, number] = [51.460729410758496, -0.3726421426363473];
+const TOP_LEFT_CORNER: [number, number] = [51.50023670726737, -0.45281640857676737];
+const BOTTOM_RIGHT_CORNER: [number, number] = [51.425008878160575, -0.27232107871209366];
 
 class MapView extends Component<IProps, IState> {
   constructor(props: IProps) {
