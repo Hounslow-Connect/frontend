@@ -142,7 +142,8 @@
   }
 
   @include for-tablet-landscape-up {
-    margin-bottom: space(32) !important;
+    padding-top: space(48) !important;
+    padding-bottom: space(48) !important;
   }
 }
 
