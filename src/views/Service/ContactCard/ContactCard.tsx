@@ -99,9 +99,9 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
             <FontAwesomeIcon icon={['fab', 'twitter']} className="service__social-icon" />
           </a>
         )}
-        {find(service.social_medias, { type: 'intstagram' }) && (
+        {find(service.social_medias, { type: 'instagram' }) && (
           <a
-            href={getSocialUrl(find(service.social_medias, { type: 'intstagram' }))}
+            href={getSocialUrl(find(service.social_medias, { type: 'instagram' }))}
             aria-label={`Link to ${service.name} Instagram`}
             target="_blank"
             rel="noopener noreferrer"
