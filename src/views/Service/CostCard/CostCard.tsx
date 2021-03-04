@@ -16,7 +16,7 @@ const CostCard: React.FunctionComponent<IProps> = ({ service }) => (
     </div>
     <div className="flex-col flex-col--9 flex-col--tablet--8 flex-col--mobile--8">
       <p>{service.fees_text ? service.fees_text : `This ${service.type} costs no money`}</p>
-      <p>{service.fees_url && <a href={service.fees_url}>Further Pricing Details</a>}</p>
+      <p>{service.fees_url && <a href={service.fees_url} target="_blank" rel="noopener noreferrer">Further Pricing Details</a>}</p>
     </div>
   </div>
 );

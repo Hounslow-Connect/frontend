@@ -10,7 +10,7 @@ interface IProps extends RouteComponentProps {
 }
 
 const ReferralCard: React.FunctionComponent<IProps> = ({ history, id }) => (
-  <div className="flex-container flex-container--align-center flex-container--justify flex-container--mobile-no-padding service__referral">
+  <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__referral">
     <div className="flex-col flex-col--tablet--6 flex-col--mobile--12 flex-col--mobile-small--12">
       <Button
         text="Make a connection"
@@ -18,10 +18,10 @@ const ReferralCard: React.FunctionComponent<IProps> = ({ history, id }) => (
         onClick={() => history.push(`/referral?service=${id}`)}
       />
     </div>
-    <div className="flex-col flex-col--tablet--12">
-      <div className="flex-container flex-container--justify flex-container--mobile-no-padding service__refer-disclaimer">
+    <div className="flex-col">
+      <div className="flex-container flex-container--no-padding flex-container--align-center service__refer-disclaimer">
         <div className="flex-col--1">
-          <FontAwesomeIcon icon="info-circle" />
+          <FontAwesomeIcon icon="info-circle" size="lg" />
         </div>
         <div className="flex-col--11">
           <p>
