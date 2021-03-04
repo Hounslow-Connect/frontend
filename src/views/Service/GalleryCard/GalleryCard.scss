@@ -60,7 +60,6 @@
   }
 
   &--image {
-    @include image;
     position: relative;
 
     @include for-phone-only {
@@ -92,8 +91,6 @@
     }
 
     &--one {
-      @include image;
-
       border-top-left-radius: 17px;
       border-top-right-radius: 17px;
     }
@@ -109,6 +106,10 @@
       @include for-phone-only {
         height: pxtorem(70px);
       }
+    }
+
+    img {
+      @include image;
     }
   }
 

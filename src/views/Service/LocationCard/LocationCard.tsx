@@ -113,7 +113,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
           <div className="flex-col flex-col--4 location__image">
             {location.has_image && (
               <img
-                src={`${apiBase}/service-locations/${location.id}/image.png?max_dimension=90`}
+                src={`${apiBase}/service-locations/${location.id}/image.png?max_dimension=250`}
                 alt={`${get(location, 'location.address_line_1')}`}
               />
             )}
