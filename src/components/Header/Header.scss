@@ -107,7 +107,7 @@
     z-index: 1;
 
     @include for-tablet-landscape-down {
-      padding: space(16) 0 !important;
+      padding: space(8) 0 !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -182,7 +182,7 @@
       height: auto;
 
       @include for-phone-only {
-        width: 90px;
+        width: 120px;
       }
     }
   }
@@ -258,6 +258,12 @@
 
   @include for-tablet-portrait-down {
     margin-bottom: 0;
+  }
+
+  .flex-col {
+    @include for-tablet-portrait-down {
+      width: auto;
+    }
   }
 }
 
