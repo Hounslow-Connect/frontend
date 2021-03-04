@@ -46,31 +46,26 @@
   }
 
   &__image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: right;
     overflow: hidden;
 
-    @include for-tablet-portrait-down {
-      width: 60px;
-      height: 60px;
-      position: absolute;
-      right: 20px;
+    @include for-phone-only {
+      margin-top: space(16);
+      text-align: left;
     }
 
     img {
       object-fit: contain;
       width: 170px;
       height: auto;
-
-      @include for-tablet-portrait-down {
-        width: 50px;
-        height: 50px;
-      }
     }
   }
 
   &__row {
     margin-bottom: space(32);
+
+    @include for-phone-only {
+      margin-bottom: space(16);
+    }
   }
 }
