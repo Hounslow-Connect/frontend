@@ -60,7 +60,9 @@
   }
 
   &--image {
+    @include image;
     position: relative;
+
     @include for-phone-only {
       display: flex;
     }
@@ -82,12 +84,10 @@
     }
 
     &--left {
-      @include image;
       border-top-left-radius: 17px;
     }
 
     &--right {
-      @include image;
       border-top-right-radius: 17px;
     }
 

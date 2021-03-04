@@ -3,11 +3,11 @@
 @import '../../../styles/breakpoints.scss';
 
 .criteria_card {
+  width: 100%;
   padding: space(16);
   background-color: $mercury;
 
   @include for-tablet-portrait-up { 
-    width: 45%;
     display: flex;
   }
 }

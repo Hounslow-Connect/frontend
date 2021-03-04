@@ -14,6 +14,8 @@ interface ILinkProps {
   inline?: boolean;
   header?: boolean;
   className?: string;
+  target?: string;
+  rel?: string;
 }
 
 const Link: React.FunctionComponent<ILinkProps> = ({
@@ -25,6 +27,8 @@ const Link: React.FunctionComponent<ILinkProps> = ({
   iconPosition,
   header,
   className,
+  target,
+  rel,
 }) => (
   <a
     href={href}
@@ -33,6 +37,8 @@ const Link: React.FunctionComponent<ILinkProps> = ({
       link__header: header,
       [className as string]: className,
     })}
+    target={target}
+    rel={rel}
   >
     {icon && iconPosition === 'left' && (
       <FontAwesomeIcon icon={icon} className="link__icon--left" />

@@ -8,9 +8,17 @@
 }
 
 .location__image {
+  padding-right: space(32);
   text-align: center;
+
   img {
+    width: 100%;
+    height: auto;
     border: 1px solid $black;
+  }
+
+  @include for-tablet-portrait-down {
+    margin-top: space(24) !important;
   }
 }
 
@@ -34,9 +42,7 @@
 }
 
 .location__opening-times {
-  @include for-tablet-portrait-down {
-    margin-top: space(24) !important;
-  }
+  margin-top: space(24) !important;
 
   h3 {
     svg {
@@ -45,6 +51,8 @@
   }
 
   &--header {
+    margin-bottom: space(8);
+
     svg {
       margin-right: space(10);
     }

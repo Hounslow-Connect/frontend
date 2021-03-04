@@ -29,11 +29,11 @@ const GalleryTwo: React.FunctionComponent<IProps> = ({ gallery }) => (
   <div className="flex-col--12 ">
     <div className="flex-container flex-container--mobile-no-padding">
       <div className="flex-col--6 gallery-card--image--container gallery-card--image">
-        <img src={gallery[0].url} className="gallery-card--image--left" alt="1 of 2" />
+        <img src={gallery[0].url} className="gallery-card--image gallery-card--image--left" alt="1 of 2" />
       </div>
 
       <div className="flex-col--6 gallery-card--image--container gallery-card--image">
-        <img src={gallery[1].url} className="gallery-card--image--right" alt="2 of 2" />
+        <img src={gallery[1].url} className="gallery-card--image gallery-card--image--right" alt="2 of 2" />
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@ const GalleryThree: React.FunctionComponent<IProps> = ({ gallery }) => (
   <div className="flex-col--12">
     <div className="flex-container flex-container--mobile-no-padding">
       <div className="flex-col--4 flex-col--mobile--6">
-        <img src={gallery[0].url} className="gallery-card--image--left" alt="1 of 3" />
+        <img src={gallery[0].url} className="gallery-card--image gallery-card--image--left" alt="1 of 3" />
       </div>
       <div className="flex-col--8 flex-col--mobile--6">
         <div className="flex-container flex-container--mobile-no-padding">
@@ -54,9 +54,9 @@ const GalleryThree: React.FunctionComponent<IProps> = ({ gallery }) => (
             >
               <img
                 src={image.url}
-                className={cx('gallery-card--image--right  gallery-card--image--small', {
+                className={cx('gallery-card--image gallery-card--image--small', {
                   'gallery-card--image--center': i === 0,
-                  'gallery-card--image--square': i === 1,
+                  'gallery-card--image--right': i === 1,
                 })}
                 alt={`${i + 2} of 3`}
               />

@@ -83,6 +83,8 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
           <a
             href={getSocialUrl(find(service.social_medias, { type: 'facebook' }))}
             aria-label={`Link to ${service.name} Facebook`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'facebook-f']} className="service__social-icon" />
           </a>
@@ -91,14 +93,18 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
           <a
             href={getSocialUrl(find(service.social_medias, { type: 'twitter' }))}
             aria-label={`Link to ${service.name} Twitter`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'twitter']} className="service__social-icon" />
           </a>
         )}
-        {find(service.social_medias, { type: 'intstagram' }) && (
+        {find(service.social_medias, { type: 'instagram' }) && (
           <a
-            href={getSocialUrl(find(service.social_medias, { type: 'intstagram' }))}
+            href={getSocialUrl(find(service.social_medias, { type: 'instagram' }))}
             aria-label={`Link to ${service.name} Instagram`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'instagram']} className="service__social-icon" />
           </a>
@@ -107,6 +113,8 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
           <a
             href={getSocialUrl(find(service.social_medias, { type: 'youtube' }))}
             aria-label={`Link to ${service.name} Youtube`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'youtube']} className="service__social-icon" />
           </a>
