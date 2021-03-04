@@ -247,22 +247,18 @@ class Service extends Component<IProps> {
                     />
                   </div>
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
-                    <h3>What we offer?</h3>
+                    <h2>What we offer?</h2>
                   </div>
 
                   {!!service.offerings.length && (
                     <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
-                      {map(service.offerings, (offering: any, i) => (
-                        <Fragment key={offering.offering}>
-                          <span>{capitalise(offering.offering)}</span>
-                          {i < service.offerings.length - 1 ? (
-                            <FontAwesomeIcon
-                              icon="circle"
-                              style={{ fontSize: 8, verticalAlign: 'middle', margin: '0 10px' }}
-                            />
-                          ) : null}
-                        </Fragment>
-                      ))}
+                      <ul>
+                        {map(service.offerings, (offering: any, i) => (
+                          <Fragment key={offering.offering}>
+                            <li>{capitalise(offering.offering)}</li>
+                          </Fragment>
+                        ))}
+                      </ul>
                     </div>
                   )}
 

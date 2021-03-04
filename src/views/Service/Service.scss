@@ -178,26 +178,12 @@
 }
 
 .service__referral {
-  background-color: $brink-pink;
+  background-color: $bright-sun;
   padding: space(32) !important;
   position: relative;
 
-  .flex-col {
-    display: flex;
-    justify-content: center;
-  }
-
   @include for-tablet-landscape-down {
     padding: space(32) space(16) !important;
-  }
-
-  @include for-tablet-landscape-up {
-    &:after {
-      content: url('../../assets/images/trees/iceberg-small.svg');
-      position: absolute;
-      top: -35px;
-      right: 20px;
-    }
   }
 
   &--desktop {
@@ -223,6 +209,10 @@
     p {
       @include body-l;
       margin-bottom: space(40);
+
+      @include for-phone-only {
+        margin-bottom: space(16);
+      }
     }
   }
 
@@ -268,12 +258,6 @@
         }
       }
     }
-  }
-
-  h1,
-  h2,
-  h3 {
-    @include heading-s;
   }
 
   a {
@@ -322,22 +306,31 @@
 }
 
 .service__button-container {
-  padding: space(24) 0 !important;
+  padding: space(32) 0 space(24) !important;
 
   @include for-tablet-landscape-down {
+    padding: space(32) space(16) space(24) !important;
+
     svg {
       display: none;
     }
   }
 
   @include for-phone-only {
-    padding: space(24) !important;
-
     justify-content: space-evenly !important;
   }
 
   &--mobile {
-    text-align: center;
+    padding-right: space(16);
+
+    @include for-phone-only {
+      margin-bottom: space(16) !important;
+      text-align: center;
+    }
+  }
+
+  .button {
+    width: 100%;
   }
 }
 
@@ -378,6 +371,7 @@
   p {
     font-family: $font-primary;
     font-size: pxtorem(30px);
+    line-height: pxtorem(32px);
     padding: space(8);
   }
 
@@ -558,17 +552,22 @@
   display: flex;
   align-items: center;
   margin-top: space(24);
-  margin-bottom: space(40) !important;
-  @include body-m;
+  margin-bottom: space(16) !important;
   font-family: $font-primary;
 
-  svg {
-    margin: 0 space(8);
+  @include for-phone-only {
+    margin-top: space(8);
+    margin-bottom: 0 !important;
+  }
+
+  ul li {
+    margin-bottom: space(12);
+    @include body-m;
   }
 }
 
 .service__heading {
-  margin-bottom: space(16);
+  margin-bottom: space(32);
 
   @include for-phone-only {
     font-size: $font-body-l !important;
