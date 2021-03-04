@@ -155,7 +155,7 @@ class Service extends Component<IProps> {
                   </div>
                 )}
                 <div
-                  className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding"
+                  className="criteria-cards service__section service__section--no-padding"
                   style={{ alignItems: 'stretch' }}
                 >
                   {get(service, 'criteria.age_group') && (
