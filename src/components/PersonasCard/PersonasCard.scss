@@ -57,7 +57,7 @@
   height: 280px;
 
   @include for-phone-only {
-    height: auto;
+    height: 100px;
   }
 
   .image {
@@ -87,7 +87,7 @@
     @include for-phone-only {
       top: auto;
       left: 50%;
-      bottom: -70px;
+      bottom: -62px;
       right: auto;
       transform: translateX(-50%);
       border-left: 24px solid transparent;
