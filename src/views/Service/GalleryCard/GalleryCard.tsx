@@ -21,7 +21,9 @@ interface IGalleryItem {
 
 const GalleryOne: React.FunctionComponent<IProps> = ({ gallery }) => (
   <div className="flex-col--12 gallery-card--image--container gallery-card--one-container">
-    <img src={gallery[0].url} className="gallery-card--image--one" alt="1 of 1" />
+    <div className="gallery-card--image ">
+      <img src={gallery[0].url} className="gallery-card--image--one" alt="1 of 1" />
+    </div>
   </div>
 );
 
