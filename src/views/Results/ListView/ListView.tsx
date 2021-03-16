@@ -5,9 +5,11 @@ import find from 'lodash/find';
 import { observer } from 'mobx-react';
 
 import SearchResultCard from '../../../components/SearchResultCard';
+import CategoryList from '../../../components/CategoryList';
 
 import { IService } from '../../../types/types';
 import ResultsStore from '../../../stores/resultsStore';
+import SearchStore from '../../../components/Search/store';
 import { History } from 'history';
 import Loading from '../../../components/Loading';
 
@@ -32,7 +34,14 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
             return <SearchResultCard key={result.id} result={result} organisation={organisation} />;
           })
         ) : (
-          <h1>No results found</h1>
+          <div className="results__container--no-results">
+            <h1>Your search for "{resultsStore.keyword}" didn't return any results.</h1>
+            <p>You could try searching for a slightly different but related keyword. For example, "nursing home" instead of "care home".</p>
+            <div className="results__container__category-list">
+              <h2>You might also find searching by category might be helpful:</h2>
+              <CategoryList categories={SearchStore.categories} covid={true} />
+            </div>
+          </div>
         )}
       </main>
 

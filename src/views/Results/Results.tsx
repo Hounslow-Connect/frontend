@@ -76,62 +76,64 @@ class Results extends Component<IProps> {
               </div>
             </div>
           )}
-          <div className="flex-container flex-container--wrap results__filter-bar">
-            <div className="flex-col flex-col--6 results__container-count">
-              {!!resultsStore.results.length && !resultsStore.loading && (
-                <p>
-                  <strong>
-                    {resultsStore.view === 'grid'
-                      ? `${
-                          resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
-                        } services found`
-                      : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
-                  </strong>
-                </p>
+          {!!resultsStore.results.length &&
+            <div className="flex-container flex-container--wrap results__filter-bar">
+              <div className="flex-col flex-col--6 results__container-count">
+                {!!resultsStore.results.length && !resultsStore.loading && (
+                  <p>
+                    <strong>
+                      {resultsStore.view === 'grid'
+                        ? `${
+                            resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
+                          } services found`
+                        : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
+                    </strong>
+                  </p>
+                )}
+              </div>
+              {resultsStore.isKeywordSearch && (
+                <div className="flex-col flex-col--6">
+                  <div
+                    className={cx(
+                      'flex-container flex-container--align-center results__keyword-container',
+                      {
+                        'results__keyword-container--end': !resultsStore.postcode,
+                      }
+                    )}
+                  >
+                    <ViewFilters resultsSwitch={true} />
+                    {resultsStore.view === 'grid' && resultsStore.postcode && (
+                      <div
+                        className={cx(
+                          'flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-col--medium--5 flex-col--mobile-small--12 flex-container--mobile-no-padding results__sort-by-container',
+                          {
+                            'flex-col--medium--6': !resultsStore.postcode,
+                          }
+                        )}
+                      >
+                        <label htmlFor="orderBy" className="results__sort-by-label">
+                          Sort by:
+                        </label>
+                        <Select
+                          className="results__sort-by-select"
+                          options={[
+                            { value: 'relevance', text: 'Relevance' },
+                            { value: 'distance', text: 'Location' },
+                          ]}
+                          placeholder={resultsStore.order === 'distance' ? 'Location' : 'Relevance'}
+                          id="orderBy"
+                          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                            resultsStore.orderResults(e)
+                          }
+                          disabled={!resultsStore.postcode}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
-            {resultsStore.isKeywordSearch && (
-              <div className="flex-col flex-col--6">
-                <div
-                  className={cx(
-                    'flex-container flex-container--align-center results__keyword-container',
-                    {
-                      'results__keyword-container--end': !resultsStore.postcode,
-                    }
-                  )}
-                >
-                  <ViewFilters resultsSwitch={true} />
-                  {resultsStore.view === 'grid' && resultsStore.postcode && (
-                    <div
-                      className={cx(
-                        'flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-col--medium--5 flex-col--mobile-small--12 flex-container--mobile-no-padding results__sort-by-container',
-                        {
-                          'flex-col--medium--6': !resultsStore.postcode,
-                        }
-                      )}
-                    >
-                      <label htmlFor="orderBy" className="results__sort-by-label">
-                        Sort by:
-                      </label>
-                      <Select
-                        className="results__sort-by-select"
-                        options={[
-                          { value: 'relevance', text: 'Relevance' },
-                          { value: 'distance', text: 'Location' },
-                        ]}
-                        placeholder={resultsStore.order === 'distance' ? 'Location' : 'Relevance'}
-                        id="orderBy"
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          resultsStore.orderResults(e)
-                        }
-                        disabled={!resultsStore.postcode}
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
+          }
 
           {resultsStore.view === 'grid' ? (
             <ListView resultsStore={resultsStore} history={history} />
