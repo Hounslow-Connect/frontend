@@ -363,4 +363,8 @@
   @include for-tablet-portrait-down {
     margin-bottom: space(24) !important;
   }
+
+  &-heading {
+    margin-bottom: space(24);
+  }
 }

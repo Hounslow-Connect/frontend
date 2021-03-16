@@ -67,8 +67,11 @@ class Results extends Component<IProps> {
         </div>
 
         <div className="results__list">
-          {this.hasCategories() && (
+          {(this.hasCategories() && this.hasCategories().length !== 0) && (
             <div className="results__category-sidebar">
+              <div className="flex-container flex-container--justify">
+                <h2 className="results__category-sidebar-heading">Information you may find useful:</h2>
+              </div>
               <div className="flex-container">
                 {map(this.hasCategories(), (sidebox: ISidebox) => {
                   return <SideboxCard sidebox={sidebox} />;
@@ -80,15 +83,13 @@ class Results extends Component<IProps> {
             <div className="flex-container flex-container--wrap results__filter-bar">
               <div className="flex-col flex-col--6 results__container-count">
                 {!!resultsStore.results.length && !resultsStore.loading && (
-                  <p>
-                    <strong>
-                      {resultsStore.view === 'grid'
-                        ? `${
-                            resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
-                          } services found`
-                        : `${resultsStore.serviceWithLocations} services shown. Some services are only available online or by phone`}
-                    </strong>
-                  </p>
+                  <h3>
+                    Your search: {resultsStore.view === 'grid'
+                      ? `${
+                          resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
+                        } results found`
+                      : `${resultsStore.serviceWithLocations} results shown. Some services are only available online or by phone`}
+                  </h3>
                 )}
               </div>
               {resultsStore.isKeywordSearch && (
