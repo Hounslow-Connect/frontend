@@ -55,7 +55,11 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
               location,
               'location.address_line_2',
               ''
-            )}, ${get(location, 'location.postcode', '')}`}</p>
+            ) ? get(
+              location,
+              'location.address_line_2',
+              ','
+            ) : ''} ${get(location, 'location.postcode', '')}`}</p>
             <div className="flex-col flex-col--mobile--12 location__google-maps">
               <Link
                 icon="map"

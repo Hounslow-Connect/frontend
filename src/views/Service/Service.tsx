@@ -64,7 +64,7 @@ const iconMap = [
   { 'What to bring': 'shopping-bag' },
   { 'How to get here': 'map-signs' },
   { Parking: 'car' },
-  { 'Keeping updated': 'calander-alt' },
+  { 'Keeping updated': 'calendar-alt' },
   { 'Additional information': 'info-circle' },
 ];
 
@@ -310,6 +310,7 @@ class Service extends Component<IProps> {
                   <div className="mobile-hide">
                     <h2 className="service__heading">Good to know</h2>
                     {service.useful_infos.map((info: { title: string; description: string }) => {
+                      console.log(info.title);
                       const iconObj = find(iconMap, info.title);
                       const icon = get(iconObj, `${info.title}`);
 

@@ -214,6 +214,27 @@
         margin-bottom: space(16);
       }
     }
+
+    ul {
+      list-style-type: none;
+    }
+
+    ul li {
+      &:before {
+        content: '•';
+        margin: 0 pxtorem(4px);
+        color: $brink-pink;
+      }
+    }
+
+    li > p {
+      display: inline;
+      hyphens: auto;
+    }
+
+    li {
+      font-family: $font-primary;
+    }
   }
 
   &--description {
