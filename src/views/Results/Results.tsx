@@ -88,7 +88,7 @@ class Results extends Component<IProps> {
                       ? `${
                           resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
                         } results found`
-                      : `${resultsStore.serviceWithLocations} results shown. Some services are only available online or by phone`}
+                      : `${resultsStore.serviceWithLocations} results are shown on the map. Some results are not shown because they are only available online or by phone and not at a physical location.`}
                   </h3>
                 )}
               </div>
