@@ -294,7 +294,7 @@ class Service extends Component<IProps> {
 
                 {!!locations.length && (
                   <div className="mobile-hide service__section">
-                    <h2 className="service__heading">Where can I access it?</h2>
+                    <h2 className="service__heading">Where can I access this {service.type}?</h2>
 
                     {locations.map((location: IServiceLocation) => (
                       <LocationCard
