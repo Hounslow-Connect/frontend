@@ -246,12 +246,13 @@ class Service extends Component<IProps> {
                       className="service__markdown service__markdown--intro"
                     />
                   </div>
-                  <div className="flex-col flex-col--12 flex-col--mobile--12">
+
+                  <div className="flex-col flex-col--12 mobile-hide">
                     <h2>What we offer?</h2>
                   </div>
 
                   {!!service.offerings.length && (
-                    <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
+                    <div className="flex-col flex-col--12 service__offerings mobile-hide">
                       <ul>
                         {map(service.offerings, (offering: any, i) => (
                           <Fragment key={offering.offering}>
@@ -262,7 +263,7 @@ class Service extends Component<IProps> {
                     </div>
                   )}
 
-                  <div className="flex-col flex-col--mobile--12 service__section">
+                  <div className="flex-col service__section mobile-hide">
                     <ReactMarkdown
                       source={service.description}
                       className={cx('service__markdown service__markdown--description', {
@@ -324,6 +325,27 @@ class Service extends Component<IProps> {
                     <ReferralCard id={service.id} />
                   </div>
                 )}
+
+                <Accordian
+                  title={`What we offer?`}
+                  className="service__accordian mobile-show"
+                >
+                  {!!service.offerings.length && (
+                    <ul>
+                      {map(service.offerings, (offering: any, i) => (
+                        <Fragment key={offering.offering}>
+                          <li>{capitalise(offering.offering)}</li>
+                        </Fragment>
+                      ))}
+                    </ul>
+                  )}
+                  <ReactMarkdown
+                    source={service.description}
+                    className={cx('service__markdown service__markdown--description', {
+                      'service__markdown--description--tight': !service.offerings.length,
+                    })}
+                  />
+                </Accordian>
 
                 <Accordian
                   title={`How can I contact this ${service.type}?`}

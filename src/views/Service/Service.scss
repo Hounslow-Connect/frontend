@@ -474,6 +474,7 @@
 
 .service__cost-card {
   width: 100%;
+  padding: 0 space(16) !important;
 
   @include for-tablet-landscape-up {
     padding: 0 !important;
