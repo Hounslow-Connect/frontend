@@ -83,5 +83,11 @@
 }
 
 .search__cateogry-list {
+  display: flex;
+  flex-wrap: wrap;
   margin-top: space(24);
+
+  .button {
+
+  }
 }

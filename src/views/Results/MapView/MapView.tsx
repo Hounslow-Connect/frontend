@@ -104,7 +104,7 @@ class MapView extends Component<IProps, IState> {
             })}
           </Map>
         </div>
-        <div className="flex-col--3 flex-col--mobile--12 map__key--container">
+        <div className="flex-col--2 flex-col--mobile--12 map__key--container">
           <h3 className="map__key--heading">Map key</h3>
           <div className="map__key">
             <p className="map__key--description">

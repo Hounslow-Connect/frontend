@@ -172,7 +172,6 @@
 }
 
 .button__alt {
-  font-size: inherit;
   background-color: $white;
   color: inherit;
   border: 2px solid $black;
@@ -219,10 +218,19 @@
 
 .button__category {
   font-size: $font-body-m;
-  height: pxtorem(50px);
-  padding: 0 space(16);
+  height: auto;
+  padding: space(12) space(16);
   margin-right: space(20);
   margin-bottom: space(16);
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 1.5em !important;
+    height: 1.5em;
+    max-width: none;
+    vertical-align: middle;
+  }
 }
 
 .button__header {

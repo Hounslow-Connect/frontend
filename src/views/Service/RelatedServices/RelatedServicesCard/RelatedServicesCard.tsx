@@ -16,7 +16,9 @@ const RelatedServicesCard: React.FunctionComponent<IProps> = ({ service, history
     <div className="flex-col flex-col--12 flex-col--mobile--12">
       <h2>{service.name}</h2>
     </div>
-    <div className="flex-col flex-col--12 related-services--card--info">{service.intro}</div>
+    <div className="flex-col flex-col--12 related-services--card--info">
+      <p>{service.intro}</p>
+    </div>
     <div className="flex-container flex-container--align-center related-services--card--no-padding">
       <div className="flex-col flex-col--9 flex-col--mobile--10 flex-col--mobile-small--12">
         <Button

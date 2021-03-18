@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import './Banner.scss';
 import { IBanner } from '../../types/types';
 import ButtonLink from '../Button/ButtonLink';
-// import { apiBase } from '../../config/api';
+import { apiBase } from '../../config/api';
 
 interface IProps {
   banner: IBanner;
@@ -15,15 +15,15 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
     <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
       <div className="flex-col--12 banner__container">
         <div className="flex-container flex-container--no-padding">
-          <div className="flex-col--8 flex-col--tablet--10 flex-col--mobile--9">
+          <div className="flex-col--8 flex-col--tablet--10 flex-col--mobile--12">
             <h1 className="banner__title">{banner.title}</h1>
             <ReactMarkdown className="banner__row" source={banner.content} />
             <ButtonLink text={banner.button_text} href={banner.button_url} icon="arrow-right" />
           </div>
           {banner.has_image && (
-            <div>
+            <div className="flex-col--4 flex-col--tablet--2 flex-col--mobile--12">
               <div className="banner__image">
-                {/* <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" /> */}
+                <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" />
               </div>
             </div>
           )}

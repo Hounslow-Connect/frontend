@@ -3,7 +3,7 @@
 @import '../../styles/breakpoints.scss';
 
 .breadcrumb {
-  padding: space(8) 0;
+  padding: space(12) 0;
 
   > .flex-container {
     max-width: 1260px;
@@ -29,7 +29,7 @@
       font-size: pxtorem(16px);
 
       @include for-phone-only {
-        font-size: pxtorem(12px);
+        font-size: pxtorem(14px);
       }
     }
   }
@@ -44,14 +44,14 @@
     }
 
     @include for-phone-only {
-      font-size: pxtorem(12px) !important;
+      font-size: pxtorem(14px) !important;
     }
 
     a {
       font-size: pxtorem(16px) !important;
 
       @include for-phone-only {
-        font-size: pxtorem(12px) !important;
+        font-size: pxtorem(14px) !important;
       }
     }
   }
@@ -64,7 +64,7 @@
     @include for-phone-only {
       margin-left: space(8);
       margin-right: space(8);
-      font-size: pxtorem(11px) !important;
+      font-size: pxtorem(12px) !important;
     }
   }
 }
