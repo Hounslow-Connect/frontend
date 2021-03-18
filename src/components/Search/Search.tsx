@@ -143,7 +143,7 @@ class Search extends React.Component<IProps> {
                   )}
 
                   <label className="search__heading" htmlFor="category">
-                    {get(cmsStore, 'home.categories_title')}
+                    <strong>{get(cmsStore, 'home.categories_title')}</strong>
                   </label>
                   {isMobile && (
                     <Fragment>
