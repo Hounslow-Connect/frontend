@@ -6,10 +6,6 @@
 .leaflet-container {
   height: 100%;
   width: 100%;
-
-  a {
-    color: inherit;
-  }
 }
 
 .map {
@@ -77,8 +73,24 @@
 }
 
 .leaflet-popup-content {
+  margin: 0;
+
   @include for-phone-only {
     width: 70vw;
     height: 90%;
   }
+}
+
+.leaflet-popup-content-wrapper {
+  background: transparent;
+  border-radius: 0;
+}
+
+.leaflet-popup-tip-container {
+  bottom: -19px;
+}
+
+.leaflet-popup-tip {
+  background: $black;
+  box-shadow: none;
 }

@@ -26,6 +26,22 @@
   }
 }
 
+.results__container--no-results {
+  padding: space(64) space(40) space(16);
+
+  @include for-phone-only {
+    padding: space(32) space(12) space(16);
+  }
+}
+
+.results__container__category-list {
+  margin-top: space(32);
+
+  h2 {
+    margin-bottom: space(16);
+  }
+}
+
 .results__container-count {
   display: flex;
 }
@@ -346,5 +362,9 @@
 
   @include for-tablet-portrait-down {
     margin-bottom: space(24) !important;
+  }
+
+  &-heading {
+    margin-bottom: space(24);
   }
 }
