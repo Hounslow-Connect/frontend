@@ -35,6 +35,7 @@ import Accordian from '../../components/Accordian';
 import LocationCard from './LocationCard';
 import CostCard from './CostCard';
 import VideoCard from './VideoCard';
+import MapCard from './MapCard';
 import ContactCard from './ContactCard';
 import OrganisationCard from './OrganisationCard';
 import ButtonCard from './ButtonCard';
@@ -326,6 +327,17 @@ class Service extends Component<IProps> {
                   </div>
                 )}
 
+                {!!locations.length && (
+                  <Accordian
+                    title={`Where is this ${service.type}?`}
+                    className="service__accordian mobile-show"
+                  >
+                    <div className="service__map">
+                      <MapCard locations={locations} />
+                    </div>
+                  </Accordian>
+                )}
+
                 <Accordian
                   title={`What we offer?`}
                   className="service__accordian mobile-show"
@@ -417,6 +429,14 @@ class Service extends Component<IProps> {
                 {service.video_embed && (
                   <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">
                     <VideoCard video={service.video_embed} width="100%" />
+                  </div>
+                )}
+                {!!locations.length && (
+                  <div className="flex-col flex-col--12">
+                    <h2>{`Where is this ${service.type}?`}</h2>
+                    <div className="service__section service__map">
+                      <MapCard locations={locations} />
+                    </div>
                   </div>
                 )}
                 <div className="flex-col flex-col--12">
