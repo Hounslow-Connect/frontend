@@ -88,6 +88,14 @@ class MapView extends Component<IProps, IState> {
     this.setState({
       activeMarkerId: id
     });
+
+    let activeSearchResultCard = document.querySelector('.search-result-card.is-active');
+
+    if(activeSearchResultCard) {
+      activeSearchResultCard.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
   };
 
   render() {
