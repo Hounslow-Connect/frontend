@@ -35,6 +35,7 @@ import Accordian from '../../components/Accordian';
 import LocationCard from './LocationCard';
 import CostCard from './CostCard';
 import VideoCard from './VideoCard';
+import MapCard from './MapCard';
 import ContactCard from './ContactCard';
 import OrganisationCard from './OrganisationCard';
 import ButtonCard from './ButtonCard';
@@ -64,7 +65,7 @@ const iconMap = [
   { 'What to bring': 'shopping-bag' },
   { 'How to get here': 'map-signs' },
   { Parking: 'car' },
-  { 'Keeping updated': 'calander-alt' },
+  { 'Keeping updated': 'calendar-alt' },
   { 'Additional information': 'info-circle' },
 ];
 
@@ -246,12 +247,13 @@ class Service extends Component<IProps> {
                       className="service__markdown service__markdown--intro"
                     />
                   </div>
-                  <div className="flex-col flex-col--12 flex-col--mobile--12">
+
+                  <div className="flex-col flex-col--12 mobile-hide">
                     <h2>What we offer?</h2>
                   </div>
 
                   {!!service.offerings.length && (
-                    <div className="flex-col flex-col--12 flex-col--mobile--12 service__offerings">
+                    <div className="flex-col flex-col--12 service__offerings mobile-hide">
                       <ul>
                         {map(service.offerings, (offering: any, i) => (
                           <Fragment key={offering.offering}>
@@ -262,7 +264,7 @@ class Service extends Component<IProps> {
                     </div>
                   )}
 
-                  <div className="flex-col flex-col--mobile--12 service__section">
+                  <div className="flex-col service__section mobile-hide">
                     <ReactMarkdown
                       source={service.description}
                       className={cx('service__markdown service__markdown--description', {
@@ -293,7 +295,7 @@ class Service extends Component<IProps> {
 
                 {!!locations.length && (
                   <div className="mobile-hide service__section">
-                    <h2 className="service__heading">Where can I access it?</h2>
+                    <h2 className="service__heading">Where can I access this {service.type}?</h2>
 
                     {locations.map((location: IServiceLocation) => (
                       <LocationCard
@@ -310,6 +312,7 @@ class Service extends Component<IProps> {
                   <div className="mobile-hide">
                     <h2 className="service__heading">Good to know</h2>
                     {service.useful_infos.map((info: { title: string; description: string }) => {
+                      console.log(info.title);
                       const iconObj = find(iconMap, info.title);
                       const icon = get(iconObj, `${info.title}`);
 
@@ -323,6 +326,38 @@ class Service extends Component<IProps> {
                     <ReferralCard id={service.id} />
                   </div>
                 )}
+
+                {!!locations.length && (
+                  <Accordian
+                    title={`Where is this ${service.type}?`}
+                    className="service__accordian mobile-show"
+                  >
+                    <div className="service__map">
+                      <MapCard locations={locations} />
+                    </div>
+                  </Accordian>
+                )}
+
+                <Accordian
+                  title={`What we offer?`}
+                  className="service__accordian mobile-show"
+                >
+                  {!!service.offerings.length && (
+                    <ul>
+                      {map(service.offerings, (offering: any, i) => (
+                        <Fragment key={offering.offering}>
+                          <li>{capitalise(offering.offering)}</li>
+                        </Fragment>
+                      ))}
+                    </ul>
+                  )}
+                  <ReactMarkdown
+                    source={service.description}
+                    className={cx('service__markdown service__markdown--description', {
+                      'service__markdown--description--tight': !service.offerings.length,
+                    })}
+                  />
+                </Accordian>
 
                 <Accordian
                   title={`How can I contact this ${service.type}?`}
@@ -394,6 +429,14 @@ class Service extends Component<IProps> {
                 {service.video_embed && (
                   <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">
                     <VideoCard video={service.video_embed} width="100%" />
+                  </div>
+                )}
+                {!!locations.length && (
+                  <div className="flex-col flex-col--12">
+                    <h2>{`Where is this ${service.type}?`}</h2>
+                    <div className="service__section service__map">
+                      <MapCard locations={locations} />
+                    </div>
                   </div>
                 )}
                 <div className="flex-col flex-col--12">

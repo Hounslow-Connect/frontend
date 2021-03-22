@@ -74,8 +74,8 @@ class MapView extends Component<IProps, IState> {
 
     return (
       <main className="flex-container">
-        <div className="flex-col--10 flex-col--mobile--12 map">
-          <Map cente={CENTRE_OF_Hounslow} attributionControl={false} bounds={this.state.bounds}>
+        <div className="flex-col--9 flex-col--mobile--12 map">
+          <Map centre={CENTRE_OF_Hounslow} attributionControl={false} bounds={this.state.bounds}>
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
             {resultsStore.results.map((result: IService) => {
               const organisation =
