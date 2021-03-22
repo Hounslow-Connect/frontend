@@ -6,91 +6,48 @@
 .leaflet-container {
   height: 100%;
   width: 100%;
+
+  a {
+    color: inherit;
+  }
 }
 
 .map {
+  max-height: calc(100vh - 64px);
+  
+  @include for-phone-only {
+    max-height: unset;
+  }
+}
+
+.map__map-container {
   position: relative;
-  width: 70%;
-  height: 600px;
+  height: calc(100vh - 64px);
   overflow: hidden;
 
   @include for-phone-only {
     height: 400px;
+    margin-bottom: space(32) !important;
   }
 }
 
-.map__key--container {
-  @include for-tablet-portrait-down {
-    margin-top: space(24);
-    padding: 0;
-  }
-
-  padding: 0 space(24);
-  width: 30%;
-}
-
-.map__key--heading {
-  color: $black;
-  margin-left: space(16);
-  margin-bottom: space(12);
-}
-
-.map__key--description {
-  color: $black;
-  font-family: $font-primary;
-}
-
-.map__key {
-  background-color: $mercury;
-  padding: space(24);
-}
-
-.map__key-icon {
-  margin-right: space(20);
-  height: 16px !important;
-  width: 16px !important;
-  font-size: 16px;
-}
-
-.map__key-icon--group {
-  color: $downy;
-}
-
-.map__key-icon--service {
-  color: $black;
-}
-
-.map__key-icon--activity {
-  color: $brink-pink;
-}
-
-.map__key-icon--club {
-  color: $lynch;
-}
-
-.map__key--description {
-  margin-bottom: space(16);
-}
-
-.leaflet-popup-content {
-  margin: 0;
+.map__results-container {
+  padding-right: space(16);
+  max-height: calc(100vh - 64px);
+  overflow-y: scroll;
 
   @include for-phone-only {
-    width: 70vw;
-    height: 90%;
+    max-height: unset;
+    padding-right: 0;
   }
-}
 
-.leaflet-popup-content-wrapper {
-  background: transparent;
-  border-radius: 0;
-}
+  .results__container {
+    margin: 0;
+    padding: 0 !important;
+  }
 
-.leaflet-popup-tip-container {
-  bottom: -19px;
-}
-
-.leaflet-popup-tip {
-  background: $black;
-  box-shadow: none;
+  .search-result-card {
+    width: 100%;
+    margin: 0 0 space(16) 0;
+  }
 }

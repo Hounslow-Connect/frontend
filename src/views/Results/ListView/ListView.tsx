@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import Pagination from 'react-js-pagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import find from 'lodash/find';
 import { observer } from 'mobx-react';
 
-import SearchResultCard from '../../../components/SearchResultCard';
+import List from './List';
 import CategoryList from '../../../components/CategoryList';
 
-import { IService } from '../../../types/types';
 import ResultsStore from '../../../stores/resultsStore';
 import SearchStore from '../../../components/Search/store';
 import { History } from 'history';
@@ -25,25 +23,21 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
 
   return (
     <Fragment>
-      <main className="results__container">
-        {!!resultsStore.results.length ? (
-          resultsStore.results.map((result: IService) => {
-            const organisation =
-              find(resultsStore.organisations, ['id', result.organisation_id]) || null;
-
-            return <SearchResultCard key={result.id} result={result} organisation={organisation} />;
-          })
-        ) : (
-          <div className="results__container--no-results">
-            <h1>Your search for "{resultsStore.keyword}" didn't return any results.</h1>
-            <p>You could try searching for a slightly different but related keyword. For example, "nursing home" instead of "care home".</p>
-            <div className="results__container__category-list">
-              <h2>You might also find searching by category might be helpful:</h2>
-              <CategoryList categories={SearchStore.categories} covid={true} />
-            </div>
+      {!!resultsStore.results.length ? (
+        <List
+          resultsList={resultsStore.results}
+          resultsStore={resultsStore}
+        />
+      ) : (
+        <div className="results__container--no-results">
+          <h1>Your search for "{resultsStore.keyword}" didn't return any results.</h1>
+          <p>You could try searching for a slightly different but related keyword. For example, "nursing home" instead of "care home".</p>
+          <div className="results__container__category-list">
+            <h2>You might also find searching by category might be helpful:</h2>
+            <CategoryList categories={SearchStore.categories} covid={true} />
           </div>
-        )}
-      </main>
+        </div>
+      )}
 
       <div className="flex-container flex-container--justify pagnation__container">
         {resultsStore.totalItems > resultsStore.itemsPerPage && (

@@ -153,7 +153,7 @@
   }
 
   @include for-tablet-landscape-down {
-    padding: 0 space(16) !important;
+    padding: space(32) space(16) !important;
     flex-direction: column-reverse;
   }
 
