@@ -214,6 +214,27 @@
         margin-bottom: space(16);
       }
     }
+
+    ul {
+      list-style-type: none;
+    }
+
+    ul li {
+      &:before {
+        content: '•';
+        margin: 0 pxtorem(4px);
+        color: $brink-pink;
+      }
+    }
+
+    li > p {
+      display: inline;
+      hyphens: auto;
+    }
+
+    li {
+      font-family: $font-primary;
+    }
   }
 
   &--description {
@@ -452,6 +473,7 @@
 
 .service__cost-card {
   width: 100%;
+  padding: 0 space(16) !important;
 
   @include for-tablet-landscape-up {
     padding: 0 !important;
@@ -588,5 +610,13 @@
     grid-template-columns: repeat(1, 1fr);
     gap: space(8);
     margin-top: 0;
+  }
+}
+
+.service__map {
+  height: 320px;
+
+  @include for-tablet-portrait-down {
+    padding: 0;
   }
 }
