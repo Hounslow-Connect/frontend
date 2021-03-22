@@ -1,0 +1,81 @@
+@import '../../../styles/breakpoints.scss';
+@import '../../../styles/mixins.scss';
+@import '../../../styles/fonts.scss';
+@import '../../../styles/colors.scss';
+
+.instruction-modal {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0;
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    padding: space(32);
+    text-align: center;
+    background-color: $mercury;
+  }
+
+  &__close {
+    position: absolute;
+    top: space(16);
+    right: space(16);
+
+    button {
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-left: space(8);
+      }
+    }
+  }
+
+  &__icon {
+    flex: 1 1 100%;
+    margin-bottom: space(32);
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      width: 62px;
+      height: 62px;
+      border-radius: 10px;
+      background-color: $white;
+    }
+
+    img {
+      max-width: 70%;
+    }
+  }
+
+  &__content {
+    p {
+      margin-bottom: space(16);
+    }
+
+    .svg-inline--fa {
+      margin: 0 4px;
+      color: $black;
+    }
+  }
+
+  &__footer {
+    width: 100%;
+    align-self: flex-end;
+    padding: space(48) space(32);
+    text-align: center;
+    background-color: $white;
+
+    .svg-inline--fa {
+      margin: 0 4px;
+      color: $black;
+    }
+  }
+}

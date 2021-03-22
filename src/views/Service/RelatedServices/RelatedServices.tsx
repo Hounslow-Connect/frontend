@@ -48,8 +48,7 @@ class RelatedServices extends Component<IProps, IState> {
       <section className="related-services">
         <div className="flex-container">
           <div className="flex-col flex-col--12 flex-col--mobile--12">
-            <h1>Related Services</h1>
-            <p className="body--l">Similar services for you to explore ...</p>
+            <h2>Other results you might be interested in</h2>
           </div>
         </div>
 
