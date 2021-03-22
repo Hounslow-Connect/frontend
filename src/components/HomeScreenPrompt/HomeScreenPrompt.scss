@@ -1,0 +1,77 @@
+@import '../../styles/colors.scss';
+@import '../../styles/grid.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
+
+.home-screen-prompt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000300;
+  transform: translateY(100%);
+  padding: space(16);
+  background-color: $mercury;
+  animation-name: slideUpPrompt;
+  animation-duration: 0.75s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  &__icon {
+    margin-right: space(16);
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 62px;
+      height: 62px;
+      border-radius: 10px;
+      background-color: $white;
+    }
+
+    img {
+      max-width: 70%;
+    }
+  }
+
+  &__ctas {
+    margin-top: space(16);
+
+    .button {
+      margin-right: space(12);
+      font-size: pxtorem(16px);
+      padding: space(8) space(12);
+      height: 2.5em;
+    }
+  }
+
+  &__title {
+    margin-bottom: space(8);
+    font-size: $font-heading-s;
+    color: $black;
+  }
+
+  &__description {
+    font-size: $font-body-xs;
+  }
+}
+
+@keyframes slideUpPrompt {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

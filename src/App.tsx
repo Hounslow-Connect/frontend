@@ -32,6 +32,7 @@ import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
 import Terms from './views/Terms';
 import FeedbackModal from './components/FeedbackModal';
+import HomeScreenPrompt from './components/HomeScreenPrompt';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 // add all free font awesome icons to project
@@ -79,6 +80,7 @@ class App extends Component {
               <Route component={NotFound} />
             </Switch>
             <FeedbackModal />
+            <HomeScreenPrompt />
             <Footer />
           </ScrollToTop>
         </Router>
