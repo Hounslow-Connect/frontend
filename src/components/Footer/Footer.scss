@@ -5,7 +5,7 @@
 
 .footer {
   position: relative;
-  border-top: 2px solid $brink-pink;
+  background-color: $bermuda;
   padding: space(32) 0;
   margin-top: pxtorem(0px);
 
@@ -90,11 +90,12 @@
 .footer__heading {
   @include heading-s;
 
-  .pink {
+  .highlight {
     display: inline-block;
     margin-top: 2px;
     padding: 2px 4px;
-    background-color: $brink-pink;
+    background-color: $black;
+    color: $bermuda;
   }
 }
 
@@ -114,10 +115,11 @@
 
   .button {
     background: transparent;
-    border: 2px solid $brink-pink;
-    color: $black;
+    background-color: $black;
+    color: $bermuda;
     font-size: pxtorem(18px);
     font-weight: 900;
+    border-radius: 4px;
   }
 
   @include for-phone-only {
