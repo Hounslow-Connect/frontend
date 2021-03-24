@@ -235,11 +235,11 @@
 
 .button__header {
   height: auto;
-  padding: 0 space(8);
+  padding: space(8) space(12);
   margin: 0 space(12);
   background-color: $white;
   color: $black;
-  font-size: pxtorem(14px);
+  font-size: pxtorem(20px);
   font-weight: normal;
   line-height: 2rem;
 
