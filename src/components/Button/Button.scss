@@ -152,6 +152,10 @@
   }
 }
 
+.button__image {
+  margin-right: space(24);
+}
+
 .button__icon {
   max-width: 20px;
 }
@@ -218,13 +222,22 @@
 }
 
 .button__category {
-  font-size: $font-body-m;
-  height: auto;
-  padding: space(12) space(16);
-  margin-right: space(20);
-  margin-bottom: space(16);
   display: flex;
   align-items: center;
+  padding: space(24) space(24);
+  height: auto;
+  border: none;
+  border-radius: 20px;
+  font-size: pxtorem(24px);
+  font-weight: 700;
+  text-align: left;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    background-color: $white;
+    color: $black;
+    transform: scale(1.025);
+  }
 
   svg {
     width: 1.5em !important;

@@ -1,14 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router';
-import get from 'lodash/get';
 
 import './CategoryList.scss';
 
 import { ICategory } from '../../types/types';
 import Button from '../Button';
-
-import CMSStore from '../../stores/CMSStore';
 
 interface IProps extends RouteComponentProps {
   categories: ICategory[];
@@ -26,7 +23,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, co
           text={name}
           key={id}
           size="small"
-          icon={icon}
+          image={'https://via.placeholder.com/60'}
           onClick={() => {
             history.push({
               pathname: '/results',

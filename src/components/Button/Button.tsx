@@ -9,6 +9,7 @@ interface IProps {
   text: string;
   size?: string;
   icon?: IconName;
+  image?: string;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
   alt?: boolean;
@@ -33,6 +34,7 @@ const Button: React.FunctionComponent<IProps> = ({
   light = false,
   onClick,
   covid = false,
+  image,
 }) => (
   <button
     className={cx('button', `button--${size}`, {
@@ -48,6 +50,9 @@ const Button: React.FunctionComponent<IProps> = ({
     type={type}
     onClick={onClick}
   >
+    {image && (
+      <img src={image} alt={text} className="button__image" />
+    )}
     {text}
     {icon && (
       <FontAwesomeIcon
