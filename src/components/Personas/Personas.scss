@@ -5,8 +5,8 @@
 
 .personas {
   position: relative;
-  padding-top: 188px !important;
-  padding-bottom: space(32) !important;
+  margin-top: space(40);
+  margin-bottom: space(40);
 
   &--intro {
     @include for-tablet-portrait-up {

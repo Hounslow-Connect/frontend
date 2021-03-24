@@ -15,13 +15,13 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
     <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
       <div className="flex-col--12 banner__container">
         <div className="flex-container flex-container--no-padding">
-          <div className="flex-col--8 flex-col--tablet--10 flex-col--mobile--12">
+          <div className="flex-col--6 flex-col--mobile--12 banner__content">
             <h1 className="banner__title">{banner.title}</h1>
             <ReactMarkdown className="banner__row" source={banner.content} />
             <ButtonLink text={banner.button_text} href={banner.button_url} icon="arrow-right" />
           </div>
           {banner.has_image && (
-            <div className="flex-col--4 flex-col--tablet--2 flex-col--mobile--12">
+            <div className="flex-col--6 flex-col--mobile--12">
               <div className="banner__image">
                 <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" />
               </div>

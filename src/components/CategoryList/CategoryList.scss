@@ -1,0 +1,15 @@
+@import '../../styles/mixins.scss';
+
+.category-list {
+  width: 100%;
+  max-width: 1030px;
+
+  &__heading {
+    margin-bottom: space(24);
+  }
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

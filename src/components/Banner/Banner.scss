@@ -6,12 +6,11 @@
 .banner {
   position: relative;
   z-index: 20;
-  margin-top: space(40);
-  margin-bottom: space(40);
+  padding: space(40);
+  background-image: linear-gradient(to top, $iceberg, $iceberg 50%, transparent 50%, transparent);
 
   @include for-tablet-portrait-down {
-    margin-top: space(32);
-    margin-bottom: space(32);
+    padding: space(32);
   }
 
   > .flex-container {
@@ -21,23 +20,28 @@
   &__container {
     position: relative;
     max-width: 1030px;
-    background-color: $bright-sun;
-    padding: space(32);
+    background-color: $black;
+  }
+
+  &__content {
+    position: relative;
+    padding: space(56);
+    background-color: $bermuda;
 
     @include for-tablet-landscape-down {
-      padding: space(20);
+      padding: space(32);
     }
 
     &::after {
       content: "";
       position: absolute;
-      bottom: -24px;
-      right: space(32);
+      top: 72px;
+      right: -48px;
       width: 0; 
-      height: 0; 
-      border-left: 24px solid transparent;
-      border-right: 24px solid transparent;
-      border-top: 24px solid $bright-sun;
+      height: 0;
+      border-bottom: 48px solid transparent;
+      border-top: 48px solid transparent;
+      border-left: 48px solid $bermuda;
     }
   }
 
@@ -62,7 +66,7 @@
   }
 
   &__row {
-    margin-bottom: space(32);
+    margin-bottom: space(24);
 
     @include for-phone-only {
       margin-bottom: space(16);

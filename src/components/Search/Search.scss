@@ -11,6 +11,8 @@
 .search__container {
   position: relative;
   height: auto;
+  padding-bottom: space(64);
+  background-color: $iceberg;
 }
 
 .search__inner-container {
@@ -18,13 +20,13 @@
   max-width: 1030px;
   height: 100%;
   position: relative;
-  padding: space(24) space(20) space(32);
-  margin-bottom: -120px;
-  background-color: $bermuda;
+  padding: space(32);
+  margin-bottom: space(40);
+  background-color: $bright-sun;
   z-index: 10;
 
   @include for-tablet-landscape-up {
-    padding: space(40) space(32);
+    padding: space(56);
   }
 
   &::after {
@@ -36,13 +38,12 @@
     height: 0; 
     border-left: 24px solid transparent;
     border-right: 24px solid transparent;
-    border-top: 24px solid $bermuda;
+    border-top: 24px solid $bright-sun;
   }
 }
 
 .search__input {
   width: 100%;
-  margin-bottom: space(16);
 
   button {
     margin: 0 space(20);
@@ -79,15 +80,5 @@
     @include for-tablet-landscape-up {
       @include marginLeft;
     }
-  }
-}
-
-.search__cateogry-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: space(24);
-
-  .button {
-
   }
 }

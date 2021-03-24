@@ -7,14 +7,14 @@ $font-primary: 'Nunito Sans', sans-serif;
 
 $font-base: pxtorem(16px);
 
-$font-heading-xl: pxtorem(36px);
-$font-heading-mobile-xl: pxtorem(22px);
+$font-heading-xl: pxtorem(48px);
+$font-heading-mobile-xl: pxtorem(32px);
 
-$font-heading-l: pxtorem(28px);
-$font-heading-mobile-l: pxtorem(27px);
+$font-heading-l: pxtorem(34px);
+$font-heading-mobile-l: pxtorem(24px);
 
-$font-heading-m: pxtorem(22px);
-$font-heading-mobile-m: pxtorem(24px);
+$font-heading-m: pxtorem(24px);
+$font-heading-mobile-m: pxtorem(20px);
 
 $font-heading-s: pxtorem(18px);
 
@@ -41,42 +41,43 @@ $font-link-medium: $font-base;
 @mixin heading-xl {
   font-size: $font-heading-xl;
   font-family: $font-primary;
-  font-weight: 900;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 4rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-xl;
-    line-height: 1.23;
+    line-height: 3rem;
   }
 }
 
 @mixin heading-l {
   font-size: $font-heading-l;
   font-family: $font-primary;
-  font-weight: 900;
-  line-height: 1.17;
+  font-weight: 700;
+  line-height: 3.5rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-l;
-    line-height: 1.2;
+    line-height: 3rem;
   }
 }
 
 @mixin heading-m {
   font-size: $font-heading-m;
   font-family: $font-primary;
-  font-weight: 900;
-  line-height: 1.14;
+  font-weight: 400;
+  line-height: 3rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-m;
+    line-height: 2.5rem;
   }
 }
 
 @mixin heading-s {
   font-size: $font-heading-s;
   font-family: $font-primary;
-  font-weight: 900;
+  font-weight: 400;
   line-height: 1.22;
 }
 
