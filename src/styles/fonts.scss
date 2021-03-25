@@ -42,7 +42,7 @@ $font-link-medium: $font-base;
   font-size: $font-heading-xl;
   font-family: $font-primary;
   font-weight: 700;
-  line-height: 4rem;
+  line-height: 3.5rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-xl;
@@ -54,11 +54,11 @@ $font-link-medium: $font-base;
   font-size: $font-heading-l;
   font-family: $font-primary;
   font-weight: 700;
-  line-height: 3.5rem;
+  line-height: 2.5rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-l;
-    line-height: 3rem;
+    line-height: 2.25rem;
   }
 }
 
@@ -66,11 +66,11 @@ $font-link-medium: $font-base;
   font-size: $font-heading-m;
   font-family: $font-primary;
   font-weight: 400;
-  line-height: 3rem;
+  line-height: 2.25rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-m;
-    line-height: 2.5rem;
+    line-height: 2rem;
   }
 }
 

@@ -7,7 +7,6 @@
   position: relative;
   z-index: 20;
   padding: space(40);
-  background-image: linear-gradient(to top, $iceberg, $iceberg 50%, transparent 50%, transparent);
 
   @include for-tablet-portrait-down {
     padding: space(32);

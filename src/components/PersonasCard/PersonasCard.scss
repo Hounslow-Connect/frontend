@@ -6,105 +6,35 @@
 .card {
   position: relative;
   display: flex;
+  flex-wrap: nowrap;
   align-content: center;
-  margin: space(32) 0;
+  width: 100%;
   background-color: $bright-sun;
-  border: 2px solid $bright-sun;
   font-family: $font-primary;
   cursor: pointer;
-
-  @include for-tablet-portrait-up {
-    width: 31.5% !important;
-  }
-
-  @include for-phone-only {
-    margin: space(12) 0 !important;
-    border: none;
-  }
-
-  .flex-container {
-    padding: 0 !important;
-    width: 100%;
-    align-items: flex-start;
-    align-content: flex-start;
-    height: 100%;
-
-    @include for-phone-only {
-      flex-wrap: wrap;
-      align-items: center;
-      align-content: center;
-      margin: 0 !important;
-    }
-  }
-
-  &:hover {
-    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-
-  &:last-child {
-    .card__description::after {
-      display: none;
-    }
-  }
 }
 
 .card__image {
-  height: 280px;
+  flex: 1 0 auto;
+  width: 33.333%;
 
-  @include for-phone-only {
-    height: 100px;
-  }
-
-  .image {
+  img {
     display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }
 
-.card__description {
-  position: relative;
-  box-sizing: border-box;
-  padding: space(24);
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -48px;
-    width: 0; 
-    height: 0; 
-    border-left: 24px solid $bright-sun;
-    border-right: 24px solid transparent;
-    border-top: 24px solid transparent;
-    border-bottom: 24px solid transparent;
-
-    @include for-phone-only {
-      top: auto;
-      left: 50%;
-      bottom: -62px;
-      right: auto;
-      transform: translateX(-50%);
-      border-left: 24px solid transparent;
-      border-right: 24px solid transparent;
-      border-top: 24px solid $bright-sun;
-      border-bottom: 24px solid transparent;
-    }
-  }
+.card__content {
+  flex: 0 1 auto;
+  padding: space(48) space(72);
 
   @include for-phone-only {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    padding: space(24);
   }
+}
 
-  @include for-phone-only {
-    padding: space(12);
-  }
+.card__header {
+  margin-bottom: space(16);
 }

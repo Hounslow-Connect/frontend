@@ -2,6 +2,8 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
 
+import './Home.scss';
+
 import SearchStore from '../../stores/searchStore';
 import CMSStore from '../../stores/CMSStore';
 
