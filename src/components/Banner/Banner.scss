@@ -46,4 +46,85 @@
       height: auto;
     }
   }
+
+  &__carousel {
+    position: relative;
+    width: 100%;
+    margin-bottom: space(40);
+    padding: space(16);
+
+    @include for-tablet-portrait-down {
+      margin-bottom: space(16);
+    }
+
+    .slide {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: space(32) space(64);
+      border-radius: 20px;
+      background-color: $white;
+
+      @include for-tablet-portrait-down {
+        flex-wrap: wrap;
+        padding: space(32);
+      }
+
+      .content {
+        max-width: 585px;
+        margin-bottom: space(24);
+        box-sizing: border-box;
+
+        @include for-tablet-portrait-up {
+          margin: 0;
+          padding-right: space(32);
+        }
+      }
+
+      .title {
+        margin-bottom: space(16);
+      }
+    }
+
+    .arrows {
+      @include for-tablet-portrait-down {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: space(16);
+      }
+    }
+
+    .arrow {
+      width: 54px;
+      height: 54px;
+      padding: space(16);
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      cursor: pointer;
+
+      @include for-tablet-portrait-up {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 62px;
+        height: 62px;
+      }
+
+      &-left {
+        left: -72px;
+      }
+
+      &-right {
+        right: -72px;
+
+        @include for-tablet-portrait-down {
+          margin-left: space(16);
+        }
+      }
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+  }
 }
