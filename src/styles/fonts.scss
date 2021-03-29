@@ -65,7 +65,7 @@ $font-link-medium: $font-base;
 @mixin heading-m {
   font-size: $font-heading-m;
   font-family: $font-primary;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 2.25rem;
 
   @include for-phone-only {

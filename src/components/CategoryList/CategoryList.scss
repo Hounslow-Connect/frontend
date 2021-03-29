@@ -1,4 +1,5 @@
 @import '../../styles/breakpoints.scss';
+@import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 
 .category-list {
@@ -7,8 +8,11 @@
   padding: 0 space(32);
 
   &__heading {
-    margin-left: space(24);
-    margin-bottom: space(24);
+    display: inline-block;
+    margin-bottom: space(32);
+    padding: space(20);
+    background-color: $downy;
+    border-radius: 20px;
   }
 
   &__items {
