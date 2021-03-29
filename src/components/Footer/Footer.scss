@@ -10,7 +10,9 @@
   margin-top: pxtorem(0px);
 
   @include for-phone-only {
-    padding: space(24) 0 space(24) 0;
+    &::before {
+      content: "";
+    }
   }
 
   &--inner-container {

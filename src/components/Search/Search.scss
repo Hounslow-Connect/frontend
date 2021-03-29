@@ -20,7 +20,7 @@
   height: 100%;
   position: relative;
   padding: space(32);
-  margin-bottom: space(40);
+  margin-bottom: space(24);
   background-color: $yellow;
   z-index: 10;
 
@@ -31,13 +31,13 @@
   &::after {
     content: "";
     position: absolute;
-    bottom: -24px;
-    right: space(32);
+    bottom: -38px;
+    right: calc(25% - 38px);
     width: 0; 
     height: 0; 
-    border-left: 24px solid transparent;
-    border-right: 24px solid transparent;
-    border-top: 24px solid $yellow;
+    border-left: 38px solid transparent;
+    border-right: 38px solid transparent;
+    border-top: 38px solid $yellow;
   }
 }
 

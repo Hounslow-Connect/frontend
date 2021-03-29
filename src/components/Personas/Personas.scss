@@ -8,16 +8,14 @@
   margin: auto;
 
   @include for-tablet-portrait-up {
-    padding: 0 space(40) space(56);
+    padding: 0 space(40) space(120);
   }
 
   &__intro {
     padding: space(32) space(24);
-    background-color: $white;
 
     @include for-tablet-portrait-up {
       padding: 0 space(24);
-      background-color: transparent;
     }
   }
 
@@ -40,14 +38,6 @@
   grid-template-columns: repeat(1, minmax(0, 1fr));
   max-width: 1030px;
 
-  > .card:nth-child(2) {
-    background-color: $pink;
-  }
-
-  > .card:nth-child(3) {
-    background-color: $turquoise;
-  }
-
   @include for-tablet-portrait-up {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: space(48) auto 0;
@@ -56,22 +46,13 @@
       grid-column: 1 / span 2;
     }
   
-    > .card:nth-child(2) {
+    > .card:nth-child(3) {
       grid-column: 3 ;
       grid-row: 1 / span 2;
       flex-direction: column;
-
-      .card__image {
-        width: 100%;
-        max-height: 230px;
-      }
-
-      .card__content {
-        padding: space(32);
-      }
     }
   
-    > .card:nth-child(3) {
+    > .card:nth-child(2) {
       grid-column: 1 / span 2;
       flex-direction: row-reverse;
     }

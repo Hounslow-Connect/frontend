@@ -5,10 +5,10 @@
 .category-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 26px;
+  gap: space(24);
   width: 1030px;
   max-width: 100%;
-  padding: 0 space(32);
+  padding: 0 space(56);
 
   @include for-tablet-portrait-down {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -21,7 +21,7 @@
   &__heading {
     grid-column: span 1;
     display: inline-block;
-    padding: space(20);
+    padding: space(16);
     background-color: $turquoise;
     border-radius: 20px;
     text-align: center;

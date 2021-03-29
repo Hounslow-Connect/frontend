@@ -58,7 +58,7 @@ $font-link-medium: $font-base;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-l;
-    line-height: 2.25rem;
+    line-height: 1.75rem;
   }
 }
 
