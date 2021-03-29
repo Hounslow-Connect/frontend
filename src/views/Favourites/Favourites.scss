@@ -19,7 +19,7 @@
 
 .favourites__header {
   padding: space(48) 0;
-  background-color: $bermuda;
+  background-color: $turquoise;
 
   &--share-container {
     padding: 0 !important;
@@ -177,7 +177,7 @@
     }
 
     &:focus {
-      border: 2px solid $downy;
+      border: 2px solid $turquoise;
     }
 
     &--more {

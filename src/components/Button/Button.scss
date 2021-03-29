@@ -34,11 +34,11 @@
   }
 
   &:active {
-    border: 2px solid $downy;
+    border: 2px solid $turquoise;
   }
 
   &:focus {
-    border: 2px solid $downy;
+    border: 2px solid $turquoise;
     outline: 0;
     text-decoration: none;
   }
@@ -86,9 +86,9 @@
 }
 
 .button--pink {
-  background-color: $brink-pink !important;
+  background-color: $pink !important;
   color: $white !important;
-  border: 2px solid $brink-pink !important;
+  border: 2px solid $pink !important;
 
   &:focus,
   &:hover {
@@ -99,9 +99,9 @@
 }
 
 .button--yellow {
-  background-color: $supernova !important;
+  background-color: $yellow !important;
   color: $black !important;
-  border: 2px solid $supernova !important;
+  border: 2px solid $yellow !important;
 
   &:focus,
   &:hover {
@@ -283,7 +283,7 @@
 
 .buton__burger-menu {
   background-color: transparent;
-  color: $brink-pink;
+  color: $pink;
   font-size: $font-body-s;
   font-family: $font-primary;
   display: block;

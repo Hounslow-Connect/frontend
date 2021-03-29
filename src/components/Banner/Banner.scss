@@ -25,7 +25,7 @@
   &__content {
     position: relative;
     padding: space(56);
-    background-color: $bermuda;
+    background-color: $turquoise;
 
     @include for-tablet-landscape-down {
       padding: space(32);
@@ -40,7 +40,7 @@
       height: 0;
       border-bottom: 48px solid transparent;
       border-top: 48px solid transparent;
-      border-left: 48px solid $bermuda;
+      border-left: 48px solid $turquoise;
     }
   }
 

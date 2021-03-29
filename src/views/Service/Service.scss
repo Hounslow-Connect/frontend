@@ -5,7 +5,7 @@
 
 .service__header {
   position: relative;
-  background-color: $bermuda;
+  background-color: $turquoise;
   padding: space(48) 0;
 
   .flex-container {
@@ -150,7 +150,7 @@
 }
 
 .service__info__cost {
-  background-color: $bright-sun !important;
+  background-color: $yellow !important;
 
   @include for-tablet-landscape-up {
     padding: space(12);
@@ -174,11 +174,11 @@
 }
 
 .react-player__shadow {
-  background-color: $brink-pink !important;
+  background-color: $pink !important;
 }
 
 .service__referral {
-  background-color: $bright-sun;
+  background-color: $yellow;
   padding: space(32) !important;
   position: relative;
 
@@ -223,7 +223,7 @@
       &:before {
         content: '•';
         margin: 0 pxtorem(4px);
-        color: $brink-pink;
+        color: $pink;
       }
     }
 
@@ -257,7 +257,7 @@
       &:before {
         content: '•';
         margin: 0 pxtorem(4px);
-        color: $brink-pink;
+        color: $pink;
       }
     }
 

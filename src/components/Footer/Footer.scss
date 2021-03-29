@@ -5,7 +5,7 @@
 
 .footer {
   position: relative;
-  background-color: $bermuda;
+  background-color: $pink;
   padding: space(32) 0;
   margin-top: pxtorem(0px);
 
@@ -95,7 +95,7 @@
     margin-top: 2px;
     padding: 2px 4px;
     background-color: $black;
-    color: $bermuda;
+    color: $pink;
   }
 }
 
@@ -116,7 +116,7 @@
   .button {
     background: transparent;
     background-color: $black;
-    color: $bermuda;
+    color: $pink;
     font-size: pxtorem(18px);
     font-weight: 900;
     border-radius: 4px;
