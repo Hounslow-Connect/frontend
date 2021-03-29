@@ -6,7 +6,7 @@
 
 .header {
   overflow: hidden;
-  padding-bottom: space(16);
+  padding-bottom: space(32);
   background: $white;
   color: $black;
   text-align: right;
@@ -261,6 +261,8 @@
 }
 
 .header__content {
+  transform: translateY(-16px);
+
   @include for-tablet-landscape-down {
     width: 100%;
 
