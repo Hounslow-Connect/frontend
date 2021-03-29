@@ -61,7 +61,7 @@ class Search extends React.Component<IProps> {
                       </label>
                     </div>
                     <div
-                      className="flex-container flex-container--no-padding"
+                      className="flex-container flex-container--no-padding flex-container--justify"
                       style={{
                         margin: 0
                       }}
@@ -77,7 +77,7 @@ class Search extends React.Component<IProps> {
                         />
                       </div>
                       <span className="search__input__seperator">in</span>
-                      <div className="flex-col--mobile--12">
+                      <div>
                         <Input
                           id="location"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -88,22 +88,36 @@ class Search extends React.Component<IProps> {
                           value={SearchStore.location}
                         />
                       </div>
-                      {!isMobile && (
-                        <div className="flex-col--mobile--12">
-                          <Button
-                            text="Search"
-                            icon="search"
-                            type="submit"
-                            onClick={(e: React.FormEvent) => {
-                              e.preventDefault();
-                              history.push({
-                                pathname: '/results',
-                                search: `?search_term=${SearchStore.search}&location=${SearchStore.location}`,
-                              });
-                            }}
+                      {isMobile && (
+                        <Fragment>
+                          <p className="search__category-subtitle">
+                            {get(cmsStore, 'home.categories_title')}
+                          </p>
+                          <Select
+                            options={options}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                              SearchStore.setCategory(e)
+                            }
+                            className="search__category--mobile"
+                            placeholder="Category List"
+                            id="category"
                           />
-                        </div>
+                        </Fragment>
                       )}
+                      <div className="flex-col--mobile--12">
+                        <Button
+                          text="Search"
+                          icon="search"
+                          type="submit"
+                          onClick={(e: React.FormEvent) => {
+                            e.preventDefault();
+                            history.push({
+                              pathname: '/results',
+                              search: `?search_term=${SearchStore.search}&location=${SearchStore.location}`,
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -140,42 +154,10 @@ class Search extends React.Component<IProps> {
                 )}
               </div>
             </form>
-
-            {isMobile && (
-              <Fragment>
-                <p className="search__category-subtitle">
-                  {get(cmsStore, 'home.personas_content')}
-                </p>
-                <Select
-                  options={options}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    SearchStore.setCategory(e)
-                  }
-                  className="search__category--mobile"
-                  placeholder="Category List"
-                  id="category"
-                />
-                <Button
-                  text="Search"
-                  icon="search"
-                  size="small"
-                  type="submit"
-                  onClick={() =>
-                    SearchStore.categoryId
-                      ? history.push({
-                          pathname: '/results',
-                          search: `?category=${SearchStore.categoryId}`,
-                        })
-                      : history.push({
-                          pathname: '/results',
-                          search: `?search_term=${SearchStore.search}`,
-                        })
-                  }
-                />
-              </Fragment>
-            )}
-
-            <CategoryList categories={SearchStore.categories} title={get(cmsStore, 'home.categories_title')} />
+            
+            {!isMobile &&
+              <CategoryList categories={SearchStore.categories} title={get(cmsStore, 'home.categories_title')} />
+            }
           </div>
         </section>
       </Fragment>

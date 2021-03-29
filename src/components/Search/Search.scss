@@ -12,6 +12,10 @@
   position: relative;
   height: auto;
   padding-bottom: space(64);
+
+  @include for-phone-only {
+    padding-bottom: 0;
+  }
 }
 
 .search__inner-container {
@@ -19,12 +23,12 @@
   max-width: 1030px;
   height: 100%;
   position: relative;
-  padding: space(32) space(32) space(16) space(32);
-  margin-bottom: space(24);
+  padding: space(24) space(16);
   background-color: $yellow;
   z-index: 10;
 
   @include for-tablet-landscape-up {
+    margin-bottom: space(24);
     padding: space(56) space(56) space(40) space(56);
   }
 
@@ -45,8 +49,14 @@
   width: 100%;
 
   button {
-    margin: space(24) 0 space(24) space(24);
+    margin: space(8) 0 space(8) space(24);
     height: 62px;
+
+    @include for-phone-only {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+    }
   }
 
   &--row {
@@ -54,10 +64,19 @@
     justify-content: flex-start !important;
   }
 
+  .input--container {
+    width: 100%;
+    margin: space(8) 0;
+  }
+
   &__seperator {
     @include body-l;
     padding: 0 space(20);
     margin: auto;
+
+    @include for-phone-only {
+      margin: auto 0;
+    }
   }
 }
 
@@ -66,15 +85,24 @@
 }
 
 .search__category-subtitle {
-  margin: space(10) 0;
+  display: block;
+  width: 100%;
+  margin: space(16) 0;
+  font-size: pxtorem(20px);
+  text-align: center;
 }
 
 .search__category--mobile {
-  margin-bottom: space(32);
+  margin-bottom: space(24);
 }
 
 .search__heading {
   display: block;
+  margin-bottom: space(16);
+
+  @include for-phone-only {
+    text-align: center;
+  }
 
   &--category {
     @include for-tablet-landscape-up {
