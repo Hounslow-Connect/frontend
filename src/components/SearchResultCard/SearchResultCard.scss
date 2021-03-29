@@ -11,8 +11,8 @@
   color: $black;
   cursor: pointer;
 
-  &:hover {
-    box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+  &.is-active {
+    border: 4px solid $black;
   }
 
   @include for-tablet-landscape-up {
@@ -72,28 +72,25 @@
   padding: space(16);
 }
 
-.search-result-card__tag {
+.search-result-card__tags {
   display: flex;
   align-items: center;
-  width: max-content;
-  padding: 6px;
-  margin-top: space(16);
+  width: 100%;
+  padding: 0 space(16);
+}
+
+.search-result-card__tag {
+  margin-right: space(8);
+  margin-bottom: space(16);
+  padding: space(8);
   @include body-xs;
   line-height: 0.875rem;
   background-color: $black;
   color: $white;
-
-  @include for-phone-only {
-    margin: 0 0 space(16);
-  }
 }
 
 .search-result-card__tag--icon {
   margin-right: space(8);
-}
-
-.search-result-card__tag--cost {
-  margin: 0 space(8);
 }
 
 .search-result-card__tag--cost--free {
@@ -102,7 +99,8 @@
 
 .search-result-card__location {
   display: flex;
-  margin-top: space(16);
+  padding: 0 space(16);
+  margin-bottom: space(16);
 
   h4 {
     margin-left: space(8);
