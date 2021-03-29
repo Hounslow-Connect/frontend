@@ -3,28 +3,43 @@
 @import '../../styles/mixins.scss';
 
 .category-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
   width: 1030px;
   max-width: 100%;
   padding: 0 space(32);
 
+  @include for-tablet-portrait-down {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include for-phone-only {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
   &__heading {
+    grid-column: span 1;
     display: inline-block;
-    margin-bottom: space(32);
     padding: space(20);
     background-color: $turquoise;
     border-radius: 20px;
+    text-align: center;
   }
 
   &__items {
+    grid-column: span 3;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 26px;
 
     @include for-tablet-portrait-down {
+      grid-column: span 2;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     @include for-phone-only {
+      grid-column: span 1;
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }

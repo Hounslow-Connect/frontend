@@ -4,14 +4,6 @@
 @import '../../styles/breakpoints.scss';
 
 .banner {
-  position: relative;
-  z-index: 20;
-  padding: space(40);
-
-  @include for-tablet-portrait-down {
-    padding: space(32);
-  }
-
   > .flex-container {
     padding: 0;
   }
@@ -19,33 +11,20 @@
   &__container {
     position: relative;
     max-width: 1030px;
-    background-color: $black;
   }
 
   &__content {
-    position: relative;
-    padding: space(56);
-    background-color: $turquoise;
+    max-width: 632px;
+    padding: space(120) space(56) space(80);
 
-    @include for-tablet-landscape-down {
-      padding: space(32);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 72px;
-      right: -48px;
-      width: 0; 
-      height: 0;
-      border-bottom: 48px solid transparent;
-      border-top: 48px solid transparent;
-      border-left: 48px solid $turquoise;
+    h2 {
+      font-weight: 400;
     }
   }
 
   &__title {
     margin-bottom: space(8);
+    text-transform: uppercase;
   }
 
   &__image {
@@ -61,14 +40,6 @@
       object-fit: contain;
       width: 170px;
       height: auto;
-    }
-  }
-
-  &__row {
-    margin-bottom: space(24);
-
-    @include for-phone-only {
-      margin-bottom: space(16);
     }
   }
 }
