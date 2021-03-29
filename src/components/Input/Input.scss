@@ -5,12 +5,20 @@
 .input {
   @include body-m;
   width: 400px;
-  border: 2px solid $black;
-  padding: space(8) space(12);
+  border: none;
+  padding: space(20);
   color: $black;
+  border-radius: 4px;
+  font-size: pxtorem(16px);
+  line-height: 1rem;
+
+  @include for-phone-only {
+    width: 100%;
+  }
 
   &--container {
-    display: inline;
+    display: inline-block;
+    margin: space(24) 0;
   }
 
   &--error {

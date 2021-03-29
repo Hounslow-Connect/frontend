@@ -21,7 +21,8 @@
 }
 
 .button {
-  font-weight: 400;
+  font-size: pxtorem(20px);
+  font-weight: 700;
   background-color: $black;
   color: $white;
   border: none;

@@ -61,30 +61,35 @@ class Search extends React.Component<IProps> {
                       </label>
                     </div>
                     <div
-                      className="flex-container flex-container--align-center flex-container--mobile-no-padding"
+                      className="flex-container flex-container--no-padding"
                       style={{
-                        width: '100%',
-                        padding: 0,
-                        justifyContent: 'start',
-                        alignItems: 'normal',
+                        margin: 0
                       }}
                     >
-                      <div
-                        className={cx('flex-col--6 flex-col--tablet-large--6', {
-                          'flex-col--mobile--12': isMobile,
-                        })}
-                      >
+                      <div className="flex-col--mobile--12">
                         <Input
                           placeholder="Search for services, groups and activities"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            SearchStore.onChange(e)
+                            SearchStore.onChange(e, 'search')
                           }
                           id="search"
                           value={SearchStore.search}
                         />
                       </div>
+                      <span className="search__input__seperator">in</span>
+                      <div className="flex-col--mobile--12">
+                        <Input
+                          id="location"
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            SearchStore.onChange(e, 'location')
+                          }
+                          className="results__search-filter-location"
+                          placeholder="Postcode or town"
+                          value={SearchStore.location}
+                        />
+                      </div>
                       {!isMobile && (
-                        <div className="flex-col--3 flex-col--tablet-large--5">
+                        <div className="flex-col--mobile--12">
                           <Button
                             text="Search"
                             icon="search"
@@ -93,7 +98,7 @@ class Search extends React.Component<IProps> {
                               e.preventDefault();
                               history.push({
                                 pathname: '/results',
-                                search: `?search_term=${SearchStore.search}`,
+                                search: `?search_term=${SearchStore.search}&location=${SearchStore.location}`,
                               });
                             }}
                           />

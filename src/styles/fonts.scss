@@ -103,6 +103,7 @@ $font-link-medium: $font-base;
 @mixin body-l {
   font-size: $font-body-l;
   font-family: $font-primary;
+  font-weight: 700;
   line-height: 1.25;
 
   @include for-phone-only {
