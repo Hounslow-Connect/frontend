@@ -53,7 +53,7 @@ class KeywordFilter extends Component<IProps, IState> {
 
     return (
       <div className="results__filters">
-        <h2 className="mobile-hide results__keyword-heading">Filter results by</h2>
+        <h2 className="results__filters__heading">Filter results by</h2>
 
         <form className="flex-container flex-container--align-bottom flex-container--no-padding">
           <div className="flex-col flex-col--4 flex-col--tablet--4 flex-col--mobile--4 flex-col--tablet-large--5 flex-col--medium--3 flex-container--mobile-no-padding">

@@ -4,15 +4,17 @@
 @import '../../../styles/breakpoints.scss';
 
 .sidebox {
-  align-content: flex-start;
   height: 100%;
-  margin: 0 space(8) !important;
   padding: space(24) !important;
-  background: $mercury;
+  border-radius: 20px;
+  background: $pink;
 
-  @include for-phone-only {
-    margin: 0 !important;
-    padding: space(16) !important;
+  &:nth-child(2) {
+    background-color: $turquoise;
+  }
+
+  &:nth-child(3) {
+    background-color: $yellow;
   }
 
   h3 {

@@ -23,48 +23,27 @@ class CategoryFilter extends Component<IProps> {
     }
 
     return (
-      <div className="flex-col flex-col--5 flex-col--tablet-large--7 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
-        <div
-          className="flex-container flex-container--mobile-no-padding category__filters"
-          aria-label={`${resultsStore.results.length} services found. Refine results`}
+      <div
+        className="results__filters"
+        aria-label={`${resultsStore.results.length} services found. Refine results`}
+      >
+        <p
+          className="results__filters__header"
+          aria-label={resultsStore.is_free ? 'View paid services' : 'View free services'}
         >
-          <div className="flex-col flex-col--4 flex-col--tablet--6 flex-container--mobile-no-padding">
-            <p
-              className="category_filters--header--cost"
-              aria-label={resultsStore.is_free ? 'View paid services' : 'View free services'}
-            >
-              Cost
-            </p>
-            <Checkbox
-              id="is_free"
-              label="Free"
-              checked={resultsStore.is_free}
-              onChange={() => {
-                resultsStore.toggleIsFree();
-                history.push({
-                  search: resultsStore.updateQueryStringParameter('is_free', resultsStore.is_free),
-                });
-              }}
-            />
-          </div>
-          <div className="flex-col flex-col--8 flex-col--tablet--6 flex-container--mobile-no-padding view-filter__search-bar">
-            <p className="view-filter--header">View As</p>
-            <Button
-              text="Grid"
-              icon="th-large"
-              size="small"
-              light={resultsStore.view !== 'grid'}
-              onClick={() => resultsStore.toggleView('grid')}
-            />
-            <Button
-              text="Map"
-              icon="map"
-              size="small"
-              light={resultsStore.view !== 'map'}
-              onClick={() => resultsStore.toggleView('map')}
-            />
-          </div>
-        </div>
+          Cost
+        </p>
+        <Checkbox
+          id="is_free"
+          label="Free"
+          checked={resultsStore.is_free}
+          onChange={() => {
+            resultsStore.toggleIsFree();
+            history.push({
+              search: resultsStore.updateQueryStringParameter('is_free', resultsStore.is_free),
+            });
+          }}
+        />
       </div>
     );
   }

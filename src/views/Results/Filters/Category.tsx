@@ -18,25 +18,27 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
   return (
     <div className="flex-container">
       <div className="flex-col flex-col--12 flex-col--mobile--12">
-        <h1 className="results__keyword-heading">Results for</h1>
+        <h1 className="results__heading">Results for</h1>
       </div>
       {(resultsStore.category || resultsStore.persona) && (
-        <div className="flex-container category__info">
-          <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
-            <h2>
-              {resultsStore && resultsStore.category
-                ? get(resultsStore, 'category.name').replace('COVID-19:', '')
-                : get(resultsStore, 'persona.name')}
-            </h2>
-            <div>
-              <p className="category__info--intro">
+        <div className="results__overview">
+          <div className="flex-container flex-container--no-padding">
+            <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
+              <h2>
                 {resultsStore && resultsStore.category
-                  ? get(resultsStore, 'category.intro')
-                  : get(resultsStore, 'persona.intro')}
-              </p>
+                  ? get(resultsStore, 'category.name').replace('COVID-19:', '')
+                  : get(resultsStore, 'persona.name')}
+              </h2>
+              <div>
+                <p className="results__overview__intro">
+                  {resultsStore && resultsStore.category
+                    ? get(resultsStore, 'category.intro')
+                    : get(resultsStore, 'persona.intro')}
+                </p>
+              </div>
             </div>
+            <CategoryFilter />
           </div>
-          <CategoryFilter />
         </div>
       )}
     </div>

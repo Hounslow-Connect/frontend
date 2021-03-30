@@ -93,7 +93,7 @@ class Keyword extends Component<IProps, IState> {
       <Fragment>
         {/* Mobile Dropdown */}
         {uiStore.keywordEditOpen && (
-          <div className="mobile-show tablet-show tablet--large-show flex-container results__keyword-edit">
+          <div className="results__overview">
             <div className="flex-col">
               <div
                 role="button"
@@ -103,7 +103,7 @@ class Keyword extends Component<IProps, IState> {
                   uiStore.toggleKeywordEdit();
                 }}
               >
-                <span className="results__keyword-edit-toggle">
+                <span className="results__overview__edit-toggle">
                   <FontAwesomeIcon icon="chevron-left" /> Back
                 </span>
               </div>
@@ -123,16 +123,16 @@ class Keyword extends Component<IProps, IState> {
                   id="keyword"
                   value={this.state.keyword}
                   fullWidth={true}
-                  className="results__keyword-edit-input"
+                  className="results__overview__edit-input"
                   error={this.state.errors.keyword}
                   errorMessage="Please enter a search term"
                 />
               </div>
               <div className="flex-col">
                 <h2>Filter results by</h2>
-                <div className="flex-container flex-container--mobile-no-padding results__keyword-edit-filters">
+                <div className="flex-container flex-container--mobile-no-padding results__overview__edit-filters">
                   <div className="flex-col flex-col--mobile--6">
-                    <label htmlFor="location" className="results__keyword-filters--heading">
+                    <label htmlFor="location" className="results__overview__filters-heading">
                       Location
                     </label>
                     <Input
@@ -140,13 +140,13 @@ class Keyword extends Component<IProps, IState> {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         this.handleInputChange(e.target.value, 'postcode')
                       }
-                      className="results__search-filter-location"
+                      className="results__overview__filter-location"
                       placeholder="Postcode"
                       value={this.state.postcode}
                     />
                   </div>
                   <div className="flex-col flex-col--mobile--4">
-                    <p className="results__keyword-filters--heading">Cost</p>
+                    <p className="results__overview__filters-heading--heading">Cost</p>
                     <Checkbox
                       id="is_free"
                       label="Free"
@@ -154,11 +154,11 @@ class Keyword extends Component<IProps, IState> {
                       onChange={() => {
                         resultsStore.toggleIsFree();
                       }}
-                      className="results__keyword-edit-checkbox"
+                      className="results__overview__edit-checkbox"
                     />
                   </div>
                 </div>
-                <div className="flex-col results__keyword-edit-submit">
+                <div className="flex-col results__overview__edit-submit">
                   <Button
                     icon="search"
                     text="Search"
@@ -188,10 +188,10 @@ class Keyword extends Component<IProps, IState> {
           {/* Desktop */}
 
           <div className="flex-col flex-col--12 mobile-hide tablet-hide tablet--large-hide">
-            <h1 className="results__keyword-heading">Search results</h1>
+            <h1 className="results__overview__heading">Search results</h1>
           </div>
           <form
-            className="flex-container mobile-hide tablet-hide tablet--large-hide results__keyword-search-container"
+            className="flex-container mobile-hide tablet-hide tablet--large-hide results__overview__search-container"
             onSubmit={e => {
               e.preventDefault();
               history.push({
@@ -199,7 +199,7 @@ class Keyword extends Component<IProps, IState> {
               });
             }}
           >
-            <div className="flex-col flex-col--6 results__keyword-input-box">
+            <div className="flex-col flex-col--6 results__overview__input-box">
               <label htmlFor="keyword">
                 <h2>I'm looking for</h2>
               </label>
