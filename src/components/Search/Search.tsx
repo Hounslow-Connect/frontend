@@ -6,15 +6,13 @@ import cx from 'classnames';
 import get from 'lodash/get';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import SearchStore from './store';
+import SearchStore from '../../stores/searchStore';
 
 import './Search.scss';
 import CategoryList from '../CategoryList';
 import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
-import Personas from '../Personas';
-import Banner from '../Banner/Banner';
 import WindowSizeStore from '../../stores/windowSizeStore';
 import CMSStore from '../../stores/CMSStore';
 
@@ -49,7 +47,6 @@ class Search extends React.Component<IProps> {
       <Fragment>
         <section className="search__container">
           <div className="flex-container flex-container--justify">
-            {cmsStore.hasBanner && cmsStore.banner && <Banner banner={cmsStore.banner} />}
             <form className="flex--col--12 search__inner-container">
               <div className="flex-container flex-container--no-padding">
                 <div
@@ -64,50 +61,68 @@ class Search extends React.Component<IProps> {
                       </label>
                     </div>
                     <div
-                      className="flex-container flex-container--align-center flex-container--mobile-no-padding"
+                      className="flex-container flex-container--no-padding flex-container--justify"
                       style={{
-                        width: '100%',
-                        padding: 0,
-                        justifyContent: 'start',
-                        alignItems: 'normal',
-                        marginBottom: 24,
+                        margin: 0
                       }}
                     >
-                      <div
-                        className={cx('flex-col--6 flex-col--tablet-large--6', {
-                          'flex-col--mobile--12': isMobile,
-                        })}
-                      >
+                      <div className="flex-col--mobile--12">
                         <Input
                           placeholder="Search for services, groups and activities"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            SearchStore.onChange(e)
+                            SearchStore.onChange(e, 'search')
                           }
                           id="search"
                           value={SearchStore.search}
                         />
                       </div>
-                      {!isMobile && (
-                        <div className="flex-col--3 flex-col--tablet-large--5">
-                          <Button
-                            text="Search"
-                            icon="search"
-                            type="submit"
-                            onClick={(e: React.FormEvent) => {
-                              e.preventDefault();
-                              history.push({
-                                pathname: '/results',
-                                search: `?search_term=${SearchStore.search}`,
-                              });
-                            }}
+                      <span className="search__input__seperator">in</span>
+                      <div>
+                        <Input
+                          id="location"
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            SearchStore.onChange(e, 'location')
+                          }
+                          className="results__search-filter-location"
+                          placeholder="Postcode or town"
+                          value={SearchStore.location}
+                        />
+                      </div>
+                      {isMobile && (
+                        <Fragment>
+                          <p className="search__category-subtitle">
+                            {get(cmsStore, 'home.categories_title')}
+                          </p>
+                          <Select
+                            options={options}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                              SearchStore.setCategory(e)
+                            }
+                            className="search__category--mobile"
+                            placeholder="Category List"
+                            id="category"
                           />
-                        </div>
+                        </Fragment>
                       )}
+                      <div className="flex-col--mobile--12">
+                        <Button
+                          text="Search"
+                          icon="search"
+                          type="submit"
+                          onClick={(e: React.FormEvent) => {
+                            e.preventDefault();
+                            history.push({
+                              pathname: '/results',
+                              search: `?search_term=${SearchStore.search}&location=${SearchStore.location}`,
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="flex-col--12">
-                  {!!SearchStore.covidCategories.length && (
+                {!!SearchStore.covidCategories.length && (
+                  <div className="flex-col--12">
                     <Fragment>
                       <label className="search__heading" htmlFor="category">
                         <h2>
@@ -120,11 +135,6 @@ class Search extends React.Component<IProps> {
                           of yourself and your community.
                         </p>
                       </div>
-                      {!isMobile && (
-                        <div className="search__cateogry-list" style={{ marginBottom: 24 }}>
-                          <CategoryList categories={SearchStore.covidCategories} covid={true} />
-                        </div>
-                      )}
 
                       {isMobile && (
                         <Fragment>
@@ -140,56 +150,15 @@ class Search extends React.Component<IProps> {
                         </Fragment>
                       )}
                     </Fragment>
-                  )}
-
-                  <label className="search__heading" htmlFor="category">
-                    <strong>{get(cmsStore, 'home.categories_title')}</strong>
-                  </label>
-                  {isMobile && (
-                    <Fragment>
-                      <p className="search__category-subtitle">
-                        {get(cmsStore, 'home.personas_content')}
-                      </p>
-                      <Select
-                        options={options}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          SearchStore.setCategory(e)
-                        }
-                        className="search__category--mobile"
-                        placeholder="Category List"
-                        id="category"
-                      />
-                      <Button
-                        text="Search"
-                        icon="search"
-                        size="small"
-                        type="submit"
-                        onClick={() =>
-                          SearchStore.categoryId
-                            ? history.push({
-                                pathname: '/results',
-                                search: `?category=${SearchStore.categoryId}`,
-                              })
-                            : history.push({
-                                pathname: '/results',
-                                search: `?search_term=${SearchStore.search}`,
-                              })
-                        }
-                      />
-                    </Fragment>
-                  )}
-                  {!isMobile && (
-                    <div className="search__cateogry-list">
-                      <CategoryList categories={SearchStore.categories} />
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </form>
+            
+            {!isMobile &&
+              <CategoryList categories={SearchStore.categories} title={get(cmsStore, 'home.categories_title')} />
+            }
           </div>
-        </section>
-        <section>
-          <Personas personas={SearchStore.personas} />
         </section>
       </Fragment>
     );

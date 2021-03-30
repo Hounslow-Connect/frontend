@@ -6,10 +6,9 @@
 
 .header {
   overflow: hidden;
-  padding-bottom: space(16);
+  padding-bottom: space(32);
   background: $white;
   color: $black;
-  border-bottom: 2px solid $brink-pink;
   text-align: right;
 
   @include for-tablet-landscape-down {
@@ -46,6 +45,10 @@
   &--top-row {
     align-items: stretch !important;
 
+    button {
+      border-radius: 4px;
+    }
+
     &--button-box {
       display: flex;
       margin-right: space(8);
@@ -70,7 +73,7 @@
 
     &--favourites {
       @include for-tablet-landscape-down {
-        background-color: $iceberg;
+        background-color: $turquoise;
       }
     }
 
@@ -120,12 +123,12 @@
 
       &--sticky {
         position: fixed;
-        background-color: $iceberg;
+        background-color: $turquoise;
       }
 
       &--iceberg {
         @include for-phone-only {
-          background-color: $iceberg;
+          background-color: $turquoise;
         }
       }
 
@@ -158,17 +161,7 @@
 
       a {
         display: block;
-        color: $black;
-        margin-bottom: space(32);
-        font-size: pxtorem(20px);
-        font-family: $font-primary;
-        cursor: pointer;
-        text-decoration: none;
-        text-align: left;
-
-        &:hover {
-          text-decoration: underline;
-        }
+        margin-bottom: space(16);
       }
     }
   }
@@ -252,7 +245,7 @@
 }
 
 .header__actions {
-  background-color: $mercury;
+  background-color: $pink;
   padding: space(8) 0;
   margin-bottom: space(24);
 
@@ -268,6 +261,8 @@
 }
 
 .header__content {
+  transform: translateY(-16px);
+
   @include for-tablet-landscape-down {
     width: 100%;
 
@@ -282,6 +277,7 @@
 }
 
 .nav {
+  position: relative;
   display: inline-block;
   padding: space(12) space(16);
 
@@ -296,19 +292,7 @@
     @include for-tablet-landscape-down {
       float: none;
       display: block;
-      // margin: space(16);
       text-align: left;
-    }
-  }
-
-  &--active {
-    border: 2px solid $brink-pink;
-    color: $black;
-    padding: space(8) space(12);
-
-    &:hover {
-      background-color: $brink-pink;
-      text-decoration: none;
     }
   }
 }

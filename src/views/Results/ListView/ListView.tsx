@@ -7,7 +7,7 @@ import List from './List';
 import CategoryList from '../../../components/CategoryList';
 
 import ResultsStore from '../../../stores/resultsStore';
-import SearchStore from '../../../components/Search/store';
+import SearchStore from '../../../stores/searchStore';
 import { History } from 'history';
 import Loading from '../../../components/Loading';
 

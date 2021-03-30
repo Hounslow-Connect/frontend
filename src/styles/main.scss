@@ -119,14 +119,15 @@ button {
 .goog-te-gadget-simple {
   height: 32px !important;
   background-color: $white;
+  border-radius: 4px;
   border: none !important;
-  font-size: pxtorem(14px) !important;
+  font-size: pxtorem(20px) !important;
   line-height: 2rem !important;
   height: auto !important;
   display: inline-block;
   cursor: pointer;
   zoom: 1;
-  padding: 0 space(8) !important;
+  padding: 7px space(12) !important;
   margin: 0;
   font-weight: normal;
   box-sizing: border-box;
@@ -158,13 +159,13 @@ button {
     color: $black;
     content: 'Translate';
     font-family: 'Museo Sans 500', sans-serif;
-    font-size: pxtorem(14px);
+    font-size: pxtorem(20px) !important;
     font-weight: 400;
   }
 
   span &:after {
     content: '\f1ab';
-    font-size: pxtorem(14px);
+    font-size: pxtorem(20px) !important;
     font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
     font-weight: 900;
     color: $black;

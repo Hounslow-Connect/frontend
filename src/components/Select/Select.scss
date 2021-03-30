@@ -9,13 +9,13 @@ select,
   width: 100%;
   max-width: 320px;
   position: relative;
-  padding: space(12);
-  padding-right: space(40);
-  border: 2px solid $lynch;
+  padding: space(20) space(40) space(20) space(20);
+  border: none;
+  border-radius: 4px;
   box-shadow: none;
   background-image: url('../../assets/images/icons/icon-cheveron-selection.svg');
   background-repeat: no-repeat;
-  background-position: calc(100% - 10px) 5px;
+  background-position: calc(100% - 10px) 12px;
   background-color: $white;
   background-size: pxtorem(35px);
   color: $black;

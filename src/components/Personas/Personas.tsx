@@ -20,14 +20,12 @@ const Personas: React.FunctionComponent<IProps> = ({ personas, history, cmsStore
 
   return (
     <section className="personas" role="button">
-      <div className="flex-container">
-        <div className="flex-col flex-col--12 personas--intro">
-          <h2 className="personas__heading">{get(cmsStore, 'home.personas_title')}</h2>
-          <p>{get(cmsStore, 'home.personas_content')}</p>
-        </div>
+      <div className="personas__intro">
+        <h2 className="personas__heading">{get(cmsStore, 'home.personas_title')}</h2>
+        <p>{get(cmsStore, 'home.personas_content')}</p>
       </div>
 
-      <div className="personas__list flex-container flex-container--space-between">
+      <div className="personas__list">
         {personas.map(persona => (
           <PersonasCard
             key={persona.id}

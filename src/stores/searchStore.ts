@@ -3,10 +3,11 @@ import axios from 'axios';
 import get from 'lodash/get';
 import partition from 'lodash/partition';
 
-import { apiBase } from '../../config/api';
-import { ICategory, IPersona } from '../../types/types';
+import { apiBase } from '../config/api';
+import { ICategory, IPersona } from '../types/types';
 
 class SearchStore {
+  @observable location: string = '';
   @observable search: string = '';
   @observable categories: ICategory[] = [];
   @observable personas: IPersona[] = [];
@@ -19,6 +20,7 @@ class SearchStore {
   }
 
   @action clear = () => {
+    this.location = '';
     this.search = '';
     this.categoryId = '';
   };
@@ -58,8 +60,14 @@ class SearchStore {
     }
   };
 
-  @action onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.search = e.target.value;
+  @action onChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+    if(type === 'location') {
+      this.location = e.target.value;
+    }
+    
+    if(type === 'search') {
+      this.search = e.target.value;
+    }
   };
 }
 

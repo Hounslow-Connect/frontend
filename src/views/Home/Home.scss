@@ -1,0 +1,15 @@
+@import '../../styles/breakpoints.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.home {
+  background-color: $light-turquoise;
+  background-image: url('../../assets/images/backgrounds/park.svg');
+  background-position: center 320px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+
+  @include for-phone-only {
+    padding-bottom: space(40);
+  }
+}

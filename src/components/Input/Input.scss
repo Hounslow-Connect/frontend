@@ -5,17 +5,25 @@
 .input {
   @include body-m;
   width: 400px;
-  border: 2px solid $black;
-  padding: space(8) space(12);
+  border: none;
+  padding: space(20);
   color: $black;
+  border-radius: 4px;
+  font-size: pxtorem(16px);
+  line-height: 1rem;
+
+  @include for-phone-only {
+    width: 100%;
+  }
 
   &--container {
-    display: inline;
+    display: inline-block;
+    margin: space(24) 0;
   }
 
   &--error {
     display: block;
-    border-left: 2px solid $brink-pink;
+    border-left: 2px solid $pink;
     padding-left: space(16);
   }
 }
@@ -30,7 +38,7 @@
 
   &--show {
     display: inline-block;
-    color: $brink-pink;
+    color: $pink;
     margin-top: space(8);
   }
 }

@@ -31,6 +31,63 @@
   }
 }
 
+.map__key--container {
+  @include for-tablet-portrait-down {
+    margin-top: space(24);
+    padding: 0;
+  }
+
+  padding: 0 space(24);
+  width: 30%;
+}
+
+.map__key--heading {
+  color: $black;
+  margin-left: space(16);
+  margin-bottom: space(12);
+}
+
+.map__key--description {
+  color: $black;
+  font-family: $font-primary;
+}
+
+.map__key {
+  background-color: $mercury;
+  padding: space(24);
+}
+
+.map__key-icon {
+  margin-right: space(20);
+  height: 16px !important;
+  width: 16px !important;
+  font-size: 16px;
+}
+
+.map__key-icon--group {
+  color: $turquoise;
+}
+
+.map__key-icon--service {
+  color: $black;
+}
+
+.map__key-icon--activity {
+  color: $pink;
+}
+
+.map__key-icon--club {
+  color: $lynch;
+}
+
+.map__key--description {
+  margin-bottom: space(16);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+}
+
 .map__results-container {
   padding-right: space(16);
   max-height: calc(100vh - 64px);

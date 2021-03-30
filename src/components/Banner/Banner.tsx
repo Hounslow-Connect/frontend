@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Button from '../Button';
 
 import './Banner.scss';
 import { IBanner } from '../../types/types';
-import ButtonLink from '../Button/ButtonLink';
-import { apiBase } from '../../config/api';
 
 interface IProps {
   banner: IBanner;
@@ -15,18 +16,38 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
     <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
       <div className="flex-col--12 banner__container">
         <div className="flex-container flex-container--no-padding">
-          <div className="flex-col--8 flex-col--tablet--10 flex-col--mobile--12">
+          <div className="flex-col--12 banner__content">
             <h1 className="banner__title">{banner.title}</h1>
             <ReactMarkdown className="banner__row" source={banner.content} />
-            <ButtonLink text={banner.button_text} href={banner.button_url} icon="arrow-right" />
           </div>
-          {banner.has_image && (
-            <div className="flex-col--4 flex-col--tablet--2 flex-col--mobile--12">
-              <div className="banner__image">
-                <img src={`${apiBase}/settings/banner-image.png`} alt="Campaign logo" />
+
+          <div className="banner__carousel">
+            <div className="slides">
+              <div className="slide">
+                <div className="content">
+                  <h3 className="title">Current Campaigns</h3>
+                  <p>One Houslow Connect is an information, advice and guidance hub connecting local residents to local support.</p>
+                </div>
+                <Button
+                  text="Read more"
+                  icon="arrow-right"
+                  type="button"
+                />
               </div>
             </div>
-          )}
+            <div className="arrows">
+              <button className="arrow arrow-left">
+                <FontAwesomeIcon
+                  icon="chevron-left"
+                />
+              </button>
+              <button className="arrow arrow-right">
+                <FontAwesomeIcon
+                  icon="chevron-right"
+                />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
