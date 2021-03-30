@@ -24,6 +24,10 @@
     padding: space(20) space(64);
     text-overflow: ellipsis;
 
+    @include for-phone-only {
+      padding: space(16) 0;
+    }
+
     svg {
       font-size: pxtorem(20px);
 

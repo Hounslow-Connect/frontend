@@ -13,6 +13,10 @@
   color: $black;
   cursor: pointer;
 
+  @include for-phone-only {
+    width: 100%;
+  }
+
   &.is-active {
     border: 2px solid $black;
   }

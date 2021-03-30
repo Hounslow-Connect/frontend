@@ -43,4 +43,9 @@
 
 .view-filter--header {
   @include heading-m;
+
+  @include for-phone-only {
+    width: 100%;
+    margin-bottom: space(8);
+  }
 }
