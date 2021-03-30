@@ -29,14 +29,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: space(32);
   max-width: 1260px;
+  padding: 0 space(40);
   margin: 0 auto;
-  color: $black;
-
-  @include for-tablet-portrait-down {
-    margin-top: space(16);
-    padding: 0 space(8) !important;
-  }
 }
 
 .results__container--no-results {

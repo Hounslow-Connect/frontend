@@ -4,7 +4,6 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 import Checkbox from '../../../../components/Checkbox';
 import ResultsStore from '../../../../stores/resultsStore';
-import Button from '../../../../components/Button';
 
 import './CategoryFilter.scss';
 

@@ -153,7 +153,7 @@ class SearchResultCard extends React.Component<IProps> {
         >
           <Link to={`/services/${result.slug}`}>
             <span>View more</span>
-            <FontAwesomeIcon icon="arrow-alt-circle-right" />
+            <FontAwesomeIcon icon="arrow-right" />
           </Link>
         </div>
       </article>
