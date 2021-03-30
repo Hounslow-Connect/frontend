@@ -7,6 +7,8 @@ import Button from '../Button';
 import './Banner.scss';
 import { IBanner } from '../../types/types';
 
+import bannerIllo from '../../assets/images/park-bench.svg';
+
 interface IProps {
   banner: IBanner;
 }
@@ -18,12 +20,15 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => (
         <div className="flex-container flex-container--no-padding">
           <div className="flex-col--12 banner__content">
             <h1 className="banner__title">{banner.title}</h1>
-            <ReactMarkdown className="banner__row" source={banner.content} />
+            <ReactMarkdown className="banner__description" source={banner.content} />
           </div>
 
           <div className="banner__carousel">
             <div className="slides">
               <div className="slide">
+                <div className="image">
+                  <img src={bannerIllo} alt=""/>
+                </div>
                 <div className="content">
                   <h3 className="title">Current Campaigns</h3>
                   <p>One Houslow Connect is an information, advice and guidance hub connecting local residents to local support.</p>
