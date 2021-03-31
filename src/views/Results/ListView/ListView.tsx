@@ -64,6 +64,7 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
             }
             innerClass="pagination"
             activeClass="pagination__item--active"
+            activeLinkClass="pagination__link--active"
             itemClass="pagination__item"
             linkClass="pagination__link"
             linkClassPrev="pagination__link"

@@ -13,6 +13,10 @@
   color: $black;
   cursor: pointer;
 
+  @include for-tablet-portrait-down {
+    width: calc(50% - 16px);
+  }
+
   @include for-phone-only {
     width: 100%;
   }

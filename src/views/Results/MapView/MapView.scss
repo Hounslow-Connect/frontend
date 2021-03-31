@@ -15,7 +15,7 @@
 .map {
   max-height: calc(100vh - 64px);
   
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     max-height: unset;
   }
 }
@@ -23,9 +23,10 @@
 .map__map-container {
   position: relative;
   height: calc(100vh - 64px);
+  border-radius: 20px;
   overflow: hidden;
 
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     height: 400px;
     margin-bottom: space(32) !important;
   }
@@ -89,11 +90,11 @@
 }
 
 .map__results-container {
-  padding-right: space(16);
+  padding-right: space(24);
   max-height: calc(100vh - 64px);
   overflow-y: scroll;
 
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     max-height: unset;
     padding-right: 0;
   }
@@ -105,6 +106,13 @@
 
   .search-result-card {
     width: 100%;
-    margin: 0 0 space(16) 0;
+
+    @include for-tablet-portrait-down {
+      width: calc(50% - 16px);
+    }
+
+    @include for-phone-only {
+      width: 100%;
+    }
   }
 }

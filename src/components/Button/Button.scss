@@ -39,7 +39,6 @@
   }
 
   &:focus {
-    border: 2px solid $turquoise;
     outline: 0;
     text-decoration: none;
   }
@@ -292,10 +291,6 @@
   height: auto;
   margin-bottom: space(24);
   font-weight: normal;
-
-  &:focus {
-    border: inherit;
-  }
 
   &:hover {
     box-shadow: none;

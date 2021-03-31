@@ -67,7 +67,7 @@ class Results extends Component<IProps> {
         </div>
         <div className="results__info">
           <div className="flex-container">
-            <div className="results__info--wrapper">
+            <div className="results__info__wrapper">
               <div className="results__count">
                 {!!resultsStore.results.length && !resultsStore.loading && (
                   <p>

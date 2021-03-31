@@ -31,7 +31,7 @@ export default class ResultsStore {
   @observable loading: boolean = false;
   @observable currentPage: number = 1;
   @observable totalItems: number = 0;
-  @observable itemsPerPage: number = 25;
+  @observable itemsPerPage: number = 9;
   @observable postcode: string = '';
   @observable locationCoords: IGeoLocation | {} = {};
   @observable view: 'grid' | 'map' = 'grid';
@@ -171,10 +171,9 @@ export default class ResultsStore {
   fetchResults = async (params: IParams) => {
     this.loading = true;
     try {
-      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}`, params);
+      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, params);
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
-      this.itemsPerPage = get(results, 'data.meta.per_page', 9);
 
       forEach(this.results, (service: IService) => {
         // @ts-ignore
