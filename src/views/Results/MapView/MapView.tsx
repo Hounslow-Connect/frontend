@@ -132,7 +132,7 @@ class MapView extends Component<IProps, IState> {
           </Map>
 
           <div className="map__key--container">
-            <h3 className="map__key--heading">Map key</h3>
+            <h4 className="map__key--heading">Map key</h4>
             <div className="map__key">
               <p className="map__key--description">
                 <FontAwesomeIcon

@@ -23,7 +23,7 @@ class CategoryFilter extends Component<IProps> {
 
     return (
       <div
-        className="results__filters"
+        className="results__overview__filters"
         aria-label={`${resultsStore.results.length} services found. Refine results`}
       >
         <p

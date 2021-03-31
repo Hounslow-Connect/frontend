@@ -24,17 +24,20 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
         <div className="results__overview">
           <div className="flex-container flex-container--no-padding">
             <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
-              <h2>
-                {resultsStore && resultsStore.category
-                  ? get(resultsStore, 'category.name').replace('COVID-19:', '')
-                  : get(resultsStore, 'persona.name')}
-              </h2>
+              <img src={'https://via.placeholder.com/150'} />
               <div>
-                <p className="results__overview__intro">
+                <h2>
                   {resultsStore && resultsStore.category
-                    ? get(resultsStore, 'category.intro')
-                    : get(resultsStore, 'persona.intro')}
-                </p>
+                    ? get(resultsStore, 'category.name').replace('COVID-19:', '')
+                    : get(resultsStore, 'persona.name')}
+                </h2>
+                <div>
+                  <p className="results__overview__intro">
+                    {resultsStore && resultsStore.category
+                      ? get(resultsStore, 'category.intro')
+                      : get(resultsStore, 'persona.intro')}
+                  </p>
+                </div>
               </div>
             </div>
             <CategoryFilter />

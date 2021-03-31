@@ -4,27 +4,17 @@
 @import '../../../styles/breakpoints.scss';
 
 .leaflet-container {
-  height: 100%;
+  min-height: calc(100vh - 160px);
   width: 100%;
+  border-radius: 20px;
 
   a {
     color: inherit;
   }
 }
 
-.map {
-  max-height: calc(100vh - 64px);
-  
-  @include for-tablet-portrait-down {
-    max-height: unset;
-  }
-}
-
 .map__map-container {
   position: relative;
-  height: calc(100vh - 64px);
-  border-radius: 20px;
-  overflow: hidden;
 
   @include for-tablet-portrait-down {
     height: 400px;
@@ -32,37 +22,34 @@
   }
 }
 
-.map__key--container {
-  @include for-tablet-portrait-down {
-    margin-top: space(24);
-    padding: 0;
-  }
-
-  padding: 0 space(24);
-  width: 30%;
+.map__key--heading {
+  font-weight: 700;
+  margin-bottom: space(8);
 }
 
-.map__key--heading {
-  color: $black;
-  margin-left: space(16);
-  margin-bottom: space(12);
+.map__key--container {
+  margin-top: space(16);
+  padding: space(16) space(16) 0;
+  border-radius: 20px;
+  background-color: $white;
 }
 
 .map__key--description {
+  margin-right: space(24);
   color: $black;
   font-family: $font-primary;
+  font-size: pxtorem(14px);
 }
 
 .map__key {
-  background-color: $gray;
-  padding: space(24);
+  display: flex;
 }
 
 .map__key-icon {
-  margin-right: space(20);
-  height: 16px !important;
-  width: 16px !important;
-  font-size: 16px;
+  margin-right: space(8);
+  height: 14px !important;
+  width: 14px !important;
+  font-size: pxtorem(14px);
 }
 
 .map__key-icon--group {
@@ -90,8 +77,9 @@
 }
 
 .map__results-container {
+  position: relative;
   padding-right: space(24);
-  max-height: calc(100vh - 64px);
+  height: calc(100vh - 60px);
   overflow-y: scroll;
 
   @include for-tablet-portrait-down {
@@ -102,6 +90,7 @@
   .results__container {
     margin: 0;
     padding: 0 !important;
+    overflow: hidden;
   }
 
   .search-result-card {
