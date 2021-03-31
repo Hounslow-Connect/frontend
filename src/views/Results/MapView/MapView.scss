@@ -17,7 +17,6 @@
   position: relative;
 
   @include for-tablet-portrait-down {
-    height: 400px;
     margin-bottom: space(32) !important;
   }
 }
@@ -83,7 +82,7 @@
   overflow-y: scroll;
 
   @include for-tablet-portrait-down {
-    max-height: unset;
+    height: unset;
     padding-right: 0;
   }
 

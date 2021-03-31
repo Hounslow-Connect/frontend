@@ -433,9 +433,9 @@
   padding: 0 space(64);
   margin-bottom: space(32);
 
-  @include for-phone-only {
+  @include for-tablet-portrait-down {
     padding: 0;
-    margin-bottom: 0;
+    margin-bottom: space(16);
   }
 }
 
