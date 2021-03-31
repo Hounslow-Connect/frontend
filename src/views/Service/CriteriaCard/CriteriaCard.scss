@@ -5,7 +5,7 @@
 .criteria_card {
   width: 100%;
   padding: space(16);
-  background-color: $mercury;
+  background-color: $gray;
 
   @include for-tablet-portrait-up { 
     display: flex;

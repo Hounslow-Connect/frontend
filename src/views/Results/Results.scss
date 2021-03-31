@@ -21,6 +21,7 @@
 
 .results__list {
   position: relative;
+  padding-top: space(40);
   padding-bottom: space(40);
   z-index: 10;
 }
@@ -104,44 +105,81 @@
   width: 100%;
 }
 
-.pagnation__container {
-  justify-content: center;
-}
-
+/* PAGINATION */
 .pagination {
   display: flex;
-  margin: space(48) 0;
+  justify-content: center;
+  width: 100%;
+  margin-top: space(64);
   list-style: none;
+}
 
-  li {
-    margin: 0;
+.pagination__item {
+  margin: 0;
+  background: $yellow;
+
+  &:nth-child(2) {
+    padding-left: space(16);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  &:nth-last-child(2) {
+    padding-right: space(16);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  &.disabled {
+    .pagination__link {
+      color: $lynch;
+    }
   }
 }
 
-.pagination--text-nav-container {
-  background: $mercury;
-  padding: space(10);
-}
-
-.pagination--text-nav-link {
+.pagination__link {
+  display: block;
+  padding: space(16) space(8);
+  font-size: pxtorem(20px);
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
+
+  @include for-phone-only {
+    font-size: pxtorem(16px);
+  }
 }
 
-.pagination--number-container {
-  padding: space(10);
+.pagination__nav-prev {
+  margin-right: auto;
+  padding: 0 space(8);
+  border-radius: 4px;
+  background: $white;
+
+  svg {
+    margin-right: space(16);
+
+    @include for-phone-only {
+      margin-right: space(8);
+    }
+  }
 }
 
-.pagination--text-number-link {
-  color: $black;
-  text-decoration: none;
-}
+.pagination__nav-next {
+  margin-left: auto;
+  padding: 0 space(8);
+  border-radius: 4px;
+  background: $white;
 
-.pagination--active {
-  background: $mercury;
+  svg {
+    margin-left: space(16);
+
+    @include for-phone-only {
+      margin-left: space(8);
+    }
+  }
 }
 
 .results__filters {
@@ -425,8 +463,8 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: space(32);
   max-width: 1260px;
-  padding: space(32) space(40);
-  margin: 0 auto;
+  padding: 0 space(40);
+  margin: 0 auto space(32);
 
   @include for-phone-only {
     grid-template-columns: repeat(1, minmax(0, 1fr));

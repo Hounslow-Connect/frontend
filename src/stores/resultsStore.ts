@@ -56,7 +56,7 @@ export default class ResultsStore {
     this.organisations = [];
     this.currentPage = 1;
     this.totalItems = 0;
-    this.itemsPerPage = 25;
+    this.itemsPerPage = 9;
     this.postcode = '';
     this.locationCoords = {};
     this.view = 'grid';
@@ -174,7 +174,7 @@ export default class ResultsStore {
       const results = await axios.post(`${apiBase}/search?page=${this.currentPage}`, params);
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
-      this.itemsPerPage = get(results, 'data.meta.per_page', 25);
+      this.itemsPerPage = get(results, 'data.meta.per_page', 9);
 
       forEach(this.results, (service: IService) => {
         // @ts-ignore
