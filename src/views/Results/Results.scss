@@ -108,6 +108,12 @@
 
 .results__search-filter-location {
   width: 100%;
+  margin: 0 space(24);
+}
+
+.results__search-filter-location--label {
+  font-size: pxtorem(20px);
+  font-weight: 700;
 }
 
 /* PAGINATION */
@@ -207,7 +213,26 @@
 }
 
 .results__filters {
-  padding: space(16) !important;
+  width: 100%;
+
+  .input--container {
+    margin: 0 space(24) 0 0;
+  }
+
+  .button {
+    height: 100%;
+    margin-left: space(24);
+  }
+}
+
+.results__filters__heading {
+  margin-bottom: space(16);
+}
+
+.results__filters__checkboxes {
+  .checkbox {
+    margin-right: space(20);
+  }
 }
 
 .results__view-filter {
@@ -330,6 +355,8 @@
 
 .results__overview {
   position: relative;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: space(40);
   background-color: $yellow;
@@ -368,60 +395,29 @@
   }
 }
 
-.results__overview__edit {
-  position: fixed;
-  top: pxtorem(63px);
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 80;
-  background: $turquoise;
-  background-image: url('../../assets/images/backgrounds/home-white-shape-mobile.svg');
-  background-repeat: no-repeat;
-  background-size: 110% 100%;
-  padding: space(32) !important;
-  font-family: $font-primary;
+.results__overview__content {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: flex-start;
+}
 
-  .flex-col {
-    margin-bottom: space(32);
-  }
+.results__overview__image {
+  margin-right: space(24);
+  width: 158px;
+  height: 158px;
+  background-color: $gray;
+  border-radius: 20px;
 
-  @include for-tablet-portrait-up {
-    top: 94px;
-  }
-
-  h1 {
-    @include heading-m;
-  }
-
-  h2 {
-    font-size: pxtorem(20px);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
-.results__overview__input-box {
-  padding: space(16);
-
-  @include for-tablet-portrait-down {
-    padding: 0;
-  }
-
-  button {
-    svg {
-      margin-left: space(16);
-    }
-  }
-}
-
-.results__overview__search-container {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100%;
-  justify-content: start !important;
-
-  h2 {
-    font-size: $font-heading-m !important;
-  }
+.results__overview__info {
+  padding: space(16) 0;
+  box-sizing: border-box;
 }
 
 .results__search-box-keyword {

@@ -25,6 +25,7 @@ export default class ResultsStore {
   @observable persona: IPersona | null = null;
   @observable organisations: IOrganisation[] | null = [];
   @observable is_free: boolean = false;
+  @observable open_now: boolean = false;
   @observable wait_time: string = 'null';
   @observable order: 'relevance' | 'distance' = 'relevance';
   @observable results: IService[] = [];
@@ -49,6 +50,7 @@ export default class ResultsStore {
     this.personaId = '';
     this.persona = null;
     this.is_free = false;
+    this.open_now = false;
     this.wait_time = 'null';
     this.order = 'relevance';
     this.results = [];
@@ -107,6 +109,10 @@ export default class ResultsStore {
         this.is_free = key === 'true' ? true : false;
       }
 
+      if (value === 'open_now') {
+        this.open_now = key === 'true' ? true : false;
+      }
+
       if (value === 'wait_time') {
         this.wait_time = key;
       }
@@ -148,6 +154,10 @@ export default class ResultsStore {
 
     if (this.is_free) {
       params.is_free = this.is_free;
+    }
+
+    if (this.open_now) {
+      params.open_now = this.open_now;
     }
 
     if (this.wait_time !== 'null') {
@@ -199,6 +209,11 @@ export default class ResultsStore {
   @action
   toggleIsFree = () => {
     this.is_free = !this.is_free;
+  };
+
+  @action
+  toggleOpenNow = () => {
+    this.open_now = !this.open_now;
   };
 
   updateQueryStringParameter = (
@@ -256,6 +271,14 @@ export default class ResultsStore {
 
     if (!this.is_free) {
       url = this.removeQueryStringParameter('is_free', url);
+    }
+
+    if (this.open_now) {
+      url = this.updateQueryStringParameter('open_now', this.open_now, url);
+    }
+
+    if (!this.open_now) {
+      url = this.removeQueryStringParameter('open_now', url);
     }
 
     if (searchTerm) {

@@ -9,11 +9,12 @@
   }
 
   input[type='checkbox'] + label {
-    @include body-m;
     display: flex;
     align-items: center;
     cursor: pointer;
     margin-bottom: 0;
+    font-size: pxtorem(20px);
+    font-weight: 700;
 
     svg {
       display: none;
@@ -26,7 +27,7 @@
 
     svg {
       display: inline-block;
-      font-size: 1.4rem;
+      font-size: pxtorem(20px);
       top: 4px;
       position: absolute;
       left: 4px;
@@ -35,24 +36,21 @@
   }
 
   input[type='checkbox'] + label > span {
+    position: relative;
     display: inline-block;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     margin-right: space(12);
     vertical-align: middle;
     cursor: pointer;
-    background-color: transparent;
+    background-color: $white;
     border: 2px solid $black;
-    position: relative;
+    border-radius: 4px;
 
     @include for-phone-only {
       width: 24px;
       height: 24px;
     }
-  }
-
-  input[type='checkbox']:focus + label > span {
-    border-color: $turquoise;
   }
 
   input[type='checkbox'] + label span:before,

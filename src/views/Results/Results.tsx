@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import './Results.scss';
 import ResultStore from '../../stores/resultsStore';
 import Category from './Filters/Category';
-import Keyword from './Filters/Keyword';
+import ParamsFilter from './Filters/ParamsFilter/ParamsFilter';
 import ViewFilters from './Filters/ViewFilter/ViewFilter';
 import ListView from './ListView';
 import MapView from './MapView';
@@ -63,7 +63,17 @@ class Results extends Component<IProps> {
       <section className="results">
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search results', url: '' }]} />
         <div className="results__search-box">
-          {resultsStore.isKeywordSearch ? <Keyword /> : <Category />}
+          <div className="flex-container">
+            {!resultsStore.isKeywordSearch && 
+              <h1 className="results__heading">Results for</h1>
+            }
+            <div className="results__overview">
+              {!resultsStore.isKeywordSearch &&
+                <Category />
+              }
+              <ParamsFilter />
+            </div>
+          </div>
         </div>
         <div className="results__info">
           <div className="flex-container">
@@ -92,7 +102,7 @@ class Results extends Component<IProps> {
               })}
             </div>
           )}
-          {(!!resultsStore.results.length && resultsStore.isKeywordSearch) &&
+          {/* {(!!resultsStore.results.length && resultsStore.isKeywordSearch) &&
             <div className="flex-container flex-container--wrap results__filter-bar">
               <div className="flex-col flex-col--6">
                 <div
@@ -133,7 +143,7 @@ class Results extends Component<IProps> {
                 </div>
               </div>
             </div>
-          }
+          } */}
 
           {resultsStore.view === 'grid' ? (
             <ListView resultsStore={resultsStore} history={history} />

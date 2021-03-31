@@ -20,10 +20,8 @@ const List: FunctionComponent<IProps> = ({ resultsList, resultsStore, activeId, 
     <Fragment>
       <div className="results__container">
         {resultsList.map((list: any) => {
-          if(list.service_locations.length) {
-            const organisation = find(resultsStore.organisations, ['id', list.organisation_id]) || null;
-            return <SearchResultCard resultsStore={resultsStore} key={list.id} activeIdHandler={setActiveId} isActive={activeId === list.id} result={list} organisation={organisation} />;
-          }
+          const organisation = find(resultsStore.organisations, ['id', list.organisation_id]) || null;
+          return <SearchResultCard resultsStore={resultsStore} key={list.id} activeIdHandler={setActiveId} isActive={activeId === list.id} result={list} organisation={organisation} />;
         })}
       </div>
     </Fragment>
