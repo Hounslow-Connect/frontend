@@ -66,24 +66,25 @@ class Search extends React.Component<IProps> {
                         margin: 0
                       }}
                     >
-                      <div className="flex-col--mobile--12">
+                      <div className="flex-col flex-col--mobile--12">
                         <Input
                           placeholder="Search for services, groups and activities"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             SearchStore.onChange(e, 'search')
                           }
+                          className="search__filter-keyword__input"
                           id="search"
                           value={SearchStore.search}
                         />
                       </div>
-                      <span className="search__input__seperator">in</span>
-                      <div>
+                      <div className="search__filter-location">
+                        <label className="search__filter-location__label" htmlFor="location" aria-label="Location">in</label>
                         <Input
                           id="location"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             SearchStore.onChange(e, 'location')
                           }
-                          className="results__search-filter-location"
+                          className="search__filter-location__input"
                           placeholder="Postcode or town"
                           value={SearchStore.location}
                         />
@@ -104,7 +105,7 @@ class Search extends React.Component<IProps> {
                           />
                         </Fragment>
                       )}
-                      <div className="flex-col--mobile--12">
+                      <div className="flex-col flex-col--mobile--12">
                         <Button
                           text="Search"
                           icon="search"
@@ -122,7 +123,7 @@ class Search extends React.Component<IProps> {
                   </div>
                 </div>
                 {!!SearchStore.covidCategories.length && (
-                  <div className="flex-col--12">
+                  <div className="flex-col flex-col--12">
                     <Fragment>
                       <label className="search__heading" htmlFor="category">
                         <h2>
