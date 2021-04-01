@@ -32,7 +32,7 @@
 
 .gallery-card {
   padding: 0 !important;
-  margin-bottom: space(8) !important;
+  margin-bottom: space(32) !important;
 
   @include for-tablet-portrait-down {
     margin-bottom: space(24) !important;
@@ -50,8 +50,6 @@
     position: relative;
     &:before {
       @include overlay();
-      border-top-right-radius: 17px;
-      border-top-left-radius: 17px;
     }
 
     &:after {
@@ -71,28 +69,11 @@
         @include overlay();
         text-align: center;
         vertical-align: middle;
-
-        @include for-tablet-portrait-up {
-          border-top-right-radius: 17px;
-        }
       }
 
       &:after {
         @include overlay-icon();
       }
-    }
-
-    &--left {
-      border-top-left-radius: 17px;
-    }
-
-    &--right {
-      border-top-right-radius: 17px;
-    }
-
-    &--one {
-      border-top-left-radius: 17px;
-      border-top-right-radius: 17px;
     }
 
     &--container {
@@ -114,22 +95,20 @@
   }
 
   &--view {
-    background-color: $gray;
+    background-color: $white;
     text-align: center;
     padding: space(16);
-    border-bottom-right-radius: 17px;
-    border-bottom-left-radius: 17px;
     cursor: pointer;
 
     p {
       font-family: $font-primary;
+      font-weight: 700;
 
       &:hover {
         text-decoration: underline;
       }
 
       svg {
-        color: $lynch;
         margin-right: space(8);
       }
     }

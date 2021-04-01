@@ -38,7 +38,6 @@ import VideoCard from './VideoCard';
 import MapCard from './MapCard';
 import ContactCard from './ContactCard';
 import OrganisationCard from './OrganisationCard';
-import ButtonCard from './ButtonCard';
 import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
 import GalleryCard from './GalleryCard';
@@ -252,7 +251,7 @@ class Service extends Component<IProps> {
                     </div>
 
                     <div className="flex-col flex-col--12 mobile-hide">
-                      <h2>What we offer?</h2>
+                      <h2 className="service__heading">What we offer?</h2>
                     </div>
 
                     {!!service.offerings.length && (
@@ -278,18 +277,20 @@ class Service extends Component<IProps> {
                   </div>
 
                   {service.testimonial && (
-                    <div className="mobile-hide flex-container service__section service__section--no-padding">
-                      <div className="flex-col flex-col--12 service__testimonial--header">
-                        <h2 className="service__heading">What people say</h2>
-                      </div>
+                    <div className="service__section">
+                      <div className="flex-container flex-container--no-padding">
+                        <div className="flex-col flex-col--12 service__testimonial--header">
+                          <h2 className="service__heading">What people say</h2>
+                        </div>
 
-                      <div className="flex-col flex-col--12 service__testimonial">
-                        <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
-                          <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
-                            <FontAwesomeIcon icon="comment" />
-                          </div>
-                          <div className="flex-col--9 flex-col--tablet--9">
-                            <p>{this.formatTestimonial(service.testimonial)}</p>
+                        <div className="flex-col flex-col--12 service__testimonial">
+                          <div className="mobile-hide flex-container flex-container--align-center flex-container--justify flex-container--no-padding">
+                            <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
+                              <FontAwesomeIcon icon="comment" />
+                            </div>
+                            <div className="flex-col--9 flex-col--tablet--9">
+                              <p>{this.formatTestimonial(service.testimonial)}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -418,10 +419,6 @@ class Service extends Component<IProps> {
                       <OrganisationCard service={service} />
                     </div>
                   </Accordian>
-
-                  <div className="flex-col mobile-show">
-                    <ButtonCard serviceStore={serviceStore} />
-                  </div>
                 </div>
               </div>
               <div className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
@@ -436,35 +433,32 @@ class Service extends Component<IProps> {
                   )}
                   {!!locations.length && (
                     <div className="flex-col flex-col--12">
-                      <h2>{`Where is this ${service.type}?`}</h2>
+                      <h2 className="service__heading">{`Where is this ${service.type}?`}</h2>
                       <div className="service__section service__map">
                         <MapCard locations={locations} />
                       </div>
                     </div>
                   )}
                   <div className="flex-col flex-col--12">
-                    <h2>{`How can I contact this ${service.type}?`}</h2>
+                    <h2 className="service__heading">{`How can I contact this ${service.type}?`}</h2>
+                    <div className="service__section">
+                      <ContactCard service={service} />
+                    </div>
                     {service.referral_method !== 'none' && (
                       <div className="service__section service__referral--desktop">
                         <ReferralCard id={service.id} />
                       </div>
                     )}
-                    <div className="service__section">
-                      <ContactCard service={service} />
-                    </div>
                   </div>
                   <div className="flex-col flex-col--12">
-                    <h2>{`Who runs this ${service.type}?`}</h2>
+                    <h2 className="service__heading">{`Who runs this ${service.type}?`}</h2>
                     <div className="service__section">
                       <OrganisationCard service={service} sidebar={true} />
                     </div>
                   </div>
-                  <div className="flex-col flex-col--12 flex-col--tablet--5">
-                    <ButtonCard serviceStore={serviceStore} />
-                  </div>
 
                   <div className="flex-col flex-col--12 flex-col--tablet--5">
-                    <ShareCard />
+                    <ShareCard serviceStore={serviceStore} />
                   </div>
                 </div>
               </div>

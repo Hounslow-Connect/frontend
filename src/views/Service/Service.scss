@@ -5,15 +5,8 @@
 
 .service__header {
   position: relative;
+  padding-bottom: space(24);
   background: linear-gradient(to bottom, $white 0%, $white 50%, $light-turquoise 50%,$light-turquoise 100%);
-
-  @include for-phone-only {
-    padding: space(32) space(24) 0 space(24) !important;
-  }
-
-  @include for-tablet-portrait-down {
-    padding: space(32) space(24);
-  }
 
   .flex-container {
     max-width: 1260px;
@@ -24,8 +17,38 @@
   }
 
   &__wrapper {
+    position: relative;
     padding: space(32) space(48);
     background-color: $yellow;
+
+    @include for-phone-only {
+      padding: space(16) space(24);
+    }
+  
+    @include for-tablet-portrait-down {
+      padding: space(24) space(32);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      bottom: -38px;
+      right: 20%;
+      width: 0; 
+      height: 0; 
+      border-left: 38px solid transparent;
+      border-right: 38px solid transparent;
+      border-top: 38px solid $yellow;
+  
+      @include for-tablet-portrait-down {
+        bottom: -20px;
+        right: space(20);
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid $yellow;
+      }
+    }
   }
 
   h1 {
@@ -43,14 +66,9 @@
 }
 
 .service__section {
-  margin-top: space(12);
-  margin-bottom: space(32) !important;
+  margin-bottom: space(32);
   width: 100%;
   align-items: stretch;
-
-  .criteria_card:nth-of-type(odd) {
-    background-color: $gray;
-  }
 
   &--no-padding {
     @include for-tablet-portrait-up {
@@ -92,7 +110,7 @@
 
 .service__info {
   position: relative;
-  padding-top: space(48) !important;
+  padding: space(48) 0 space(64) 0 !important;
   background-color: $light-turquoise;
   color: $black;
 
@@ -131,11 +149,8 @@
 }
 
 .service__info__cost {
-  background-color: $yellow !important;
-
-  @include for-tablet-landscape-up {
-    padding: space(12);
-  }
+  background-color: $turquoise !important;
+  border-radius: 20px;
 }
 
 .service__info__cost--icon {
@@ -151,7 +166,7 @@
 }
 
 .react-player__preview {
-  background-color: $gray;
+  background-color: $white;
 }
 
 .react-player__shadow {
@@ -165,10 +180,6 @@
 
   @include for-tablet-landscape-down {
     padding: space(32) space(16) !important;
-  }
-
-  &--desktop {
-    margin-top: space(40);
   }
 }
 
@@ -287,7 +298,7 @@
   }
 
   &:nth-of-type(odd) {
-    background-color: $gray;
+    background-color: $white;
 
     .service__accordian-inner {
       background-color: $white;
@@ -296,7 +307,7 @@
 
   &:nth-of-type(even) {
     .service__accordian-inner {
-      background-color: $gray;
+      background-color: $white;
     }
   }
 
@@ -323,7 +334,7 @@
   }
 
   &--mobile {
-    padding-right: space(16);
+    padding-right: space(8);
 
     @include for-phone-only {
       margin-bottom: space(16) !important;
@@ -409,7 +420,7 @@
   justify-content: space-evenly !important;
 
   @include for-tablet-portrait-up {
-    background-color: $gray;
+    background-color: $white;
   }
 
   p {
@@ -418,7 +429,7 @@
 
   a {
     font-size: $font-base;
-    color: $gray;
+    color: $white;
   }
 
   svg {
@@ -437,7 +448,7 @@
   }
 
   &--sidebar {
-    background-color: $gray;
+    background-color: $white;
     padding: space(20) !important;
   }
 }
@@ -449,6 +460,10 @@
 .service__left-column {
   @include for-tablet-landscape-up {
     padding-right: space(64) !important;
+  }
+
+  .service__heading {
+    margin-left: space(24);
   }
 }
 
@@ -469,8 +484,30 @@
 }
 
 .service__contact-card {
+  position: relative;
   padding: space(24) !important;
-  background-color: $gray;
+  background-color: $yellow;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    top: -38px;
+    right: 20%;
+    width: 0; 
+    height: 0; 
+    border-left: 38px solid transparent;
+    border-right: 38px solid transparent;
+    border-bottom: 38px solid $yellow;
+
+    @include for-tablet-portrait-down {
+      top: -20px;
+      right: space(20);
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid $yellow;
+    }
+  }
 
   .flex-col {
     margin-bottom: space(24);
@@ -515,7 +552,8 @@
 
 .service__share-card {
   padding: space(20);
-  background-color: $gray;
+  background-color: $turquoise;
+  border-radius: 20px;
   text-align: center;
 
   h3 {
@@ -526,6 +564,10 @@
 
   a {
     margin: 0 space(8);
+  }
+
+  &__social {
+    margin-bottom: space(24);
   }
 }
 
@@ -538,8 +580,10 @@
 }
 
 .service__information {
+  position: relative;
+
   @include for-tablet-landscape-up {
-    background: $gray;
+    background: $white;
     padding: space(32) !important;
   }
 
@@ -548,12 +592,32 @@
       font-size: $font-body-l;
     }
   }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    bottom: -38px;
+    right: space(64);
+    width: 0; 
+    height: 0; 
+    border-left: 38px solid transparent;
+    border-right: 38px solid transparent;
+    border-top: 38px solid $white;
+
+    @include for-tablet-portrait-down {
+      bottom: -20px;
+      right: space(20);
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid $white;
+    }
+  }
 }
 
 .service__offerings {
   display: flex;
   align-items: center;
-  margin-top: space(24);
   margin-bottom: space(16) !important;
   font-family: $font-primary;
 
@@ -569,7 +633,7 @@
 }
 
 .service__heading {
-  margin-bottom: space(32);
+  margin-bottom: space(24);
 
   @include for-phone-only {
     font-size: $font-body-l !important;
@@ -599,5 +663,9 @@
 
   @include for-tablet-portrait-down {
     padding: 0;
+  }
+
+  .leaflet-container {
+    min-height: 100%;
   }
 }
