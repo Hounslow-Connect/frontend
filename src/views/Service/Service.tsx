@@ -121,25 +121,27 @@ class Service extends Component<IProps> {
           ]}
         />
         <div className={`service__header service__header--${get(service, 'type')}`}>
-          <div className="flex-container flex-container--mobile-no-padding">
-            <div className="flex-col flex-col--mobile--9">
-              <h1>{get(service, 'name')}</h1>
-              <p className="service__header__last-updated">
-                Page last updated{' '}
-                <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
-                <br />
-                <Button
-                  text="Give feedback"
-                  icon="comment"
-                  alt={true}
-                  size="small"
-                  onClick={() => uiStore.toggleFeedbackModal()}
-                />
-              </p>
-            </div>
-            <div className="flex-col flex-col--mobile--3">
-              <div className="service__header__logo">
-                <img src={getImg(service)} alt={`${service.name} logo`} />
+          <div className="flex-container">
+            <div className="service__header__wrapper">
+              <div className="flex-container flex-container--no-padding flex-container--no-wrap flex-container--left">
+                <div className="flex-col flex-col--mobile--3">
+                  <div className="service__header__logo">
+                    <img src={getImg(service)} alt={`${service.name} logo`} />
+                  </div>
+                </div>
+                <div className="flex-col flex-col--mobile--9">
+                  <h1>{get(service, 'name')}</h1>
+                  <p className="service__header__last-updated">
+                    Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                  </p>
+                  <Button
+                    text="Give feedback"
+                    icon="comment-alt"
+                    alt={true}
+                    size="medium"
+                    onClick={() => uiStore.toggleFeedbackModal()}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -147,113 +149,203 @@ class Service extends Component<IProps> {
         {serviceStore.loading ? (
           <Loading />
         ) : (
-          <section className="flex-container flex-container--justify service__info">
-            <section className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
-              <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
-                {serviceStore.hasCriteria && (
-                  <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
-                    <h2 className="service__heading">Who is it for?</h2>
-                  </div>
-                )}
-                <div
-                  className="criteria-cards service__section service__section--no-padding"
-                  style={{ alignItems: 'stretch' }}
-                >
-                  {get(service, 'criteria.age_group') && (
-                    <CriteriaCard
-                      svg={AgeGroup}
-                      title="Age Group"
-                      info={get(service, 'criteria.age_group')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.disability') && (
-                    <CriteriaCard
-                      svg={Disability}
-                      title="Disability"
-                      info={get(service, 'criteria.disability')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.employment') && (
-                    <CriteriaCard
-                      svg={Employment}
-                      title="Employment Status"
-                      info={get(service, 'criteria.employment')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.gender') && (
-                    <CriteriaCard
-                      svg={Gender}
-                      title="Gender"
-                      info={get(service, 'criteria.gender')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.housing') && (
-                    <CriteriaCard
-                      svg={Housing}
-                      title="Housing"
-                      info={get(service, 'criteria.housing')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.income') && (
-                    <CriteriaCard
-                      svg={Income}
-                      title="Income"
-                      info={get(service, 'criteria.income')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.language') && (
-                    <CriteriaCard
-                      svg={Language}
-                      title="Language"
-                      info={get(service, 'criteria.language')}
-                    />
-                  )}
-
-                  {get(service, 'criteria.other') && (
-                    <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
-                  )}
-
-                  <div className="flex-col flex-col--mobile--12 mobile-show tablet-show criteria_card service__info__cost">
-                    <CostCard service={service} />
-                  </div>
-                </div>
-
-                <div className="flex-container flex-container--align-center service__media service__section--no-padding">
-                  <div className="flex-col flex-col--mobile--12">
-                    <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
-                  </div>
-                  {!!service.gallery_items.length && (
-                    <div className="flex-container flex-container--mobile-no-padding service__gallery">
-                      <GalleryCard gallery={service.gallery_items} />
+          <section className="service__info">
+            <div className="flex-container flex-container--justify">
+              <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
+                <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
+                  {serviceStore.hasCriteria && (
+                    <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
+                      <h2 className="service__heading">Who is it for?</h2>
                     </div>
                   )}
-                  {service.video_embed && (
-                    <div className="flex-container flex-container--mobile-no-padding mobile-show">
-                      <VideoCard video={service.video_embed} width="90vw" />
+                  <div
+                    className="criteria-cards service__section service__section--no-padding"
+                    style={{ alignItems: 'stretch' }}
+                  >
+                    {get(service, 'criteria.age_group') && (
+                      <CriteriaCard
+                        svg={AgeGroup}
+                        title="Age Group"
+                        info={get(service, 'criteria.age_group')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.disability') && (
+                      <CriteriaCard
+                        svg={Disability}
+                        title="Disability"
+                        info={get(service, 'criteria.disability')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.employment') && (
+                      <CriteriaCard
+                        svg={Employment}
+                        title="Employment Status"
+                        info={get(service, 'criteria.employment')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.gender') && (
+                      <CriteriaCard
+                        svg={Gender}
+                        title="Gender"
+                        info={get(service, 'criteria.gender')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.housing') && (
+                      <CriteriaCard
+                        svg={Housing}
+                        title="Housing"
+                        info={get(service, 'criteria.housing')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.income') && (
+                      <CriteriaCard
+                        svg={Income}
+                        title="Income"
+                        info={get(service, 'criteria.income')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.language') && (
+                      <CriteriaCard
+                        svg={Language}
+                        title="Language"
+                        info={get(service, 'criteria.language')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.other') && (
+                      <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
+                    )}
+
+                    <div className="flex-col flex-col--mobile--12 mobile-show tablet-show criteria_card service__info__cost">
+                      <CostCard service={service} />
+                    </div>
+                  </div>
+
+                  <div className="flex-container flex-container--align-center service__media service__section--no-padding">
+                    <div className="flex-col flex-col--mobile--12">
+                      <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
+                    </div>
+                    {!!service.gallery_items.length && (
+                      <div className="flex-container flex-container--mobile-no-padding service__gallery">
+                        <GalleryCard gallery={service.gallery_items} />
+                      </div>
+                    )}
+                    {service.video_embed && (
+                      <div className="flex-container flex-container--mobile-no-padding mobile-show">
+                        <VideoCard video={service.video_embed} width="90vw" />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex-container flex-container--align-center service__section service__section--no-padding service__information">
+                    <div className="flex-col flex-col--12 flex-col--mobile--12">
+                      <ReactMarkdown
+                        source={service.intro}
+                        className="service__markdown service__markdown--intro"
+                      />
+                    </div>
+
+                    <div className="flex-col flex-col--12 mobile-hide">
+                      <h2>What we offer?</h2>
+                    </div>
+
+                    {!!service.offerings.length && (
+                      <div className="flex-col flex-col--12 service__offerings mobile-hide">
+                        <ul>
+                          {map(service.offerings, (offering: any, i) => (
+                            <Fragment key={offering.offering}>
+                              <li>{capitalise(offering.offering)}</li>
+                            </Fragment>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="flex-col service__section mobile-hide">
+                      <ReactMarkdown
+                        source={service.description}
+                        className={cx('service__markdown service__markdown--description', {
+                          'service__markdown--description--tight': !service.offerings.length,
+                        })}
+                      />
+                    </div>
+                  </div>
+
+                  {service.testimonial && (
+                    <div className="mobile-hide flex-container service__section service__section--no-padding">
+                      <div className="flex-col flex-col--12 service__testimonial--header">
+                        <h2 className="service__heading">What people say</h2>
+                      </div>
+
+                      <div className="flex-col flex-col--12 service__testimonial">
+                        <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
+                          <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
+                            <FontAwesomeIcon icon="comment" />
+                          </div>
+                          <div className="flex-col--9 flex-col--tablet--9">
+                            <p>{this.formatTestimonial(service.testimonial)}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   )}
-                </div>
 
-                <div className="flex-container flex-container--align-center service__section service__section--no-padding service__information">
-                  <div className="flex-col flex-col--12 flex-col--mobile--12">
-                    <ReactMarkdown
-                      source={service.intro}
-                      className="service__markdown service__markdown--intro"
-                    />
-                  </div>
+                  {!!locations.length && (
+                    <div className="mobile-hide service__section">
+                      <h2 className="service__heading">Where can I access this {service.type}?</h2>
 
-                  <div className="flex-col flex-col--12 mobile-hide">
-                    <h2>What we offer?</h2>
-                  </div>
+                      {locations.map((location: IServiceLocation) => (
+                        <LocationCard
+                          location={location}
+                          key={location.id}
+                          className="service__accordian-inner"
+                          desktop={true}
+                        />
+                      ))}
+                    </div>
+                  )}
 
-                  {!!service.offerings.length && (
-                    <div className="flex-col flex-col--12 service__offerings mobile-hide">
+                  {!!service.useful_infos.length && (
+                    <div className="mobile-hide">
+                      <h2 className="service__heading">Good to know</h2>
+                      {service.useful_infos.map((info: { title: string; description: string }) => {
+                        console.log(info.title);
+                        const iconObj = find(iconMap, info.title);
+                        const icon = get(iconObj, `${info.title}`);
+
+                        return <UsefulInfoCard icon={icon} info={info} key={uniqueId()} />;
+                      })}
+                    </div>
+                  )}
+
+                  {service.referral_method !== 'none' && (
+                    <div className="mobile-show">
+                      <ReferralCard id={service.id} />
+                    </div>
+                  )}
+
+                  {!!locations.length && (
+                    <Accordian
+                      title={`Where is this ${service.type}?`}
+                      className="service__accordian mobile-show"
+                    >
+                      <div className="service__map">
+                        <MapCard locations={locations} />
+                      </div>
+                    </Accordian>
+                  )}
+
+                  <Accordian
+                    title={`What we offer?`}
+                    className="service__accordian mobile-show"
+                  >
+                    {!!service.offerings.length && (
                       <ul>
                         {map(service.offerings, (offering: any, i) => (
                           <Fragment key={offering.offering}>
@@ -261,210 +353,122 @@ class Service extends Component<IProps> {
                           </Fragment>
                         ))}
                       </ul>
-                    </div>
-                  )}
-
-                  <div className="flex-col service__section mobile-hide">
+                    )}
                     <ReactMarkdown
                       source={service.description}
                       className={cx('service__markdown service__markdown--description', {
                         'service__markdown--description--tight': !service.offerings.length,
                       })}
                     />
-                  </div>
-                </div>
+                  </Accordian>
 
-                {service.testimonial && (
-                  <div className="mobile-hide flex-container service__section service__section--no-padding">
-                    <div className="flex-col flex-col--12 service__testimonial--header">
-                      <h2 className="service__heading">What people say</h2>
-                    </div>
-
-                    <div className="flex-col flex-col--12 service__testimonial">
-                      <div className="mobile-hide flex-container flex-container--align-center flex-container--justify service__section--no-padding">
-                        <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
-                          <FontAwesomeIcon icon="comment" />
-                        </div>
-                        <div className="flex-col--9 flex-col--tablet--9">
-                          <p>{this.formatTestimonial(service.testimonial)}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {!!locations.length && (
-                  <div className="mobile-hide service__section">
-                    <h2 className="service__heading">Where can I access this {service.type}?</h2>
-
-                    {locations.map((location: IServiceLocation) => (
-                      <LocationCard
-                        location={location}
-                        key={location.id}
-                        className="service__accordian-inner"
-                        desktop={true}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {!!service.useful_infos.length && (
-                  <div className="mobile-hide">
-                    <h2 className="service__heading">Good to know</h2>
-                    {service.useful_infos.map((info: { title: string; description: string }) => {
-                      console.log(info.title);
-                      const iconObj = find(iconMap, info.title);
-                      const icon = get(iconObj, `${info.title}`);
-
-                      return <UsefulInfoCard icon={icon} info={info} key={uniqueId()} />;
-                    })}
-                  </div>
-                )}
-
-                {service.referral_method !== 'none' && (
-                  <div className="mobile-show">
-                    <ReferralCard id={service.id} />
-                  </div>
-                )}
-
-                {!!locations.length && (
                   <Accordian
-                    title={`Where is this ${service.type}?`}
+                    title={`How can I contact this ${service.type}?`}
                     className="service__accordian mobile-show"
                   >
-                    <div className="service__map">
-                      <MapCard locations={locations} />
-                    </div>
+                    <ContactCard service={service} accordian={true} />
                   </Accordian>
-                )}
 
-                <Accordian
-                  title={`What we offer?`}
-                  className="service__accordian mobile-show"
-                >
-                  {!!service.offerings.length && (
-                    <ul>
-                      {map(service.offerings, (offering: any, i) => (
-                        <Fragment key={offering.offering}>
-                          <li>{capitalise(offering.offering)}</li>
-                        </Fragment>
+                  {service.testimonial && (
+                    <Accordian title="What people say" className="service__accordian mobile-show">
+                      <div className="service__accordian-inner">
+                        <div className="flex-container flex-container--mobile-no-padding flex-container--justify service__testimonial service__testimonial--mobile">
+                          <div className="flex-col--1">
+                            <FontAwesomeIcon icon="comment" />
+                          </div>
+                          <div className="flex-col--12">
+                            <p>{this.formatTestimonial(service.testimonial)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Accordian>
+                  )}
+
+                  {!!locations.length && (
+                    <Accordian
+                      title="Where can I access it?"
+                      className="service__accordian mobile-show"
+                    >
+                      {locations.map((location: IServiceLocation) => (
+                        <LocationCard
+                          location={location}
+                          key={location.id}
+                          className="service__accordian-inner"
+                        />
                       ))}
-                    </ul>
+                    </Accordian>
                   )}
-                  <ReactMarkdown
-                    source={service.description}
-                    className={cx('service__markdown service__markdown--description', {
-                      'service__markdown--description--tight': !service.offerings.length,
-                    })}
-                  />
-                </Accordian>
 
-                <Accordian
-                  title={`How can I contact this ${service.type}?`}
-                  className="service__accordian mobile-show"
-                >
-                  <ContactCard service={service} accordian={true} />
-                </Accordian>
+                  {!!service.useful_infos.length && (
+                    <Accordian title="Good to know" className="service__accordian mobile-show">
+                      {service.useful_infos.map((info: { title: string; description: string }) => {
+                        const iconObj = find(iconMap, info.title);
+                        const icon = get(iconObj, `${info.title}`);
 
-                {service.testimonial && (
-                  <Accordian title="What people say" className="service__accordian mobile-show">
-                    <div className="service__accordian-inner">
-                      <div className="flex-container flex-container--mobile-no-padding flex-container--justify service__testimonial service__testimonial--mobile">
-                        <div className="flex-col--1">
-                          <FontAwesomeIcon icon="comment" />
-                        </div>
-                        <div className="flex-col--12">
-                          <p>{this.formatTestimonial(service.testimonial)}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </Accordian>
-                )}
+                        return <UsefulInfoCardAccordian icon={icon} info={info} key={uniqueId()} />;
+                      })}
+                    </Accordian>
+                  )}
 
-                {!!locations.length && (
                   <Accordian
-                    title="Where can I access it?"
+                    title={`Who runs this ${service.type}?`}
                     className="service__accordian mobile-show"
                   >
-                    {locations.map((location: IServiceLocation) => (
-                      <LocationCard
-                        location={location}
-                        key={location.id}
-                        className="service__accordian-inner"
-                      />
-                    ))}
+                    <div className="service__accordian-inner">
+                      <OrganisationCard service={service} />
+                    </div>
                   </Accordian>
-                )}
 
-                {!!service.useful_infos.length && (
-                  <Accordian title="Good to know" className="service__accordian mobile-show">
-                    {service.useful_infos.map((info: { title: string; description: string }) => {
-                      const iconObj = find(iconMap, info.title);
-                      const icon = get(iconObj, `${info.title}`);
-
-                      return <UsefulInfoCardAccordian icon={icon} info={info} key={uniqueId()} />;
-                    })}
-                  </Accordian>
-                )}
-
-                <Accordian
-                  title={`Who runs this ${service.type}?`}
-                  className="service__accordian mobile-show"
-                >
-                  <div className="service__accordian-inner">
-                    <OrganisationCard service={service} />
+                  <div className="flex-col mobile-show">
+                    <ButtonCard serviceStore={serviceStore} />
                   </div>
-                </Accordian>
-
-                <div className="flex-col mobile-show">
-                  <ButtonCard serviceStore={serviceStore} />
                 </div>
               </div>
-            </section>
-            <section className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
-              <div className="flex-container service__right-column">
-                <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
-                  <CostCard service={service} />
-                </div>
-                {service.video_embed && (
-                  <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">
-                    <VideoCard video={service.video_embed} width="100%" />
+              <div className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
+                <div className="flex-container service__right-column">
+                  <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
+                    <CostCard service={service} />
                   </div>
-                )}
-                {!!locations.length && (
-                  <div className="flex-col flex-col--12">
-                    <h2>{`Where is this ${service.type}?`}</h2>
-                    <div className="service__section service__map">
-                      <MapCard locations={locations} />
-                    </div>
-                  </div>
-                )}
-                <div className="flex-col flex-col--12">
-                  <h2>{`How can I contact this ${service.type}?`}</h2>
-                  {service.referral_method !== 'none' && (
-                    <div className="service__section service__referral--desktop">
-                      <ReferralCard id={service.id} />
+                  {service.video_embed && (
+                    <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">
+                      <VideoCard video={service.video_embed} width="100%" />
                     </div>
                   )}
-                  <div className="service__section">
-                    <ContactCard service={service} />
+                  {!!locations.length && (
+                    <div className="flex-col flex-col--12">
+                      <h2>{`Where is this ${service.type}?`}</h2>
+                      <div className="service__section service__map">
+                        <MapCard locations={locations} />
+                      </div>
+                    </div>
+                  )}
+                  <div className="flex-col flex-col--12">
+                    <h2>{`How can I contact this ${service.type}?`}</h2>
+                    {service.referral_method !== 'none' && (
+                      <div className="service__section service__referral--desktop">
+                        <ReferralCard id={service.id} />
+                      </div>
+                    )}
+                    <div className="service__section">
+                      <ContactCard service={service} />
+                    </div>
                   </div>
-                </div>
-                <div className="flex-col flex-col--12">
-                  <h2>{`Who runs this ${service.type}?`}</h2>
-                  <div className="service__section">
-                    <OrganisationCard service={service} sidebar={true} />
+                  <div className="flex-col flex-col--12">
+                    <h2>{`Who runs this ${service.type}?`}</h2>
+                    <div className="service__section">
+                      <OrganisationCard service={service} sidebar={true} />
+                    </div>
                   </div>
-                </div>
-                <div className="flex-col flex-col--12 flex-col--tablet--5">
-                  <ButtonCard serviceStore={serviceStore} />
-                </div>
+                  <div className="flex-col flex-col--12 flex-col--tablet--5">
+                    <ButtonCard serviceStore={serviceStore} />
+                  </div>
 
-                <div className="flex-col flex-col--12 flex-col--tablet--5">
-                  <ShareCard />
+                  <div className="flex-col flex-col--12 flex-col--tablet--5">
+                    <ShareCard />
+                  </div>
                 </div>
               </div>
-            </section>
+            </div>
           </section>
         )}
         {relatedServices && <RelatedServices relatedServices={relatedServices} />}
