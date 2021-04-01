@@ -14,7 +14,6 @@
   }
 
   &__content {
-    max-width: 632px;
     padding: space(120) space(56) space(80);
 
     @include for-phone-only {
@@ -29,6 +28,20 @@
   &__title {
     margin-bottom: space(8);
     text-transform: uppercase;
+  }
+
+  &__description {
+    max-width: 632px;
+
+    p {
+      font-size: pxtorem(34px);
+      line-height: pxtorem(46px);
+
+      @include for-phone-only {
+        font-size: pxtorem(16px);
+        line-height: pxtorem(22px);
+      }
+    }
   }
 
   &__image {
@@ -54,10 +67,12 @@
     padding: space(16);
 
     @include for-tablet-portrait-down {
+      margin-top: space(32);
       margin-bottom: space(16);
     }
 
     .slide {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -68,6 +83,23 @@
       @include for-tablet-portrait-down {
         flex-wrap: wrap;
         padding: space(32);
+      }
+
+      .image {
+        position: absolute;
+        bottom: calc(100% - 32px);
+        right: 10%;
+        max-width: 160px;
+        height: auto;
+
+        @include for-tablet-portrait-down {
+          max-width: 100px;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
 
       .content {
