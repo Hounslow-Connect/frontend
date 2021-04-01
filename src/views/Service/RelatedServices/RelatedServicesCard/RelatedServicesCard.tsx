@@ -2,46 +2,43 @@ import React from 'react';
 import get from 'lodash/get';
 
 import { IService } from '../../../../types/types';
-import Button from '../../../../components/Button';
+import Link from '../../../../components/Link';
 
 import { apiBase } from '../../../../config/api';
 import { withRouter, RouteComponentProps } from 'react-router';
+
+import './RelatedServicesCard.scss';
 
 interface IProps extends RouteComponentProps {
   service: IService;
 }
 
 const RelatedServicesCard: React.FunctionComponent<IProps> = ({ service, history }) => (
-  <div className="related-services--card">
-    <div className="flex-col flex-col--12 flex-col--mobile--12">
-      <h2>{service.name}</h2>
+  <div className="related-services-card">
+    <div className="flex-container flex-container--no-padding flex-container--no-wrap flex-container--align-center flex-container--space-between">
+      <h3>{service.name}</h3>
+      {service.has_logo && (
+        <div className="related-services-card__logo mobile-hide">
+          <img
+            src={`${apiBase}/organisations/${get(service, 'organisation_id')}/logo.png?v=${get(
+              service,
+              'organisation.id'
+            )}`}
+            alt={`${service.name} logo`}
+          />
+        </div>
+      )}
     </div>
-    <div className="flex-col flex-col--12 related-services--card--info">
+    <div className="related-services-card__info">
       <p>{service.intro}</p>
     </div>
-    <div className="flex-container flex-container--align-center related-services--card--no-padding">
-      <div className="flex-col flex-col--9 flex-col--mobile--10 flex-col--mobile-small--12">
-        <Button
-          text="View more"
-          size="small"
-          icon="chevron-right"
-          onClick={() => history.replace(`/services/${service.slug}`)}
-        />
-      </div>
-      <div className="flex-col flex-col--3 flex-col--mobile--2">
-        {service.has_logo && (
-          <div className="related-services--logo mobile-hide">
-            <img
-              src={`${apiBase}/organisations/${get(service, 'organisation_id')}/logo.png?v=${get(
-                service,
-                'organisation.id'
-              )}`}
-              alt={`${service.name} logo`}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+    <Link
+      size="medium"
+      text="Read more"
+      icon="arrow-right"
+      iconPosition="right"
+      href={`/services/${service.slug}`}
+    />
   </div>
 );
 

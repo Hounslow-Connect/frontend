@@ -128,8 +128,8 @@
 }
 
 .button--small {
-  height: pxtorem(32px);
-  padding: 0px space(16);
+  height: pxtorem(48px);
+  padding: space(8) space(16);
 
   @include for-phone-only {
     font-family: $font-primary;
@@ -153,6 +153,9 @@
 }
 
 .button__image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
   margin-right: space(24);
 }
 
@@ -177,7 +180,7 @@
 }
 
 .button__alt {
-  background-color: $white;
+  background-color: transparent;
   color: inherit;
   border: 2px solid $black;
 

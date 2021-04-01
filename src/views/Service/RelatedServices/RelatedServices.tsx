@@ -46,21 +46,23 @@ class RelatedServices extends Component<IProps, IState> {
     const relatedServices = showMore ? fullList : preview;
     return (
       <section className="related-services">
-        <div className="flex-container">
-          <div className="flex-col flex-col--12 flex-col--mobile--12">
+        <div className="flex-container flex-container--justify-between flex-container--align-center">
+          <div className="flex-col flex-col--mobile--12">
             <h2>Other results you might be interested in</h2>
           </div>
+          <div className="flex-col flex-col--mobile--12">
+            {!showMore && (
+              <Button text="View more related services" onClick={() => this.showMore()} />
+            )}
+          </div>
         </div>
-
-        <div className="flex-container flex-container--space-between flex-container--mobile-no-padding related-services--container">
-          {relatedServices.map((service: IService) => (
-            <RelatedServicesCard service={service} key={service.id} />
-          ))}
-        </div>
-        <div className="related-services--button">
-          {!showMore && (
-            <Button text="View more related services" onClick={() => this.showMore()} />
-          )}
+        
+        <div className="flex-container">
+          <div className="related-services__container">
+            {relatedServices.map((service: IService) => (
+              <RelatedServicesCard service={service} key={service.id} />
+            ))}
+          </div>
         </div>
       </section>
     );
