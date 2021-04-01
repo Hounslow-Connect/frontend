@@ -83,6 +83,7 @@
 
 .location__container {
   margin-bottom: space(16) !important;
+  background-color: $white;
 
   &--address {
     @include for-tablet-portrait-up {
@@ -95,7 +96,6 @@
   }
 
   @include for-tablet-landscape-up {
-    background-color: $gray;
     padding: space(24) !important;
   }
 }

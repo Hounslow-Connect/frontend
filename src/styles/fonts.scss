@@ -35,7 +35,7 @@ $font-body-mobile-alt: pxtorem(22px);
 $font-breadcrumb: $font-base;
 $font-breadcrumb-mobile: pxtorem(10px);
 
-$font-link-medium: $font-base;
+$font-link-medium: pxtorem(20px);
 
 /* Headings */
 @mixin heading-xl {
@@ -194,6 +194,7 @@ $font-link-medium: $font-base;
 @mixin link-medium {
   font-size: $font-link-medium;
   font-family: $font-primary;
+  line-height: $font-link-medium;
 }
 
 @mixin breadcrumb {
