@@ -77,7 +77,7 @@
 
     .slide {
       position: relative;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: space-between;
       padding: space(32) space(64);
@@ -87,6 +87,10 @@
       @include for-tablet-landscape-down {
         flex-wrap: wrap;
         padding: space(32);
+      }
+
+      &--active {
+        display: flex;
       }
 
       .image {
