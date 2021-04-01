@@ -19,22 +19,11 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
   return (
     <div
       className={cx(
-        'view-filter__search-bar',
-        {
-          'flex-col flex-col--12 flex-container--mobile-no-padding flex-col--medium--6':
-            resultsStore.postcode,
-        },
-        { 'view-filter--right-align': resultsSwitch },
-        {
-          'flex-col--12 view-filter--right-align--float-right': !resultsStore.postcode,
-        }
+        'results__view-filter',
       )}
     >
       <p
-        className={cx('view-filter--header', {
-          'view-filter--header--light': resultsSwitch,
-        })}
-      >
+        className="view-filter--header">
         {resultsSwitch ? ' View as:' : 'View As'}
       </p>
       <Button
@@ -45,7 +34,7 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
       />
       <Button
         text="Map"
-        icon="map"
+        icon="map-marker-alt"
         light={resultsStore.view !== 'map'}
         onClick={() => resultsStore.toggleView('map')}
       />

@@ -109,7 +109,7 @@ class MapView extends Component<IProps, IState> {
 
     return (
       <div className="flex-container flex-container--space flex-container--row-reverse map">
-        <div className="flex-col--8 flex-col--mobile--12 map__map-container">
+        <div className="flex-col--8 flex-col--tablet--12 map__map-container">
           <Map centre={CENTRE_OF_Hounslow} attributionControl={false} bounds={this.state.bounds}>
             <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
             {resultsStore.results.map((result: IService) => {
@@ -132,7 +132,7 @@ class MapView extends Component<IProps, IState> {
           </Map>
 
           <div className="map__key--container">
-            <h3 className="map__key--heading">Map key</h3>
+            <h4 className="map__key--heading">Map key</h4>
             <div className="map__key">
               <p className="map__key--description">
                 <FontAwesomeIcon
@@ -157,7 +157,7 @@ class MapView extends Component<IProps, IState> {
           </div>
         </div>
 
-        <div className="flex-col--4 flex-col--mobile--12 map__results-container">
+        <div className="flex-col--4 flex-col--tablet--12 map__results-container">
           {resultsStore.results.length && (
             <List
               activeId={this.state.activeMarkerId}

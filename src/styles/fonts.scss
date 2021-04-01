@@ -58,7 +58,7 @@ $font-link-medium: $font-base;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-l;
-    line-height: 1.75rem;
+    line-height: 2rem;
   }
 }
 
@@ -66,11 +66,11 @@ $font-link-medium: $font-base;
   font-size: $font-heading-m;
   font-family: $font-primary;
   font-weight: 700;
-  line-height: 2.25rem;
+  line-height: 2rem;
 
   @include for-phone-only {
     font-size: $font-heading-mobile-m;
-    line-height: 2rem;
+    line-height: 1.75rem;
   }
 }
 

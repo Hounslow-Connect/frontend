@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 
 import ResultsStore from '../../../stores/resultsStore';
-import CategoryFilter from '../Filters/CategoryFilter';
 import '../Results.scss';
 
 interface IProps {
@@ -16,30 +15,29 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
   }
 
   return (
-    <div className="flex-container">
-      <div className="flex-col flex-col--12 flex-col--mobile--12">
-        <h1 className="results__keyword-heading">Results for</h1>
-      </div>
+    <Fragment>
       {(resultsStore.category || resultsStore.persona) && (
-        <div className="flex-container category__info">
-          <div className="flex-col flex-col--7 flex-col--tablet-large--5 flex-col--medium--6 flex-col--mobile--12 flex-col--tablet--12">
+        <div className="results__overview__content">
+          <div className="results__overview__image">
+            
+          </div>
+          <div className="results__overview__info">
             <h2>
               {resultsStore && resultsStore.category
                 ? get(resultsStore, 'category.name').replace('COVID-19:', '')
                 : get(resultsStore, 'persona.name')}
             </h2>
             <div>
-              <p className="category__info--intro">
+              <p className="results__overview__intro">
                 {resultsStore && resultsStore.category
                   ? get(resultsStore, 'category.intro')
                   : get(resultsStore, 'persona.intro')}
               </p>
             </div>
           </div>
-          <CategoryFilter />
         </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

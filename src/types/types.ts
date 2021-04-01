@@ -14,6 +14,7 @@ export interface IParams {
   category?: string;
   persona?: string;
   is_free?: boolean;
+  open_now?: boolean;
   wait_time?: string;
   order?: 'distance' | 'relevance';
   query?: string;

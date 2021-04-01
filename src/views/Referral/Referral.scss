@@ -112,7 +112,7 @@
     margin: space(24) 0 !important;
 
     &--inner {
-      background-color: $mercury;
+      background-color: $gray;
     }
     @include for-tablet-landscape-down {
       background-color: $white;
@@ -144,7 +144,7 @@
         margin-bottom: 0 !important;
 
         &:nth-of-type(odd) {
-          background-color: $mercury;
+          background-color: $gray;
         }
       }
 
@@ -224,7 +224,7 @@
 }
 
 .referral__step-container {
-  background-color: $mercury;
+  background-color: $gray;
   margin: space(24) 0 !important;
   padding: space(32);
 
@@ -364,7 +364,7 @@
   }
 
   &--info {
-    background-color: $mercury;
+    background-color: $gray;
     padding: space(48) space(60) !important;
     margin-top: space(48);
 

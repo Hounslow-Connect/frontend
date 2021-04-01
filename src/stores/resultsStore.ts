@@ -25,13 +25,14 @@ export default class ResultsStore {
   @observable persona: IPersona | null = null;
   @observable organisations: IOrganisation[] | null = [];
   @observable is_free: boolean = false;
+  @observable open_now: boolean = false;
   @observable wait_time: string = 'null';
   @observable order: 'relevance' | 'distance' = 'relevance';
   @observable results: IService[] = [];
   @observable loading: boolean = false;
   @observable currentPage: number = 1;
   @observable totalItems: number = 0;
-  @observable itemsPerPage: number = 25;
+  @observable itemsPerPage: number = 9;
   @observable postcode: string = '';
   @observable locationCoords: IGeoLocation | {} = {};
   @observable view: 'grid' | 'map' = 'grid';
@@ -49,6 +50,7 @@ export default class ResultsStore {
     this.personaId = '';
     this.persona = null;
     this.is_free = false;
+    this.open_now = false;
     this.wait_time = 'null';
     this.order = 'relevance';
     this.results = [];
@@ -56,7 +58,7 @@ export default class ResultsStore {
     this.organisations = [];
     this.currentPage = 1;
     this.totalItems = 0;
-    this.itemsPerPage = 25;
+    this.itemsPerPage = 9;
     this.postcode = '';
     this.locationCoords = {};
     this.view = 'grid';
@@ -107,6 +109,10 @@ export default class ResultsStore {
         this.is_free = key === 'true' ? true : false;
       }
 
+      if (value === 'open_now') {
+        this.open_now = key === 'true' ? true : false;
+      }
+
       if (value === 'wait_time') {
         this.wait_time = key;
       }
@@ -150,6 +156,10 @@ export default class ResultsStore {
       params.is_free = this.is_free;
     }
 
+    if (this.open_now) {
+      params.open_now = this.open_now;
+    }
+
     if (this.wait_time !== 'null') {
       params.wait_time = this.wait_time;
     }
@@ -171,10 +181,9 @@ export default class ResultsStore {
   fetchResults = async (params: IParams) => {
     this.loading = true;
     try {
-      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}`, params);
+      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, params);
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
-      this.itemsPerPage = get(results, 'data.meta.per_page', 25);
 
       forEach(this.results, (service: IService) => {
         // @ts-ignore
@@ -200,6 +209,11 @@ export default class ResultsStore {
   @action
   toggleIsFree = () => {
     this.is_free = !this.is_free;
+  };
+
+  @action
+  toggleOpenNow = () => {
+    this.open_now = !this.open_now;
   };
 
   updateQueryStringParameter = (
@@ -257,6 +271,14 @@ export default class ResultsStore {
 
     if (!this.is_free) {
       url = this.removeQueryStringParameter('is_free', url);
+    }
+
+    if (this.open_now) {
+      url = this.updateQueryStringParameter('open_now', this.open_now, url);
+    }
+
+    if (!this.open_now) {
+      url = this.removeQueryStringParameter('open_now', url);
     }
 
     if (searchTerm) {

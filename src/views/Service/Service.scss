@@ -84,7 +84,7 @@
   align-items: stretch;
 
   .criteria_card:nth-of-type(odd) {
-    background-color: $mercury;
+    background-color: $gray;
   }
 
   &--no-padding {
@@ -170,7 +170,7 @@
 }
 
 .react-player__preview {
-  background-color: $mercury;
+  background-color: $gray;
 }
 
 .react-player__shadow {
@@ -306,7 +306,7 @@
   }
 
   &:nth-of-type(odd) {
-    background-color: $mercury;
+    background-color: $gray;
 
     .service__accordian-inner {
       background-color: $white;
@@ -315,7 +315,7 @@
 
   &:nth-of-type(even) {
     .service__accordian-inner {
-      background-color: $mercury;
+      background-color: $gray;
     }
   }
 
@@ -428,7 +428,7 @@
   justify-content: space-evenly !important;
 
   @include for-tablet-portrait-up {
-    background-color: $mercury;
+    background-color: $gray;
   }
 
   p {
@@ -456,7 +456,7 @@
   }
 
   &--sidebar {
-    background-color: $mercury;
+    background-color: $gray;
     padding: space(20) !important;
   }
 }
@@ -489,7 +489,7 @@
 
 .service__contact-card {
   padding: space(24) !important;
-  background-color: $mercury;
+  background-color: $gray;
 
   .flex-col {
     margin-bottom: space(24);
@@ -534,7 +534,7 @@
 
 .service__share-card {
   padding: space(20);
-  background-color: $mercury;
+  background-color: $gray;
   text-align: center;
 
   h3 {
@@ -558,7 +558,7 @@
 
 .service__information {
   @include for-tablet-landscape-up {
-    background: $mercury;
+    background: $gray;
     padding: space(32) !important;
   }
 

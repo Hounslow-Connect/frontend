@@ -39,8 +39,8 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
         </div>
       )}
 
-      <div className="flex-container flex-container--justify pagnation__container">
-        {resultsStore.totalItems > resultsStore.itemsPerPage && (
+      {resultsStore.totalItems > resultsStore.itemsPerPage && (
+        <div className="flex-container flex-container--justify">
           <Pagination
             activePage={resultsStore.currentPage}
             itemsCountPerPage={resultsStore.itemsPerPage}
@@ -54,26 +54,27 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
             }}
             prevPageText={
               <span>
-                <FontAwesomeIcon icon="chevron-left" /> Prev
+                <FontAwesomeIcon icon="arrow-left" /> Prev page
               </span>
             }
             nextPageText={
               <span>
-                Next <FontAwesomeIcon icon="chevron-right" />
+                Next page <FontAwesomeIcon icon="arrow-right" />
               </span>
             }
             innerClass="pagination"
-            activeClass="pagination--active"
-            itemClass="pagination--number-container"
-            linkClass="pagination--text-number-link"
-            linkClassPrev="pagination--text-nav-link"
-            linkClassNext="pagination--text-nav-link"
-            itemClassPrev="pagination--text-nav-container"
-            itemClassNext="pagination--text-nav-container"
+            activeClass="pagination__item--active"
+            activeLinkClass="pagination__link--active"
+            itemClass="pagination__item"
+            linkClass="pagination__link"
+            linkClassPrev="pagination__link"
+            linkClassNext="pagination__link"
+            itemClassPrev="pagination__nav-prev"
+            itemClassNext="pagination__nav-next"
             hideFirstLastPages={true}
           />
-        )}
-      </div>
+        </div>
+      )}
     </Fragment>
   );
 };

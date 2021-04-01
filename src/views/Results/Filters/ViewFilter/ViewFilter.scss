@@ -43,24 +43,9 @@
 
 .view-filter--header {
   @include heading-m;
-  margin-bottom: space(16);
 
   @include for-phone-only {
-    margin-bottom: space(8);
-  }
-}
-
-.view-filter--header--light {
-  @include body-m;
-  margin-bottom: 0;
-  color: $black;
-  margin-right: space(10);
-
-  @include for-tablet-landscape-up {
-    display: inline;
-  }
-
-  @include for-phone-only {
+    width: 100%;
     margin-bottom: space(8);
   }
 }
