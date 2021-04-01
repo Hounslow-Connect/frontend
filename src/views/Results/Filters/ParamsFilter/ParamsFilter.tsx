@@ -98,7 +98,7 @@ class Filter extends Component<IProps, IState> {
             });
           }}>
           <div className={resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12"}>
-            <div className="flex-container flex-container--no-padding flex-container--no-space">
+            <div className="flex-container flex-container--no-padding flex-container--no-space results__filters__wrapper">
               {resultsStore.isKeywordSearch &&
                 <div className="flex-col">
                   <Input
@@ -112,7 +112,12 @@ class Filter extends Component<IProps, IState> {
                   />
                 </div>
               }
-              <div className="flex-col">
+              <div
+                className="flex-col"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
                 <label className="results__search-filter-location--label" htmlFor="location" aria-label="Location">in</label>
                 <Input
                   id="location"

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { History } from 'history';
-import cx from 'classnames';
 import get from 'lodash/get';
 
 import './Results.scss';
@@ -11,7 +10,6 @@ import ParamsFilter from './Filters/ParamsFilter/ParamsFilter';
 import ViewFilters from './Filters/ViewFilter/ViewFilter';
 import ListView from './ListView';
 import MapView from './MapView';
-import Select from '../../components/Select';
 import Breadcrumb from '../../components/Breadcrumb';
 import map from 'lodash/map';
 import SideboxCard from './SideboxCard';
@@ -67,7 +65,7 @@ class Results extends Component<IProps> {
             {!resultsStore.isKeywordSearch && 
               <h1 className="results__heading">Results for</h1>
             }
-            <div className="results__overview">
+            <div className={"results__overview " + (!resultsStore.isKeywordSearch ? 'results__overview--category' : 'results__overview--keyword')}>
               {!resultsStore.isKeywordSearch &&
                 <Category />
               }
@@ -97,8 +95,8 @@ class Results extends Component<IProps> {
         <div className="results__list">
           {(this.hasCategories() && this.hasCategories().length !== 0) && (
             <div className="results__category-sidebar">
-              {map(this.hasCategories(), (sidebox: ISidebox) => {
-                return <SideboxCard sidebox={sidebox} />;
+              {map(this.hasCategories(), (sidebox: ISidebox, index) => {
+                return <SideboxCard sidebox={sidebox} key={index} />;
               })}
             </div>
           )}
