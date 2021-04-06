@@ -21,7 +21,8 @@
       background-color: $turquoise;
 
       @include for-tablet-portrait-up {
-        left: 0;
+        left: -1px;
+        right: auto;
         transform: rotate(180deg);
       }
     }
@@ -41,7 +42,8 @@
 
         &::before {
           top: auto;
-          bottom: 0;
+          bottom: -1px;
+          right: auto;
           width: 100%;
           height: 32px;
           clip-path: polygon(70% 90%, 60% 0, 0 0, 0 100%, 100% 100%, 100% 0%, 80% 0);
@@ -53,29 +55,38 @@
       }
     }
   }
+
+  &:hover {
+    .card__image img {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .card__image {
   position: relative;
   flex: 1 0 auto;
   width: 40%;
+  overflow: hidden;
 
   img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.2s ease-in-out;
   }
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
-    right: 0;
+    right: -1px;
     height: 100%;
     width: 32px;
     clip-path: polygon(90% 70%, 0 60%, 0 0, 100% 0, 100% 100%, 0 100%, 0 80%);
     background-color: $yellow;
+    z-index: 10;
 
     @include for-phone-only {
       clip-path: polygon(90% 70%, 0 55%, 0 0, 100% 0, 100% 100%, 0 100%, 0 85%) !important;
