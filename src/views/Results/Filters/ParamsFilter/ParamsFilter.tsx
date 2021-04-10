@@ -158,6 +158,7 @@ class Filter extends Component<IProps, IState> {
                 checked={get(resultsStore, 'is_free', false)}
                 onChange={() => {
                   resultsStore.toggleIsFree();
+                  resultsStore.setParams();
                 }}
                 aria="Filter free services"
               />
