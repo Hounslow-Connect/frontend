@@ -262,6 +262,9 @@
   line-height: 2rem;
 
   @include for-tablet-landscape-down {
+    padding: space(4) space(8);
+    font-size: pxtorem(16px);
+    line-height: pxtorem(16px);
     color: $black;
   }
 
@@ -286,15 +289,7 @@
 }
 
 .buton__burger-menu {
-  background-color: transparent;
-  color: $pink;
-  font-size: $font-body-s;
-  font-family: $font-primary;
-  display: block;
-  padding: 0;
-  height: auto;
   margin-bottom: space(24);
-  font-weight: normal;
 
   &:hover {
     box-shadow: none;
