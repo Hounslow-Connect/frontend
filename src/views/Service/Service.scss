@@ -17,6 +17,7 @@
   }
 
   &__wrapper {
+    flex: 0 0 100%;
     position: relative;
     padding: space(32) space(48);
     background-color: $yellow;
@@ -416,11 +417,44 @@
 }
 
 .service__useful-info {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0 !important;
   margin-bottom: space(16) !important;
   justify-content: space-evenly !important;
+  background-color: $white;
 
-  @include for-tablet-portrait-up {
-    background-color: $white;
+  &__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 160px;
+    background-color: $pink;
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      bottom: calc(50% - 24px);
+      right: -24px;
+      width: 0; 
+      height: 0; 
+      border-top: 24px solid transparent;
+      border-bottom: 24px solid transparent;
+      border-left: 24px solid $pink;
+  
+      @include for-tablet-portrait-down {
+        border-top: 24px solid transparent;
+      border-bottom: 24px solid transparent;
+      border-left: 24px solid $pink;
+      }
+    }
+  }
+
+  &__content {
+    flex: 0 1 auto;
+    padding: space(24) space(48);
   }
 
   p {
@@ -433,10 +467,7 @@
   }
 
   svg {
-    @include for-tablet-landscape-up {
-      font-size: pxtorem(36px);
-      float: right;
-    }
+    font-size: pxtorem(36px);
   }
 }
 
