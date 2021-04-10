@@ -57,6 +57,11 @@ class Results extends Component<IProps> {
 
   render() {
     const { resultsStore, history } = this.props;
+
+    if (resultsStore.loading) {
+      return false;
+    }
+
     return (
       <section className="results">
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search results', url: '' }]} />
@@ -100,48 +105,6 @@ class Results extends Component<IProps> {
               })}
             </div>
           )}
-          {/* {(!!resultsStore.results.length && resultsStore.isKeywordSearch) &&
-            <div className="flex-container flex-container--wrap results__filter-bar">
-              <div className="flex-col flex-col--6">
-                <div
-                  className={cx(
-                    'flex-container flex-container--align-center results__keyword-container',
-                    {
-                      'results__keyword-container--end': !resultsStore.postcode,
-                    }
-                  )}
-                >
-                  {resultsStore.view === 'grid' && resultsStore.postcode && (
-                    <div
-                      className={cx(
-                        'flex-col flex-col--7 flex-col--tablet-large--6 flex-col--mobile--5 flex-col--medium--5 flex-col--mobile-small--12 flex-container--mobile-no-padding results__sort-by-container',
-                        {
-                          'flex-col--medium--6': !resultsStore.postcode,
-                        }
-                      )}
-                    >
-                      <label htmlFor="orderBy" className="results__sort-by-label">
-                        Sort by:
-                      </label>
-                      <Select
-                        className="results__sort-by-select"
-                        options={[
-                          { value: 'relevance', text: 'Relevance' },
-                          { value: 'distance', text: 'Location' },
-                        ]}
-                        placeholder={resultsStore.order === 'distance' ? 'Location' : 'Relevance'}
-                        id="orderBy"
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          resultsStore.orderResults(e)
-                        }
-                        disabled={!resultsStore.postcode}
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          } */}
 
           {resultsStore.view === 'grid' ? (
             <ListView resultsStore={resultsStore} history={history} />

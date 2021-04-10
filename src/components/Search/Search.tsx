@@ -76,8 +76,8 @@ class Search extends React.Component<IProps> {
                           value={SearchStore.search}
                         />
                       </div>
-                      <span className="search__input__seperator">in</span>
-                      <div>
+                      <div className="flex-col results__search-filter">
+                        <label className="results__search-filter-location--label" htmlFor="location" aria-label="Location">in</label>
                         <Input
                           id="location"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

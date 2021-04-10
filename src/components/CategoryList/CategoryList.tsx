@@ -15,7 +15,9 @@ interface IProps extends RouteComponentProps {
 
 const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, covid = false, title }) => (
   <div className="category-list">
-    <h3 className="category-list__heading">{title}</h3>
+    {title &&
+      <h3 className="category-list__heading">{title}</h3>
+    }
     <div className="category-list__items">
       {categories.map(({ name, id, icon }) => (
         <Button
