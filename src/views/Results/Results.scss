@@ -131,7 +131,7 @@
 }
 
 .results__search-filter-location--label {
-  margin: 0 space(24);
+  margin-right: space(24);
   font-size: pxtorem(20px);
   font-weight: 700;
 
@@ -267,18 +267,14 @@
       flex-direction: row;
     }
   }
+
+  .results__search-box-keyword {
+    width: auto;
+  }
 }
 
 .results__filters__heading {
   margin-bottom: space(8);
-}
-
-.results__filters__wrapper {
-  flex-wrap: nowrap !important;
-
-  @include for-phone-only {
-    flex-wrap: wrap !important;
-  }
 }
 
 .results__filters__checkboxes {
@@ -496,7 +492,7 @@
 }
 
 .results__search-box-keyword {
-  width: 100%;
+  margin-right: space(24);
 }
 
 .results__heading {

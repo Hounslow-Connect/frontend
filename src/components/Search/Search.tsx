@@ -72,6 +72,7 @@ class Search extends React.Component<IProps> {
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             SearchStore.onChange(e, 'search')
                           }
+                          className="results__search-box-keyword"
                           id="search"
                           value={SearchStore.search}
                         />
