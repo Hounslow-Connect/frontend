@@ -15,16 +15,14 @@
     margin-bottom: 0;
     font-size: pxtorem(20px);
     font-weight: 700;
+    line-height: pxtorem(20px);
 
     svg {
       display: none;
     }
   }
 
-  input[type='checkbox']:checked + label {
-    display: inline-block;
-    vertical-align: middle;
-
+  input[type='checkbox']:checked + label {;
     svg {
       display: inline-block;
       font-size: pxtorem(20px);
@@ -32,6 +30,12 @@
       position: absolute;
       left: 4px;
       color: $black;
+
+      @include for-phone-only {
+        top: 3px;
+        left: 3px;
+        font-size: pxtorem(14px);
+      }
     }
   }
 

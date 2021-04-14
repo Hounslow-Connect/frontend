@@ -6,6 +6,13 @@
 .results {
   position: relative;
   background: linear-gradient(to bottom, $white 0%, $white 270px, $light-turquoise 270px,$light-turquoise 100%);
+}
+
+.results__list {
+  position: relative;
+  z-index: 0;
+  padding-top: space(40);
+  padding-bottom: space(40);
 
   &::after {
     content: url('../../assets/images/backgrounds/park-trimmed.svg');
@@ -19,13 +26,6 @@
   }
 }
 
-.results__list {
-  position: relative;
-  padding-top: space(40);
-  padding-bottom: space(40);
-  z-index: 10;
-}
-
 .results__container {
   display: flex;
   flex-wrap: wrap;
@@ -34,18 +34,22 @@
   max-width: 1260px;
   padding: 0 space(40);
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
 
   @include for-tablet-portrait-down {
     gap: none;
-    padding: 0 space(24);
+    padding: 0 space(16);
   }
 }
 
 .results__container--no-results {
-  padding: space(64) space(40) space(16);
+  width: 100%;
+  max-width: 1030px;
+  text-align: center;
 
-  @include for-phone-only {
-    padding: space(32) space(12) space(16);
+  .category-list {
+    padding: 0;
   }
 }
 
@@ -63,6 +67,7 @@
 
 .results__search-box {
   position: relative;
+  z-index: 10;
 
   @include for-phone-only {
     h1 {
@@ -74,6 +79,11 @@
     position: relative;
     max-width: 1260px;
   }
+}
+
+.results__info {
+  position: relative;
+  z-index: 10;
 }
 
 .results__info__wrapper {
@@ -106,19 +116,31 @@
   }
 }
 
+.results__search-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .input--container {
+    width: auto;
+  }
+}
+
 .results__search-filter-location {
-  width: 100%;
-  margin: 0 space(24);
+  width: auto;
 }
 
 .results__search-filter-location--label {
+  margin-right: space(24);
   font-size: pxtorem(20px);
   font-weight: 700;
+
 }
 
 /* PAGINATION */
 .pagination {
   position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -216,7 +238,7 @@
   width: 100%;
 
   .input--container {
-    margin: 0 space(24) 0 0;
+    margin: 0;
 
     @include for-phone-only {
       width: 100%;
@@ -245,18 +267,14 @@
       flex-direction: row;
     }
   }
+
+  .results__search-box-keyword {
+    width: auto;
+  }
 }
 
 .results__filters__heading {
   margin-bottom: space(8);
-}
-
-.results__filters__wrapper {
-  flex-wrap: nowrap !important;
-
-  @include for-phone-only {
-    flex-wrap: wrap !important;
-  }
 }
 
 .results__filters__checkboxes {
@@ -408,12 +426,6 @@
   }
 
   &--category {
-    flex-wrap: nowrap;
-
-    @include for-tablet-portrait-down {
-      flex-wrap: wrap;
-    }
-
     .results__filters {
       width: auto;
     }
@@ -460,6 +472,7 @@
 }
 
 .results__overview__image {
+  flex: 0 0 auto;
   margin-right: space(24);
   width: 158px;
   height: 158px;
@@ -479,8 +492,7 @@
 }
 
 .results__search-box-keyword {
-  margin-right: space(20);
-  width: 100%;
+  margin-right: space(24);
 }
 
 .results__heading {
@@ -543,6 +555,8 @@
   max-width: 1260px;
   padding: 0 space(40);
   margin: 0 auto space(32);
+  position: relative;
+  z-index: 10;
 
   @include for-tablet-portrait-down {
     padding: 0 space(24);
@@ -551,6 +565,6 @@
   @include for-phone-only {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: space(16);
-    padding: space(16);
+    padding: 0 space(16);
   }
 }

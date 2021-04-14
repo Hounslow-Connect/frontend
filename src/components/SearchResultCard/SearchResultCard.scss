@@ -9,11 +9,12 @@
   width: calc(33.3333% - 22px);
   padding: space(20);
   border-radius: 20px;
+  border: 2px solid transparent;
   background-color: $white;
   color: $black;
   cursor: pointer;
 
-  @include for-tablet-portrait-down {
+  @include for-tablet-landscape-down {
     width: calc(50% - 16px);
   }
 
@@ -21,8 +22,9 @@
     width: 100%;
   }
 
-  &.is-active {
-    border: 2px solid $black;
+  &.is-active,
+  &:hover {
+    border-color: $black;
   }
 }
 
