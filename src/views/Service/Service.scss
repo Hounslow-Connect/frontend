@@ -17,16 +17,17 @@
   }
 
   &__wrapper {
+    flex: 0 0 100%;
     position: relative;
     padding: space(32) space(48);
     background-color: $yellow;
-
-    @include for-phone-only {
-      padding: space(16) space(24);
-    }
   
     @include for-tablet-portrait-down {
       padding: space(24) space(32);
+    }
+
+    @include for-phone-only {
+      padding: space(16) space(16);
     }
 
     &::after {
@@ -82,19 +83,25 @@
 }
 
 .service__header__logo {
+  flex: 0 0 154px;
+  height: 154px;
   margin-right: space(40);
+  margin-bottom: space(16);
   border-radius: 20px;
   overflow: hidden;
 
-  img {
-    height: pxtorem(154px);
-    width: pxtorem(154px);
-    object-fit: cover;
+  @include for-phone-only {
+    flex: 0 0 80px;
+    height: 80px;
+    margin-right: 0;
+    margin-bottom: space(12);
+    border-radius: 12px;
+  }
 
-    @include for-tablet-portrait-down {
-      height: pxtorem(50px);
-      width: pxtorem(50px);
-    }
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 }
 
@@ -306,6 +313,8 @@
   }
 
   &:nth-of-type(even) {
+    background-color: $gray;
+
     .service__accordian-inner {
       background-color: $white;
     }
@@ -319,6 +328,7 @@
 }
 
 .service__button-container {
+  justify-content: flex-start !important;
   padding: space(32) 0 space(24) !important;
 
   @include for-tablet-landscape-down {
@@ -329,16 +339,14 @@
     }
   }
 
-  @include for-phone-only {
-    justify-content: space-evenly !important;
-  }
-
   &--mobile {
-    padding-right: space(8);
-
     @include for-phone-only {
       margin-bottom: space(16) !important;
       text-align: center;
+    }
+
+    .button:first-child {
+      margin-right: space(12);
     }
   }
 
@@ -404,6 +412,10 @@
 
   &--header {
     margin-top: space(32);
+
+    @include for-phone-only {
+      margin-bottom: 0 !important;
+    }
   }
 }
 
@@ -416,11 +428,54 @@
 }
 
 .service__useful-info {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0 !important;
   margin-bottom: space(16) !important;
   justify-content: space-evenly !important;
+  background-color: $white;
 
-  @include for-tablet-portrait-up {
-    background-color: $white;
+  @include for-phone-only {
+    flex-wrap: wrap;
+    margin-bottom: 0 !important;
+  }
+
+  &__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 160px;
+    background-color: $pink;
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      bottom: calc(50% - 24px);
+      right: -24px;
+      width: 0; 
+      height: 0; 
+      border-top: 24px solid transparent;
+      border-bottom: 24px solid transparent;
+      border-left: 24px solid $pink;
+  
+      @include for-tablet-portrait-down {
+        border-top: 24px solid transparent;
+      border-bottom: 24px solid transparent;
+      border-left: 24px solid $pink;
+      }
+    }
+  }
+
+  &__content {
+    flex: 0 1 auto;
+    padding: space(24) space(48);
+
+    @include for-phone-only {
+      padding: 0;
+      margin: 0;
+    }
   }
 
   p {
@@ -433,10 +488,7 @@
   }
 
   svg {
-    @include for-tablet-landscape-up {
-      font-size: pxtorem(36px);
-      float: right;
-    }
+    font-size: pxtorem(36px);
   }
 }
 
@@ -463,11 +515,14 @@
   }
 
   .service__heading {
-    margin-left: space(24);
+    @include for-tablet-landscape-up {
+      margin-left: space(24);
+    }
   }
 }
 
 .service__cost-card {
+  justify-content: flex-start !important;
   width: 100%;
   padding: 0 space(16) !important;
 
@@ -581,13 +636,13 @@
 
 .service__information {
   position: relative;
-
-  @include for-tablet-landscape-up {
-    background: $white;
-    padding: space(32) !important;
-  }
+  background: $white;
+  padding: space(32) !important;
 
   @include for-phone-only {
+    margin-top: space(16) !important;
+    padding: space(16) !important;
+
     h3 {
       font-size: $font-body-l;
     }

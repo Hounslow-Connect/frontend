@@ -55,8 +55,6 @@ const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => (
           icon="print"
           onClick={() => window.print()}
         />
-      </div>
-      <div className="flex-col">
         <Button
           size="small"
           text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}

@@ -122,13 +122,11 @@ class Service extends Component<IProps> {
         <div className={`service__header service__header--${get(service, 'type')}`}>
           <div className="flex-container">
             <div className="service__header__wrapper">
-              <div className="flex-container flex-container--no-padding flex-container--no-wrap flex-container--left">
-                <div className="flex-col flex-col--mobile--3">
-                  <div className="service__header__logo">
-                    <img src={getImg(service)} alt={`${service.name} logo`} />
-                  </div>
+              <div className="flex-container flex-container--no-padding flex-container--left">
+                <div className="service__header__logo">
+                  <img src={getImg(service)} alt={`${service.name} logo`} />
                 </div>
-                <div className="flex-col flex-col--mobile--9">
+                <div className="flex-col flex-col--tablet--9">
                   <h1>{get(service, 'name')}</h1>
                   <p className="service__header__last-updated">
                     Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
@@ -151,7 +149,7 @@ class Service extends Component<IProps> {
           <section className="service__info">
             <div className="flex-container flex-container--justify">
               <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
-                <div className="flex-container flex-container--align-center flex-container--mobile-no-padding service__section service__section--no-padding">
+                <div className="flex-container flex-container--align-center flex-container--no-padding service__section service__section--no-padding">
                   {serviceStore.hasCriteria && (
                     <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
                       <h2 className="service__heading">Who is it for?</h2>
@@ -221,12 +219,12 @@ class Service extends Component<IProps> {
                       <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
                     )}
 
-                    <div className="flex-col flex-col--mobile--12 mobile-show tablet-show criteria_card service__info__cost">
+                    <div className="flex-col flex-col--tablet--6 mobile-show tablet-show criteria_card service__info__cost">
                       <CostCard service={service} />
                     </div>
                   </div>
 
-                  <div className="flex-container flex-container--align-center service__media service__section--no-padding">
+                  <div className="flex-container flex-container--align-center flex-container--no-padding service__media service__section--no-padding">
                     <div className="flex-col flex-col--mobile--12">
                       <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
                     </div>
@@ -284,7 +282,7 @@ class Service extends Component<IProps> {
                         </div>
 
                         <div className="flex-col flex-col--12 service__testimonial">
-                          <div className="mobile-hide flex-container flex-container--align-center flex-container--justify flex-container--no-padding">
+                          <div className="flex-container flex-container--align-center flex-container--justify flex-container--no-padding">
                             <div className="flex-col--1 flex-col--tablet-large--2 flex-col--tablet--2">
                               <FontAwesomeIcon icon="comment" />
                             </div>
@@ -457,7 +455,7 @@ class Service extends Component<IProps> {
                     </div>
                   </div>
 
-                  <div className="flex-col flex-col--12 flex-col--tablet--5">
+                  <div className="flex-col flex-col--12">
                     <ShareCard serviceStore={serviceStore} />
                   </div>
                 </div>

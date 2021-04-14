@@ -46,7 +46,7 @@ $font-link-medium: pxtorem(20px);
 
   @include for-phone-only {
     font-size: $font-heading-mobile-xl;
-    line-height: 3rem;
+    line-height: 2.5rem;
   }
 }
 
