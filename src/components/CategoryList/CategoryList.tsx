@@ -18,7 +18,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, co
     <h3 className="category-list__heading">{title}</h3>
     <div className="category-list__items">
       {categories.map(({ name, id, icon }) => {
-        // const image = require(`../../assets/images/category-images/${name.replace(/\s+/g, '-').toLowerCase()}.svg`) ? require(`../../assets/images/category-images/${name.replace(/\s+/g, '-').toLowerCase()}.svg`) : '';
+        const image = require(`../../assets/images/category-images/${name.replace(/\s+/g, '-').toLowerCase()}.svg`) ? require(`../../assets/images/category-images/${name.replace(/\s+/g, '-').toLowerCase()}.svg`) : '';
 
         return (
           <Button
@@ -26,7 +26,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, co
             text={name}
             key={id}
             size="small"
-            // image={image}
+            image={image}
             onClick={() => {
               history.push({
                 pathname: '/results',
