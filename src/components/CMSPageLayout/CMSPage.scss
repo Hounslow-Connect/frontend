@@ -62,10 +62,6 @@
 }
 
 .cms__header {
-  background-color: $yellow;
-  position: relative;
-  padding: space(16) 0;
-
   .flex-container {
     max-width: 1260px;
   }
@@ -90,18 +86,22 @@
   width: 100%;
   max-width: 1260px;
   margin: 0 auto;
+  padding: space(32) space(48);
+  background-color: $yellow;
 
   &--title {
     font-size: pxtorem(32px);
+    line-height: pxtorem(32px);
 
     @include for-phone-only {
-      font-size: $font-heading-mobile-l;
+      font-size: pxtorem(22px);
+      line-height: pxtorem(22px);
     }
   }
 }
 
 .cms__content {
-  padding: space(32) 0;
+  padding: space(32);
 
   > .flex-container {
     max-width: 1260px;

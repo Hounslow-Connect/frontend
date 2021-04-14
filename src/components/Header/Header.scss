@@ -181,18 +181,13 @@
   }
 
   .nav-trigger {
-    display: none;
-    float: right;
+    display: flex;
+    align-items: center;
     margin: pxtorem(4px) 0;
     padding: 0;
     border: none;
     background: transparent;
-    width: 65px;
     cursor: pointer;
-
-    @include for-small-phone {
-      width: 52px;
-    }
 
     &:focus {
       outline: none;
@@ -204,11 +199,14 @@
       margin-right: space(8);
       margin-bottom: 0;
       vertical-align: middle;
-      font-size: pxtorem(14px);
-      line-height: 0.925rem;
+      font-size: pxtorem(20px);
+      font-weight: bold;
+      line-height: pxtorem(20px);
+      text-decoration: underline;
 
       &:before {
         content: 'Menu';
+        display: block;
       }
 
       @include for-small-phone {
@@ -221,6 +219,8 @@
     i {
       display: inline-block;
       vertical-align: middle;
+      margin-left: space(12);
+      font-size: pxtorem(22px);
     }
 
     &.active {
