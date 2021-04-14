@@ -12,6 +12,7 @@
 
   @include for-tablet-portrait-down {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0;
   }
 
   @include for-phone-only {
@@ -24,7 +25,10 @@
     padding: space(16);
     background-color: $turquoise;
     border-radius: 20px;
-    text-align: center;
+
+    @include for-tablet-landscape-down {
+      grid-column: span 2;
+    }
   }
 
   &__items {

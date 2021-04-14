@@ -49,8 +49,8 @@ class InstructionModal extends Component<any> {
 
           <div className="instruction-modal__content">
             <p>
-              <strong>Connected Together</strong><br />
-              https://connect.nhs.uk/
+              <strong>One Hounslow Connect</strong><br />
+              https://onehounslowconnect.london
             </p>
             <p>Add this app to your home screen for quick access to our services.</p>
             {renderModalContent()}
