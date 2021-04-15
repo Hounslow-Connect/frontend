@@ -1,38 +1,39 @@
 import L from 'leaflet';
+const requestImageFile = require.context("../../../assets/images/icons/maps/", true, /^\.\/.*\.svg$/);
 
 export const ActiveMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/active-pin.svg'),
+  iconUrl: requestImageFile("./active-pin.svg").default,
   iconSize: [62, 88],
 });
 export const ActivityMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/activity-pin.svg'),
+  iconUrl: requestImageFile("./activity-pin.svg").default,
   iconSize: [50, 95],
 });
 export const AdviceMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/advice-pin.svg'),
+  iconUrl: requestImageFile("./advice-pin.svg").default,
   iconSize: [50, 95],
 });
 export const AppMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/app-pin.svg'),
+  iconUrl: requestImageFile("./app-pin.svg").default,
   iconSize: [50, 95],
 });
 export const ClubMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/club-pin.svg'),
+  iconUrl: requestImageFile("./club-pin.svg").default,
   iconSize: [50, 95],
 });
 export const GroupMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/group-pin.svg'),
+  iconUrl: requestImageFile("./group-pin.svg").default,
   iconSize: [50, 95],
 });
 export const HelplineMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/helpline-pin.svg'),
+  iconUrl: requestImageFile("./helpline-pin.svg").default,
   iconSize: [50, 95],
 });
 export const InformationMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/information-pin.svg'),
+  iconUrl: requestImageFile("./information-pin.svg").default,
   iconSize: [50, 95],
 });
 export const ServiceMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/service-pin.svg'),
+  iconUrl: requestImageFile("./service-pin.svg").default,
   iconSize: [50, 95],
 });
