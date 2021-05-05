@@ -22,9 +22,13 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
         <div className="results__overview__content">
           {resultsStore &&
             <div className="results__overview__image">
-              <img src={requestImageFile(`./${resultsStore.category
-                ? get(resultsStore, 'category.name').replace(/\s+/g, '-').toLowerCase()
-                : get(resultsStore, 'persona.name').replace(/\s+/g, '-').toLowerCase()}.svg`).default} />
+              <img
+                src={requestImageFile(`./${resultsStore.category
+                  ? get(resultsStore, 'category.name').replace(/\s+/g, '-').toLowerCase()
+                  : get(resultsStore, 'persona.name').replace(/\s+/g, '-').toLowerCase()}.svg`).default}
+                alt={resultsStore && resultsStore.category
+                  ? get(resultsStore, 'category.name').replace('COVID-19:', '')
+                  : get(resultsStore, 'persona.name')} />
             </div>
           }
           <div className="results__overview__info">
