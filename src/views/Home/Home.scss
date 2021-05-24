@@ -5,8 +5,8 @@
 .home {
   background-color: $light-turquoise;
   background-image: url('../../assets/images/backgrounds/park.svg');
-  background-position: center 320px;
-  background-size: 100% auto;
+  background-position: -32px 320px;
+  background-size: calc(100% + 35px) auto;
   background-repeat: no-repeat;
 
   @include for-phone-only {
