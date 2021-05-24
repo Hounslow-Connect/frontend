@@ -84,7 +84,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
             </div>
 
             <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__button">
-              <ButtonLink href="https://admin.connectedhounslow.uk" text="Members Area" />
+              <ButtonLink href={`${process.env.MEMBERS_AREA_URL}`} text="Members Area" />
               <img src={HounslowLogo} alt="London Borough of Hounslow" className="footer-hounslow-logo" />
             </div>
           </div>
