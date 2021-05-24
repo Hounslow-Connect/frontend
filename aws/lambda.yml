@@ -74,10 +74,7 @@ Resources:
             let hasChanged = false;
 
             // Initialise the path mapping
-            const map = {
-              about: 'about-connect',
-              'get-involved': 'providers'
-            };
+            const map = {};
 
             // Rewrite URLs
             for (const [from, to] of Object.entries(map)) {
