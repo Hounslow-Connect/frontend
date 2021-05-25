@@ -30,9 +30,9 @@ const ListView: React.FunctionComponent<IProps> = ({ resultsStore, history }) =>
         />
       ) : (
         <div className="results__container results__container--no-results">
-          <h1>Your search for "{resultsStore.keyword}" didn't return any results.</h1>
+          <h2>Your search for "{resultsStore.keyword}" didn't return any results.</h2>
           <p>You could try searching for a slightly different but related keyword. For example, "nursing home" instead of "care home".</p>
-          <h2>You might also find searching by category might be helpful:</h2>
+          <h3>You might also find searching by category might be helpful:</h3>
           <CategoryList categories={SearchStore.categories} />
         </div>
       )}
