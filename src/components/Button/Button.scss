@@ -42,7 +42,8 @@
   }
 
   &:disabled {
-    background-color: $gray;
+    background-color: $lynch;
+    color: #fff;
     opacity: 0.75;
   }
 
