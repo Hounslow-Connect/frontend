@@ -56,6 +56,7 @@ class Header extends Component<IProps> {
               </div>
               <div className="flex-col mobile-hide tablet--large-hide medium-hide">
                 <Button
+                  tabIndex={0}
                   text="Give Feedback"
                   header={true}
                   icon="comment"

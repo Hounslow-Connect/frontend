@@ -19,6 +19,7 @@ interface IProps {
   light?: boolean;
   onClick?: any;
   covid?: boolean;
+  tabIndex?: number;
 }
 
 const Button: React.FunctionComponent<IProps> = ({
@@ -35,6 +36,7 @@ const Button: React.FunctionComponent<IProps> = ({
   onClick,
   covid = false,
   image,
+  tabIndex = 0
 }) => (
   <button
     className={cx('button', `button--${size}`, {
@@ -49,6 +51,7 @@ const Button: React.FunctionComponent<IProps> = ({
     disabled={disabled}
     type={type}
     onClick={onClick}
+    tabIndex={tabIndex}
   >
     {image && (
       <img src={image} alt={text} className="button__image" />

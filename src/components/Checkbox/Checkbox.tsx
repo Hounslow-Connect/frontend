@@ -13,32 +13,34 @@ interface IProps {
   aria?: string;
 }
 
-const Checkbox: React.FunctionComponent<IProps> = ({
-  label,
-  id,
-  onChange,
-  checked,
-  className,
-  aria,
-}) => (
-  <div className={`checkbox ${className}`}>
+const Checkbox: React.FunctionComponent<IProps> = (props: IProps) => {
+  const handleKeyPress = (event:  any) => {
+    console.log('[handleKeyPress] -->')
+    
+    if (event.key === 'Enter') {
+      // props.onChange
+    }
+  }
+  
+  return (<div className={`checkbox ${props.className}`}>
     <input
       type="checkbox"
-      id={id}
-      name={id}
-      checked={checked}
-      onChange={onChange}
-      aria-label={aria}
+      id={props.id}
+      name={props.id}
+      checked={props.checked}
+      onChange={props.onChange}
+      tabIndex={-1}
+      aria-label={props.aria}
     />
-    <label htmlFor={id}>
+    <label htmlFor={props.id} tabIndex={0} onKeyPress={handleKeyPress} >
       <span>
         <span>
           <FontAwesomeIcon icon="check" />
         </span>
       </span>
-      {label}
+      {props.label}
     </label>
-  </div>
-);
+  </div>)
+};
 
 export default observer(Checkbox);
