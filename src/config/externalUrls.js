@@ -1,0 +1,1 @@
+export const membersAreaURL = process.env.REACT_APP_MEMBERS_AREA_URL || '';
