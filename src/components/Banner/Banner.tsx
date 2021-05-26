@@ -63,6 +63,7 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => {
                   <FontAwesomeIcon
                     icon="chevron-left"
                   />
+                  <span className="sr-only">Previous campaign</span>
                 </button>
                 <button className="arrow arrow-right" onClick={() => {
                   if(activeCarouselItem < 2) setActiveCarouselItem(activeCarouselItem + 1)
@@ -70,6 +71,7 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => {
                   <FontAwesomeIcon
                     icon="chevron-right"
                   />
+                  <span className="sr-only">Next campaign</span>
                 </button>
               </div>
             </div>
