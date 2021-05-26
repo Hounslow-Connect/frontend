@@ -9,6 +9,7 @@ import './Header.scss';
 import Logo from '../../assets/logo/logo.svg';
 
 import Button from '../Button';
+import LinkButton from '../LinkButton';
 import WindowSizeStore from '../../stores/windowSizeStore';
 import UIStore from '../../stores/uiStore';
 import Footer from '../Footer/Footer';
@@ -63,9 +64,7 @@ class Header extends Component<IProps> {
                 />
               </div>
               <div className="flex-col header--top-row--favourite header--top-row--button-box">
-                <RouterLink to="/favourites">
-                  <Button text="Favourites" header={true} icon="star" />
-                </RouterLink>
+                <LinkButton text="Favourites" to="/favourites" header={true} icon="star" />
               </div>
             </div>
           </div>
