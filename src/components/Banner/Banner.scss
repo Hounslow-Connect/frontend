@@ -122,6 +122,7 @@
       }
 
       .title {
+        @include heading-m;
         margin-bottom: space(16);
       }
     }

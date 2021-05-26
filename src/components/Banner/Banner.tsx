@@ -32,7 +32,7 @@ const Banner: FunctionComponent<IProps> = ({ banner }) => {
                     <img src={bannerIllo} alt=""/>
                   </div>
                   <div className="content">
-                    <h3 className="title">Current Campaigns</h3>
+                    <h2 className="title">Current Campaigns</h2>
                     <p>One Houslow Connect is an information, advice and guidance hub connecting local residents to local support.</p>
                   </div>
                   <Button
