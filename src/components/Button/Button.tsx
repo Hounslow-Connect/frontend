@@ -35,8 +35,7 @@ const Button: React.FunctionComponent<IProps> = ({
   light = false,
   onClick,
   covid = false,
-  image,
-  tabIndex = 0
+  image
 }) => (
   <button
     className={cx('button', `button--${size}`, {
@@ -51,7 +50,6 @@ const Button: React.FunctionComponent<IProps> = ({
     disabled={disabled}
     type={type}
     onClick={onClick}
-    tabIndex={tabIndex}
   >
     {image && (
       <img src={image} alt={text} className="button__image" />
