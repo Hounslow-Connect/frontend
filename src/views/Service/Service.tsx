@@ -419,8 +419,8 @@ class Service extends Component<IProps> {
                   </Accordian>
                 </div>
               </div>
-              <div className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
-                <div className="flex-container service__right-column">
+              <div className="flex-col flex-col--4 flex-col--tablet--12  ">
+                <div className="flex-container service__right-column mobile-hide">
                   <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
                     <CostCard service={service} />
                   </div>
@@ -455,6 +455,9 @@ class Service extends Component<IProps> {
                     </div>
                   </div>
 
+                 
+                </div>
+                <div className="flex-container service__right-column">
                   <div className="flex-col flex-col--12">
                     <ShareCard serviceStore={serviceStore} />
                   </div>

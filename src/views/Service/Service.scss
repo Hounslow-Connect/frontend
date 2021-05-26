@@ -510,7 +510,7 @@
 }
 
 .service__left-column {
-  @include for-tablet-landscape-up {
+  @media(min-width: 861px) {
     padding-right: space(64) !important;
   }
 
@@ -610,6 +610,10 @@
   background-color: $turquoise;
   border-radius: 20px;
   text-align: center;
+  
+  @media(max-width: 600px) {
+    margin-top: 2rem;
+  }
 
   h3 {
     display: inline;
@@ -722,5 +726,38 @@
 
   .leaflet-container {
     min-height: 100%;
+  }
+}
+
+.service {
+  &__action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.3rem 0.5rem;
+    width: 100%;
+
+    & > button {
+      flex: 1;
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
+      min-width: 100%;
+      
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      @media(min-width: 524px) and (max-width: 860px) {
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        min-width: auto;
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
+
+      @media(min-width: 861px) and (max-width: 900px) {
+        font-size: 1rem;
+      }
+    }
   }
 }
