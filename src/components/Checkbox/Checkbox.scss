@@ -1,3 +1,4 @@
+@import '../../styles/variables.scss';
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/fonts.scss';
@@ -20,9 +21,17 @@
     svg {
       display: none;
     }
+
+    &:focus {
+      outline: 0;
+      & > span {
+        outline: 0;
+      box-shadow: 0 0 0pt $formControlOutlineWidth $blue;
+      }
+    }
   }
 
-  input[type='checkbox']:checked + label {;
+  input[type='checkbox']:checked + label {
     svg {
       display: inline-block;
       font-size: pxtorem(20px);
