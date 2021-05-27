@@ -9,10 +9,11 @@ interface IProps {
   text: string;
   icon?: IconName;
   href: string;
+  target?: string;
 }
 
-const ButtonLink: React.FunctionComponent<IProps> = ({ text, icon, href }) => (
-  <a className={cx('button', 'button__link')} href={href} target="__blank">
+const ButtonLink: React.FunctionComponent<IProps> = ({ text, icon, href, target = '_self' }) => (
+  <a className={cx('button', 'button__link')} href={href} target={target}>
     <span>{text}</span>
     {icon && <FontAwesomeIcon icon={icon} className={cx('button__icon')} />}
   </a>
