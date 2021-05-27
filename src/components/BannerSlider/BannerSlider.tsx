@@ -13,7 +13,6 @@ interface IProps {
 
 const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content}) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState(1);
-    console.log('banners', banners)
     
   return (
     <div className="flex-col--12 banner">
@@ -28,22 +27,24 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content}
               <div className="slides">
                 {banners.map((banner, i) => <Banner activeCarouselItem={activeCarouselItem} banner={banner} bannerIndex={i + 1} key={i} />)}
               </div>
-              <div className="arrows">
-                <button className="arrow arrow-left" onClick={() => {
-                  if(activeCarouselItem > 1) setActiveCarouselItem(activeCarouselItem - 1)
-                }}>
-                  <FontAwesomeIcon
-                    icon="chevron-left"
-                  />
-                </button>
-                <button className="arrow arrow-right" onClick={() => {
-                  if(activeCarouselItem < 2) setActiveCarouselItem(activeCarouselItem + 1)
-                }}>
-                  <FontAwesomeIcon
-                    icon="chevron-right"
-                  />
-                </button>
-              </div>
+              {banners.length && banners.length > 1 && (
+                <div className="arrows">
+                    <button className="arrow arrow-left" onClick={() => {
+                    if(activeCarouselItem > 1) setActiveCarouselItem(activeCarouselItem - 1)
+                    }}>
+                    <FontAwesomeIcon
+                        icon="chevron-left"
+                    />
+                    </button>
+                    <button className="arrow arrow-right" onClick={() => {
+                    if(activeCarouselItem < 2) setActiveCarouselItem(activeCarouselItem + 1)
+                    }}>
+                    <FontAwesomeIcon
+                        icon="chevron-right"
+                    />
+                    </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

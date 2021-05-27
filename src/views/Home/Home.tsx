@@ -18,7 +18,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   if (!cmsStore) {
     return null;
   }
-
+  
   return (
     <main className="home">
       {cmsStore.home && cmsStore.home.banners && <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />}
