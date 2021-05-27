@@ -100,7 +100,8 @@ class Service extends Component<IProps> {
 
   render() {
     const { serviceStore, uiStore } = this.props;
-    const { service, locations, relatedServices } = serviceStore;
+    const { service, locations, relatedServices, organisation } = serviceStore;
+    
     if (!service) {
       return null;
     }
@@ -314,7 +315,6 @@ class Service extends Component<IProps> {
                     <div className="mobile-hide">
                       <h2 className="service__heading">Good to know</h2>
                       {service.useful_infos.map((info: { title: string; description: string }) => {
-                        console.log(info.title);
                         const iconObj = find(iconMap, info.title);
                         const icon = get(iconObj, `${info.title}`);
 
@@ -365,7 +365,7 @@ class Service extends Component<IProps> {
                     title={`How can I contact this ${service.type}?`}
                     className="service__accordian mobile-show"
                   >
-                    <ContactCard service={service} accordian={true} />
+                    <ContactCard service={service} organisation={organisation} accordian={true} />
                   </Accordian>
 
                   {service.testimonial && (
@@ -440,7 +440,7 @@ class Service extends Component<IProps> {
                   <div className="flex-col flex-col--12">
                     <h2 className="service__heading">{`How can I contact this ${service.type}?`}</h2>
                     <div className="service__section">
-                      <ContactCard service={service} />
+                      <ContactCard organisation={organisation} service={service} />
                     </div>
                     {service.referral_method !== 'none' && (
                       <div className="service__section service__referral--desktop">

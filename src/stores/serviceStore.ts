@@ -3,14 +3,15 @@ import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
 import every from 'lodash/every';
-import { IService, IServiceLocation } from '../types/types';
-
+import { IService, IServiceLocation, IOrganisation } from '../types/types';
 export default class ServiceStore {
   @observable service: IService | null = null;
   @observable locations: IServiceLocation[] = [];
   @observable loading: boolean = false;
   @observable relatedServices: IService[] | null = null;
   @observable favourite: boolean = false;
+  @observable organisationId: string = '';
+  @observable organisation: IOrganisation | null = null;
 
   checkIfFavorited = () => {
     const favourites = localStorage.getItem('favourites');
@@ -37,6 +38,11 @@ export default class ServiceStore {
     const serviceData = await axios.get(`${apiBase}/services/${name}?include=organisation`);
     this.service = get(serviceData, 'data.data');
 
+    if(this.service?.organisation_id) {
+      this.organisationId = this.service?.organisation_id
+      await this.getOrganisation();
+    }
+
     this.getServiceLocations();
     this.getRelatedServices(name);
     this.checkIfFavorited();
@@ -51,6 +57,14 @@ export default class ServiceStore {
 
       this.locations = get(locationData, 'data.data');
     }
+  };
+
+  @action
+  getOrganisation = async () => {
+    try {
+      const organisation = await axios.get(`${apiBase}/organisations/${this.organisationId}`);
+      this.organisation = get(organisation, 'data.data', '');
+    } catch (e) {}
   };
 
   @action
