@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ButtonLink from '../Button/ButtonLink';
 

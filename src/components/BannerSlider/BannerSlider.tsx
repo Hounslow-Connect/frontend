@@ -3,7 +3,6 @@ import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IBanner } from '../../types/types';
-
 import Banner from '../../components/Banner';
 
 interface IProps {
@@ -29,19 +28,11 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content}
               </div>
               {banners.length && banners.length > 1 && (
                 <div className="arrows">
-                    <button className="arrow arrow-left" onClick={() => {
-                    if(activeCarouselItem > 1) setActiveCarouselItem(activeCarouselItem - 1)
-                    }}>
-                    <FontAwesomeIcon
-                        icon="chevron-left"
-                    />
+                    <button className="arrow arrow-left" disabled={(activeCarouselItem <=1 ? true : false)} onClick={() => { if(activeCarouselItem > 1) setActiveCarouselItem(activeCarouselItem - 1) }}>
+                        <FontAwesomeIcon icon="chevron-left" />
                     </button>
-                    <button className="arrow arrow-right" onClick={() => {
-                    if(activeCarouselItem < 2) setActiveCarouselItem(activeCarouselItem + 1)
-                    }}>
-                    <FontAwesomeIcon
-                        icon="chevron-right"
-                    />
+                    <button className="arrow arrow-right" disabled={(activeCarouselItem >= banners.length ? true : false)} onClick={() => { if(activeCarouselItem < 2) setActiveCarouselItem(activeCarouselItem + 1) }}>
+                        <FontAwesomeIcon icon="chevron-right" />
                     </button>
                 </div>
               )}

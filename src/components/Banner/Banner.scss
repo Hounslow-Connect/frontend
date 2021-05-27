@@ -162,7 +162,7 @@
         }
       }
 
-      &:hover {
+      &:not(:disabled) {
         background-color: $white;
       }
     }
