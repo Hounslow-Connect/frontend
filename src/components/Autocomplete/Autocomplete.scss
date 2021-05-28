@@ -1,0 +1,57 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.react-autosuggest {
+    &__container {
+       
+
+        &--open {
+
+        }
+    }
+
+    &__input {
+        &--open {
+
+        }
+
+        &--focused {
+
+        }
+    }
+
+    &__suggestions-container {
+        position: absolute;
+        z-index: 999;
+        background-color: #fff;
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+
+    &__suggestions-list {
+        list-style: none;
+    }
+
+    &__suggestion {
+        cursor: pointer;
+        padding: 0.3rem 0.5rem;
+
+    
+        &--first {
+
+        }
+
+        &--highlighted {
+            color: #fff;
+            background: $pink;
+        }
+    }
+
+    &__section-container {
+
+    }
+
+    &__section-title {
+
+    }
+}

@@ -78,14 +78,23 @@ class ReferralStore {
     }
   };
 
+  // LEGACY [UNUSED]
+  // @action
+  // getPartnerOrganisations = async () => {
+  //   try {
+  //     const organisationData = await axios.get(`${apiBase}/taxonomies/organisations`);
+  //     this.partnerOrganisations = get(organisationData, 'data.data');
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
   @action
   getPartnerOrganisations = async () => {
     try {
-      const organisationData = await axios.get(`${apiBase}/taxonomies/organisations`);
-      this.partnerOrganisations = get(organisationData, 'data.data');
-    } catch (e) {
-      console.error(e);
-    }
+      const organisations = await axios.get(`${apiBase}/organisations`);
+      this.partnerOrganisations = get(organisations, 'data.data', '');
+    } catch (e) {}
   };
 
   @action
@@ -187,6 +196,8 @@ class ReferralStore {
   };
 
   partnerOrganisationLabels = () => {
+    console.log('[this.partnerOrganisations] -->');
+    
     const orderedList = orderBy(this.partnerOrganisations, 'name', 'asc');
 
     const filteredList = orderedList.filter(org => org.name !== 'Family/Friend');
