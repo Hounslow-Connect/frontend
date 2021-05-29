@@ -85,7 +85,7 @@ class Form extends Component<IProps, IState> {
                   </p>
                 </label>
 
-                <Autocomplete endpoint='/organisations' />
+                <Autocomplete hiddenField="organisation_taxonomy_id" defaultValue={get(referralStore, 'referral.organisation_taxonomy_id')} store={referralStore} endpoint='/organisations' />
 
                 {/* <Select
                   className="referral__step-container--select"

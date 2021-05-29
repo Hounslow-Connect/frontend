@@ -3,7 +3,10 @@
 
 .react-autosuggest {
     &__container {
-       
+        position: relative;
+        .input, input[type="text"] {
+            width: 100%;
+        }
 
         &--open {
 
@@ -26,6 +29,7 @@
         background-color: #fff;
         max-height: 400px;
         overflow-y: scroll;
+        width: 100%;
     }
 
     &__suggestions-list {
