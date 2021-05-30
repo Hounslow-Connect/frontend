@@ -26,6 +26,14 @@
     border-left: 2px solid $pink;
     padding-left: space(16);
   }
+
+  &__autocomplete {
+    padding-right: 6rem;
+    &:disabled {
+      background-color: #f3f3f3;
+      border: 1px solid #fff;
+    }
+  }
 }
 
 .input--full-width {

@@ -32,11 +32,6 @@ class Form extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const { showPartnerOrgs, referralStore } = this.props;
-
-    // if (showPartnerOrgs) {
-    //   referralStore.getPartnerOrganisations();
-    // }
   }
 
   toggleOrganisation = () => {
@@ -85,7 +80,7 @@ class Form extends Component<IProps, IState> {
                   </p>
                 </label>
 
-                <Autocomplete hiddenField="organisation_taxonomy_id" defaultValue={get(referralStore, 'referral.organisation_taxonomy_id')} store={referralStore} endpoint='/organisations' />
+                <Autocomplete hiddenField="organisation_taxonomy_id" defaultValue={get(referralStore, 'referral.organisation_taxonomy_id')} store={referralStore} endpointEntity='organisations' />
 
                 {/* <Select
                   className="referral__step-container--select"

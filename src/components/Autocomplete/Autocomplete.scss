@@ -23,6 +23,18 @@
         }
     }
 
+    &__toggle-btn {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translate(0,-50%);
+        background: $turquoise;
+        border-radius: 4px;
+        padding: 0.3rem 0.6rem;
+        cursor: pointer;
+        // color: ;
+    }
+
     &__suggestions-container {
         position: absolute;
         z-index: 999;
@@ -30,15 +42,21 @@
         max-height: 400px;
         overflow-y: scroll;
         width: 100%;
+        padding: 0;
+        margin: 0;
     }
 
     &__suggestions-list {
         list-style: none;
+        margin: 0;
+        padding: 0;
     }
+
 
     &__suggestion {
         cursor: pointer;
-        padding: 0.3rem 0.5rem;
+        padding: 0.8rem 1rem;
+        margin: 0;
 
     
         &--first {
