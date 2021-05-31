@@ -14,17 +14,18 @@ interface IProps {
   filterKey?: string;
   hiddenField?: string;
   defaultValue?: string;
+  defaultText?: string;
+  defaultTextStoreField?: string;
   store: any;
 }
 
 
-const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterKey = 'name', store, hiddenField = '', defaultValue = '' }) => {
+const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterKey = 'name', store, hiddenField = '', defaultValue = '',  defaultText = '', defaultTextStoreField = '' }) => {
     
     const [suggestions, setSuggestions] = useState([]);
     const [value, setAutocompleKeywordValue] = useState('');
     const hiddenInputField = useRef<HTMLInputElement>(null);
     const autocompeleteInputField = useRef<HTMLInputElement>(null);
-    const autocompeleteResetBtn = useRef<HTMLInputElement>(null);
 
     const fuseOptions = {
         keys: [ filterKey ]
@@ -88,56 +89,55 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
         <div>{suggestion.item.name}</div>
     );
 
-    const hasHiddenInputFieldChanged = () => {
-        return hiddenField && hiddenInputField.current && hiddenInputField.current.value !== ''
-    }
-
     const resetAutocompleteField = (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log('resetAutocompleteField');
         if(e) e.preventDefault()
         
-        store.handleInput(hiddenField, '')
+        store.handleInput(hiddenField, null)
+        store.handleInput(defaultTextStoreField, null)
         if(hiddenInputField.current) hiddenInputField.current.value = ''
         setAutocompleKeywordValue('')
         if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = false
         if(autocompeleteInputField.current) autocompeleteInputField.current.focus()
-        // if(autocompeleteResetBtn.current) autocompeleteResetBtn.current.classList.add('hidden')
+        if(defaultValue) defaultValue = ''
     }
  
      //Runs on render and update and skips if suggestions variable hasnt changed
      useEffect(() => {
         // If an option was perviously selected and stored, then retrieve the option and show the 'display' value
-        if(defaultValue !== '' && value === '') {
-            axios.get(`${apiBase}/${endpointEntity}?filter[id]=${defaultValue}`).then(res => {
-                const data = get(res, 'data.data', '');
-                setAutocompleKeywordValue(data[0].name)
-                if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
-            }).catch(err => {})
+        if(defaultValue && value === '') {
+            if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
+
+            if(defaultText) setAutocompleKeywordValue(defaultText)
+            if(defaultText) store.handleInput(defaultTextStoreField, defaultText)
+            // console.log('get default value from endpoint');
+            
+            // axios.get(`${apiBase}/${endpointEntity}?filter[id]=${defaultValue}`).then(res => {
+            //     const data = get(res, 'data.data', '');
+            //     setAutocompleKeywordValue(data[0].name)
+            // }).catch(() => {
+            //     if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = false
+            // })
         }     
-     }, [hasHiddenInputFieldChanged]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, []);
  
      const inputProps: any = {
         value,
         onChange: (e: React.ChangeEvent<HTMLInputElement>, newValue: any) => {
             setAutocompleKeywordValue(newValue.newValue)
-            console.log('autocompeleteInputField', autocompeleteInputField.current);
-
             if (newValue.newValue !== '' && hiddenField && hiddenInputField.current && hiddenInputField.current.value !== '') {
-                console.log('disable input field');
-                
                 if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
-                console.log('hiddenInputField.current.value', hiddenInputField.current.value)
                 
                 store.handleInput(hiddenField, hiddenInputField.current.value)
+                store.handleInput(defaultTextStoreField, newValue.newValue)
                 return
             }
 
-            console.log('%c reset store input state', 'color: red');
-            store.handleInput(hiddenField, '')
+            store.handleInput(hiddenField, null)
+            store.handleInput(defaultTextStoreField, null)
         },
         onBlur: () => {
-            console.log('onBlur')
-            
             if(hiddenField && hiddenInputField.current && hiddenInputField.current.value === '') {
                 setAutocompleKeywordValue('')
                 return

@@ -28,7 +28,10 @@
   }
 
   &__autocomplete {
-    padding-right: 6rem;
+    @media(min-width: 576px) {
+      padding-right: 6rem;
+    }
+    
     &:disabled {
       background-color: #f3f3f3;
       border: 1px solid #fff;

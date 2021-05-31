@@ -24,15 +24,21 @@
     }
 
     &__toggle-btn {
-        position: absolute;
-        right: 0.5rem;
-        top: 50%;
-        transform: translate(0,-50%);
+        
         background: $turquoise;
         border-radius: 4px;
+        margin-top: 1rem;
         padding: 0.3rem 0.6rem;
         cursor: pointer;
         // color: ;
+
+        @media(min-width: 576px) {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translate(0,-50%);
+            margin: 0;
+        }
     }
 
     &__suggestions-container {
