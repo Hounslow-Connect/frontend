@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
-import Fuse from 'fuse.js'
+import AsyncSelect from 'react-select/async';
 import axios from 'axios';
 import cx from 'classnames';
 import get from 'lodash/get';
-import orderBy from 'lodash/orderBy';
 import { apiBase } from '../../config/api';
-import Autosuggest from 'react-autosuggest'; //docs: https://www.npmjs.com/package/react-autosuggest
 
 import './Autocomplete.scss';
 interface IProps {
@@ -17,67 +15,54 @@ interface IProps {
   defaultText?: string;
   defaultTextStoreField?: string;
   store: any;
+  multiSelect?: boolean
 }
 
 
-const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterKey = 'name', store, hiddenField = '', defaultValue = '',  defaultText = '', defaultTextStoreField = '' }) => {
+const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterKey = 'name', store, hiddenField = '', defaultValue = '',  defaultText = '', defaultTextStoreField = '', multiSelect = false}) => {
     
     const [suggestions, setSuggestions] = useState([]);
+    const [isLoading, toggleLoading] = useState(false);
     const [value, setAutocompleKeywordValue] = useState('');
     const hiddenInputField = useRef<HTMLInputElement>(null);
     const autocompeleteInputField = useRef<HTMLInputElement>(null);
 
-    const fuseOptions = {
-        keys: [ filterKey ]
+
+    const onSuggestionsFetchRequested =  (inputValue: any, callback: any) => {
+        console.log('[onSuggestionsFetchRequested] --> inputValue: ', inputValue);
+        toggleLoading(true)
+        
+        const suggestions: any = getSuggestions(inputValue)
+
+        suggestions.then((res: any) => {
+            console.log('[onSuggestionsFetchRequested] --> suggestions then:', res);
+            toggleLoading(false)
+            setSuggestions(res)
+            callback(res);
+        }).catch(() => {
+            toggleLoading(false)
+        })
     };
 
-    const fuse = new Fuse(suggestions, fuseOptions);
-
-    // Autosuggest will call this function every time you need to update suggestions.
-    const onSuggestionsFetchRequested =  async (value: any): Promise<void> => {
-        const suggestions: any = await getSuggestions(value)
-        setSuggestions(suggestions)
-    };
-
-    // Autosuggest will call this function every time you need to clear suggestions.
-    const onSuggestionsClearRequested = () => {
-        setSuggestions([])
-    };
-
-    // When suggestion is clicked, Autosuggest needs to populate the input
-    // based on the clicked suggestion. Teach Autosuggest how to calculate the
-    // input value for every given suggestion.
-    const getSuggestionValue = ((suggestion: any) => {
-        if(suggestion && suggestion.item.value) {
-            if(hiddenField && hiddenInputField.current) {
-                hiddenInputField.current.value = suggestion.item.value
-            }
-        }
-
-        return suggestion.item.name
-    });
-
-    // Teach Autosuggest how to calculate suggestions for any given input value.
-    const getSuggestions = ({value} :  {value: string}) => {
+    const getSuggestions = (value: string) => {
         return new Promise<void>((resolve, reject) => {
             const inputValue = value.toString().trim().toLowerCase();
             const inputLength = inputValue.length;
 
             axios.get(`${apiBase}/${endpointEntity}?filter[${filterKey}]=${inputValue}`).then(res => {
                 const suggestions = get(res, 'data.data', '');
-                const orderedList = orderBy(suggestions, 'name', 'asc');
-    
-                let filteredList = [] as any;
-            
-                filteredList = orderedList.map((item: any) => ({
-                    value: item.id,
-                    name: item.name,
-                }));
-                
-                fuse.setCollection(filteredList)
-    
                 let result = [] as any;
-                result = (inputLength === 0 ? [] : fuse.search(inputValue))
+                
+                if(suggestions.length) {
+                    let filteredList = [] as any;
+                
+                    filteredList = suggestions.map((item: any) => ({
+                        value: item.id,
+                        label: item.name,
+                    }));
+
+                    result = (inputLength === 0 ? [] : filteredList)
+                }
                 resolve(result)
             }).catch(err => {
                 reject()
@@ -85,13 +70,8 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
         })
     };
 
-    const renderSuggestion = (suggestion: any) => (
-        <div>{suggestion.item.name}</div>
-    );
-
-    const resetAutocompleteField = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log('resetAutocompleteField');
-        if(e) e.preventDefault()
+    const resetStoredAutocompleteData = () => {
+        console.log('[resetStoredAutocompleteData] -->');
         
         store.handleInput(hiddenField, null)
         store.handleInput(defaultTextStoreField, null)
@@ -104,55 +84,65 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
  
      //Runs once on render
      useEffect(() => {
+        const suggestions: any = getSuggestions(value)
+
+        suggestions.then((res: any) => {
+            setSuggestions(res)
+        }).catch(() => {})
+
         // If an option was perviously selected and stored, then retrieve the option and show
         if(defaultValue && value === '') {
-            if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
+            // if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
 
             if(defaultText) setAutocompleKeywordValue(defaultText)
             if(defaultText) store.handleInput(defaultTextStoreField, defaultText)
         }     
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
      }, []);
- 
-     const inputProps: any = {
-        value,
-        onChange: (e: React.ChangeEvent<HTMLInputElement>, newValue: any) => {
-            setAutocompleKeywordValue(newValue.newValue)
-            if (newValue.newValue !== '' && hiddenField && hiddenInputField.current && hiddenInputField.current.value !== '') {
-                if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
-                
-                store.handleInput(hiddenField, hiddenInputField.current.value)
-                store.handleInput(defaultTextStoreField, newValue.newValue)
-                return
-            }
 
-            store.handleInput(hiddenField, null)
-            store.handleInput(defaultTextStoreField, null)
-        },
-        onBlur: () => {
-            if(hiddenField && hiddenInputField.current && hiddenInputField.current.value === '') {
-                setAutocompleKeywordValue('')
-                return
-            }
-        },
-        className: 'input__autocomplete input',
-        placeholder: `Type to search ${endpointEntity}`,
-        type: 'text',
-        ref: autocompeleteInputField
-    };
+     const handleInputChange = (newValue: any, {action}: any) => {
+         console.log('[handleInputChange] --> newValue', newValue, 'action type:', action.toString());
+
+        if (action && action === 'select-option' && hiddenField && hiddenInputField.current) {
+            setAutocompleKeywordValue(newValue.value)
+            hiddenInputField.current.value = newValue.value
+            store.handleInput(hiddenField, hiddenInputField.current.value)
+            store.handleInput(defaultTextStoreField, newValue.label)
+        }
+
+        if(action && action === 'clear') {
+            resetStoredAutocompleteData()
+        }
+     }
+
+     const handleInputStates = (newValue: any, {action}: any) => {
+         console.log('[handleInputStates] --> newValue', newValue, 'action type:', action.toString(), 'defaultText value:', defaultText);
+        
+        if(action && action === 'input-blur' && value === '') {
+           resetStoredAutocompleteData()
+           return
+        }
+     }
+
       
     return (
         <div className={cx('relative')} >
-            <Autosuggest
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-                
+            <AsyncSelect
+                defaultInputValue={defaultText}
+                isMulti={multiSelect}
+                cacheOptions={true}
+                loadOptions={onSuggestionsFetchRequested}
+                defaultOptions={suggestions}
+                onChange={handleInputChange}
+                onInputChange={handleInputStates}
+                isLoading={isLoading}
+                isClearable={true}
+                placeholder={`Type to search ${endpointEntity}`}
+                classNamePrefix='react-select'
+                className='react-select-container'
             />
-            {hiddenInputField.current && hiddenInputField.current.value !== '' && <button onClick={resetAutocompleteField} className={'react-autosuggest__toggle-btn'}>Change</button>}
+
             {hiddenField !== '' && <input type="hidden" name={hiddenField} id={hiddenField} ref={hiddenInputField} value={get(store, 'referral.organisation_taxonomy_id') || ''} />}
         </div>
       );

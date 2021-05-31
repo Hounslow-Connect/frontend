@@ -1,73 +1,7 @@
 @import '../../styles/colors.scss';
 
-.react-autosuggest {
-    &__container {
-        position: relative;
-        .input, input[type="text"] {
-            width: 100%;
-        }
-
-        &--open {}
-    }
-
-    &__input {
-        &--open {}
-
-        &--focused {}
-    }
-
-    &__toggle-btn {
-        font-size: 1rem;
-        background: $turquoise;
-        border-radius: 4px;
-        margin-top: 1rem;
-        padding: 0.3rem 0.6rem;
-        cursor: pointer;
-
-        @media(min-width: 576px) {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translate(0,-50%);
-            margin: 0;
-        }
-    }
-
-    &__suggestions-container {
-        position: absolute;
-        z-index: 999;
-        background-color: #fff;
-        max-height: 400px;
-        overflow-y: scroll;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
-    &__suggestions-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-
-    &__suggestion {
-        cursor: pointer;
-        padding: 0.8rem 1rem;
-        margin: 0;
-
-    
-        &--first {
-
-        }
-
-        &--highlighted {
-            color: #fff;
-            background: $pink;
-        }
-    }
-
-    &__section-container {}
-
-    &__section-title {}
+.react-select {
+ &__value-container {
+    padding: 18px 1.25rem !important;
+ }   
 }
