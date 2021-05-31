@@ -5,8 +5,10 @@ import cx from 'classnames';
 
 import ReferralStore from '../../../../stores/referralStore';
 
-import Select from '../../../../components/Select';
+// import Select from '../../../../components/Select';
 import Input from '../../../../components/Input';
+
+import Autocomplete from '../../../../components/Autocomplete';
 
 interface IProps {
   referralStore: ReferralStore;
@@ -30,11 +32,6 @@ class Form extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const { showPartnerOrgs, referralStore } = this.props;
-
-    if (showPartnerOrgs) {
-      referralStore.getPartnerOrganisations();
-    }
   }
 
   toggleOrganisation = () => {
@@ -82,7 +79,10 @@ class Form extends Component<IProps, IState> {
                     Do you work for one of our partner organisations?
                   </p>
                 </label>
-                <Select
+
+                <Autocomplete hiddenField="organisation_taxonomy_id" defaultText={get(referralStore, 'referral.organisation')} defaultTextStoreField="organisation" defaultValue={get(referralStore, 'referral.organisation_taxonomy_id')} store={referralStore} endpointEntity='organisations' />
+
+                {/* <Select
                   className="referral__step-container--select"
                   options={referralStore.partnerOrganisationLabels()}
                   id="organisation_taxonomy_id"
@@ -90,7 +90,7 @@ class Form extends Component<IProps, IState> {
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                     referralStore.handleInput('organisation_taxonomy_id', e.target.value)
                   }
-                />
+                /> */}
               </div>
 
               <div className="flex-col flex-col--12 referral__form">
