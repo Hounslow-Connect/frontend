@@ -196,8 +196,6 @@ class ReferralStore {
   };
 
   partnerOrganisationLabels = () => {
-    console.log('[this.partnerOrganisations] -->');
-    
     const orderedList = orderBy(this.partnerOrganisations, 'name', 'asc');
 
     const filteredList = orderedList.filter(org => org.name !== 'Family/Friend');
