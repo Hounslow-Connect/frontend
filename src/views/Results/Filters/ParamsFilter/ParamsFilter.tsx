@@ -26,6 +26,7 @@ interface IState {
   keyword: string;
   postcode: string;
   errors: any;
+  showFilters: boolean;
 }
 
 @inject('resultsStore')
@@ -37,6 +38,7 @@ class Filter extends Component<IProps, IState> {
     this.state = {
       keyword: '',
       postcode: '',
+      showFilters: false,
       errors: {
         keyword: false,
       },
@@ -90,6 +92,15 @@ class Filter extends Component<IProps, IState> {
       return;
     }
   };
+
+  toggleFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    console.log('[toggleFilters] -->e ', e);
+    
+    this.setState({
+      showFilters: !this.state.showFilters
+    });
+  }
 
   render() {
     const { resultsStore, history } = this.props;
@@ -203,20 +214,26 @@ class Filter extends Component<IProps, IState> {
                   <p>You can get more personalised results by providing some extra information</p>
                 </div>
                 <div className={'flex-col--2'}>
-                  <button className={'button button__alt--small'}>Show filters</button>
+                  <button onClick={this.toggleFilters} className={'button button__alt--small'}>{this.state.showFilters ? 'Hide' : 'Show' } filters</button>
                 </div>
                 
               </div>
 
-              <div className={'results__filters--group'}>
+
+
+              { this.state.showFilters && (
+                <div className={'results__filters--group'}>
                 {/* column */ }
                 <div className={'results__filters--group__item'}>
                   <label>Age</label>
                   <Autocomplete hiddenField="organisation_taxonomy_id" multiSelect={true} store={ResultsStore} endpointEntity='age' />
                 </div>
+                {/* ./column */ }
+
+                {/* column */ }
                 <div className={'results__filters--group__item'}>
                   <label htmlFor="incomeFilter">Income</label>
-                  
+
                   <Select
                     options={[{value: '5', text: '5 miles'}]}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -227,8 +244,106 @@ class Filter extends Component<IProps, IState> {
                     id="incomeFilter"
                   />
                 </div>
-                {/* ./column */ }
+                 {/* ./column */ }
+
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="disabilityFilter">Disability</label>
+
+                  <Select
+                    options={[{value: '5', text: '5 miles'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="disabilityFilter"
+                  />
+                </div>
+                 {/* ./column */ }
+
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="languageFilter">Language</label>
+
+                  <Select
+                    options={[{value: 'english', text: 'English'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="languageFilter"
+                  />
+                </div>
+                 {/* ./column */ }
+
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="genderFilter">Gender</label>
+
+                  <Select
+                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="genderFilter"
+                  />
+                </div>
+                 {/* ./column */ }
+                
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="ethnicityFilter">Ethnicity</label>
+
+                  <Select
+                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="ethnicityFilter"
+                  />
+                </div>
+                 {/* ./column */ }
+
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="housingFilter">Housing</label>
+
+                  <Select
+                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="housingFilter"
+                  />
+                </div>
+                 {/* ./column */ }
+
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="accessibilityFilter">Accessibility</label>
+
+                  <Select
+                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="accessibilityFilter"
+                  />
+                </div>
+                 {/* ./column */ }
+                
               </div>
+              )}
                 
 
             </div>

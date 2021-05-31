@@ -249,7 +249,9 @@
 
   &--secondary {
     margin: 1.5rem 0;
-    background: #fff;
+    // background: #fff;
+    background-color: $gray;
+
     padding: 1.5rem;
     border-radius: $border-radius-sm;
   }
@@ -257,22 +259,30 @@
   &--group {
     margin: 2rem -2rem 0;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 
     &__item {
       padding: 0 2rem;
+      margin-bottom: 2rem;
       width: 50%;
       display: flex;
       align-items: center;
+      justify-content: space-between;
 
       label {
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 700;
         padding-right: 1rem;
       }
 
-      .autocomplete__wrapper {
+      .autocomplete__wrapper, select {
+        max-width: 320px;
         width: 100%;
+      }
+
+      select {
+        
       }
     }
   }
