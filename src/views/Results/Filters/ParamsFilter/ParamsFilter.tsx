@@ -4,10 +4,13 @@ import get from 'lodash/get';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 
+import Autocomplete from '../../../../components/Autocomplete';
 import Checkbox from '../../../../components/Checkbox';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
+import Select from '../../../../components/Select';
 import ResultsStore from '../../../../stores/resultsStore';
+import searchStore from '../../../../stores/searchStore';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
@@ -71,6 +74,11 @@ class Filter extends Component<IProps, IState> {
     });
   };
 
+  search = () => {
+   console.log('%c [search] -->', 'color: green;');
+   
+  };
+
   handleAmend = async (callback: () => void) => {
     await this.validate();
 
@@ -105,9 +113,9 @@ class Filter extends Component<IProps, IState> {
             });
           }}>
           <div className={resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12"}>
-            <div className="flex-container flex-container--no-padding flex-container--no-space results__filters__wrapper">
+            <div className="results__filters--primary">
               {!resultsStore.isKeywordSearch &&
-                <div className="flex-col">
+                <div className="">
                   <Input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       this.handleInputChange(e.target.value, 'keyword')
@@ -120,13 +128,16 @@ class Filter extends Component<IProps, IState> {
                   />
                 </div>
               }
+              <div>
+                <label className="results__search-filter-location--label" htmlFor="location" aria-label="Location">in</label>
+              </div>
               <div
-                className="flex-col"
+                className=""
                 style={{
                   display: 'flex',
                   alignItems: 'center'
                 }}>
-                <label className="results__search-filter-location--label" htmlFor="location" aria-label="Location">in</label>
+                
                 <Input
                   id="location"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -137,7 +148,29 @@ class Filter extends Component<IProps, IState> {
                   value={this.state.postcode}
                 />
               </div>
-              <div className="flex-col">
+
+              <div>
+                <label className="results__search-filter-location--label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
+              </div>
+
+              <div
+                className=""
+                style={{
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <Select
+                    options={[{value: '5', text: '5 miles'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Mile radius"
+                    id="proximityFilter"
+                  />
+                </div>
+              
+              <div className="">
                 {/* <Button
                   icon="search"
                   text="Search"
@@ -150,7 +183,54 @@ class Filter extends Component<IProps, IState> {
                     });
                   }}
                 /> */}
+                 <Checkbox
+                  id="is_free"
+                  label="Only show free"
+                  checked={get(resultsStore, 'is_free', false)}
+                  onChange={() => {
+                    resultsStore.toggleIsFree();
+                    resultsStore.setParams();
+                  }}
+                  aria="Filter free services"
+                />
               </div>
+            </div>
+
+            <div className="results__filters--secondary">
+              <div className={'flex-container flex-container--align-bottom flex-container--no-padding'}>
+                <div className={'flex-col--8'}>
+                  <h3>Filter your results</h3>
+                  <p>You can get more personalised results by providing some extra information</p>
+                </div>
+                <div className={'flex-col--2'}>
+                  <button className={'button button__alt--small'}>Show filters</button>
+                </div>
+                
+              </div>
+
+              <div className={'results__filters--group'}>
+                {/* column */ }
+                <div className={'results__filters--group__item'}>
+                  <label>Age</label>
+                  <Autocomplete hiddenField="organisation_taxonomy_id" multiSelect={true} store={ResultsStore} endpointEntity='age' />
+                </div>
+                <div className={'results__filters--group__item'}>
+                  <label htmlFor="incomeFilter">Income</label>
+                  
+                  <Select
+                    options={[{value: '5', text: '5 miles'}]}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      this.search()
+                    }
+                    className=""
+                    placeholder="Select"
+                    id="incomeFilter"
+                  />
+                </div>
+                {/* ./column */ }
+              </div>
+                
+
             </div>
           </div>
           <div
@@ -160,16 +240,7 @@ class Filter extends Component<IProps, IState> {
             }}>
             <h3 className="results__filters__heading">Filter by</h3>
             <div className="flex-container flex-container--no-padding flex-container--no-space">
-              <Checkbox
-                id="is_free"
-                label="Free"
-                checked={get(resultsStore, 'is_free', false)}
-                onChange={() => {
-                  resultsStore.toggleIsFree();
-                  resultsStore.setParams();
-                }}
-                aria="Filter free services"
-              />
+              
               <Checkbox
                 id="open_now"
                 label="Open now"

@@ -127,7 +127,7 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
 
       
     return (
-        <div className={cx('relative')} >
+        <div className={cx('autocomplete__wrapper relative')} >
             <AsyncSelect
                 defaultInputValue={defaultText}
                 isMulti={multiSelect}
