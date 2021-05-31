@@ -1,5 +1,4 @@
 @import '../../styles/colors.scss';
-@import '../../styles/mixins.scss';
 
 .react-autosuggest {
     &__container {
@@ -8,33 +7,26 @@
             width: 100%;
         }
 
-        &--open {
-
-        }
+        &--open {}
     }
 
     &__input {
-        &--open {
+        &--open {}
 
-        }
-
-        &--focused {
-
-        }
+        &--focused {}
     }
 
     &__toggle-btn {
-        
+        font-size: 1rem;
         background: $turquoise;
         border-radius: 4px;
         margin-top: 1rem;
         padding: 0.3rem 0.6rem;
         cursor: pointer;
-        // color: ;
 
         @media(min-width: 576px) {
             position: absolute;
-            right: 0.5rem;
+            right: 1rem;
             top: 50%;
             transform: translate(0,-50%);
             margin: 0;
@@ -75,11 +67,7 @@
         }
     }
 
-    &__section-container {
+    &__section-container {}
 
-    }
-
-    &__section-title {
-
-    }
+    &__section-title {}
 }

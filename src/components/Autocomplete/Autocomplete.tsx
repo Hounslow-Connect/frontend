@@ -102,22 +102,14 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
         if(defaultValue) defaultValue = ''
     }
  
-     //Runs on render and update and skips if suggestions variable hasnt changed
+     //Runs once on render
      useEffect(() => {
-        // If an option was perviously selected and stored, then retrieve the option and show the 'display' value
+        // If an option was perviously selected and stored, then retrieve the option and show
         if(defaultValue && value === '') {
             if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
 
             if(defaultText) setAutocompleKeywordValue(defaultText)
             if(defaultText) store.handleInput(defaultTextStoreField, defaultText)
-            // console.log('get default value from endpoint');
-            
-            // axios.get(`${apiBase}/${endpointEntity}?filter[id]=${defaultValue}`).then(res => {
-            //     const data = get(res, 'data.data', '');
-            //     setAutocompleKeywordValue(data[0].name)
-            // }).catch(() => {
-            //     if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = false
-            // })
         }     
         // eslint-disable-next-line react-hooks/exhaustive-deps
      }, []);
