@@ -274,7 +274,8 @@
 }
 
 .results__filters__heading {
-  margin-bottom: space(8);
+  @include heading-m;
+  margin-bottom: space(24);
 }
 
 .results__filters__checkboxes {

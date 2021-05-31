@@ -13,6 +13,12 @@ interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
 }
 
+/**
+ * TODO:
+ * - replace search button with auto search functionality each time search term or filters are changed
+ * - push filters into the url as parms and auto-search on page refresh using those filters
+ */
+
 interface IState {
   keyword: string;
   postcode: string;
@@ -86,11 +92,12 @@ class Filter extends Component<IProps, IState> {
 
     return (
       <div className="results__filters">
-        {resultsStore.isKeywordSearch && 
+        {/* {resultsStore.isKeywordSearch && 
           <h2 className="results__filters__heading">Results found for</h2>
-        }
+        } */ }
+         <h2 className="results__filters__heading">Search results</h2>
         <form
-          className={"flex-container flex-container--align-bottom flex-container--no-padding" + (!resultsStore.isKeywordSearch ? " flex-container--column-reverse" : "")}
+          className={"flex-container flex-container--align-bottom flex-container--no-padding"}
           onSubmit={e => {
             e.preventDefault();
             history.push({
@@ -99,7 +106,7 @@ class Filter extends Component<IProps, IState> {
           }}>
           <div className={resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12"}>
             <div className="flex-container flex-container--no-padding flex-container--no-space results__filters__wrapper">
-              {resultsStore.isKeywordSearch &&
+              {!resultsStore.isKeywordSearch &&
                 <div className="flex-col">
                   <Input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -107,6 +114,7 @@ class Filter extends Component<IProps, IState> {
                     }
                     id="keyword"
                     value={this.state.keyword}
+                    placeholder="Search using a keyword"
                     className="results__search-box-keyword"
                     error={this.state.errors.keyword}
                   />
@@ -130,7 +138,7 @@ class Filter extends Component<IProps, IState> {
                 />
               </div>
               <div className="flex-col">
-                <Button
+                {/* <Button
                   icon="search"
                   text="Search"
                   onClick={() => {
@@ -141,7 +149,7 @@ class Filter extends Component<IProps, IState> {
                       ),
                     });
                   }}
-                />
+                /> */}
               </div>
             </div>
           </div>
