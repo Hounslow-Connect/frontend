@@ -77,7 +77,7 @@ class Form extends Component<IProps, IState> {
                   </p>
                 </label>
 
-                <Autocomplete hiddenField="organisation_taxonomy_id" defaultText={get(referralStore, 'referral.organisation')} defaultTextStoreField="organisation" defaultValue={get(referralStore, 'referral.organisation_taxonomy_id')} store={referralStore} endpointEntity='organisations' />
+                <Autocomplete storeValueField="organisation_taxonomy_id" defaultText={get(referralStore, 'referral.organisation')} storeTextField="organisation" defaultValue={get(referralStore, 'referral.organisation_taxonomy_id')} store={referralStore} endpointEntity='organisations' />
               </div>
 
               <div className="flex-col flex-col--12 referral__form">

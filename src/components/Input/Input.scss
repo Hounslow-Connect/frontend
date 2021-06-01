@@ -28,7 +28,7 @@
   }
 
   &__autocomplete {
-    @media(min-width: 576px) {
+    @include for-mobile-up {
       padding-right: 6rem;
     }
     

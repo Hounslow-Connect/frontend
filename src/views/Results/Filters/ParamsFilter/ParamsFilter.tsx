@@ -11,6 +11,7 @@ import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import Select from '../../../../components/Select';
 import ResultsStore from '../../../../stores/resultsStore';
+import SearchStore from '../../../../stores/searchStore';
 import searchStore from '../../../../stores/searchStore';
 
 interface IProps extends RouteComponentProps {
@@ -28,7 +29,6 @@ interface IState {
   postcode: string;
   errors: any;
   showFilters: boolean;
-  filters: IFilters;
 }
 
 @inject('resultsStore')
@@ -43,14 +43,19 @@ class Filter extends Component<IProps, IState> {
       showFilters: false,
       errors: {
         keyword: false,
-      },
-      filters: {}
+      }
     };
   }
+
+  // componentWillUnmount() {
+  //   SearchStore.clear();
+  // }
 
   componentDidMount() {
     const { search_term, location } = queryString.parse(this.props.location.search);
 
+    console.log('[componentDidMount()] --> SearchStore.filters', SearchStore.filters);
+    
     if (search_term) {
       this.setState({
         keyword: search_term as string,
@@ -62,6 +67,10 @@ class Filter extends Component<IProps, IState> {
         postcode: location as string,
       });
     }
+  }
+
+  componentDidUpdate(prevProps: any) {
+    console.log('[componentDidUpdate] --> prevProps', prevProps,  'SearchStore.filters', SearchStore.filters);
   }
 
   handleInputChange = (string: string, field: string) => {
@@ -109,7 +118,7 @@ class Filter extends Component<IProps, IState> {
   resetFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
     if(e) e.preventDefault()
     console.log('[resetFilters] -->');
-    
+    searchStore.clearFilters()
   }
 
   render() {
@@ -149,15 +158,14 @@ class Filter extends Component<IProps, IState> {
                   />
                 </div>
               }
-              <div>
-                <label className="results__search-filter-location--label" htmlFor="location" aria-label="Location">in</label>
-              </div>
+  
               <div
                 className=""
                 style={{
                   display: 'flex',
                   alignItems: 'center'
                 }}>
+                <label className="results__filters--primary__label" htmlFor="location" aria-label="Location">in</label>
                 
                 <Input
                   id="location"
@@ -170,16 +178,13 @@ class Filter extends Component<IProps, IState> {
                 />
               </div>
 
-              <div>
-                <label className="results__search-filter-location--label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
-              </div>
-
               <div
                 className=""
                 style={{
                   display: 'flex',
                   alignItems: 'center'
                 }}>
+                  <label className="results__filters--primary__label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
                   <Select
                     options={[{value: '5', text: '5 miles'}]}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -192,7 +197,7 @@ class Filter extends Component<IProps, IState> {
                 </div>
               
               <div className="">
-                <Button
+                {/* <Button
                   icon="search"
                   text="Search"
                   onClick={() => {
@@ -203,7 +208,7 @@ class Filter extends Component<IProps, IState> {
                       ),
                     });
                   }}
-                />
+                /> */}
                  <Checkbox
                   id="is_free"
                   label="Only show free"
@@ -218,12 +223,12 @@ class Filter extends Component<IProps, IState> {
             </div>
 
             <div className="results__filters--secondary">
-              <div className={'flex-container flex-container--align-bottom flex-container--no-padding'}>
-                <div className={'flex-col--8'}>
+              <div className={'flex-container flex-container--align-top flex-container--no-padding'}>
+                <div className={'flex-col-12 flex-col-medium-8 flex-col--gutter'}>
                   <h3>Filter your results</h3>
                   <p>You can get more personalised results by providing some extra information</p>
                 </div>
-                <div className={'flex-col--2'}>
+                <div className={'flex-col-12 flex-col-medium-2 flex-col--gutter'}>
                   <button onClick={this.toggleFilters} className={'button button__alt--small'}>{this.state.showFilters ? 'Hide' : 'Show' } filters</button>
                 </div>
                 
@@ -233,11 +238,11 @@ class Filter extends Component<IProps, IState> {
 
               { this.state.showFilters && (
                 <div>
-                  <div className={'results__filters--group'}>
+                  <div className={'results__filters--group flex-col--gutter'}>
                     {/* column */ }
                     <div className={'results__filters--group__item'}>
                       <label>Age</label>
-                      <Autocomplete hiddenField="organisation_taxonomy_id" multiSelect={true} store={ResultsStore} endpointEntity='age' />
+                      <Autocomplete storeValueField="age" storeTextField="age" multiSelect={true} store={SearchStore} endpointEntity='age' />
                     </div>
                     {/* ./column */ }
 
@@ -361,11 +366,9 @@ class Filter extends Component<IProps, IState> {
                   
                 </div>
               )}
-                
-
             </div>
           </div>
-          <div
+          {/* <div
             className={"results__filters__checkboxes " + (resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12")}
             style={{
               marginBottom: !resultsStore.isKeywordSearch ? 24 : 0
@@ -383,7 +386,7 @@ class Filter extends Component<IProps, IState> {
                 aria="Filter services that are open now"
               />
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     );

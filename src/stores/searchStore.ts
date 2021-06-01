@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import partition from 'lodash/partition';
 
 import { apiBase } from '../config/api';
-import { ICategory, IPersona } from '../types/types';
+import { ICategory, IPersona, IFilters } from '../types/types';
 
 class SearchStore {
   @observable location: string = '';
@@ -14,15 +14,41 @@ class SearchStore {
   @observable categoryId: string = '';
   @observable covidCategories: ICategory[] = [];
 
+  @observable filters: IFilters = {
+    age: ''
+  };
+
   constructor() {
     this.getCategories();
     this.getPersonas();
   }
 
+  @action
+  setFilter = (filter: string, input: string) => {
+    // @ts-ignore
+    this.filters[filter] = input;
+  };
+
+  @action
+  handleInput = (filter: string, input: string) => {
+    console.log('[searchStore] --> handleInput filter:', filter, 'input: ', input);
+    
+    // @ts-ignore
+    this.filters[field] = input;
+  };
+
   @action clear = () => {
     this.location = '';
     this.search = '';
     this.categoryId = '';
+  };
+
+  @action clearFilters = () => {
+    console.log('[searchStore] --> clearFilters()');
+    
+    this.filters = {
+      age: null
+    };
   };
 
   @action setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -168,5 +168,5 @@ export interface IBanner {
 }
 
 export interface IFilters {
-  age?: string;
+  age: null | string;
 }
