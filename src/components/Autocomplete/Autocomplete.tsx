@@ -92,8 +92,6 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
 
         // If an option was perviously selected and stored, then retrieve the option and show
         if(defaultValue && value === '') {
-            // if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = true
-
             if(defaultText) setAutocompleKeywordValue(defaultText)
             if(defaultText) store.handleInput(defaultTextStoreField, defaultText)
         }     
