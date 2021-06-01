@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
+import { IFilters } from '../../../../types/types';
 
 import Autocomplete from '../../../../components/Autocomplete';
 import Checkbox from '../../../../components/Checkbox';
@@ -27,6 +28,7 @@ interface IState {
   postcode: string;
   errors: any;
   showFilters: boolean;
+  filters: IFilters;
 }
 
 @inject('resultsStore')
@@ -42,6 +44,7 @@ class Filter extends Component<IProps, IState> {
       errors: {
         keyword: false,
       },
+      filters: {}
     };
   }
 
@@ -77,6 +80,7 @@ class Filter extends Component<IProps, IState> {
   };
 
   search = () => {
+    // This will be called each time a search is triggered
    console.log('%c [search] -->', 'color: green;');
    
   };
@@ -94,12 +98,18 @@ class Filter extends Component<IProps, IState> {
   };
 
   toggleFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+    if(e) e.preventDefault()
     console.log('[toggleFilters] -->e ', e);
     
     this.setState({
       showFilters: !this.state.showFilters
     });
+  }
+
+  resetFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(e) e.preventDefault()
+    console.log('[resetFilters] -->');
+    
   }
 
   render() {
@@ -182,7 +192,7 @@ class Filter extends Component<IProps, IState> {
                 </div>
               
               <div className="">
-                {/* <Button
+                <Button
                   icon="search"
                   text="Search"
                   onClick={() => {
@@ -193,7 +203,7 @@ class Filter extends Component<IProps, IState> {
                       ),
                     });
                   }}
-                /> */}
+                />
                  <Checkbox
                   id="is_free"
                   label="Only show free"
@@ -222,127 +232,134 @@ class Filter extends Component<IProps, IState> {
 
 
               { this.state.showFilters && (
-                <div className={'results__filters--group'}>
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label>Age</label>
-                  <Autocomplete hiddenField="organisation_taxonomy_id" multiSelect={true} store={ResultsStore} endpointEntity='age' />
+                <div>
+                  <div className={'results__filters--group'}>
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label>Age</label>
+                      <Autocomplete hiddenField="organisation_taxonomy_id" multiSelect={true} store={ResultsStore} endpointEntity='age' />
+                    </div>
+                    {/* ./column */ }
+
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="incomeFilter">Income</label>
+
+                      <Select
+                        options={[{value: '5', text: '5 miles'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="incomeFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="disabilityFilter">Disability</label>
+
+                      <Select
+                        options={[{value: '5', text: '5 miles'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="disabilityFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="languageFilter">Language</label>
+
+                      <Select
+                        options={[{value: 'english', text: 'English'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="languageFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="genderFilter">Gender</label>
+
+                      <Select
+                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="genderFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+                    
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="ethnicityFilter">Ethnicity</label>
+
+                      <Select
+                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="ethnicityFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="housingFilter">Housing</label>
+
+                      <Select
+                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="housingFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+
+                    {/* column */ }
+                    <div className={'results__filters--group__item'}>
+                      <label htmlFor="accessibilityFilter">Accessibility</label>
+
+                      <Select
+                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          this.search()
+                        }
+                        className=""
+                        placeholder="Select"
+                        id="accessibilityFilter"
+                      />
+                    </div>
+                    {/* ./column */ }
+                    
+                  </div>
+
+                  <div className={'flex-container flex-container--align-bottom flex-container--no-padding flex-container--right'}>
+                    <button onClick={this.resetFilters} className={'link'}>Remove all filters</button>
+                  </div>
+                  
                 </div>
-                {/* ./column */ }
-
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="incomeFilter">Income</label>
-
-                  <Select
-                    options={[{value: '5', text: '5 miles'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="incomeFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="disabilityFilter">Disability</label>
-
-                  <Select
-                    options={[{value: '5', text: '5 miles'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="disabilityFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="languageFilter">Language</label>
-
-                  <Select
-                    options={[{value: 'english', text: 'English'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="languageFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="genderFilter">Gender</label>
-
-                  <Select
-                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="genderFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-                
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="ethnicityFilter">Ethnicity</label>
-
-                  <Select
-                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="ethnicityFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="housingFilter">Housing</label>
-
-                  <Select
-                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="housingFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-
-                {/* column */ }
-                <div className={'results__filters--group__item'}>
-                  <label htmlFor="accessibilityFilter">Accessibility</label>
-
-                  <Select
-                    options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                      this.search()
-                    }
-                    className=""
-                    placeholder="Select"
-                    id="accessibilityFilter"
-                  />
-                </div>
-                 {/* ./column */ }
-                
-              </div>
               )}
                 
 

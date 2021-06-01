@@ -166,3 +166,7 @@ export interface IBanner {
   button_url: string;
   has_image: true;
 }
+
+export interface IFilters {
+  age?: string;
+}
