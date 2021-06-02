@@ -10,23 +10,21 @@ import './Autocomplete.scss';
 interface IProps {
   endpointEntity: string;
   filterKey?: string;
-  hiddenField?: string;
+  storeValueField?: string;
   defaultValue?: string;
   defaultText?: string;
-  defaultTextStoreField?: string;
+  storeTextField?: string;
   store: any;
   multiSelect?: boolean
 }
 
 
-const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterKey = 'name', store, hiddenField = '', defaultValue = '',  defaultText = '', defaultTextStoreField = '', multiSelect = false}) => {
+const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterKey = 'name', store, storeValueField = '', defaultValue = '',  defaultText = '', storeTextField = '', multiSelect = false}) => {
     
     const [suggestions, setSuggestions] = useState([]);
     const [isLoading, toggleLoading] = useState(false);
     const [value, setAutocompleKeywordValue] = useState('');
-    const hiddenInputField = useRef<HTMLInputElement>(null);
     const autocompeleteInputField = useRef<HTMLInputElement>(null);
-
 
     const onSuggestionsFetchRequested =  (inputValue: any, callback: any) => {
         console.log('[onSuggestionsFetchRequested] --> inputValue: ', inputValue);
@@ -71,11 +69,8 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
     };
 
     const resetStoredAutocompleteData = () => {
-        console.log('[resetStoredAutocompleteData] -->');
-        
-        store.handleInput(hiddenField, null)
-        store.handleInput(defaultTextStoreField, null)
-        if(hiddenInputField.current) hiddenInputField.current.value = ''
+        store.handleInput(storeValueField, null)
+        store.handleInput(storeTextField, null)
         setAutocompleKeywordValue('')
         if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = false
         if(autocompeleteInputField.current) autocompeleteInputField.current.focus()
@@ -93,7 +88,7 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
         // If an option was perviously selected and stored, then retrieve the option and show
         if(defaultValue && value === '') {
             if(defaultText) setAutocompleKeywordValue(defaultText)
-            if(defaultText) store.handleInput(defaultTextStoreField, defaultText)
+            if(defaultText) store.handleInput(storeTextField, defaultText)
         }     
         
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,11 +97,10 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
      const handleInputChange = (newValue: any, {action}: any) => {
          console.log('[handleInputChange] --> newValue', newValue, 'action type:', action.toString());
 
-        if (action && action === 'select-option' && hiddenField && hiddenInputField.current) {
+        if (action && action === 'select-option' && storeValueField) {
             setAutocompleKeywordValue(newValue.value)
-            hiddenInputField.current.value = newValue.value
-            store.handleInput(hiddenField, hiddenInputField.current.value)
-            store.handleInput(defaultTextStoreField, newValue.label)
+            store.handleInput(storeValueField, newValue.value)
+            store.handleInput(storeTextField, newValue.label)
         }
 
         if(action && action === 'clear') {
@@ -122,10 +116,9 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
            return
         }
      }
-
       
     return (
-        <div className={cx('relative')} >
+        <div className={cx('autocomplete__wrapper relative')} >
             <AsyncSelect
                 defaultInputValue={defaultText}
                 isMulti={multiSelect}
@@ -140,8 +133,6 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
                 classNamePrefix='react-select'
                 className='react-select-container'
             />
-
-            {hiddenField !== '' && <input type="hidden" name={hiddenField} id={hiddenField} ref={hiddenInputField} value={get(store, 'referral.organisation_taxonomy_id') || ''} />}
         </div>
       );
 }
