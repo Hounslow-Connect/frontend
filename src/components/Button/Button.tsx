@@ -19,7 +19,6 @@ interface IProps {
   light?: boolean;
   onClick?: any;
   covid?: boolean;
-  tabIndex?: number;
 }
 
 const Button: React.FunctionComponent<IProps> = ({
