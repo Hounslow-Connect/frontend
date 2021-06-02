@@ -123,6 +123,10 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
            resetStoredAutocompleteData()
            return
         }
+        if(action &&  action === 'input-change' && newValue === '') {
+           resetStoredAutocompleteData()
+           return
+        }
      }
       
     return (
