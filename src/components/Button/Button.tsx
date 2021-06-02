@@ -34,7 +34,7 @@ const Button: React.FunctionComponent<IProps> = ({
   light = false,
   onClick,
   covid = false,
-  image,
+  image
 }) => (
   <button
     className={cx('button', `button--${size}`, {
