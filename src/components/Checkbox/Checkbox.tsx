@@ -15,10 +15,8 @@ interface IProps {
 
 const Checkbox: React.FunctionComponent<IProps> = (props: IProps) => {
   const handleKeyPress = (event:  any) => {
-    console.log('[handleKeyPress] -->')
-    
     if (event.key === 'Enter') {
-      // props.onChange
+      if(props.onChange) props.onChange()
     }
   }
   
