@@ -69,7 +69,9 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
     };
 
     const resetStoredAutocompleteData = () => {
-        store.handleInput(storeValueField, null)
+        console.log('[resetStoredAutocompleteData] -->');
+        
+        if(storeValueField) store.handleInput(storeValueField, null)
         store.handleInput(storeTextField, null)
         setAutocompleKeywordValue('')
         if(autocompeleteInputField.current) autocompeleteInputField.current.disabled = false
@@ -87,6 +89,7 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
 
         // If an option was perviously selected and stored, then retrieve the option and show
         if(defaultValue && value === '') {
+            setAutocompleKeywordValue(defaultValue)
             if(defaultText) setAutocompleKeywordValue(defaultText)
             if(defaultText) store.handleInput(storeTextField, defaultText)
         }     
@@ -95,12 +98,17 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
      }, []);
 
      const handleInputChange = (newValue: any, {action}: any) => {
-         console.log('[handleInputChange] --> newValue', newValue, 'action type:', action.toString());
+         console.log('[handleInputChange] --> newValue', newValue, 'action type:', action.toString(), 'value: ', value);
 
-        if (action && action === 'select-option' && storeValueField) {
-            setAutocompleKeywordValue(newValue.value)
-            store.handleInput(storeValueField, newValue.value)
-            store.handleInput(storeTextField, newValue.label)
+        if (action && action === 'select-option') {
+            if(storeValueField) {
+                setAutocompleKeywordValue(newValue.value)
+            } else {
+                if(storeTextField) setAutocompleKeywordValue(newValue.label)
+            }
+            
+            if(storeValueField)  store.handleInput(storeValueField, newValue.value)
+            if(storeTextField) store.handleInput(storeTextField, newValue.label)
         }
 
         if(action && action === 'clear') {
@@ -109,9 +117,13 @@ const Autocomplete: React.FunctionComponent<IProps> = ({ endpointEntity, filterK
      }
 
      const handleInputStates = (newValue: any, {action}: any) => {
-         console.log('[handleInputStates] --> newValue', newValue, 'action type:', action.toString(), 'defaultText value:', defaultText);
+         console.log('[handleInputStates] --> newValue', newValue, 'action type:', action.toString(), 'defaultText value:', defaultText, 'value: ', value);
         
-        if(action && action === 'input-blur' && value === '') {
+        if(action && (action === 'input-blur' || action === 'input-change') && value === '') {
+           resetStoredAutocompleteData()
+           return
+        }
+        if(action &&  action === 'input-change' && newValue === '') {
            resetStoredAutocompleteData()
            return
         }
