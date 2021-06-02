@@ -8,6 +8,7 @@ import { IServiceLocation } from '../../../types/types';
 
 interface IProps {
   locations: any;
+  iconType?: string;
 }
 
 interface IState {
@@ -18,11 +19,6 @@ interface IState {
 const CENTRE_OF_Hounslow: [number, number] = [51.460729410758496, -0.3726421426363473];
 const TOP_LEFT_CORNER: [number, number] = [51.50023670726737, -0.45281640857676737];
 const BOTTOM_RIGHT_CORNER: [number, number] = [51.425008878160575, -0.27232107871209366];
-
-const ServiceMarker = L.icon({
-  iconUrl: require('../../../assets/images/icons/maps/service-pin.svg'),
-  iconSize: [50, 95],
-});
 
 class MapCard extends Component<IProps, IState> {
   constructor(props: IProps) {
@@ -45,7 +41,12 @@ class MapCard extends Component<IProps, IState> {
   };
 
   render() {
-    const { locations } = this.props;
+    const { locations, iconType } = this.props;
+
+    const ServiceMarker = L.icon({
+      iconUrl: (iconType ? require(`../../../assets/images/icons/maps/${iconType}-pin.svg`).default : require('../../../assets/images/icons/maps/service-pin.svg').default),
+      iconSize: [50, 95],
+    });
 
     this.addMarkers(locations);
 
