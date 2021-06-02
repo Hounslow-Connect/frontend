@@ -335,7 +335,7 @@ class Service extends Component<IProps> {
                       className="service__accordian mobile-show"
                     >
                       <div className="service__map">
-                        <MapCard locations={locations} />
+                        <MapCard iconType={get(service, 'type')} locations={locations} />
                       </div>
                     </Accordian>
                   )}
@@ -433,7 +433,7 @@ class Service extends Component<IProps> {
                     <div className="flex-col flex-col--12">
                       <h2 className="service__heading">{`Where is this ${service.type}?`}</h2>
                       <div className="service__section service__map">
-                        <MapCard locations={locations} />
+                        <MapCard iconType={get(service, 'type')} locations={locations} />
                       </div>
                     </div>
                   )}
