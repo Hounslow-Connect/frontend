@@ -16,7 +16,7 @@ import { apiBase } from '../../config/api';
 import './Service.scss';
 
 import { removeQuotesRegex, capitalise } from '../../utils/utils';
-import { IServiceLocation, IService, IServiceEligibility } from '../../types/types';
+import { IServiceLocation, IService, IServiceTaxonomy } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
 import UIStore from '../../stores/uiStore';
 
@@ -99,54 +99,57 @@ class Service extends Component<IProps> {
     return `" ${testimonial.replace(removeQuotesRegex, '')} "`;
   };
 
-  // TODO: Make API call to get all taxonomies from `/taxonomies/service-eligibilities`
   getAllTaxonomies = () => {
     const { serviceStore } = this.props;
     return serviceStore.serviceEligibilityTaxonomies
   }
 
-
-  // TODO: Write function to get name of taxonomy by taking in the id as parameter
-  getTaxonomyById = () => {
-
-  }
-
-  // These ids will need to be .mapped
   getTaxonomyUUIDs = () => {
-    // const { serviceStore } = this.props;
-    // const { service } = serviceStore;
-    // return (service && service.eligibility_types ? service.eligibility_types : null)
-    return ['23499E91-4F1F-426C-B7AF-AE201125C016', '45ar85f64-5717-4562-b3fc-2c963f66afa6']
+    const { serviceStore } = this.props;
+    const { service } = serviceStore;
+    return (service && service.eligibility_types ? service.eligibility_types.taxonomies : null)
   }
 
   // Takes in a string and returns associated concatenated string of taxonomies and custom eligibility if they exist
   getServiceEligibilityInfo = (name: string) => {
-    console.log('[getServiceEligibilityInfo] --> name', name);
+    const { serviceStore } = this.props;
+    const { service } = serviceStore;
+    console.log('[getServiceEligibilityInfo] --> name', name, 'service: ', service);
     
+    // Get UUIDS from service.elgibility.taxonomies array
     const UUIDs = this.getTaxonomyUUIDs()
 
     // Gets all taxonomies
     const taxonomies = this.getAllTaxonomies();
-    let eligibilityInfo:any = null
 
-    //traverses through array of UUIDs bassed into service.eligibility_types.taxonpmies
+    let relatedEligibilities:any = []
 
-    if(taxonomies) {
-      UUIDs.map(uuid => {
+    if(UUIDs && taxonomies) {
+      // Traverse through UUIDS and then filter the array of taxonomies to find a match using the taxonomy ID
+      UUIDs.forEach(uuid => {
         const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
-  
+        
         if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
-          return matchedTaxonomyParent.children.map((taxonomy: any) => {
-            // if(taxonomy.id === uuid) {
-            //   console.log('taxonomy.id: ', taxonomy.id, 'uuid: ', uuid, 'map taxonomy', taxonomy);
-            // }
-            if(taxonomy.id === uuid) eligibilityInfo = taxonomy
-          })
+          const matchedTaxonomy:any = find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
+          console.log('matchedTaxonomy', matchedTaxonomy);
+          
+          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy.name)
         }
       })
     }
 
-    return (eligibilityInfo && eligibilityInfo.name ? eligibilityInfo.name : null)
+    // Check service.elgibility.custom to see if there is a value for the passed in name
+    if(service && service.eligibility_types.custom) {
+      const customEligibility = get(service.eligibility_types.custom, `${name.split(' ').join('_').toLowerCase()}`)
+      
+      if(customEligibility) {
+        console.log('[getServiceEligibilityInfo] --> has custom eligibilities for ', name, ', customEligibility ', customEligibility);
+      }
+
+      if(customEligibility) relatedEligibilities.push(customEligibility)
+    }
+    
+    return (relatedEligibilities.length ? relatedEligibilities.join(', ') : null)
   }
 
   render() {
@@ -157,8 +160,7 @@ class Service extends Component<IProps> {
     }
 
     // console.log('[getTaxonomyUUIDs] --> ', this.getTaxonomyUUIDs());
-    console.log('[getServiceEligibilityInfo() -->', this.getServiceEligibilityInfo('Age Group'));
-  
+    console.log('[getServiceEligibilityInfo() --> Age Group: ', this.getServiceEligibilityInfo('Ethnicity'));
 
     // service is disabled
     if (service.status === 'inactive') {
@@ -219,6 +221,14 @@ class Service extends Component<IProps> {
                         svg={AgeGroup}
                         title="Age Group"
                         info={this.getServiceEligibilityInfo('Age Group')}
+                      />
+                    )}
+
+                    {get(service, 'criteria.age_group') && (
+                      <CriteriaCard
+                        svg={AgeGroup}
+                        title="Ethnicity"
+                        info={this.getServiceEligibilityInfo('Ethnicity')}
                       />
                     )}
 

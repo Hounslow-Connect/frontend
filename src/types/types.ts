@@ -79,12 +79,14 @@ export interface IService {
   video_embed: null | string;
   wait_time: null | string;
 }
-export interface IServiceEligibility {
+export interface IServiceTaxonomy {
   id: string;
   parent_id: string;
   name: string;
   order: number; 
   children: [];
+  created_at: string;
+  updated_at: string;
 }
 
 export interface IServiceLocation {
@@ -167,7 +169,15 @@ export interface ICriteria {
   other: string;
 }
 export interface IEligibility {
-  custom: {};
+  custom: {
+    age_group: string,
+    disability: string,
+    ethnicity: string,
+    gender: string,
+    income: string,
+    language: string,
+    other: string
+  };
   taxonomies: [];
 }
 

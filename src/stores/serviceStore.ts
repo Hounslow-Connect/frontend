@@ -3,7 +3,7 @@ import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
 import every from 'lodash/every';
-import { IService, IServiceLocation, IServiceEligibility } from '../types/types';
+import { IService, IServiceLocation, IServiceTaxonomy } from '../types/types';
 
 export default class ServiceStore {
   @observable service: IService | null = null;
@@ -11,7 +11,7 @@ export default class ServiceStore {
   @observable loading: boolean = false;
   @observable relatedServices: IService[] | null = null;
   @observable favourite: boolean = false;
-  @observable serviceEligibilityTaxonomies: IServiceEligibility[] | null = null
+  @observable serviceEligibilityTaxonomies: IServiceTaxonomy[] | null = null;
 
   checkIfFavorited = () => {
     const favourites = localStorage.getItem('favourites');
@@ -37,6 +37,8 @@ export default class ServiceStore {
     this.loading = true;
     const serviceData = await axios.get(`${apiBase}/services/${name}?include=organisation`);
     this.service = get(serviceData, 'data.data');
+
+    if(this.service) this.service.eligibility_types.custom.ethnicity = 'test ethnicity';
 
     this.getServiceLocations();
     this.getRelatedServices(name);
