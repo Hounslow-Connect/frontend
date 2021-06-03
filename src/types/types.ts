@@ -46,7 +46,6 @@ export interface IService {
   contact_email: string;
   contact_name: string;
   contact_phone: string;
-  criteria: ICriteria; //TODO: Remove depracated field
   eligibility_types: IEligibility;
   created_at: string;
   description: string;

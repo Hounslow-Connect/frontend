@@ -26,7 +26,7 @@ export default class ServiceStore {
   @computed
   get hasCriteria() {
     if (this.service) {
-      return every(this.service.criteria, criteria => criteria === null) ? false : true;
+      return ((this.service.eligibility_types && this.service.eligibility_types.taxonomies && this.service.eligibility_types.taxonomies.length) || !every(this.service.eligibility_types.custom, criteria => criteria === null) ? true : false)
     }
 
     return false;
@@ -37,8 +37,6 @@ export default class ServiceStore {
     this.loading = true;
     const serviceData = await axios.get(`${apiBase}/services/${name}?include=organisation`);
     this.service = get(serviceData, 'data.data');
-
-    if(this.service) this.service.eligibility_types.custom.ethnicity = 'test ethnicity';
 
     this.getServiceLocations();
     this.getRelatedServices(name);
