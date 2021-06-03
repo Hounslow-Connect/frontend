@@ -46,7 +46,8 @@ export interface IService {
   contact_email: string;
   contact_name: string;
   contact_phone: string;
-  criteria: ICriteria;
+  criteria: ICriteria; //TODO: Remove depracated field
+  eligibility_types: IEligibility;
   created_at: string;
   description: string;
   fees_text: null | string;
@@ -77,6 +78,13 @@ export interface IService {
   useful_infos: [];
   video_embed: null | string;
   wait_time: null | string;
+}
+export interface IServiceEligibility {
+  id: string;
+  parent_id: string;
+  name: string;
+  order: number; 
+  children: [];
 }
 
 export interface IServiceLocation {
@@ -157,6 +165,10 @@ export interface ICriteria {
   income: string;
   language: string;
   other: string;
+}
+export interface IEligibility {
+  custom: {};
+  taxonomies: [];
 }
 
 export interface IBanner {

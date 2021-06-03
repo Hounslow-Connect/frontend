@@ -16,7 +16,7 @@ import { apiBase } from '../../config/api';
 import './Service.scss';
 
 import { removeQuotesRegex, capitalise } from '../../utils/utils';
-import { IServiceLocation, IService } from '../../types/types';
+import { IServiceLocation, IService, IServiceEligibility } from '../../types/types';
 import ServiceStore from '../../stores/serviceStore';
 import UIStore from '../../stores/uiStore';
 
@@ -84,6 +84,7 @@ class Service extends Component<IProps> {
     const { serviceStore, match } = this.props;
 
     serviceStore.fetchService(match.params.service);
+    serviceStore.fetchServiceEligibilities();
   }
 
   componentDidUpdate(prevProps: IProps) {
@@ -98,12 +99,66 @@ class Service extends Component<IProps> {
     return `" ${testimonial.replace(removeQuotesRegex, '')} "`;
   };
 
+  // TODO: Make API call to get all taxonomies from `/taxonomies/service-eligibilities`
+  getAllTaxonomies = () => {
+    const { serviceStore } = this.props;
+    return serviceStore.serviceEligibilityTaxonomies
+  }
+
+
+  // TODO: Write function to get name of taxonomy by taking in the id as parameter
+  getTaxonomyById = () => {
+
+  }
+
+  // These ids will need to be .mapped
+  getTaxonomyUUIDs = () => {
+    // const { serviceStore } = this.props;
+    // const { service } = serviceStore;
+    // return (service && service.eligibility_types ? service.eligibility_types : null)
+    return ['23499E91-4F1F-426C-B7AF-AE201125C016', '45ar85f64-5717-4562-b3fc-2c963f66afa6']
+  }
+
+  // Takes in a string and returns associated concatenated string of taxonomies and custom eligibility if they exist
+  getServiceEligibilityInfo = (name: string) => {
+    console.log('[getServiceEligibilityInfo] --> name', name);
+    
+    const UUIDs = this.getTaxonomyUUIDs()
+
+    // Gets all taxonomies
+    const taxonomies = this.getAllTaxonomies();
+    let eligibilityInfo:any = null
+
+    //traverses through array of UUIDs bassed into service.eligibility_types.taxonpmies
+
+    if(taxonomies) {
+      UUIDs.map(uuid => {
+        const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
+  
+        if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
+          return matchedTaxonomyParent.children.map((taxonomy: any) => {
+            // if(taxonomy.id === uuid) {
+            //   console.log('taxonomy.id: ', taxonomy.id, 'uuid: ', uuid, 'map taxonomy', taxonomy);
+            // }
+            if(taxonomy.id === uuid) eligibilityInfo = taxonomy
+          })
+        }
+      })
+    }
+
+    return (eligibilityInfo && eligibilityInfo.name ? eligibilityInfo.name : null)
+  }
+
   render() {
     const { serviceStore, uiStore } = this.props;
     const { service, locations, relatedServices } = serviceStore;
     if (!service) {
       return null;
     }
+
+    // console.log('[getTaxonomyUUIDs] --> ', this.getTaxonomyUUIDs());
+    console.log('[getServiceEligibilityInfo() -->', this.getServiceEligibilityInfo('Age Group'));
+  
 
     // service is disabled
     if (service.status === 'inactive') {
@@ -163,7 +218,7 @@ class Service extends Component<IProps> {
                       <CriteriaCard
                         svg={AgeGroup}
                         title="Age Group"
-                        info={get(service, 'criteria.age_group')}
+                        info={this.getServiceEligibilityInfo('Age Group')}
                       />
                     )}
 
