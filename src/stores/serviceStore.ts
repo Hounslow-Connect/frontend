@@ -3,7 +3,8 @@ import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
 import every from 'lodash/every';
-import { IService, IServiceLocation, IOrganisation } from '../types/types';
+import { IService, IServiceLocation, IOrganisation, IServiceTaxonomy } from '../types/types';
+
 export default class ServiceStore {
   @observable service: IService | null = null;
   @observable locations: IServiceLocation[] = [];
@@ -12,6 +13,7 @@ export default class ServiceStore {
   @observable favourite: boolean = false;
   @observable organisationId: string = '';
   @observable organisation: IOrganisation | null = null;
+  @observable serviceEligibilityTaxonomies: IServiceTaxonomy[] | null = null;
 
   checkIfFavorited = () => {
     const favourites = localStorage.getItem('favourites');
@@ -26,7 +28,7 @@ export default class ServiceStore {
   @computed
   get hasCriteria() {
     if (this.service) {
-      return every(this.service.criteria, criteria => criteria === null) ? false : true;
+      return ((this.service.eligibility_types && this.service.eligibility_types.taxonomies && this.service.eligibility_types.taxonomies.length) || !every(this.service.eligibility_types.custom, criteria => criteria === null) ? true : false)
     }
 
     return false;
@@ -46,6 +48,12 @@ export default class ServiceStore {
     this.getServiceLocations();
     this.getRelatedServices(name);
     this.checkIfFavorited();
+  };
+
+  @action
+  fetchServiceEligibilities = async () => {
+    const data = await axios.get(`${apiBase}/taxonomies/service-eligibilities`);
+    this.serviceEligibilityTaxonomies = get(data, 'data.data');
   };
 
   @action

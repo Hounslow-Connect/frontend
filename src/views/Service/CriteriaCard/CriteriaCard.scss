@@ -7,6 +7,10 @@
   padding: space(20);
   background-color: $white;
 
+  &:nth-of-type(even) {
+    background-color: #E5E5E5;
+  }
+
   @include for-tablet-portrait-up { 
     display: flex;
   }
@@ -28,6 +32,24 @@
   @include for-tablet-landscape-up {
     margin-top: space(8);
   }
+}
+
+.criteria_card-toggle {
+  text-align: right;
+  
+  button {
+    cursor: pointer;
+  }
+}
+
+p.criteria_card-content {
+  font-size: pxtorem(18px);
+  
+  @include for-tablet-portrait-down {
+    font-size: pxtorem(16px);
+    padding-left: space(16);
+  }
+
 }
 
 .service__criteria {

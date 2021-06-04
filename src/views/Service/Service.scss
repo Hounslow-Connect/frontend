@@ -158,6 +158,10 @@
 .service__info__cost {
   background-color: $turquoise !important;
   border-radius: 20px;
+
+  &.criteria_card {
+    margin-top: space(16);
+  }
 }
 
 .service__info__cost--icon {
@@ -706,15 +710,7 @@
 }
 
 .criteria-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: space(16);
-
-  @include for-tablet-portrait-down {
-    grid-template-columns: repeat(1, 1fr);
-    gap: space(8);
-    margin-top: 0;
-  }
+  width: 100%;
 }
 
 .service__map {

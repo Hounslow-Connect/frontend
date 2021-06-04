@@ -84,6 +84,7 @@ class Service extends Component<IProps> {
     const { serviceStore, match } = this.props;
 
     serviceStore.fetchService(match.params.service);
+    serviceStore.fetchServiceEligibilities();
   }
 
   componentDidUpdate(prevProps: IProps) {
@@ -97,6 +98,54 @@ class Service extends Component<IProps> {
   formatTestimonial = (testimonial: string) => {
     return `" ${testimonial.replace(removeQuotesRegex, '')} "`;
   };
+
+  getAllTaxonomies = () => {
+    const { serviceStore } = this.props;
+    return serviceStore.serviceEligibilityTaxonomies
+  }
+
+  getTaxonomyUUIDs = () => {
+    const { serviceStore } = this.props;
+    const { service } = serviceStore;
+   return (service && service.eligibility_types ? service.eligibility_types.taxonomies : null)
+    // return (service && service.eligibility_types ? null : null)
+  }
+
+  // Takes in a string and returns associated concatenated string of taxonomies and custom eligibility if they exist
+  getServiceEligibilityInfo = (name: string) => {
+    const { serviceStore } = this.props;
+    const { service } = serviceStore;
+    
+    // Get UUIDS from service.elgibility.taxonomies array
+    const UUIDs:any = this.getTaxonomyUUIDs()
+
+    // Gets all taxonomies
+    const taxonomies = this.getAllTaxonomies();
+
+    let relatedEligibilities:any = []
+
+    if(UUIDs && UUIDs.length && taxonomies) {
+      // Traverse through UUIDS and then filter the array of taxonomies to find a match using the taxonomy ID
+      UUIDs.forEach((uuid:string) => {
+        const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
+        
+        if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
+          const matchedTaxonomy:any = find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
+          
+          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy.name)
+        }
+      })
+    }
+
+    // Check service.elgibility.custom to see if there is a value for the passed in name
+    if(service && service.eligibility_types.custom) {
+      const customEligibility = get(service.eligibility_types.custom, `${name.split(' ').join('_').toLowerCase()}`)
+
+      if(customEligibility) relatedEligibilities.push(customEligibility)
+    }
+    
+    return (relatedEligibilities.length ? relatedEligibilities.join(', ') : null)
+  }
 
   render() {
     const { serviceStore, uiStore } = this.props;
@@ -160,67 +209,75 @@ class Service extends Component<IProps> {
                     className="criteria-cards service__section service__section--no-padding"
                     style={{ alignItems: 'stretch' }}
                   >
-                    {get(service, 'criteria.age_group') && (
+                    {this.getServiceEligibilityInfo('Age Group') && (
                       <CriteriaCard
                         svg={AgeGroup}
                         title="Age Group"
-                        info={get(service, 'criteria.age_group')}
+                        info={this.getServiceEligibilityInfo('Age Group')}
                       />
                     )}
 
-                    {get(service, 'criteria.disability') && (
+                    {this.getServiceEligibilityInfo('Ethnicity') && (
+                      <CriteriaCard
+                        svg={Other}
+                        title="Ethnicity"
+                        info={this.getServiceEligibilityInfo('Ethnicity')}
+                      />
+                    )}
+
+                    {this.getServiceEligibilityInfo('Disability') && (
                       <CriteriaCard
                         svg={Disability}
                         title="Disability"
-                        info={get(service, 'criteria.disability')}
+                        info={this.getServiceEligibilityInfo('Disability')}
                       />
                     )}
 
-                    {get(service, 'criteria.employment') && (
+                    {this.getServiceEligibilityInfo('Employment') && (
                       <CriteriaCard
                         svg={Employment}
                         title="Employment Status"
-                        info={get(service, 'criteria.employment')}
+                        info={this.getServiceEligibilityInfo('Employment')}
                       />
                     )}
 
-                    {get(service, 'criteria.gender') && (
+                    {this.getServiceEligibilityInfo('Gender') && (
                       <CriteriaCard
                         svg={Gender}
                         title="Gender"
-                        info={get(service, 'criteria.gender')}
+                        info={this.getServiceEligibilityInfo('Gender')}
                       />
                     )}
 
-                    {get(service, 'criteria.housing') && (
+                    {this.getServiceEligibilityInfo('Housing') && (
                       <CriteriaCard
                         svg={Housing}
                         title="Housing"
-                        info={get(service, 'criteria.housing')}
+                        info={this.getServiceEligibilityInfo('Housing')}
                       />
                     )}
 
-                    {get(service, 'criteria.income') && (
+                    {this.getServiceEligibilityInfo('Income') && (
                       <CriteriaCard
                         svg={Income}
                         title="Income"
-                        info={get(service, 'criteria.income')}
+                        info={this.getServiceEligibilityInfo('Income')}
                       />
                     )}
 
-                    {get(service, 'criteria.language') && (
+                    {this.getServiceEligibilityInfo('Language') && (
                       <CriteriaCard
                         svg={Language}
                         title="Language"
-                        info={get(service, 'criteria.language')}
+                        info={this.getServiceEligibilityInfo('Language')}
                       />
                     )}
 
-                    {get(service, 'criteria.other') && (
-                      <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
+                    {this.getServiceEligibilityInfo('Other') && (
+                      <CriteriaCard svg={Other} title="Other" info={this.getServiceEligibilityInfo('Other')} />
                     )}
 
-                    <div className="flex-col flex-col--tablet--6 mobile-show tablet-show criteria_card service__info__cost">
+                    <div className="flex-col flex-col--tablet--12 mobile-show tablet-show criteria_card service__info__cost">
                       <CostCard service={service} />
                     </div>
                   </div>
