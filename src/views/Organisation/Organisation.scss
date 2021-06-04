@@ -1,0 +1,90 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/breakpoints.scss';
+
+.organisation {
+    &__header {
+        z-index: 10;
+        position: relative;
+        padding-bottom: 1.5rem;
+        background: linear-gradient(to bottom, #fff 0%, #fff 50%, #D8EEEA 50%, #D8EEEA 100%);
+
+        &__wrapper {
+            display: flex;
+            background-color: $turquoise;
+
+            &:after {
+                border-top-color: $turquoise;
+            }
+        }
+
+        &__sub {
+            text-transform: unset;
+            font-weight: bold;
+            font-size: pxtorem(20px);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        &__logo {
+            flex: 0 0 154px;
+            height: 154px;
+            margin-right: space(40);
+            margin-bottom: space(16);
+            border-radius: 20px;
+            overflow: hidden;
+
+            @include for-phone-only {
+            flex: 0 0 80px;
+            height: 80px;
+            margin-right: 0;
+            margin-bottom: space(12);
+            border-radius: 12px;
+            }
+        
+            img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            }
+        }
+
+        &__content {
+
+        }
+
+        &__contact-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: space(8);
+            list-style: none;
+            padding: 0;
+            margin: space(16) 0 0;
+
+            & > li {
+                strong {
+                    display: block;
+                    font-weight: bold;
+                }
+
+                a {
+                    text-decoration: none;
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+
+    &__services {
+        background: $light-turquoise;
+    }
+
+    &__social-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30px, 30px));
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}

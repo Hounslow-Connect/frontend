@@ -40,6 +40,7 @@ export interface IOrganisation {
   slug: string;
   updated_at: string;
   url: string;
+  social_medias: [];
 }
 
 export interface IService {
