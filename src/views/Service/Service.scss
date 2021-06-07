@@ -633,7 +633,7 @@
 .criteria_card--inner {
   width: 100%;
 
-  @include for-tablet-landscape-up {
+  @media(min-width: 601px) {
     padding: 0 !important;
   }
 }
