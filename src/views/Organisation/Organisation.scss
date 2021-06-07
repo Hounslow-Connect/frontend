@@ -18,7 +18,7 @@
                 border-top-color: $turquoise;
             }
 
-            @include for-tablet-portrait-up {
+            @media(min-width: 768px) {
                 display: flex;
             }
         }
@@ -31,9 +31,6 @@
             margin-bottom: 0.5rem;
 
             @include for-tablet-portrait-down {
-                font-size: pxtorem(18px)
-            }
-            @include for-phone-only {
                 font-size: pxtorem(16px)
             }
         }
@@ -51,6 +48,8 @@
                 margin-right: 0;
                 margin-bottom: space(12);
                 border-radius: 12px;
+                height: 130px;
+                max-width: 130px;
             }
         
             img {
@@ -70,6 +69,7 @@
             @include for-phone-only {
                 font-size: pxtorem(24px);
                 line-height: space(32);
+                margin-bottom: space(16);
             }
 
 

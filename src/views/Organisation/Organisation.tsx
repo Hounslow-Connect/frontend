@@ -53,7 +53,7 @@ class Organisation extends Component<IProps> {
       return <NotFound />;
     }
 
-    return (
+    return (organisation &&
       <main>
         <div className={`organisation__header`}>
           <div className="flex-container">
@@ -85,13 +85,13 @@ class Organisation extends Component<IProps> {
               <div className="flex-col flex-col--12 flex-col--mobile--12 flex-col--tablet--12">
                 <div className="flex-container flex-container--align-left flex-container--no-padding service__section service__section--no-padding">
                   
-                  <div className="flex-col flex-col--8 flex-col--mobile--12">
+                  <div className="flex-col flex-col--9 flex-col--tablet--11 flex-col--mobile--12">
                     <h2 className="organisation__services--heading">Services provided by {get(organisation, 'name')}</h2>
                   </div>
 
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
                     <div className="organisation__services--listing">
-                        {(associatedServices && associatedServices.map((service: IService) => <ServiceCard service={service} />))}
+                      {(associatedServices && associatedServices.map((service: IService) => <ServiceCard service={service} />))}
                     </div>
                   </div>
                 </div>
