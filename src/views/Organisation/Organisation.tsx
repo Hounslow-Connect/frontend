@@ -1,27 +1,20 @@
-import React, { Component, useLayoutEffect } from 'react';
+import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
 import get from 'lodash/get';
-// import map from 'lodash/map';
-// import find from 'lodash/find';
-// import ReactMarkdown from 'react-markdown';
-// import cx from 'classnames';
-// import uniqueId from 'lodash/uniqueId';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { apiBase } from '../../config/api';
 
 import './Organisation.scss';
 
-// import { removeQuotesRegex, capitalise } from '../../utils/utils';
-import { IOrganisation } from '../../types/types';
+import { IOrganisation, IService } from '../../types/types';
 import OrganisationStore from '../../stores/organisationStore';
 import UIStore from '../../stores/uiStore';
 
 import SocialLinks from './SocialLinks';
 import Loading from '../../components/Loading';
-
+import ServiceCard from './ServiceCard';
+import NotFound from '../NotFound';
 
 interface RouteParams {
   organisation: string;
@@ -51,12 +44,13 @@ class Organisation extends Component<IProps> {
   }
 
   render() {
-    const { organisationStore } = this.props;
-    const { organisation } = organisationStore;
+    const { organisationStore, history } = this.props;
+    const { organisation, associatedServices } = organisationStore;
+    console.log('[associatedServices] --> associatedServices', associatedServices);
     
-
-    if (!organisation) {
-      return null;
+    // organisation not found
+    if (organisationStore.loading === false && !organisation) {
+      return <NotFound />;
     }
 
     return (
@@ -65,7 +59,7 @@ class Organisation extends Component<IProps> {
           <div className="flex-container">
             <div className="service__header__wrapper organisation__header__wrapper">
               <div className="organisation__header__logo">
-                <img src={getImg(organisation)} alt={`${organisation.name} logo`} />
+                {organisation && <img src={getImg(organisation)} alt={`${organisation.name} logo`} />}
               </div>
               <div className="organisation__header__content flex-col flex-col--tablet--9">
                 <span className="organisation__header__sub">Organisation</span>
@@ -73,10 +67,10 @@ class Organisation extends Component<IProps> {
                 <p>{get(organisation, 'description')}</p>
 
                 <ul className="organisation__header__contact-details">
-                  {get(organisation, 'phone') && <li><strong>Phone</strong><a href={`tel:${get(organisation, 'phone')}`}>{get(organisation, 'phone')}</a></li>} 
-                  {get(organisation, 'url') && <li><strong>Website</strong><a href={`${get(organisation, 'url')}`}>{get(organisation, 'url')}</a></li>} 
-                  {get(organisation, 'email') && <li><strong>Email</strong><a href={`${get(organisation, 'email')}`}>{get(organisation, 'email')}</a></li>} 
-                  <li><strong>Social media</strong><SocialLinks organisationStore={organisationStore} /></li>
+                  {get(organisation, 'phone') && <li key={`key_${get(organisation, 'phone')}`}><strong>Phone</strong><a href={`tel:${get(organisation, 'phone')}`}>{get(organisation, 'phone')}</a></li>} 
+                  {get(organisation, 'url') && <li key={`key_${get(organisation, 'url')}`}><strong>Website</strong><a href={`${get(organisation, 'url')}`} target="_blank"  rel="noreferrer">{get(organisation, 'url')}</a></li>} 
+                  {get(organisation, 'email') && <li key={`key_${get(organisation, 'email')}`}><strong>Email</strong><a href={`mailto:${get(organisation, 'email')}`}>{get(organisation, 'email')}</a></li>} 
+                  <li key={`key_organisation_social`}><strong>Social media</strong><SocialLinks organisationStore={organisationStore} /></li>
                 </ul>
               </div>
             </div>
@@ -88,11 +82,17 @@ class Organisation extends Component<IProps> {
           <section className="organisation__services">
             <div className="flex-container">
               
-              <div className="flex-col flex-col--10 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
+              <div className="flex-col flex-col--12 flex-col--mobile--12 flex-col--tablet--12">
                 <div className="flex-container flex-container--align-left flex-container--no-padding service__section service__section--no-padding">
                   
-                  <div className="flex-col flex-col--12 flex-col--mobile--12 service__criteria">
-                    <h2 className="service__heading">Services provided by {get(organisation, 'name')}</h2>
+                  <div className="flex-col flex-col--8 flex-col--mobile--12">
+                    <h2 className="organisation__services--heading">Services provided by {get(organisation, 'name')}</h2>
+                  </div>
+
+                  <div className="flex-col flex-col--12 flex-col--mobile--12">
+                    <div className="organisation__services--listing">
+                        {(associatedServices && associatedServices.map((service: IService) => <ServiceCard service={service} />))}
+                    </div>
                   </div>
                 </div>
               </div>

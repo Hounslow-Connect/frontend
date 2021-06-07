@@ -1,0 +1,17 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/colors.scss';
+
+.service-card {
+    background: #fff;
+    padding: space(20);
+    border-radius: 10px;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 3px $pink;
+    }
+
+    p {
+        margin-bottom: space(16);
+    }
+}

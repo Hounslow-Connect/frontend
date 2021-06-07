@@ -11,11 +11,15 @@
         background: linear-gradient(to bottom, #fff 0%, #fff 50%, #D8EEEA 50%, #D8EEEA 100%);
 
         &__wrapper {
-            display: flex;
+           
             background-color: $turquoise;
 
             &:after {
                 border-top-color: $turquoise;
+            }
+
+            @include for-tablet-portrait-up {
+                display: flex;
             }
         }
 
@@ -25,6 +29,13 @@
             font-size: pxtorem(20px);
             display: block;
             margin-bottom: 0.5rem;
+
+            @include for-tablet-portrait-down {
+                font-size: pxtorem(18px)
+            }
+            @include for-phone-only {
+                font-size: pxtorem(16px)
+            }
         }
 
         &__logo {
@@ -34,13 +45,12 @@
             margin-bottom: space(16);
             border-radius: 20px;
             overflow: hidden;
+            max-width: 154px;
 
             @include for-phone-only {
-            flex: 0 0 80px;
-            height: 80px;
-            margin-right: 0;
-            margin-bottom: space(12);
-            border-radius: 12px;
+                margin-right: 0;
+                margin-bottom: space(12);
+                border-radius: 12px;
             }
         
             img {
@@ -50,19 +60,43 @@
             }
         }
 
+        h1 {
+            margin-bottom: space(24);
+
+            @include for-tablet-portrait-down {
+                font-size: pxtorem(32px);
+                line-height: space(40);
+            }
+            @include for-phone-only {
+                font-size: pxtorem(24px);
+                line-height: space(32);
+            }
+
+
+        }
+
         &__content {
 
         }
 
         &__contact-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: space(8);
             list-style: none;
             padding: 0;
             margin: space(16) 0 0;
 
+            @media(min-width: 576px) {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); 
+                gap: space(20);
+            }
+
             & > li {
+                margin-bottom: space(16);
+
+                @media(min-width: 576px) {
+                   margin-bottom: 0;
+                }
+
                 strong {
                     display: block;
                     font-weight: bold;
@@ -78,6 +112,27 @@
 
     &__services {
         background: $light-turquoise;
+
+        &--heading {
+            margin: 2rem 0 2rem;
+        }
+
+        &--listing {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: space(20);
+            margin: 0 0 3rem 0;
+
+            @media(min-width: 576px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include for-tablet-portrait-up {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            
+        }
     }
 
     &__social-links {
