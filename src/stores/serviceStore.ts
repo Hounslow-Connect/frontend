@@ -40,16 +40,18 @@ export default class ServiceStore {
 
     this.getServiceLocations();
     this.getRelatedServices(name);
+
+    if(this.service && this.service.organisation_id)  this.fetchOrganisation(this.service.organisation_id);
+
     this.checkIfFavorited();
   };
 
   @action
-  fetchOrganisationSlug = async (id: string) => {
+  fetchOrganisation = async (id: string) => {
     try {
       const organisationData = await axios.get(`${apiBase}/organisations/${id}`);
       this.organisation = get(organisationData, 'data.data');
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   @action
