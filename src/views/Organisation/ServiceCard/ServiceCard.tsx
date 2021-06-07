@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import { withRouter, RouteComponentProps } from 'react-router';
 
 import FallBackLogo from '../../../assets/images/logo-fallback.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,12 +13,11 @@ import { IService } from '../../../types/types';
 
 import './ServiceCard.scss';
 
-interface IProps extends RouteComponentProps {
+interface IProps {
   service: IService;
 }
 
-const ServiceCard: React.FunctionComponent<IProps> = ({ service, history}) => {
-  console.log('service', service);
+const ServiceCard: React.FunctionComponent<IProps> = ({ service }) => {
 
   const getIcon = (type: string) => {
     switch (true) {
@@ -45,7 +43,7 @@ const ServiceCard: React.FunctionComponent<IProps> = ({ service, history}) => {
   };
 
   return (
-    <article className='service-card'   >
+    <article className='service-card'>
         <div className="search-result-card__content">
           <div className="search-result-card__top-row">
             <div className="search-result-card__title">
@@ -99,7 +97,7 @@ const ServiceCard: React.FunctionComponent<IProps> = ({ service, history}) => {
           aria-label={`View more information on ${service.name}`}
         >
           {service.slug && <Link to={`/services/${service.slug}`}>
-            <span>View more</span>
+            <span>See details</span>
             <FontAwesomeIcon icon="arrow-right" />
           </Link>} 
         </div>
@@ -107,4 +105,4 @@ const ServiceCard: React.FunctionComponent<IProps> = ({ service, history}) => {
   )
 };
 
-export default withRouter((observer(ServiceCard)));
+export default observer(ServiceCard);

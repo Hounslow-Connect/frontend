@@ -9,7 +9,6 @@ import './Organisation.scss';
 
 import { IOrganisation, IService } from '../../types/types';
 import OrganisationStore from '../../stores/organisationStore';
-import UIStore from '../../stores/uiStore';
 
 import SocialLinks from './SocialLinks';
 import Loading from '../../components/Loading';
@@ -22,7 +21,6 @@ interface RouteParams {
 
 interface IProps extends RouteComponentProps<RouteParams> {
   organisationStore: OrganisationStore;
-  uiStore: UIStore;
 }
 
 
@@ -44,9 +42,8 @@ class Organisation extends Component<IProps> {
   }
 
   render() {
-    const { organisationStore, history } = this.props;
+    const { organisationStore } = this.props;
     const { organisation, associatedServices } = organisationStore;
-    console.log('[associatedServices] --> associatedServices', associatedServices);
     
     // organisation not found
     if (organisationStore.loading === false && !organisation) {
@@ -70,7 +67,7 @@ class Organisation extends Component<IProps> {
                   {get(organisation, 'phone') && <li key={`key_${get(organisation, 'phone')}`}><strong>Phone</strong><a href={`tel:${get(organisation, 'phone')}`}>{get(organisation, 'phone')}</a></li>} 
                   {get(organisation, 'url') && <li key={`key_${get(organisation, 'url')}`}><strong>Website</strong><a href={`${get(organisation, 'url')}`} target="_blank"  rel="noreferrer">{get(organisation, 'url')}</a></li>} 
                   {get(organisation, 'email') && <li key={`key_${get(organisation, 'email')}`}><strong>Email</strong><a href={`mailto:${get(organisation, 'email')}`}>{get(organisation, 'email')}</a></li>} 
-                  <li key={`key_organisation_social`}><strong>Social media</strong><SocialLinks organisationStore={organisationStore} /></li>
+                  <li key="key_organisation_social"><strong>Social media</strong><SocialLinks organisationStore={organisationStore} /></li>
                 </ul>
               </div>
             </div>
@@ -91,7 +88,7 @@ class Organisation extends Component<IProps> {
 
                   <div className="flex-col flex-col--12 flex-col--mobile--12">
                     <div className="organisation__services--listing">
-                      {(associatedServices && associatedServices.map((service: IService) => <ServiceCard service={service} />))}
+                      {(associatedServices && associatedServices.map((service: IService) => <ServiceCard  key={`key_${service.id}`} service={service} />))}
                     </div>
                   </div>
                 </div>
@@ -104,4 +101,4 @@ class Organisation extends Component<IProps> {
   }
 }
 
-export default inject('organisationStore', 'uiStore')(observer(Organisation));
+export default inject('organisationStore')(observer(Organisation));

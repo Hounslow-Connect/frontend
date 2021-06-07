@@ -138,6 +138,7 @@
     &__social-links {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(30px, 30px));
+        gap: space(8);
         list-style: none;
         padding: 0;
         margin: 0;

@@ -18,7 +18,7 @@ const SocialLinks: React.FunctionComponent<IProps> = ({ organisationStore }) => 
             rel="noopener noreferrer"
             aria-label={`Go to ${social.type} social page`}
           >
-            <FontAwesomeIcon icon={['fab', social.type ]} />
+            <FontAwesomeIcon size="lg" icon={['fab', social.type ]} />
           </a></li>)
         })}
     </ul>
