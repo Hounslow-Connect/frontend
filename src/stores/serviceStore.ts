@@ -3,10 +3,11 @@ import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
 import every from 'lodash/every';
-import { IService, IServiceLocation } from '../types/types';
+import { IService, IServiceLocation, IOrganisation } from '../types/types';
 
 export default class ServiceStore {
   @observable service: IService | null = null;
+  @observable organisation: IOrganisation | null = null;
   @observable locations: IServiceLocation[] = [];
   @observable loading: boolean = false;
   @observable relatedServices: IService[] | null = null;
@@ -40,6 +41,15 @@ export default class ServiceStore {
     this.getServiceLocations();
     this.getRelatedServices(name);
     this.checkIfFavorited();
+  };
+
+  @action
+  fetchOrganisationSlug = async (id: string) => {
+    try {
+      const organisationData = await axios.get(`${apiBase}/organisations/${id}`);
+      this.organisation = get(organisationData, 'data.data');
+    } catch (error) {
+    }
   };
 
   @action
