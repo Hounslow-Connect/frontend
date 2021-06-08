@@ -8,11 +8,25 @@ const pathToIndex = path.join(__dirname, "build/index.html")
 console.log('pathToIndex: ', pathToIndex)
 app.get("/", (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
-  const pageTitle = "Homepage - Welcome to the Homepage"
-  console.log('raw',raw);
-  const updated = raw.toString().replace("__PAGE_TITLE__", `${pageTitle}`)
-  console.log('updated',updated);
-  res.send(updated)
+  let updatedPage = raw.toString()
+
+  const metas = [
+    {
+			name: '__PAGE_TITLE__',
+			content: 'Homepage [server.js] - Welcome to the Homepage'
+    }, 
+    {
+			name: '__PAGE_META_DESCRIPTION__',
+			content:  'Hhome page description [server.js]'
+    }   
+  ]
+
+  metas.forEach(meta => {
+    updatedPage = raw.toString().replace(String(meta.name), `${meta.content}`)
+  })
+  //   const pageTitle = "Homepage - Welcome to the Homepage"
+//   const updated = raw.toString().replace("__PAGE_TITLE__", `${pageTitle}`)
+  res.send(updatedPage)
 })
 //
 app.use(express.static(path.join(__dirname, "build")))
