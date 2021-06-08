@@ -39,13 +39,11 @@ const CriteriaCard: React.FunctionComponent<IProps> = ({ svg, title, info }) => 
   return (
     <div className="flex-col flex-col--mobile--12 criteria_card">
       <div className="flex-container flex-container--align-center criteria_card--inner">
-        <div className="flex-col flex-col--2 flex-col--mobile--2 criteria_card-img">
+        <div className="flex-col--tablet-2 criteria_card-img">
           <ReactSVG src={svg} />
           <p className="criteria_card-title">{title}</p>
         </div>
-        <div className="flex-col flex-col--9 flex-col--mobile--9">
-          <p className="criteria_card-content">{getInfo()}{shouldShowToggle() && !open && (', plus more...')}{shouldShowToggle() && open && getHiddenInfo()}</p>
-        </div>
+        <div className="criteria_card-content"><p>{getInfo()}{shouldShowToggle() && !open && (', plus more...')}{shouldShowToggle() && open && getHiddenInfo()}</p></div>
 
         <div className="flex-col flex-col--1 flex-col--mobile--1 criteria_card-toggle">{shouldShowToggle() && 
           (<button aria-label={`Show more ${title} details`} onClick={() => toggleContent(!open)}><FontAwesomeIcon
