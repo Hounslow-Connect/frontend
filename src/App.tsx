@@ -16,7 +16,7 @@ import About from './views/About';
 import Contact from './views/Contact';
 import GetInvolved from './views/GetInvolved';
 import Privacy from './views/Privacy';
-import DutyToRefer from './views/DutyToRefer';
+// import DutyToRefer from './views/DutyToRefer';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header';
@@ -76,7 +76,7 @@ class App extends Component {
               <Route path="/get-involved" component={GetInvolved} />
               <Route path="/privacy-policy" component={Privacy} />
               <Route path="/terms-and-conditions" component={Terms} />
-              <Route path="/duty-to-refer" component={DutyToRefer} />
+              {/* <Route path="/duty-to-refer" component={DutyToRefer} /> */}
               <Route component={NotFound} />
             </Switch>
             <FeedbackModal />
