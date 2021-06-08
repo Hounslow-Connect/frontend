@@ -46,6 +46,7 @@ import RelatedServices from './RelatedServices';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
 import ServiceDisabled from './ServiceDisabled';
+import LinkButton from '../../components/LinkButton'
 
 interface RouteParams {
   service: string;
@@ -150,7 +151,6 @@ class Service extends Component<IProps> {
   render() {
     const { serviceStore, uiStore } = this.props;
     const { service, locations, relatedServices, organisation } = serviceStore;
-    
     if (!service) {
       return null;
     }
@@ -181,13 +181,20 @@ class Service extends Component<IProps> {
                   <p className="service__header__last-updated">
                     Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
                   </p>
-                  <Button
-                    text="Give feedback"
-                    icon="comment-alt"
-                    alt={true}
-                    size="medium"
-                    onClick={() => uiStore.toggleFeedbackModal()}
-                  />
+
+                  <div className="flex-container flex-container--no-padding flex-container--left">
+                    {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
+                    {organisation && organisation.slug && <span className="mobile-hide">&nbsp;&nbsp;&nbsp;</span>}
+                    <div className="flex-col--mobile--12">
+                      <Button
+                        text="Give feedback"
+                        icon="comment-alt"
+                        alt={true}
+                        size="medium"
+                        onClick={() => uiStore.toggleFeedbackModal()}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

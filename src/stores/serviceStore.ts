@@ -7,12 +7,12 @@ import { IService, IServiceLocation, IOrganisation, IServiceTaxonomy } from '../
 
 export default class ServiceStore {
   @observable service: IService | null = null;
+  @observable organisation: IOrganisation | null = null;
   @observable locations: IServiceLocation[] = [];
   @observable loading: boolean = false;
   @observable relatedServices: IService[] | null = null;
   @observable favourite: boolean = false;
   @observable organisationId: string = '';
-  @observable organisation: IOrganisation | null = null;
   @observable serviceEligibilityTaxonomies: IServiceTaxonomy[] | null = null;
 
   checkIfFavorited = () => {
@@ -47,6 +47,9 @@ export default class ServiceStore {
 
     this.getServiceLocations();
     this.getRelatedServices(name);
+
+    if(this.service && this.service.organisation_id)  this.fetchOrganisation(this.service.organisation_id);
+
     this.checkIfFavorited();
   };
 
@@ -54,6 +57,14 @@ export default class ServiceStore {
   fetchServiceEligibilities = async () => {
     const data = await axios.get(`${apiBase}/taxonomies/service-eligibilities`);
     this.serviceEligibilityTaxonomies = get(data, 'data.data');
+  }
+  
+  @action
+  fetchOrganisation = async (id: string) => {
+    try {
+      const organisationData = await axios.get(`${apiBase}/organisations/${id}`);
+      this.organisation = get(organisationData, 'data.data');
+    } catch (error) {}
   };
 
   @action

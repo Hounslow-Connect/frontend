@@ -10,13 +10,14 @@ import Home from './views/Home/Home';
 import NotFound from './views/NotFound/NotFound';
 import Results from './views/Results';
 import Service from './views/Service';
+import Organisation from './views/Organisation';
 import Favourites from './views/Favourites';
 import Referral from './views/Referral';
 import About from './views/About';
 import Contact from './views/Contact';
 import GetInvolved from './views/GetInvolved';
 import Privacy from './views/Privacy';
-// import DutyToRefer from './views/DutyToRefer';
+import DutyToRefer from './views/DutyToRefer';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header';
@@ -27,6 +28,7 @@ import WindowSizeStore from './stores/windowSizeStore';
 import UIStore from './stores/uiStore';
 import ResultsStore from './stores/resultsStore';
 import ServiceStore from './stores/serviceStore';
+import OrganisationStore from './stores/organisationStore';
 import FavouritesStore from './stores/favouritesStore';
 import CMSStore from './stores/CMSStore';
 import ReferralStore from './stores/referralStore';
@@ -42,6 +44,7 @@ const windowSizeStore = new WindowSizeStore();
 const uiStore = new UIStore();
 const resultsStore = new ResultsStore();
 const serviceStore = new ServiceStore();
+const organisationStore = new OrganisationStore();
 const favouritesStore = new FavouritesStore();
 const cmsStore = new CMSStore();
 const referralStore = new ReferralStore();
@@ -58,6 +61,7 @@ class App extends Component {
         uiStore={uiStore}
         resultsStore={resultsStore}
         serviceStore={serviceStore}
+        organisationStore={organisationStore}
         favouritesStore={favouritesStore}
         cmsStore={cmsStore}
         referralStore={referralStore}
@@ -76,7 +80,8 @@ class App extends Component {
               <Route path="/get-involved" component={GetInvolved} />
               <Route path="/privacy-policy" component={Privacy} />
               <Route path="/terms-and-conditions" component={Terms} />
-              {/* <Route path="/duty-to-refer" component={DutyToRefer} /> */}
+              <Route path="/duty-to-refer" component={DutyToRefer} />
+              <Route path="/organisations/:organisation" component={Organisation} />
               <Route component={NotFound} />
             </Switch>
             <FeedbackModal />
