@@ -62,10 +62,10 @@ class Organisation extends Component<IProps> {
               <div className="organisation__header__content flex-col flex-col--tablet--9">
                 <span className="organisation__header__sub">Organisation</span>
                 <h1>{get(organisation, 'name')}</h1>
-                  <ReactMarkdown
+                  {get(organisation, 'description') && <ReactMarkdown
                     className=""
                     source={get(organisation, 'description')}
-                  />
+                  />}
 
                 <ul className="organisation__header__contact-details">
                   {get(organisation, 'phone') && <li key={`key_${get(organisation, 'phone')}`}><strong>Phone</strong><a href={`tel:${get(organisation, 'phone')}`}>{get(organisation, 'phone')}</a></li>} 
