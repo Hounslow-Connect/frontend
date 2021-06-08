@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
 
@@ -21,6 +22,9 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
 
   return (
     <main className="home">
+      <Helmet>
+        <title>Welcome to One Hounslow Connect</title>
+      </Helmet>
       {cmsStore.hasBanner && cmsStore.banner && <Banner banner={cmsStore.banner} />}
       <Search />
       <Personas personas={SearchStore.personas} />
