@@ -19,7 +19,7 @@ const Privacy: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   return (
     <CMSPage title={get(cmsStore, 'privacy_policy.title')} breadcrumb="Privacy Policy">
       <Helmet>
-        <title>Privacy | One Hounslow Connect</title>
+        <title>Privacy policy | One Hounslow Connect</title>
       </Helmet>
 
       <ReactMarkdown source={get(cmsStore, 'privacy_policy.content')} />
