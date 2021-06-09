@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import {Helmet} from "react-helmet";
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
 import get from 'lodash/get';
@@ -112,6 +113,19 @@ class Service extends Component<IProps> {
 
     return (
       <main>
+        <Helmet>
+          {get(service, 'name') && <title>{`${get(service, 'name')} | One Hounslow Connect`}</title>}
+          {!get(service, 'name') && <title>Service | One Hounslow Connect</title>}
+
+          {get(service, 'intro') &&  <meta name="description" content={get(service, 'intro')} />}
+          {!get(service, 'intro') &&  <meta name="description" content="Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow" />}
+      
+          {get(service, 'name') && <meta property="og:title" content={`${get(service, 'name')}`} />}
+          {get(service, 'slug') && <meta property="og:url" content={`${process.env.REACT_APP_FRONTEND_URL}/${get(service, 'slug')}`} />}
+          {getImg(service) && <meta property="og:image" content={getImg(service)} />}
+          <meta property="og:type" content="website" />
+        </Helmet>
+
         <Breadcrumb
           crumbs={[
             { text: 'Home', url: '/' },

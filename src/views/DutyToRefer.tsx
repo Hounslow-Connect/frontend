@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 import { observer } from 'mobx-react';
 
 import Housing from '../assets/images/duty-to-refer/housing.png';
@@ -13,6 +14,10 @@ import './DutyToRefer.scss';
 const DutyToRefer: React.FunctionComponent = () => {
   return (
     <CMSPage title="Duty to refer" breadcrumb="Duty to refer">
+      <Helmet>
+        <title>Duty to refer | One Hounslow Connect</title>
+      </Helmet>
+
       <section>
         <div className="flex-container flex-container--justify">
           <div className="cta">

@@ -13,17 +13,18 @@ app.get("/", (req, res) => {
   const metas = [
     {
 			name: '__PAGE_TITLE__',
-			content: 'Homepage [server.js] - Welcome to the Homepage'
+			content: 'Home | One Hounslow Connect'
     }, 
     {
 			name: '__PAGE_META_DESCRIPTION__',
-			content:  'Hhome page description [server.js]'
+			content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow'
     }   
   ]
 
   metas.forEach(meta => {
     updatedPage = raw.toString().replace(String(meta.name), `${meta.content}`)
   })
+
   //   const pageTitle = "Homepage - Welcome to the Homepage"
 //   const updated = raw.toString().replace("__PAGE_TITLE__", `${pageTitle}`)
   res.send(updatedPage)

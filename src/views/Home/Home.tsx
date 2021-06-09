@@ -24,7 +24,6 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
     <main className="home">
       <Helmet>
         <title>Home | One Hounslow Connect</title>
-        <meta name="description" content="Home - Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow" />
       </Helmet>
       {cmsStore.hasBanner && cmsStore.banner && <Banner banner={cmsStore.banner} />}
       <Search />
