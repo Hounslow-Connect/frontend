@@ -16,10 +16,8 @@ const wrap = fn => (...args) => fn(...args).catch(args[2])
 //
 /* tslint:disable */
 const pathToIndex = path.join(__dirname, "build/index.html")
-console.log('pathToIndex: ', pathToIndex, ', apiBase: ', apiBase)
 
 const fetchService = async (name) => {
-  console.log('dbug 1 [fetchService]: --> name=',name);
   try {
     let response = await axios.get(`${apiBase}/services/${name.trim()}`)
     return _get(response, 'data.data');
@@ -29,7 +27,6 @@ const fetchService = async (name) => {
 };
 
 const fetchOrganisation = async (name) => {
-  console.log('dbug 1 [fetchService]: --> name=',name);
   try {
     let response = await axios.get(`${apiBase}/organisations/${name.trim()}`)
     return _get(response, 'data.data');
@@ -123,7 +120,7 @@ app.get("/", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Home | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Home | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -145,7 +142,7 @@ app.get("/results", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Results | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Results | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -167,7 +164,7 @@ app.get("/favourites", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Favourites | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Favourites | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -189,7 +186,7 @@ app.get("/referral", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Referral | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Referral | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -211,7 +208,7 @@ app.get("/about", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'About | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'About | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -233,7 +230,7 @@ app.get("/contact", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Contact | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Contact | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -255,7 +252,7 @@ app.get("/get-involved", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Get involved | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Get involved | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -277,7 +274,7 @@ app.get("/privacy-policy", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Privacy policy | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Privacy policy | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -299,7 +296,7 @@ app.get("/terms-and-conditions", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Terms and Conditions | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Terms and Conditions | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -321,7 +318,7 @@ app.get("/duty-to-refer", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Duty to refer | One Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_TITLE__', content: '' }, { name: '__PAGE_META_OG_URL__', content: '' }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_TITLE__', content: 'Duty to refer | One Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
   ]
 
   metas.forEach(meta => {
@@ -340,8 +337,7 @@ app.use(express.static(path.join(__dirname, "build")))
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "build/index.html"))
 )
-const port = process.env.PORT || 5000
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`)
-})
+
+const port = process.env.PORT || 80
+app.listen(port)
 /* tslint:enable */
