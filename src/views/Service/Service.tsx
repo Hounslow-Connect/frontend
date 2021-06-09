@@ -119,7 +119,6 @@ class Service extends Component<IProps> {
           {!get(service, 'name') && <title>Service | One Hounslow Connect</title>}
 
           {get(service, 'intro') &&  <meta name="description" content={get(service, 'intro')} />}
-          {!get(service, 'intro') &&  <meta name="description" content="Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow" />}
       
           {get(service, 'name') && <meta property="og:title" content={`${get(service, 'name')}`} />}
           {get(service, 'slug') && <meta property="og:url" content={`${process.env.REACT_APP_FRONTEND_URL}/${get(service, 'slug')}`} />}
