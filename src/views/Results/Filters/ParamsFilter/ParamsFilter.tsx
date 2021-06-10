@@ -13,7 +13,6 @@ import Button from '../../../../components/Button';
 import Select from '../../../../components/Select';
 import ResultsStore from '../../../../stores/resultsStore';
 import SearchStore from '../../../../stores/searchStore';
-import searchStore from '../../../../stores/searchStore';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
@@ -27,8 +26,6 @@ interface IProps extends RouteComponentProps {
  */
 
 interface IState {
-  // keyword: string;
-  // postcode: string;
   errors: any;
   showFilters: boolean;
 }
@@ -40,8 +37,6 @@ class Filter extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      // keyword: '',
-      // postcode: '',
       showFilters: false,
       errors: {
         keyword: false,
@@ -54,48 +49,39 @@ class Filter extends Component<IProps, IState> {
   // }
 
   componentDidMount() {
+    // const { resultsStore } = this.props
     //TODO: Update store based on query string values
-    const { search_term, location } = queryString.parse(this.props.location.search);
-
-    console.log('[componentDidMount()] search_term', search_term);
+    // const { search_term, location } = queryString.parse(this.props.location.search);
     
-
-    // console.log('[componentDidMount()] --> SearchStore.filters', SearchStore.filters);
-    
-    if (search_term) {
-      SearchStore.setKeyword(search_term as string)
-    }
-
-    if (location) {
-      SearchStore.setLocation(location as string)
-    }
+    // if (search_term && resultsStore) resultsStore.setKeyword(search_term as string)
+    // if (location && resultsStore) resultsStore.setLocation(location as string)
   }
 
   componentDidUpdate(prevProps: any) {
-    console.log('[componentDidUpdate] --> prevProps', prevProps,  'SearchStore.filters', SearchStore.filters);
   }
 
-  handleInputChange = (string: string, field: string) => {
-    // @ts-ignore
-    this.setState({
-      [field]: string,
-    });
-  };
+  // handleInputChange = (string: string, field: string) => {
+  //   // @ts-ignore
+  //   this.setState({
+  //     [field]: string,
+  //   });
+  // };
 
   validate = async () => {
+    const { resultsStore } = this.props
     return this.setState({
       errors: {
-        keyword: !SearchStore.keyword,
+        keyword: !(resultsStore && resultsStore.keyword),
       },
     });
   };
 
   search = () => {
-    const { resultsStore, history } = this.props
+    const { resultsStore } = this.props
     // This will be called each time a search is triggered
    console.log('%c [search] -->', 'color: green;');
-   console.log('[search] --> url query: ', JSON.stringify(SearchStore.filters));
-   SearchStore.updateUrlParams()
+  //  console.log('[search] --> url query: ', JSON.stringify(resultsStore.filters));
+   if(resultsStore) resultsStore.handleFormChange()
 
     // if(resultsStore) {
     //   history.push({
@@ -127,14 +113,18 @@ class Filter extends Component<IProps, IState> {
   }
 
   resetFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { resultsStore } = this.props
     if(e) e.preventDefault()
     console.log('[resetFilters] -->');
-    searchStore.clearFilters()
+    if(resultsStore) resultsStore.clearFilters()
   }
 
   getFilterOptions = (name: string) => { 
-    if(!name) return
-    const { serviceEligibilityOptions } = SearchStore
+    const { resultsStore } = this.props
+    
+    if(!name || !resultsStore) return
+    
+    const { serviceEligibilityOptions } = resultsStore
     let options = null
 
     let group:any = _first(serviceEligibilityOptions.filter((eligibility: any) => name.toLowerCase() === eligibility.name.split(' ')[0].toLowerCase()))
@@ -172,11 +162,15 @@ class Filter extends Component<IProps, IState> {
               {!resultsStore.isKeywordSearch &&
                 <div className="">
                   <Input
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      this.handleInputChange(e.target.value, 'keyword')
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      // this.handleInputChange(e.target.value, 'keyword')
+                      if (resultsStore) resultsStore.setKeyword(e.target.value)
+                    }
+                      
+                     
                     }
                     id="keyword"
-                    value={SearchStore.keyword}
+                    value={resultsStore.keyword}
                     placeholder="Search using a keyword"
                     className="results__search-box-keyword"
                     error={this.state.errors.keyword}
@@ -194,12 +188,14 @@ class Filter extends Component<IProps, IState> {
                 
                 <Input
                   id="location"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    this.handleInputChange(e.target.value, 'postcode')
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    // this.handleInputChange(e.target.value, 'postcode')
+                    if(resultsStore) resultsStore.setLocation(e.target.value)
+                  }
                   }
                   className="results__search-filter-location"
                   placeholder="Postcode"
-                  value={SearchStore.location}
+                  value={resultsStore.postcode}
                 />
               </div>
 
@@ -277,7 +273,7 @@ class Filter extends Component<IProps, IState> {
                       <Select
                         options={this.getFilterOptions('income')}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          SearchStore.handleInput('income', e.target.value)
+                          resultsStore.handleInput('income', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="incomeFilter"
@@ -292,7 +288,7 @@ class Filter extends Component<IProps, IState> {
                       <Select
                         options={this.getFilterOptions('disability')}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          SearchStore.handleInput('disability', e.target.value)
+                           resultsStore.handleInput('disability', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="disabilityFilter"
@@ -307,7 +303,7 @@ class Filter extends Component<IProps, IState> {
                       <Select
                         options={this.getFilterOptions('language')}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          SearchStore.handleInput('language', e.target.value)
+                           resultsStore.handleInput('language', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="languageFilter"
@@ -322,7 +318,7 @@ class Filter extends Component<IProps, IState> {
                       <Select
                         options={this.getFilterOptions('gender')}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          SearchStore.handleInput('gender', e.target.value)
+                           resultsStore.handleInput('gender', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="genderFilter"
@@ -337,7 +333,7 @@ class Filter extends Component<IProps, IState> {
                       <Select
                         options={this.getFilterOptions('ethnicity')}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          SearchStore.handleInput('ethnicity', e.target.value)
+                           resultsStore.handleInput('ethnicity', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="ethnicityFilter"
@@ -352,7 +348,7 @@ class Filter extends Component<IProps, IState> {
                       <Select
                         options={this.getFilterOptions('housing')}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          SearchStore.handleInput('housing', e.target.value)
+                           resultsStore.handleInput('housing', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="housingFilter"

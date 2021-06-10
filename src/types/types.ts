@@ -19,6 +19,12 @@ export interface IParams {
   order?: 'distance' | 'relevance';
   query?: string;
   location?: IGeoLocation | {};
+  age?: null | string;
+  income?: null | string;
+  disability?: null | string;
+  language?: null | string;
+  gender?: null | string;
+  ethnicity?: null | string;
 }
 
 export interface ICategory {

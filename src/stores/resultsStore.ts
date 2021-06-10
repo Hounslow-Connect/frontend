@@ -13,6 +13,7 @@ import {
   IOrganisation,
   IService,
   IGeoLocation,
+  IEligibilityFilters,
 } from '../types/types';
 
 import { queryRegex, querySeparator } from '../utils/utils';
@@ -36,11 +37,95 @@ export default class ResultsStore {
   @observable postcode: string = '';
   @observable locationCoords: IGeoLocation | {} = {};
   @observable view: 'grid' | 'map' = 'grid';
+  serviceEligibilityOptions: [] = [];
+
+  @observable filters: IEligibilityFilters = {
+    age: null,
+    income: null,
+    disability: null,
+    language: null,
+    gender: null,
+    ethnicity: null
+  };
+
+  constructor() {
+    this.getServiceEligibilities();
+  }
 
   @computed
   get isKeywordSearch() {
-    return !!this.keyword;
+    return !this.keyword;
   }
+
+  @action
+  getServiceEligibilities = async () => {
+    try {
+      const data = await axios.get(`${apiBase}/taxonomies/service-eligibilities`);
+      this.serviceEligibilityOptions = get(data, 'data.data', []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  @action
+  setLocation = (input: string) => {
+    // @ts-ignore
+    this.location = input;
+  };
+
+  @action
+  setKeyword = (input: string) => {
+    // @ts-ignore
+    this.keyword = input;
+  };
+
+  /**
+   * Handles Input from search filters (onChange method)
+   */
+  @action
+  handleInput = (filter: string, input: string) => {
+    console.log('[searchStore] --> handleInput filter:', filter, 'input: ', input);
+    
+    // @ts-ignore
+    this.filters[filter] = input;
+  };
+
+
+  //TODO: rename to getFiltersUrlQuery
+  @action
+  updateUrlParams = () => {
+    
+    let filters:any = this.filters
+    let queryString = `search_term=${this.keyword}&`
+
+    console.log('filters', filters);
+    
+    // let queryUrl = `results?`
+    let queryParams = Object.keys(filters)
+    .map((key) => { 
+      console.log('map() key=', key, ', filters[key]=', filters[key]);
+      
+      return (filters[key] ? `${key}=${filters[key]}`  : null ) 
+    })
+
+    queryString = `${queryString}${queryParams.filter(filter => filter !== null).join('&')}` ;
+
+    console.log('[SearchStore] --> [updateUrlParams] --> queryString=', queryString);
+  }
+
+
+  @action clearFilters = () => {
+    console.log('[searchStore] --> clearFilters()');
+    
+    this.filters = {
+      age: null,
+      income: null,
+      disability: null,
+      language: null,
+      gender: null,
+      ethnicity: null
+    };
+  };
 
   @action
   clear() {
@@ -84,14 +169,26 @@ export default class ResultsStore {
     }
   };
 
+
+  /**
+   * Gets search terms from url query. Runs on component mount and update
+   */
   getSearchTerms = () => {
+    console.log('[getSearchTerms] -->');
+    
     const searchTerms = queryString.parse(window.location.search);
 
     this.setSearchTerms(searchTerms);
   };
 
+
+  /**
+   * Updates the store with the pased in query params 
+   * @param searchTerms 
+   */
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
+    console.log('[setSearchTerms] -->');
     forEach(searchTerms, (key, value) => {
       if (value === 'category') {
         this.categoryId = key;
@@ -124,6 +221,26 @@ export default class ResultsStore {
       if (value === 'location') {
         this.postcode = key;
       }
+
+      // set filter params
+      if (value === 'age') {
+        this.filters.age = key;
+      }
+      if (value === 'income') {
+        this.filters.income = key;
+      }
+      if (value === 'disability') {
+        this.filters.disability = key;
+      }
+      if (value === 'language') {
+        this.filters.language = key;
+      }
+      if (value === 'gender') {
+        this.filters.gender = key;
+      }
+      if (value === 'ethnicity') {
+        this.filters.ethnicity = key;
+      }
     });
 
     if (this.categoryId) {
@@ -142,6 +259,8 @@ export default class ResultsStore {
   };
 
   setParams = async () => {
+    console.log('[setParams] -->');
+    
     const params: IParams = {};
 
     if (this.category) {
@@ -168,6 +287,25 @@ export default class ResultsStore {
       params.query = this.keyword;
     }
 
+    if (this.filters.age) {
+      params.age = this.filters.age;
+    }
+    if (this.filters.income) {
+      params.income = this.filters.income;
+    }
+    if (this.filters.disability) {
+      params.disability = this.filters.disability;
+    }
+    if (this.filters.language) {
+      params.language = this.filters.language;
+    }
+    if (this.filters.gender) {
+      params.gender = this.filters.gender;
+    }
+    if (this.filters.ethnicity) {
+      params.ethnicity = this.filters.ethnicity;
+    }
+
     if (size(this.locationCoords)) {
       params.location = this.locationCoords;
     }
@@ -177,8 +315,19 @@ export default class ResultsStore {
     await this.fetchResults(params);
   };
 
+  /**
+   * Triggered when form inputs change 
+   */
+  @action
+  handleFormChange = async () => {
+    console.log('[resultsStore] --> handleFormChange() -->');
+    this.setParams()
+  }
+
   @action
   fetchResults = async (params: IParams) => {
+    console.log('[fetchResults] --> params: ', params);
+    
     this.loading = true;
     try {
       const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, params);
@@ -307,10 +456,10 @@ export default class ResultsStore {
     }
   };
 
-  @action
-  handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.keyword = e.target.value;
-  };
+  // @action
+  // handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   this.keyword = e.target.value;
+  // };
 
   @action
   toggleView = (view: 'map' | 'grid') => {
