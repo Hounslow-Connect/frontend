@@ -15,6 +15,7 @@ interface IProps {
   placeholder: string;
   id: string;
   disabled?: boolean;
+  value?: string | ''
 }
 
 const Select: React.FunctionComponent<IProps> = ({
@@ -24,6 +25,7 @@ const Select: React.FunctionComponent<IProps> = ({
   placeholder,
   id,
   disabled,
+  value
 }) => (
   <select
     className={`select ${className}`}
@@ -31,6 +33,7 @@ const Select: React.FunctionComponent<IProps> = ({
     id={id}
     defaultValue={placeholder}
     disabled={disabled}
+    value= {value}
   >
     <option value={placeholder} disabled={true} hidden={true}>
       {placeholder}

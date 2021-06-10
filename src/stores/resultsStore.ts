@@ -20,6 +20,7 @@ import { queryRegex, querySeparator } from '../utils/utils';
 
 export default class ResultsStore {
   @observable keyword: string = '';
+  @observable distance: string = '';
   @observable categoryId: string = '';
   @observable category: ICategory | null = null;
   @observable personaId: string = '';
@@ -38,6 +39,7 @@ export default class ResultsStore {
   @observable locationCoords: IGeoLocation | {} = {};
   @observable view: 'grid' | 'map' = 'grid';
   serviceEligibilityOptions: [] = [];
+  @observable queryParams: IParams = {};
 
   @observable filters: IEligibilityFilters = {
     age: null,
@@ -45,7 +47,8 @@ export default class ResultsStore {
     disability: null,
     language: null,
     gender: null,
-    ethnicity: null
+    ethnicity: null,
+    housing: null
   };
 
   constructor() {
@@ -90,27 +93,43 @@ export default class ResultsStore {
     this.filters[filter] = input;
   };
 
+  // @action
+  // getSearchQueryString = () => {
+  //   console.log('[getSearchQueryString] --> filters query string=', this.getFiltersQueryString());
+  //   let filtersQuery = this.getFiltersQueryString()
 
-  //TODO: rename to getFiltersUrlQuery
+  //   return this.getFiltersQueryString()
+  // }
+
+
+  // @action
+  // getFiltersQueryString = () => {
+    
+  //   let filters:any = this.filters
+  //   let queryString = null
+    
+  //   let queryParams = Object.keys(filters)
+  //   .map((key) => { 
+  //     return (filters[key] ? `${key}=${filters[key]}`  : null ) 
+  //   })
+
+  //   queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
+  //   return queryString
+  // }
+
   @action
-  updateUrlParams = () => {
-    
-    let filters:any = this.filters
-    let queryString = `search_term=${this.keyword}&`
+  getQueryParamsString = () => {
+    let params: any = this.queryParams
+    let queryString = null
 
-    console.log('filters', filters);
-    
-    // let queryUrl = `results?`
-    let queryParams = Object.keys(filters)
+    let queryParams = Object.keys(params)
     .map((key) => { 
-      console.log('map() key=', key, ', filters[key]=', filters[key]);
-      
-      return (filters[key] ? `${key}=${filters[key]}`  : null ) 
+      return (params[key] ? `${key}=${params[key]}`  : null ) 
     })
 
-    queryString = `${queryString}${queryParams.filter(filter => filter !== null).join('&')}` ;
+    queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
 
-    console.log('[SearchStore] --> [updateUrlParams] --> queryString=', queryString);
+    return queryString
   }
 
 
@@ -123,13 +142,15 @@ export default class ResultsStore {
       disability: null,
       language: null,
       gender: null,
-      ethnicity: null
+      ethnicity: null,
+      housing: null
     };
   };
 
   @action
   clear() {
     this.keyword = '';
+    this.distance = '';
     this.categoryId = '';
     this.category = null;
     this.personaId = '';
@@ -147,10 +168,14 @@ export default class ResultsStore {
     this.postcode = '';
     this.locationCoords = {};
     this.view = 'grid';
+
+    this.clearFilters()
   }
 
   @action
   getCategory = async () => {
+    console.log('[%c [getCategory] -->', 'color: red;');
+    
     try {
       const category = await axios.get(`${apiBase}/collections/categories/${this.categoryId}`);
       this.category = get(category, 'data.data', '');
@@ -161,6 +186,8 @@ export default class ResultsStore {
 
   @action
   getPersona = async () => {
+    console.log('[%c [getPersona] -->', 'color: red;');
+    
     try {
       const persona = await axios.get(`${apiBase}/collections/personas/${this.personaId}`);
       this.persona = get(persona, 'data.data', '');
@@ -311,26 +338,28 @@ export default class ResultsStore {
     }
 
     params.order = this.order;
+    
+    this.queryParams = params
 
-    await this.fetchResults(params);
+    await this.fetchResults();
   };
 
   /**
    * Triggered when form inputs change 
    */
-  @action
-  handleFormChange = async () => {
-    console.log('[resultsStore] --> handleFormChange() -->');
-    this.setParams()
-  }
+  // @action
+  // handleFormChange = async () => {
+  //   console.log('[resultsStore] --> handleFormChange() -->');
+  //   this.setParams()
+  // }
 
   @action
-  fetchResults = async (params: IParams) => {
-    console.log('[fetchResults] --> params: ', params);
+  fetchResults = async () => {
+    console.log('[fetchResults] --> params: ', this.queryParams);
     
     this.loading = true;
     try {
-      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, params);
+      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.queryParams);
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
 

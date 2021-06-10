@@ -21,8 +21,9 @@ interface IProps extends RouteComponentProps {
 /**
  * TODO:
  * - replace search button with auto search functionality each time search term or filters are changed
- * - populate filter options from api endpoint
  * - push filters into the url as parms and auto-search on page refresh using those filters
+ * - add distance filter type
+ * - add prep-population for autocomplete
  */
 
 interface IState {
@@ -77,17 +78,21 @@ class Filter extends Component<IProps, IState> {
   };
 
   search = () => {
-    const { resultsStore } = this.props
+    const { resultsStore, history } = this.props
     // This will be called each time a search is triggered
    console.log('%c [search] -->', 'color: green;');
   //  console.log('[search] --> url query: ', JSON.stringify(resultsStore.filters));
-   if(resultsStore) resultsStore.handleFormChange()
+   if(resultsStore) {
+     // @ts-ignore
+     resultsStore.setParams()
 
-    // if(resultsStore) {
-    //   history.push({
-    //     search: resultsStore.updateQueryStringParameter('search_term', this.state.keyword),
-    //   });
-    // }
+      // console.log('resultsStore.getQueryParams()', resultsStore.getQueryParamsString());
+
+      history.push({
+        search: resultsStore.getQueryParamsString(),
+      });
+
+   } 
 
   };
 
@@ -207,7 +212,7 @@ class Filter extends Component<IProps, IState> {
                 }}>
                   <label className="results__filters--primary__label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
                   <Select
-                    options={[{value: '5', text: '5 miles'}]}
+                    options={[{value: '5', text: '5 miles'}, {value: '10', text: '10 miles'}]}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       this.search()
                     }
@@ -238,7 +243,7 @@ class Filter extends Component<IProps, IState> {
                   checked={get(resultsStore, 'is_free', false)}
                   onChange={() => {
                     resultsStore.toggleIsFree();
-                    resultsStore.setParams();
+                    this.search()
                   }}
                   aria="Filter free services"
                 />
@@ -272,6 +277,7 @@ class Filter extends Component<IProps, IState> {
 
                       <Select
                         options={this.getFilterOptions('income')}
+                        value={`${resultsStore.filters.income}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                           resultsStore.handleInput('income', e.target.value)
                           this.search()
@@ -287,6 +293,7 @@ class Filter extends Component<IProps, IState> {
 
                       <Select
                         options={this.getFilterOptions('disability')}
+                        value={`${resultsStore.filters.disability}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                            resultsStore.handleInput('disability', e.target.value)
                           this.search()
@@ -302,6 +309,7 @@ class Filter extends Component<IProps, IState> {
 
                       <Select
                         options={this.getFilterOptions('language')}
+                        value={`${resultsStore.filters.language}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                            resultsStore.handleInput('language', e.target.value)
                           this.search()
@@ -317,6 +325,7 @@ class Filter extends Component<IProps, IState> {
 
                       <Select
                         options={this.getFilterOptions('gender')}
+                        value={`${resultsStore.filters.gender}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                            resultsStore.handleInput('gender', e.target.value)
                           this.search()
@@ -332,6 +341,7 @@ class Filter extends Component<IProps, IState> {
 
                       <Select
                         options={this.getFilterOptions('ethnicity')}
+                        value={`${resultsStore.filters.ethnicity}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                            resultsStore.handleInput('ethnicity', e.target.value)
                           this.search()
@@ -347,6 +357,7 @@ class Filter extends Component<IProps, IState> {
 
                       <Select
                         options={this.getFilterOptions('housing')}
+                        value={`${resultsStore.filters.housing}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                            resultsStore.handleInput('housing', e.target.value)
                           this.search()

@@ -25,6 +25,7 @@ export interface IParams {
   language?: null | string;
   gender?: null | string;
   ethnicity?: null | string;
+  housing?: null | string;
 }
 
 export interface ICategory {
@@ -180,4 +181,5 @@ export interface IEligibilityFilters {
   language: null | string;
   gender: null | string;
   ethnicity: null | string;
+  housing: null | string;
 }
