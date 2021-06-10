@@ -7,7 +7,7 @@ import './Home.scss';
 import SearchStore from '../../stores/searchStore';
 import CMSStore from '../../stores/CMSStore';
 
-import Banner from '../../components/Banner';
+import BannerSlider from '../../components/BannerSlider';
 import Personas from '../../components/Personas';
 
 interface IProps {
@@ -18,10 +18,10 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   if (!cmsStore) {
     return null;
   }
-
+  
   return (
     <main className="home">
-      {cmsStore.hasBanner && cmsStore.banner && <Banner banner={cmsStore.banner} />}
+      {cmsStore.home && cmsStore.home.banners && <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />}
       <Search />
       <Personas personas={SearchStore.personas} />
     </main>

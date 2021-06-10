@@ -158,6 +158,10 @@
 .service__info__cost {
   background-color: $turquoise !important;
   border-radius: 20px;
+
+  &.criteria_card {
+    margin-top: space(16);
+  }
 }
 
 .service__info__cost--icon {
@@ -510,7 +514,7 @@
 }
 
 .service__left-column {
-  @include for-tablet-landscape-up {
+  @media(min-width: 861px) {
     padding-right: space(64) !important;
   }
 
@@ -610,6 +614,10 @@
   background-color: $turquoise;
   border-radius: 20px;
   text-align: center;
+  
+  @media(max-width: 600px) {
+    margin-top: 2rem;
+  }
 
   h3 {
     display: inline;
@@ -629,7 +637,7 @@
 .criteria_card--inner {
   width: 100%;
 
-  @include for-tablet-landscape-up {
+  @media(min-width: 601px) {
     padding: 0 !important;
   }
 }
@@ -702,15 +710,7 @@
 }
 
 .criteria-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: space(16);
-
-  @include for-tablet-portrait-down {
-    grid-template-columns: repeat(1, 1fr);
-    gap: space(8);
-    margin-top: 0;
-  }
+  width: 100%;
 }
 
 .service__map {
@@ -722,5 +722,38 @@
 
   .leaflet-container {
     min-height: 100%;
+  }
+}
+
+.service {
+  &__action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.3rem 0.5rem;
+    width: 100%;
+
+    & > button {
+      flex: 1;
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
+      min-width: 100%;
+      
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      @media(min-width: 524px) and (max-width: 860px) {
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        min-width: auto;
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
+
+      @media(min-width: 861px) and (max-width: 900px) {
+        font-size: 1rem;
+      }
+    }
   }
 }

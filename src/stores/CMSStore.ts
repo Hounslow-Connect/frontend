@@ -33,6 +33,7 @@ interface IHome {
   personas_content: string;
   personas_title: string;
   search_title: string;
+  banners: [];
 }
 
 class CMSStore {

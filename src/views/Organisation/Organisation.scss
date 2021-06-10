@@ -1,0 +1,146 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/breakpoints.scss';
+
+.organisation {
+    &__header {
+        z-index: 10;
+        position: relative;
+        padding-bottom: 1.5rem;
+        background: linear-gradient(to bottom, #fff 0%, #fff 50%, #D8EEEA 50%, #D8EEEA 100%);
+
+        &__wrapper {
+           
+            background-color: $turquoise;
+
+            &:after {
+                border-top-color: $turquoise;
+            }
+
+            @media(min-width: 768px) {
+                display: flex;
+            }
+        }
+
+        &__sub {
+            text-transform: unset;
+            font-weight: bold;
+            font-size: pxtorem(20px);
+            display: block;
+            margin-bottom: 0.5rem;
+
+            @include for-tablet-portrait-down {
+                font-size: pxtorem(16px)
+            }
+        }
+
+        &__logo {
+            flex: 0 0 154px;
+            height: 154px;
+            margin-right: space(40);
+            margin-bottom: space(16);
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 154px;
+
+            @include for-phone-only {
+                margin-right: 0;
+                margin-bottom: space(12);
+                border-radius: 12px;
+                height: 130px;
+                max-width: 130px;
+            }
+        
+            img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            }
+        }
+
+        h1 {
+            margin-bottom: space(24);
+
+            @include for-tablet-portrait-down {
+                font-size: pxtorem(32px);
+                line-height: space(40);
+            }
+            @include for-phone-only {
+                font-size: pxtorem(24px);
+                line-height: space(32);
+                margin-bottom: space(16);
+            }
+
+
+        }
+
+        &__content {
+
+        }
+
+        &__contact-details {
+            list-style: none;
+            padding: 0;
+            margin: space(16) 0 0;
+
+            @media(min-width: 576px) {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); 
+                gap: space(20);
+            }
+
+            & > li {
+                margin-bottom: space(16);
+
+                @media(min-width: 576px) {
+                   margin-bottom: 0;
+                }
+
+                strong {
+                    display: block;
+                    font-weight: bold;
+                }
+
+                a {
+                    text-decoration: none;
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+
+    &__services {
+        background: $light-turquoise;
+
+        &--heading {
+            margin: 2rem 0 2rem;
+        }
+
+        &--listing {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: space(20);
+            margin: 0 0 3rem 0;
+
+            @media(min-width: 576px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include for-tablet-portrait-up {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            
+        }
+    }
+
+    &__social-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30px, 30px));
+        gap: space(8);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}

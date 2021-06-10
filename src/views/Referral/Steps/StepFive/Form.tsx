@@ -4,9 +4,8 @@ import get from 'lodash/get';
 import cx from 'classnames';
 
 import ReferralStore from '../../../../stores/referralStore';
-
-import Select from '../../../../components/Select';
 import Input from '../../../../components/Input';
+import Autocomplete from '../../../../components/Autocomplete';
 
 interface IProps {
   referralStore: ReferralStore;
@@ -30,11 +29,6 @@ class Form extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const { showPartnerOrgs, referralStore } = this.props;
-
-    if (showPartnerOrgs) {
-      referralStore.getPartnerOrganisations();
-    }
   }
 
   toggleOrganisation = () => {
@@ -82,15 +76,8 @@ class Form extends Component<IProps, IState> {
                     Do you work for one of our partner organisations?
                   </p>
                 </label>
-                <Select
-                  className="referral__step-container--select"
-                  options={referralStore.partnerOrganisationLabels()}
-                  id="organisation_taxonomy_id"
-                  placeholder="Organisation List"
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    referralStore.handleInput('organisation_taxonomy_id', e.target.value)
-                  }
-                />
+
+                <Autocomplete storeTextField="organisation" defaultText={get(referralStore, 'referral.organisation')}  defaultValue={get(referralStore, 'referral.organisation')} store={referralStore} endpointEntity='organisations' />
               </div>
 
               <div className="flex-col flex-col--12 referral__form">

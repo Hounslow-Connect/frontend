@@ -7,13 +7,17 @@
   padding: space(20);
   background-color: $white;
 
+  &:nth-of-type(even) {
+    background-color: #E5E5E5;
+  }
+
   @include for-tablet-portrait-up { 
     display: flex;
   }
 }
 
 .criteria_card-img {
-  padding-right: space(16);
+  min-width: 86px;
   text-align: center;
 
   svg {
@@ -28,6 +32,34 @@
   @include for-tablet-landscape-up {
     margin-top: space(8);
   }
+}
+
+.criteria_card-toggle {
+  text-align: right;
+  padding-right: space(8);
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.criteria_card-content {
+  
+  padding-left: space(16);
+  flex: 1;
+
+  @include for-tablet-portrait-up {
+    padding-left: space(20);
+  }
+
+  p {
+    font-size: pxtorem(18px);
+
+    @include for-tablet-portrait-down {
+      font-size: pxtorem(16px);
+    }
+  }
+
 }
 
 .service__criteria {

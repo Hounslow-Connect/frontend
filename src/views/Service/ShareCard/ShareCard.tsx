@@ -51,7 +51,7 @@ const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
         </div>
       </div>
       <div className="flex-container flex-container--no-padding">
-        <div className="flex-col service__button-container--mobile">
+        <div className="flex-col service__action-buttons">
           <Button
             size="small"
             text="Print"

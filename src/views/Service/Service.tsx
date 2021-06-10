@@ -46,6 +46,7 @@ import RelatedServices from './RelatedServices';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
 import ServiceDisabled from './ServiceDisabled';
+import LinkButton from '../../components/LinkButton'
 
 interface RouteParams {
   service: string;
@@ -84,6 +85,7 @@ class Service extends Component<IProps> {
     const { serviceStore, match } = this.props;
 
     serviceStore.fetchService(match.params.service);
+    serviceStore.fetchServiceEligibilities();
   }
 
   componentDidUpdate(prevProps: IProps) {
@@ -98,9 +100,57 @@ class Service extends Component<IProps> {
     return `" ${testimonial.replace(removeQuotesRegex, '')} "`;
   };
 
+  getAllTaxonomies = () => {
+    const { serviceStore } = this.props;
+    return serviceStore.serviceEligibilityTaxonomies
+  }
+
+  getTaxonomyUUIDs = () => {
+    const { serviceStore } = this.props;
+    const { service } = serviceStore;
+   return (service && service.eligibility_types ? service.eligibility_types.taxonomies : null)
+    // return (service && service.eligibility_types ? null : null)
+  }
+
+  // Takes in a string and returns associated concatenated string of taxonomies and custom eligibility if they exist
+  getServiceEligibilityInfo = (name: string) => {
+    const { serviceStore } = this.props;
+    const { service } = serviceStore;
+    
+    // Get UUIDS from service.elgibility.taxonomies array
+    const UUIDs:any = this.getTaxonomyUUIDs()
+
+    // Gets all taxonomies
+    const taxonomies = this.getAllTaxonomies();
+
+    let relatedEligibilities:any = []
+
+    if(UUIDs && UUIDs.length && taxonomies) {
+      // Traverse through UUIDS and then filter the array of taxonomies to find a match using the taxonomy ID
+      UUIDs.forEach((uuid:string) => {
+        const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
+        
+        if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
+          const matchedTaxonomy:any = find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
+          
+          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy.name)
+        }
+      })
+    }
+
+    // Check service.elgibility.custom to see if there is a value for the passed in name
+    if(service && service.eligibility_types.custom) {
+      const customEligibility = get(service.eligibility_types.custom, `${name.split(' ').join('_').toLowerCase()}`)
+
+      if(customEligibility) relatedEligibilities.push(customEligibility)
+    }
+    
+    return (relatedEligibilities.length ? relatedEligibilities.join(', ') : null)
+  }
+
   render() {
     const { serviceStore, uiStore } = this.props;
-    const { service, locations, relatedServices } = serviceStore;
+    const { service, locations, relatedServices, organisation } = serviceStore;
     if (!service) {
       return null;
     }
@@ -131,13 +181,20 @@ class Service extends Component<IProps> {
                   <p className="service__header__last-updated">
                     Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
                   </p>
-                  <Button
-                    text="Give feedback"
-                    icon="comment-alt"
-                    alt={true}
-                    size="medium"
-                    onClick={() => uiStore.toggleFeedbackModal()}
-                  />
+
+                  <div className="flex-container flex-container--no-padding flex-container--left">
+                    {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
+                    {organisation && organisation.slug && <span className="mobile-hide">&nbsp;&nbsp;&nbsp;</span>}
+                    <div className="flex-col--mobile--12">
+                      <Button
+                        text="Give feedback"
+                        icon="comment-alt"
+                        alt={true}
+                        size="medium"
+                        onClick={() => uiStore.toggleFeedbackModal()}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -159,67 +216,75 @@ class Service extends Component<IProps> {
                     className="criteria-cards service__section service__section--no-padding"
                     style={{ alignItems: 'stretch' }}
                   >
-                    {get(service, 'criteria.age_group') && (
+                    {this.getServiceEligibilityInfo('Age Group') && (
                       <CriteriaCard
                         svg={AgeGroup}
                         title="Age Group"
-                        info={get(service, 'criteria.age_group')}
+                        info={this.getServiceEligibilityInfo('Age Group')}
                       />
                     )}
 
-                    {get(service, 'criteria.disability') && (
+                    {this.getServiceEligibilityInfo('Ethnicity') && (
+                      <CriteriaCard
+                        svg={Other}
+                        title="Ethnicity"
+                        info={this.getServiceEligibilityInfo('Ethnicity')}
+                      />
+                    )}
+
+                    {this.getServiceEligibilityInfo('Disability') && (
                       <CriteriaCard
                         svg={Disability}
                         title="Disability"
-                        info={get(service, 'criteria.disability')}
+                        info={this.getServiceEligibilityInfo('Disability')}
                       />
                     )}
 
-                    {get(service, 'criteria.employment') && (
+                    {this.getServiceEligibilityInfo('Employment') && (
                       <CriteriaCard
                         svg={Employment}
                         title="Employment Status"
-                        info={get(service, 'criteria.employment')}
+                        info={this.getServiceEligibilityInfo('Employment')}
                       />
                     )}
 
-                    {get(service, 'criteria.gender') && (
+                    {this.getServiceEligibilityInfo('Gender') && (
                       <CriteriaCard
                         svg={Gender}
                         title="Gender"
-                        info={get(service, 'criteria.gender')}
+                        info={this.getServiceEligibilityInfo('Gender')}
                       />
                     )}
 
-                    {get(service, 'criteria.housing') && (
+                    {this.getServiceEligibilityInfo('Housing') && (
                       <CriteriaCard
                         svg={Housing}
                         title="Housing"
-                        info={get(service, 'criteria.housing')}
+                        info={this.getServiceEligibilityInfo('Housing')}
                       />
                     )}
 
-                    {get(service, 'criteria.income') && (
+                    {this.getServiceEligibilityInfo('Income') && (
                       <CriteriaCard
                         svg={Income}
                         title="Income"
-                        info={get(service, 'criteria.income')}
+                        info={this.getServiceEligibilityInfo('Income')}
                       />
                     )}
 
-                    {get(service, 'criteria.language') && (
+                    {this.getServiceEligibilityInfo('Language') && (
                       <CriteriaCard
                         svg={Language}
                         title="Language"
-                        info={get(service, 'criteria.language')}
+                        info={this.getServiceEligibilityInfo('Language')}
                       />
                     )}
 
-                    {get(service, 'criteria.other') && (
-                      <CriteriaCard svg={Other} title="Other" info={get(service, 'criteria.other')} />
+                    {this.getServiceEligibilityInfo('Other') && (
+                      <CriteriaCard svg={Other} title="Other" info={this.getServiceEligibilityInfo('Other')} />
                     )}
 
-                    <div className="flex-col flex-col--tablet--6 mobile-show tablet-show criteria_card service__info__cost">
+                    <div className="flex-col flex-col--tablet--12 mobile-show tablet-show criteria_card service__info__cost">
                       <CostCard service={service} />
                     </div>
                   </div>
@@ -314,7 +379,6 @@ class Service extends Component<IProps> {
                     <div className="mobile-hide">
                       <h2 className="service__heading">Good to know</h2>
                       {service.useful_infos.map((info: { title: string; description: string }) => {
-                        console.log(info.title);
                         const iconObj = find(iconMap, info.title);
                         const icon = get(iconObj, `${info.title}`);
 
@@ -335,7 +399,7 @@ class Service extends Component<IProps> {
                       className="service__accordian mobile-show"
                     >
                       <div className="service__map">
-                        <MapCard locations={locations} />
+                        <MapCard iconType={get(service, 'type')} locations={locations} />
                       </div>
                     </Accordian>
                   )}
@@ -365,7 +429,7 @@ class Service extends Component<IProps> {
                     title={`How can I contact this ${service.type}?`}
                     className="service__accordian mobile-show"
                   >
-                    <ContactCard service={service} accordian={true} />
+                    <ContactCard service={service} organisation={organisation} accordian={true} />
                   </Accordian>
 
                   {service.testimonial && (
@@ -419,8 +483,8 @@ class Service extends Component<IProps> {
                   </Accordian>
                 </div>
               </div>
-              <div className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
-                <div className="flex-container service__right-column">
+              <div className="flex-col flex-col--4 flex-col--tablet--12  ">
+                <div className="flex-container service__right-column mobile-hide">
                   <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
                     <CostCard service={service} />
                   </div>
@@ -433,14 +497,14 @@ class Service extends Component<IProps> {
                     <div className="flex-col flex-col--12">
                       <h2 className="service__heading">{`Where is this ${service.type}?`}</h2>
                       <div className="service__section service__map">
-                        <MapCard locations={locations} />
+                        <MapCard iconType={get(service, 'type')} locations={locations} />
                       </div>
                     </div>
                   )}
                   <div className="flex-col flex-col--12">
                     <h2 className="service__heading">{`How can I contact this ${service.type}?`}</h2>
                     <div className="service__section">
-                      <ContactCard service={service} />
+                      <ContactCard organisation={organisation} service={service} />
                     </div>
                     {service.referral_method !== 'none' && (
                       <div className="service__section service__referral--desktop">
@@ -455,6 +519,9 @@ class Service extends Component<IProps> {
                     </div>
                   </div>
 
+                 
+                </div>
+                <div className="flex-container service__right-column">
                   <div className="flex-col flex-col--12">
                     <ShareCard serviceStore={serviceStore} />
                   </div>

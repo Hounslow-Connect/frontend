@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import get from 'lodash/get';
 
+import { membersAreaURL } from '../../config/externalUrls';
+
 import './Footer.scss';
 
 import HounslowLogo from '../../assets/images/london-borough-of-hounslow.png';
@@ -14,6 +16,7 @@ import CMSStore from '../../stores/CMSStore';
 import UIStore from '../../stores/uiStore';
 import ButtonLink from '../Button/ButtonLink';
 
+console.log(process.env)
 interface IProps {
   mobileMenu?: boolean;
   cmsStore?: CMSStore;
@@ -84,7 +87,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
             </div>
 
             <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__button">
-              <ButtonLink href="https://admin.connectedhounslow.uk" text="Members Area" />
+              <ButtonLink href={membersAreaURL} text="Members Area" target="_blank" />
               <img src={HounslowLogo} alt="London Borough of Hounslow" className="footer-hounslow-logo" />
             </div>
           </div>

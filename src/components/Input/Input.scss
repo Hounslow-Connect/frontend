@@ -1,3 +1,4 @@
+@import '../../styles/variables.scss';
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/fonts.scss';
@@ -11,6 +12,12 @@
   border-radius: 4px;
   font-size: pxtorem(16px);
   line-height: 1rem;
+  transition: box-shadow $formControlTransitionDuration ease-in-out;
+
+  &:focus, &:active {
+    outline: 0;
+    box-shadow: 0 0 0pt $formControlOutlineWidth $blue;
+  }
 
   @include for-phone-only {
     width: 100%;
@@ -25,6 +32,17 @@
     display: block;
     border-left: 2px solid $pink;
     padding-left: space(16);
+  }
+
+  &__autocomplete {
+    @media(min-width: 576px) {
+      padding-right: 6rem;
+    }
+    
+    &:disabled {
+      background-color: #f3f3f3;
+      border: 1px solid #fff;
+    }
   }
 }
 

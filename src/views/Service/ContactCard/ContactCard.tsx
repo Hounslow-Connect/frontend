@@ -4,16 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import find from 'lodash/find';
 import size from 'lodash/size';
 
-import { IService } from '../../../types/types';
+import { IOrganisation, IService } from '../../../types/types';
 
 interface IProps {
   service: IService;
   accordian?: boolean;
+  organisation?: IOrganisation | null;
 }
 
 const getSocialUrl = (socialObj: any) => socialObj.url;
 
-const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) => (
+const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian, organisation }) => (
   <div
     className={cx(
       'flex-container flex-container--align-center flex-container--mobile-no-padding service__section',
@@ -73,46 +74,46 @@ const ContactCard: React.FunctionComponent<IProps> = ({ service, accordian }) =>
         </a>
       </div>
     )}
-    {!!size(service.social_medias) && (
+    {organisation && !!size(organisation.social_medias) && (
       <div
         className={cx('flex-col flex-col--12 service__social-icon-container', {
           'service__contact-card--row': !accordian,
         })}
       >
-        {find(service.social_medias, { type: 'facebook' }) && (
+        {find(organisation.social_medias, { type: 'facebook' }) && (
           <a
-            href={getSocialUrl(find(service.social_medias, { type: 'facebook' }))}
-            aria-label={`Link to ${service.name} Facebook`}
+            href={getSocialUrl(find(organisation.social_medias, { type: 'facebook' }))}
+            aria-label={`Link to ${organisation.name} Facebook`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'facebook-f']} className="service__social-icon" />
           </a>
         )}
-        {find(service.social_medias, { type: 'twitter' }) && (
+        {find(organisation.social_medias, { type: 'twitter' }) && (
           <a
-            href={getSocialUrl(find(service.social_medias, { type: 'twitter' }))}
-            aria-label={`Link to ${service.name} Twitter`}
+            href={getSocialUrl(find(organisation.social_medias, { type: 'twitter' }))}
+            aria-label={`Link to ${organisation.name} Twitter`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'twitter']} className="service__social-icon" />
           </a>
         )}
-        {find(service.social_medias, { type: 'instagram' }) && (
+        {find(organisation.social_medias, { type: 'instagram' }) && (
           <a
-            href={getSocialUrl(find(service.social_medias, { type: 'instagram' }))}
-            aria-label={`Link to ${service.name} Instagram`}
+            href={getSocialUrl(find(organisation.social_medias, { type: 'instagram' }))}
+            aria-label={`Link to ${organisation.name} Instagram`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'instagram']} className="service__social-icon" />
           </a>
         )}
-        {find(service.social_medias, { type: 'youtube' }) && (
+        {find(organisation.social_medias, { type: 'youtube' }) && (
           <a
-            href={getSocialUrl(find(service.social_medias, { type: 'youtube' }))}
-            aria-label={`Link to ${service.name} Youtube`}
+            href={getSocialUrl(find(organisation.social_medias, { type: 'youtube' }))}
+            aria-label={`Link to ${organisation.name} Youtube`}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -40,13 +40,14 @@ export interface IOrganisation {
   slug: string;
   updated_at: string;
   url: string;
+  social_medias: [];
 }
 
 export interface IService {
   contact_email: string;
   contact_name: string;
   contact_phone: string;
-  criteria: ICriteria;
+  eligibility_types: IEligibility;
   created_at: string;
   description: string;
   fees_text: null | string;
@@ -77,6 +78,15 @@ export interface IService {
   useful_infos: [];
   video_embed: null | string;
   wait_time: null | string;
+}
+export interface IServiceTaxonomy {
+  id: string;
+  parent_id: string;
+  name: string;
+  order: number; 
+  children: [];
+  created_at: string;
+  updated_at: string;
 }
 
 export interface IServiceLocation {
@@ -157,6 +167,18 @@ export interface ICriteria {
   income: string;
   language: string;
   other: string;
+}
+export interface IEligibility {
+  custom: {
+    age_group: string,
+    disability: string,
+    ethnicity: string,
+    gender: string,
+    income: string,
+    language: string,
+    other: string
+  };
+  taxonomies: [];
 }
 
 export interface IBanner {
