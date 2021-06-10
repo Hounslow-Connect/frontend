@@ -27,8 +27,8 @@ interface IProps extends RouteComponentProps {
  */
 
 interface IState {
-  keyword: string;
-  postcode: string;
+  // keyword: string;
+  // postcode: string;
   errors: any;
   showFilters: boolean;
 }
@@ -40,8 +40,8 @@ class Filter extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      keyword: '',
-      postcode: '',
+      // keyword: '',
+      // postcode: '',
       showFilters: false,
       errors: {
         keyword: false,
@@ -54,20 +54,20 @@ class Filter extends Component<IProps, IState> {
   // }
 
   componentDidMount() {
+    //TODO: Update store based on query string values
     const { search_term, location } = queryString.parse(this.props.location.search);
+
+    console.log('[componentDidMount()] search_term', search_term);
+    
 
     // console.log('[componentDidMount()] --> SearchStore.filters', SearchStore.filters);
     
     if (search_term) {
-      this.setState({
-        keyword: search_term as string,
-      });
+      SearchStore.setKeyword(search_term as string)
     }
 
     if (location) {
-      this.setState({
-        postcode: location as string,
-      });
+      SearchStore.setLocation(location as string)
     }
   }
 
@@ -85,16 +85,24 @@ class Filter extends Component<IProps, IState> {
   validate = async () => {
     return this.setState({
       errors: {
-        keyword: !this.state.keyword,
+        keyword: !SearchStore.keyword,
       },
     });
   };
 
   search = () => {
+    const { resultsStore, history } = this.props
     // This will be called each time a search is triggered
    console.log('%c [search] -->', 'color: green;');
    console.log('[search] --> url query: ', JSON.stringify(SearchStore.filters));
-   
+   SearchStore.updateUrlParams()
+
+    // if(resultsStore) {
+    //   history.push({
+    //     search: resultsStore.updateQueryStringParameter('search_term', this.state.keyword),
+    //   });
+    // }
+
   };
 
   handleAmend = async (callback: () => void) => {
@@ -139,7 +147,7 @@ class Filter extends Component<IProps, IState> {
   }
 
   render() {
-    const { resultsStore, history } = this.props;
+    const { resultsStore } = this.props;
 
     console.log('[getFilterOptions] age --> ', this.getFilterOptions('age'));
 
@@ -157,9 +165,7 @@ class Filter extends Component<IProps, IState> {
           className={"flex-container flex-container--align-bottom flex-container--no-padding"}
           onSubmit={e => {
             e.preventDefault();
-            history.push({
-              search: resultsStore.updateQueryStringParameter('search_term', this.state.keyword),
-            });
+            this.search()
           }}>
           <div className={resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12"}>
             <div className="results__filters--primary">
@@ -170,7 +176,7 @@ class Filter extends Component<IProps, IState> {
                       this.handleInputChange(e.target.value, 'keyword')
                     }
                     id="keyword"
-                    value={this.state.keyword}
+                    value={SearchStore.keyword}
                     placeholder="Search using a keyword"
                     className="results__search-box-keyword"
                     error={this.state.errors.keyword}
@@ -193,7 +199,7 @@ class Filter extends Component<IProps, IState> {
                   }
                   className="results__search-filter-location"
                   placeholder="Postcode"
-                  value={this.state.postcode}
+                  value={SearchStore.location}
                 />
               </div>
 

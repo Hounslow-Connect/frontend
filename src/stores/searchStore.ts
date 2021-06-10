@@ -7,6 +7,7 @@ import { apiBase } from '../config/api';
 import { ICategory, IPersona, IEligibilityFilters } from '../types/types';
 
 class SearchStore {
+  @observable keyword: string = '';
   @observable location: string = '';
   @observable search: string = '';
   @observable categories: ICategory[] = [];
@@ -31,9 +32,15 @@ class SearchStore {
   }
 
   @action
-  setFilter = (filter: string, input: string) => {
+  setKeyword = (input: string) => {
     // @ts-ignore
-    this.filters[filter] = input;
+    this.keyword = input;
+  };
+
+  @action
+  setLocation = (input: string) => {
+    // @ts-ignore
+    this.location = input;
   };
 
   @action
@@ -43,6 +50,60 @@ class SearchStore {
     // @ts-ignore
     this.filters[filter] = input;
   };
+
+  @action
+  updateUrlParams = () => {
+    
+    let filters:any = this.filters
+    let queryString = `search_term=${this.keyword}&`
+
+
+    console.log('filters', filters);
+    
+    // let queryUrl = `results?`
+    let queryParams = Object.keys(filters)
+    .map((key) => { 
+      console.log('map() key=', key, ', filters[key]=', filters[key]);
+      
+      return (filters[key] ? `${key}=${filters[key]}`  : null ) 
+    })
+
+    queryString = `${queryString}${queryParams.filter(filter => filter !== null).join('&')}` ;
+
+    
+    console.log('[SearchStore] --> [updateUrlParams] --> queryString=', queryString);
+
+			// if(this.state.keyword) {
+			// 	queryUrl += `search_term=${this.state.keyword}&`
+			// }
+
+			// if(SearchStore.filters.age) {
+			// 	queryUrl += `keywords=${SearchStore.filters.age}&`
+			// }
+
+			// if(SearchStore.filters.location) {
+			// 	queryUrl += `postcode=${SearchStore.filters.location}&`
+			// }
+			// if(SearchStore.filters.daysOfWeek) {
+			// 	queryUrl += `daysOfWeek=${SearchStore.filters.daysOfWeek}&`
+			// }
+			// if(SearchStore.filters.types) {
+			// 	queryUrl += `activityTypes=${SearchStore.filters.types}&`
+			// }
+			// if(SearchStore.filters.bookableOnlineOnly) {
+			// 	queryUrl += `bookableOnly=${SearchStore.filters.bookableOnlineOnly}&`
+			// }
+			// if(SearchStore.filters.participants) {
+			// 	queryUrl += `participants=${SearchStore.filters.participants}&`
+			// }
+			// if(SearchStore.filters.medium) {
+			// 	queryUrl += `medium=${SearchStore.filters.medium}&`
+			// }
+
+			// if(queryUrl.charAt(queryUrl.length-1) === '&') {
+			// 	queryUrl = queryUrl.substring(0, queryUrl.length - 1)
+			// }
+  }
 
   @action clear = () => {
     this.location = '';

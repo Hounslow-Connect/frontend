@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 import Select from 'react-select';
 import cx from 'classnames';
+import _first from 'lodash/first';
 
 import './Autocomplete.scss';
 interface IProps {
@@ -20,48 +21,6 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
     const [suggestions, setSuggestions] = useState([]);
     const [value, setAutocompleKeywordValue] = useState('');
     const autocompeleteInputField = useRef<HTMLInputElement>(null);
-
-    // const onSuggestionsFetchRequested =  (inputValue: any, callback: any) => {
-    //     console.log('[onSuggestionsFetchRequested] --> inputValue: ', inputValue);
-    //     toggleLoading(true)
-        
-    //     const suggestions: any = getSuggestions(inputValue)
-
-    //     suggestions.then((res: any) => {
-    //         console.log('[onSuggestionsFetchRequested] --> suggestions then:', res);
-    //         toggleLoading(false)
-    //         setSuggestions(res)
-    //         callback(res);
-    //     }).catch(() => {
-    //         toggleLoading(false)
-    //     })
-    // };
-
-    // const getSuggestions = (value: string) => {
-    //     return new Promise<void>((resolve, reject) => {
-    //         const inputValue = value.toString().trim().toLowerCase();
-    //         const inputLength = inputValue.length;
-
-    //         axios.get(`${apiBase}/${endpointEntity}?filter[${filterKey}]=${inputValue}`).then(res => {
-    //             const suggestions = get(res, 'data.data', '');
-    //             let result = [] as any;
-                
-    //             if(suggestions.length) {
-    //                 let filteredList = [] as any;
-                
-    //                 filteredList = suggestions.map((item: any) => ({
-    //                     value: item.id,
-    //                     label: item.name,
-    //                 }));
-
-    //                 result = (inputLength === 0 ? [] : filteredList)
-    //             }
-    //             resolve(result)
-    //         }).catch(err => {
-    //             reject()
-    //         })
-    //     })
-    // };
 
     const resetStoredAutocompleteData = () => {
         console.log('[resetStoredAutocompleteData] -->');
@@ -88,16 +47,16 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
 
      const handleInputChange = (newValue: any, {action}: any) => {
          console.log('[handleInputChange] --> newValue', newValue, 'action type:', action.toString(), 'value: ', value);
-
+        let inputValue:any = _first(newValue)
         if (action && action === 'select-option') {
             if(storeValueField) {
-                setAutocompleKeywordValue(newValue.value)
+                setAutocompleKeywordValue(inputValue.value)
             } else {
-                if(storeTextField) setAutocompleKeywordValue(newValue.label)
+                if(storeTextField) setAutocompleKeywordValue(inputValue.label)
             }
             
-            if(storeValueField)  store.handleInput(storeValueField, newValue.value)
-            if(storeTextField) store.handleInput(storeTextField, newValue.label)
+            if(storeValueField)  store.handleInput(storeValueField, inputValue.value)
+            if(storeTextField) store.handleInput(storeTextField, inputValue.label)
         }
 
         if(action && action === 'clear') {
@@ -128,7 +87,7 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
                 isMulti={multiSelect}
                 // loadOptions={onSuggestionsFetchRequested}
                 options={suggestions}
-                // onChange={handleInputChange}
+                onChange={handleInputChange}
                 // onInputChange={handleInputStates}
                 isClearable={true}
                 placeholder={`Type to search`}
