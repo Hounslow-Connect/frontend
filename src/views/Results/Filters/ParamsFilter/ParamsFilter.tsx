@@ -29,6 +29,7 @@ interface IProps extends RouteComponentProps {
 interface IState {
   errors: any;
   showFilters: boolean;
+  typingTimeoutId: any;
 }
 
 @inject('resultsStore')
@@ -39,6 +40,7 @@ class Filter extends Component<IProps, IState> {
 
     this.state = {
       showFilters: false,
+      typingTimeoutId: undefined,
       errors: {
         keyword: false,
       }
@@ -61,13 +63,6 @@ class Filter extends Component<IProps, IState> {
   componentDidUpdate(prevProps: any) {
   }
 
-  // handleInputChange = (string: string, field: string) => {
-  //   // @ts-ignore
-  //   this.setState({
-  //     [field]: string,
-  //   });
-  // };
-
   validate = async () => {
     const { resultsStore } = this.props
     return this.setState({
@@ -77,23 +72,17 @@ class Filter extends Component<IProps, IState> {
     });
   };
 
+  // This will be called each time a search is triggered
   search = () => {
     const { resultsStore, history } = this.props
-    // This will be called each time a search is triggered
-   console.log('%c [search] -->', 'color: green;');
-  //  console.log('[search] --> url query: ', JSON.stringify(resultsStore.filters));
-   if(resultsStore) {
+    console.log('%c [search] -->', 'color: green;');
+    if(resultsStore) {
      // @ts-ignore
-     resultsStore.setParams()
-
-      // console.log('resultsStore.getQueryParams()', resultsStore.getQueryParamsString());
-
+      resultsStore.setParams()
       history.push({
         search: resultsStore.getQueryParamsString(),
       });
-
-   } 
-
+    } 
   };
 
   handleAmend = async (callback: () => void) => {
@@ -143,6 +132,7 @@ class Filter extends Component<IProps, IState> {
 
   render() {
     const { resultsStore } = this.props;
+    let typingTimeoutId: any = undefined;
 
     console.log('[getFilterOptions] age --> ', this.getFilterOptions('age'));
 
@@ -168,12 +158,16 @@ class Filter extends Component<IProps, IState> {
                 <div className="">
                   <Input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      // this.handleInputChange(e.target.value, 'keyword')
-                      if (resultsStore) resultsStore.setKeyword(e.target.value)
-                    }
+                      const target = e.target || null
+                      if(this.state.typingTimeoutId) clearTimeout(this.state.typingTimeoutId)
                       
-                     
-                    }
+                      this.setState({
+                        typingTimeoutId: setTimeout(() => {
+                          if (resultsStore) resultsStore.setKeyword(target.value)
+                          this.search()
+                        }, 500)
+                      })
+                    }}
                     id="keyword"
                     value={resultsStore.keyword}
                     placeholder="Search using a keyword"
@@ -194,26 +188,28 @@ class Filter extends Component<IProps, IState> {
                 <Input
                   id="location"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    // this.handleInputChange(e.target.value, 'postcode')
-                    if(resultsStore) resultsStore.setLocation(e.target.value)
-                  }
-                  }
+                    const target = e.target || null
+                    if(this.state.typingTimeoutId) clearTimeout(this.state.typingTimeoutId)
+                      
+                    this.setState({
+                      typingTimeoutId: setTimeout(() => {
+                        if(resultsStore) resultsStore.setPostcode(target.value)
+                        this.search()
+                      }, 500)
+                    })
+                  }}
                   className="results__search-filter-location"
                   placeholder="Postcode"
                   value={resultsStore.postcode}
                 />
               </div>
 
-              <div
-                className=""
-                style={{
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                   <label className="results__filters--primary__label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
                   <Select
                     options={[{value: '5', text: '5 miles'}, {value: '10', text: '10 miles'}]}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                      resultsStore.setDistance(e.target.value)
                       this.search()
                     }
                      

@@ -71,9 +71,22 @@ export default class ResultsStore {
   };
 
   @action
-  setLocation = (input: string) => {
+  setPostcode = async (input: string) => {
     // @ts-ignore
-    this.location = input;
+    if (input !== '' && input !== this.postcode) {
+      await this.geolocate();
+    }
+
+    console.log('postcode set, this.locationCoords', this.locationCoords);
+    
+    
+    this.postcode = input;
+  };
+
+  @action
+  setDistance = (input: string) => {
+    // @ts-ignore
+    this.distance = input;
   };
 
   @action
@@ -175,7 +188,7 @@ export default class ResultsStore {
   @action
   getCategory = async () => {
     console.log('[%c [getCategory] -->', 'color: red;');
-    
+
     try {
       const category = await axios.get(`${apiBase}/collections/categories/${this.categoryId}`);
       this.category = get(category, 'data.data', '');
@@ -248,6 +261,9 @@ export default class ResultsStore {
       if (value === 'location') {
         this.postcode = key;
       }
+      if (value === 'distance') {
+        this.distance = key;
+      }
 
       // set filter params
       if (value === 'age') {
@@ -312,6 +328,10 @@ export default class ResultsStore {
 
     if (this.keyword) {
       params.query = this.keyword;
+    }
+
+    if (this.distance) {
+      params.distance = this.distance;
     }
 
     if (this.filters.age) {
@@ -431,44 +451,48 @@ export default class ResultsStore {
     this.postcode = postcode.replace(' ', '');
   };
 
-  amendSearch = (searchTerm?: string) => {
-    let url = window.location.search;
 
-    if (this.postcode) {
-      url = this.updateQueryStringParameter('location', this.postcode);
-    }
+  // Legacy?
+  // amendSearch = (searchTerm?: string) => {
+  //   let url = window.location.search;
 
-    if (!this.postcode) {
-      url = this.removeQueryStringParameter('location', url);
-      this.locationCoords = {};
-    }
+  //   if (this.postcode) {
+  //     url = this.updateQueryStringParameter('location', this.postcode);
+  //   }
 
-    if (this.is_free) {
-      url = this.updateQueryStringParameter('is_free', this.is_free, url);
-    }
+  //   if (!this.postcode) {
+  //     url = this.removeQueryStringParameter('location', url);
+  //     this.locationCoords = {};
+  //   }
 
-    if (!this.is_free) {
-      url = this.removeQueryStringParameter('is_free', url);
-    }
+  //   if (this.is_free) {
+  //     url = this.updateQueryStringParameter('is_free', this.is_free, url);
+  //   }
 
-    if (this.open_now) {
-      url = this.updateQueryStringParameter('open_now', this.open_now, url);
-    }
+  //   if (!this.is_free) {
+  //     url = this.removeQueryStringParameter('is_free', url);
+  //   }
 
-    if (!this.open_now) {
-      url = this.removeQueryStringParameter('open_now', url);
-    }
+  //   if (this.open_now) {
+  //     url = this.updateQueryStringParameter('open_now', this.open_now, url);
+  //   }
 
-    if (searchTerm) {
-      url = this.updateQueryStringParameter('search_term', searchTerm, url);
-    }
+  //   if (!this.open_now) {
+  //     url = this.removeQueryStringParameter('open_now', url);
+  //   }
 
-    this.results = [];
-    return url;
-  };
+  //   if (searchTerm) {
+  //     url = this.updateQueryStringParameter('search_term', searchTerm, url);
+  //   }
+
+  //   this.results = [];
+  //   return url;
+  // };
 
   @action
   geolocate = async () => {
+    console.log('[geolocate] -->');
+    
     try {
       const geolocation = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode},UK&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
