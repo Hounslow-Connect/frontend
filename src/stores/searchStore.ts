@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import partition from 'lodash/partition';
 
 import { apiBase } from '../config/api';
-import { ICategory, IPersona, IFilters } from '../types/types';
+import { ICategory, IPersona, IEligibilityFilters } from '../types/types';
 
 class SearchStore {
   @observable location: string = '';
@@ -13,14 +13,21 @@ class SearchStore {
   @observable personas: IPersona[] = [];
   @observable categoryId: string = '';
   @observable covidCategories: ICategory[] = [];
+  serviceEligibilityOptions: [] = [];
 
-  @observable filters: IFilters = {
-    age: ''
+  @observable filters: IEligibilityFilters = {
+    age: null,
+    income: null,
+    disability: null,
+    language: null,
+    gender: null,
+    ethnicity: null
   };
 
   constructor() {
     this.getCategories();
     this.getPersonas();
+    this.getServiceEligibilities();
   }
 
   @action
@@ -34,7 +41,7 @@ class SearchStore {
     console.log('[searchStore] --> handleInput filter:', filter, 'input: ', input);
     
     // @ts-ignore
-    this.filters[field] = input;
+    this.filters[filter] = input;
   };
 
   @action clear = () => {
@@ -47,7 +54,12 @@ class SearchStore {
     console.log('[searchStore] --> clearFilters()');
     
     this.filters = {
-      age: null
+      age: null,
+      income: null,
+      disability: null,
+      language: null,
+      gender: null,
+      ethnicity: null
     };
   };
 
@@ -81,6 +93,16 @@ class SearchStore {
     try {
       const personas = await axios.get(`${apiBase}/collections/personas`);
       this.personas = get(personas, 'data.data', []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  @action
+  getServiceEligibilities = async () => {
+    try {
+      const data = await axios.get(`${apiBase}/taxonomies/service-eligibilities`);
+      this.serviceEligibilityOptions = get(data, 'data.data', []);
     } catch (e) {
       console.error(e);
     }

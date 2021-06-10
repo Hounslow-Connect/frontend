@@ -167,6 +167,11 @@ export interface IBanner {
   has_image: true;
 }
 
-export interface IFilters {
+export interface IEligibilityFilters {
   age: null | string;
+  income: null | string;
+  disability: null | string;
+  language: null | string;
+  gender: null | string;
+  ethnicity: null | string;
 }

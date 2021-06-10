@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
+import _first from 'lodash/first';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
-import { IFilters } from '../../../../types/types';
+// import { IEligibilityFilters } from '../../../../types/types';
 
-import Autocomplete from '../../../../components/Autocomplete';
+import StaticAutocomplete from '../../../../components/StaticAutocomplete';
 import Checkbox from '../../../../components/Checkbox';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
@@ -21,6 +22,7 @@ interface IProps extends RouteComponentProps {
 /**
  * TODO:
  * - replace search button with auto search functionality each time search term or filters are changed
+ * - populate filter options from api endpoint
  * - push filters into the url as parms and auto-search on page refresh using those filters
  */
 
@@ -54,7 +56,7 @@ class Filter extends Component<IProps, IState> {
   componentDidMount() {
     const { search_term, location } = queryString.parse(this.props.location.search);
 
-    console.log('[componentDidMount()] --> SearchStore.filters', SearchStore.filters);
+    // console.log('[componentDidMount()] --> SearchStore.filters', SearchStore.filters);
     
     if (search_term) {
       this.setState({
@@ -91,6 +93,7 @@ class Filter extends Component<IProps, IState> {
   search = () => {
     // This will be called each time a search is triggered
    console.log('%c [search] -->', 'color: green;');
+   console.log('[search] --> url query: ', JSON.stringify(SearchStore.filters));
    
   };
 
@@ -121,8 +124,24 @@ class Filter extends Component<IProps, IState> {
     searchStore.clearFilters()
   }
 
+  getFilterOptions = (name: string) => { 
+    if(!name) return
+    const { serviceEligibilityOptions } = SearchStore
+    let options = null
+
+    let group:any = _first(serviceEligibilityOptions.filter((eligibility: any) => name.toLowerCase() === eligibility.name.split(' ')[0].toLowerCase()))
+
+    if(group && group.children) {
+      options = group.children.map((item: any) => { return { text: item.name, value: item.id } } )
+    }
+    
+    return options
+  }
+
   render() {
     const { resultsStore, history } = this.props;
+
+    console.log('[getFilterOptions] age --> ', this.getFilterOptions('age'));
 
     if (!resultsStore) {
       return null;
@@ -187,8 +206,10 @@ class Filter extends Component<IProps, IState> {
                   <label className="results__filters--primary__label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
                   <Select
                     options={[{value: '5', text: '5 miles'}]}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       this.search()
+                    }
+                     
                     }
                     className=""
                     placeholder="Mile radius"
@@ -231,131 +252,106 @@ class Filter extends Component<IProps, IState> {
                 <div className={'flex-col-12 flex-col-medium-2 flex-col--gutter'}>
                   <button onClick={this.toggleFilters} className={'button button__alt--small'}>{this.state.showFilters ? 'Hide' : 'Show' } filters</button>
                 </div>
-                
               </div>
-
-
 
               { this.state.showFilters && (
                 <div>
                   <div className={'results__filters--group flex-col--gutter'}>
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('age') && <div className={'results__filters--group__item'}>
                       <label>Age</label>
-                      <Autocomplete storeValueField="age" storeTextField="age" multiSelect={true} store={SearchStore} endpointEntity='age' />
-                    </div>
+                      <StaticAutocomplete options={this.getFilterOptions('age')} storeValueField="age" storeTextField="age" multiSelect={true} store={SearchStore} />
+                    </div>}
                     {/* ./column */ }
 
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('income') && <div className={'results__filters--group__item'}>
                       <label htmlFor="incomeFilter">Income</label>
 
                       <Select
-                        options={[{value: '5', text: '5 miles'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        options={this.getFilterOptions('income')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          SearchStore.handleInput('income', e.target.value)
                           this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="incomeFilter"
+                        }}
+                        placeholder="Select" id="incomeFilter"
                       />
-                    </div>
+                    </div>}
                     {/* ./column */ }
 
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('disability') && <div className={'results__filters--group__item'}>
                       <label htmlFor="disabilityFilter">Disability</label>
 
                       <Select
-                        options={[{value: '5', text: '5 miles'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        options={this.getFilterOptions('disability')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          SearchStore.handleInput('disability', e.target.value)
                           this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="disabilityFilter"
+                        }}
+                        placeholder="Select" id="disabilityFilter"
                       />
-                    </div>
+                    </div>}
                     {/* ./column */ }
 
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('language') && <div className={'results__filters--group__item'}>
                       <label htmlFor="languageFilter">Language</label>
 
                       <Select
-                        options={[{value: 'english', text: 'English'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        options={this.getFilterOptions('language')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          SearchStore.handleInput('language', e.target.value)
                           this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="languageFilter"
+                        }}
+                        placeholder="Select" id="languageFilter"
                       />
-                    </div>
+                    </div>}
                     {/* ./column */ }
 
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('gender') && <div className={'results__filters--group__item'}>
                       <label htmlFor="genderFilter">Gender</label>
 
                       <Select
-                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        options={this.getFilterOptions('gender')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          SearchStore.handleInput('gender', e.target.value)
                           this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="genderFilter"
+                        }}
+                        placeholder="Select" id="genderFilter"
                       />
-                    </div>
+                    </div>}
                     {/* ./column */ }
                     
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('ethnicity') && <div className={'results__filters--group__item'}>
                       <label htmlFor="ethnicityFilter">Ethnicity</label>
 
                       <Select
-                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        options={this.getFilterOptions('ethnicity')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          SearchStore.handleInput('ethnicity', e.target.value)
                           this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="ethnicityFilter"
+                        }}
+                        placeholder="Select" id="ethnicityFilter"
                       />
-                    </div>
+                    </div>}
                     {/* ./column */ }
 
                     {/* column */ }
-                    <div className={'results__filters--group__item'}>
+                    { this.getFilterOptions('housing') && <div className={'results__filters--group__item'}>
                       <label htmlFor="housingFilter">Housing</label>
 
                       <Select
-                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        options={this.getFilterOptions('housing')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                          SearchStore.handleInput('housing', e.target.value)
                           this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="housingFilter"
+                        }}
+                        placeholder="Select" id="housingFilter"
                       />
-                    </div>
-                    {/* ./column */ }
-
-                    {/* column */ }
-                    <div className={'results__filters--group__item'}>
-                      <label htmlFor="accessibilityFilter">Accessibility</label>
-
-                      <Select
-                        options={[{value: 'male', text: 'Male'}, {value: 'female', text: 'Female'}]}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          this.search()
-                        }
-                        className=""
-                        placeholder="Select"
-                        id="accessibilityFilter"
-                      />
-                    </div>
+                    </div> }
                     {/* ./column */ }
                     
                   </div>
