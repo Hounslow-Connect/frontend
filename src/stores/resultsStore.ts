@@ -72,14 +72,15 @@ export default class ResultsStore {
 
   @action
   setPostcode = async (input: string) => {
+    console.log('[setPostcode input:', input);
+    
     // @ts-ignore
     if (input !== '' && input !== this.postcode) {
+      this.postcode = input;
       await this.geolocate();
+      return
     }
 
-    console.log('postcode set, this.locationCoords', this.locationCoords);
-    
-    
     this.postcode = input;
   };
 

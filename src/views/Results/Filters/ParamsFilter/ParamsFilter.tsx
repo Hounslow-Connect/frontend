@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import _first from 'lodash/first';
+import _isEmpty from 'lodash/isEmpty';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 // import { IEligibilityFilters } from '../../../../types/types';
@@ -20,13 +21,11 @@ interface IProps extends RouteComponentProps {
 
 /**
  * TODO:
- * - replace search button with auto search functionality each time search term or filters are changed
- * - push filters into the url as parms and auto-search on page refresh using those filters
- * - add distance filter type
- * - add prep-population for autocomplete
+* - pass select autocompelete option to setParams and trigger search.
  */
 
 interface IState {
+  postcode: string;
   errors: any;
   showFilters: boolean;
   typingTimeoutId: any;
@@ -38,7 +37,11 @@ class Filter extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
+    const { resultsStore } = this.props
+
     this.state = {
+      // postcode: (resultsStore ? resultsStore.postcode : '' ),
+      postcode: '',
       showFilters: false,
       typingTimeoutId: undefined,
       errors: {
@@ -111,6 +114,7 @@ class Filter extends Component<IProps, IState> {
     if(e) e.preventDefault()
     console.log('[resetFilters] -->');
     if(resultsStore) resultsStore.clearFilters()
+    this.search()
   }
 
   getFilterOptions = (name: string) => { 
@@ -119,12 +123,15 @@ class Filter extends Component<IProps, IState> {
     if(!name || !resultsStore) return
     
     const { serviceEligibilityOptions } = resultsStore
-    let options = null
+    let options: any = []   
 
     let group:any = _first(serviceEligibilityOptions.filter((eligibility: any) => name.toLowerCase() === eligibility.name.split(' ')[0].toLowerCase()))
 
     if(group && group.children) {
-      options = group.children.map((item: any) => { return { text: item.name, value: item.id } } )
+      let eligibilityOptions = [{text: 'Any', value: '' }]
+      group.children.map((item: any) => { eligibilityOptions.push({text: item.name, value: item.id })  } )
+      
+      options = eligibilityOptions
     }
     
     return options
@@ -189,10 +196,16 @@ class Filter extends Component<IProps, IState> {
                   id="location"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const target = e.target || null
+
+                    this.setState({
+                      postcode: target.value
+                    })
+
                     if(this.state.typingTimeoutId) clearTimeout(this.state.typingTimeoutId)
                       
                     this.setState({
                       typingTimeoutId: setTimeout(() => {
+                        console.log('set postcode');
                         if(resultsStore) resultsStore.setPostcode(target.value)
                         this.search()
                       }, 500)
@@ -200,14 +213,15 @@ class Filter extends Component<IProps, IState> {
                   }}
                   className="results__search-filter-location"
                   placeholder="Postcode"
-                  value={resultsStore.postcode}
+                  value={this.state.postcode}
                 />
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center' }}>
                   <label className="results__filters--primary__label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
                   <Select
-                    options={[{value: '5', text: '5 miles'}, {value: '10', text: '10 miles'}]}
+                    options={[{text: 'Any', value: '' }, {value: '5', text: '5 miles'}, {value: '10', text: '10 miles'}]}
+                    value={`${resultsStore.distance}`}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       resultsStore.setDistance(e.target.value)
                       this.search()
@@ -261,14 +275,14 @@ class Filter extends Component<IProps, IState> {
                 <div>
                   <div className={'results__filters--group flex-col--gutter'}>
                     {/* column */ }
-                    { this.getFilterOptions('age') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('age')) && <div className={'results__filters--group__item'}>
                       <label>Age</label>
-                      <StaticAutocomplete options={this.getFilterOptions('age')} storeValueField="age" storeTextField="age" multiSelect={true} store={SearchStore} />
+                      <StaticAutocomplete options={this.getFilterOptions('age')} storeValueField="age" storeTextField="age" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
 
                     {/* column */ }
-                    { this.getFilterOptions('income') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('income')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="incomeFilter">Income</label>
 
                       <Select
@@ -284,7 +298,7 @@ class Filter extends Component<IProps, IState> {
                     {/* ./column */ }
 
                     {/* column */ }
-                    { this.getFilterOptions('disability') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('disability')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="disabilityFilter">Disability</label>
 
                       <Select
@@ -300,7 +314,7 @@ class Filter extends Component<IProps, IState> {
                     {/* ./column */ }
 
                     {/* column */ }
-                    { this.getFilterOptions('language') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('language')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="languageFilter">Language</label>
 
                       <Select
@@ -316,7 +330,7 @@ class Filter extends Component<IProps, IState> {
                     {/* ./column */ }
 
                     {/* column */ }
-                    { this.getFilterOptions('gender') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('gender')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="genderFilter">Gender</label>
 
                       <Select
@@ -332,7 +346,7 @@ class Filter extends Component<IProps, IState> {
                     {/* ./column */ }
                     
                     {/* column */ }
-                    { this.getFilterOptions('ethnicity') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('ethnicity')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="ethnicityFilter">Ethnicity</label>
 
                       <Select
@@ -348,7 +362,7 @@ class Filter extends Component<IProps, IState> {
                     {/* ./column */ }
 
                     {/* column */ }
-                    { this.getFilterOptions('housing') && <div className={'results__filters--group__item'}>
+                    { !_isEmpty(this.getFilterOptions('housing')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="housingFilter">Housing</label>
 
                       <Select
