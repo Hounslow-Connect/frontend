@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
+import { EventEmitter } from '../../../../utils/events'
 import get from 'lodash/get';
 import _first from 'lodash/first';
 import _isEmpty from 'lodash/isEmpty';
@@ -122,6 +123,8 @@ class Filter extends Component<IProps, IState> {
     if(e) e.preventDefault()
     console.log('[resetFilters] -->');
     if(resultsStore) resultsStore.clearFilters()
+    // @ts-ignore
+    EventEmitter.dispatch('filtersCleared', e)
     this.search()
   }
 

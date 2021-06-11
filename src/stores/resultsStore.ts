@@ -450,11 +450,10 @@ export default class ResultsStore {
 
   @action
   fetchResults = async () => {
-    // console.log('[fetchResults] --> params: ', this.queryParams);
+    console.log('%c [fetchResults] -->', 'color: yellow;');
     
     this.loading = true;
     try {
-      //TODO: Update post data sturcture for service-eligiblities to be flat array of taxonomies
       const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.getPostParams());
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);

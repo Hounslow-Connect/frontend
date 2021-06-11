@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { EventEmitter } from '../../utils/events'
 import { observer } from 'mobx-react';
 import Select from 'react-select';
 import cx from 'classnames';
 import _first from 'lodash/first';
-
+  
 import './Autocomplete.scss';
 interface IProps {
   storeValueField?: string;
@@ -18,13 +19,15 @@ interface IProps {
 
 
 const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, storeValueField = '', defaultValues = [],  defaultText = '', storeTextField = '', multiSelect = false, clickHandler}) => {
-    
+    // @ts-ignore
+    EventEmitter.subscribe('filtersCleared', () => resetStoredAutocompleteData())
+
     const [suggestions, setSuggestions] = useState([]);
     const [value, setAutocompleKeywordValue] = useState([]);
     const autocompeleteInputField = useRef<HTMLInputElement>(null);
 
     const resetStoredAutocompleteData = () => {
-        console.log('[resetStoredAutocompleteData] -->');
+        console.log('%c [resetStoredAutocompleteData] -->','color: green;');
         
         if(storeValueField) store.handleInput(storeValueField, null)
         if(storeTextField) store.handleInput(storeTextField, null)

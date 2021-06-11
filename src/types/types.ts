@@ -186,3 +186,7 @@ export interface IEligibilityFilters {
   ethnicity: null | string;
   housing: null | string;
 }
+
+export enum Events {
+  SET_TITLE = 'set_title'
+}
