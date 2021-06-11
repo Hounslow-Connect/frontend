@@ -103,31 +103,8 @@ export default class ResultsStore {
   handleInput = (filter: string, input: string) => {
     console.log('[resultsStore] --> handleInput filter:', filter, 'input: ', input, ', this.filters[age]= ', this.filters['age']);
 
-    // append multple values
-    // if(filter === 'age' && this.filters['age'] && input) {
-
-    //   this.filters['age'] = input
-      
-    //   // let valuesArr = (this.filters['age'] ? this.filters['age'].split(',') : null);
-
-    //   // console.log('age valuesArr', valuesArr);
-
-    //   // if(valuesArr && !valuesArr.filter((item: any) => item === input).length) valuesArr.push(input)
-    //   // this.filters[filter] = (valuesArr ? valuesArr.join(',') : null)
-    //   // append single value
-    // } else {
-    //    // @ts-ignore
-    //   this.filters[filter] = input;
-    // }
-
     // @ts-ignore
     this.filters[filter] = input;
-
-    console.log('[resultsStore] --> handleInput filter after this.filters[age]= ', this.filters['age']);
-    
-   
-   
-    this.setParams()
   };
 
   @action
@@ -228,6 +205,8 @@ export default class ResultsStore {
    */
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
+    console.log('%c [setSearchTerms] -->', 'color: yellow');
+    
     forEach(searchTerms, (key, value) => {
       if (value === 'category') {
         this.categoryId = key;
@@ -298,10 +277,12 @@ export default class ResultsStore {
       await this.geolocate();
     }
 
-    this.setParams();
+    this.setParams(true);
   };
 
-  setParams = async () => {    
+  setParams = async (search: boolean = false) => {    
+    console.log('[setParams]-->');
+    
     const params: IParams = {};
 
     if (this.category) {
@@ -359,7 +340,7 @@ export default class ResultsStore {
     
     this.queryParams = params
 
-    await this.fetchResults();
+    if(search) await this.fetchResults();
   };
 
   getPostParams = () => {    
@@ -411,25 +392,6 @@ export default class ResultsStore {
       params.eligibilities = service_eligibilities
     }
 
-    // if (this.filters.age) {
-    //   params.age = this.filters.age;
-    // }
-    // if (this.filters.income) {
-    //   params.income = this.filters.income;
-    // }
-    // if (this.filters.disability) {
-    //   params.disability = this.filters.disability;
-    // }
-    // if (this.filters.language) {
-    //   params.language = this.filters.language;
-    // }
-    // if (this.filters.gender) {
-    //   params.gender = this.filters.gender;
-    // }
-    // if (this.filters.ethnicity) {
-    //   params.ethnicity = this.filters.ethnicity;
-    // }
-
     if (size(this.locationCoords)) {
       params.location = this.locationCoords;
     }
@@ -438,15 +400,6 @@ export default class ResultsStore {
 
    return params
   };
-
-  /**
-   * Triggered when form inputs change 
-   */
-  // @action
-  // handleFormChange = async () => {
-  //   console.log('[resultsStore] --> handleFormChange() -->');
-  //   this.setParams()
-  // }
 
   @action
   fetchResults = async () => {
@@ -526,44 +479,6 @@ export default class ResultsStore {
     this.postcode = postcode.replace(' ', '');
   };
 
-
-  // Legacy?
-  // amendSearch = (searchTerm?: string) => {
-  //   let url = window.location.search;
-
-  //   if (this.postcode) {
-  //     url = this.updateQueryStringParameter('location', this.postcode);
-  //   }
-
-  //   if (!this.postcode) {
-  //     url = this.removeQueryStringParameter('location', url);
-  //     this.locationCoords = {};
-  //   }
-
-  //   if (this.is_free) {
-  //     url = this.updateQueryStringParameter('is_free', this.is_free, url);
-  //   }
-
-  //   if (!this.is_free) {
-  //     url = this.removeQueryStringParameter('is_free', url);
-  //   }
-
-  //   if (this.open_now) {
-  //     url = this.updateQueryStringParameter('open_now', this.open_now, url);
-  //   }
-
-  //   if (!this.open_now) {
-  //     url = this.removeQueryStringParameter('open_now', url);
-  //   }
-
-  //   if (searchTerm) {
-  //     url = this.updateQueryStringParameter('search_term', searchTerm, url);
-  //   }
-
-  //   this.results = [];
-  //   return url;
-  // };
-
   @action
   geolocate = async () => {
     try {
@@ -582,11 +497,6 @@ export default class ResultsStore {
     }
   };
 
-  // @action
-  // handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   this.keyword = e.target.value;
-  // };
-
   @action
   toggleView = (view: 'map' | 'grid') => {
     this.view = view;
@@ -594,6 +504,8 @@ export default class ResultsStore {
 
   @action
   orderResults = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log('%c [orderResults]', 'color: red;');
+    
     this.order = e.target.value as 'relevance' | 'distance';
     this.results = [];
 

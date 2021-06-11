@@ -17,11 +17,6 @@ interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
 }
 
-/**
- * TODO:
- * - clear autocomplete options when 'Remove all filters' is clicked
- */
-
 interface IState {
   postcode: string;
   errors: any;
@@ -58,12 +53,6 @@ class Filter extends Component<IProps, IState> {
     // if (location && resultsStore) resultsStore.setLocation(location as string)
 
     const { postcode } = queryString.parse(this.props.location.search);
-    
-    // if (search_term) {
-    //   this.setState({
-    //     keyword: search_term as string,
-    //   });
-    // }
 
     if (postcode) {
       this.setState({
