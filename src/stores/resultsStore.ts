@@ -97,7 +97,7 @@ export default class ResultsStore {
   };
 
   /**
-   * Handles Input from search filters (onChange method)
+   * Handles Input from autocomplete filters (onChange method)
    */
   @action
   handleInput = (filter: string, input: string) => {
@@ -105,6 +105,9 @@ export default class ResultsStore {
     
     // @ts-ignore
     this.filters[filter] = input;
+    
+
+    this.setParams()
   };
 
   // @action
@@ -264,7 +267,7 @@ export default class ResultsStore {
       if (value === 'postcode') {
         this.postcode = key;
       }
-      
+
       if (value === 'distance') {
         this.distance = key;
       }

@@ -12,11 +12,12 @@ interface IProps {
   options?: [];
   storeTextField?: string;
   store: any;
-  multiSelect?: boolean
+  multiSelect?: boolean;
+  clickHandler: () => void
 }
 
 
-const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, storeValueField = '', defaultValue = '',  defaultText = '', storeTextField = '', multiSelect = false}) => {
+const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, storeValueField = '', defaultValue = '',  defaultText = '', storeTextField = '', multiSelect = false, clickHandler}) => {
     
     const [suggestions, setSuggestions] = useState([]);
     const [value, setAutocompleKeywordValue] = useState('');
@@ -57,6 +58,7 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
             
             if(storeValueField)  store.handleInput(storeValueField, inputValue.value)
             if(storeTextField) store.handleInput(storeTextField, inputValue.label)
+            // Props.clickHandler
         }
 
         if(action && action === 'clear') {
@@ -64,22 +66,19 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
         }
      }
 
-     const handleInputStates = (newValue: any, {action}: any) => {
-         console.log('[handleInputStates] --> newValue', newValue, 'action type:', action.toString(), 'defaultText value:', defaultText, 'value: ', value);
+    //  const handleInputStates = (newValue: any, {action}: any) => {
+    //      console.log('[handleInputStates] --> newValue', newValue, 'action type:', action.toString(), 'defaultText value:', defaultText, 'value: ', value);
         
-        if(action && (action === 'input-blur' || action === 'input-change') && value === '') {
-           resetStoredAutocompleteData()
-           return
-        }
-        if(action &&  action === 'input-change' && newValue === '') {
-           resetStoredAutocompleteData()
-           return
-        }
-     }
-
-     console.log('suggestions', suggestions);
+    //     if(action && (action === 'input-blur' || action === 'input-change') && value === '') {
+    //        resetStoredAutocompleteData()
+    //        return
+    //     }
+    //     if(action &&  action === 'input-change' && newValue === '') {
+    //        resetStoredAutocompleteData()
+    //        return
+    //     }
+    //  }
      
-      
     return (
         <div className={cx('autocomplete__wrapper relative')} >
             <Select

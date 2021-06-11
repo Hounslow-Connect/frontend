@@ -291,7 +291,7 @@ class Filter extends Component<IProps, IState> {
                     {/* column */ }
                     { !_isEmpty(this.getFilterOptions('age')) && <div className={'results__filters--group__item'}>
                       <label>Age</label>
-                      <StaticAutocomplete options={this.getFilterOptions('age')} storeValueField="age" storeTextField="age" multiSelect={true} store={resultsStore} />
+                      <StaticAutocomplete clickHandler={this.search} options={this.getFilterOptions('age')} storeValueField="age" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
 
