@@ -5,15 +5,12 @@ import _first from 'lodash/first';
 import _isEmpty from 'lodash/isEmpty';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
-// import { IEligibilityFilters } from '../../../../types/types';
 
 import StaticAutocomplete from '../../../../components/StaticAutocomplete';
 import Checkbox from '../../../../components/Checkbox';
 import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
 import Select from '../../../../components/Select';
 import ResultsStore from '../../../../stores/resultsStore';
-import SearchStore from '../../../../stores/searchStore';
 
 interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
@@ -32,10 +29,7 @@ class Filter extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
-    const { resultsStore } = this.props
-
     this.state = {
-      // postcode: (resultsStore ? resultsStore.postcode : '' ),
       postcode: '',
       showFilters: false,
       typingTimeoutId: undefined,
@@ -52,13 +46,12 @@ class Filter extends Component<IProps, IState> {
 
   componentDidMount() {
     // const { resultsStore } = this.props
-    //TODO: Update store based on query string values
     // const { search_term, location } = queryString.parse(this.props.location.search);
     
     // if (search_term && resultsStore) resultsStore.setKeyword(search_term as string)
     // if (location && resultsStore) resultsStore.setLocation(location as string)
 
-    const { search_term, postcode } = queryString.parse(this.props.location.search);
+    const { postcode } = queryString.parse(this.props.location.search);
     
     // if (search_term) {
     //   this.setState({
@@ -139,7 +132,7 @@ class Filter extends Component<IProps, IState> {
 
     if(group && group.children) {
       let eligibilityOptions = [{text: 'Any', value: '' }]
-      group.children.map((item: any) => { eligibilityOptions.push({text: item.name, value: item.id })  } )
+      group.children.forEach((item: any) => { eligibilityOptions.push({text: item.name, value: item.id })  } )
       
       options = eligibilityOptions
     }
@@ -149,9 +142,6 @@ class Filter extends Component<IProps, IState> {
 
   render() {
     const { resultsStore } = this.props;
-    let typingTimeoutId: any = undefined;
-
-    console.log('[getFilterOptions] age --> ', this.getFilterOptions('age'));
 
     if (!resultsStore) {
       return null;
