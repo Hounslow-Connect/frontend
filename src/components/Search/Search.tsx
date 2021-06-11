@@ -82,11 +82,11 @@ class Search extends React.Component<IProps> {
                         <Input
                           id="location"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            SearchStore.onChange(e, 'location')
+                            SearchStore.onChange(e, 'postcode')
                           }
                           className="search__filter-location__input"
                           placeholder="Postcode or town"
-                          value={SearchStore.location}
+                          value={SearchStore.postcode}
                         />
                       </div>
                       {isMobile && (
@@ -114,7 +114,7 @@ class Search extends React.Component<IProps> {
                             e.preventDefault();
                             history.push({
                               pathname: '/results',
-                              search: `?search_term=${SearchStore.search}&location=${SearchStore.location}`,
+                              search: `?search_term=${SearchStore.search}&postcode=${SearchStore.postcode}`,
                             });
                           }}
                         />

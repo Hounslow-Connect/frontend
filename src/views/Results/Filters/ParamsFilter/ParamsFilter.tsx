@@ -61,6 +61,20 @@ class Filter extends Component<IProps, IState> {
     
     // if (search_term && resultsStore) resultsStore.setKeyword(search_term as string)
     // if (location && resultsStore) resultsStore.setLocation(location as string)
+
+    const { search_term, postcode } = queryString.parse(this.props.location.search);
+
+    // if (search_term) {
+    //   this.setState({
+    //     keyword: search_term as string,
+    //   });
+    // }
+
+    if (postcode) {
+      this.setState({
+        postcode: postcode as string,
+      });
+    }
   }
 
   componentDidUpdate(prevProps: any) {
@@ -305,7 +319,7 @@ class Filter extends Component<IProps, IState> {
                         options={this.getFilterOptions('disability')}
                         value={`${resultsStore.filters.disability}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                           resultsStore.handleInput('disability', e.target.value)
+                          resultsStore.handleInput('disability', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="disabilityFilter"
@@ -321,7 +335,7 @@ class Filter extends Component<IProps, IState> {
                         options={this.getFilterOptions('language')}
                         value={`${resultsStore.filters.language}`}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                           resultsStore.handleInput('language', e.target.value)
+                          resultsStore.handleInput('language', e.target.value)
                           this.search()
                         }}
                         placeholder="Select" id="languageFilter"

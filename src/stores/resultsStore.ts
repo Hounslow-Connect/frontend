@@ -138,11 +138,13 @@ export default class ResultsStore {
 
     let queryParams = Object.keys(params)
     .map((key) => { 
-      return (params[key] ? `${key}=${params[key]}`  : null ) 
+      return (params[key] && key !== 'location' ? `${key}=${params[key]}` : null ) 
     })
 
     queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
 
+    console.log('[getQueryParamsString] --> ', queryString);
+    
     return queryString
   }
 
@@ -259,9 +261,10 @@ export default class ResultsStore {
         this.currentPage = Number(key);
       }
 
-      if (value === 'location') {
+      if (value === 'postcode') {
         this.postcode = key;
       }
+      
       if (value === 'distance') {
         this.distance = key;
       }
@@ -329,6 +332,10 @@ export default class ResultsStore {
 
     if (this.keyword) {
       params.query = this.keyword;
+    }
+
+    if (this.postcode) {
+      params.postcode = this.postcode;
     }
 
     if (this.distance) {
@@ -492,21 +499,19 @@ export default class ResultsStore {
 
   @action
   geolocate = async () => {
-    console.log('[geolocate] -->');
-    
     try {
       const geolocation = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode},UK&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
       );
 
       const location = get(geolocation, 'data.results[0].geometry.location', {});
-
+      console.log('[geolocate] --> new location: ', location);
       this.locationCoords = {
         lon: location.lng,
         lat: location.lat,
       };
     } catch (e) {
-      console.error(e);
+      console.error('[geolocate] --> error getting new location: ', e);
     }
   };
 

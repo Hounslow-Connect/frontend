@@ -18,6 +18,7 @@ export interface IParams {
   wait_time?: string;
   order?: 'distance' | 'relevance';
   query?: string;
+  postcode?: string;
   location?: IGeoLocation | {};
   distance?: null | string;
   age?: null | string;
