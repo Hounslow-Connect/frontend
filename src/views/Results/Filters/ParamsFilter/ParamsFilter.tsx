@@ -19,11 +19,6 @@ interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
 }
 
-/**
- * TODO:
-* - pass select autocompelete option to setParams and trigger search.
- */
-
 interface IState {
   postcode: string;
   errors: any;
@@ -50,9 +45,10 @@ class Filter extends Component<IProps, IState> {
     };
   }
 
-  // componentWillUnmount() {
-  //   SearchStore.clear();
-  // }
+  componentWillUnmount() {
+    const { resultsStore } = this.props
+    if(resultsStore) resultsStore.clear();
+  }
 
   componentDidMount() {
     // const { resultsStore } = this.props
@@ -63,7 +59,7 @@ class Filter extends Component<IProps, IState> {
     // if (location && resultsStore) resultsStore.setLocation(location as string)
 
     const { search_term, postcode } = queryString.parse(this.props.location.search);
-
+    
     // if (search_term) {
     //   this.setState({
     //     keyword: search_term as string,
@@ -291,7 +287,8 @@ class Filter extends Component<IProps, IState> {
                     {/* column */ }
                     { !_isEmpty(this.getFilterOptions('age')) && <div className={'results__filters--group__item'}>
                       <label>Age</label>
-                      <StaticAutocomplete clickHandler={this.search} options={this.getFilterOptions('age')} storeValueField="age" multiSelect={true} store={resultsStore} />
+                      <StaticAutocomplete defaultValues={resultsStore.filters.age?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('age')} storeTextField="age" multiSelect={true} store={resultsStore} />
+                      {resultsStore.filters.age}
                     </div>}
                     {/* ./column */ }
 

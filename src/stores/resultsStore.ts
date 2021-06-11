@@ -101,38 +101,34 @@ export default class ResultsStore {
    */
   @action
   handleInput = (filter: string, input: string) => {
-    console.log('[searchStore] --> handleInput filter:', filter, 'input: ', input);
-    
+    console.log('[resultsStore] --> handleInput filter:', filter, 'input: ', input, ', this.filters[age]= ', this.filters['age']);
+
+    // append multple values
+    // if(filter === 'age' && this.filters['age'] && input) {
+
+    //   this.filters['age'] = input
+      
+    //   // let valuesArr = (this.filters['age'] ? this.filters['age'].split(',') : null);
+
+    //   // console.log('age valuesArr', valuesArr);
+
+    //   // if(valuesArr && !valuesArr.filter((item: any) => item === input).length) valuesArr.push(input)
+    //   // this.filters[filter] = (valuesArr ? valuesArr.join(',') : null)
+    //   // append single value
+    // } else {
+    //    // @ts-ignore
+    //   this.filters[filter] = input;
+    // }
+
     // @ts-ignore
     this.filters[filter] = input;
-    
 
+    console.log('[resultsStore] --> handleInput filter after this.filters[age]= ', this.filters['age']);
+    
+   
+   
     this.setParams()
   };
-
-  // @action
-  // getSearchQueryString = () => {
-  //   console.log('[getSearchQueryString] --> filters query string=', this.getFiltersQueryString());
-  //   let filtersQuery = this.getFiltersQueryString()
-
-  //   return this.getFiltersQueryString()
-  // }
-
-
-  // @action
-  // getFiltersQueryString = () => {
-    
-  //   let filters:any = this.filters
-  //   let queryString = null
-    
-  //   let queryParams = Object.keys(filters)
-  //   .map((key) => { 
-  //     return (filters[key] ? `${key}=${filters[key]}`  : null ) 
-  //   })
-
-  //   queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
-  //   return queryString
-  // }
 
   @action
   getQueryParamsString = () => {
@@ -220,8 +216,6 @@ export default class ResultsStore {
    * Gets search terms from url query. Runs on component mount and update
    */
   getSearchTerms = () => {
-    console.log('[getSearchTerms] -->');
-    
     const searchTerms = queryString.parse(window.location.search);
 
     this.setSearchTerms(searchTerms);
@@ -234,7 +228,6 @@ export default class ResultsStore {
    */
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
-    console.log('[setSearchTerms] -->');
     forEach(searchTerms, (key, value) => {
       if (value === 'category') {
         this.categoryId = key;
@@ -308,9 +301,7 @@ export default class ResultsStore {
     this.setParams();
   };
 
-  setParams = async () => {
-    console.log('[setParams] -->');
-    
+  setParams = async () => {    
     const params: IParams = {};
 
     if (this.category) {
@@ -386,10 +377,11 @@ export default class ResultsStore {
 
   @action
   fetchResults = async () => {
-    console.log('[fetchResults] --> params: ', this.queryParams);
+    // console.log('[fetchResults] --> params: ', this.queryParams);
     
     this.loading = true;
     try {
+      //TODO: Update post data sturcture for service-eligiblities to be flat array of taxonomies
       const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.queryParams);
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
