@@ -137,7 +137,7 @@ export default class ResultsStore {
 
     let queryParams = Object.keys(params)
     .map((key) => { 
-      return (params[key] && key !== 'location' ? `${key}=${params[key]}` : null ) 
+      return (params[key] ? `${key}=${params[key]}` : null ) 
     })
 
     queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
@@ -355,15 +355,88 @@ export default class ResultsStore {
       params.ethnicity = this.filters.ethnicity;
     }
 
-    if (size(this.locationCoords)) {
-      params.location = this.locationCoords;
-    }
-
     params.order = this.order;
     
     this.queryParams = params
 
     await this.fetchResults();
+  };
+
+  getPostParams = () => {    
+    const params: IParams = {};
+
+    if (this.category) {
+      params.category = get(this.category, 'name');
+    }
+
+    if (this.persona) {
+      params.persona = get(this.persona, 'name');
+    }
+
+    if (this.is_free) {
+      params.is_free = this.is_free;
+    }
+
+    if (this.open_now) {
+      params.open_now = this.open_now;
+    }
+
+    if (this.wait_time !== 'null') {
+      params.wait_time = this.wait_time;
+    }
+
+    if (this.keyword) {
+      params.query = this.keyword;
+    }
+
+    if (this.postcode) {
+      params.postcode = this.postcode;
+    }
+
+    if (this.distance) {
+      params.distance = this.distance;
+    }
+
+    let service_eligibilities: any = []
+    let {...filters}: any = this.filters
+    
+    Object.keys(this.filters)
+    .forEach((key) => { 
+      if(filters[key]) {
+        service_eligibilities.push(filters[key])
+      }
+    })
+
+    if(service_eligibilities.length) {
+      params.eligibilities = service_eligibilities
+    }
+
+    // if (this.filters.age) {
+    //   params.age = this.filters.age;
+    // }
+    // if (this.filters.income) {
+    //   params.income = this.filters.income;
+    // }
+    // if (this.filters.disability) {
+    //   params.disability = this.filters.disability;
+    // }
+    // if (this.filters.language) {
+    //   params.language = this.filters.language;
+    // }
+    // if (this.filters.gender) {
+    //   params.gender = this.filters.gender;
+    // }
+    // if (this.filters.ethnicity) {
+    //   params.ethnicity = this.filters.ethnicity;
+    // }
+
+    if (size(this.locationCoords)) {
+      params.location = this.locationCoords;
+    }
+
+    params.order = this.order;
+
+   return params
   };
 
   /**
@@ -382,7 +455,7 @@ export default class ResultsStore {
     this.loading = true;
     try {
       //TODO: Update post data sturcture for service-eligiblities to be flat array of taxonomies
-      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.queryParams);
+      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.getPostParams());
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
 

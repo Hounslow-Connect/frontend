@@ -28,6 +28,7 @@ export interface IParams {
   gender?: null | string;
   ethnicity?: null | string;
   housing?: null | string;
+  eligibilities?: [];
 }
 
 export interface ICategory {

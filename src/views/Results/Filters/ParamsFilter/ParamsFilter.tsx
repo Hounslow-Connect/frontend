@@ -16,6 +16,11 @@ interface IProps extends RouteComponentProps {
   resultsStore?: ResultsStore;
 }
 
+/**
+ * TODO:
+ * - clear autocomplete options when 'Remove all filters' is clicked
+ */
+
 interface IState {
   postcode: string;
   errors: any;
@@ -132,7 +137,7 @@ class Filter extends Component<IProps, IState> {
 
     if(group && group.children) {
       let eligibilityOptions = [{text: 'Any', value: '' }]
-      group.children.forEach((item: any) => { eligibilityOptions.push({text: item.name, value: item.id })  } )
+      group.children.forEach((item: any) => { eligibilityOptions.push({text: item.name, value: item.name })  } )
       
       options = eligibilityOptions
     }
