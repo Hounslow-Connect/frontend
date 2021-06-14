@@ -30,7 +30,6 @@ import Income from '../../assets/images/icons/who-is-this-for/income.svg';
 import Language from '../../assets/images/icons/who-is-this-for/language.svg';
 import Other from '../../assets/images/icons/who-is-this-for/other.svg';
 
-import Button from '../../components/Button';
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import LocationCard from './LocationCard';
@@ -101,7 +100,7 @@ class Service extends Component<IProps> {
   };
 
   render() {
-    const { serviceStore, uiStore } = this.props;
+    const { serviceStore } = this.props;
     const { service, locations, relatedServices, organisation } = serviceStore;
     if (!service) {
       return null;
