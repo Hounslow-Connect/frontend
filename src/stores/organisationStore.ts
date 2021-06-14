@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import axios from 'axios';
 import { apiBase } from '../config/api';
 import get from 'lodash/get';
@@ -9,6 +9,10 @@ export default class OrganisationStore {
   @observable associatedServices: IService[] | null = null;
   @observable loading: boolean = false;
 
+  @computed
+  get hasSocials() {
+    return (this.organisation && this.organisation.social_medias.length ? true : false)
+  }
 
   /**
    * Get organisation using the passed in organisation slug

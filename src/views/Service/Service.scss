@@ -21,6 +21,10 @@
     position: relative;
     padding: space(32) space(48);
     background-color: $yellow;
+    
+    @media(min-width: 768px) {
+      display: flex;
+    }
   
     @include for-tablet-portrait-down {
       padding: space(24) space(32);
@@ -64,6 +68,14 @@
     background-color: transparent;
     font-weight: normal;
   }
+
+  &__desc {
+   
+    @include for-tablet-landscape-up {
+      max-width: 85%;
+
+    }
+  }
 }
 
 .service__section {
@@ -89,13 +101,14 @@
   margin-bottom: space(16);
   border-radius: 20px;
   overflow: hidden;
+  max-width: 154px;
 
   @include for-phone-only {
-    flex: 0 0 80px;
-    height: 80px;
-    margin-right: 0;
-    margin-bottom: space(12);
-    border-radius: 12px;
+      margin-right: 0;
+      margin-bottom: space(12);
+      border-radius: 12px;
+      height: 130px;
+      max-width: 130px;
   }
 
   img {

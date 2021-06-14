@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
@@ -123,29 +124,14 @@ class Service extends Component<IProps> {
         <div className={`service__header service__header--${get(service, 'type')}`}>
           <div className="flex-container">
             <div className="service__header__wrapper">
-              <div className="flex-container flex-container--no-padding flex-container--left">
-                <div className="service__header__logo">
-                  <img src={getImg(service)} alt={`${service.name} logo`} />
-                </div>
-                <div className="flex-col flex-col--tablet--9">
-                  <h1>{get(service, 'name')}</h1>
-                  <p className="service__header__last-updated">
-                    Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
-                  </p>
-
-                  <div className="flex-container flex-container--no-padding flex-container--left">
-                    {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
-                    {organisation && organisation.slug && <span className="mobile-hide">&nbsp;&nbsp;&nbsp;</span>}
-                    <div className="flex-col--mobile--12">
-                      <Button
-                        text="Give feedback"
-                        icon="comment-alt"
-                        alt={true}
-                        size="medium"
-                        onClick={() => uiStore.toggleFeedbackModal()}
-                      />
-                    </div>
-                  </div>
+              <div className="service__header__logo">
+                <img src={getImg(service)} alt={`${service.name} logo`} />
+              </div>
+              <div className="flex-col flex-col--tablet--9">
+                <h1>{get(service, 'name')}</h1>
+                {organisation && organisation.slug && <p className="service__header__desc">This service is run by the organisation <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">{service.name}</Link>. View their organisation details and other listed services.</p> }
+                <div className="flex-container flex-container--no-padding flex-container--left">
+                  {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={false} accent={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
                 </div>
               </div>
             </div>
@@ -426,6 +412,15 @@ class Service extends Component<IProps> {
                     </div>
                   </Accordian>
                 </div>
+                <br /><br />
+                <div className="mobile-show">
+                  <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
+                    <p>
+                      Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                    </p>
+                  </div>
+                </div>
+                
               </div>
               <div className="flex-col flex-col--4 flex-col--tablet--12 mobile-hide ">
                 <div className="flex-container service__right-column">
@@ -465,6 +460,11 @@ class Service extends Component<IProps> {
 
                   <div className="flex-col flex-col--12">
                     <ShareCard serviceStore={serviceStore} />
+                  </div>
+                  <div className="flex-col flex-col--12 flex-container flex-container--justify flex-container--no-padding">
+                    <p>
+                      Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                    </p>
                   </div>
                 </div>
               </div>

@@ -71,7 +71,7 @@ class Organisation extends Component<IProps> {
                   {get(organisation, 'phone') && <li key={`key_${get(organisation, 'phone')}`}><strong>Phone</strong><a href={`tel:${get(organisation, 'phone')}`}>{get(organisation, 'phone')}</a></li>} 
                   {get(organisation, 'url') && <li key={`key_${get(organisation, 'url')}`}><strong>Website</strong><a href={`${get(organisation, 'url')}`} target="_blank"  rel="noreferrer">{get(organisation, 'url')}</a></li>} 
                   {get(organisation, 'email') && <li key={`key_${get(organisation, 'email')}`}><strong>Email</strong><a href={`mailto:${get(organisation, 'email')}`}>{get(organisation, 'email')}</a></li>} 
-                  {organisation.social_medias && organisation.social_medias.length && <li key="key_organisation_social"><strong>Social media</strong><SocialLinks organisationStore={organisationStore} /></li>}
+                  {organisationStore.hasSocials && <li key="key_organisation_social"><strong>Social media</strong><SocialLinks organisationStore={organisationStore} /></li>}
                 </ul>
               </div>
             </div>
