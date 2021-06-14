@@ -258,15 +258,7 @@ class Filter extends Component<IProps, IState> {
                     { !_isEmpty(this.getFilterOptions('income')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="incomeFilter">Income</label>
 
-                      <Select
-                        options={this.getFilterOptions('income')}
-                        value={`${resultsStore.filters.income}`}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          resultsStore.handleInput('income', e.target.value)
-                          this.search()
-                        }}
-                        placeholder="Select" id="incomeFilter"
-                      />
+                      <StaticAutocomplete defaultValues={resultsStore.filters.income?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('income')} storeTextField="income" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
 
@@ -274,31 +266,14 @@ class Filter extends Component<IProps, IState> {
                     { !_isEmpty(this.getFilterOptions('disability')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="disabilityFilter">Disability</label>
 
-                      <Select
-                        options={this.getFilterOptions('disability')}
-                        value={`${resultsStore.filters.disability}`}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          resultsStore.handleInput('disability', e.target.value)
-                          this.search()
-                        }}
-                        placeholder="Select" id="disabilityFilter"
-                      />
+                      <StaticAutocomplete defaultValues={resultsStore.filters.disability?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('disability')} storeTextField="disability" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
 
                     {/* column */ }
                     { !_isEmpty(this.getFilterOptions('language')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="languageFilter">Language</label>
-
-                      <Select
-                        options={this.getFilterOptions('language')}
-                        value={`${resultsStore.filters.language}`}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          resultsStore.handleInput('language', e.target.value)
-                          this.search()
-                        }}
-                        placeholder="Select" id="languageFilter"
-                      />
+                       <StaticAutocomplete defaultValues={resultsStore.filters.language?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('language')} storeTextField="language" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
 
@@ -306,15 +281,7 @@ class Filter extends Component<IProps, IState> {
                     { !_isEmpty(this.getFilterOptions('gender')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="genderFilter">Gender</label>
 
-                      <Select
-                        options={this.getFilterOptions('gender')}
-                        value={`${resultsStore.filters.gender}`}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                           resultsStore.handleInput('gender', e.target.value)
-                          this.search()
-                        }}
-                        placeholder="Select" id="genderFilter"
-                      />
+                      <StaticAutocomplete defaultValues={resultsStore.filters.gender?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('gender')} storeTextField="gender" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
                     
@@ -322,15 +289,7 @@ class Filter extends Component<IProps, IState> {
                     { !_isEmpty(this.getFilterOptions('ethnicity')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="ethnicityFilter">Ethnicity</label>
 
-                      <Select
-                        options={this.getFilterOptions('ethnicity')}
-                        value={`${resultsStore.filters.ethnicity}`}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                           resultsStore.handleInput('ethnicity', e.target.value)
-                          this.search()
-                        }}
-                        placeholder="Select" id="ethnicityFilter"
-                      />
+                      <StaticAutocomplete defaultValues={resultsStore.filters.ethnicity?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('ethnicity')} storeTextField="ethnicity" multiSelect={true} store={resultsStore} />
                     </div>}
                     {/* ./column */ }
 
@@ -338,15 +297,7 @@ class Filter extends Component<IProps, IState> {
                     { !_isEmpty(this.getFilterOptions('housing')) && <div className={'results__filters--group__item'}>
                       <label htmlFor="housingFilter">Housing</label>
 
-                      <Select
-                        options={this.getFilterOptions('housing')}
-                        value={`${resultsStore.filters.housing}`}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                           resultsStore.handleInput('housing', e.target.value)
-                          this.search()
-                        }}
-                        placeholder="Select" id="housingFilter"
-                      />
+                      <StaticAutocomplete defaultValues={resultsStore.filters.housing?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('housing')} storeTextField="housing" multiSelect={true} store={resultsStore} />
                     </div> }
                     {/* ./column */ }
                     

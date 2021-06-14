@@ -386,7 +386,13 @@ export default class ResultsStore {
     Object.keys(this.filters)
     .forEach((key) => { 
       if(filters[key]) {
-        service_eligibilities.push(filters[key])
+        let filterGroup = filters[key].split(',')
+
+        if(filterGroup) {
+          filterGroup.forEach((filter: any) => {
+            service_eligibilities.push(filter)
+          });
+        }
       }
     })
 
@@ -405,8 +411,6 @@ export default class ResultsStore {
 
   @action
   fetchResults = async () => {
-    console.log('%c [fetchResults] -->', 'color: yellow;');
-    
     this.loading = true;
     try {
       const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.getPostParams());
@@ -420,6 +424,7 @@ export default class ResultsStore {
 
       this.getOrganisations();
     } catch (e) {
+      this.results = []
       console.error(e);
       this.loading = false;
     }

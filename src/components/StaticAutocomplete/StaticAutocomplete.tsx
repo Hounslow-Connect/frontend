@@ -5,7 +5,7 @@ import Select from 'react-select';
 import cx from 'classnames';
 import _first from 'lodash/first';
   
-import './Autocomplete.scss';
+import '../Autocomplete/Autocomplete.scss';
 interface IProps {
   storeValueField?: string;
   defaultValues?: any;
@@ -27,8 +27,6 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
     const autocompeleteInputField = useRef<HTMLInputElement>(null);
 
     const resetStoredAutocompleteData = () => {
-        console.log('%c [resetStoredAutocompleteData] -->','color: green;');
-        
         if(storeValueField) store.handleInput(storeValueField, null)
         if(storeTextField) store.handleInput(storeTextField, null)
 
@@ -46,8 +44,6 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
                 setSuggestions(refactoredOptions)
             }
         }
-
-        console.log('defaultValues:', defaultValues);
         
         // @ts-ignore
         setAutocompleKeywordValue(defaultValues)
@@ -55,7 +51,6 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
      }, []);
 
      const handleInputChange = (newValue: any, {action}: any) => {
-         console.log('[handleInputChange] --> newValue', newValue, 'action type:', action.toString(), 'value: ');
         let inputValue:any = {}
 
         setAutocompleKeywordValue(newValue)
@@ -68,9 +63,6 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
         } else {
             inputValue = _first(newValue)
         }
-
-
-        // console.log('[handleInputChange] --> final inputValue', inputValue);
         
         if (action && (action === 'select-option' || action === 'remove-value')) {
             if(storeValueField)  store.handleInput(storeValueField, inputValue.value)
@@ -84,6 +76,9 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
         clickHandler()
      }
 
+     const getInputName = () => {
+        return (storeTextField && storeTextField[0] ? storeTextField[0].toUpperCase() + storeTextField.substr(1) : 'option')
+     }
      
     return (
         <div className={cx('autocomplete__wrapper relative')} >
@@ -93,7 +88,7 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
                 options={suggestions}
                 onChange={handleInputChange}
                 isClearable={true}
-                placeholder={`Type to search`}
+                placeholder={`Select ${getInputName()}`}
                 classNamePrefix='react-select'
                 className='react-select-container'
             />
