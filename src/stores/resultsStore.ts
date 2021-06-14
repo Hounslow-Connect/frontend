@@ -72,8 +72,6 @@ export default class ResultsStore {
 
   @action
   setPostcode = async (input: string) => {    
-    console.log('[setPostcode] --> input=', input);
-
     if (input !== '' && input !== this.postcode) {
       this.postcode = input;
       await this.geolocate();
@@ -86,8 +84,6 @@ export default class ResultsStore {
 
   @action
   setDistance = (input: string) => {
-    console.log('[setDistance] --> input', input);
-    
     this.distance = input;
   };
 
@@ -101,8 +97,6 @@ export default class ResultsStore {
    */
   @action
   handleInput = (filter: string, input: string) => {
-    console.log('[resultsStore] --> handleInput filter:', filter, 'input: ', input, ', this.filters[age]= ', this.filters['age']);
-
     // @ts-ignore
     this.filters[filter] = input;
   };
@@ -118,9 +112,6 @@ export default class ResultsStore {
     })
 
     queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
-
-    console.log('[getQueryParamsString] --> ', queryString);
-    
     return queryString
   }
 
@@ -164,8 +155,6 @@ export default class ResultsStore {
 
   @action
   getCategory = async () => {
-    console.log('[%c [getCategory] -->', 'color: red;');
-
     try {
       const category = await axios.get(`${apiBase}/collections/categories/${this.categoryId}`);
       this.category = get(category, 'data.data', '');
@@ -176,8 +165,6 @@ export default class ResultsStore {
 
   @action
   getPersona = async () => {
-    console.log('[%c [getPersona] -->', 'color: red;');
-    
     try {
       const persona = await axios.get(`${apiBase}/collections/personas/${this.personaId}`);
       this.persona = get(persona, 'data.data', '');
@@ -203,8 +190,6 @@ export default class ResultsStore {
    */
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
-    console.log('%c [setSearchTerms] -->', 'color: yellow');
-    
     forEach(searchTerms, (key, value) => {
       if (value === 'category') {
         this.categoryId = key;
@@ -279,8 +264,6 @@ export default class ResultsStore {
   };
 
   setParams = async (search: boolean = false) => {    
-    console.log('[setParams]-->');
-    
     const params: IParams = {};
 
     if (this.category) {
@@ -502,7 +485,7 @@ export default class ResultsStore {
         };
       }
     } catch (e) {
-      console.error('[geolocate] --> error getting new location: ', e);
+      console.error('[geoLocate] error: ', e);
     }
   };
 
@@ -513,8 +496,6 @@ export default class ResultsStore {
 
   @action
   orderResults = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log('%c [orderResults]', 'color: red;');
-    
     this.order = e.target.value as 'relevance' | 'distance';
     this.results = [];
 

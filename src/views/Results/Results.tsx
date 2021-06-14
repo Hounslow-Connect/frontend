@@ -59,10 +59,6 @@ class Results extends Component<IProps> {
   render() {
     const { resultsStore, history } = this.props;
 
-    // if (resultsStore.loading) {
-    //   return false;
-    // }
-
     return (
       <section className="results">
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search results', url: '' }]} />

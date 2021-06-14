@@ -54,7 +54,6 @@ class Filter extends Component<IProps, IState> {
   // This will be called each time a search is triggered
   search = () => {
     const { resultsStore, history } = this.props
-    console.log('%c [search] -->', 'color: green;');
     if(resultsStore) {
      // @ts-ignore
       resultsStore.setParams()
@@ -78,7 +77,6 @@ class Filter extends Component<IProps, IState> {
 
   toggleFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
     if(e) e.preventDefault()
-    console.log('[toggleFilters] -->e ', e);
     
     this.setState({
       showFilters: !this.state.showFilters
@@ -88,7 +86,6 @@ class Filter extends Component<IProps, IState> {
   resetFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { resultsStore } = this.props
     if(e) e.preventDefault()
-    console.log('[resetFilters] -->');
     if(resultsStore) resultsStore.clearFilters()
     this.toggleFilters(e)
     // @ts-ignore
