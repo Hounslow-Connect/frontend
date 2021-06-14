@@ -4,7 +4,6 @@ import { EventEmitter } from '../../../../utils/events'
 import get from 'lodash/get';
 import _first from 'lodash/first';
 import _isEmpty from 'lodash/isEmpty';
-import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import StaticAutocomplete from '../../../../components/StaticAutocomplete';
@@ -18,7 +17,6 @@ interface IProps extends RouteComponentProps {
 }
 
 interface IState {
-  postcode: string;
   errors: any;
   showFilters: boolean;
   typingTimeoutId: any;
@@ -31,7 +29,6 @@ class Filter extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      postcode: '',
       showFilters: false,
       typingTimeoutId: undefined,
       errors: {
@@ -43,25 +40,6 @@ class Filter extends Component<IProps, IState> {
   componentWillUnmount() {
     const { resultsStore } = this.props
     if(resultsStore) resultsStore.clear();
-  }
-
-  componentDidMount() {
-    // const { resultsStore } = this.props
-    // const { search_term, location } = queryString.parse(this.props.location.search);
-    
-    // if (search_term && resultsStore) resultsStore.setKeyword(search_term as string)
-    // if (location && resultsStore) resultsStore.setLocation(location as string)
-
-    const { postcode } = queryString.parse(this.props.location.search);
-
-    if (postcode) {
-      this.setState({
-        postcode: postcode as string,
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps: any) {
   }
 
   validate = async () => {
@@ -164,17 +142,19 @@ class Filter extends Component<IProps, IState> {
                   <Input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const target = e.target || null
+                      if (resultsStore) resultsStore.setKeyword(target.value)
+
                       if(this.state.typingTimeoutId) clearTimeout(this.state.typingTimeoutId)
                       
                       this.setState({
                         typingTimeoutId: setTimeout(() => {
-                          if (resultsStore) resultsStore.setKeyword(target.value)
+                          
                           this.search()
                         }, 500)
                       })
                     }}
                     id="keyword"
-                    value={resultsStore.keyword}
+                    value={resultsStore.keyword || ''}
                     placeholder="Search using a keyword"
                     className="results__search-box-keyword"
                     error={this.state.errors.keyword}
@@ -195,31 +175,29 @@ class Filter extends Component<IProps, IState> {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const target = e.target || null
 
-                    this.setState({
-                      postcode: target.value
-                    })
+                    if(resultsStore) resultsStore.setPostcode(target.value)
 
                     if(this.state.typingTimeoutId) clearTimeout(this.state.typingTimeoutId)
                       
                     this.setState({
                       typingTimeoutId: setTimeout(() => {
-                        console.log('set postcode');
-                        if(resultsStore) resultsStore.setPostcode(target.value)
                         this.search()
                       }, 500)
                     })
                   }}
                   className="results__search-filter-location"
                   placeholder="Postcode"
-                  value={this.state.postcode}
+                  value={resultsStore.postcode}
                 />
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center' }}>
                   <label className="results__filters--primary__label" htmlFor="proximityFilter" aria-label="Choose search radius">within</label>
                   <Select
-                    options={[{text: 'Any', value: '' }, {value: '5', text: '5 miles'}, {value: '10', text: '10 miles'}]}
-                    value={`${resultsStore.distance}`}
+
+                    disabled={!resultsStore.postcode}
+                    options={[{value: '1', text: '1 Mile'},{value: '5', text: '5 Miles'}, {value: '10', text: '10 Miles'}, {value: '20', text: '20 Miles'}]}
+                    value={`${resultsStore.distance || "5"}`}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       resultsStore.setDistance(e.target.value)
                       this.search()
@@ -276,7 +254,6 @@ class Filter extends Component<IProps, IState> {
                     { !_isEmpty(this.getFilterOptions('age')) && <div className={'results__filters--group__item'}>
                       <label>Age</label>
                       <StaticAutocomplete defaultValues={resultsStore.filters.age?.split(',').map((item: string) => { return { value: item, label: item } })} clickHandler={this.search} options={this.getFilterOptions('age')} storeTextField="age" multiSelect={true} store={resultsStore} />
-                      {resultsStore.filters.age}
                     </div>}
                     {/* ./column */ }
 

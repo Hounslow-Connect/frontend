@@ -19,7 +19,7 @@ import {
 import { queryRegex, querySeparator } from '../utils/utils';
 
 export default class ResultsStore {
-  @observable keyword: string = '';
+  @observable keyword: string | null = null;
   @observable distance: string = '';
   @observable categoryId: string = '';
   @observable category: ICategory | null = null;
@@ -57,7 +57,7 @@ export default class ResultsStore {
 
   @computed
   get isKeywordSearch() {
-    return !!this.keyword;
+    return this.keyword !== null;
   }
 
   @action
@@ -71,28 +71,28 @@ export default class ResultsStore {
   };
 
   @action
-  setPostcode = async (input: string) => {
-    console.log('[setPostcode input:', input);
-    
-    // @ts-ignore
+  setPostcode = async (input: string) => {    
+    console.log('[setPostcode] --> input=', input);
+
     if (input !== '' && input !== this.postcode) {
       this.postcode = input;
       await this.geolocate();
       return
     }
 
-    this.postcode = input;
+    if(input === '') this.locationCoords = {}
+    this.postcode = input || '';
   };
 
   @action
   setDistance = (input: string) => {
-    // @ts-ignore
+    console.log('[setDistance] --> input', input);
+    
     this.distance = input;
   };
 
   @action
   setKeyword = (input: string) => {
-    // @ts-ignore
     this.keyword = input;
   };
 
@@ -126,8 +126,6 @@ export default class ResultsStore {
 
 
   @action clearFilters = () => {
-    console.log('[searchStore] --> clearFilters()');
-    
     this.filters = {
       age: null,
       income: null,
@@ -305,12 +303,16 @@ export default class ResultsStore {
       params.wait_time = this.wait_time;
     }
 
-    if (this.keyword) {
+    if (this.keyword !== null) {
       params.query = this.keyword;
     }
 
     if (this.postcode) {
       params.postcode = this.postcode;
+
+      if(!this.distance) this.setDistance('5')
+    } else {
+      if(this.distance) this.setDistance('')
     }
 
     if (this.distance) {
@@ -485,13 +487,15 @@ export default class ResultsStore {
       const geolocation = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode},UK&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
       );
-
+      
       const location = get(geolocation, 'data.results[0].geometry.location', {});
-      console.log('[geolocate] --> new location: ', location);
-      this.locationCoords = {
-        lon: location.lng,
-        lat: location.lat,
-      };
+
+      if(location && get(geolocation, 'data.results[0]')) {
+        this.locationCoords = {
+          lon: location.lng,
+          lat: location.lat,
+        };
+      }
     } catch (e) {
       console.error('[geolocate] --> error getting new location: ', e);
     }
