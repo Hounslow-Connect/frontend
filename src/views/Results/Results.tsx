@@ -14,6 +14,7 @@ import Breadcrumb from '../../components/Breadcrumb';
 import map from 'lodash/map';
 import SideboxCard from './SideboxCard';
 import { ISidebox } from '../../types/types';
+import Loading from '../../components/Loading';
 
 interface IProps {
   location: Location;
@@ -58,10 +59,6 @@ class Results extends Component<IProps> {
   render() {
     const { resultsStore, history } = this.props;
 
-    if (resultsStore.loading) {
-      return false;
-    }
-
     return (
       <section className="results">
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search results', url: '' }]} />
@@ -70,7 +67,7 @@ class Results extends Component<IProps> {
             {!resultsStore.isKeywordSearch && 
               <h1 className="results__heading">Results for</h1>
             }
-            <div className={"results__overview " + (!resultsStore.isKeywordSearch ? 'results__overview--category' : 'results__overview--keyword')}>
+            <div className={"results__overview " + (!resultsStore.isKeywordSearch ? '_disabled-results__overview--category' : 'results__overview--keyword')}>
               {!resultsStore.isKeywordSearch &&
                 <Category />
               }
@@ -97,21 +94,25 @@ class Results extends Component<IProps> {
           </div>
         </div>
 
-        <div className="results__list">
-          {(this.hasCategories() && this.hasCategories().length !== 0) && (
-            <div className="results__category-sidebar">
-              {map(this.hasCategories(), (sidebox: ISidebox, index) => {
-                return <SideboxCard sidebox={sidebox} key={index} />;
-              })}
-            </div>
-          )}
+        {resultsStore.loading ? (
+          <Loading />
+        ) : (
+          <div className="results__list">
+            {(this.hasCategories() && this.hasCategories().length !== 0) && (
+              <div className="results__category-sidebar">
+                {map(this.hasCategories(), (sidebox: ISidebox, index) => {
+                  return <SideboxCard sidebox={sidebox} key={index} />;
+                })}
+              </div>
+            )}
 
-          {resultsStore.view === 'grid' ? (
-            <ListView resultsStore={resultsStore} history={history} />
-          ) : (
-            <MapView />
-          )}
-        </div>
+            {resultsStore.view === 'grid' ? (
+              <ListView resultsStore={resultsStore} history={history} />
+            ) : (
+              <MapView />
+            )}
+          </div>
+        )}
       </section>
     );
   }

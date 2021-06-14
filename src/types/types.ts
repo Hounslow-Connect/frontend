@@ -18,7 +18,17 @@ export interface IParams {
   wait_time?: string;
   order?: 'distance' | 'relevance';
   query?: string;
+  postcode?: string;
   location?: IGeoLocation | {};
+  distance?: null | string;
+  age?: null | string;
+  income?: null | string;
+  disability?: null | string;
+  language?: null | string;
+  gender?: null | string;
+  ethnicity?: null | string;
+  housing?: null | string;
+  eligibilities?: [];
 }
 
 export interface ICategory {
@@ -187,4 +197,18 @@ export interface IBanner {
   button_text: string;
   button_url: string;
   has_image: true;
+}
+
+export interface IEligibilityFilters {
+  age: null | string;
+  income: null | string;
+  disability: null | string;
+  language: null | string;
+  gender: null | string;
+  ethnicity: null | string;
+  housing: null | string;
+}
+
+export enum Events {
+  SET_TITLE = 'set_title'
 }

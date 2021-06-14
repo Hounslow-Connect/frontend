@@ -3,6 +3,9 @@
 @import '../../styles/breakpoints.scss';
 
 .breadcrumb {
+  position: relative;
+  z-index: 10;
+  
   > .flex-container {
     max-width: 1260px;
   }

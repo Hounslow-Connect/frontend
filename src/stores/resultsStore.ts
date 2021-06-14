@@ -13,12 +13,14 @@ import {
   IOrganisation,
   IService,
   IGeoLocation,
+  IEligibilityFilters,
 } from '../types/types';
 
 import { queryRegex, querySeparator } from '../utils/utils';
 
 export default class ResultsStore {
-  @observable keyword: string = '';
+  @observable keyword: string | null = null;
+  @observable distance: string = '';
   @observable categoryId: string = '';
   @observable category: ICategory | null = null;
   @observable personaId: string = '';
@@ -36,15 +38,100 @@ export default class ResultsStore {
   @observable postcode: string = '';
   @observable locationCoords: IGeoLocation | {} = {};
   @observable view: 'grid' | 'map' = 'grid';
+  serviceEligibilityOptions: [] = [];
+  @observable queryParams: IParams = {};
+
+  @observable filters: IEligibilityFilters = {
+    age: null,
+    income: null,
+    disability: null,
+    language: null,
+    gender: null,
+    ethnicity: null,
+    housing: null
+  };
+
+  constructor() {
+    this.getServiceEligibilities();
+  }
 
   @computed
   get isKeywordSearch() {
-    return !!this.keyword;
+    return this.keyword !== null;
   }
 
   @action
+  getServiceEligibilities = async () => {
+    try {
+      const data = await axios.get(`${apiBase}/taxonomies/service-eligibilities`);
+      this.serviceEligibilityOptions = get(data, 'data.data', []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  @action
+  setPostcode = async (input: string) => {    
+    if (input !== '' && input !== this.postcode) {
+      this.postcode = input;
+      await this.geolocate();
+      return
+    }
+
+    if(input === '') this.locationCoords = {}
+    this.postcode = input || '';
+  };
+
+  @action
+  setDistance = (input: string) => {
+    this.distance = input;
+  };
+
+  @action
+  setKeyword = (input: string) => {
+    this.keyword = input;
+  };
+
+  /**
+   * Handles Input from autocomplete filters (onChange method)
+   */
+  @action
+  handleInput = (filter: string, input: string) => {
+    // @ts-ignore
+    this.filters[filter] = input;
+  };
+
+  @action
+  getQueryParamsString = () => {
+    let params: any = this.queryParams
+    let queryString = null
+
+    let queryParams = Object.keys(params)
+    .map((key) => { 
+      return (params[key] ? `${key}=${params[key]}` : null ) 
+    })
+
+    queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
+    return queryString
+  }
+
+
+  @action clearFilters = () => {
+    this.filters = {
+      age: null,
+      income: null,
+      disability: null,
+      language: null,
+      gender: null,
+      ethnicity: null,
+      housing: null
+    };
+  };
+
+  @action
   clear() {
-    this.keyword = '';
+    this.keyword = null;
+    this.distance = '';
     this.categoryId = '';
     this.category = null;
     this.personaId = '';
@@ -62,6 +149,8 @@ export default class ResultsStore {
     this.postcode = '';
     this.locationCoords = {};
     this.view = 'grid';
+
+    this.clearFilters()
   }
 
   @action
@@ -84,12 +173,21 @@ export default class ResultsStore {
     }
   };
 
+
+  /**
+   * Gets search terms from url query. Runs on component mount and update
+   */
   getSearchTerms = () => {
     const searchTerms = queryString.parse(window.location.search);
 
     this.setSearchTerms(searchTerms);
   };
 
+
+  /**
+   * Updates the store with the pased in query params 
+   * @param searchTerms 
+   */
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
     forEach(searchTerms, (key, value) => {
@@ -101,7 +199,7 @@ export default class ResultsStore {
         this.personaId = key;
       }
 
-      if (value === 'search_term') {
+      if (value === 'query') {
         this.keyword = key;
       }
 
@@ -121,8 +219,32 @@ export default class ResultsStore {
         this.currentPage = Number(key);
       }
 
-      if (value === 'location') {
+      if (value === 'postcode') {
         this.postcode = key;
+      }
+
+      if (value === 'distance') {
+        this.distance = key;
+      }
+
+      // set filter params
+      if (value === 'age') {
+        this.filters.age = key;
+      }
+      if (value === 'income') {
+        this.filters.income = key;
+      }
+      if (value === 'disability') {
+        this.filters.disability = key;
+      }
+      if (value === 'language') {
+        this.filters.language = key;
+      }
+      if (value === 'gender') {
+        this.filters.gender = key;
+      }
+      if (value === 'ethnicity') {
+        this.filters.ethnicity = key;
       }
     });
 
@@ -138,10 +260,75 @@ export default class ResultsStore {
       await this.geolocate();
     }
 
-    this.setParams();
+    this.setParams(true);
   };
 
-  setParams = async () => {
+  setParams = async (search: boolean = false) => {    
+    const params: IParams = {};
+
+    if (this.category) {
+      params.category = get(this.category, 'id');
+    }
+
+    if (this.persona) {
+      params.persona = get(this.persona, 'id');
+    }
+
+    if (this.is_free) {
+      params.is_free = this.is_free;
+    }
+
+    if (this.open_now) {
+      params.open_now = this.open_now;
+    }
+
+    if (this.wait_time !== 'null') {
+      params.wait_time = this.wait_time;
+    }
+
+    if (this.keyword !== null) {
+      params.query = this.keyword;
+    }
+
+    if (this.postcode) {
+      params.postcode = this.postcode;
+
+      if(!this.distance) this.setDistance('5')
+    } else {
+      if(this.distance) this.setDistance('')
+    }
+
+    if (this.distance) {
+      params.distance = this.distance;
+    }
+
+    if (this.filters.age) {
+      params.age = this.filters.age;
+    }
+    if (this.filters.income) {
+      params.income = this.filters.income;
+    }
+    if (this.filters.disability) {
+      params.disability = this.filters.disability;
+    }
+    if (this.filters.language) {
+      params.language = this.filters.language;
+    }
+    if (this.filters.gender) {
+      params.gender = this.filters.gender;
+    }
+    if (this.filters.ethnicity) {
+      params.ethnicity = this.filters.ethnicity;
+    }
+
+    params.order = this.order;
+    
+    this.queryParams = params
+
+    if(search) await this.fetchResults();
+  };
+
+  getPostParams = () => {    
     const params: IParams = {};
 
     if (this.category) {
@@ -168,20 +355,48 @@ export default class ResultsStore {
       params.query = this.keyword;
     }
 
+    if (this.postcode) {
+      params.postcode = this.postcode;
+    }
+
+    if (this.distance) {
+      params.distance = this.distance;
+    }
+
+    let service_eligibilities: any = []
+    let {...filters}: any = this.filters
+    
+    Object.keys(this.filters)
+    .forEach((key) => { 
+      if(filters[key]) {
+        let filterGroup = filters[key].split(',')
+
+        if(filterGroup) {
+          filterGroup.forEach((filter: any) => {
+            service_eligibilities.push(filter)
+          });
+        }
+      }
+    })
+
+    if(service_eligibilities.length) {
+      params.eligibilities = service_eligibilities
+    }
+
     if (size(this.locationCoords)) {
       params.location = this.locationCoords;
     }
 
     params.order = this.order;
 
-    await this.fetchResults(params);
+   return params
   };
 
   @action
-  fetchResults = async (params: IParams) => {
+  fetchResults = async () => {
     this.loading = true;
     try {
-      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, params);
+      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.getPostParams());
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
 
@@ -192,6 +407,7 @@ export default class ResultsStore {
 
       this.getOrganisations();
     } catch (e) {
+      this.results = []
       console.error(e);
       this.loading = false;
     }
@@ -253,63 +469,24 @@ export default class ResultsStore {
     this.postcode = postcode.replace(' ', '');
   };
 
-  amendSearch = (searchTerm?: string) => {
-    let url = window.location.search;
-
-    if (this.postcode) {
-      url = this.updateQueryStringParameter('location', this.postcode);
-    }
-
-    if (!this.postcode) {
-      url = this.removeQueryStringParameter('location', url);
-      this.locationCoords = {};
-    }
-
-    if (this.is_free) {
-      url = this.updateQueryStringParameter('is_free', this.is_free, url);
-    }
-
-    if (!this.is_free) {
-      url = this.removeQueryStringParameter('is_free', url);
-    }
-
-    if (this.open_now) {
-      url = this.updateQueryStringParameter('open_now', this.open_now, url);
-    }
-
-    if (!this.open_now) {
-      url = this.removeQueryStringParameter('open_now', url);
-    }
-
-    if (searchTerm) {
-      url = this.updateQueryStringParameter('search_term', searchTerm, url);
-    }
-
-    this.results = [];
-    return url;
-  };
-
   @action
   geolocate = async () => {
     try {
       const geolocation = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode},UK&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
       );
-
+      
       const location = get(geolocation, 'data.results[0].geometry.location', {});
 
-      this.locationCoords = {
-        lon: location.lng,
-        lat: location.lat,
-      };
+      if(location && get(geolocation, 'data.results[0]')) {
+        this.locationCoords = {
+          lon: location.lng,
+          lat: location.lat,
+        };
+      }
     } catch (e) {
-      console.error(e);
+      console.error('[geoLocate] error: ', e);
     }
-  };
-
-  @action
-  handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.keyword = e.target.value;
   };
 
   @action
