@@ -125,10 +125,7 @@ class Filter extends Component<IProps, IState> {
 
     return (
       <div className="results__filters">
-        {/* {resultsStore.isKeywordSearch && 
-          <h2 className="results__filters__heading">Results found for</h2>
-        } */ }
-         <h2 className="results__filters__heading">Search results</h2>
+        {resultsStore.isKeywordSearch && <h2 className="results__filters__heading">Search results</h2>}
         <form
           // className={"flex-container flex-container--align-bottom flex-container--no-padding"}
           onSubmit={e => {

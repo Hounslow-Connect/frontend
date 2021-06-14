@@ -139,7 +139,7 @@ export default class ResultsStore {
 
   @action
   clear() {
-    this.keyword = '';
+    this.keyword = null;
     this.distance = '';
     this.categoryId = '';
     this.category = null;
@@ -284,11 +284,11 @@ export default class ResultsStore {
     const params: IParams = {};
 
     if (this.category) {
-      params.category = get(this.category, 'name');
+      params.category = get(this.category, 'id');
     }
 
     if (this.persona) {
-      params.persona = get(this.persona, 'name');
+      params.persona = get(this.persona, 'id');
     }
 
     if (this.is_free) {

@@ -608,21 +608,17 @@
 }
 
 .results__overview__content {
-  flex: 0 0 50%;
   display: flex;
-  align-items: flex-start;
-
-  @include for-tablet-portrait-down {
-    flex: 0 0 100%;
-    margin-bottom: space(24);
-  }
+  width: 100%;
+  margin-bottom: space(24);
+  align-items: center;
 }
 
 .results__overview__image {
   flex: 0 0 auto;
   margin-right: space(24);
-  width: 158px;
-  height: 158px;
+  width: 100px;
+  height: 100px;
   background-color: $gray;
   border-radius: 20px;
 

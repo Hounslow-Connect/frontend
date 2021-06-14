@@ -71,7 +71,7 @@ class Results extends Component<IProps> {
             {!resultsStore.isKeywordSearch && 
               <h1 className="results__heading">Results for</h1>
             }
-            <div className={"results__overview " + (!resultsStore.isKeywordSearch ? 'results__overview--category' : 'results__overview--keyword')}>
+            <div className={"results__overview " + (!resultsStore.isKeywordSearch ? '_disabled-results__overview--category' : 'results__overview--keyword')}>
               {!resultsStore.isKeywordSearch &&
                 <Category />
               }
