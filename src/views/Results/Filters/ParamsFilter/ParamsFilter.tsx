@@ -124,7 +124,6 @@ class Filter extends Component<IProps, IState> {
       <div className="results__filters">
         {resultsStore.isKeywordSearch && <h2 className="results__filters__heading">Search results</h2>}
         <form
-          // className={"flex-container flex-container--align-bottom flex-container--no-padding"}
           onSubmit={e => {
             e.preventDefault();
             this.search()
@@ -190,7 +189,7 @@ class Filter extends Component<IProps, IState> {
                   <Select
 
                     disabled={!resultsStore.postcode}
-                    options={[{value: '1', text: '1 Mile'},{value: '5', text: '5 Miles'}, {value: '10', text: '10 Miles'}, {value: '20', text: '20 Miles'}]}
+                    options={[{value: '1', text: '1 Mile'}, {value: '3', text: '3 Miles'}, {value: '5', text: '5 Miles'}, {value: '10', text: '10 Miles'}, {value: '20', text: '20 Miles'}]}
                     value={`${resultsStore.distance || "5"}`}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       resultsStore.setDistance(e.target.value)

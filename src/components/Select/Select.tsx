@@ -31,7 +31,6 @@ const Select: React.FunctionComponent<IProps> = ({
     className={`select ${className}`}
     onChange={onChange}
     id={id}
-    // defaultValue={placeholder}
     disabled={disabled}
     value= {value}
   >
