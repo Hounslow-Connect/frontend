@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
+import _orderBy from 'lodash/orderBy';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 import cx from 'classnames';
@@ -131,13 +132,15 @@ class Service extends Component<IProps> {
         const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
         
         if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
-          const matchedTaxonomy:any = find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
-          
-          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy.name)
+          const matchedTaxonomy:any =find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
+          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy)
         }
       })
     }
 
+    const orderEligibilities = _orderBy(relatedEligibilities, 'order', 'asc')
+    relatedEligibilities = orderEligibilities.map((eligibility: any) => eligibility.name)
+    
     // Check service.elgibility.custom to see if there is a value for the passed in name
     if(service && service.eligibility_types.custom) {
       const customEligibility = get(service.eligibility_types.custom, `${name.split(' ').join('_').toLowerCase()}`)
