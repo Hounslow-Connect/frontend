@@ -57,7 +57,7 @@ export default class ResultsStore {
 
   @computed
   get isKeywordSearch() {
-    return !this.keyword;
+    return !!this.keyword;
   }
 
   @action
@@ -216,7 +216,7 @@ export default class ResultsStore {
         this.personaId = key;
       }
 
-      if (value === 'search_term') {
+      if (value === 'query') {
         this.keyword = key;
       }
 

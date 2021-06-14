@@ -112,6 +112,7 @@ class Filter extends Component<IProps, IState> {
     if(e) e.preventDefault()
     console.log('[resetFilters] -->');
     if(resultsStore) resultsStore.clearFilters()
+    this.toggleFilters(e)
     // @ts-ignore
     EventEmitter.dispatch('filtersCleared', e)
     this.search()
@@ -151,14 +152,14 @@ class Filter extends Component<IProps, IState> {
         } */ }
          <h2 className="results__filters__heading">Search results</h2>
         <form
-          className={"flex-container flex-container--align-bottom flex-container--no-padding"}
+          // className={"flex-container flex-container--align-bottom flex-container--no-padding"}
           onSubmit={e => {
             e.preventDefault();
             this.search()
           }}>
           <div className={resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12"}>
             <div className="results__filters--primary">
-              {!resultsStore.isKeywordSearch &&
+              {resultsStore.isKeywordSearch &&
                 <div className="">
                   <Input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -377,33 +378,12 @@ class Filter extends Component<IProps, IState> {
                     
                   </div>
 
-                  <div className={'flex-container flex-container--align-bottom flex-container--no-padding flex-container--right'}>
-                    <button onClick={this.resetFilters} className={'link'}>Remove all filters</button>
-                  </div>
+                  <button onClick={this.resetFilters} className={'link results__filters--remove'}>Remove all filters</button>
                   
                 </div>
               )}
             </div>
           </div>
-          {/* <div
-            className={"results__filters__checkboxes " + (resultsStore.isKeywordSearch ? "flex-col" : "flex-col flex-col--12")}
-            style={{
-              marginBottom: !resultsStore.isKeywordSearch ? 24 : 0
-            }}>
-            <h3 className="results__filters__heading">Filter by</h3>
-            <div className="flex-container flex-container--no-padding flex-container--no-space">
-              
-              <Checkbox
-                id="open_now"
-                label="Open now"
-                checked={get(resultsStore, 'open_now', false)}
-                onChange={() => {
-                  resultsStore.toggleOpenNow();
-                }}
-                aria="Filter services that are open now"
-              />
-            </div>
-          </div> */}
         </form>
       </div>
     );

@@ -114,7 +114,7 @@ class Search extends React.Component<IProps> {
                             e.preventDefault();
                             history.push({
                               pathname: '/results',
-                              search: `?search_term=${SearchStore.search}&postcode=${SearchStore.postcode}`,
+                              search: `?query=${SearchStore.search}&postcode=${SearchStore.postcode}`,
                             });
                           }}
                         />
