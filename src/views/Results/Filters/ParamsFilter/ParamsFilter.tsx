@@ -208,18 +208,6 @@ class Filter extends Component<IProps, IState> {
                 </div>
               
               <div className="">
-                {/* <Button
-                  icon="search"
-                  text="Search"
-                  onClick={() => {
-                    history.push({
-                      search: resultsStore.updateQueryStringParameter(
-                        'search_term',
-                        this.state.keyword
-                      ),
-                    });
-                  }}
-                /> */}
                  <Checkbox
                   id="is_free"
                   label="Only show free"
