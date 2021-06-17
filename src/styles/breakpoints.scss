@@ -8,6 +8,18 @@
     @content;
   }
 }
+
+@mixin for-small-mobile-up {
+  @media (min-width: 465px) {
+    @content;
+  }
+}
+@mixin for-mobile-up {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+
 @mixin for-tablet-portrait-up {
   @media (min-width: 769px) {
     @content;

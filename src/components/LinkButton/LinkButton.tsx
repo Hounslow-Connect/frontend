@@ -20,6 +20,7 @@ interface IProps extends RouteComponentProps {
   header?: boolean;
   burgerMenu?: boolean;
   light?: boolean;
+  accent?: boolean;
   onClick?: any;
   covid?: boolean;
 }
@@ -37,6 +38,7 @@ const LinkButton: React.FunctionComponent<IProps> = ({
   header = false,
   burgerMenu = false,
   light = false,
+  accent = false,
   onClick,
   covid = false,
   image,
@@ -49,6 +51,7 @@ const LinkButton: React.FunctionComponent<IProps> = ({
       button__header: header,
       'buton__burger-menu': burgerMenu,
       'button--light': light,
+      'button--pink': accent,
       'button button--black': covid,
     })}
     disabled={disabled}

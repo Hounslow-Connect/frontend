@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import find from 'lodash/find';
+import _orderBy from 'lodash/orderBy';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 import cx from 'classnames';
@@ -29,7 +31,6 @@ import Income from '../../assets/images/icons/who-is-this-for/income.svg';
 import Language from '../../assets/images/icons/who-is-this-for/language.svg';
 import Other from '../../assets/images/icons/who-is-this-for/other.svg';
 
-import Button from '../../components/Button';
 import CriteriaCard from './CriteriaCard';
 import Accordian from '../../components/Accordian';
 import LocationCard from './LocationCard';
@@ -131,13 +132,15 @@ class Service extends Component<IProps> {
         const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
         
         if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
-          const matchedTaxonomy:any = find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
-          
-          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy.name)
+          const matchedTaxonomy:any =find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
+          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy)
         }
       })
     }
 
+    const orderEligibilities = _orderBy(relatedEligibilities, 'order', 'asc')
+    relatedEligibilities = orderEligibilities.map((eligibility: any) => eligibility.name)
+    
     // Check service.elgibility.custom to see if there is a value for the passed in name
     if(service && service.eligibility_types.custom) {
       const customEligibility = get(service.eligibility_types.custom, `${name.split(' ').join('_').toLowerCase()}`)
@@ -149,7 +152,7 @@ class Service extends Component<IProps> {
   }
 
   render() {
-    const { serviceStore, uiStore } = this.props;
+    const { serviceStore } = this.props;
     const { service, locations, relatedServices, organisation } = serviceStore;
     if (!service) {
       return null;
@@ -172,29 +175,14 @@ class Service extends Component<IProps> {
         <div className={`service__header service__header--${get(service, 'type')}`}>
           <div className="flex-container">
             <div className="service__header__wrapper">
-              <div className="flex-container flex-container--no-padding flex-container--left">
-                <div className="service__header__logo">
-                  <img src={getImg(service)} alt={`${service.name} logo`} />
-                </div>
-                <div className="flex-col flex-col--tablet--9">
-                  <h1>{get(service, 'name')}</h1>
-                  <p className="service__header__last-updated">
-                    Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
-                  </p>
-
-                  <div className="flex-container flex-container--no-padding flex-container--left">
-                    {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
-                    {organisation && organisation.slug && <span className="mobile-hide">&nbsp;&nbsp;&nbsp;</span>}
-                    <div className="flex-col--mobile--12">
-                      <Button
-                        text="Give feedback"
-                        icon="comment-alt"
-                        alt={true}
-                        size="medium"
-                        onClick={() => uiStore.toggleFeedbackModal()}
-                      />
-                    </div>
-                  </div>
+              <div className="service__header__logo">
+                <img src={getImg(service)} alt={`${service.name} logo`} />
+              </div>
+              <div className="flex-col flex-col--tablet--9">
+                <h1>{get(service, 'name')}</h1>
+                {organisation && organisation.slug && <p className="service__header__desc">This service is run by the organisation <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">{service.name}</Link>. View their organisation details and other listed services.</p> }
+                <div className="flex-container flex-container--no-padding flex-container--left">
+                  {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={false} accent={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
                 </div>
               </div>
             </div>
@@ -482,6 +470,15 @@ class Service extends Component<IProps> {
                     </div>
                   </Accordian>
                 </div>
+                <br /><br />
+                <div className="mobile-show">
+                  <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
+                    <p>
+                      Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                    </p>
+                  </div>
+                </div>
+                
               </div>
               <div className="flex-col flex-col--4 flex-col--tablet--12  ">
                 <div className="flex-container service__right-column mobile-hide">
@@ -524,6 +521,11 @@ class Service extends Component<IProps> {
                 <div className="flex-container service__right-column">
                   <div className="flex-col flex-col--12">
                     <ShareCard serviceStore={serviceStore} />
+                  </div>
+                  <div className="flex-col flex-col--12 flex-container flex-container--justify flex-container--no-padding">
+                    <p>
+                      Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                    </p>
                   </div>
                 </div>
               </div>

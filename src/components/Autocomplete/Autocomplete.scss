@@ -4,4 +4,17 @@
  &__value-container {
     padding: 18px 1.25rem !important;
  }   
+
+ &__menu {
+   z-index: 999 !important;
+ }
+
+ &__multi-value {
+   color: #fff !important;
+    background-color: $pink !important;
+ }
+
+ &__multi-value , &__multi-value__label {
+  color: #fff !important;
+ }
 }

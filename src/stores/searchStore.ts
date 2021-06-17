@@ -7,7 +7,7 @@ import { apiBase } from '../config/api';
 import { ICategory, IPersona } from '../types/types';
 
 class SearchStore {
-  @observable location: string = '';
+  @observable postcode: string = '';
   @observable search: string = '';
   @observable categories: ICategory[] = [];
   @observable personas: IPersona[] = [];
@@ -20,7 +20,7 @@ class SearchStore {
   }
 
   @action clear = () => {
-    this.location = '';
+    this.postcode = '';
     this.search = '';
     this.categoryId = '';
   };
@@ -61,8 +61,8 @@ class SearchStore {
   };
 
   @action onChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-    if(type === 'location') {
-      this.location = e.target.value;
+    if(type === 'postcode') {
+      this.postcode = e.target.value;
     }
     
     if(type === 'search') {
