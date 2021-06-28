@@ -17,4 +17,14 @@
  &__multi-value , &__multi-value__label {
   color: #fff !important;
  }
+
+ &__control {
+  border-color: hsl(0, 0%, 60%) !important;
+ }
+ &__indicator-separator  {
+  background-color: hsl(0, 0%, 60%) !important;
+ }
+ &__indicator  {
+  color: hsl(0, 0%, 60%) !important;
+ }
 }
