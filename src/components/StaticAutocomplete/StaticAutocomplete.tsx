@@ -47,7 +47,14 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({ options, store, s
         
         // @ts-ignore
         setAutocompleKeywordValue(defaultValues)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+       
+        return () => {
+            setAutocompleKeywordValue([]);
+            setSuggestions([]);
+            // @ts-ignore
+            EventEmitter.unsubscribe('filtersCleared')
+        };
+         // eslint-disable-next-line react-hooks/exhaustive-deps
      }, []);
 
      const handleInputChange = (newValue: any, {action}: any) => {
