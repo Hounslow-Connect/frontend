@@ -12,7 +12,7 @@ interface IProps {
 
 const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content}) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState(1);
-    
+
   return (
     <div className="flex-col--12 banner">
       <div className="flex-container flex-container--justify flex-container--mobile-no-padding">
@@ -28,11 +28,11 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content}
               </div>
               {banners.length && banners.length > 1 && (
                 <div className="arrows">
-                    <button className="arrow arrow-left" disabled={(activeCarouselItem <=1 ? true : false)} onClick={() => { if(activeCarouselItem > 1) setActiveCarouselItem(activeCarouselItem - 1) }}>
+                    <button className="arrow arrow-left" disabled={(activeCarouselItem <=1 ? true : false)} onClick={() => { setActiveCarouselItem(activeCarouselItem - 1) }}>
                         <FontAwesomeIcon icon="chevron-left" />
                         <span className="sr-only">Previous slide</span>
                     </button>
-                    <button className="arrow arrow-right" disabled={(activeCarouselItem >= banners.length ? true : false)} onClick={() => { if(activeCarouselItem < 2) setActiveCarouselItem(activeCarouselItem + 1) }}>
+                    <button className="arrow arrow-right" disabled={(activeCarouselItem >= banners.length ? true : false)} onClick={() => {  setActiveCarouselItem(activeCarouselItem + 1) }}>
                         <FontAwesomeIcon icon="chevron-right" />
                         <span className="sr-only">Next slide</span>
                     </button>
