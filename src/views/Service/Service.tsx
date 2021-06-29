@@ -180,7 +180,7 @@ class Service extends Component<IProps> {
               </div>
               <div className="flex-col flex-col--tablet--9">
                 <h1>{get(service, 'name')}</h1>
-                {organisation && organisation.slug && <p className="service__header__desc">This service is run by the organisation <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">{service.name}</Link>. View their organisation details and other listed services.</p> }
+                {organisation && organisation.slug && <p className="service__header__desc">This service is run by the organisation <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">{organisation.name}</Link>. View their organisation details and other listed services.</p> }
                 <div className="flex-container flex-container--no-padding flex-container--left">
                   {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={false} accent={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
                 </div>
