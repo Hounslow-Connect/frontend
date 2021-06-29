@@ -32,8 +32,9 @@ class SearchStore {
   @action
   getCategories = async () => {
     try {
-      const categories = await axios.get(`${apiBase}/collections/categories?page=1`);
-      const categoryList = get(categories, 'data.data', []);
+      const categories = await axios.get(`${apiBase}/collections/categories/all`);
+      let categoryList = get(categories, 'data.data', []);
+      categoryList = categoryList.filter((category: any) => { return category.enabled === true })
 
       // temp addition for COVID-19
       const [covidCategories, normalCategories] = partition(categoryList, category =>
@@ -54,7 +55,10 @@ class SearchStore {
   getPersonas = async () => {
     try {
       const personas = await axios.get(`${apiBase}/collections/personas`);
-      this.personas = get(personas, 'data.data', []);
+      let personasList = get(personas, 'data.data', []);
+      personasList = personasList.filter((persona: any) => { return persona.enabled === true }).splice(0, 3)
+
+      this.personas = personasList
     } catch (e) {
       console.error(e);
     }
