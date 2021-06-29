@@ -31,7 +31,7 @@ const CriteriaCard: React.FunctionComponent<IProps> = ({ svg, title, info }) => 
 
     if(shouldShowToggle()) {
       const size = info.split(', ').length
-      infoText = info.split(',').slice(4, size).join(', ');
+      infoText = info.split(',').slice(3, size).join(', ');
     }
     return infoText
   }
@@ -43,7 +43,7 @@ const CriteriaCard: React.FunctionComponent<IProps> = ({ svg, title, info }) => 
           <ReactSVG src={svg} />
           <p className="criteria_card-title">{title}</p>
         </div>
-        <div className="criteria_card-content"><p>{getInfo()}{shouldShowToggle() && !open && (', plus more...')}{shouldShowToggle() && open && getHiddenInfo()}</p></div>
+        <div className="criteria_card-content"><p>{getInfo()}{shouldShowToggle() && !open && (', plus more...')}{shouldShowToggle() && open && `, ${getHiddenInfo()}`}</p></div>
 
         <div className="flex-col flex-col--1 flex-col--mobile--1 criteria_card-toggle">{shouldShowToggle() && 
           (<button aria-label={`Show more ${title} details`} onClick={() => toggleContent(!open)}><FontAwesomeIcon
