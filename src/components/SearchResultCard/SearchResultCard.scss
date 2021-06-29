@@ -6,21 +6,13 @@
 .search-result-card {
   display: flex;
   flex-wrap: wrap;
-  width: calc(33.3333% - 22px);
+  width: 100%;
   padding: space(20);
   border-radius: 20px;
   border: 2px solid transparent;
   background-color: $white;
   color: $black;
   cursor: pointer;
-
-  @include for-tablet-landscape-down {
-    width: calc(50% - 16px);
-  }
-
-  @include for-phone-only {
-    width: 100%;
-  }
 
   &.is-active,
   &:hover {

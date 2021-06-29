@@ -111,29 +111,8 @@
 }
 
 .favourites__card {
-  background-color: $white;
-  color: $black;
-  border: 2px solid $black;
-  margin-bottom: space(24);
+  border-color: $black;
 
-  &--no-padding {
-    padding: 0 !important;
-  }
-
-  &--inner {
-    padding: space(16) !important;
-  }
-
-  &--outer {
-    @include for-tablet-portrait-up {
-      max-width: pxtorem(380px);
-      margin: 0 space(16);
-    }
-  }
-
-  &--organisation {
-    margin-top: space(8);
-  }
 
   &--location {
     display: flex;
@@ -194,9 +173,7 @@
   }
 
   &--contact {
-    border-left: 3px solid $black;
-    padding-left: space(12) !important;
-    margin: space(8) 0 !important;
+    margin: space(16) 0 !important;
 
     &--heading {
       @include heading-s;
@@ -204,7 +181,7 @@
     }
 
     .flex-col {
-      margin-bottom: space(8) !important;
+      margin-bottom: space(16) !important;
 
       .body--s {
         text-overflow: ellipsis;

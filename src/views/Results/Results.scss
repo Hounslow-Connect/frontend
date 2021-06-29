@@ -28,8 +28,8 @@
 }
 
 .results__container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   gap: space(32);
   max-width: 1260px;
@@ -38,8 +38,15 @@
   position: relative;
   z-index: 10;
 
+  @include for-tablet-landscape-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include for-phone-only {
+    grid-template-columns: 1fr;
+  }
+
   @include for-tablet-portrait-down {
-    gap: none;
     padding: 0 space(16);
   }
 }
