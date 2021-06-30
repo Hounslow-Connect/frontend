@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import {Helmet} from "react-helmet";
 import { inject, observer } from 'mobx-react';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';
@@ -88,6 +89,9 @@ class Referral extends Component<IProps> {
 
     return (
       <div className="referral">
+        <Helmet>
+          <title>Referral | One Hounslow Connect</title>
+        </Helmet>
         <div className="flex-container flex-container--mobile-no-padding">
           <div className="flex-col flex-col--12 referral--back">
             {referralStore.step === 1 ? (
