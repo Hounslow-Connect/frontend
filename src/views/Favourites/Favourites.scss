@@ -235,6 +235,10 @@
       margin: space(8) 0;
     }
 
+    a {
+      word-break: break-all;
+    }
+
     .flex-col {
       margin-bottom: space(16) !important;
 

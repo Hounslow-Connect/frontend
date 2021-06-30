@@ -137,18 +137,18 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
           }
 
           <div className="flex-container  flex-container--no-padding favourites__card--contact">
-            <div className="flex-col flex-col--12">
+            {service.contact_phone && <div className="flex-col flex-col--12">
               <p className="favourites__card--contact--heading">
                 <FontAwesomeIcon icon="phone" /> Telephone
               </p>
-              <p className="body--s">{service.contact_phone}</p>
-            </div>
-            <div className="flex-col flex-col--12">
+              <a href={`tel:${service.contact_phone}`} className="body--s">{service.contact_phone}</a>
+            </div>}
+            {service.contact_email && <div className="flex-col flex-col--12">
               <p className="favourites__card--contact--heading">
                 <FontAwesomeIcon icon="envelope" /> Email
               </p>
-              <p className="body--s">{service.contact_email}</p>
-            </div>
+              <a href={`mailto:${service.contact_email}`} className="body--s">{service.contact_email}</a>
+            </div>}
           </div>
         </div>
         <div className="favourites__card--footer">
