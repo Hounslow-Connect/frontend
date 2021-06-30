@@ -111,7 +111,62 @@
 }
 
 .favourites__card {
+  cursor: default;
   border-color: $black;
+
+  &--footer {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: space(6);
+    align-self: flex-end;
+
+    & > div {
+      &:last-child {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    @media(max-width: 340px) {
+      align-items: flex-end;
+      grid-template-columns: 1fr;
+
+      & > div {
+        &:last-child {
+          display: block;
+          justify-content: initial;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 752px) {
+      align-items: flex-end;
+      grid-template-columns: 1fr;
+
+      & > div {
+        &:last-child {
+          display: block;
+          justify-content: initial;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    a, button {
+      display: flex;
+      align-items: center;
+      font-size: 1.125rem;
+      text-decoration: none;
+
+      svg {
+        font-size: 1.5rem;
+        margin-left: 0.75rem;
+      }
+    }
+  }
 
 
   &--location {

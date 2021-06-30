@@ -13,7 +13,6 @@ import Accordian from '../../components/Accordian';
 import { apiBase } from '../../config/api';
 import { observer, inject } from 'mobx-react';
 import FavouritesStore from '../../stores/favouritesStore';
-import get from 'lodash/get';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
@@ -58,9 +57,6 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
 
   const serviceLocations = getLocationName(locations);
 
-  console.log('serviceLocations', serviceLocations);
-  
-
   if (!favouritesStore) {
     return null;
   }
@@ -94,7 +90,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
             </div>
           </div>
 
-          <div className="search-result-card__location favourites__card--location">
+          {serviceLocations.length > 0 && <div className="search-result-card__location favourites__card--location">
             <FontAwesomeIcon icon="map-marker-alt" />
             {serviceLocations.length === 1 ? (
               <p>{first(serviceLocations)}</p>
@@ -108,7 +104,7 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
                 ))}
               </Accordian>
             )}
-          </div>
+          </div>} 
 
           <div className="search-result-card__meta">
             <div className="search-result-card__tags">
@@ -130,29 +126,9 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
                   icon="pound-sign"
                   className="search-result-card__tag--icon"
                 />
-
                 {service.is_free ? 'Free' : 'Cost'}
               </div>
             </div>
-            {/* {!!locations.length && (
-              <div className="search-result-card__location" onClick={(e: any) => e.stopPropagation()}>
-                <span className="sr-only">{`This ${service.type} is located at`}</span>
-
-                <FontAwesomeIcon icon="map-marker-alt" />
-                {locations.length === 1 ? (
-                  <h4>{first(locations)}</h4>
-                ) : (
-                  <Accordian
-                    title={`${locations.length} locations`}
-                    className={'search-result-card__location-list'}
-                  >
-                    {locations.map(location => (
-                      <h4 key={`${service.id}-${location}`}>{location}</h4>
-                    ))}
-                  </Accordian>
-                )}
-              </div>
-            )} */}
           </div>
           {service.intro &&
             <div className="search-result-card__intro">
@@ -175,27 +151,23 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
             </div>
           </div>
         </div>
-        <div className="search-result-card__footer">
-          <div className="flex-col flex-col--12">
-            <div className="flex-container flex-container--no-padding flex-container--align-center">
-              <div className="flex-col flex-col--6 flex-col--mobile--6">
-                <Link to={`/services/${service.slug}`}>
-                  <span>View more</span>
-                  <FontAwesomeIcon icon="arrow-right" />
-                </Link>
-              </div>
-              <div className="flex-col flex-col--6 flex-col--mobile--6">
-                <Button
-                  text='Remove'
-                  key={`key_remove_favourite_${service.id}`}
-                  size="small"
-                  icon="times"
-                  onClick={() => {
-                    removeFavourite(service.id)
-                  }}
-                />
-              </div>
-            </div>
+        <div className="favourites__card--footer">
+          <div>
+            <Link to={`/services/${service.slug}`}>
+              <span>View more</span>
+              <FontAwesomeIcon icon="arrow-right" />
+            </Link>
+          </div>
+          <div>
+            <Button
+              text='Remove'
+              key={`key_remove_favourite_${service.id}`}
+              size="small"
+              icon="times"
+              onClick={() => {
+                removeFavourite(service.id)
+              }}
+            />
           </div>
         </div>
       </article>

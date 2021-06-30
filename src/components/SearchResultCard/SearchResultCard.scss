@@ -122,10 +122,6 @@
 .search-result-card__intro {
   align-self: flex-start;
   margin-bottom: space(12);
-
-  @include for-phone-only {
-    padding: 0 space(8) 0 space(16);
-  }
 }
 
 .search-result-card__footer {
