@@ -42,7 +42,7 @@ class Favourites extends Component<IProps> {
     return (
       <section className="favourites">
          <Helmet>
-          <title>Favourites | One Hounslow Connect</title>
+          <title>Favourites | Hounslow Connect</title>
         </Helmet>
 
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Favourites', url: '' }]} />

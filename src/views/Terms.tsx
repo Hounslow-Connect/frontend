@@ -19,7 +19,7 @@ const Terms: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   return (
     <CMSPage title={get(cmsStore, 'terms_and_conditions.title')} breadcrumb="Terms & Conditions">
       <Helmet>
-        <title>Terms and Conditions | One Hounslow Connect</title>
+        <title>Terms and Conditions | Hounslow Connect</title>
       </Helmet>
 
       <ReactMarkdown source={get(cmsStore, 'terms_and_conditions.content')} />

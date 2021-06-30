@@ -55,8 +55,8 @@ class Organisation extends Component<IProps> {
     return (organisation &&
       <main>
          <Helmet>
-          {get(organisation, 'name') && <title>{`${get(organisation, 'name')} | One Hounslow Connect`}</title>}
-          {!get(organisation, 'name') && <title>Organisation | One Hounslow Connect</title>}
+          {get(organisation, 'name') && <title>{`${get(organisation, 'name')} | Hounslow Connect`}</title>}
+          {!get(organisation, 'name') && <title>Organisation | Hounslow Connect</title>}
 
           {get(organisation, 'description') &&  <meta name="description" content={get(organisation, 'description')} />}
       

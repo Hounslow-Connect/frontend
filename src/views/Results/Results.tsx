@@ -63,7 +63,7 @@ class Results extends Component<IProps> {
     return (
       <section className="results">
          <Helmet>
-          <title>Search results | One Hounslow Connect</title>
+          <title>Search results | Hounslow Connect</title>
           <meta name="description" content="Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow" />
         </Helmet>
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search results', url: '' }]} />

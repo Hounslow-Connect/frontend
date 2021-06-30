@@ -90,7 +90,7 @@ class Referral extends Component<IProps> {
     return (
       <div className="referral">
         <Helmet>
-          <title>Referral | One Hounslow Connect</title>
+          <title>Referral | Hounslow Connect</title>
         </Helmet>
         <div className="flex-container flex-container--mobile-no-padding">
           <div className="flex-col flex-col--12 referral--back">

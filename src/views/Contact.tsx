@@ -20,7 +20,7 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   return (
     <CMSPage title={get(cmsStore, 'contact.title')} twoColumn={true} breadcrumb="Contact">
       <Helmet>
-        <title>Contact | One Hounslow Connect</title>
+        <title>Contact | Hounslow Connect</title>
       </Helmet>
 
       <div className="flex-col flex-col--7 flex-col--tablet--8">

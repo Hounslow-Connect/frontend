@@ -23,7 +23,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   return (
     <main className="home">
       <Helmet>
-        <title>Home | One Hounslow Connect</title>
+        <title>Home | Hounslow Connect</title>
       </Helmet>
       {cmsStore.home && cmsStore.home.banners && <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />}
       <Search />

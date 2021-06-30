@@ -167,8 +167,8 @@ class Service extends Component<IProps> {
     return (
       <main>
         <Helmet>
-          {get(service, 'name') && <title>{`${get(service, 'name')} | One Hounslow Connect`}</title>}
-          {!get(service, 'name') && <title>Service | One Hounslow Connect</title>}
+          {get(service, 'name') && <title>{`${get(service, 'name')} | Hounslow Connect`}</title>}
+          {!get(service, 'name') && <title>Service | Hounslow Connect</title>}
 
           {get(service, 'intro') &&  <meta name="description" content={get(service, 'intro')} />}
       

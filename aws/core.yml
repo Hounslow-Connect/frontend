@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create the core infrastructure needed to run the One Hounslow Connect Frontend
+Description: Create the core infrastructure needed to run the Hounslow Connect Frontend
 
 Outputs:
   BucketName:
