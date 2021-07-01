@@ -293,7 +293,7 @@ export default class ResultsStore {
     if (this.postcode) {
       params.postcode = this.postcode;
 
-      if(!this.distance) this.setDistance('5')
+      if(!this.distance) this.setDistance('1')
     } else {
       if(this.distance) this.setDistance('')
     }
