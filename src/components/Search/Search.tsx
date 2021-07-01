@@ -37,11 +37,12 @@ class Search extends React.Component<IProps> {
     }
 
     const { isMobile } = windowSizeStore;
-    const options = map(SearchStore.categories, ({ name, id }) => ({ value: id, text: name }));
-    const covidOptions = map(SearchStore.covidCategories, ({ name, id }) => ({
-      value: id,
-      text: name,
-    }));
+
+    let options:any = [{ value: '', text: 'Select category'}]
+    let covidOptions:any = [{ value: '', text: 'Select category'}]
+
+    options = [...options, ...map(SearchStore.categories, ({ name, id }) => ({ value: id, text: name }))]
+    covidOptions = [...covidOptions, ...map(SearchStore.covidCategories, ({ name, id }) => ({ value: id, text: name }))] 
 
     return (
       <Fragment>
@@ -96,9 +97,15 @@ class Search extends React.Component<IProps> {
                           </p>
                           <Select
                             options={options}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                              SearchStore.setCategory(e)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                              if(e.target.value !== '') {
+                                SearchStore.setCategory(e)
+                                history.push({
+                                  pathname: '/results',
+                                  search: `?category=${e.target.value}`,
+                                })
+                              }
+                            }}
                             className="search__category--mobile"
                             placeholder="Category List"
                             id="category"
@@ -141,9 +148,15 @@ class Search extends React.Component<IProps> {
                         <Fragment>
                           <Select
                             options={covidOptions}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                              SearchStore.setCategory(e)
-                            }
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                              if(e.target.value !== '') {
+                                SearchStore.setCategory(e)
+                                history.push({
+                                  pathname: '/results',
+                                  search: `?category=${e.target.value}`,
+                                })
+                              }
+                            }}
                             className="search__category--mobile"
                             placeholder="Category List"
                             id="category"
