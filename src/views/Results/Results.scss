@@ -28,8 +28,8 @@
 }
 
 .results__container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   gap: space(32);
   max-width: 1260px;
@@ -38,9 +38,20 @@
   position: relative;
   z-index: 10;
 
-  @include for-tablet-portrait-down {
-    gap: none;
+  @media (max-width: 860px) {
+    padding: 0 space(24);
+  }
+
+  @media (max-width: 600px) {
     padding: 0 space(16);
+  }
+
+  @include for-tablet-landscape-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include for-phone-only {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -387,10 +398,6 @@
           max-width: 63%;
         }
       }
-
-      select {
-        
-      }
     }
   }
 
@@ -642,10 +649,6 @@
 .results__overview__info {
   padding: space(16) 0;
   box-sizing: border-box;
-}
-
-.results__search-box-keyword {
-  // margin-right: space(24);
 }
 
 .results__heading {
