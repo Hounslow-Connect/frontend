@@ -63,7 +63,7 @@ class Favourites extends Component<IProps> {
               </div>
 
               <div className="flex-col flex-col--12">
-                <div className="flex-container flex-container--justify favourites--container">
+                <div className="results__container">
                   {favouritesStore.favourites.map((favourite: IService) => {
                     return (
                       <FavouritesCard

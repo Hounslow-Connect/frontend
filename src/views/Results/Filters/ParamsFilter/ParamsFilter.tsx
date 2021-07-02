@@ -190,7 +190,7 @@ class Filter extends Component<IProps, IState> {
 
                     disabled={!resultsStore.postcode}
                     options={[{value: '1', text: '1 Mile'}, {value: '3', text: '3 Miles'}, {value: '5', text: '5 Miles'}, {value: '10', text: '10 Miles'}, {value: '20', text: '20 Miles'}]}
-                    value={`${resultsStore.distance || "5"}`}
+                    value={`${resultsStore.distance || "1"}`}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                       resultsStore.setDistance(e.target.value)
                       this.search()
