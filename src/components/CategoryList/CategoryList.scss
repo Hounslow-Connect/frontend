@@ -5,12 +5,11 @@
 .category-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: space(24);
   width: 1030px;
   max-width: 100%;
   padding: 0 space(56);
 
-  @include for-tablet-portrait-down {
+  @media(max-width: 992px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 0;
   }
@@ -25,6 +24,7 @@
     padding: space(16);
     background-color: $turquoise;
     border-radius: 20px;
+    margin-bottom: space(24);
 
     @include for-tablet-landscape-down {
       grid-column: span 2;
@@ -37,7 +37,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 26px;
 
-    @include for-tablet-portrait-down {
+    @media(max-width: 992px) {
       grid-column: span 2;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
