@@ -22,7 +22,7 @@
     padding: space(32) space(48);
     background-color: $yellow;
     
-    @media(min-width: 768px) {
+    @media(min-width: 426px) {
       display: flex;
     }
   
@@ -95,7 +95,7 @@
 }
 
 .service__header__logo {
-  flex: 0 0 154px;
+  flex: 0 0 calc(100% - 75%);
   height: 154px;
   margin-right: space(40);
   margin-bottom: space(16);
@@ -104,7 +104,18 @@
   max-width: 154px;
 
   @include for-phone-only {
-      margin-right: 0;
+    height: 120px;
+    margin-right: 0;
+    max-width: 100%;
+
+    @media(min-width: 426px) {
+      & + div {
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
+  @media(max-width: 425px) {
       margin-bottom: space(12);
       border-radius: 12px;
       height: 130px;
@@ -173,7 +184,9 @@
   border-radius: 20px;
 
   &.criteria_card {
-    margin-top: space(16);
+    @media(max-width: 860px) {
+      margin-top: space(16);
+    }
   }
 }
 
@@ -445,12 +458,15 @@
 }
 
 .service__useful-info {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  padding: 0 !important;
   margin-bottom: space(16) !important;
-  justify-content: space-evenly !important;
   background-color: $white;
+
+  @media(min-width: 601px) {
+    padding: 0 !important;
+  }
 
   @include for-phone-only {
     flex-wrap: wrap;
@@ -501,7 +517,6 @@
 
   a {
     font-size: $font-base;
-    color: $white;
   }
 
   svg {
@@ -539,13 +554,27 @@
 }
 
 .service__cost-card {
+  display: flex;
+  align-items: center;
   justify-content: flex-start !important;
   width: 100%;
-  padding: 0 space(16) !important;
+  padding: space(20);
 
-  @include for-tablet-landscape-up {
-    padding: 0 !important;
-    margin: 0 !important;
+  @media(max-width: 860px) {
+    margin-top: space(32);
+  }
+
+  &--img {
+    padding-right: space(20);
+    flex-shrink: 0;
+
+    @media(max-width: 860px) {
+      padding-right: space(24);
+    }
+  }
+
+  &--content {
+    flex: 1;
   }
 }
 
@@ -688,6 +717,11 @@
       border-right: 20px solid transparent;
       border-top: 20px solid $white;
     }
+  }
+
+  .service__heading {
+    margin-left: 0 !important;
+    margin-bottom: space(10);
   }
 }
 
