@@ -102,6 +102,7 @@
   border-radius: 20px;
   overflow: hidden;
   max-width: 154px;
+  background-color: #ffffff;
 
   @include for-phone-only {
     height: 120px;
