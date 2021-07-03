@@ -15,8 +15,6 @@ import HounslowLogo from '../../assets/images/london-borough-of-hounslow.png';
 import CMSStore from '../../stores/CMSStore';
 import UIStore from '../../stores/uiStore';
 import ButtonLink from '../Button/ButtonLink';
-
-console.log(process.env)
 interface IProps {
   mobileMenu?: boolean;
   cmsStore?: CMSStore;
