@@ -79,7 +79,7 @@
 }
 
 .service__section {
-  margin-bottom: space(32);
+  margin-bottom: space(32) !important;
   width: 100%;
   align-items: stretch;
 
@@ -236,13 +236,18 @@
 
 .service__markdown {
   &--intro {
+    border-left: 10px solid $lynch;
+    padding: space(16) 0 space(16) space(20);
+    
+
+    @media(min-width: 601px) {
+      margin-bottom: space(40);
+    }
+
     p {
       @include body-l;
-      margin-bottom: space(40);
-
-      @include for-phone-only {
-        margin-bottom: space(16);
-      }
+      margin-bottom: 0 !important;
+      font-size: pxtorem(22px) !important;
     }
 
     ul {
@@ -270,34 +275,13 @@
   &--description {
     word-break: break-word;
 
-    p {
-      @include body-m;
-      margin: space(24) 0;
-
-      &:first-of-type {
-        margin-top: 0;
-      }
-    }
-
-    ul {
-      list-style-type: none;
-    }
-
-    ul li {
-      &:before {
-        content: '•';
-        margin: 0 pxtorem(4px);
-        color: $pink;
-      }
+    @media(max-width: 600px) {
+      margin-top: space(32);
     }
 
     li > p {
       display: inline;
       hyphens: auto;
-    }
-
-    li {
-      font-family: $font-primary;
     }
 
     &--tight {
@@ -693,10 +677,6 @@
   @include for-phone-only {
     margin-top: space(16) !important;
     padding: space(16) !important;
-
-    h3 {
-      font-size: $font-body-l;
-    }
   }
 
   &::after {
@@ -719,11 +699,40 @@
       border-top: 20px solid $white;
     }
   }
+}
 
-  .service__heading {
+.service__information, .service__markdown:not(.service__markdown--intro) {
+  h2, h3, .service__heading {
     margin-left: 0 !important;
     margin-bottom: space(10);
   }
+
+  h3 {
+    @include for-phone-only {
+      font-size: $font-body-l;
+    }
+  }
+
+  p {
+    @include body-m;
+  }
+
+  p, ul {
+    margin-bottom: space(24);
+  }
+
+  ul {
+    padding-left: space(20);
+    list-style-position: outside;
+
+    li {
+      @include body-m;
+
+      &:not(:last-child) {
+        margin-bottom: space(12);
+      }
+    }
+  } 
 }
 
 .service__offerings {
@@ -735,11 +744,6 @@
   @include for-phone-only {
     margin-top: space(8);
     margin-bottom: 0 !important;
-  }
-
-  ul li {
-    margin-bottom: space(12);
-    @include body-m;
   }
 }
 

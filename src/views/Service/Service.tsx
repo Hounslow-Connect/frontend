@@ -38,7 +38,6 @@ import CostCard from './CostCard';
 import VideoCard from './VideoCard';
 import MapCard from './MapCard';
 import ContactCard from './ContactCard';
-import OrganisationCard from './OrganisationCard';
 import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
 import GalleryCard from './GalleryCard';
@@ -331,7 +330,7 @@ class Service extends Component<IProps> {
                   {service.testimonial && (
                     <div className="service__section">
                       <div className="flex-container flex-container--no-padding">
-                        <div className="flex-col flex-col--12 service__testimonial--header">
+                        <div className="flex-col flex-col--12">
                           <h2 className="service__heading">What people say</h2>
                         </div>
 
