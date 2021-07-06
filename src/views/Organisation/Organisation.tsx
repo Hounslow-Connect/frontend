@@ -69,9 +69,9 @@ class Organisation extends Component<IProps> {
         <div className={`organisation__header`}>
           <div className="flex-container">
             <div className="service__header__wrapper organisation__header__wrapper">
-              <div className="organisation__header__logo">
-                {organisation && <img src={getImg(organisation)} alt={`${organisation.name} logo`} />}
-              </div>
+              {organisation && organisation.has_logo && <div className="organisation__header__logo">
+                <img src={getImg(organisation)} alt={`${organisation.name} logo`} />
+              </div>}
               <div className="organisation__header__content flex-col flex-col--tablet--9">
                 <span className="organisation__header__sub">Organisation</span>
                 <h1>{get(organisation, 'name')}</h1>
