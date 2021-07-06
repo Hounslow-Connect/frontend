@@ -1,6 +1,6 @@
 # Needs to be created in us-east-1
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create the lambda infrastructure needed to run the One Hounslow Connect Frontend
+Description: Create the lambda infrastructure needed to run the Hounslow Connect Frontend
 
 Resources:
   LambdaOriginRewriteFunctionVersion:

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Helmet} from "react-helmet";
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
 import get from 'lodash/get';
@@ -53,6 +54,18 @@ class Organisation extends Component<IProps> {
 
     return (organisation &&
       <main>
+         <Helmet>
+          {get(organisation, 'name') && <title>{`${get(organisation, 'name')} | Hounslow Connect`}</title>}
+          {!get(organisation, 'name') && <title>Organisation | Hounslow Connect</title>}
+
+          {get(organisation, 'description') &&  <meta name="description" content={get(organisation, 'description')} />}
+      
+          {get(organisation, 'name') && <meta property="og:title" content={`${get(organisation, 'name')}`} />}
+          {get(organisation, 'slug') && <meta property="og:url" content={`${process.env.REACT_APP_FRONTEND_URL}/${get(organisation, 'slug')}`} />}
+          {getImg(organisation) && <meta property="og:image" content={getImg(organisation)} />}
+          <meta property="og:type" content="website" />
+        </Helmet>
+
         <div className={`organisation__header`}>
           <div className="flex-container">
             <div className="service__header__wrapper organisation__header__wrapper">

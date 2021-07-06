@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import ReactMarkdown from 'react-markdown';
@@ -18,6 +19,9 @@ const About: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   
   return (
     <CMSPage title={get(cmsStore, 'about.title')} breadcrumb="About">
+      <Helmet>
+        <title>About | Hounslow Connect</title>
+      </Helmet>
       <ReactMarkdown source={get(cmsStore, 'about.content')} />
       {get(cmsStore, 'about.video_url') && <ReactPlayer
         url={get(cmsStore, 'about.video_url')}
