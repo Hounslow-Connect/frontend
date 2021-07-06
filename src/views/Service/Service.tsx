@@ -39,7 +39,6 @@ import CostCard from './CostCard';
 import VideoCard from './VideoCard';
 import MapCard from './MapCard';
 import ContactCard from './ContactCard';
-import OrganisationCard from './OrganisationCard';
 import ShareCard from './ShareCard';
 import ReferralCard from './ReferralCard';
 import GalleryCard from './GalleryCard';
@@ -192,6 +191,7 @@ class Service extends Component<IProps> {
                 <img src={getImg(service)} alt={`${service.name} logo`} />
               </div>
               <div className="flex-col flex-col--tablet--9">
+                <span className="organisation__header__sub">Service</span>
                 <h1>{get(service, 'name')}</h1>
                 {organisation && organisation.slug && <p className="service__header__desc">This service is run by the organisation <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">{organisation.name}</Link>. View their organisation details and other listed services.</p> }
                 <div className="flex-container flex-container--no-padding flex-container--left">
@@ -285,7 +285,7 @@ class Service extends Component<IProps> {
                       <CriteriaCard svg={Other} title="Other" info={this.getServiceEligibilityInfo('Other')} />
                     )}
 
-                    <div className="flex-col flex-col--tablet--12 mobile-show tablet-show criteria_card service__info__cost">
+                    <div className="flex-col flex-col--tablet--12 mobile-show tablet-show  service__info__cost">
                       <CostCard service={service} />
                     </div>
                   </div>
@@ -343,7 +343,7 @@ class Service extends Component<IProps> {
                   {service.testimonial && (
                     <div className="service__section">
                       <div className="flex-container flex-container--no-padding">
-                        <div className="flex-col flex-col--12 service__testimonial--header">
+                        <div className="flex-col flex-col--12">
                           <h2 className="service__heading">What people say</h2>
                         </div>
 
@@ -377,7 +377,7 @@ class Service extends Component<IProps> {
                   )}
 
                   {!!service.useful_infos.length && (
-                    <div className="mobile-hide">
+                    <div className="mobile-hide service__section">
                       <h2 className="service__heading">Good to know</h2>
                       {service.useful_infos.map((info: { title: string; description: string }) => {
                         const iconObj = find(iconMap, info.title);
@@ -473,15 +473,6 @@ class Service extends Component<IProps> {
                       })}
                     </Accordian>
                   )}
-
-                  <Accordian
-                    title={`Who runs this ${service.type}?`}
-                    className="service__accordian mobile-show"
-                  >
-                    <div className="service__accordian-inner">
-                      <OrganisationCard service={service} />
-                    </div>
-                  </Accordian>
                 </div>
                 <br /><br />
                 <div className="mobile-show">
@@ -495,7 +486,7 @@ class Service extends Component<IProps> {
               </div>
               <div className="flex-col flex-col--4 flex-col--tablet--12  ">
                 <div className="flex-container service__right-column mobile-hide">
-                  <div className="tablet-hide flex-col flex-col--12 criteria_card service__info__cost service__section">
+                  <div className="tablet-hide flex-col flex-col--12 service__info__cost service__section">
                     <CostCard service={service} />
                   </div>
                   {service.video_embed && (
@@ -522,14 +513,6 @@ class Service extends Component<IProps> {
                       </div>
                     )}
                   </div>
-                  <div className="flex-col flex-col--12">
-                    <h2 className="service__heading">{`Who runs this ${service.type}?`}</h2>
-                    <div className="service__section">
-                      <OrganisationCard service={service} sidebar={true} />
-                    </div>
-                  </div>
-
-                 
                 </div>
                 <div className="flex-container service__right-column">
                   <div className="flex-col flex-col--12">

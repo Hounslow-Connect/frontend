@@ -17,9 +17,9 @@
             &:after {
                 border-top-color: $turquoise;
             }
-
-            @media(min-width: 768px) {
-                display: flex;
+            
+            @media(min-width: 426px) {
+              display: flex;
             }
         }
 
@@ -36,26 +36,38 @@
         }
 
         &__logo {
-            flex: 0 0 154px;
+            flex: 0 0 calc(100% - 75%);
             height: 154px;
             margin-right: space(40);
             margin-bottom: space(16);
             border-radius: 20px;
             overflow: hidden;
             max-width: 154px;
-
+            background-color: #ffffff;
+          
             @include for-phone-only {
-                margin-right: 0;
+              height: 110px;
+              margin-right: 0;
+              max-width: 100%;
+          
+              @media(min-width: 426px) {
+                & + div {
+                  padding-left: 1.5rem;
+                }
+              }
+            }
+          
+            @media(max-width: 425px) {
                 margin-bottom: space(12);
                 border-radius: 12px;
                 height: 130px;
                 max-width: 130px;
             }
-        
+          
             img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
             }
         }
 
@@ -99,6 +111,7 @@
                 a {
                     text-decoration: none;
                     font-weight: normal;
+                    word-break: break-all;
                 }
             }
         }

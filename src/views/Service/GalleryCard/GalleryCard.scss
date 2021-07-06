@@ -48,12 +48,9 @@
 
   &--one-container {
     position: relative;
-    &:before {
-      @include overlay();
-    }
 
-    &:after {
-      @include overlay-icon();
+    @include for-tablet-landscape-up {
+      min-height: 220px;
     }
   }
 
@@ -73,6 +70,12 @@
 
       &:after {
         @include overlay-icon();
+      }
+    }
+
+    .gallery-card--one-container & {
+      &:before, &:after {
+        display: none !important;
       }
     }
 
