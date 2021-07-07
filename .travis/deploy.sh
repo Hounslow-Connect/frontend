@@ -17,16 +17,21 @@ ENV_SECRET_ID=".env.frontend.${ENVIRONMENT}"
 
 # Get the .env file.
 echo "Downloading .env file..."
-rm -f .env
-aws secretsmanager get-secret-value \
-    --secret-id ${ENV_SECRET_ID} | \
-    python -c "import json,sys;obj=json.load(sys.stdin);print obj['SecretString'];" > .env
+# rm -f .env
+# aws secretsmanager get-secret-value \
+#     --secret-id ${ENV_SECRET_ID} | \
+#     python -c "import json,sys;obj=json.load(sys.stdin);print obj['SecretString'];" > .env
 
 # Build.
-echo "Building..."
-npm run build
+if  [ "$ENVIRONMENT" == "production" ] || [ "$ENVIRONMENT" == "staging" ]; then
+    echo "Build and start Express..."
+    npm run start:prod
+else
+    echo "Building..."
+    npm run build
+fi
 
 # Deploy to S3.
 echo "Deploying..."
-aws s3 sync build/ "s3://${S3_BUCKET_NAME}" --acl public-read --delete
-aws cloudfront create-invalidation --distribution-id "${DISTRIBUTION_ID}" --paths "/*"
+# aws s3 sync build/ "s3://${S3_BUCKET_NAME}" --acl public-read --delete
+# aws cloudfront create-invalidation --distribution-id "${DISTRIBUTION_ID}" --paths "/*"
