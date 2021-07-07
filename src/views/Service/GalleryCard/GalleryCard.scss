@@ -48,10 +48,6 @@
 
   &--one-container {
     position: relative;
-
-    @include for-tablet-landscape-up {
-      min-height: 220px;
-    }
   }
 
   &--image {
@@ -80,10 +76,14 @@
     }
 
     &--container {
-      height: 180px;
-      @include for-phone-only {
-        height: 150px;
+
+      &:not(.gallery-card--one-container) {
+        height: 180px;
+        @include for-phone-only {
+          height: 150px;
+        }
       }
+  
     }
 
     &--small {
