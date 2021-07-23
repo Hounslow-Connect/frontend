@@ -20,8 +20,7 @@ echo "Downloading .env file..."
 rm -f .env
 aws secretsmanager get-secret-value \
     --secret-id ${ENV_SECRET_ID} | \
-    python -c "import json,sys;obj=json.load(sys.stdin);print obj['SecretString'];" > .env
-
+    python -c "import json,sys;obj=json.load(sys.stdin);print(obj['SecretString']);" > .env
 # Build.
 echo "Building..."
 npm run build
