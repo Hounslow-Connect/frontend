@@ -48,13 +48,6 @@
 
   &--one-container {
     position: relative;
-    &:before {
-      @include overlay();
-    }
-
-    &:after {
-      @include overlay-icon();
-    }
   }
 
   &--image {
@@ -76,11 +69,21 @@
       }
     }
 
-    &--container {
-      height: 180px;
-      @include for-phone-only {
-        height: 150px;
+    .gallery-card--one-container & {
+      &:before, &:after {
+        display: none !important;
       }
+    }
+
+    &--container {
+
+      &:not(.gallery-card--one-container) {
+        height: 180px;
+        @include for-phone-only {
+          height: 150px;
+        }
+      }
+  
     }
 
     &--small {

@@ -22,7 +22,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, co
     }
     <div className="category-list__items">
       {categories.map(({ name, id, icon }) => {
-        const image = requestImageFile(`./${name.replace(/\s+/g, '-').toLowerCase()}.svg`).default;
+        const image = requestImageFile(`./${name.replace(/[, ]+/g, '-').toLowerCase()}.svg`).default;
 
         return (
           <Button

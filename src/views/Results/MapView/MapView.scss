@@ -77,9 +77,16 @@
 
 .map__results-container {
   position: relative;
-  padding-right: space(24);
   height: calc(100vh - 60px);
   overflow-y: scroll;
+
+  @media(min-width: 861px) {
+    padding-right: space(24);
+  }
+
+  @media(min-width: 769px) and (max-width: 860px) {
+    margin-top: space(32);
+  }
 
   @include for-tablet-portrait-down {
     height: unset;
@@ -90,17 +97,18 @@
     margin: 0;
     padding: 0 !important;
     overflow: hidden;
+    grid-template-columns: 1fr;
+
+    @media(max-width: 860px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include for-phone-only {
+      grid-template-columns: 1fr;
+    }
   }
 
   .search-result-card {
     width: 100%;
-
-    @include for-tablet-portrait-down {
-      width: calc(50% - 16px);
-    }
-
-    @include for-phone-only {
-      width: 100%;
-    }
   }
 }

@@ -15,8 +15,6 @@ import HounslowLogo from '../../assets/images/london-borough-of-hounslow.png';
 import CMSStore from '../../stores/CMSStore';
 import UIStore from '../../stores/uiStore';
 import ButtonLink from '../Button/ButtonLink';
-
-console.log(process.env)
 interface IProps {
   mobileMenu?: boolean;
   cmsStore?: CMSStore;
@@ -51,7 +49,7 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
             <div className="flex-col flex-col--5 flex-col--mobile--12">
               <p className="footer__heading">
                 Get in touch with <br />
-                <span className="highlight">One</span> Hounslow Connect
+                <span className="highlight">Hounslow</span> Connect
               </p>
               <nav className="footer__social-links" role="menu" aria-label="Social Media Links">
                 <a

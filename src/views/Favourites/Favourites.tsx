@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import {Helmet} from "react-helmet";
 import Button from '../../components/Button';
 import { inject, observer } from 'mobx-react';
 import queryString from 'query-string';
@@ -40,6 +41,10 @@ class Favourites extends Component<IProps> {
 
     return (
       <section className="favourites">
+         <Helmet>
+          <title>Favourites | Hounslow Connect</title>
+        </Helmet>
+
         <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Favourites', url: '' }]} />
         <div className="favourites__header">
           <div className="flex-container flex-container--align-center">

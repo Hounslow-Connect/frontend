@@ -67,7 +67,9 @@
     padding: 3rem 2rem 2rem;
     margin-bottom: space(64);
     width: 100%;
+  }
 
+  &__suggestions, &__categories {
     h2 {
       margin-bottom: space(24)
     }
@@ -75,6 +77,7 @@
 
   &__categories {
     max-width: 100%;
+    display: block;
 
     @include for-desktop-up {
       max-width: 1030px;

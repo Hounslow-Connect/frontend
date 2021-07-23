@@ -246,6 +246,9 @@ export default class ResultsStore {
       if (value === 'ethnicity') {
         this.filters.ethnicity = key;
       }
+      if (value === 'housing') {
+        this.filters.housing = key;
+      }
     });
 
     if (this.categoryId) {
@@ -319,6 +322,9 @@ export default class ResultsStore {
     }
     if (this.filters.ethnicity) {
       params.ethnicity = this.filters.ethnicity;
+    }
+    if (this.filters.housing) {
+      params.housing = this.filters.housing;
     }
 
     params.order = this.order;
