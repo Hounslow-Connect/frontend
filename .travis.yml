@@ -26,7 +26,6 @@ before_deploy:
   unzip awscliv2.zip
   sudo ./aws/install
   echo aws --version
-  export PATH=$PATH:$HOME/bin
 
 deploy:
   # Tagged releases
