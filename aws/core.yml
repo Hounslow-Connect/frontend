@@ -175,6 +175,7 @@ Resources:
         DefaultRootObject: index.html
         Enabled: True
         IPV6Enabled: True
+        HttpVersion: http2
         Origins:
         - DomainName:
             Fn::GetAtt:
@@ -190,6 +191,7 @@ Resources:
           AcmCertificateArn:
             Ref: CertificateArn
           SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2019
 
   WwwDistribution:
     Type: AWS::CloudFront::Distribution
@@ -211,9 +213,10 @@ Resources:
           ViewerProtocolPolicy: redirect-to-https
         Enabled: True
         IPV6Enabled: True
+        HttpVersion: http2
         Origins:
         - DomainName:
-            Fn::Sub: www.${Cname}.s3-website-${AWS::Region}.amazonaws.com
+            Fn::Sub: www.${Cname}.s3-website.${AWS::Region}.amazonaws.com
           Id:
             Fn::Join:
             - "-"
@@ -225,3 +228,4 @@ Resources:
           AcmCertificateArn:
             Ref: WwwCertificateArn
           SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2019
