@@ -36,6 +36,7 @@ import Terms from './views/Terms';
 import FeedbackModal from './components/FeedbackModal';
 import HomeScreenPrompt from './components/HomeScreenPrompt';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import CookieBanner from './components/CookieBanner';
 
 // add all free font awesome icons to project
 library.add(fas, fab);
@@ -87,6 +88,7 @@ class App extends Component {
             <FeedbackModal />
             <HomeScreenPrompt />
             <Footer />
+            <CookieBanner />
           </ScrollToTop>
         </Router>
       </Provider>
