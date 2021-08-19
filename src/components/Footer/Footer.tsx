@@ -43,6 +43,10 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
           <Link to="/privacy-policy" className="body--xs">
             Privacy Policy
           </Link>
+          &nbsp;&nbsp;
+          <Link to="/terms-and-conditions" className="body--xs">
+            Terms and Conditions
+          </Link>
         </div>
         <div className="flex-col flex-col--6 flex-col--tablet--12 footer__section">
           <div className="flex-container flex-container--no-padding">
