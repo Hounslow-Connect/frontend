@@ -26,6 +26,13 @@ Outputs:
       - WwwDistribution
       - DomainName
 
+  CloudFront301Domain:
+    Description: The domain name of the CloudFront distribution that is being redirected
+    Value:
+      Fn::GetAtt:
+      - Distribution301
+      - DomainName
+
   CloudFrontId:
     Description: The ID of the CloudFront distribution
     Value:
@@ -35,11 +42,6 @@ Parameters:
   CertificateArn:
     Description: The ARN for the CloudFront distribution SSL certificate (must
       be in us-east-1).
-    Type: String
-
-  WwwCertificateArn:
-    Description: The ARN for the CloudFront distribution SSL certificate for the
-      www subdomain (must be in us-east-1).
     Type: String
 
   Certificate301Arn:
@@ -106,22 +108,31 @@ Resources:
         RedirectAllRequestsTo:
           HostName:
             Ref: Cname
-          Protocol: https
 
   Bucket301:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: PublicRead
       BucketName:
+        Ref: Cname301
+      WebsiteConfiguration:
+        RedirectAllRequestsTo:
+          HostName:
+            Ref: Cname
+
+  WwwBucket301:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName:
         Fn::Join:
         - "."
-        - - '301'
+        - - www
           - Ref: Cname301
       WebsiteConfiguration:
         RedirectAllRequestsTo:
           HostName:
             Ref: Cname
-          Protocol: https
 
   CiUser:
     Type: AWS::IAM::User
@@ -253,7 +264,7 @@ Resources:
             OriginProtocolPolicy: http-only
         ViewerCertificate:
           AcmCertificateArn:
-            Ref: WwwCertificateArn
+            Ref: CertificateArn
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2019
 
@@ -277,14 +288,49 @@ Resources:
         HttpVersion: http2
         Origins:
         - DomainName:
-            Fn::GetAtt:
-            - Bucket301
-            - DomainName
+            Fn::Sub: ${Cname301}.s3-website.${AWS::Region}.amazonaws.com
           Id:
             Fn::Join:
             - "-"
             - - S3
               - Ref: Bucket301
+          CustomOriginConfig:
+            OriginProtocolPolicy: http-only
+        ViewerCertificate:
+          AcmCertificateArn:
+            Ref: Certificate301Arn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2019
+
+  WwwDistribution301:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+        - Fn::Join:
+          - "."
+          - - www
+            - Ref: Cname301
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: False
+          TargetOriginId:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: WwwBucket301
+          ViewerProtocolPolicy: redirect-to-https
+        Enabled: True
+        IPV6Enabled: True
+        HttpVersion: http2
+        Origins:
+        - DomainName:
+            Fn::Sub: www.${Cname301}.s3-website.${AWS::Region}.amazonaws.com
+          Id:
+            Fn::Join:
+            - "-"
+            - - S3
+              - Ref: WwwBucket301
           CustomOriginConfig:
             OriginProtocolPolicy: http-only
         ViewerCertificate:
