@@ -89,11 +89,9 @@ Resources:
     Properties:
       AccessControl: PublicRead
       BucketName:
-        Fn::Join:
-        - "-"
-        - - frontend
-          - Ref: Environment
-          - Ref: Uuid
+        Ref: Cname
+      WebsiteConfiguration:
+        IndexDocument: index.html
 
   WwwBucket:
     Type: AWS::S3::Bucket
@@ -159,6 +157,7 @@ Resources:
 
   Distribution:
     Type: AWS::CloudFront::Distribution
+    DependsOn: Bucket
     Properties:
       DistributionConfig:
         Aliases:
@@ -167,29 +166,6 @@ Resources:
         - ErrorCode: 404
           ResponseCode: 200
           ResponsePagePath: "/index.html"
-        CacheBehaviors:
-        - AllowedMethods:
-          - HEAD
-          - GET
-          CachedMethods:
-          - HEAD
-          - GET
-          DefaultTTL: 0
-          MaxTTL: 0
-          MinTTL: 0
-          ForwardedValues:
-            QueryString: False
-          PathPattern: "/covid19*"
-          TargetOriginId:
-            Fn::Join:
-            - "-"
-            - - S3
-              - Ref: Bucket
-          LambdaFunctionAssociations:
-          - EventType: origin-request
-            LambdaFunctionARN:
-              Ref: LambdaOriginRewriteFunctionArn
-          ViewerProtocolPolicy: redirect-to-https
         DefaultCacheBehavior:
           AllowedMethods:
           - HEAD
@@ -209,22 +185,20 @@ Resources:
             LambdaFunctionARN:
               Ref: LambdaRedirectFunctionArn
           ViewerProtocolPolicy: redirect-to-https
-          ViewerProtocolPolicy: redirect-to-https
         DefaultRootObject: index.html
         Enabled: True
         IPV6Enabled: True
         HttpVersion: http2
         Origins:
         - DomainName:
-            Fn::GetAtt:
-            - Bucket
-            - DomainName
+            Fn::Sub: ${Cname}.s3-website.${AWS::Region}.amazonaws.com
           Id:
             Fn::Join:
             - "-"
             - - S3
               - Ref: Bucket
-          S3OriginConfig: {}
+          CustomOriginConfig:
+            OriginProtocolPolicy: http-only
         ViewerCertificate:
           AcmCertificateArn:
             Ref: CertificateArn
@@ -233,6 +207,7 @@ Resources:
 
   WwwDistribution:
     Type: AWS::CloudFront::Distribution
+    DependsOn: WwwBucket
     Properties:
       DistributionConfig:
         Aliases:
@@ -270,6 +245,7 @@ Resources:
 
   Distribution301:
     Type: AWS::CloudFront::Distribution
+    DependsOn: Bucket301
     Properties:
       DistributionConfig:
         Aliases:
@@ -304,6 +280,7 @@ Resources:
 
   WwwDistribution301:
     Type: AWS::CloudFront::Distribution
+    DependsOn: WwwBucket301
     Properties:
       DistributionConfig:
         Aliases:
