@@ -23,7 +23,7 @@ class CookieBanner extends Component<any> {
       },
       'position': 'bottom',
       'content': {
-        'href': 'https://onehounslowconnect.london/privacy-policy',
+        'href': 'https://hounslowconnect.com/privacy-policy',
         'message': 'Our website uses cookies, for more information on what they are, how they work and how to manage them, please view our ','link':'policy here'
       },
       'padding': 'small'
