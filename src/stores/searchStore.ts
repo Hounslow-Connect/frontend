@@ -34,7 +34,7 @@ class SearchStore {
     try {
       const categories = await axios.get(`${apiBase}/collections/categories/all`);
       let categoryList = get(categories, 'data.data', []);
-      categoryList = categoryList.filter((category: any) => { return category.enabled === true })
+      categoryList = categoryList.filter((category: any) => category.enabled === true);
 
       // temp addition for COVID-19
       const [covidCategories, normalCategories] = partition(categoryList, category =>
@@ -56,20 +56,20 @@ class SearchStore {
     try {
       const personas = await axios.get(`${apiBase}/collections/personas`);
       let personasList = get(personas, 'data.data', []);
-      personasList = personasList.filter((persona: any) => { return persona.enabled === true }).splice(0, 3)
+      personasList = personasList.filter((persona: any) => persona.enabled === true).splice(0, 3);
 
-      this.personas = personasList
+      this.personas = personasList;
     } catch (e) {
       console.error(e);
     }
   };
 
   @action onChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-    if(type === 'postcode') {
+    if (type === 'postcode') {
       this.postcode = e.target.value;
     }
-    
-    if(type === 'search') {
+
+    if (type === 'search') {
       this.search = e.target.value;
     }
   };

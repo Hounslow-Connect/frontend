@@ -36,43 +36,43 @@ class HomeScreenPrompt extends Component<any, IState> {
 
     this.getDisplayCookie();
 
-    if(get(referralStore, 'showConfirmation')) {
+    if (get(referralStore, 'showConfirmation')) {
       this.setState({
-        isVisible: true
+        isVisible: true,
       });
     }
   }
 
   getDisplayCookie() {
-    let displayCookie = cookies.get('ct_home_screen_prompt_visible');
+    const displayCookie = cookies.get('ct_home_screen_prompt_visible');
 
     this.setState({
-      isVisible: displayCookie
+      isVisible: displayCookie,
     });
   }
 
   setDisplayCookie(value: boolean) {
-    let d = new Date();
+    const d = new Date();
 
     d.setMonth(d.getMonth() + 6);
     console.log(d);
 
     cookies.set('ct_home_screen_prompt_visible', false, {
-      expires: d
+      expires: d,
     });
 
     this.setState({
       isVisible: true,
-      showInstructionModal: value
+      showInstructionModal: value,
     });
   }
 
   render() {
     const { isVisible, showInstructionModal } = this.state;
-    
+
     return (
       <Fragment>
-        {(isMobile && !isVisible) &&
+        {isMobile && !isVisible && (
           <div className="home-screen-prompt">
             <div className="home-screen-prompt__wrapper">
               <div className="home-screen-prompt__icon">
@@ -82,29 +82,38 @@ class HomeScreenPrompt extends Component<any, IState> {
               </div>
               <div className="home-screen-prompt__info">
                 <h3 className="home-screen-prompt__title">Add to homescreen?</h3>
-                <p className="home-screen-prompt__description">Add this website to your homescreen to quickly access support opportunities</p>
+                <p className="home-screen-prompt__description">
+                  Add this website to your homescreen to quickly access support opportunities
+                </p>
                 <div className="home-screen-prompt__ctas">
                   <Button
                     size="small"
                     light={true}
                     text="No thanks"
                     type="button"
-                    onClick={(e: React.ChangeEvent<HTMLButtonElement>) => this.setDisplayCookie(false)}
+                    onClick={(e: React.ChangeEvent<HTMLButtonElement>) =>
+                      this.setDisplayCookie(false)
+                    }
                   />
                   <Button
                     size="small"
                     text="Yes, let's add"
                     type="button"
-                    onClick={(e: React.ChangeEvent<HTMLButtonElement>) => this.setDisplayCookie(true)}
+                    onClick={(e: React.ChangeEvent<HTMLButtonElement>) =>
+                      this.setDisplayCookie(true)
+                    }
                   />
                 </div>
               </div>
             </div>
           </div>
-        }
-        <InstructionModal setDisplayCookie={this.setDisplayCookie.bind(this)} isOpen={showInstructionModal}/>
+        )}
+        <InstructionModal
+          setDisplayCookie={this.setDisplayCookie.bind(this)}
+          isOpen={showInstructionModal}
+        />
       </Fragment>
-    )
+    );
   }
 }
 

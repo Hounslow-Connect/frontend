@@ -14,31 +14,35 @@ interface IProps {
 }
 
 const Checkbox: React.FunctionComponent<IProps> = (props: IProps) => {
-  const handleKeyPress = (event:  any) => {
+  const handleKeyPress = (event: any) => {
     if (event.key === 'Enter') {
-      if(props.onChange) props.onChange()
+      if (props.onChange) {
+        props.onChange();
+      }
     }
-  }
-  
-  return (<div className={`checkbox ${props.className}`}>
-    <input
-      type="checkbox"
-      id={props.id}
-      name={props.id}
-      checked={props.checked}
-      onChange={props.onChange}
-      tabIndex={-1}
-      aria-label={props.aria}
-    />
-    <label htmlFor={props.id} tabIndex={0} onKeyPress={handleKeyPress} >
-      <span>
+  };
+
+  return (
+    <div className={`checkbox ${props.className}`}>
+      <input
+        type="checkbox"
+        id={props.id}
+        name={props.id}
+        checked={props.checked}
+        onChange={props.onChange}
+        tabIndex={-1}
+        aria-label={props.aria}
+      />
+      <label htmlFor={props.id} tabIndex={0} onKeyPress={handleKeyPress}>
         <span>
-          <FontAwesomeIcon icon="check" />
+          <span>
+            <FontAwesomeIcon icon="check" />
+          </span>
         </span>
-      </span>
-      {props.label}
-    </label>
-  </div>)
+        {props.label}
+      </label>
+    </div>
+  );
 };
 
 export default observer(Checkbox);

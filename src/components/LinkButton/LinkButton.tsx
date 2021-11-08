@@ -56,14 +56,12 @@ const LinkButton: React.FunctionComponent<IProps> = ({
     })}
     disabled={disabled}
     type={type}
-    onClick={(event) => {
-      onClick && onClick(event)
-      history.push(to)
+    onClick={event => {
+      onClick && onClick(event);
+      history.push(to);
     }}
   >
-    {image && (
-      <img src={image} alt={text} className="button__image" />
-    )}
+    {image && <img src={image} alt={text} className="button__image" />}
     {text}
     {icon && (
       <FontAwesomeIcon

@@ -28,7 +28,12 @@ export default class ServiceStore {
   @computed
   get hasCriteria() {
     if (this.service) {
-      return ((this.service.eligibility_types && this.service.eligibility_types.taxonomies && this.service.eligibility_types.taxonomies.length) || !every(this.service.eligibility_types.custom, criteria => criteria === null) ? true : false)
+      return (this.service.eligibility_types &&
+        this.service.eligibility_types.taxonomies &&
+        this.service.eligibility_types.taxonomies.length) ||
+        !every(this.service.eligibility_types.custom, criteria => criteria === null)
+        ? true
+        : false;
     }
 
     return false;
@@ -40,15 +45,17 @@ export default class ServiceStore {
     const serviceData = await axios.get(`${apiBase}/services/${name}?include=organisation`);
     this.service = get(serviceData, 'data.data');
 
-    if(this.service?.organisation_id) {
-      this.organisationId = this.service?.organisation_id
+    if (this.service?.organisation_id) {
+      this.organisationId = this.service?.organisation_id;
       await this.getOrganisation();
     }
 
     this.getServiceLocations();
     this.getRelatedServices(name);
 
-    if(this.service && this.service.organisation_id)  this.fetchOrganisation(this.service.organisation_id);
+    if (this.service && this.service.organisation_id) {
+      this.fetchOrganisation(this.service.organisation_id);
+    }
 
     this.checkIfFavorited();
   };
@@ -57,8 +64,8 @@ export default class ServiceStore {
   fetchServiceEligibilities = async () => {
     const data = await axios.get(`${apiBase}/taxonomies/service-eligibilities`);
     this.serviceEligibilityTaxonomies = get(data, 'data.data');
-  }
-  
+  };
+
   @action
   fetchOrganisation = async (id: string) => {
     try {

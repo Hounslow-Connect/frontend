@@ -28,8 +28,7 @@ class Form extends Component<IProps, IState> {
     };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   toggleOrganisation = () => {
     this.setState({
@@ -77,7 +76,13 @@ class Form extends Component<IProps, IState> {
                   </p>
                 </label>
 
-                <Autocomplete storeTextField="organisation" defaultText={get(referralStore, 'referral.organisation')}  defaultValue={get(referralStore, 'referral.organisation')} store={referralStore} endpointEntity='organisations' />
+                <Autocomplete
+                  storeTextField="organisation"
+                  defaultText={get(referralStore, 'referral.organisation')}
+                  defaultValue={get(referralStore, 'referral.organisation')}
+                  store={referralStore}
+                  endpointEntity="organisations"
+                />
               </div>
 
               <div className="flex-col flex-col--12 referral__form">

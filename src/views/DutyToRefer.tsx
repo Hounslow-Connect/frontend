@@ -1,5 +1,5 @@
 import React from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react';
 
 import Housing from '../assets/images/duty-to-refer/housing.png';
@@ -28,7 +28,7 @@ const DutyToRefer: React.FunctionComponent = () => {
                 impact. Your intervention could keep the roof over someone’s head.
               </p>
               <a href="mailto:dutytorefer@Hounslow.gov.uk">
-                Click to report <i className="fas fa-envelope" aria-hidden={true}/>
+                Click to report <i className="fas fa-envelope" aria-hidden={true} />
               </a>
             </div>
           </div>
