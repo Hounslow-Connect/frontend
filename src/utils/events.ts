@@ -13,6 +13,7 @@ export const EventEmitter = {
   subscribe(event: Events, callback: (data: any) => any) {
     // @ts-ignore
     if (!this._events[event]) {
+      // @ts-ignore
       this._events[event] = [];
     }
     // @ts-ignore
