@@ -17,15 +17,8 @@ const ViewFilters: React.FunctionComponent<IProps> = ({ resultsStore, resultsSwi
   }
 
   return (
-    <div
-      className={cx(
-        'results__view-filter',
-      )}
-    >
-      <p
-        className="view-filter--header">
-        {resultsSwitch ? ' View as:' : 'View As'}
-      </p>
+    <div className={cx('results__view-filter')}>
+      <p className="view-filter--header">{resultsSwitch ? ' View as:' : 'View As'}</p>
       <Button
         text="Grid"
         icon="th-large"

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -47,7 +47,7 @@ import RelatedServices from './RelatedServices';
 import Breadcrumb from '../../components/Breadcrumb';
 import Loading from '../../components/Loading';
 import ServiceDisabled from './ServiceDisabled';
-import LinkButton from '../../components/LinkButton'
+import LinkButton from '../../components/LinkButton';
 
 interface RouteParams {
   service: string;
@@ -103,53 +103,65 @@ class Service extends Component<IProps> {
 
   getAllTaxonomies = () => {
     const { serviceStore } = this.props;
-    return serviceStore.serviceEligibilityTaxonomies
-  }
+    return serviceStore.serviceEligibilityTaxonomies;
+  };
 
   getTaxonomyUUIDs = () => {
     const { serviceStore } = this.props;
     const { service } = serviceStore;
-   return (service && service.eligibility_types ? service.eligibility_types.taxonomies : null)
+    return service && service.eligibility_types ? service.eligibility_types.taxonomies : null;
     // return (service && service.eligibility_types ? null : null)
-  }
+  };
 
   // Takes in a string and returns associated concatenated string of taxonomies and custom eligibility if they exist
   getServiceEligibilityInfo = (name: string) => {
     const { serviceStore } = this.props;
     const { service } = serviceStore;
-    
+
     // Get UUIDS from service.elgibility.taxonomies array
-    const UUIDs:any = this.getTaxonomyUUIDs()
+    const UUIDs: any = this.getTaxonomyUUIDs();
 
     // Gets all taxonomies
     const taxonomies = this.getAllTaxonomies();
 
-    let relatedEligibilities:any = []
+    let relatedEligibilities: any = [];
 
-    if(UUIDs && UUIDs.length && taxonomies) {
+    if (UUIDs && UUIDs.length && taxonomies) {
       // Traverse through UUIDS and then filter the array of taxonomies to find a match using the taxonomy ID
-      UUIDs.forEach((uuid:string) => {
-        const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0]
-        
-        if(matchedTaxonomyParent && matchedTaxonomyParent.children) {
-          const matchedTaxonomy:any =find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) || null
-          if(matchedTaxonomy && matchedTaxonomy.name) relatedEligibilities.push(matchedTaxonomy)
+      UUIDs.forEach((uuid: string) => {
+        const matchedTaxonomyParent = taxonomies.filter(taxonomy => taxonomy.name === name)[0];
+
+        if (matchedTaxonomyParent && matchedTaxonomyParent.children) {
+          const matchedTaxonomy: any =
+            find(matchedTaxonomyParent.children.filter((taxonomy: any) => taxonomy.id === uuid)) ||
+            null;
+          if (matchedTaxonomy && matchedTaxonomy.name) {
+            relatedEligibilities.push(matchedTaxonomy);
+          }
         }
-      })
+      });
     }
 
-    const orderEligibilities = _orderBy(relatedEligibilities, 'order', 'asc')
-    relatedEligibilities = orderEligibilities.map((eligibility: any) => eligibility.name)
-    
+    const orderEligibilities = _orderBy(relatedEligibilities, 'order', 'asc');
+    relatedEligibilities = orderEligibilities.map((eligibility: any) => eligibility.name);
+
     // Check service.elgibility.custom to see if there is a value for the passed in name
-    if(service && service.eligibility_types.custom) {
-      const customEligibility = get(service.eligibility_types.custom, `${name.split(' ').join('_').toLowerCase()}`)
+    if (service && service.eligibility_types.custom) {
+      const customEligibility = get(
+        service.eligibility_types.custom,
+        `${name
+          .split(' ')
+          .join('_')
+          .toLowerCase()}`
+      );
 
-      if(customEligibility) relatedEligibilities.push(customEligibility)
+      if (customEligibility) {
+        relatedEligibilities.push(customEligibility);
+      }
     }
-    
-    return (relatedEligibilities.length ? relatedEligibilities.join(', ') : null)
-  }
+
+    return relatedEligibilities.length ? relatedEligibilities.join(', ') : null;
+  };
 
   render() {
     const { serviceStore } = this.props;
@@ -169,10 +181,15 @@ class Service extends Component<IProps> {
           {get(service, 'name') && <title>{`${get(service, 'name')} | Hounslow Connect`}</title>}
           {!get(service, 'name') && <title>Service | Hounslow Connect</title>}
 
-          {get(service, 'intro') &&  <meta name="description" content={get(service, 'intro')} />}
-      
+          {get(service, 'intro') && <meta name="description" content={get(service, 'intro')} />}
+
           {get(service, 'name') && <meta property="og:title" content={`${get(service, 'name')}`} />}
-          {get(service, 'slug') && <meta property="og:url" content={`${process.env.REACT_APP_FRONTEND_URL}/${get(service, 'slug')}`} />}
+          {get(service, 'slug') && (
+            <meta
+              property="og:url"
+              content={`${process.env.REACT_APP_FRONTEND_URL}/${get(service, 'slug')}`}
+            />
+          )}
           {getImg(service) && <meta property="og:image" content={getImg(service)} />}
           <meta property="og:type" content="website" />
         </Helmet>
@@ -193,9 +210,26 @@ class Service extends Component<IProps> {
               <div className="flex-col flex-col--tablet--9">
                 <span className="organisation__header__sub">Service</span>
                 <h1>{get(service, 'name')}</h1>
-                {organisation && organisation.slug && <p className="service__header__desc">This service is run by the organisation <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">{organisation.name}</Link>. View their organisation details and other listed services.</p> }
+                {organisation && organisation.slug && (
+                  <p className="service__header__desc">
+                    This service is run by the organisation{' '}
+                    <Link to={`/organisations/${organisation.slug}`} aria-label="Home Link">
+                      {organisation.name}
+                    </Link>
+                    . View their organisation details and other listed services.
+                  </p>
+                )}
                 <div className="flex-container flex-container--no-padding flex-container--left">
-                  {organisation && organisation.slug && <div className="flex-col--mobile--12"><LinkButton alt={false} accent={true} text="View organisation" to={`/organisations/${organisation.slug}`}  /></div>}
+                  {organisation && organisation.slug && (
+                    <div className="flex-col--mobile--12">
+                      <LinkButton
+                        alt={false}
+                        accent={true}
+                        text="View organisation"
+                        to={`/organisations/${organisation.slug}`}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -282,7 +316,11 @@ class Service extends Component<IProps> {
                     )}
 
                     {this.getServiceEligibilityInfo('Other') && (
-                      <CriteriaCard svg={Other} title="Other" info={this.getServiceEligibilityInfo('Other')} />
+                      <CriteriaCard
+                        svg={Other}
+                        title="Other"
+                        info={this.getServiceEligibilityInfo('Other')}
+                      />
                     )}
 
                     <div className="flex-col flex-col--tablet--12 mobile-show tablet-show  service__info__cost">
@@ -292,7 +330,10 @@ class Service extends Component<IProps> {
 
                   <div className="flex-container flex-container--align-center flex-container--no-padding service__media service__section--no-padding">
                     <div className="flex-col flex-col--mobile--12">
-                      <h2 className="service__heading">{`What is this ${get(service, 'type')}?`}</h2>
+                      <h2 className="service__heading">{`What is this ${get(
+                        service,
+                        'type'
+                      )}?`}</h2>
                     </div>
                     {!!service.gallery_items.length && (
                       <div className="flex-container flex-container--mobile-no-padding service__gallery">
@@ -405,10 +446,7 @@ class Service extends Component<IProps> {
                     </Accordian>
                   )}
 
-                  <Accordian
-                    title={`What we offer?`}
-                    className="service__accordian mobile-show"
-                  >
+                  <Accordian title={`What we offer?`} className="service__accordian mobile-show">
                     {!!service.offerings.length && (
                       <ul>
                         {map(service.offerings, (offering: any, i) => (
@@ -474,15 +512,16 @@ class Service extends Component<IProps> {
                     </Accordian>
                   )}
                 </div>
-                <br /><br />
+                <br />
+                <br />
                 <div className="mobile-show">
                   <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
                     <p>
-                      Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                      Page last updated{' '}
+                      <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
                     </p>
                   </div>
                 </div>
-                
               </div>
               <div className="flex-col flex-col--4 flex-col--tablet--12  ">
                 <div className="flex-container service__right-column mobile-hide">
@@ -520,7 +559,8 @@ class Service extends Component<IProps> {
                   </div>
                   <div className="flex-col flex-col--12 flex-container flex-container--justify flex-container--no-padding">
                     <p>
-                      Page last updated <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
+                      Page last updated{' '}
+                      <strong>{moment(service!.updated_at).format('Do MMMM YYYY')}</strong>
                     </p>
                   </div>
                 </div>

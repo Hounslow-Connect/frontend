@@ -11,12 +11,12 @@ export default class OrganisationStore {
 
   @computed
   get hasSocials() {
-    return (this.organisation && this.organisation.social_medias.length ? true : false)
+    return this.organisation && this.organisation.social_medias.length ? true : false;
   }
 
   /**
    * Get organisation using the passed in organisation slug
-   * @param name 
+   * @param name
    */
   @action
   fetchOrganisation = async (name: string) => {
@@ -25,8 +25,8 @@ export default class OrganisationStore {
       const organisationData = await axios.get(`${apiBase}/organisations/${name}`);
       this.organisation = get(organisationData, 'data.data');
 
-      if(this.organisation && this.organisation.id) {
-        this.fetchAssociatedServices(this.organisation.id)
+      if (this.organisation && this.organisation.id) {
+        this.fetchAssociatedServices(this.organisation.id);
       } else {
         this.loading = false;
       }
@@ -41,10 +41,14 @@ export default class OrganisationStore {
    */
   @action
   fetchAssociatedServices = async (id: string) => {
-    if(!id) return
-    
+    if (!id) {
+      return;
+    }
+
     try {
-      const servicesData = await axios.post(`${apiBase}/services/index?filter[organisation_id]=${id}`);
+      const servicesData = await axios.post(
+        `${apiBase}/services/index?filter[organisation_id]=${id}`
+      );
       this.associatedServices = get(servicesData, 'data.data');
       this.loading = false;
     } catch (error) {

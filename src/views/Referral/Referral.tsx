@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import queryString from 'query-string';
 import { withRouter, RouteComponentProps } from 'react-router';

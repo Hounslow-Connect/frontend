@@ -34,7 +34,7 @@ class MapCard extends Component<IProps, IState> {
     if (locations) {
       map(locations, (location: IServiceLocation) => {
         if (location) {
-          this.state.bounds.extend([location.location.lat, location.location.lon])
+          this.state.bounds.extend([location.location.lat, location.location.lon]);
         }
       });
     }
@@ -42,11 +42,15 @@ class MapCard extends Component<IProps, IState> {
 
   render() {
     const { locations, iconType } = this.props;
-    const locationObj: any = first(locations)
-    const mapCenter: [number, number] = (locationObj ? [locationObj.location.lat, locationObj.location.lon] : [51.460729410758496, -0.3726421426363473]);
-    
+    const locationObj: any = first(locations);
+    const mapCenter: [number, number] = locationObj
+      ? [locationObj.location.lat, locationObj.location.lon]
+      : [51.460729410758496, -0.3726421426363473];
+
     const ServiceMarker = L.icon({
-      iconUrl: (iconType ? require(`../../../assets/images/icons/maps/${iconType}-pin.svg`).default : require('../../../assets/images/icons/maps/service-pin.svg').default),
+      iconUrl: iconType
+        ? require(`../../../assets/images/icons/maps/${iconType}-pin.svg`).default
+        : require('../../../assets/images/icons/maps/service-pin.svg').default,
       iconSize: [50, 95],
     });
 
@@ -55,18 +59,17 @@ class MapCard extends Component<IProps, IState> {
     return (
       <Map center={mapCenter} zoom={14} attributionControl={false} setMaxBounds={this.state.bounds}>
         <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png" />
-          {locations.map((serviceLocation: IServiceLocation) => {
-            return (
-              <Marker
-                key={serviceLocation.id}
-                position={[serviceLocation.location.lat, serviceLocation.location.lon]}
-                icon={ServiceMarker}
-              >
-              </Marker>
-            );
-          })}
+        {locations.map((serviceLocation: IServiceLocation) => {
+          return (
+            <Marker
+              key={serviceLocation.id}
+              position={[serviceLocation.location.lat, serviceLocation.location.lon]}
+              icon={ServiceMarker}
+            />
+          );
+        })}
       </Map>
-    )
+    );
   }
 }
 

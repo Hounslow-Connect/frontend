@@ -39,17 +39,18 @@ const TermsAndConditions: React.FunctionComponent<IProps> = ({ referralStore }) 
                 'service.name'
               )} to contact you regarding the service you have connected with`}</li>
               <li>
-                For the Hounslow Connect admin team and/or the London Borough of Hounslow to
-                contact you/the client regarding your experience or to request feedback
+                For the Hounslow Connect admin team and/or the London Borough of Hounslow to contact
+                you/the client regarding your experience or to request feedback
               </li>
 
               <li>
-                For the Hounslow Connect admin team and/or the London Borough of Hounslow to
-                contact you to let you know about changes to our terms of service
+                For the Hounslow Connect admin team and/or the London Borough of Hounslow to contact
+                you to let you know about changes to our terms of service
               </li>
 
               <li>
-                You confirm you have obtained the referred persons consent and they authorise you to refer them for {`${get(referralStore, 'service.name')}`}, where applicable
+                You confirm you have obtained the referred persons consent and they authorise you to
+                refer them for {`${get(referralStore, 'service.name')}`}, where applicable
               </li>
             </ul>
 

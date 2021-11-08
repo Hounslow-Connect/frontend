@@ -90,12 +90,14 @@ const GalleryCard: React.FunctionComponent<IProps> = ({ gallery }) => {
   return (
     <div className="flex-container flex-container--mobile-no-padding gallery-card">
       {displayGallery(gallery.slice(0, 3))}
-      {gallery.length > 1 && <div className="flex-col--12 gallery-card--view">
-        <p onClick={() => toggleOpen(!open)}>
-          <FontAwesomeIcon icon="camera" />
-          View Images ({`${gallery.length}`})
-        </p>
-      </div>}
+      {gallery.length > 1 && (
+        <div className="flex-col--12 gallery-card--view">
+          <p onClick={() => toggleOpen(!open)}>
+            <FontAwesomeIcon icon="camera" />
+            View Images ({`${gallery.length}`})
+          </p>
+        </div>
+      )}
       {open && (
         <Lightbox
           mainSrc={get(gallery, `[${photoIndex}].url`)}
