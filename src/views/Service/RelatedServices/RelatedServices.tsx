@@ -56,7 +56,7 @@ class RelatedServices extends Component<IProps, IState> {
             )}
           </div>
         </div>
-        
+
         <div className="flex-container">
           <div className="related-services__container">
             {relatedServices.map((service: IService) => (

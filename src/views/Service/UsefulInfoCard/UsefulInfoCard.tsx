@@ -16,7 +16,9 @@ interface IProps {
 const UsefulInfoCardAccordian: React.FunctionComponent<IProps> = ({ icon, info }) => (
   <div className="service__useful-info service__accordian-inner">
     <div className="flex-col flex-col--12">
-      <h3><FontAwesomeIcon icon={icon} /> {info.title}</h3>
+      <h3>
+        <FontAwesomeIcon icon={icon} /> {info.title}
+      </h3>
     </div>
     <div className="flex-col flex-col--12 service__useful-info__content">
       <ReactMarkdown source={info.description} />

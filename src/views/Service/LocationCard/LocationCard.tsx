@@ -51,15 +51,11 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
             } flex-col--mobile--12`}
           >
             <h3>{get(location, 'location.address_line_1', '')}</h3>
-            <p className="location__address">{`${get(
-              location,
-              'location.address_line_2',
-              ''
-            ) ? get(
-              location,
-              'location.address_line_2',
-              ','
-            ) : ''} ${get(location, 'location.postcode', '')}`}</p>
+            <p className="location__address">{`${
+              get(location, 'location.address_line_2', '')
+                ? get(location, 'location.address_line_2', ',')
+                : ''
+            } ${get(location, 'location.postcode', '')}`}</p>
             <div className="flex-col flex-col--mobile--12 location__google-maps">
               <Link
                 icon="map"
@@ -96,16 +92,20 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
                   </h3>
                   <div className="flex-container flex-container--no-padding">
                     <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
-                      {formatOpeningTimes(location.regular_opening_hours).map((openingTime: string) => (
-                        <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
-                      ))}
+                      {formatOpeningTimes(location.regular_opening_hours).map(
+                        (openingTime: string) => (
+                          <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: openingTime }} />
+                        )
+                      )}
                     </div>
                     <div className="flex-col flex-col--12 flex-col--mobile--12 location__opening-times--list">
                       {!!location.holiday_opening_hours.length && (
                         <Accordian title="Bank holiday times" className="location__holiday-times">
-                          {formatHolidayTimes(location.holiday_opening_hours).map((time: string) => (
-                            <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
-                          ))}
+                          {formatHolidayTimes(location.holiday_opening_hours).map(
+                            (time: string) => (
+                              <p key={uniqueId()} dangerouslySetInnerHTML={{ __html: time }} />
+                            )
+                          )}
                         </Accordian>
                       )}
                     </div>
@@ -113,7 +113,7 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
                 </div>
               )}
             </div>
-          </div>          
+          </div>
           <div className="flex-col flex-col--4 location__image">
             {location.has_image && (
               <img

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
 
@@ -19,17 +19,19 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
   if (!cmsStore) {
     return null;
   }
-  
+
   return (
     <main className="home">
       <Helmet>
         <title>Home | Hounslow Connect</title>
       </Helmet>
-      {cmsStore.home && cmsStore.home.banners && <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />}
+      {cmsStore.home && cmsStore.home.banners && (
+        <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />
+      )}
       <Search />
       <Personas personas={SearchStore.personas} />
     </main>
-  )
+  );
 };
 
 export default inject('cmsStore')(observer(Home));

@@ -66,9 +66,9 @@ class SearchResultCard extends React.Component<IProps> {
           'is-active': isActive,
         })}
         onClick={() => {
-          resultsStore.view === 'map'  ?
-          this.props.activeIdHandler(result.id) :
-          history.push(`/services/${result.slug}`);
+          resultsStore.view === 'map'
+            ? this.props.activeIdHandler(result.id)
+            : history.push(`/services/${result.slug}`);
         }}
         tabIndex={0}
       >
@@ -76,12 +76,12 @@ class SearchResultCard extends React.Component<IProps> {
           <div className="search-result-card__top-row">
             <div className="search-result-card__title">
               <h3>{result.name}</h3>
-              {organisation &&
+              {organisation && (
                 <h4 className="search-result-card__organisation">
                   <span className="sr-only">{`This ${result.type} is ran by`}</span>
                   {organisation.name}
                 </h4>
-              }
+              )}
             </div>
 
             <div className="search-result-card__logo">
@@ -112,16 +112,16 @@ class SearchResultCard extends React.Component<IProps> {
                 className={cx('search-result-card__tag', `search-result-card__tag--cost`)}
                 aria-label={`This ${result.type} ${result.is_free ? 'is free' : 'has a cost'}`}
               >
-                <FontAwesomeIcon
-                  icon="pound-sign"
-                  className="search-result-card__tag--icon"
-                />
+                <FontAwesomeIcon icon="pound-sign" className="search-result-card__tag--icon" />
 
                 {result.is_free ? 'Free' : 'Cost'}
               </div>
             </div>
             {!!locations.length && (
-              <div className="search-result-card__location" onClick={(e: any) => e.stopPropagation()}>
+              <div
+                className="search-result-card__location"
+                onClick={(e: any) => e.stopPropagation()}
+              >
                 <span className="sr-only">{`This ${result.type} is located at`}</span>
 
                 <FontAwesomeIcon icon="map-marker-alt" />
@@ -140,11 +140,11 @@ class SearchResultCard extends React.Component<IProps> {
               </div>
             )}
           </div>
-          {result.intro &&
+          {result.intro && (
             <div className="search-result-card__intro">
               <p className="body--s">{result.intro}</p>
             </div>
-          }
+          )}
         </div>
         <div
           className="search-result-card__footer"
@@ -157,8 +157,8 @@ class SearchResultCard extends React.Component<IProps> {
           </Link>
         </div>
       </article>
-    )
+    );
   }
-};
+}
 
 export default withRouter(SearchResultCard);

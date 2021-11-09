@@ -7,7 +7,11 @@ import './CategoryList.scss';
 import { ICategory } from '../../types/types';
 import Button from '../Button';
 
-const requestImageFile = require.context("../../assets/images/category-images/", true, /^\.\/.*\.svg$/);
+const requestImageFile = require.context(
+  '../../assets/images/category-images/',
+  true,
+  /^\.\/.*\.svg$/
+);
 
 interface IProps extends RouteComponentProps {
   categories: ICategory[];
@@ -15,14 +19,18 @@ interface IProps extends RouteComponentProps {
   title?: string;
 }
 
-const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, covid = false, title }) => (
+const CategoryList: React.FunctionComponent<IProps> = ({
+  history,
+  categories,
+  covid = false,
+  title,
+}) => (
   <div className="category-list">
-    {title &&
-      <h3 className="category-list__heading">{title}</h3>
-    }
+    {title && <h3 className="category-list__heading">{title}</h3>}
     <div className="category-list__items">
       {categories.map(({ name, id, icon }) => {
-        const image = requestImageFile(`./${name.replace(/[, ]+/g, '-').toLowerCase()}.svg`).default;
+        const image = requestImageFile(`./${name.replace(/[, ]+/g, '-').toLowerCase()}.svg`)
+          .default;
 
         return (
           <Button
@@ -39,7 +47,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({ history, categories, co
             }}
             covid={covid}
           />
-        )
+        );
       })}
     </div>
   </div>

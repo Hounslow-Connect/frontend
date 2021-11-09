@@ -93,7 +93,7 @@ export interface IServiceTaxonomy {
   id: string;
   parent_id: string;
   name: string;
-  order: number; 
+  order: number;
   children: [];
   created_at: string;
   updated_at: string;
@@ -180,13 +180,13 @@ export interface ICriteria {
 }
 export interface IEligibility {
   custom: {
-    age_group: string,
-    disability: string,
-    ethnicity: string,
-    gender: string,
-    income: string,
-    language: string,
-    other: string
+    age_group: string;
+    disability: string;
+    ethnicity: string;
+    gender: string;
+    income: string;
+    language: string;
+    other: string;
   };
   taxonomies: [];
 }
@@ -210,5 +210,5 @@ export interface IEligibilityFilters {
 }
 
 export enum Events {
-  SET_TITLE = 'set_title'
+  SET_TITLE = 'set_title',
 }

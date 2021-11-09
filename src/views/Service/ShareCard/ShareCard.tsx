@@ -52,26 +52,21 @@ const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
       </div>
       <div className="flex-container flex-container--no-padding">
         <div className="flex-col service__action-buttons">
-          <Button
-            size="small"
-            text="Print"
-            icon="print"
-            onClick={() => window.print()}
-          />
+          <Button size="small" text="Print" icon="print" onClick={() => window.print()} />
           <Button
             size="small"
             text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
             icon="star"
-            onClick={() =>  {
-              serviceStore.addToFavourites()
-              forceUpdate()
+            onClick={() => {
+              serviceStore.addToFavourites();
+              forceUpdate();
             }}
             disabled={serviceStore.favourite}
           />
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default ShareCard;

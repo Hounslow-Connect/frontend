@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 import { observer, inject } from 'mobx-react';
 import { History } from 'history';
 import get from 'lodash/get';
@@ -62,20 +62,31 @@ class Results extends Component<IProps> {
 
     return (
       <section className="results">
-         <Helmet>
+        <Helmet>
           <title>Search results | Hounslow Connect</title>
-          <meta name="description" content="Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow" />
+          <meta
+            name="description"
+            content="Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow"
+          />
         </Helmet>
-        <Breadcrumb crumbs={[{ text: 'Home', url: '/' }, { text: 'Search results', url: '' }]} />
+        <Breadcrumb
+          crumbs={[
+            { text: 'Home', url: '/' },
+            { text: 'Search results', url: '' },
+          ]}
+        />
         <div className="results__search-box">
           <div className="flex-container">
-            {!resultsStore.isKeywordSearch && 
-              <h1 className="results__heading">Results for</h1>
-            }
-            <div className={"results__overview " + (!resultsStore.isKeywordSearch ? '_disabled-results__overview--category' : 'results__overview--keyword')}>
-              {!resultsStore.isKeywordSearch &&
-                <Category />
+            {!resultsStore.isKeywordSearch && <h1 className="results__heading">Results for</h1>}
+            <div
+              className={
+                'results__overview ' +
+                (!resultsStore.isKeywordSearch
+                  ? '_disabled-results__overview--category'
+                  : 'results__overview--keyword')
               }
+            >
+              {!resultsStore.isKeywordSearch && <Category />}
               <ParamsFilter />
             </div>
           </div>
@@ -86,7 +97,8 @@ class Results extends Component<IProps> {
               <div className="results__count">
                 {!!resultsStore.results.length && !resultsStore.loading && (
                   <p>
-                    Your search: {resultsStore.view === 'grid'
+                    Your search:{' '}
+                    {resultsStore.view === 'grid'
                       ? `${
                           resultsStore.totalItems > 25 ? 'Over 25' : resultsStore.totalItems
                         } results found`
@@ -103,7 +115,7 @@ class Results extends Component<IProps> {
           <Loading />
         ) : (
           <div className="results__list">
-            {(this.hasCategories() && this.hasCategories().length !== 0) && (
+            {this.hasCategories() && this.hasCategories().length !== 0 && (
               <div className="results__category-sidebar">
                 {map(this.hasCategories(), (sidebox: ISidebox, index) => {
                   return <SideboxCard sidebox={sidebox} key={index} />;

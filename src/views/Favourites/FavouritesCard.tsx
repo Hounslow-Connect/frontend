@@ -64,33 +64,34 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
   const organisation = find(favouritesStore.organisations, ['id', service.organisation_id]);
 
   return (
-    <article className='search-result-card favourites__card'>
-        <div className="search-result-card__content">
-          <div className="search-result-card__top-row">
-            <div className="search-result-card__title">
-              <h3>{service.name}</h3>
-              {organisation &&
-                <h4 className="search-result-card__organisation">
-                  <span className="sr-only">{`This ${service.type} is ran by`}</span>
-                  {organisation.name}
-                </h4>
-              }
-            </div>
-
-            <div className="search-result-card__logo">
-              <img
-                src={
-                  service.has_logo
-                    ? `${apiBase}/services/${service.id}/logo.png?v=${service.updated_at}`
-                    : `${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}`
-                }
-                alt={service.name}
-                onError={(ev: any) => (ev.target.src = FallBackLogo)}
-              />
-            </div>
+    <article className="search-result-card favourites__card">
+      <div className="search-result-card__content">
+        <div className="search-result-card__top-row">
+          <div className="search-result-card__title">
+            <h3>{service.name}</h3>
+            {organisation && (
+              <h4 className="search-result-card__organisation">
+                <span className="sr-only">{`This ${service.type} is ran by`}</span>
+                {organisation.name}
+              </h4>
+            )}
           </div>
 
-          {serviceLocations.length > 0 && <div className="search-result-card__location favourites__card--location">
+          <div className="search-result-card__logo">
+            <img
+              src={
+                service.has_logo
+                  ? `${apiBase}/services/${service.id}/logo.png?v=${service.updated_at}`
+                  : `${apiBase}/organisations/${service.organisation_id}/logo.png?v=${service.updated_at}`
+              }
+              alt={service.name}
+              onError={(ev: any) => (ev.target.src = FallBackLogo)}
+            />
+          </div>
+        </div>
+
+        {serviceLocations.length > 0 && (
+          <div className="search-result-card__location favourites__card--location">
             <FontAwesomeIcon icon="map-marker-alt" />
             {serviceLocations.length === 1 ? (
               <p>{first(serviceLocations)}</p>
@@ -104,73 +105,79 @@ const FavouritesCard: React.FunctionComponent<IProps> = ({
                 ))}
               </Accordian>
             )}
-          </div>} 
+          </div>
+        )}
 
-          <div className="search-result-card__meta">
-            <div className="search-result-card__tags">
-              <div
-                className={cx('search-result-card__tag', `search-result-card__tag--type`)}
-                aria-label={`This is a ${service.type}`}
-              >
-                <FontAwesomeIcon
-                  icon={getIcon(service.type) as IconProp}
-                  className="search-result-card__tag--icon"
-                />
-                {capitalize(service.type)}
-              </div>
-              <div
-                className={cx('search-result-card__tag', `search-result-card__tag--cost`)}
-                aria-label={`This ${service.type} ${service.is_free ? 'is free' : 'has a cost'}`}
-              >
-                <FontAwesomeIcon
-                  icon="pound-sign"
-                  className="search-result-card__tag--icon"
-                />
-                {service.is_free ? 'Free' : 'Cost'}
-              </div>
+        <div className="search-result-card__meta">
+          <div className="search-result-card__tags">
+            <div
+              className={cx('search-result-card__tag', `search-result-card__tag--type`)}
+              aria-label={`This is a ${service.type}`}
+            >
+              <FontAwesomeIcon
+                icon={getIcon(service.type) as IconProp}
+                className="search-result-card__tag--icon"
+              />
+              {capitalize(service.type)}
+            </div>
+            <div
+              className={cx('search-result-card__tag', `search-result-card__tag--cost`)}
+              aria-label={`This ${service.type} ${service.is_free ? 'is free' : 'has a cost'}`}
+            >
+              <FontAwesomeIcon icon="pound-sign" className="search-result-card__tag--icon" />
+              {service.is_free ? 'Free' : 'Cost'}
             </div>
           </div>
-          {service.intro &&
-            <div className="search-result-card__intro">
-              <p className="body--s">{service.intro}</p>
-            </div>
-          }
+        </div>
+        {service.intro && (
+          <div className="search-result-card__intro">
+            <p className="body--s">{service.intro}</p>
+          </div>
+        )}
 
-          <div className="flex-container  flex-container--no-padding favourites__card--contact">
-            {service.contact_phone && <div className="flex-col flex-col--12">
+        <div className="flex-container  flex-container--no-padding favourites__card--contact">
+          {service.contact_phone && (
+            <div className="flex-col flex-col--12">
               <p className="favourites__card--contact--heading">
                 <FontAwesomeIcon icon="phone" /> Telephone
               </p>
-              <a href={`tel:${service.contact_phone}`} className="body--s">{service.contact_phone}</a>
-            </div>}
-            {service.contact_email && <div className="flex-col flex-col--12">
+              <a href={`tel:${service.contact_phone}`} className="body--s">
+                {service.contact_phone}
+              </a>
+            </div>
+          )}
+          {service.contact_email && (
+            <div className="flex-col flex-col--12">
               <p className="favourites__card--contact--heading">
                 <FontAwesomeIcon icon="envelope" /> Email
               </p>
-              <a href={`mailto:${service.contact_email}`} className="body--s">{service.contact_email}</a>
-            </div>}
-          </div>
+              <a href={`mailto:${service.contact_email}`} className="body--s">
+                {service.contact_email}
+              </a>
+            </div>
+          )}
         </div>
-        <div className="favourites__card--footer">
-          <div>
-            <Link to={`/services/${service.slug}`}>
-              <span>View more</span>
-              <FontAwesomeIcon icon="arrow-right" />
-            </Link>
-          </div>
-          <div>
-            <Button
-              text='Remove'
-              key={`key_remove_favourite_${service.id}`}
-              size="small"
-              icon="times"
-              onClick={() => {
-                removeFavourite(service.id)
-              }}
-            />
-          </div>
+      </div>
+      <div className="favourites__card--footer">
+        <div>
+          <Link to={`/services/${service.slug}`}>
+            <span>View more</span>
+            <FontAwesomeIcon icon="arrow-right" />
+          </Link>
         </div>
-      </article>
+        <div>
+          <Button
+            text="Remove"
+            key={`key_remove_favourite_${service.id}`}
+            size="small"
+            icon="times"
+            onClick={() => {
+              removeFavourite(service.id);
+            }}
+          />
+        </div>
+      </div>
+    </article>
   );
 };
 

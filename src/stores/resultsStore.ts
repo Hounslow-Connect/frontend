@@ -48,7 +48,7 @@ export default class ResultsStore {
     language: null,
     gender: null,
     ethnicity: null,
-    housing: null
+    housing: null,
   };
 
   constructor() {
@@ -71,14 +71,16 @@ export default class ResultsStore {
   };
 
   @action
-  setPostcode = async (input: string) => {    
+  setPostcode = async (input: string) => {
     if (input !== '' && input !== this.postcode) {
       this.postcode = input;
       await this.geolocate();
-      return
+      return;
     }
 
-    if(input === '') this.locationCoords = {}
+    if (input === '') {
+      this.locationCoords = {};
+    }
     this.postcode = input || '';
   };
 
@@ -103,18 +105,16 @@ export default class ResultsStore {
 
   @action
   getQueryParamsString = () => {
-    let params: any = this.queryParams
-    let queryString = null
+    const params: any = this.queryParams;
+    let queryString = null;
 
-    let queryParams = Object.keys(params)
-    .map((key) => { 
-      return (params[key] ? `${key}=${params[key]}` : null ) 
-    })
+    const queryParams = Object.keys(params).map(key => {
+      return params[key] ? `${key}=${params[key]}` : null;
+    });
 
     queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
-    return queryString
-  }
-
+    return queryString;
+  };
 
   @action clearFilters = () => {
     this.filters = {
@@ -124,7 +124,7 @@ export default class ResultsStore {
       language: null,
       gender: null,
       ethnicity: null,
-      housing: null
+      housing: null,
     };
   };
 
@@ -150,7 +150,7 @@ export default class ResultsStore {
     this.locationCoords = {};
     this.view = 'grid';
 
-    this.clearFilters()
+    this.clearFilters();
   }
 
   @action
@@ -173,7 +173,6 @@ export default class ResultsStore {
     }
   };
 
-
   /**
    * Gets search terms from url query. Runs on component mount and update
    */
@@ -183,10 +182,9 @@ export default class ResultsStore {
     this.setSearchTerms(searchTerms);
   };
 
-
   /**
-   * Updates the store with the pased in query params 
-   * @param searchTerms 
+   * Updates the store with the pased in query params
+   * @param searchTerms
    */
   @action
   setSearchTerms = async (searchTerms: { [key: string]: any }) => {
@@ -266,7 +264,7 @@ export default class ResultsStore {
     this.setParams(true);
   };
 
-  setParams = async (search: boolean = false) => {    
+  setParams = async (search: boolean = false) => {
     const params: IParams = {};
 
     if (this.category) {
@@ -296,9 +294,13 @@ export default class ResultsStore {
     if (this.postcode) {
       params.postcode = this.postcode;
 
-      if(!this.distance) this.setDistance('1')
+      if (!this.distance) {
+        this.setDistance('1');
+      }
     } else {
-      if(this.distance) this.setDistance('')
+      if (this.distance) {
+        this.setDistance('');
+      }
     }
 
     if (this.distance) {
@@ -328,13 +330,15 @@ export default class ResultsStore {
     }
 
     params.order = this.order;
-    
-    this.queryParams = params
 
-    if(search) await this.fetchResults();
+    this.queryParams = params;
+
+    if (search) {
+      await this.fetchResults();
+    }
   };
 
-  getPostParams = () => {    
+  getPostParams = () => {
     const params: IParams = {};
 
     if (this.category) {
@@ -369,24 +373,23 @@ export default class ResultsStore {
       params.distance = this.distance;
     }
 
-    let service_eligibilities: any = []
-    let {...filters}: any = this.filters
-    
-    Object.keys(this.filters)
-    .forEach((key) => { 
-      if(filters[key]) {
-        let filterGroup = filters[key].split(',')
+    const service_eligibilities: any = [];
+    const { ...filters }: any = this.filters;
 
-        if(filterGroup) {
+    Object.keys(this.filters).forEach(key => {
+      if (filters[key]) {
+        const filterGroup = filters[key].split(',');
+
+        if (filterGroup) {
           filterGroup.forEach((filter: any) => {
-            service_eligibilities.push(filter)
+            service_eligibilities.push(filter);
           });
         }
       }
-    })
+    });
 
-    if(service_eligibilities.length) {
-      params.eligibilities = service_eligibilities
+    if (service_eligibilities.length) {
+      params.eligibilities = service_eligibilities;
     }
 
     if (size(this.locationCoords)) {
@@ -395,14 +398,17 @@ export default class ResultsStore {
 
     params.order = this.order;
 
-   return params
+    return params;
   };
 
   @action
   fetchResults = async () => {
     this.loading = true;
     try {
-      const results = await axios.post(`${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`, this.getPostParams());
+      const results = await axios.post(
+        `${apiBase}/search?page=${this.currentPage}&per_page=${this.itemsPerPage}`,
+        this.getPostParams()
+      );
       this.results = get(results, 'data.data', []);
       this.totalItems = get(results, 'data.meta.total', 0);
 
@@ -413,7 +419,7 @@ export default class ResultsStore {
 
       this.getOrganisations();
     } catch (e) {
-      this.results = []
+      this.results = [];
       console.error(e);
       this.loading = false;
     }
@@ -481,10 +487,10 @@ export default class ResultsStore {
       const geolocation = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${this.postcode},UK&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
       );
-      
+
       const location = get(geolocation, 'data.results[0].geometry.location', {});
 
-      if(location && get(geolocation, 'data.results[0]')) {
+      if (location && get(geolocation, 'data.results[0]')) {
         this.locationCoords = {
           lon: location.lng,
           lat: location.lat,

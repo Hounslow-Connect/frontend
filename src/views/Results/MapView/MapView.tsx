@@ -14,7 +14,7 @@ import {
   GroupMarker,
   HelplineMarker,
   InformationMarker,
-  ServiceMarker
+  ServiceMarker,
 } from './icons';
 import List from './../ListView/List';
 
@@ -86,14 +86,14 @@ class MapView extends Component<IProps, IState> {
 
   setActiveService = (id: string) => {
     this.setState({
-      activeMarkerId: id
+      activeMarkerId: id,
     });
 
-    let activeSearchResultCard = document.querySelector('.search-result-card.is-active');
+    const activeSearchResultCard = document.querySelector('.search-result-card.is-active');
 
-    if(activeSearchResultCard) {
+    if (activeSearchResultCard) {
       activeSearchResultCard.scrollIntoView({
-        behavior: "smooth"
+        behavior: 'smooth',
       });
     }
   };
@@ -119,10 +119,13 @@ class MapView extends Component<IProps, IState> {
                     <Marker
                       key={serviceLocation.id}
                       position={[serviceLocation.location.lat, serviceLocation.location.lon]}
-                      icon={this.state.activeMarkerId === result.id ? this.getMarkerType('active') : this.getMarkerType(result.type)}
+                      icon={
+                        this.state.activeMarkerId === result.id
+                          ? this.getMarkerType('active')
+                          : this.getMarkerType(result.type)
+                      }
                       onClick={() => this.setActiveService(result.id)}
-                    >
-                    </Marker>
+                    />
                   );
                 });
               }
@@ -142,7 +145,10 @@ class MapView extends Component<IProps, IState> {
                 Activity
               </p>
               <p className="map__key--description">
-                <FontAwesomeIcon icon="clipboard" className="map__key-icon map__key-icon--service" />
+                <FontAwesomeIcon
+                  icon="clipboard"
+                  className="map__key-icon map__key-icon--service"
+                />
                 Service
               </p>
               <p className="map__key--description">

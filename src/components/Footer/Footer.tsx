@@ -39,7 +39,6 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
             className="body--xs footer__content"
             source={get(cmsStore, 'global.footer_content')}
           />
-
           <Link to="/privacy-policy" className="body--xs">
             Privacy Policy
           </Link>
@@ -90,7 +89,11 @@ const Footer: React.FunctionComponent<IProps> = ({ mobileMenu, cmsStore, uiStore
 
             <div className="flex-col flex-col--6 flex-col--mobile--12 flex-col--tablet--12 footer__button">
               <ButtonLink href={membersAreaURL} text="Members Area" target="_blank" />
-              <img src={HounslowLogo} alt="London Borough of Hounslow" className="footer-hounslow-logo" />
+              <img
+                src={HounslowLogo}
+                alt="London Borough of Hounslow"
+                className="footer-hounslow-logo"
+              />
             </div>
           </div>
         </div>
