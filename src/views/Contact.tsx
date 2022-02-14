@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import ReactMarkdown from 'react-markdown';
@@ -19,10 +18,6 @@ const Contact: React.FunctionComponent<IProps> = ({ cmsStore }) => {
 
   return (
     <CMSPage title={get(cmsStore, 'contact.title')} twoColumn={true} breadcrumb="Contact">
-      <Helmet>
-        <title>Contact | Hounslow Connect</title>
-      </Helmet>
-
       <div className="flex-col flex-col--7 flex-col--tablet--8">
         <ReactMarkdown source={get(cmsStore, 'contact.content')} />
       </div>

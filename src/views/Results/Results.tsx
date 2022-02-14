@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Helmet } from 'react-helmet';
 import { observer, inject } from 'mobx-react';
 import { History } from 'history';
 import get from 'lodash/get';
@@ -62,13 +61,6 @@ class Results extends Component<IProps> {
 
     return (
       <section className="results">
-        <Helmet>
-          <title>Search results | Hounslow Connect</title>
-          <meta
-            name="description"
-            content="Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow"
-          />
-        </Helmet>
         <Breadcrumb
           crumbs={[
             { text: 'Home', url: '/' },
