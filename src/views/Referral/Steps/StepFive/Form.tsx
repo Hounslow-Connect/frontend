@@ -28,7 +28,9 @@ class Form extends Component<IProps, IState> {
     };
   }
 
+  /* tslint:disable */
   componentDidMount() {}
+  /* tslint:enable */
 
   toggleOrganisation = () => {
     this.setState({

@@ -49,8 +49,8 @@ Parameters:
       redirected domain (must be in us-east-1).
     Type: String
 
-  LambdaOriginRewriteFunctionArn:
-    Description: The ARN for the Lambda origin rewrite function (must be in us-east-1).
+  LambdaSeoMetaFunctionArn:
+    Description: The ARN for the Lambda customise meta tags function (must be in us-east-1).
     Type: String
 
   LambdaRedirectFunctionArn:
@@ -184,6 +184,9 @@ Resources:
           - EventType: viewer-request
             LambdaFunctionARN:
               Ref: LambdaRedirectFunctionArn
+          - EventType: origin-request
+            LambdaFunctionARN:
+              Ref: LambdaSeoMetaFunctionArn
           ViewerProtocolPolicy: redirect-to-https
         DefaultRootObject: index.html
         Enabled: True
@@ -199,6 +202,10 @@ Resources:
               - Ref: Bucket
           CustomOriginConfig:
             OriginProtocolPolicy: http-only
+          OriginCustomHeaders:
+          - HeaderName: "X-Env-Cname"
+            HeaderValue:
+              Fn::Sub: ${Cname}
         ViewerCertificate:
           AcmCertificateArn:
             Ref: CertificateArn
