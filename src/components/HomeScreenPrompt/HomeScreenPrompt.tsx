@@ -67,6 +67,7 @@ class HomeScreenPrompt extends Component<any, IState> {
     });
   }
 
+  /* tslint:disable */
   render() {
     const { isVisible, showInstructionModal } = this.state;
 
@@ -115,6 +116,7 @@ class HomeScreenPrompt extends Component<any, IState> {
       </Fragment>
     );
   }
+  /* tslint:enable */
 }
 
 export default HomeScreenPrompt;
