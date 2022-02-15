@@ -71,7 +71,9 @@ export default class ServiceStore {
     try {
       const organisationData = await axios.get(`${apiBase}/organisations/${id}`);
       this.organisation = get(organisationData, 'data.data');
-    } catch (error) {}
+    } catch (error) {
+      // @ts-ignore
+    }
   };
 
   @action
@@ -90,7 +92,9 @@ export default class ServiceStore {
     try {
       const organisation = await axios.get(`${apiBase}/organisations/${this.organisationId}`);
       this.organisation = get(organisation, 'data.data', '');
-    } catch (e) {}
+    } catch (e) {
+      // @ts-ignore
+    }
   };
 
   @action

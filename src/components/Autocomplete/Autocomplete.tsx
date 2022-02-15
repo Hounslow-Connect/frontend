@@ -37,9 +37,9 @@ const Autocomplete: React.FunctionComponent<IProps> = ({
     console.log('[onSuggestionsFetchRequested] --> inputValue: ', inputValue);
     toggleLoading(true);
 
-    const suggestions: any = getSuggestions(inputValue);
+    const newSuggestions: any = getSuggestions(inputValue);
 
-    suggestions
+    newSuggestions
       .then((res: any) => {
         console.log('[onSuggestionsFetchRequested] --> suggestions then:', res);
         toggleLoading(false);
@@ -51,29 +51,29 @@ const Autocomplete: React.FunctionComponent<IProps> = ({
       });
   };
 
-  const getSuggestions = (value: string) => {
+  const getSuggestions = (inputValue: string) => {
     return new Promise<void>((resolve, reject) => {
-      const inputValue = value
+      const filterValue = inputValue
         .toString()
         .trim()
         .toLowerCase();
-      const inputLength = inputValue.length;
+      const filterLength = filterValue.length;
 
       axios
-        .get(`${apiBase}/${endpointEntity}?filter[${filterKey}]=${inputValue}`)
+        .get(`${apiBase}/${endpointEntity}?filter[${filterKey}]=${filterValue}`)
         .then(res => {
-          const suggestions = get(res, 'data.data', '');
+          const suggestionList = get(res, 'data.data', '');
           let result = [] as any;
 
-          if (suggestions.length) {
+          if (suggestionList.length) {
             let filteredList = [] as any;
 
-            filteredList = suggestions.map((item: any) => ({
+            filteredList = suggestionList.map((item: any) => ({
               value: item.id,
               label: item.name,
             }));
 
-            result = inputLength === 0 ? [] : filteredList;
+            result = filterLength === 0 ? [] : filteredList;
           }
           resolve(result);
         })
@@ -104,13 +104,15 @@ const Autocomplete: React.FunctionComponent<IProps> = ({
 
   // Runs once on render
   useEffect(() => {
-    const suggestions: any = getSuggestions(value);
+    const newSuggestions: any = getSuggestions(value);
 
-    suggestions
+    newSuggestions
       .then((res: any) => {
         setSuggestions(res);
       })
-      .catch(() => {});
+      .catch(() => {
+        // @ts-ignore
+      });
 
     // If an option was perviously selected and stored, then retrieve the option and show
     if (defaultValue && value === '') {

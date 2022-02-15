@@ -17,7 +17,7 @@ interface IProps {
   disabled?: boolean;
   value?: string | '';
 }
-
+/* tslint:disable */
 const Select: React.FunctionComponent<IProps> = ({
   options,
   onChange,
@@ -44,5 +44,6 @@ const Select: React.FunctionComponent<IProps> = ({
     ))}
   </select>
 );
+/* tslint:enable */
 
 export default observer(Select);
