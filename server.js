@@ -8,15 +8,21 @@ const app = express()
 const fs = require("fs")
 const axios = require('axios');
 const _get = require('lodash/get');
+const removeMarkdown = require('remove-markdown');
 const apiBase = process.env.REACT_APP_API_URL;
 const frontendBaseUrl = process.env.REACT_APP_FRONTEND_URL;
+const hounslowConnectLogoUrl = `${frontendBaseUrl}/hounslow-logo-white.png`
 
 const wrap = fn => (...args) => fn(...args).catch(args[2])
 //
 /* tslint:disable */
 const pathToIndex = path.join(__dirname, "build/index.html")
 
-const fetchService = async (name) => {
+const removeMarkdownConfig = {
+  useImgAltText: true
+}
+
+const fetchService = async (name = null) => {
   try {
     let response = await axios.get(`${apiBase}/services/${name.trim()}`)
     return _get(response, 'data.data');
@@ -25,7 +31,7 @@ const fetchService = async (name) => {
   }
 };
 
-const fetchOrganisation = async (name) => {
+const fetchOrganisation = async (name = null) => {
   try {
     let response = await axios.get(`${apiBase}/organisations/${name.trim()}`)
     return _get(response, 'data.data');
@@ -34,6 +40,32 @@ const fetchOrganisation = async (name) => {
   }
 };
 
+const fetchCategory = async (id = null) => {
+  try {
+    let response = await axios.get(`${apiBase}/collections/categories/${id}`)
+    return _get(response, 'data.data');
+  } catch (err) {
+    return false
+  }
+};
+
+const fetchPersona = async (id = null) => {
+  try {
+    let response = await axios.get(`${apiBase}/collections/personas/${id}`)
+    return _get(response, 'data.data');
+  } catch (err) {
+    return false
+  }
+};
+
+const fetchCMSData = async () => {
+  try {
+    let response = await axios.get(`${apiBase}/settings`)
+    return _get(response, 'data.data.cms');
+  } catch (err) {
+    return false
+  }
+};
 
 // Service page
 app.get('/services/:slug', wrap(async (req, res) => {
@@ -51,14 +83,29 @@ app.get('/services/:slug', wrap(async (req, res) => {
 
     const data = await fetchService(slug)
 
+    const metaTitle = _get(data, 'name', '')
+    const serviceHasLogo = _get(data, 'has_logo', false)
+    const orgHasLogo = _get(data, 'organisation.has_logo', false)
+    const orgImageUrl = `${apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`
+    
+    let rawPageContent = _get(data, 'intro', '')
+
+    // strip markdown formatting
+    rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+    // limit to 160 chars
+    let metaDesc = rawPageContent.substring(0, 161)
+
+    if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
+    
     if(data) {
       let metas = [
-        { name: '__PAGE_TITLE__', content: `${data.name} | Hounslow Connect` }, 
-        { name: '__PAGE_META_DESCRIPTION__', content:  `${data.intro}` },
-        { name: '__PAGE_META_OG_TITLE__', content: `${data.name}` },   
-        { name: '__PAGE_META_OG_DESCRIPTION__', content: `${data.intro}` },   
+        { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+        { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+        { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },   
+        { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },   
         { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}/${data.slug}` },   
-        { name: '__PAGE_META_OG_IMAGE__', content: (data.has_logo ? `${apiBase}/services/${data.id}/logo.png?` : `${apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`) }   
+        { name: '__PAGE_META_OG_IMAGE__', content: (serviceHasLogo ? `${apiBase}/services/${data.id}/logo.png?` : (orgHasLogo ? orgImageUrl : hounslowConnectLogoUrl)) }
       ]
 
       metas.forEach(meta => {
@@ -90,14 +137,28 @@ app.get('/organisations/:slug', wrap(async (req, res) => {
 
     const data = await fetchOrganisation(slug)
 
+    const metaTitle = _get(data, 'name', '')
+    const orgHasLogo = _get(data, 'has_logo', false)
+    const orgImageUrl = `${apiBase}/organisations/${data.id}/logo.png?v=${data.id}`
+
+    let rawPageContent = _get(data, 'description', '')
+
+    // strip markdown formatting
+    rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+    // limit to 160 chars
+    let metaDesc = rawPageContent.substring(0, 161)
+
+    if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
+
     if(data) {
       let metas = [
-        { name: '__PAGE_TITLE__', content: `${data.name} | Hounslow Connect` }, 
-        { name: '__PAGE_META_DESCRIPTION__', content:  `${data.description}` },
-        { name: '__PAGE_META_OG_TITLE__', content: `${data.name}` },   
-        { name: '__PAGE_META_OG_DESCRIPTION__', content: `${data.description}` },   
+        { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+        { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+        { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },   
+        { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },   
         { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}/${data.slug}` },   
-        { name: '__PAGE_META_OG_IMAGE__', content: (data.has_logo ? `${apiBase}/organisations/${data.id}/logo.png?v=${data.id}` : '') }   
+        { name: '__PAGE_META_OG_IMAGE__', content: (orgHasLogo ? orgImageUrl : hounslowConnectLogoUrl) }   
       ]
 
       metas.forEach(meta => {
@@ -114,14 +175,27 @@ app.get('/organisations/:slug', wrap(async (req, res) => {
 }))
 
 // Home page
-app.get("/", (req, res) => {
+app.get("/", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+
+  const metaTitle = _get(cmsData, 'frontend.home.banners.0.title', '')
+  let rawPageContent = _get(cmsData, 'frontend.home.banners.0.content', '')
+
+  // strip markdown formatting
+  rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+  // limit to 160 chars
+  let metaDesc = rawPageContent.substring(0, 161)
+
+  if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Home | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Home | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -133,17 +207,49 @@ app.get("/", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Search results
-app.get("/results", (req, res) => {
+app.get("/results", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
+  const hasCategoryParam = !!req.query.category
   let updatedPage = raw.toString()
+  let metaTitle = 'Results | Hounslow Connect'
+  let metaDesc = 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow'
+  let rawPageContent = ''
+
+  if (req.query.category) {
+    const categoryData = await fetchCategory(req.query.category)
+
+    rawPageContent = _get(categoryData, 'intro', '')
+
+    // strip markdown formatting
+    rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+    // limit to 160 chars
+    metaDesc = rawPageContent.substring(0, 161)
+    metaTitle = _get(categoryData, 'name', '').concat(' in Hounslow')
+  }
+  
+  if (req.query.persona) {
+    const personaData = await fetchPersona(req.query.persona)
+
+    let rawPageContent = _get(personaData, 'intro', '')
+
+    // strip markdown formatting
+    rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+    // limit to 160 chars
+    metaDesc = rawPageContent.substring(0, 161)
+    metaTitle = _get(personaData, 'name', '').concat(' in Hounslow')
+  }
+
+  if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
 
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Results | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Results | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: metaTitle }, 
+    { name: '__PAGE_META_DESCRIPTION__', content: metaDesc },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: metaTitle }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -155,17 +261,29 @@ app.get("/results", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Favourites
-app.get("/favourites", (req, res) => {
+app.get("/favourites", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+  const metaTitle = _get(cmsData, 'frontend.favourites.title', '')
+  let rawPageContent = _get(cmsData, 'frontend.favourites.content', '')
+
+  // strip markdown formatting
+  rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+  // limit to 160 chars
+  let metaDesc = rawPageContent.substring(0, 161)
+
+  if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Favourites | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Favourites | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -177,7 +295,7 @@ app.get("/favourites", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Referral
 app.get("/referral", (req, res) => {
@@ -187,7 +305,7 @@ app.get("/referral", (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: 'Referral | Hounslow Connect' }, 
     { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Referral | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Referral | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -202,14 +320,26 @@ app.get("/referral", (req, res) => {
 })
 
 // About
-app.get("/about", (req, res) => {
+app.get("/about", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+  const metaTitle = _get(cmsData, 'frontend.about.title', '')
+  let rawPageContent = _get(cmsData, 'frontend.about.content', '')
+
+  // strip markdown formatting
+  rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+  // limit to 160 chars
+  let metaDesc = rawPageContent.substring(0, 161)
+
+  if (rawPageContent.length >= 160) metaDesc = metaDesc.concat('...')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'About | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'About | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -221,17 +351,29 @@ app.get("/about", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Contact
-app.get("/contact", (req, res) => {
+app.get("/contact", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+  const metaTitle = _get(cmsData, 'frontend.contact.title', '')
+  let rawPageContent = _get(cmsData, 'frontend.contact.content', '')
+
+  // strip markdown formatting
+  rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+  // limit to 160 chars
+  let metaDesc = rawPageContent.substring(0, 161)
+
+  if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Contact | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Contact | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc}, { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -243,17 +385,29 @@ app.get("/contact", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Get involved
-app.get("/get-involved", (req, res) => {
+app.get("/get-involved", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+  const metaTitle = _get(cmsData, 'frontend.get_involved.title', '')
+  let rawPageContent = _get(cmsData, 'frontend.get_involved.content', '')
+
+  // strip markdown formatting
+  rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
+
+  // limit to 160 chars
+  let metaDesc = rawPageContent.substring(0, 161)
+
+  if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Get involved | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Get involved | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -265,17 +419,23 @@ app.get("/get-involved", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Privacy policy
-app.get("/privacy-policy", (req, res) => {
+app.get("/privacy-policy", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+  const metaTitle = _get(cmsData, 'frontend.privacy_policy.title', '')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Privacy policy | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Privacy policy | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  'We are committed to protecting and respecting your privacy' },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'We are committed to protecting and respecting your privacy' }, 
+    { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, 
+    { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -287,17 +447,20 @@ app.get("/privacy-policy", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Terms and Conditions
-app.get("/terms-and-conditions", (req, res) => {
+app.get("/terms-and-conditions", wrap(async (req, res) => {
   const raw = fs.readFileSync(pathToIndex)
   let updatedPage = raw.toString()
 
+  const cmsData = await fetchCMSData()
+  const metaTitle = _get(cmsData, 'frontend.terms_and_conditions.title', '')
+
   let metas = [
-    { name: '__PAGE_TITLE__', content: 'Terms and Conditions | Hounslow Connect' }, 
-    { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Terms and Conditions | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }   
+    { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` }, 
+    { name: '__PAGE_META_DESCRIPTION__', content:  'This page (together with the documents referred to on it) outlines the terms and conditions on which we and our partners offer services to you' },
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: 'This page (together with the documents referred to on it) outlines the terms and conditions on which we and our partners offer services to you' }, { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }   
   ]
 
   metas.forEach(meta => {
@@ -309,7 +472,7 @@ app.get("/terms-and-conditions", (req, res) => {
   })
 
   res.send(updatedPage)
-})
+}))
 
 // Duty to refer
 app.get("/duty-to-refer", (req, res) => {
