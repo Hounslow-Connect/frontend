@@ -23,11 +23,7 @@ Resources:
           const https = require('https');
 
           // Environment based endpoints
-          const envUris = {
-            apiBase: '',
-            frontendBaseUrl: '',
-            originalPath: ''
-          };
+          const envUris = {};
 
           /*
           * Generate HTTP OK response using 200 status code with HTML body.
@@ -49,56 +45,16 @@ Resources:
           };
 
           const pageMeta = {
-            "home": [
-              { name: '__PAGE_TITLE__', content: 'Home | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Home | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "results": [
-              { name: '__PAGE_TITLE__', content: 'Results | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Results | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "favourites": [
-              { name: '__PAGE_TITLE__', content: 'Favourites | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Favourites | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
             "referral": [
               { name: '__PAGE_TITLE__', content: 'Referral | Hounslow Connect' },
               { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
               { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Referral | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "about": [
-              { name: '__PAGE_TITLE__', content: 'About | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'About | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "contact": [
-              { name: '__PAGE_TITLE__', content: 'Contact | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Contact | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "get-involved": [
-              { name: '__PAGE_TITLE__', content: 'Get involved | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Get involved | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "privacy-policy": [
-              { name: '__PAGE_TITLE__', content: 'Privacy policy | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Privacy policy | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
             ],
             "duty-to-refer": [
               { name: '__PAGE_TITLE__', content: 'Duty to refer | Hounslow Connect' },
               { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
               { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Duty to refer | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
             ],
-            "terms-and-conditions": [
-              { name: '__PAGE_TITLE__', content: 'Terms and Conditions | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Terms and Conditions | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ]
           };
 
           const getObject = async (bucket, objectKey) => {
@@ -148,7 +104,7 @@ Resources:
           const fetchService = async (name) => {
               try {
                   const response = await getApi(`${envUris.apiBase}/services/${name.trim()}`);
-                  return response['data']? response['data'] : null;
+                  return _get(response, 'data');
               } catch (err) {
                 console.log(err);
                   return false;
@@ -158,25 +114,128 @@ Resources:
           const fetchOrganisation = async (name) => {
               try {
                   const response = await getApi(`${envUris.apiBase}/organisations/${name.trim()}`);
-                  return response['data']? response['data'] : null;
+                  return _get(response, 'data');
               } catch (err) {
                 console.log(err);
                   return false;
               }
           };
 
+          const fetchCategory = async (id) => {
+              try {
+                  const response = await getApi(`${envUris.apiBase}/collections/categories/${id}`);
+                  return _get(response, 'data');
+              } catch (err) {
+                console.log(err);
+                  return false;
+              }
+          };
+
+          const fetchPersona = async (id) => {
+              try {
+                  const response = await getApi(`${envUris.apiBase}/collections/personas/${id}`);
+                  return _get(response, 'data');
+              } catch (err) {
+                console.log(err);
+                  return false;
+              }
+          };
+
+          const fetchSettings = async (name) => {
+              try {
+                  const response = await getApi(`${envUris.apiBase}/settings`);
+                  return _get(response, 'data.cms');
+              } catch (err) {
+                console.log(err);
+                  return false;
+              }
+          };
+
+          const removeMarkdown = (content) => {
+            const h3 = /^### (.*$)/gim;
+            const h2 = /^## (.*$)/gim;
+            const h1 = /^# (.*$)/gim;
+            const bq = /^\> (.*$)/gim;
+            const bold = /\*\*(.*)\*\*/gim;
+            const italics = /\*(.*)\*/gim;
+            const image = /!\[(.*?)\]\((.*?)\)/gim;
+            const link = /\[(.*?)\]\((.*?)\)/gim;
+            const lineBreak = /\n$/gim;
+
+            const text = content
+            .replace(h3, '$1')// h3
+            .replace(h2, '$1')// h2
+            .replace(h1, '$1')// h1
+            .replace(bq, '$1')// blockquote
+            .replace(bold, '$1')// bold
+            .replace(italics, '$1')// italic
+            .replace(image, "$1")// image alt text
+            .replace(link, "$1")// link
+            .replace(lineBreak, ' ');// linebreak
+
+            return text.trim();
+          };
+
+          const iterable = (item) => {
+            return item && typeof item === 'object' && (Array.isArray(item) || item.constructor === Object);
+          };
+
+          const _get = (data, path, defaultValue = null) => {
+            if (iterable(data)) {
+              const steps = path.split('.');
+              let node = data;
+              for (let i in steps) {
+                const step = steps[i];
+                if (i == steps.length - 1) {
+                  return node[step];
+                }
+                if (!iterable(node[step])) {
+                  return defaultValue;
+                }
+                node = node[step];
+              }
+            }
+            return defaultValue;
+          };
+
+          const getUrlParameter = (name) => {
+            if (! envUris.querystring) {
+              return null;
+            }
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]?' + name + '=([^&#]*)');
+            var results = regex.exec(envUris.querystring);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+          };
+
           const renderServiceMeta = async (slug) => {
             const data = await fetchService(slug);
+
+            const metaTitle = _get(data, 'name', '');
+            const serviceHasLogo = _get(data, 'has_logo', false);
+            const orgHasLogo = _get(data, 'organisation.has_logo', false);
+            const orgImageUrl = `${envUris.apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`;
+
+            let rawPageContent = _get(data, 'intro', '');
+
+            // strip markdown formatting
+            rawPageContent = removeMarkdown(rawPageContent);
+
+            // limit to 160 chars
+            let metaDesc = rawPageContent.substring(0, 161);
+
+            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+
             let metas = [];
 
             if(data) {
               metas = [
-                  { name: '__PAGE_TITLE__', content: `${data.name} | Hounslow Connect` },
-                  { name: '__PAGE_META_DESCRIPTION__', content:  `${data.intro}` },
-                  { name: '__PAGE_META_OG_TITLE__', content: `${data.name}` },
-                  { name: '__PAGE_META_OG_DESCRIPTION__', content: `${data.intro}` },
+                  { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+                  { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
                   { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/${data.slug}` },
-                  { name: '__PAGE_META_OG_IMAGE__', content: (data.has_logo ? `${envUris.apiBase}/services/${data.id}/logo.png?` : `${envUris.apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`) }
+                  { name: '__PAGE_META_OG_IMAGE__', content: (serviceHasLogo ? `${envUris.apiBase}/services/${data.id}/logo.png?` : (orgHasLogo ? orgImageUrl : envUris.logoUrl)) }
               ];
             }
 
@@ -185,16 +244,137 @@ Resources:
 
           const renderOrganisationMeta = async (slug) => {
             const data = await fetchOrganisation(slug);
+
+            const metaTitle = _get(data, 'name', '');
+            const orgHasLogo = _get(data, 'has_logo', false);
+            const orgImageUrl = `${envUris.apiBase}/organisations/${data.id}/logo.png?v=${data.id}`;
+
+            let rawPageContent = _get(data, 'description', '');
+
+            // strip markdown formatting
+            rawPageContent = removeMarkdown(rawPageContent);
+
+            // limit to 160 chars
+            let metaDesc = rawPageContent.substring(0, 161);
+
+            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+
             let metas = [];
 
             if(data) {
               metas = [
-                  { name: '__PAGE_TITLE__', content: `${data.name} | Hounslow Connect` },
-                  { name: '__PAGE_META_DESCRIPTION__', content:  `${data.description}` },
-                  { name: '__PAGE_META_OG_TITLE__', content: `${data.name}` },
-                  { name: '__PAGE_META_OG_DESCRIPTION__', content: `${data.description}` },
+                  { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+                  { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
                   { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/${data.slug}` },
-                  { name: '__PAGE_META_OG_IMAGE__', content: (data.has_logo ? `${envUris.apiBase}/organisations/${data.id}/logo.png?v=${data.id}` : '') }
+                  { name: '__PAGE_META_OG_IMAGE__', content: (orgHasLogo ? orgImageUrl : envUris.logoUrl) }
+              ];
+            }
+
+            return metas;
+          };
+
+          const renderResultsMeta = async () => {
+            const category = getUrlParameter('category');
+
+            const persona = getUrlParameter('persona');
+
+            let rawPageContent = '';
+            let data = null;
+
+            if (category) {
+              data = await fetchCategory(category);
+
+              rawPageContent = _get(data, 'intro', '');
+            }
+
+            if (persona) {
+              data = await fetchPersona(persona);
+
+              rawPageContent = _get(data, 'intro', '');
+            }
+
+            // strip markdown formatting
+            rawPageContent = removeMarkdown(rawPageContent);
+
+            // limit to 160 chars
+            let metaDesc = rawPageContent.substring(0, 161);
+            const metaTitle = _get(data, 'name', '').concat(' in Hounslow');
+
+            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+
+            let metas = [];
+
+            if(data) {
+              metas = [
+                  { name: '__PAGE_TITLE__', content: metaTitle },
+                  { name: '__PAGE_META_DESCRIPTION__', content: metaDesc },
+                  { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
+                  { name: '__PAGE_META_OG_TITLE__', content: metaTitle },
+                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}? ${envUris.querystring}` },
+                  { name: '__PAGE_META_OG_IMAGE__', content: envUris.logoUrl }
+              ];
+            }
+
+            return metas;
+          };
+
+          const renderCmsMeta = async (page) => {
+            const data = await fetchSettings();
+
+            const metaTitle = _get(data, `frontend.${page}.title`, '');
+            let rawPageContent = _get(data, `frontend.${page}.content`, '');
+
+            // strip markdown formatting
+            rawPageContent = removeMarkdown(rawPageContent);
+
+            // limit to 160 chars
+            let metaDesc = rawPageContent.substring(0, 161);
+
+            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+
+            let metas = [];
+
+            if(data) {
+              metas = [
+                  { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+                  { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
+                  { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
+                  { name: '__PAGE_META_OG_IMAGE__', content: envUris.logoUrl }
+              ];
+            }
+
+            return metas;
+          };
+
+          const renderHomeMeta = async () => {
+            const data = await fetchSettings();
+
+            const metaTitle = _get(data, `frontend.home.banners.0.title`, '');
+
+            let rawPageContent = _get(data, `frontend.home.banners.0.content`, '');
+
+            // strip markdown formatting
+            rawPageContent = removeMarkdown(rawPageContent);
+
+            // limit to 160 chars
+            let metaDesc = rawPageContent.substring(0, 161);
+
+            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+
+            let metas = [];
+
+            if(data) {
+              metas = [
+                  { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
+                  { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
+                  { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
+                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
+                  { name: '__PAGE_META_OG_IMAGE__', content: envUris.logoUrl }
               ];
             }
 
@@ -221,18 +401,23 @@ Resources:
                 meta = await renderOrganisationMeta(slug);
                 break;
               case 'results':
+                meta = await renderResultsMeta();
+                break;
               case 'favourites':
-              case 'referral':
               case 'about':
               case 'contact':
               case 'get-involved':
               case 'privacy-policy':
-              case 'duty-to-refer':
               case 'terms-and-conditions':
+                const page = urlElements[1].trim().replace('-', '_');
+                meta = await renderCmsMeta(page);
+                break;
+              case 'duty-to-refer':
+              case 'referral':
                 meta = pageMeta[urlElements[1]];
                 break;
               default:
-                meta = pageMeta['home'];
+                meta = await renderHomeMeta();
             }
             return meta;
           };
@@ -241,6 +426,7 @@ Resources:
             try {
               let body = await getObject(bucket, 'index.html');
               const metas = await renderMeta();
+
               metas.forEach(meta => {
                 if(meta.content !== '') {
                   body = body.replace(String(meta.name), `${meta.content}`);
@@ -275,6 +461,8 @@ Resources:
             envUris.frontendBaseUrl = `https://${domainName}`;
             envUris.apiBase = `https://api.${domainName}/core/v1`;
             envUris.originalPath = request.uri;
+            envUris.querystring = request.querystring;
+            envUris.logoUrl = `${envUris.frontendBaseUrl}/hounslow-logo-white.png`;
 
             const page = await renderPage(domainName);
 

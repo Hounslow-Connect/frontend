@@ -173,8 +173,8 @@ Resources:
           CachedMethods:
           - HEAD
           - GET
-          ForwardedValues:
-            QueryString: False
+          CachePolicyId:
+            Ref: CachePolicy
           TargetOriginId:
             Fn::Join:
             - "-"
@@ -322,3 +322,36 @@ Resources:
             Ref: Certificate301Arn
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.2_2019
+
+  CachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name:
+          Fn::Join:
+            - "-"
+            - - Ref: Environment
+              - cache
+              - policy
+        DefaultTTL: 86400
+        MaxTTL: 31536000
+        MinTTL: 60
+        ParametersInCacheKeyAndForwardedToOrigin:
+          CookiesConfig:
+            CookieBehavior: none
+          EnableAcceptEncodingBrotli: false
+          EnableAcceptEncodingGzip: false
+          HeadersConfig:
+            HeaderBehavior: whitelist
+            Headers:
+              - x-forwarded-for
+              - user-agent
+              - accept-encoding
+              - pragma
+              - host
+              - X-Env-Cname
+          QueryStringsConfig:
+            QueryStringBehavior: whitelist
+            QueryStrings:
+              - category
+              - persona
