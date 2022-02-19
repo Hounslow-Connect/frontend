@@ -23,7 +23,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({
     {title && <h3 className="category-list__heading">{title}</h3>}
     <div className="category-list__items">
       {categories.map(({ name, id }) => {
-        const categoryImageUrl = `${apiBase}/collections/categories/${id}/image.svg`;
+        const categoryImageUrl: string = `${apiBase}/collections/categories/${id}/image.svg`;
 
         return (
           <Button
