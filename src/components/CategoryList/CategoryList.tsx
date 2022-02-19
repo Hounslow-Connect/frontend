@@ -1,17 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router';
-
+import { apiBase } from '../../config/api';
 import './CategoryList.scss';
 
 import { ICategory } from '../../types/types';
 import Button from '../Button';
-
-const requestImageFile = require.context(
-  '../../assets/images/category-images/',
-  true,
-  /^\.\/.*\.svg$/
-);
 
 interface IProps extends RouteComponentProps {
   categories: ICategory[];
@@ -28,9 +22,8 @@ const CategoryList: React.FunctionComponent<IProps> = ({
   <div className="category-list">
     {title && <h3 className="category-list__heading">{title}</h3>}
     <div className="category-list__items">
-      {categories.map(({ name, id, icon }) => {
-        const image = requestImageFile(`./${name.replace(/[, ]+/g, '-').toLowerCase()}.svg`)
-          .default;
+      {categories.map(({ name, id }) => {
+        const categoryImageUrl = `${apiBase}/collections/categories/${id}/image.svg`;
 
         return (
           <Button
@@ -38,7 +31,7 @@ const CategoryList: React.FunctionComponent<IProps> = ({
             text={name}
             key={id}
             size="small"
-            image={image}
+            image={categoryImageUrl}
             onClick={() => {
               history.push({
                 pathname: '/results',

@@ -6,12 +6,6 @@ import { apiBase } from '../../../config/api';
 import ResultsStore from '../../../stores/resultsStore';
 import '../Results.scss';
 
-const requestImageFile = require.context(
-  '../../../assets/images/category-images/',
-  true,
-  /^\.\/.*\.svg$/
-);
-
 interface IProps {
   resultsStore?: ResultsStore;
 }
@@ -28,14 +22,12 @@ const Category: React.FunctionComponent<IProps> = ({ resultsStore }) => {
           <div className="results__overview__image">
             {resultsStore && resultsStore.category ? (
               <img
-                src={
-                  requestImageFile(
-                    `./${get(resultsStore, 'category.name')
-                      .replace(/[, ]+/g, '-')
-                      .toLowerCase()}.svg`
-                  ).default
-                }
+                src={`${apiBase}/collections/categories/${get(
+                  resultsStore,
+                  'category.id'
+                )}/image.svg`}
                 alt={get(resultsStore, 'category.name').replace('COVID-19:', '')}
+                loading="lazy"
               />
             ) : (
               <img
