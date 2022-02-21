@@ -25,6 +25,10 @@ Resources:
           // Environment based endpoints
           const envUris = {};
 
+          // Default meta content
+          let defaultTitle = '';
+          let defaultContent = '';
+
           /*
           * Generate HTTP OK response using 200 status code with HTML body.
           */
@@ -44,17 +48,41 @@ Resources:
               body: null,
           };
 
-          const pageMeta = {
-            "referral": [
-              { name: '__PAGE_TITLE__', content: 'Referral | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Referral | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
-            "duty-to-refer": [
-              { name: '__PAGE_TITLE__', content: 'Duty to refer | Hounslow Connect' },
-              { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
-              { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' }, { name: '__PAGE_META_OG_TITLE__', content: 'Duty to refer | Hounslow Connect' }, { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` }, { name: '__PAGE_META_OG_IMAGE__', content: '' }
-            ],
+          const pageMeta = () => {
+            return {
+              "referral": [
+                { name: '__PAGE_TITLE__', content: 'Referral | Hounslow Connect' },
+                { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
+                { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
+                { name: '__PAGE_META_OG_TITLE__', content: 'Referral | Hounslow Connect' },
+                { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalUrl}` },
+                { name: '__PAGE_META_OG_IMAGE__', content: `${envUris.logoUrl}` }
+              ],
+              "duty-to-refer": [
+                { name: '__PAGE_TITLE__', content: 'Duty to refer | Hounslow Connect' },
+                { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
+                { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow' },
+                { name: '__PAGE_META_OG_TITLE__', content: 'Duty to refer | Hounslow Connect' },
+                { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
+                { name: '__PAGE_META_OG_IMAGE__', content: `${envUris.logoUrl}` }
+              ],
+              "privacy-policy": [
+                { name: '__PAGE_TITLE__', content: 'Privacy policy | Hounslow Connect' },
+                { name: '__PAGE_META_DESCRIPTION__', content:  'We are committed to protecting and respecting your privacy' },
+                { name: '__PAGE_META_OG_DESCRIPTION__', content: 'We are committed to protecting and respecting your privacy' },
+                { name: '__PAGE_META_OG_TITLE__', content: 'Privacy policy | Hounslow Connect' },
+                { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
+                { name: '__PAGE_META_OG_IMAGE__', content: `${envUris.logoUrl}` }
+              ],
+              "terms-and-conditions": [
+                { name: '__PAGE_TITLE__', content: 'Terms and conditions | Hounslow Connect' },
+                { name: '__PAGE_META_DESCRIPTION__', content:  'This page (together with the documents referred to on it) outlines the terms and conditions on which we and our partners offer services to you' },
+                { name: '__PAGE_META_OG_DESCRIPTION__', content: 'This page (together with the documents referred to on it) outlines the terms and conditions on which we and our partners offer services to you' },
+                { name: '__PAGE_META_OG_TITLE__', content: 'Terms and conditions | Hounslow Connect' },
+                { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
+                { name: '__PAGE_META_OG_IMAGE__', content: `${envUris.logoUrl}` }
+              ],
+            };
           };
 
           const getObject = async (bucket, objectKey) => {
@@ -152,20 +180,26 @@ Resources:
           };
 
           const removeMarkdown = (content) => {
-            const h3 = /^### (.*$)/gim;
-            const h2 = /^## (.*$)/gim;
-            const h1 = /^# (.*$)/gim;
-            const bq = /^\> (.*$)/gim;
+            const h3 = /^### (.*\b)/gim;
+            const h2 = /^## (.*\b)/gim;
+            const h2Alt = /\n+-+\n+/gim;
+            const h1 = /^# (.*\b)/gim;
+            const h1Alt = /\n+=+\n+/gim;
+            const bq = /^\> (.*\b)/gim;
             const bold = /\*\*(.*)\*\*/gim;
             const italics = /\*(.*)\*/gim;
             const image = /!\[(.*?)\]\((.*?)\)/gim;
             const link = /\[(.*?)\]\((.*?)\)/gim;
-            const lineBreak = /\n$/gim;
+            const lineBreak = /\n+/gim;
+            const quote = /\"+/gim;
 
             const text = content
+            .replace(quote, '')// Double quotes
             .replace(h3, '$1')// h3
             .replace(h2, '$1')// h2
+            .replace(h2Alt, ' ')// h2 Alt syntax
             .replace(h1, '$1')// h1
+            .replace(h1Alt, ' ')// h1 Alt syntax
             .replace(bq, '$1')// blockquote
             .replace(bold, '$1')// bold
             .replace(italics, '$1')// italic
@@ -208,16 +242,10 @@ Resources:
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
           };
 
-          const renderServiceMeta = async (slug) => {
-            const data = await fetchService(slug);
-
-            const metaTitle = _get(data, 'name', '');
-            const serviceHasLogo = _get(data, 'has_logo', false);
-            const orgHasLogo = _get(data, 'organisation.has_logo', false);
-            const orgImageUrl = `${envUris.apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`;
-
-            let rawPageContent = _get(data, 'intro', '');
-
+          const prepareDescription = (rawPageContent) => {
+            if (rawPageContent === '') {
+              rawPageContent = defaultContent;
+            }
             // strip markdown formatting
             rawPageContent = removeMarkdown(rawPageContent);
 
@@ -225,6 +253,21 @@ Resources:
             let metaDesc = rawPageContent.substring(0, 161);
 
             if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+
+            return metaDesc;
+          };
+
+          const renderServiceMeta = async (slug) => {
+            const data = await fetchService(slug);
+
+            const metaTitle = _get(data, 'name', defaultTitle);
+            const serviceHasLogo = _get(data, 'has_logo', false);
+            const orgHasLogo = _get(data, 'organisation.has_logo', false);
+            const orgImageUrl = `${envUris.apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`;
+
+            const rawPageContent = _get(data, 'intro', '');
+
+            const metaDesc = prepareDescription(rawPageContent);
 
             let metas = [];
 
@@ -234,7 +277,7 @@ Resources:
                   { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
                   { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
                   { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
-                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/${data.slug}` },
+                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/services/${data.slug}` },
                   { name: '__PAGE_META_OG_IMAGE__', content: (serviceHasLogo ? `${envUris.apiBase}/services/${data.id}/logo.png?` : (orgHasLogo ? orgImageUrl : envUris.logoUrl)) }
               ];
             }
@@ -245,19 +288,13 @@ Resources:
           const renderOrganisationMeta = async (slug) => {
             const data = await fetchOrganisation(slug);
 
-            const metaTitle = _get(data, 'name', '');
+            const metaTitle = _get(data, 'name', defaultTitle);
             const orgHasLogo = _get(data, 'has_logo', false);
             const orgImageUrl = `${envUris.apiBase}/organisations/${data.id}/logo.png?v=${data.id}`;
 
-            let rawPageContent = _get(data, 'description', '');
+            const rawPageContent = _get(data, 'description', '');
 
-            // strip markdown formatting
-            rawPageContent = removeMarkdown(rawPageContent);
-
-            // limit to 160 chars
-            let metaDesc = rawPageContent.substring(0, 161);
-
-            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+            const metaDesc = prepareDescription(rawPageContent);
 
             let metas = [];
 
@@ -267,7 +304,7 @@ Resources:
                   { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
                   { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
                   { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
-                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/${data.slug}` },
+                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/organisations/${data.slug}` },
                   { name: '__PAGE_META_OG_IMAGE__', content: (orgHasLogo ? orgImageUrl : envUris.logoUrl) }
               ];
             }
@@ -282,27 +319,27 @@ Resources:
 
             let rawPageContent = '';
             let data = null;
+            let collectionImage = '';
 
             if (category) {
               data = await fetchCategory(category);
 
               rawPageContent = _get(data, 'intro', '');
+
+              collectionImage = `${envUris.apiBase}/collections/categories/${category}/image.svg`;
             }
 
             if (persona) {
               data = await fetchPersona(persona);
 
               rawPageContent = _get(data, 'intro', '');
+
+              collectionImage = `${envUris.apiBase}/collections/personas/${persona}/image.png`;
             }
 
-            // strip markdown formatting
-            rawPageContent = removeMarkdown(rawPageContent);
+            const metaDesc = prepareDescription(rawPageContent);
 
-            // limit to 160 chars
-            let metaDesc = rawPageContent.substring(0, 161);
-            const metaTitle = _get(data, 'name', '').concat(' in Hounslow');
-
-            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+            const metaTitle = _get(data, 'name', defaultTitle).concat(' in Hounslow');
 
             let metas = [];
 
@@ -312,8 +349,8 @@ Resources:
                   { name: '__PAGE_META_DESCRIPTION__', content: metaDesc },
                   { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
                   { name: '__PAGE_META_OG_TITLE__', content: metaTitle },
-                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}? ${envUris.querystring}` },
-                  { name: '__PAGE_META_OG_IMAGE__', content: envUris.logoUrl }
+                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}?${envUris.querystring}` },
+                  { name: '__PAGE_META_OG_IMAGE__', content: `${collectionImage}` }
               ];
             }
 
@@ -323,16 +360,10 @@ Resources:
           const renderCmsMeta = async (page) => {
             const data = await fetchSettings();
 
-            const metaTitle = _get(data, `frontend.${page}.title`, '');
+            const metaTitle = _get(data, `frontend.${page}.title`, defaultTitle);
             let rawPageContent = _get(data, `frontend.${page}.content`, '');
 
-            // strip markdown formatting
-            rawPageContent = removeMarkdown(rawPageContent);
-
-            // limit to 160 chars
-            let metaDesc = rawPageContent.substring(0, 161);
-
-            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+            const metaDesc = prepareDescription(rawPageContent);
 
             let metas = [];
 
@@ -353,17 +384,11 @@ Resources:
           const renderHomeMeta = async () => {
             const data = await fetchSettings();
 
-            const metaTitle = _get(data, `frontend.home.banners.0.title`, '');
+            const metaTitle = _get(data, `frontend.banner.title`, '');
 
-            let rawPageContent = _get(data, `frontend.home.banners.0.content`, '');
+            let rawPageContent = _get(data, `frontend.banner.content`, '');
 
-            // strip markdown formatting
-            rawPageContent = removeMarkdown(rawPageContent);
-
-            // limit to 160 chars
-            let metaDesc = rawPageContent.substring(0, 161);
-
-            if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...');
+            const metaDesc = prepareDescription(rawPageContent);
 
             let metas = [];
 
@@ -382,7 +407,12 @@ Resources:
           };
 
           const renderMeta = async () => {
+            const data = await fetchSettings();
+            defaultTitle = _get(data, `frontend.banner.title`, '');
+            defaultContent = _get(data, `frontend.banner.content`, '');
+
             const urlElements = envUris.originalPath.split('/');
+
             let meta = [];
             let slug = '';
             switch (urlElements[1]) {
@@ -407,14 +437,14 @@ Resources:
               case 'about':
               case 'contact':
               case 'get-involved':
-              case 'privacy-policy':
-              case 'terms-and-conditions':
-                const page = urlElements[1].trim().replace('-', '_');
+                const page = urlElements[1].trim().replace(/-/g, '_');
                 meta = await renderCmsMeta(page);
                 break;
+              case 'privacy-policy':
+              case 'terms-and-conditions':
               case 'duty-to-refer':
               case 'referral':
-                meta = pageMeta[urlElements[1]];
+                meta = pageMeta()[urlElements[1]];
                 break;
               default:
                 meta = await renderHomeMeta();
