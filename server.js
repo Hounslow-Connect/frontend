@@ -250,11 +250,12 @@ app.get("/results", wrap(async (req, res) => {
   let metaTitle = 'Results | Hounslow Connect'
   let metaDesc = 'Hounslow Connect is a site dedicated to helping people find activities, join clubs, and navigate local services in Hounslow'
   let rawPageContent = ''
+  let categoryData = null
 
   console.log('Request:', req);
 
   if (req.query.category) {
-    const categoryData = await fetchCategory(req.query.category)
+    categoryData = await fetchCategory(req.query.category)
 
     rawPageContent = _get(categoryData, 'intro', '')
 
@@ -267,16 +268,16 @@ app.get("/results", wrap(async (req, res) => {
   }
 
   if (req.query.persona) {
-    const personaData = await fetchPersona(req.query.persona)
+    categoryData = await fetchPersona(req.query.persona)
 
-    let rawPageContent = _get(personaData, 'intro', '')
+    let rawPageContent = _get(categoryData, 'intro', '')
 
     // strip markdown formatting
     rawPageContent = removeMarkdown(rawPageContent, removeMarkdownConfig)
 
     // limit to 160 chars
     metaDesc = rawPageContent.substring(0, 161)
-    metaTitle = _get(personaData, 'name', '').concat(' in Hounslow')
+    metaTitle = _get(categoryData, 'name', '').concat(' in Hounslow')
   }
 
   if (rawPageContent.length > 160) metaDesc = metaDesc.concat('...')
@@ -284,7 +285,8 @@ app.get("/results", wrap(async (req, res) => {
   let metas = [
     { name: '__PAGE_TITLE__', content: metaTitle },
     { name: '__PAGE_META_DESCRIPTION__', content: metaDesc },
-    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: metaTitle }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` }, { name: '__PAGE_META_OG_IMAGE__', content: hounslowConnectLogoUrl }
+    { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc }, { name: '__PAGE_META_OG_TITLE__', content: metaTitle }, { name: '__PAGE_META_OG_URL__', content: `${frontendBaseUrl}${req.originalUrl}` },
+    { name: '__PAGE_META_OG_IMAGE__', content: (req.query.category && _get(categoryData, 'id') ? `${apiBase}/collections/categories/${req.query.category}/image.svg` : req.query.persona && _get(categoryData, 'id') ? `${apiBase}/collections/personas/${req.query.persona}/image.png?max_dimension=600` : hounslowConnectLogoUrl) }   
   ]
 
   metas.forEach(meta => {
