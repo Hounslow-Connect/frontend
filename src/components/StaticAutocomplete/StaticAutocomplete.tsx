@@ -85,8 +85,8 @@ const StaticAutocomplete: React.FunctionComponent<IProps> = ({
 
     if (multiSelect) {
       if (newValue.length) {
-        inputValue.value = newValue.map((value: any) => value.value).join(',');
-        inputValue.label = newValue.map((value: any) => value.label).join(',');
+        inputValue.value = newValue.map((option: any) => option.value).join(',');
+        inputValue.label = newValue.map((option: any) => option.label).join(',');
       }
     } else {
       inputValue = _first(newValue);
