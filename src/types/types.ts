@@ -30,13 +30,21 @@ export interface IParams {
   housing?: null | string;
   eligibilities?: [];
 }
-
+export interface ICategoryTaxonomy {
+  id: string;
+  parent_id: string;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
 export interface ICategory {
   id: string;
   intro: string;
   name: string;
-  icon: IconName | undefined;
   sideboxes: ISidebox[];
+  category_taxonomies?: ICategoryTaxonomy[];
+  order: number;
+  enabled: boolean;
 }
 
 export interface IOrganisation {

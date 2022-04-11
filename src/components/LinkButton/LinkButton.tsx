@@ -25,6 +25,7 @@ interface IProps extends RouteComponentProps {
   covid?: boolean;
 }
 
+/* tslint:disable */
 const LinkButton: React.FunctionComponent<IProps> = ({
   history,
   text,
@@ -73,5 +74,6 @@ const LinkButton: React.FunctionComponent<IProps> = ({
     )}
   </button>
 );
+/* tslint:enable */
 
 export default withRouter(observer(LinkButton));

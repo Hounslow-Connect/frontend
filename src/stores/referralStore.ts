@@ -83,7 +83,9 @@ class ReferralStore {
     try {
       const organisations = await axios.get(`${apiBase}/organisations`);
       this.partnerOrganisations = get(organisations, 'data.data', '');
-    } catch (e) {}
+    } catch (e) {
+      // @ts-ignore
+    }
   };
 
   @action

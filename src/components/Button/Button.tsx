@@ -50,7 +50,7 @@ const Button: React.FunctionComponent<IProps> = ({
     type={type}
     onClick={onClick}
   >
-    {image && <img src={image} alt={text} className="button__image" />}
+    {image && <img src={image} alt={text} loading="lazy" className="button__image" />}
     {text}
     {icon && (
       <FontAwesomeIcon

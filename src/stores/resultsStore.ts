@@ -106,14 +106,15 @@ export default class ResultsStore {
   @action
   getQueryParamsString = () => {
     const params: any = this.queryParams;
-    let queryString = null;
+
+    let queryParamsString = null;
 
     const queryParams = Object.keys(params).map(key => {
       return params[key] ? `${key}=${params[key]}` : null;
     });
 
-    queryString = `${queryParams.filter(filter => filter !== null).join('&')}`;
-    return queryString;
+    queryParamsString = `${queryParams.filter(filter => filter !== null).join('&')}`;
+    return queryParamsString;
   };
 
   @action clearFilters = () => {
