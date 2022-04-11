@@ -19,7 +19,7 @@
     "@types/react-router-dom": "^4.3.5",
     "@types/react-select": "^4.0.15",
     "@types/webpack-env": "^1.16.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "breakpoint-sass": "^2.7.1",
     "classnames": "^2.2.6",
     "dotenv": "^8.1.0",
