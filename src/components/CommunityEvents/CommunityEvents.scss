@@ -1,0 +1,39 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
+
+.community-events {
+  padding: 100px 0;
+  background-color: $turquoise;
+
+  .flex-container:not(.flex-container--no-padding) {
+    padding: 0 1.5rem;
+    max-width: 1030px;
+  }
+
+  @include for-tablet-portrait-up {
+    .flex-container:not(.flex-container--no-padding) {
+      padding: 0 3.5rem;
+    }
+  }
+}
+
+.community-events__inner {
+  width: 100%;
+  max-width: 1030px;
+
+  h2 {
+    max-width: 340px;
+  }
+
+  button {
+    margin-top: 3rem;
+  }
+
+  @include for-mobile-up {
+    h2 {
+      max-width: 100%;
+    }
+  }
+}

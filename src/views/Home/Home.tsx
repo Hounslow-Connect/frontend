@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
+import CommunityEvents from '../../components/CommunityEvents';
 
 import './Home.scss';
 
@@ -29,6 +30,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
         <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />
       )}
       <Search />
+      <CommunityEvents />
       <Personas personas={SearchStore.personas} />
     </main>
   );

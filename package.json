@@ -81,6 +81,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-hash-link": "^2.4.5",
     "prettier": "^1.18.2",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",

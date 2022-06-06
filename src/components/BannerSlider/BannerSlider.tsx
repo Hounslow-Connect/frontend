@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { HashLink } from 'react-router-hash-link';
 
 import { IBanner } from '../../types/types';
 import Banner from '../../components/Banner';
@@ -14,6 +14,13 @@ interface IProps {
 }
 
 const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content }) => {
+
+  const scrollWithOffset = (el: HTMLElement) => {
+    const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -80;
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+  }
+
   const [activeCarouselItem, setActiveCarouselItem] = useState(1);
 
   return (
@@ -29,14 +36,14 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content 
               />
             </div>
             <div className="banner__cta-row">
-              <Link to="/">
+              <HashLink to="#events" scroll={el => scrollWithOffset(el)}>
                 <img src={bannerIllo} alt="Person on a park bench" />
                 <span>Find local events</span>
-              </Link>
-              <Link to="/">
+              </HashLink>
+              <HashLink to="#search__container" scroll={el => scrollWithOffset(el)}>
                 <img src={bannerIllo} alt="Person on a park bench" />
                 <span>Search for services</span>
-              </Link>
+              </HashLink>
             </div>
             <div className="banner__carousel">
               <div className="slides">
