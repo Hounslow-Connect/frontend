@@ -2,11 +2,12 @@
 @import '../../../styles/colors.scss';
 @import '../../../styles/fonts.scss';
 @import '../../../styles/breakpoints.scss';
+@import '../../../styles/variables.scss';
 
 .sidebox {
   height: 100%;
   padding: space(24) !important;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
   background: $pink;
 
   &:nth-child(2) {

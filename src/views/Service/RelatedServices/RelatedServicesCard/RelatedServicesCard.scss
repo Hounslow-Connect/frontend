@@ -1,11 +1,12 @@
 @import '../../../../styles/colors.scss';
 @import '../../../../styles/fonts.scss';
 @import '../../../../styles/mixins.scss';
+@import '../../../../styles/variables.scss';
 
 .related-services-card {
   padding: space(20);
   background-color: $white;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
   text-align: left;
 
   @include for-tablet-portrait-down {

@@ -302,7 +302,7 @@
           }
         }
       }
-      
+
     }
 
     &__label {
@@ -355,7 +355,7 @@
       width: 100%;
       padding: 0 2rem;
       margin-bottom: 1.5rem;
-      
+
 
       @include for-mobile-up {
         width: 50%;
@@ -481,7 +481,7 @@
       padding: space(8) space(12);
       margin-left: 0;
       margin-right: space(16);
-      font-size: pxtorem(16px); 
+      font-size: pxtorem(16px);
     }
   }
 }
@@ -611,8 +611,8 @@
     position: absolute;
     bottom: -38px;
     right: 37.5%;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 38px solid transparent;
     border-right: 38px solid transparent;
     border-top: 38px solid $yellow;
@@ -640,7 +640,7 @@
   width: 100px;
   height: 100px;
   background-color: $gray;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
 
   img {
     width: 100%;
@@ -759,6 +759,6 @@
       display: inline-block;
     }
 
-    
+
   }
 }

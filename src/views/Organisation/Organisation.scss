@@ -1,6 +1,7 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/colors.scss';
 @import '../../styles/fonts.scss';
+@import '../../styles/variables.scss';
 @import '../../styles/breakpoints.scss';
 
 .organisation {
@@ -11,13 +12,13 @@
         background: linear-gradient(to bottom, #fff 0%, #fff 50%, #D8EEEA 50%, #D8EEEA 100%);
 
         &__wrapper {
-           
+
             background-color: $turquoise;
 
             &:after {
                 border-top-color: $turquoise;
             }
-            
+
             @media(min-width: 426px) {
               display: flex;
             }
@@ -40,30 +41,30 @@
             height: 154px;
             margin-right: space(40);
             margin-bottom: space(16);
-            border-radius: 20px;
+            border-radius: $border-radius-md;
             overflow: hidden;
             max-width: 154px;
             background-color: #ffffff;
-          
+
             @include for-phone-only {
               height: 110px;
               margin-right: 0;
               max-width: 100%;
-          
+
               @media(min-width: 426px) {
                 & + div {
                   padding-left: 1.5rem;
                 }
               }
             }
-          
+
             @media(max-width: 425px) {
                 margin-bottom: space(12);
                 border-radius: 12px;
                 height: 130px;
                 max-width: 130px;
             }
-          
+
             img {
               height: 100%;
               width: 100%;
@@ -92,7 +93,7 @@
 
             @media(min-width: 576px) {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr); 
+                grid-template-columns: repeat(2, 1fr);
                 gap: space(20);
             }
 
@@ -138,7 +139,7 @@
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            
+
         }
     }
 

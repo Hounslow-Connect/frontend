@@ -1,9 +1,12 @@
 import React, { FunctionComponent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IBanner } from '../../types/types';
 import Banner from '../../components/Banner';
+
+import bannerIllo from '../../assets/images/park-bench.svg';
 
 interface IProps {
   banners: [];
@@ -24,6 +27,16 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content 
                 className="banner__description"
                 source={header_content ? header_content.content : undefined}
               />
+            </div>
+            <div className="banner__cta-row">
+              <Link to="/">
+                <img src={bannerIllo} alt="Person on a park bench" />
+                <span>Find local events</span>
+              </Link>
+              <Link to="/">
+                <img src={bannerIllo} alt="Person on a park bench" />
+                <span>Search for services</span>
+              </Link>
             </div>
             <div className="banner__carousel">
               <div className="slides">

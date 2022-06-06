@@ -1,6 +1,7 @@
 @import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/fonts.scss';
+@import '../../styles/variables.scss';
 @import '../../styles/breakpoints.scss';
 
 .banner {
@@ -81,7 +82,7 @@
       align-items: center;
       justify-content: space-between;
       padding: space(32) space(64);
-      border-radius: 20px;
+      border-radius: $border-radius-md;
       background-color: $white;
 
       @include for-tablet-landscape-down {
@@ -166,6 +167,58 @@
       &:not(:disabled) {
         background-color: $white;
       }
+    }
+  }
+
+  &__cta-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: space(16);
+    margin-bottom: 50px;
+    justify-content: space-between;
+
+    a {
+      flex: 0 0 100%;
+      padding: 30px 10px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 26px;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      justify-content: center;
+      background-color: $yellow;
+      border-radius: $border-radius-md;
+      transition: all $formControlTransitionDuration ease-in-out;
+
+      &:first-of-type {
+        margin-top: 0;
+        background-color: $turquoise;
+      }
+
+      img {
+        width: 40px;
+        height: auto;
+        margin-right: 1rem;
+      }
+
+      &:hover {
+        box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
+      }
+    }
+
+    @include for-mobile-up {
+      a {
+        margin-top: 0;
+        flex: 0 0 calc(50% - 15px);
+      }
+    }
+
+    @include for-tablet-portrait-up {
+      width: 70%;
+      margin-bottom: 0;
     }
   }
 }

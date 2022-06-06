@@ -2,6 +2,7 @@
 @import '../../styles/colors.scss';
 @import '../../styles/fonts.scss';
 @import '../../styles/breakpoints.scss';
+@import '../../styles/variables.scss';
 
 .service__header {
   position: relative;
@@ -21,11 +22,11 @@
     position: relative;
     padding: space(32) space(48);
     background-color: $yellow;
-    
+
     @media(min-width: 426px) {
       display: flex;
     }
-  
+
     @include for-tablet-portrait-down {
       padding: space(24) space(32);
     }
@@ -40,12 +41,12 @@
       z-index: 10;
       bottom: -38px;
       right: 20%;
-      width: 0; 
-      height: 0; 
+      width: 0;
+      height: 0;
       border-left: 38px solid transparent;
       border-right: 38px solid transparent;
       border-top: 38px solid $yellow;
-  
+
       @include for-tablet-portrait-down {
         bottom: -20px;
         right: space(20);
@@ -70,7 +71,7 @@
   }
 
   &__desc {
-   
+
     @include for-tablet-landscape-up {
       max-width: 85%;
 
@@ -99,7 +100,7 @@
   height: 154px;
   margin-right: space(40);
   margin-bottom: space(16);
-  border-radius: 20px;
+  border-radius: $border-radius-md;
   overflow: hidden;
   max-width: 154px;
   background-color: #ffffff;
@@ -182,7 +183,7 @@
 
 .service__info__cost {
   background-color: $turquoise !important;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
 
   &.criteria_card {
     @media(max-width: 860px) {
@@ -238,7 +239,7 @@
   &--intro {
     border-left: 10px solid $lynch;
     padding: space(16) 0 space(16) space(20);
-    
+
 
     @media(min-width: 601px) {
       margin-bottom: space(40);
@@ -472,12 +473,12 @@
       z-index: 10;
       bottom: calc(50% - 24px);
       right: -24px;
-      width: 0; 
-      height: 0; 
+      width: 0;
+      height: 0;
       border-top: 24px solid transparent;
       border-bottom: 24px solid transparent;
       border-left: 24px solid $pink;
-  
+
       @include for-tablet-portrait-down {
         border-top: 24px solid transparent;
       border-bottom: 24px solid transparent;
@@ -580,8 +581,8 @@
     z-index: 10;
     top: -38px;
     right: 20%;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 38px solid transparent;
     border-right: 38px solid transparent;
     border-bottom: 38px solid $yellow;
@@ -639,9 +640,9 @@
 .service__share-card {
   padding: space(20);
   background-color: $turquoise;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
   text-align: center;
-  
+
   @media(max-width: 600px) {
     margin-top: 2rem;
   }
@@ -685,8 +686,8 @@
     z-index: 10;
     bottom: -38px;
     right: space(64);
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 38px solid transparent;
     border-right: 38px solid transparent;
     border-top: 38px solid $white;
@@ -732,7 +733,7 @@
         margin-bottom: space(12);
       }
     }
-  } 
+  }
 }
 
 .service__offerings {
@@ -789,7 +790,7 @@
       margin-left: 0.3rem;
       margin-right: 0.3rem;
       min-width: 100%;
-      
+
       &:not(:last-child) {
         margin-bottom: 1rem;
       }

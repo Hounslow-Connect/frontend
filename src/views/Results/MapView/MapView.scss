@@ -1,12 +1,13 @@
 @import '../../../styles/colors.scss';
 @import '../../../styles/mixins.scss';
 @import '../../../styles/fonts.scss';
+@import '../../../styles/variables.scss';
 @import '../../../styles/breakpoints.scss';
 
 .leaflet-container {
   min-height: calc(100vh - 160px);
   width: 100%;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
 
   a {
     color: inherit;
@@ -29,7 +30,7 @@
 .map__key--container {
   margin-top: space(16);
   padding: space(16) space(16) 0;
-  border-radius: 20px;
+  border-radius: $border-radius-md;
   background-color: $white;
 }
 
