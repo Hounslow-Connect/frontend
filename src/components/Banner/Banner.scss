@@ -14,7 +14,7 @@
   }
 
   &__content {
-    padding: space(120) space(56) space(80);
+    padding: space(80) space(16) space(24);
 
     @include for-tablet-portrait-down {
       padding: space(64) space(32) space(32);
@@ -170,9 +170,9 @@
   }
 }
 
-/** not a fan of this but the existing flex containers arent very re-usable, a
-parent adds a justify content to everything in the page
-and this needs to align differently */
+/** not a fan of this but the existing flex containers in Banner Component arent very re-usable,
+one example is a parent adds a justify content to everything in the page and this
+needs to align differently. So this is a container just for the CTA buttons on the home page */
 .flex-container__align--left {
   display: flex;
   margin: pxtorem(15px);
