@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IBanner } from '../../types/types';
 import Banner from '../../components/Banner';
+import CTAButton from '../../components/CTAButton';
 
 interface IProps {
   banners: [];
@@ -24,6 +25,11 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content 
                 className="banner__description"
                 source={header_content ? header_content.content : undefined}
               />
+            </div>
+            <div className="flex-container__align--left">
+                <CTAButton text="Find local events" size="xl" icon="calendar-days" name='events'/>
+             
+                <CTAButton text="Search for services" size="xl" icon='hand-holding-heart' name='services'/>
             </div>
             <div className="banner__carousel">
               <div className="slides">
