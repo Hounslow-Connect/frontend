@@ -70,6 +70,16 @@
     margin-bottom: space(40);
     padding: space(16);
 
+    &__card {
+      padding: space(32) space(64);
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 20px;
+      background-color: #fff;
+      width: 100%;
+      display: flex;
+    }
+
     @include for-tablet-landscape-down {
       margin-top: space(32);
       margin-bottom: space(16);
@@ -78,11 +88,6 @@
     .slide {
       position: relative;
       display: none;
-      align-items: center;
-      justify-content: space-between;
-      padding: space(32) space(64);
-      border-radius: 20px;
-      background-color: $white;
 
       @include for-tablet-landscape-down {
         flex-wrap: wrap;

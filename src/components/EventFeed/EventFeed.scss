@@ -11,6 +11,11 @@
   padding: 3rem;
 }
 
+.event-feed__intro {
+  max-width: 1030px;
+  margin: 0 auto;
+}
+
 .event-feed__grid {
   display: grid;
   gap: pxtorem(35px);
