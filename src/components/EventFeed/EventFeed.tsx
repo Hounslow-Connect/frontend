@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, RefObject} from 'react';
 import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -10,7 +10,8 @@ import './EventFeed.scss';
 
 const noOfEventsPerSlide = 4;
 
-const EventFeed: React.FC<{ list: IEvent[] }> = ({ list }) => {
+// @ts-ignore
+const EventFeed = React.forwardRef(({ list }, ref) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState<number>(1);
 
   if (list.length === 0) {
@@ -20,19 +21,16 @@ const EventFeed: React.FC<{ list: IEvent[] }> = ({ list }) => {
   const currentSlide = chunkifyArray(list, noOfEventsPerSlide);
 
   return (
-    <section className="event-feed" id='find-local-events'>
+    <section className="event-feed" ref={ref as any}>
       <div className='event-feed__intro'>
         <h2 className="search__heading">Community events happening this week...</h2>
         <div className="banner__carousel">
           {currentSlide.map((slider: IEvent[], i: number) => (
-            <div className="event-feed__grid">
-              {slider.map((event: IEvent) => {
+            <div className="event-feed__grid" key={i}>
+              {slider.map((event: IEvent, j: number) => {
                 return (
-                  <div className={'slide' + (activeCarouselItem === i + 1 ? ' slide--active' : '')}>
-                    <EventSummary
-                      event={event}
-                      key={i}
-                    />
+                  <div key={j} className={'slide' + (activeCarouselItem === i + 1 ? ' slide--active' : '')}>
+                    <EventSummary event={event} />
                   </div>
                 )
               })}
@@ -66,7 +64,7 @@ const EventFeed: React.FC<{ list: IEvent[] }> = ({ list }) => {
       </div>
     </section>
   );
-}
+})
 
 export default observer(EventFeed);
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef, useCallback} from 'react';
 import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
@@ -19,6 +19,19 @@ interface IProps {
 }
 
 const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
+  const eventSectionRef = createRef<HTMLDivElement>();
+  const serviceSectionRef = createRef<HTMLDivElement>();
+
+  const scrollToEvents = () => {
+    if (!eventSectionRef.current) return;
+    eventSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToServices = () => {
+    if (!serviceSectionRef.current) return;
+    serviceSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   if (!cmsStore) {
     return null;
   }
@@ -29,10 +42,19 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
         <title>Home | Hounslow Connect</title>
       </Helmet>
       {cmsStore.home && cmsStore.home.banners && (
-        <BannerSlider header_content={cmsStore.banner} banners={cmsStore.home.banners} />
+        <BannerSlider
+          header_content={cmsStore.banner}
+          banners={cmsStore.home.banners}
+          cta={{
+            scrollToEvents,
+            scrollToServices,
+          }} 
+        />
       )}
-      <Search />
-      <EventFeed list={EventStore.eventFeed} />
+       {/* @ts-ignore */}
+      <Search ref={serviceSectionRef} />
+      {/* @ts-ignore */}
+      <EventFeed list={EventStore.eventFeed} ref={eventSectionRef} />
       <Personas personas={SearchStore.personas} />
     </main>
   );

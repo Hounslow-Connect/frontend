@@ -31,13 +31,14 @@ const ButtonCTA: React.FC<IProps> = ({
   type = 'button',
   name,
   href,
-  // onClick,
+  onClick,
 }) => (
   <a href={href}>
     <button
       className={cx('button', 'button__CTA', `button__CTA--${name}`)}
       disabled={disabled}
       type={type}
+      onClick={onClick}
     >
       {icon && (
         <FontAwesomeIcon

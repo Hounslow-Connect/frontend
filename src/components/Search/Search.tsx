@@ -19,6 +19,7 @@ import CMSStore from '../../stores/CMSStore';
 interface IProps extends RouteComponentProps {
   windowSizeStore?: WindowSizeStore;
   cmsStore?: CMSStore;
+  innerRef: any;
 }
 
 @inject('windowSizeStore', 'cmsStore')
@@ -29,7 +30,7 @@ class Search extends React.Component<IProps> {
   }
 
   render() {
-    const { windowSizeStore, cmsStore, history } = this.props;
+    const { windowSizeStore, cmsStore, history, innerRef } = this.props;
 
     // injected stores must be typed as optional, but will always be there if injected. Allows workound for destructuring values from store
     if (!windowSizeStore || !cmsStore) {
@@ -52,7 +53,7 @@ class Search extends React.Component<IProps> {
 
     return (
       <Fragment>
-        <section className="search__container" id='find-services'>
+        <section className="search__container" ref={innerRef}>
           <div className="flex-container flex-container--justify">
             <form className="flex--col--12 search__inner-container">
               <div className="flex-container flex-container--no-padding">
@@ -194,4 +195,7 @@ class Search extends React.Component<IProps> {
   }
 }
 
-export default withRouter(Search);
+const SearchWithRouter = withRouter(Search)
+
+export default React.forwardRef((props, ref) => <SearchWithRouter innerRef={ref} {...props}/>);;
+
