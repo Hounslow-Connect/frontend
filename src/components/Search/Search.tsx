@@ -195,7 +195,6 @@ class Search extends React.Component<IProps> {
   }
 }
 
-const SearchWithRouter = withRouter(Search)
+const SearchWithRouter = withRouter(Search);
 
-export default React.forwardRef((props, ref) => <SearchWithRouter innerRef={ref} {...props}/>);;
-
+export default React.forwardRef((props, ref) => <SearchWithRouter innerRef={ref} {...props} />);

@@ -17,7 +17,7 @@ interface IProps {
 const Banner: FunctionComponent<IProps> = ({ banner, activeCarouselItem, bannerIndex }) => {
   return (
     <div className={'slide' + (activeCarouselItem === bannerIndex ? ' slide--active' : '')}>
-      <div className='banner__carousel__card'>
+      <div className="banner__carousel__card">
         <div className="image">
           <img src={bannerIllo} alt="Person on a park bench" />
         </div>

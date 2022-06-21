@@ -1,4 +1,4 @@
-import React, {useState, RefObject} from 'react';
+import React, { useState, LegacyRef } from 'react';
 import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -10,8 +10,10 @@ import './EventFeed.scss';
 
 const noOfEventsPerSlide = 4;
 
-// @ts-ignore
-const EventFeed = React.forwardRef(({ list }, ref) => {
+const EventFeed: React.FC<{
+  list: IEvent[];
+  innerRef: LegacyRef<HTMLElement> | undefined;
+}> = ({ list, innerRef }) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState<number>(1);
 
   if (list.length === 0) {
@@ -21,20 +23,23 @@ const EventFeed = React.forwardRef(({ list }, ref) => {
   const currentSlide = chunkifyArray(list, noOfEventsPerSlide);
 
   return (
-    <section className="event-feed" ref={ref as any}>
-      <div className='event-feed__intro'>
+    <section className="event-feed" ref={innerRef}>
+      <div className="event-feed__intro">
         <h2 className="search__heading">Community events happening this week...</h2>
         <div className="banner__carousel">
           {currentSlide.map((slider: IEvent[], i: number) => (
             <div className="event-feed__grid" key={i}>
               {slider.map((event: IEvent, j: number) => {
                 return (
-                  <div key={j} className={'slide' + (activeCarouselItem === i + 1 ? ' slide--active' : '')}>
+                  <div
+                    key={j}
+                    className={'slide' + (activeCarouselItem === i + 1 ? ' slide--active' : '')}
+                  >
                     <EventSummary event={event} />
                   </div>
-                )
+                );
               })}
-            </div>    
+            </div>
           ))}
           {currentSlide.length && currentSlide.length > 1 && (
             <div className="arrows">
@@ -64,7 +69,11 @@ const EventFeed = React.forwardRef(({ list }, ref) => {
       </div>
     </section>
   );
-})
+};
 
-export default observer(EventFeed);
+const EventFeedObservered = observer(EventFeed);
 
+export default React.forwardRef((props, ref) => (
+  // @ts-ignore
+  <EventFeedObservered innerRef={ref as LegacyRef<HTMLElement> | undefined} {...props} />
+));

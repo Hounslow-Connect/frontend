@@ -15,7 +15,7 @@ interface IProps extends RouteComponentProps {
   disabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
   alt?: boolean;
-  onClick?: any;
+  onClick?: () => void;
   name?: string;
   href?: string;
 }

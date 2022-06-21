@@ -12,7 +12,7 @@ interface IProps {
   cta: {
     scrollToEvents: () => void;
     scrollToServices: () => void;
-  }
+  };
 }
 
 const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content, cta }) => {
@@ -35,16 +35,14 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content,
                 text="Find local events"
                 size="xl"
                 icon="calendar-days"
-                name='events'
-                // href='#find-local-events'
+                name="events"
                 onClick={cta.scrollToEvents}
               />
               <CTAButton
                 text="Search for services"
                 size="xl"
-                icon='hand-holding-heart'
-                name='services'
-                // href='#find-services'
+                icon="hand-holding-heart"
+                name="services"
                 onClick={cta.scrollToServices}
               />
             </div>

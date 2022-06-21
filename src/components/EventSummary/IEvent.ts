@@ -1,4 +1,3 @@
-
 export interface ILocation {
   accessibility_info: string | null;
   address_line_1: string;

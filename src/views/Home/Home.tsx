@@ -1,4 +1,4 @@
-import React, {createRef, useCallback} from 'react';
+import React, { createRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
@@ -12,24 +12,28 @@ import EventStore from '../../stores/eventStore';
 
 import BannerSlider from '../../components/BannerSlider';
 import Personas from '../../components/Personas';
-
+import { IEvent } from '../../components/EventSummary/IEvent';
 interface IProps {
   cmsStore: CMSStore;
   eventStore: any;
 }
 
 const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
-  const eventSectionRef = createRef<HTMLDivElement>();
-  const serviceSectionRef = createRef<HTMLDivElement>();
+  const eventSectionRef = createRef<HTMLDivElement | null>();
+  const serviceSectionRef = createRef<HTMLDivElement | null>();
 
   const scrollToEvents = () => {
-    if (!eventSectionRef.current) return;
-    eventSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    if (!eventSectionRef.current) {
+      return;
+    }
+    eventSectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToServices = () => {
-    if (!serviceSectionRef.current) return;
-    serviceSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    if (!serviceSectionRef.current) {
+      return;
+    }
+    serviceSectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   if (!cmsStore) {
@@ -48,13 +52,12 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
           cta={{
             scrollToEvents,
             scrollToServices,
-          }} 
+          }}
         />
       )}
-       {/* @ts-ignore */}
       <Search ref={serviceSectionRef} />
       {/* @ts-ignore */}
-      <EventFeed list={EventStore.eventFeed} ref={eventSectionRef} />
+      <EventFeed list={EventStore.eventFeed as IEvent[]} ref={eventSectionRef} />
       <Personas personas={SearchStore.personas} />
     </main>
   );
