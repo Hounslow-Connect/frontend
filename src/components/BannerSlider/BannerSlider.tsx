@@ -27,9 +27,8 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content 
               />
             </div>
             <div className="flex-container__align--left">
-                <CTAButton text="Find local events" size="xl" icon="calendar-days" name='events'/>
-             
-                <CTAButton text="Search for services" size="xl" icon='hand-holding-heart' name='services'/>
+              <CTAButton text="Find local events" size="xl" icon="calendar-days" name='events' href='#find-local-events'/>
+              <CTAButton text="Search for services" size="xl" icon='hand-holding-heart' name='services' href='#find-services'/>
             </div>
             <div className="banner__carousel">
               <div className="slides">

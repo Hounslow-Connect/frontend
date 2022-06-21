@@ -5,7 +5,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-import '../Button/Button.scss';
+import '../CTAButton/CTAButton.scss';
 
 interface IProps extends RouteComponentProps {
   text: string;
@@ -16,8 +16,8 @@ interface IProps extends RouteComponentProps {
   type?: 'submit' | 'reset' | 'button';
   alt?: boolean;
   onClick?: any;
-  background?: string;
   name?: string;
+  href?: string;
 }
 
 /* tslint:disable */
@@ -29,25 +29,27 @@ const ButtonCTA: React.FC<IProps> = ({
   disabled = false,
   alt = false,
   type = 'button',
-  background,
   name,
+  href,
   // onClick,
 }) => (
-  <button
-    className={cx('button', 'button__CTA', `button__CTA--${name}`)}
-    disabled={disabled}
-    type={type}
-  >
-    {icon && (
-      <FontAwesomeIcon
-        icon={icon}
-        className={cx('button__CTA__icon', {
-          [`button__CTA__icon--${size}`]: !alt,
-        })}
-      />
-    )}
-    {text}
-  </button>
+  <a href={href}>
+    <button
+      className={cx('button', 'button__CTA', `button__CTA--${name}`)}
+      disabled={disabled}
+      type={type}
+    >
+      {icon && (
+        <FontAwesomeIcon
+          icon={icon}
+          className={cx('button__CTA__icon', {
+            [`button__CTA__icon--${size}`]: !alt,
+          })}
+        />
+      )}
+      {text}
+    </button>
+  </a>
 );
 
 /* tslint:enable */

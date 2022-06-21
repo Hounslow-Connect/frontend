@@ -52,7 +52,7 @@ class Search extends React.Component<IProps> {
 
     return (
       <Fragment>
-        <section className="search__container">
+        <section className="search__container" id='find-services'>
           <div className="flex-container flex-container--justify">
             <form className="flex--col--12 search__inner-container">
               <div className="flex-container flex-container--no-padding">
