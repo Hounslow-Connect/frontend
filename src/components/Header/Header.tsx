@@ -120,6 +120,19 @@ class Header extends Component<IProps> {
                     Home
                   </RouterLink>
                   <RouterLink
+                    to="/events"
+                    exact={true}
+                    className="link link__inline link--large link__header"
+                    activeClassName={cx({ 'link__header--active': !isMobile })}
+                    onClick={() => {
+                      if (burgerMenuOpen) {
+                        toggleBurgerMenu();
+                      }
+                    }}
+                  >
+                    Events
+                  </RouterLink>
+                  <RouterLink
                     to="/about"
                     exact={true}
                     className="link link__inline link--large link__header"
