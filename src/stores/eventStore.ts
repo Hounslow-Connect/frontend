@@ -6,9 +6,12 @@ import get from 'lodash/get';
 
 import { IEvent } from '../components/EventSummary/IEvent';
 
+const PER_PAGE = 9;
 class EventStore {
   @observable eventFeed: any[] = [];
   @observable eventList: any[] = [];
+  @observable total: number = 0;
+  @observable numberOfPages: number = 0;
 
   @action
   fetcheventFeed = async () => {
@@ -28,20 +31,19 @@ class EventStore {
 
   @action
   fetchAllEvents = async (page = 1) => {
-    const perPage = 9
     try {
       const response = await axios.post(
-        `${apiBase}/search/events?page=${page}&per_page=${perPage}`
+        `${apiBase}/search/events?page=${page}&per_page=${PER_PAGE}`
       );
-      const eventListResponse = get(response, 'data.data');
-      this.eventList = eventListResponse;
+      const eventListResponse = get(response, 'data');
+      this.eventList = eventListResponse.data;
+      this.total = eventListResponse.meta.total;
+      this.numberOfPages = Math.ceil(eventListResponse.meta.total / PER_PAGE);
     } catch (err) {
       console.error({ err });
       return false;
     }
   };
 }
-
-// const eventStore = new EventStore();
 
 export default EventStore;

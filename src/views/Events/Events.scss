@@ -2,3 +2,70 @@
 @import '../../styles/colors.scss';
 @import '../../styles/fonts.scss';
 @import '../../styles/breakpoints.scss';
+
+.events__list {
+  position: relative;
+  z-index: 0;
+  padding-top: space(40);
+  padding-bottom: space(40);
+
+  &::after {
+    content: url('../../assets/images/backgrounds/park-trimmed.svg');
+    position: absolute;
+    bottom: -180px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+  }
+}
+
+.pagination {
+  display: flex;
+  padding-bottom: pxtorem(40px);
+
+  .arrow {
+    padding: pxtorem(10px);
+    font-size: pxtorem(20px);
+    background: $white;
+    align-items: center;
+    span {
+      padding: pxtorem(2px) pxtorem(10px);
+    }
+    &:hover {
+      filter: brightness(85%);
+      cursor: pointer;
+    }
+  }
+
+  .arrow--left {
+    margin-left: auto;
+  }
+  
+  .arrow--right {
+    margin-right: auto;
+    flex-direction: row-reverse;
+    display: flex;
+  }
+}
+
+.pagination__pages {
+  display: inline-flex;
+  grid-column-gap: 5px;
+  justify-content: center;
+  flex-grow: 1;
+  > div {
+    padding: pxtorem(10px);
+    font-size: pxtorem(20px);
+    background: $yellow;
+    height: 54px;
+    line-height: 35px;
+    width: 40px;
+    text-align: center;
+    &:hover {
+      filter: brightness(85%);
+      cursor: pointer;
+    }
+  }
+}
