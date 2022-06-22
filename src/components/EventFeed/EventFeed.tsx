@@ -2,25 +2,32 @@ import React, { useState, LegacyRef } from 'react';
 import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import EventSummary from '../EventSummary';
 import { IEvent } from '../EventSummary/IEvent';
 import { chunkifyArray } from './utils';
 
 import './EventFeed.scss';
 
-const noOfEventsPerSlide = 4;
+// Setting for customiseations for events feed slider
+// TODO - make slider its own component and/or hook
+const noOfEventsPerDesktopSlide = 4;
+const noOfEventsPerMobileSlide = 1;
+const sliderBreakpoint = '768px';
 
 const EventFeed: React.FC<{
   list: IEvent[];
   innerRef: LegacyRef<HTMLElement> | undefined;
 }> = ({ list, innerRef }) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState<number>(1);
+  const { isMobile } = useMediaQuery(`(max-width: 768px${sliderBreakpoint})`)
 
   if (list.length === 0) {
     return null;
   }
 
-  const currentSlide = chunkifyArray(list, noOfEventsPerSlide);
+  const setChunk = isMobile.matches ? noOfEventsPerMobileSlide : noOfEventsPerDesktopSlide
+  const currentSlide = chunkifyArray(list, setChunk);
 
   return (
     <section className="event-feed" ref={innerRef}>

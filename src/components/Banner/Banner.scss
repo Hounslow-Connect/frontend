@@ -78,6 +78,10 @@
       background-color: #fff;
       width: 100%;
       display: flex;
+      @include for-phone-only {
+        padding: space(16) space(32);
+        display: block;
+      }
     }
 
     @include for-tablet-landscape-down {
@@ -91,7 +95,11 @@
 
       @include for-tablet-landscape-down {
         flex-wrap: wrap;
-        padding: space(32);
+        padding: space(16);
+      }
+
+      @include for-phone-only {
+        padding: space(16);
       }
 
       &--active {
@@ -183,5 +191,11 @@ needs to align differently. So this is a container just for the CTA buttons on t
   margin: pxtorem(15px);
   > button {
     margin-right: pxtorem(30px)
+  }
+  @include for-phone-only {
+    flex-wrap: wrap;
+    > a {
+      width: 100%;
+    }
   }
 }
