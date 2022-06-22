@@ -3,6 +3,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Create the lambda infrastructure needed to run the Hounslow Connect Frontend
 
 Resources:
+
   LambdaSeoMetaFunctionVersion:
     Type: AWS::Lambda::Version
     Properties:
@@ -81,14 +82,6 @@ Resources:
                 { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
                 { name: '__PAGE_META_OG_IMAGE__', content: `${envUris.logoUrl}` }
               ],
-              "events": [
-                { name: '__PAGE_TITLE__', content: 'Community events in Hounslow | Hounslow Connect' },
-                { name: '__PAGE_META_DESCRIPTION__', content:  'Hounslow has a wide range of community events, many of which are free.' },
-                { name: '__PAGE_META_OG_DESCRIPTION__', content: 'Hounslow has a wide range of community events, many of which are free.' },
-                { name: '__PAGE_META_OG_TITLE__', content: 'Community events in Hounslow | Hounslow Connect' },
-                { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}${envUris.originalPath}` },
-                { name: '__PAGE_META_OG_IMAGE__', content: `${envUris.logoUrl}` }
-              ],
             };
           };
 
@@ -156,16 +149,6 @@ Resources:
               }
           };
 
-          const fetchOrganisationEvent = async (id) => {
-              try {
-                  const response = await getApi(`${envUris.apiBase}/organisation-events/${id}`);
-                  return _get(response, 'data');
-              } catch (err) {
-                console.log(err);
-                  return false;
-              }
-          };
-
           const fetchCategory = async (id) => {
               try {
                   const response = await getApi(`${envUris.apiBase}/collections/categories/${id}`);
@@ -179,16 +162,6 @@ Resources:
           const fetchPersona = async (id) => {
               try {
                   const response = await getApi(`${envUris.apiBase}/collections/personas/${id}`);
-                  return _get(response, 'data');
-              } catch (err) {
-                console.log(err);
-                  return false;
-              }
-          };
-
-          const fetchOrganisationEventCategory = async (id) => {
-              try {
-                  const response = await getApi(`${envUris.apiBase}/collections/organisation-events/${id}`);
                   return _get(response, 'data');
               } catch (err) {
                 console.log(err);
@@ -339,40 +312,10 @@ Resources:
             return metas;
           };
 
-          const renderOrganisationEventMeta = async (slug) => {
-            const data = await fetchOrganisationEvent(slug);
-
-            const metaTitle = _get(data, 'title', defaultTitle);
-            const eventHasImage = _get(data, 'has_image', false);
-            const orgHasLogo = _get(data, 'organisation.has_logo', false);
-            const orgImageUrl = `${envUris.apiBase}/organisations/${data.organisation_id}/logo.png?v=${data.organisation_id}`;
-
-            const rawPageContent = _get(data, 'intro', '');
-
-            const metaDesc = prepareDescription(rawPageContent);
-
-            let metas = [];
-
-            if(data) {
-              metas = [
-                  { name: '__PAGE_TITLE__', content: `${metaTitle} | Hounslow Connect` },
-                  { name: '__PAGE_META_DESCRIPTION__', content:  metaDesc },
-                  { name: '__PAGE_META_OG_TITLE__', content: `${metaTitle} | Hounslow Connect` },
-                  { name: '__PAGE_META_OG_DESCRIPTION__', content: metaDesc },
-                  { name: '__PAGE_META_OG_URL__', content: `${envUris.frontendBaseUrl}/events/${data.id}` },
-                  { name: '__PAGE_META_OG_IMAGE__', content: (eventHasImage ? `${envUris.apiBase}/organisation-events/${data.id}/image.png?` : (orgHasLogo ? orgImageUrl : envUris.logoUrl)) }
-              ];
-            }
-
-            return metas;
-          };
-
           const renderResultsMeta = async () => {
             const category = getUrlParameter('category');
 
             const persona = getUrlParameter('persona');
-
-            const eventCategory = getUrlParameter('event-category');
 
             let rawPageContent = '';
             let data = null;
@@ -392,14 +335,6 @@ Resources:
               rawPageContent = _get(data, 'intro', '');
 
               collectionImage = `${envUris.apiBase}/collections/personas/${persona}/image.png`;
-            }
-
-            if (eventCategory) {
-              data = await fetchOrganisationEventCategory(eventCategory);
-
-              rawPageContent = _get(data, 'intro', '');
-
-              collectionImage = `${envUris.apiBase}/collections/organisation-events/${eventCategory}/image.png`;
             }
 
             const metaDesc = prepareDescription(rawPageContent);
@@ -495,14 +430,6 @@ Resources:
                 slug = urlElements[2].trim();
                 meta = await renderOrganisationMeta(slug);
                 break;
-              case 'events':
-                if(! urlElements[2] || urlElements[2] === '') {
-                  meta = pageMeta()['events'];
-                } else {
-                  slug = urlElements[2].trim();
-                  meta = await renderOrganisationEventMeta(slug);
-                }
-                break;
               case 'results':
                 meta = await renderResultsMeta();
                 break;
@@ -555,7 +482,7 @@ Resources:
             const request = event.Records[0].cf.request;
 
             if (! request.uri.endsWith('index.html') && request.uri.includes('.')) {
-              // Asset request: return to CloudFront
+              // Return to CloudFront
               callback(null, request);
               return;
             }
@@ -580,6 +507,7 @@ Resources:
         Fn::GetAtt:
           - LambdaRole
           - Arn
+
 
   LambdaRedirectFunctionVersion:
     Type: AWS::Lambda::Version
@@ -664,12 +592,12 @@ Resources:
       Policies:
         - PolicyName: s3AccessPolicy
           PolicyDocument:
-            Version: '2012-10-17'
+            Version: "2012-10-17"
             Statement:
-              - Sid: 'AllowS3Access'
-                Effect: 'Allow'
+              - Sid: "AllowS3Access"
+                Effect: "Allow"
                 Action:
                   - s3:*
-                Resource: '*'
+                Resource: "*"
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
