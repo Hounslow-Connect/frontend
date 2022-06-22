@@ -14,7 +14,7 @@
   }
 
   &__content {
-    padding: space(120) space(56) space(80);
+    padding: space(80) space(16) space(24);
 
     @include for-tablet-portrait-down {
       padding: space(64) space(32) space(32);
@@ -70,6 +70,20 @@
     margin-bottom: space(40);
     padding: space(16);
 
+    &__card {
+      padding: space(32) space(64);
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 20px;
+      background-color: #fff;
+      width: 100%;
+      display: flex;
+      @include for-phone-only {
+        padding: space(16) space(32);
+        display: block;
+      }
+    }
+
     @include for-tablet-landscape-down {
       margin-top: space(32);
       margin-bottom: space(16);
@@ -78,15 +92,14 @@
     .slide {
       position: relative;
       display: none;
-      align-items: center;
-      justify-content: space-between;
-      padding: space(32) space(64);
-      border-radius: 20px;
-      background-color: $white;
 
       @include for-tablet-landscape-down {
         flex-wrap: wrap;
-        padding: space(32);
+        padding: space(16);
+      }
+
+      @include for-phone-only {
+        padding: space(16);
       }
 
       &--active {
@@ -166,6 +179,23 @@
       &:not(:disabled) {
         background-color: $white;
       }
+    }
+  }
+}
+
+/** not a fan of this but the existing flex containers in Banner Component arent very re-usable,
+one example is a parent adds a justify content to everything in the page and this
+needs to align differently. So this is a container just for the CTA buttons on the home page */
+.flex-container__align--left {
+  display: flex;
+  margin: pxtorem(15px);
+  > button {
+    margin-right: pxtorem(30px)
+  }
+  @include for-phone-only {
+    flex-wrap: wrap;
+    > a {
+      width: 100%;
     }
   }
 }

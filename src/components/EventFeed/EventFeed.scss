@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
+
+
+.event-feed {
+  background: $turquoise;
+  margin-bottom: 4rem;
+  padding: 3rem;
+  @include for-phone-only {
+    padding: 1rem;
+  }
+}
+
+.event-feed__intro {
+  max-width: 1030px;
+  margin: 0 auto;
+}
+
+.event-feed__grid {
+  display: grid;
+  gap: pxtorem(35px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 1030px;
+  max-width: 100%;
+  padding: 0 space(56);
+
+  @include for-tablet-landscape-down {
+    padding: 0;
+    grid-gap: 0;
+    gap: 0;
+  }
+
+  @include for-phone-only {
+    padding: 0;
+    grid-template-columns: 1fr;
+  }
+}

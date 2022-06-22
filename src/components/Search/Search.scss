@@ -12,10 +12,6 @@
   position: relative;
   height: auto;
   padding-bottom: space(64);
-
-  @include for-tablet-portrait-down {
-    padding-bottom: 0;
-  }
 }
 
 .search__inner-container {
