@@ -8,23 +8,33 @@ import { IEvent } from '../components/EventSummary/IEvent';
 
 class EventStore {
   @observable eventFeed: any[] = [];
-
-  constructor() {
-    this.fetchEventFeed();
-  }
+  @observable eventList: any[] = [];
 
   @action
-  fetchEventFeed = async () => {
+  fetcheventFeed = async () => {
     try {
       const todaysDate = moment().format(moment.HTML5_FMT.DATE);
       const response = await axios.get(
         `${apiBase}/organisation-events?filter[starts_after]=${todaysDate}`
       );
       const eventFeed = get(response, 'data.data');
-      // filter by item.homepage === true
       const eventFeedList = eventFeed.filter((item: IEvent) => item.homepage);
-
       this.eventFeed = eventFeedList;
+    } catch (err) {
+      console.error({ err });
+      return false;
+    }
+  };
+
+  @action
+  fetchAllEvents = async (page = 1) => {
+    const perPage = 9
+    try {
+      const response = await axios.post(
+        `${apiBase}/search/events?page=${page}&per_page=${perPage}`
+      );
+      const eventListResponse = get(response, 'data.data');
+      this.eventList = eventListResponse;
     } catch (err) {
       console.error({ err });
       return false;
@@ -32,6 +42,6 @@ class EventStore {
   };
 }
 
-const eventStore = new EventStore();
+// const eventStore = new EventStore();
 
-export default eventStore;
+export default EventStore;
