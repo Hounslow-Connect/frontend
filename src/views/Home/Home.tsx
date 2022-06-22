@@ -24,7 +24,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
 
   useEffect(() => {
     eventStore.fetcheventFeed();
-  }, [eventStore])
+  }, [eventStore]);
 
   const scrollToEvents = () => {
     if (!eventSectionRef.current) {

@@ -14,16 +14,7 @@ const EventSummary: React.FC<{ event: IEvent }> = ({ event }) => {
     return null;
   }
 
-  const {
-    id,
-    title,
-    is_free,
-    is_virtual,
-    start_date,
-    start_time,
-    organisation_id,
-    intro
-  } = event;
+  const { id, title, is_free, is_virtual, start_date, start_time, organisation_id, intro } = event;
 
   return (
     <div key={id} className="event-summary-card">

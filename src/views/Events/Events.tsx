@@ -18,7 +18,7 @@ const Events: React.FunctionComponent<IProps> = ({ eventStore }) => {
 
   useEffect(() => {
     eventStore.fetchAllEvents();
-  }, [eventStore])
+  }, [eventStore]);
 
   if (!eventStore || !eventStore.eventList) {
     return null;
@@ -26,12 +26,12 @@ const Events: React.FunctionComponent<IProps> = ({ eventStore }) => {
 
   const { total, eventList, numberOfPages } = eventStore;
 
-  const getPages = Array.from(Array(numberOfPages), (_, i) => i+1)
+  const getPages = Array.from(Array(numberOfPages), (_, i) => i + 1);
 
-  console.log(getPages)
- 
+  console.log(getPages);
+
   return (
-    <section className='results'>
+    <section className="results">
       <Helmet>
         <meta property="og:type" content="website" />
       </Helmet>
@@ -42,9 +42,12 @@ const Events: React.FunctionComponent<IProps> = ({ eventStore }) => {
           { text: 'Events', url: '/' },
         ]}
       />
-       <div className='flex-container'>
-        <h1 className='results__heading'>Events In Hounslow</h1>
-        <h4 className='results__heading'>The borough has a wide range of community events, many of which are free. Search below to explore all</h4>
+      <div className="flex-container">
+        <h1 className="results__heading">Events In Hounslow</h1>
+        <h4 className="results__heading">
+          The borough has a wide range of community events, many of which are free. Search below to
+          explore all
+        </h4>
       </div>
       <div className="results__info">
         <div className="flex-container">
@@ -55,36 +58,42 @@ const Events: React.FunctionComponent<IProps> = ({ eventStore }) => {
           </div>
         </div>
       </div>
-      
+
       <div className="events__list">
         <div className="results__container">
-          {eventList.map(event => <EventSummary key={event.id} event={event} />)}
+          {eventList.map(event => (
+            <EventSummary key={event.id} event={event} />
+          ))}
         </div>
       </div>
 
       {numberOfPages && numberOfPages > 1 && (
         <div className="flex-container">
-          <div className='pagination'>
+          <div className="pagination">
             <button
               className="arrow arrow--left"
               disabled={activeCarouselItem <= 1 ? true : false}
               onClick={() => {
                 setActiveCarouselItem(activeCarouselItem - 1);
-                eventStore.fetchAllEvents(activeCarouselItem - 1)
+                eventStore.fetchAllEvents(activeCarouselItem - 1);
               }}
             >
               <FontAwesomeIcon icon="chevron-left" />
               <span>Previous page</span>
             </button>
-            <div className='pagination__pages'>
-              {getPages.map(page => <div key={page} onClick={() => eventStore.fetchAllEvents(page)}>{page}</div>)}
+            <div className="pagination__pages">
+              {getPages.map(page => (
+                <div key={page} onClick={() => eventStore.fetchAllEvents(page)}>
+                  {page}
+                </div>
+              ))}
             </div>
             <button
               className="arrow arrow--right"
               disabled={activeCarouselItem >= numberOfPages ? true : false}
               onClick={() => {
                 setActiveCarouselItem(activeCarouselItem + 1);
-                eventStore.fetchAllEvents(activeCarouselItem + 1)
+                eventStore.fetchAllEvents(activeCarouselItem + 1);
               }}
             >
               <FontAwesomeIcon icon="chevron-right" />
@@ -95,6 +104,6 @@ const Events: React.FunctionComponent<IProps> = ({ eventStore }) => {
       )}
     </section>
   );
-}
+};
 
 export default inject('eventStore')(observer(Events));
