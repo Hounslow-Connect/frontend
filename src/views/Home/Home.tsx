@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import Search from '../../components/Search';
@@ -15,12 +15,16 @@ import Personas from '../../components/Personas';
 import { IEvent } from '../../components/EventSummary/IEvent';
 interface IProps {
   cmsStore: CMSStore;
-  eventStore: any;
+  eventStore: EventStore;
 }
 
-const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
+const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
   const eventSectionRef = createRef<HTMLDivElement | null>();
   const serviceSectionRef = createRef<HTMLDivElement | null>();
+
+  useEffect(() => {
+    eventStore.fetcheventFeed();
+  }, [eventStore]);
 
   const scrollToEvents = () => {
     if (!eventSectionRef.current) {
@@ -57,10 +61,10 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore }) => {
       )}
       <Search ref={serviceSectionRef} />
       {/* @ts-ignore */}
-      <EventFeed list={EventStore.eventFeed as IEvent[]} ref={eventSectionRef} />
+      <EventFeed list={eventStore.eventFeed as IEvent[]} ref={eventSectionRef} />
       <Personas personas={SearchStore.personas} />
     </main>
   );
 };
 
-export default inject('cmsStore')(observer(Home));
+export default inject('cmsStore', 'eventStore')(observer(Home));

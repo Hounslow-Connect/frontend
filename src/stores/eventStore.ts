@@ -6,25 +6,39 @@ import get from 'lodash/get';
 
 import { IEvent } from '../components/EventSummary/IEvent';
 
+const PER_PAGE = 9;
 class EventStore {
   @observable eventFeed: any[] = [];
-
-  constructor() {
-    this.fetchEventFeed();
-  }
+  @observable eventList: any[] = [];
+  @observable total: number = 0;
+  @observable numberOfPages: number = 0;
 
   @action
-  fetchEventFeed = async () => {
+  fetcheventFeed = async () => {
     try {
       const todaysDate = moment().format(moment.HTML5_FMT.DATE);
       const response = await axios.get(
         `${apiBase}/organisation-events?filter[starts_after]=${todaysDate}`
       );
       const eventFeed = get(response, 'data.data');
-      // filter by item.homepage === true
       const eventFeedList = eventFeed.filter((item: IEvent) => item.homepage);
-
       this.eventFeed = eventFeedList;
+    } catch (err) {
+      console.error({ err });
+      return false;
+    }
+  };
+
+  @action
+  fetchAllEvents = async (page = 1) => {
+    try {
+      const response = await axios.post(
+        `${apiBase}/search/events?page=${page}&per_page=${PER_PAGE}`
+      );
+      const eventListResponse = get(response, 'data');
+      this.eventList = eventListResponse.data;
+      this.total = eventListResponse.meta.total;
+      this.numberOfPages = Math.ceil(eventListResponse.meta.total / PER_PAGE);
     } catch (err) {
       console.error({ err });
       return false;
@@ -32,6 +46,4 @@ class EventStore {
   };
 }
 
-const eventStore = new EventStore();
-
-export default eventStore;
+export default EventStore;

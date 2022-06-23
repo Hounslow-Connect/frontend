@@ -20,13 +20,13 @@ const EventFeed: React.FC<{
   innerRef: LegacyRef<HTMLElement> | undefined;
 }> = ({ list, innerRef }) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState<number>(1);
-  const { isMobile } = useMediaQuery(`(max-width: 768px${sliderBreakpoint})`)
+  const { isMobile } = useMediaQuery(`(max-width: 768px${sliderBreakpoint})`);
 
   if (list.length === 0) {
     return null;
   }
 
-  const setChunk = isMobile.matches ? noOfEventsPerMobileSlide : noOfEventsPerDesktopSlide
+  const setChunk = isMobile.matches ? noOfEventsPerMobileSlide : noOfEventsPerDesktopSlide;
   const currentSlide = chunkifyArray(list, setChunk);
 
   return (
