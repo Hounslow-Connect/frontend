@@ -28,8 +28,6 @@ const Events: React.FunctionComponent<IProps> = ({ eventStore }) => {
 
   const getPages = Array.from(Array(numberOfPages), (_, i) => i + 1);
 
-  console.log(getPages);
-
   return (
     <section className="results">
       <Helmet>
