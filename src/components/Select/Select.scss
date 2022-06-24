@@ -7,7 +7,7 @@ select,
 .select {
   @include body-m;
   width: 100%;
-  max-width: 320px;
+  max-width: none;
   position: relative;
   padding: space(20) space(40) space(20) space(20);
   border: none;
@@ -20,4 +20,7 @@ select,
   background-size: pxtorem(35px);
   color: $black;
   -webkit-appearance: none;
+  @include for-desktop-up {
+    max-width: 320px;
+  }
 }

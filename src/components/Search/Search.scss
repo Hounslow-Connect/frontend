@@ -67,6 +67,7 @@
 }
 
 .search__filter-keyword__input {
+  width: 400px;
   @include for-tablet-portrait-down {
     max-width: 260px;
   }

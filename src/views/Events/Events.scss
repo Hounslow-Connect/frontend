@@ -2,6 +2,7 @@
 @import '../../styles/colors.scss';
 @import '../../styles/fonts.scss';
 @import '../../styles/breakpoints.scss';
+@import '../../styles/variables.scss';
 
 .events__list {
   position: relative;
@@ -67,5 +68,109 @@
       filter: brightness(85%);
       cursor: pointer;
     }
+  }
+}
+
+.events__filter {
+  background: $turquoise;
+  width: 100%;
+  padding: pxtorem(45px);
+  position: relative;
+  z-index: 2;
+  @include for-phone-only {
+    padding: pxtorem(16px);
+  }
+}
+
+.events__filter__heading {
+  font-size: pxtorem(30px);
+  margin-bottom: 1rem;
+}
+
+.events__filter__filters {
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 4rem;
+  > div:nth-child(1) { flex-grow: 2; }
+  > div:nth-child(2) { flex-grow: 1; }
+  > div:nth-child(3) { flex-grow: 1; }
+}
+
+.flex--center--space-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.events__filters--secondary {
+  background: white;
+  padding: 1.4rem;
+  .inner-flex {
+    display: flex;
+    justify-content: space-between;
+    @include for-phone-only {
+      display: block;
+    }
+  }
+  .checkbox-wrapper {
+    margin-top: pxtorem(25px);
+  }
+  .checkbox {
+    margin-bottom: pxtorem(10px);
+  }
+}
+
+.flex--align--start {
+  align-self: flex-start;
+}
+
+.date-picker-outer-wrapper {
+  > label {
+    margin-right: 1.25rem;
+    font-size: pxtorem(22px);
+    font-weight: 700;
+    font-family: "Nunito Sans", sans-serif;
+  }
+}
+
+.date-range-wrapper {
+  margin-bottom: 1rem;
+}
+
+.date-range-icon-wrapper {
+  align-self: center;
+  opacity: 0.4;
+  @include for-tablet-landscape-down {
+    display: none;
+  }
+}
+
+.react-datepicker__input-container,
+.react-datepicker-wrapper {
+  width: 150px;
+  @include for-phone-only {
+    width: 100%;
+  }
+}
+
+.react-datepicker__input-container input {
+  display: block;
+  font-family: "Nunito Sans", sans-serif;
+  border: none;
+  padding: space(20);
+  color: $black;
+  border-radius: 4px;
+  font-size: pxtorem(18px);
+  line-height: 1rem;
+  transition: box-shadow $formControlTransitionDuration ease-in-out;
+  width: inherit;
+
+  &:focus, &:active {
+    outline: 0;
+    box-shadow: 0 0 0pt $formControlOutlineWidth $blue;
+  }
+
+  @include for-phone-only {
+    width: 100%;
   }
 }
