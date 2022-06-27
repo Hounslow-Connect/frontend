@@ -26,7 +26,7 @@ const EventSummary: React.FC<{ event: IEvent }> = ({ event }) => {
               {is_free ? 'Free' : ' Costs'}
             </div>
             <div className="event-summary-card__tag event-summary-card__tag--virtual">
-              {is_virtual ? 'Virtual' : 'In person'}
+              {is_virtual ? 'Online' : 'In person'}
             </div>
           </div>
           <h4 className="event-summary-card__h4">

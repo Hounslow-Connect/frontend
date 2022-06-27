@@ -31,12 +31,16 @@
   display: flex;
 }
 
+.event-summary-card__tag--date-time {
+  background-color: $light-turquoise;
+}
+
 .event-summary-card__tag--virtual {
-  background-color: #FFD940;
+  background-color: $yellow;
 }
 
 .event-summary-card__tag--cost {
-  background-color: #C6C4F8;
+  background-color: $lilac;
 }
 
 .event-summary-card__h3 {

@@ -69,3 +69,53 @@
     }
   }
 }
+
+.event-detail {
+  .h1 {
+    font-size: pxtorem(38px);
+  }
+  .main {
+    position: relative;
+    padding: 2rem 0 4rem 0;
+    background-color: #D8EEEA;
+  }
+  .h2 {
+    font-size: pxtorem(34px);
+    margin: 3rem 0 2rem;
+  }
+  
+  .p--large {
+    font-size: pxtorem(24px);
+    a {
+      font-size: pxtorem(24px);
+    }
+  }
+  .p--xlarge {
+    font-size: pxtorem(28px);
+  }
+  .contact {
+    position: relative;
+    padding: 2rem;
+    background-color: $yellow;
+    align-items: center;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      top: -38px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      border-left: 38px solid transparent;
+      border-right: 38px solid transparent;
+      border-bottom: 38px solid #FFD940;
+    }
+  }
+}
+
+.event__header__wrapper {
+  background: $turquoise;
+  &::after {
+    border-top-color: $turquoise;
+  }
+}
