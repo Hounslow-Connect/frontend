@@ -9,13 +9,14 @@ import pick from 'lodash/pick';
 import queryString from 'query-string';
 
 import { apiBase } from '../config/api';
-import { IParams, IGeoLocation } from '../types/types';
+import { IParams, IGeoLocation, IOrganisation } from '../types/types';
 import { queryRegex, querySeparator } from '../utils/utils';
 import { IEvent } from '../components/EventSummary/IEvent';
 
 const PER_PAGE = 9;
 class EventStore {
   @observable eventFeed: any[] = [];
+  @observable event: IEvent | undefined = undefined;
   @observable eventList: IEvent[] = [];
   @observable numberOfPages: number = 0;
   @observable eventCategories: any[] = [];
@@ -37,6 +38,8 @@ class EventStore {
   @observable has_induction_loop: boolean = false;
   @observable starts_after: string = '';
   @observable ends_before: string = '';
+  @observable organisation: IOrganisation | null = null;
+  @observable organisationId: string = '';
 
   @action
   fetchEventFeed = async () => {
@@ -64,13 +67,34 @@ class EventStore {
       );
       this.eventList = get(response, 'data.data', []);
       this.totalItems = get(response, 'data.meta.total', 0);
-      // const eventListResponse = get(response, 'data');
       this.numberOfPages = Math.ceil(this.totalItems / PER_PAGE);
       this.loading = false;
     } catch (e) {
       this.eventList = [];
       console.error(e);
       this.loading = false;
+    }
+  };
+
+  @action
+  fetchEvent = async (uuid: string) => {
+    this.loading = true;
+    const eventData = await axios.get(`${apiBase}/organisation-events/${uuid}`);
+    this.event = get(eventData, 'data.data');
+
+    if (this.event?.organisation_id) {
+      this.organisationId = this.event?.organisation_id;
+      await this.getOrganisation();
+    }
+  }
+
+  @action
+  getOrganisation = async () => {
+    try {
+      const organisation = await axios.get(`${apiBase}/organisations/${this.organisationId}`);
+      this.organisation = get(organisation, 'data.data', '');
+    } catch (e) {
+      // @ts-ignore
     }
   };
 

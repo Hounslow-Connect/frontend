@@ -42,7 +42,7 @@ const EventSummary: React.FC<{ event: IEvent }> = ({ event }) => {
         </div>
         <p className="event-summary-card__p">{intro}</p>
         <div className="event-summary-card__view-more">
-          <Link to={`/events/${id}`}>
+          <Link to={`/event/${id}`}>
             <span>View more</span>
             <FontAwesomeIcon icon="arrow-right" />
           </Link>

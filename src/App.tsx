@@ -15,6 +15,7 @@ import Favourites from './views/Favourites';
 import Referral from './views/Referral';
 import About from './views/About';
 import Events from './views/Events';
+import EventDetail from './views/EventDetail';
 import Contact from './views/Contact';
 import GetInvolved from './views/GetInvolved';
 import Privacy from './views/Privacy';
@@ -82,6 +83,7 @@ class App extends Component {
               <Route path="/referral" component={Referral} />
               <Route path="/about" component={About} />
               <Route path="/events" component={Events} />
+              <Route path="/event/:uuid" component={EventDetail} />
               <Route path="/contact" component={Contact} />
               <Route path="/get-involved" component={GetInvolved} />
               <Route path="/privacy-policy" component={Privacy} />
