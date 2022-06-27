@@ -23,6 +23,7 @@ interface IProps extends RouteComponentProps {
   accent?: boolean;
   onClick?: any;
   covid?: boolean;
+  black?: boolean;
 }
 
 /* tslint:disable */
@@ -42,6 +43,7 @@ const LinkButton: React.FunctionComponent<IProps> = ({
   accent = false,
   onClick,
   covid = false,
+  black = false,
   image,
 }) => (
   <button
@@ -53,7 +55,7 @@ const LinkButton: React.FunctionComponent<IProps> = ({
       'buton__burger-menu': burgerMenu,
       'button--light': light,
       'button--pink': accent,
-      'button button--black': covid,
+      'button button--black': covid || black,
     })}
     disabled={disabled}
     type={type}

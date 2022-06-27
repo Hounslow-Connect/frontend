@@ -272,7 +272,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
               </div>
             </div>
 
-            <div className="events__filters--secondary">
+            <div className="events__filters--secondary panel-box__white">
               <div className="inner-flex">
                 <div>
                   <h3>Filter your results</h3>

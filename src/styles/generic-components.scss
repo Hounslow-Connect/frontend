@@ -1,0 +1,22 @@
+@import './mixins.scss';
+@import './colors.scss';
+@import './fonts.scss';
+@import './breakpoints.scss';
+@import './variables.scss';
+
+.panel-box__white {
+  background: $white;
+  padding: 1.4rem;
+}
+
+.panel-box__white--large {
+  background: $white;
+  padding: 2rem;
+  position: relative;
+}
+
+.panel-box--turqoiuse {
+  background-color: $turquoise;
+  border-radius: 20px;
+  padding: pxtorem(20px);
+}
