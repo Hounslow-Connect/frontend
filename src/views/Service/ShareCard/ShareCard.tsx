@@ -50,10 +50,11 @@ const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
           </a>
         </div>
       </div>
-      {serviceStore && (
-        <div className="flex-container flex-container--no-padding">
-          <div className="flex-col service__action-buttons">
-            <Button size="small" text="Print" icon="print" onClick={() => window.print()} />
+      <div className="flex-container flex-container--no-padding">
+        <div className="flex-col service__action-buttons">
+          <Button size="small" text="Print" icon="print" onClick={() => window.print()} />
+          {serviceStore && (
+
             <Button
               size="small"
               text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
@@ -64,9 +65,9 @@ const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
               }}
               disabled={serviceStore.favourite}
             />
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

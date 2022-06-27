@@ -6,6 +6,9 @@ import get from 'lodash/get';
 import { Link as RouterLink} from 'react-router-dom';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
+import WheelChair from  '../../assets/images/icons/accessibility/wheelchair-accessible.svg';
+import FallbackLogo from  '../../assets/images/logo-fallback.png';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import EventStore from '../../stores/eventStore';
@@ -119,15 +122,17 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
       <section className="main">
       <div className="flex-container">
         <div className="panel-box__white--large flex-col flex-col--12">
-          <div className="event-summary-card__pills"> 
+          <div className="event-summary-card__pills flex--justify-space"> 
             <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
               {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
             </h3>
-            <div className="event-summary-card__tag event-summary-card__tag--cost">
-              {event.is_free ? 'Free' : ' Costs'}
-            </div>
-            <div className="event-summary-card__tag event-summary-card__tag--virtual">
-              {event.is_virtual ? 'Online' : 'In person'}
+            <div className='flex--justify-space flex--align--start'>
+              <div className="event-summary-card__tag event-summary-card__tag--cost">
+                {event.is_free ? 'Free' : ' Costs'}
+              </div>
+              <div className="event-summary-card__tag event-summary-card__tag--virtual">
+                {event.is_virtual ? 'Online' : 'In person'}
+              </div>
             </div>
           </div>
           <p className='p--xlarge'>{event.intro}</p>
@@ -142,7 +147,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
           <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
             <div className="flex-container">
               <div className="panel-box__white">
-                <p>{event.description}</p>
+                <p className='p--large'>{event.description}</p>
               </div>
           
               <h2 className="h2">How can I contact this event organiser?</h2>
@@ -178,50 +183,62 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               {event.location && (
               <>
                 <h2 className="h2">Where and when is this event?</h2>
-                <div className="panel-box__white  flex-col flex-col--12">
-                  <h3 className="event-summary-card__tag">
-                  </h3>
+                <div className="panel-box__white flex-col flex-col--12">
                   <div className="flex-container flex-container--no-padding">
-                    <div className='p--xlarge'>{moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}</div>
+                    <h3 className='h3'>{moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}</h3>
                     <div className="flex-col flex-col--5">
-                      <div className='p--xlarge'>
-                        {event.location.address_line_1}{' '}
-                        {event.location.address_line_2}{' '}
-                        {event.location.city}{' '}
-                        {event.location.county}
+                      <div className='address'>
+                        <p>{event.location.address_line_1}{' '}</p>
+                        <p>{event.location.address_line_2}{' '}</p>
+                        <p>{event.location.city}{' '}</p>
+                        <p>{event.location.postcode}</p>
                       </div>
-                      <Link
-                        icon="map"
-                        text="View on Google Maps"
-                        size="medium"
-                        href={`https://www.google.com/maps/search/?api=1&query=${event.location.lat},${event.location.lon}`}
-                        iconPosition="right"
-                        target="_blank"
-                        rel="noopener nofollow"
-                        className="location__google-maps--link"
-                      />
-                      <Link
-                        icon="map-signs"
-                        text="Get directions on Google Maps"
-                        size="medium"
-                        href={`https://www.google.com/maps?daddr=${event.location.lat},${event.location.lon}`}
-                        target="_blank"
-                        rel="noopener nofollow"
-                        iconPosition="right"
-                        className="location__google-maps--link"
-                      />
-                      <ul>
-                        {['ear-listen', 'wheelchair'].map((accessibilityItem: string) => (
-                          // @ts-ignore
-                          <li><FontAwesomeIcon icon={'wheelchair'}> {accessibilityItem}</FontAwesomeIcon></li>
-                        ))}
-                      </ul>
+                      <div className='google-links'>
+                        <Link
+                          text="View on Google Maps"
+                          size="medium"
+                          href={`https://www.google.com/maps/search/?api=1&query=${event.location.lat},${event.location.lon}`}
+                          iconPosition="right"
+                          target="_blank"
+                          rel="noopener nofollow"
+                          className="location__google-maps--link"
+                        />
+                        <Link
+                          text="Get directions on Google Maps"
+                          size="medium"
+                          href={`https://www.google.com/maps?daddr=${event.location.lat},${event.location.lon}`}
+                          target="_blank"
+                          rel="noopener nofollow"
+                          iconPosition="right"
+                          className="location__google-maps--link"
+                        />
+                      </div>
                     </div>
                     <div className="flex-col flex-col--5">
                       <div className="service__section service__map">
                         <MapCard locations={[event]} />
                       </div>
                     </div>
+                  </div>
+                  <div className="disability-services">
+                    {event.location.has_wheelchair_access && (
+                      <div className='service'>
+                        <img className='icon' src={InductionLoop} alt='Wheelchair accessible logo' />
+                        Wheelchair accessible
+                      </div>
+                    )}
+                    {event.location.has_induction_loop && (
+                      <div className="service">
+                        <img className='icon' src={WheelChair} alt='Induction loop logo' />
+                        Induction loop
+                      </div>
+                    )}
+                    {event.location.has_accessible_toilet && (
+                      <div className="service">
+                        <img className='icon' src={FallbackLogo} alt=' Accessible toilet logo' />
+                        Accessible toilet
+                      </div>
+                    )}                      
                   </div>
                 </div>
               </>
@@ -233,13 +250,13 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <CostCard is_free={event.is_free} fees_url={event.fees_url} />
             <h2 className="h2">Filter your results</h2>
             <div className="panel-box__white">
-              <p>You can get more personalised results by providing some extra information</p>
+              <p className='p--large'>You can get more personalised results by providing some extra information</p>
               <button className="button button__alt--small flex--align--start">Register on EventBrite</button>
             </div>
             <h2 className="h2">Add to your calendar?</h2>
 
-            <div className="panel-box__white">
-              <p>Download this event to your personal calender </p>
+            <div className="panel-box__white service__section">
+              <p className='p--large'>Download this event to your personal calender </p>
               <button className="button button__alt--small flex--align--start">Download</button>
             </div>
             <ShareCard />
