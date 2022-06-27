@@ -20,7 +20,6 @@ interface IProps extends RouteComponentProps {
   href?: string;
 }
 
-/* tslint:disable */
 const ButtonCTA: React.FC<IProps> = ({
   text,
   to,
@@ -53,5 +52,4 @@ const ButtonCTA: React.FC<IProps> = ({
   </a>
 );
 
-/* tslint:enable */
 export default withRouter(observer(ButtonCTA));

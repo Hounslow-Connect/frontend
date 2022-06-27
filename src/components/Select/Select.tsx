@@ -16,6 +16,7 @@ interface IProps {
   id: string;
   disabled?: boolean;
   value?: string | '';
+  showDefaultValue?: boolean;
 }
 /* tslint:disable */
 const Select: React.FunctionComponent<IProps> = ({
@@ -26,6 +27,7 @@ const Select: React.FunctionComponent<IProps> = ({
   id,
   disabled,
   value,
+  showDefaultValue = true,
 }) => (
   <select
     className={`select ${className}`}
@@ -34,7 +36,7 @@ const Select: React.FunctionComponent<IProps> = ({
     disabled={disabled}
     value={value}
   >
-    <option value={placeholder} disabled={true} hidden={true}>
+    <option value={placeholder} disabled={showDefaultValue} hidden={showDefaultValue}>
       {placeholder}
     </option>
     {options.map(({ value, text }) => (
