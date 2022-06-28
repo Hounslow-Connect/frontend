@@ -56,6 +56,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   // fetch all events on mount
   useEffect(() => {
     fetchEvents();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // watch for changes to the query string, triggered by searchFn when input
@@ -63,6 +64,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   useEffect(() => {
     getEventCategories();
     getSearchTerms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   if (!eventStore || !eventList) {
@@ -391,7 +393,5 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
     </section>
   );
 };
-
-// const EventWithRouter = withRouter(Events);
 
 export default inject('eventStore')(observer(Events));
