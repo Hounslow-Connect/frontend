@@ -316,10 +316,10 @@
     }
 
     .checkbox input[type='checkbox'] + label {
-      font-size: 1rem;
+      font-size: pxtorem(18px);
 
       @include for-tablet-portrait-up {
-        font-size: pxtorem(20px);
+        font-size: pxtorem(16px);
       }
     }
   }
