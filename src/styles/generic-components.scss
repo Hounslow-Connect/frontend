@@ -13,6 +13,9 @@
   background: $white;
   padding: 2rem;
   position: relative;
+  @include for-phone-only {
+    padding: 1.4rem;
+  }
 }
 
 .panel-box--turqoiuse {

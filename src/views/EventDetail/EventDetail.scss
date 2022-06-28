@@ -71,6 +71,12 @@
 }
 
 .event-detail {
+  .margin-bottom {
+    margin-bottom: 2.7rem;
+    @include for-tablet-landscape-down {
+      margin-bottom: 2rem;
+    }
+  }
   .flex--justify-space {
     display: flex;
     justify-content: space-between;
@@ -101,7 +107,7 @@
 
   .h3 {
     font-size: pxtorem(28px);
-    @include for-phone-only {
+    @include for-tablet-portrait-down {
       font-size: 1.25rem;
       line-height: 1.75rem;
     }
