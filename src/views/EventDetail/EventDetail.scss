@@ -100,6 +100,9 @@
   // we should have global fonts but these seems slightly different size to existing
   .h2 {
     font-size: pxtorem(34px);
+    @include for-tablet-landscape-down {
+      font-size: pxtorem(28px);
+    }
     @include for-phone-only {
       font-size: pxtorem(20px);
     }
@@ -107,6 +110,7 @@
 
   .h3 {
     font-size: pxtorem(28px);
+    margin-bottom: 1.5rem;
     @include for-tablet-portrait-down {
       font-size: 1.25rem;
       line-height: 1.75rem;
@@ -154,7 +158,12 @@
 
   .disability-services {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+    @include for-phone-only {
+      display: block;
+    }
+
     .service {
       margin-bottom: 1rem;
       display: flex;
