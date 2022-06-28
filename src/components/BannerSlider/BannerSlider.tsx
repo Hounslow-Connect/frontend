@@ -4,18 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IBanner } from '../../types/types';
 import Banner from '../../components/Banner';
-import CTAButton from '../../components/CTAButton';
 
 interface IProps {
   banners: [];
   header_content?: IBanner | null;
-  cta: {
-    scrollToEvents: () => void;
-    scrollToServices: () => void;
-  };
 }
 
-const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content, cta }) => {
+const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content }) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState(1);
 
   return (
@@ -28,22 +23,6 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content,
               <ReactMarkdown
                 className="banner__description"
                 source={header_content ? header_content.content : undefined}
-              />
-            </div>
-            <div className="flex-container__align--left">
-              <CTAButton
-                text="Find local events"
-                size="xl"
-                icon="calendar-days"
-                name="events"
-                onClick={cta.scrollToEvents}
-              />
-              <CTAButton
-                text="Search for services"
-                size="xl"
-                icon="hand-holding-heart"
-                name="services"
-                onClick={cta.scrollToServices}
               />
             </div>
             <div className="banner__carousel">

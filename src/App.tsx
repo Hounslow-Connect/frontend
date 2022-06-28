@@ -14,7 +14,6 @@ import Organisation from './views/Organisation';
 import Favourites from './views/Favourites';
 import Referral from './views/Referral';
 import About from './views/About';
-import Events from './views/Events';
 import Contact from './views/Contact';
 import GetInvolved from './views/GetInvolved';
 import Privacy from './views/Privacy';
@@ -32,7 +31,6 @@ import ServiceStore from './stores/serviceStore';
 import OrganisationStore from './stores/organisationStore';
 import FavouritesStore from './stores/favouritesStore';
 import CMSStore from './stores/CMSStore';
-import EventStore from './stores/eventStore';
 import ReferralStore from './stores/referralStore';
 import Terms from './views/Terms';
 import FeedbackModal from './components/FeedbackModal';
@@ -51,7 +49,6 @@ const organisationStore = new OrganisationStore();
 const favouritesStore = new FavouritesStore();
 const cmsStore = new CMSStore();
 const referralStore = new ReferralStore();
-const eventStore = new EventStore();
 
 class App extends Component {
   componentDidMount() {
@@ -68,7 +65,6 @@ class App extends Component {
         organisationStore={organisationStore}
         favouritesStore={favouritesStore}
         cmsStore={cmsStore}
-        eventStore={eventStore}
         referralStore={referralStore}
       >
         <Router>
@@ -81,7 +77,6 @@ class App extends Component {
               <Route path="/favourites" component={Favourites} />
               <Route path="/referral" component={Referral} />
               <Route path="/about" component={About} />
-              <Route path="/events" component={Events} />
               <Route path="/contact" component={Contact} />
               <Route path="/get-involved" component={GetInvolved} />
               <Route path="/privacy-policy" component={Privacy} />

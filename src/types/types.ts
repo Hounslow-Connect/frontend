@@ -14,9 +14,6 @@ export interface IParams {
   category?: string;
   persona?: string;
   is_free?: boolean;
-  is_virtual?: boolean;
-  has_wheelchair_access?: boolean;
-  has_induction_loop?: boolean;
   open_now?: boolean;
   wait_time?: string;
   order?: 'distance' | 'relevance';
@@ -31,8 +28,6 @@ export interface IParams {
   gender?: null | string;
   ethnicity?: null | string;
   housing?: null | string;
-  starts_after?: string;
-  ends_before?: string;
   eligibilities?: [];
 }
 export interface ICategoryTaxonomy {
