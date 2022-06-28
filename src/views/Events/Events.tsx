@@ -56,7 +56,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   // fetch all events on mount
   useEffect(() => {
     fetchEvents();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // watch for changes to the query string, triggered by searchFn when input

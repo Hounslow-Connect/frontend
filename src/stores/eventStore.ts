@@ -86,7 +86,7 @@ class EventStore {
       this.organisationId = this.event?.organisation_id;
       await this.getOrganisation();
     }
-  }
+  };
 
   @action
   getOrganisation = async () => {

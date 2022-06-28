@@ -123,7 +123,9 @@ class Header extends Component<IProps> {
                     //
                     strict={true}
                     className="link link__inline link--large link__header"
-                    activeClassName={cx({ 'link__header--active': !isMobile || location.pathname.includes('/event/') })}
+                    activeClassName={cx({
+                      'link__header--active': !isMobile || location.pathname.includes('/event/'),
+                    })}
                     onClick={() => {
                       if (burgerMenuOpen) {
                         toggleBurgerMenu();
