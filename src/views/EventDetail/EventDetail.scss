@@ -97,6 +97,13 @@
     background-color: #D8EEEA;
   }
 
+  .calendar-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
   // we should have global fonts but these seems slightly different size to existing
   .h2 {
     font-size: pxtorem(34px);
