@@ -141,7 +141,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   </div>
                 </div>
               </div>
-              <p className="p--xlarge">{event.intro}</p>
+              <p className="p--large">{event.intro}</p>
             </div>
           </div>
         </div>
@@ -191,12 +191,118 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             </Accordian>
 
             {event.location && (
-              <>
-                <Accordian
-                  title="Where and when is this event?"
-                  className="service__accordian mobile-show"
-                >
-                  <div className="flex-col flex-col--12">
+              <Accordian
+                title="Where and when is this event?"
+                className="service__accordian mobile-show"
+              >
+                <div className="flex-col flex-col--12">
+                  <h3 className="h3">
+                    {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
+                  </h3>
+                  <div className="flex-col flex-col--5">
+                    <div className="address">
+                      <p>{event.location.address_line_1} </p>
+                      <p>{event.location.address_line_2} </p>
+                      <p>{event.location.city} </p>
+                      <p>{event.location.postcode}</p>
+                    </div>
+                    <div className="google-links">
+                      <Link
+                        text="View on Google Maps"
+                        size="medium"
+                        href={`https://www.google.com/maps/search/?api=1&query=${event.location.lat},${event.location.lon}`}
+                        iconPosition="right"
+                        target="_blank"
+                        rel="noopener nofollow"
+                        className="location__google-maps--link"
+                      />
+                      <Link
+                        text="Get directions on Google Maps"
+                        size="medium"
+                        href={`https://www.google.com/maps?daddr=${event.location.lat},${event.location.lon}`}
+                        target="_blank"
+                        rel="noopener nofollow"
+                        iconPosition="right"
+                        className="location__google-maps--link"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-col flex-col--5">
+                    <div className="service__map">
+                      <MapCard locations={[event]} />
+                    </div>
+                  </div>
+                  <div className="disability-services">
+                    {
+                      <div className="service">
+                        <img
+                          className="icon"
+                          src={InductionLoop}
+                          alt="Wheelchair accessible logo"
+                        />
+                        Wheelchair accessible
+                      </div>
+                    }
+                    {
+                      <div className="service">
+                        <img className="icon" src={WheelChair} alt="Induction loop logo" />
+                        Induction loop
+                      </div>
+                    }
+                    {
+                      <div className="service">
+                        <img className="icon" src={FallbackLogo} alt=" Accessible toilet logo" />
+                        Accessible toilet
+                      </div>
+                    }
+                  </div>
+                </div>
+              </Accordian>
+            )}
+
+            <div className="panel-box__white mobile-hide margin-bottom">
+              <p className="p--large">{event.description}</p>
+            </div>
+
+            <h2 className="h2 mobile-hide margin-bottom">
+              How can I contact this event organiser?
+            </h2>
+            <div className="flex-container flex-container--no-padding contact mobile-hide margin-bottom">
+              <div className="flex-col flex-col--6">
+                {event.organiser_name && (
+                  <p className="p--large">
+                    Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                    for more information
+                  </p>
+                )}
+                <div className="cms--contact-card--row service__accordian--no-overflow">
+                  <h3>
+                    <FontAwesomeIcon icon="globe" /> Website
+                  </h3>
+                  <p>{event.organiser_url || 'n/a'}</p>
+                </div>
+              </div>
+              <div className="flex-col flex-col--5">
+                <div className="cms--contact-card--row service__accordian--no-overflow">
+                  <h3>
+                    <FontAwesomeIcon icon="phone" /> Telephone
+                  </h3>
+                  <p>{event.organiser_phone || 'n/a'}</p>
+                </div>
+                <div className="cms--contact-card--row service__accordian--no-overflow">
+                  <h3>
+                    <FontAwesomeIcon icon="envelope" /> Email
+                  </h3>
+                  <p>{event.organiser_email || 'n/a'}</p>
+                </div>
+              </div>
+            </div>
+
+            {event.location && (
+              <div className="mobile-hide">
+                <h2 className="h2 margin-bottom">Where and when is this event?</h2>
+                <div className="panel-box__white flex-col flex-col--12">
+                  <div className="flex-container flex-container--no-padding">
                     <h3 className="h3">
                       {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
                     </h3>
@@ -233,139 +339,33 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                         <MapCard locations={[event]} />
                       </div>
                     </div>
-                    <div className="disability-services">
-                      {
-                        <div className="service">
-                          <img
-                            className="icon"
-                            src={InductionLoop}
-                            alt="Wheelchair accessible logo"
-                          />
-                          Wheelchair accessible
-                        </div>
-                      }
-                      {
-                        <div className="service">
-                          <img className="icon" src={WheelChair} alt="Induction loop logo" />
-                          Induction loop
-                        </div>
-                      }
-                      {
-                        <div className="service">
-                          <img className="icon" src={FallbackLogo} alt=" Accessible toilet logo" />
-                          Accessible toilet
-                        </div>
-                      }
-                    </div>
                   </div>
-                </Accordian>
-
-                <div className="panel-box__white mobile-hide margin-bottom">
-                  <p className="p--large">{event.description}</p>
-                </div>
-
-                <h2 className="h2 mobile-hide margin-bottom">
-                  How can I contact this event organiser?
-                </h2>
-                <div className="flex-container flex-container--no-padding contact mobile-hide margin-bottom">
-                  <div className="flex-col flex-col--6">
-                    {event.organiser_name && (
-                      <p className="p--large">
-                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
-                        for more information
-                      </p>
+                  <div className="disability-services">
+                    {event.location.has_wheelchair_access && (
+                      <div className="service">
+                        <img
+                          className="icon"
+                          src={InductionLoop}
+                          alt="Wheelchair accessible logo"
+                        />
+                        Wheelchair accessible
+                      </div>
                     )}
-                    <div className="cms--contact-card--row service__accordian--no-overflow">
-                      <h3>
-                        <FontAwesomeIcon icon="globe" /> Website
-                      </h3>
-                      <p>{event.organiser_url || 'n/a'}</p>
-                    </div>
-                  </div>
-                  <div className="flex-col flex-col--5">
-                    <div className="cms--contact-card--row service__accordian--no-overflow">
-                      <h3>
-                        <FontAwesomeIcon icon="phone" /> Telephone
-                      </h3>
-                      <p>{event.organiser_phone || 'n/a'}</p>
-                    </div>
-                    <div className="cms--contact-card--row service__accordian--no-overflow">
-                      <h3>
-                        <FontAwesomeIcon icon="envelope" /> Email
-                      </h3>
-                      <p>{event.organiser_email || 'n/a'}</p>
-                    </div>
+                    {event.location.has_induction_loop && (
+                      <div className="service">
+                        <img className="icon" src={WheelChair} alt="Induction loop logo" />
+                        Induction loop
+                      </div>
+                    )}
+                    {event.location.has_accessible_toilet && (
+                      <div className="service">
+                        <img className="icon" src={FallbackLogo} alt=" Accessible toilet logo" />
+                        Accessible toilet
+                      </div>
+                    )}
                   </div>
                 </div>
-
-                <div className="mobile-hide">
-                  <h2 className="h2 margin-bottom">Where and when is this event?</h2>
-                  <div className="panel-box__white flex-col flex-col--12">
-                    <div className="flex-container flex-container--no-padding">
-                      <h3 className="h3">
-                        {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
-                      </h3>
-                      <div className="flex-col flex-col--5">
-                        <div className="address">
-                          <p>{event.location.address_line_1} </p>
-                          <p>{event.location.address_line_2} </p>
-                          <p>{event.location.city} </p>
-                          <p>{event.location.postcode}</p>
-                        </div>
-                        <div className="google-links">
-                          <Link
-                            text="View on Google Maps"
-                            size="medium"
-                            href={`https://www.google.com/maps/search/?api=1&query=${event.location.lat},${event.location.lon}`}
-                            iconPosition="right"
-                            target="_blank"
-                            rel="noopener nofollow"
-                            className="location__google-maps--link"
-                          />
-                          <Link
-                            text="Get directions on Google Maps"
-                            size="medium"
-                            href={`https://www.google.com/maps?daddr=${event.location.lat},${event.location.lon}`}
-                            target="_blank"
-                            rel="noopener nofollow"
-                            iconPosition="right"
-                            className="location__google-maps--link"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex-col flex-col--5">
-                        <div className="service__map">
-                          <MapCard locations={[event]} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="disability-services">
-                      {event.location.has_wheelchair_access && (
-                        <div className="service">
-                          <img
-                            className="icon"
-                            src={InductionLoop}
-                            alt="Wheelchair accessible logo"
-                          />
-                          Wheelchair accessible
-                        </div>
-                      )}
-                      {event.location.has_induction_loop && (
-                        <div className="service">
-                          <img className="icon" src={WheelChair} alt="Induction loop logo" />
-                          Induction loop
-                        </div>
-                      )}
-                      {event.location.has_accessible_toilet && (
-                        <div className="service">
-                          <img className="icon" src={FallbackLogo} alt=" Accessible toilet logo" />
-                          Accessible toilet
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </>
+              </div>
             )}
           </div>
 

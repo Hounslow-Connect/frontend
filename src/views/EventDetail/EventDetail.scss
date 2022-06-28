@@ -131,14 +131,6 @@
     }
   }
 
-  .p--xlarge {
-    font-size: pxtorem(28px);
-    @include for-phone-only {
-      font-size: 1.15rem;
-      line-height: 1.75rem;
-    }
-  }
-
   .address {
     margin-bottom: 1.5rem;
     > p {
