@@ -103,8 +103,6 @@
 }
 
 .events__filters--secondary {
-  background: white;
-  padding: 1.4rem;
   .inner-flex {
     display: flex;
     justify-content: space-between;
@@ -121,6 +119,7 @@
 }
 
 .flex--align--start {
+  display: flex;
   align-self: flex-start;
 }
 

@@ -1,0 +1,211 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
+@import '../../styles/breakpoints.scss';
+
+.events__list {
+  position: relative;
+  z-index: 0;
+  padding-top: space(40);
+  padding-bottom: space(40);
+
+  &::after {
+    content: url('../../assets/images/backgrounds/park-trimmed.svg');
+    position: absolute;
+    bottom: -180px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+  }
+}
+
+.pagination {
+  display: flex;
+  padding-bottom: pxtorem(40px);
+
+  .arrow {
+    padding: pxtorem(10px);
+    font-size: pxtorem(20px);
+    background: $white;
+    align-items: center;
+    span {
+      padding: pxtorem(2px) pxtorem(10px);
+    }
+    &:hover {
+      filter: brightness(85%);
+      cursor: pointer;
+    }
+  }
+
+  .arrow--left {
+    margin-left: auto;
+  }
+  
+  .arrow--right {
+    margin-right: auto;
+    flex-direction: row-reverse;
+    display: flex;
+  }
+}
+
+.pagination__pages {
+  display: inline-flex;
+  grid-column-gap: 5px;
+  justify-content: center;
+  flex-grow: 1;
+  > div {
+    padding: pxtorem(10px);
+    font-size: pxtorem(20px);
+    background: $yellow;
+    height: 54px;
+    line-height: 35px;
+    width: 40px;
+    text-align: center;
+    &:hover {
+      filter: brightness(85%);
+      cursor: pointer;
+    }
+  }
+}
+
+.event-detail {
+  .margin-bottom {
+    margin-bottom: 2.7rem;
+    @include for-tablet-landscape-down {
+      margin-bottom: 2rem;
+    }
+  }
+  .flex--justify-space {
+    display: flex;
+    justify-content: space-between;
+    @include for-phone-only {
+      display: block;
+    }
+  }
+  .h1 {
+    font-size: pxtorem(38px);
+    @include for-phone-only {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }    
+  }
+  .main {
+    position: relative;
+    padding: 2rem 0 4rem 0;
+    background-color: #D8EEEA;
+  }
+
+  // we should have global fonts but these seems slightly different size to existing
+  .h2 {
+    font-size: pxtorem(34px);
+    @include for-tablet-landscape-down {
+      font-size: pxtorem(28px);
+    }
+    @include for-phone-only {
+      font-size: pxtorem(20px);
+    }
+  }
+
+  .h3 {
+    font-size: pxtorem(28px);
+    margin-bottom: 1.5rem;
+    @include for-tablet-portrait-down {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+  
+  .p--large {
+    font-size: pxtorem(24px);
+    line-height: 32px;
+    margin-bottom: 1rem;
+    @include for-phone-only {
+      font-size: 1.15rem;
+      line-height: 1.75rem;
+    }
+    a {
+      font-size: pxtorem(24px);
+      line-height: 32px;
+    }
+  }
+
+  .address {
+    margin-bottom: 1.5rem;
+    > p {
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+      font-weight: 700;
+    }
+  }
+
+  .google-links {
+    a {
+      font-weight: normal;
+      font-size: pxtorem(18px);
+      margin-bottom: .6rem;
+    }
+  }
+
+  .disability-services {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+    @include for-phone-only {
+      display: block;
+    }
+
+    .service {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .icon {
+      width: 45px;
+      height: 45px;
+      max-width: 100%;
+      margin-right: 1rem;
+    }
+  }
+
+  .contact {
+    position: relative;
+    padding: 2rem;
+    background-color: $yellow;
+    align-items: flex-end;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      top: -38px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      border-left: 38px solid transparent;
+      border-right: 38px solid transparent;
+      border-bottom: 38px solid #FFD940;
+    }
+  }
+
+  .service__map {
+    height: 160px;
+  
+    @include for-tablet-portrait-down {
+      padding: 0;
+    }
+  
+    .leaflet-container {
+      border-radius: 0;
+    }
+  }
+}
+
+.event__header__wrapper {
+  background: $turquoise;
+  &::after {
+    border-top-color: $turquoise;
+  }
+}

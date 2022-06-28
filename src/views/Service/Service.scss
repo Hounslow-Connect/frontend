@@ -7,7 +7,7 @@
   position: relative;
   padding-bottom: space(24);
   background: linear-gradient(to bottom, $white 0%, $white 50%, $light-turquoise 50%,$light-turquoise 100%);
-
+  z-index: 1;
   .flex-container {
     max-width: 1260px;
 
@@ -181,9 +181,6 @@
 }
 
 .service__info__cost {
-  background-color: $turquoise !important;
-  border-radius: 20px;
-
   &.criteria_card {
     @media(max-width: 860px) {
       margin-top: space(16);
@@ -306,6 +303,8 @@
 
   svg {
     font-size: pxtorem(18px);
+    position: absolute;
+    right: 25px;
   }
 
   button {
@@ -543,7 +542,6 @@
   align-items: center;
   justify-content: flex-start !important;
   width: 100%;
-  padding: space(20);
 
   @media(max-width: 860px) {
     margin-top: space(32);
@@ -636,12 +634,7 @@
   }
 }
 
-.service__share-card {
-  padding: space(20);
-  background-color: $turquoise;
-  border-radius: 20px;
-  text-align: center;
-  
+.service__share-card {  
   @media(max-width: 600px) {
     margin-top: 2rem;
   }

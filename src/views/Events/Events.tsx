@@ -56,7 +56,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   // fetch all events on mount
   useEffect(() => {
     fetchEvents();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // watch for changes to the query string, triggered by searchFn when input
@@ -272,7 +272,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
               </div>
             </div>
 
-            <div className="events__filters--secondary">
+            <div className="events__filters--secondary panel-box__white">
               <div className="inner-flex">
                 <div>
                   <h3>Filter your results</h3>
