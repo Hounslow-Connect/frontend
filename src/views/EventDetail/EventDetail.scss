@@ -74,9 +74,16 @@
   .flex--justify-space {
     display: flex;
     justify-content: space-between;
+    @include for-phone-only {
+      display: block;
+    }
   }
   .h1 {
     font-size: pxtorem(38px);
+    @include for-phone-only {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }    
   }
   .main {
     position: relative;
@@ -87,18 +94,27 @@
   // we should have global fonts but these seems slightly different size to existing
   .h2 {
     font-size: pxtorem(34px);
-    margin: 2rem 0;
+    @include for-phone-only {
+      font-size: pxtorem(20px);
+    }
   }
 
   .h3 {
     font-size: pxtorem(28px);
-    margin: 0 0 2rem;
+    @include for-phone-only {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
   }
   
   .p--large {
     font-size: pxtorem(24px);
     line-height: 32px;
     margin-bottom: 1rem;
+    @include for-phone-only {
+      font-size: 1.15rem;
+      line-height: 1.75rem;
+    }
     a {
       font-size: pxtorem(24px);
       line-height: 32px;
@@ -107,6 +123,10 @@
 
   .p--xlarge {
     font-size: pxtorem(28px);
+    @include for-phone-only {
+      font-size: 1.15rem;
+      line-height: 1.75rem;
+    }
   }
 
   .address {
@@ -148,7 +168,7 @@
     position: relative;
     padding: 2rem;
     background-color: $yellow;
-    align-items: center;
+    align-items: flex-end;
     &::after {
       content: "";
       position: absolute;

@@ -41,7 +41,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
 
   const { event, organisation } = eventStore;
 
-  if (!event) return null
+  if (!event) return null;
 
   const getImg = (event: IEvent) => {
     if (event) {
@@ -54,6 +54,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
     }
   }; 
 
+  const hasBookingFields = event.booking_cta && event.booking_summary && event.booking_title && event.booking_url
+
+  console.log({event})
   return (
     <section className="event-detail">
       <Helmet>
@@ -121,35 +124,44 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
      
       <section className="main">
       <div className="flex-container">
-        <div className="panel-box__white--large flex-col flex-col--12">
-          <div className="event-summary-card__pills flex--justify-space"> 
-            <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
-              {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
-            </h3>
-            <div className='flex--justify-space flex--align--start'>
-              <div className="event-summary-card__tag event-summary-card__tag--cost">
-                {event.is_free ? 'Free' : ' Costs'}
-              </div>
-              <div className="event-summary-card__tag event-summary-card__tag--virtual">
-                {event.is_virtual ? 'Online' : 'In person'}
+        <CostCard is_free={event.is_free} fees_url={event.fees_url} />
+        <div className="flex-col flex-col--12">
+          <div className="panel-box__white--large">
+            <div className="event-summary-card__pills flex--justify-space"> 
+              <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
+                {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
+              </h3>
+              <div className='flex--align--start'>
+                <div className="event-summary-card__tag event-summary-card__tag--cost">
+                  {event.is_free ? 'Free' : ' Costs'}
+                </div>
+                <div className="event-summary-card__tag event-summary-card__tag--virtual">
+                  {event.is_virtual ? 'Online' : 'In person'}
+                </div>
               </div>
             </div>
+            <p className='p--xlarge'>{event.intro}</p>
           </div>
-          <p className='p--xlarge'>{event.intro}</p>
         </div>
       </div>
         <div className="flex-container flex-container--justify">
           <div className="flex-col flex-col--12">
-            <div className="flex-container">
-              <h2 className='h2'>Event description</h2>
-            </div>
+            <h2 className='h2'>Event description</h2>
           </div>
           <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
-            <div className="flex-container">
+            <Accordian
+              title='Event description'
+              className="service__accordian"
+            >
               <div className="panel-box__white">
                 <p className='p--large'>{event.description}</p>
               </div>
-          
+            </Accordian>
+
+            <Accordian
+              title='How can I contact this event organiser?'
+              className="service__accordian"
+            >
               <h2 className="h2">How can I contact this event organiser?</h2>
               <div className="flex-container flex-container--no-padding contact">
                 <div className='flex-col flex-col--6'>
@@ -157,7 +169,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                     <p className='p--large'> 
                       Contact <a href={event.organiser_url as string}>{event.organiser_name}</a> for more information</p>
                   )}
-                  <div className="cms--contact-card--row">
+                  <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
                       <FontAwesomeIcon icon="globe" /> Website
                     </h3>
@@ -165,13 +177,13 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   </div>
                 </div>
                 <div className='flex-col flex-col--5'>
-                  <div className="cms--contact-card--row">
+                  <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
                       <FontAwesomeIcon icon="phone" /> Telephone
                     </h3>
                     <p>{event.organiser_phone || 'n/a'}</p>
                   </div>
-                  <div className="cms--contact-card--row">
+                  <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
                       <FontAwesomeIcon icon="envelope" /> Email
                     </h3>
@@ -179,85 +191,98 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   </div>
                 </div>
               </div>
+            </Accordian>
 
-              {event.location && (
-              <>
-                <h2 className="h2">Where and when is this event?</h2>
-                <div className="panel-box__white flex-col flex-col--12">
-                  <div className="flex-container flex-container--no-padding">
-                    <h3 className='h3'>{moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}</h3>
-                    <div className="flex-col flex-col--5">
-                      <div className='address'>
-                        <p>{event.location.address_line_1}{' '}</p>
-                        <p>{event.location.address_line_2}{' '}</p>
-                        <p>{event.location.city}{' '}</p>
-                        <p>{event.location.postcode}</p>
-                      </div>
-                      <div className='google-links'>
-                        <Link
-                          text="View on Google Maps"
-                          size="medium"
-                          href={`https://www.google.com/maps/search/?api=1&query=${event.location.lat},${event.location.lon}`}
-                          iconPosition="right"
-                          target="_blank"
-                          rel="noopener nofollow"
-                          className="location__google-maps--link"
-                        />
-                        <Link
-                          text="Get directions on Google Maps"
-                          size="medium"
-                          href={`https://www.google.com/maps?daddr=${event.location.lat},${event.location.lon}`}
-                          target="_blank"
-                          rel="noopener nofollow"
-                          iconPosition="right"
-                          className="location__google-maps--link"
-                        />
-                      </div>
+            {event.location && (
+             <Accordian
+              title='Where and when is this event?'
+              className="service__accordian"
+            >
+              <h2 className="h2">Where and when is this event?</h2>
+              <div className="panel-box__white flex-col flex-col--12">
+                <div className="flex-container flex-container--no-padding">
+                  <h3 className='h3'>{moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}</h3>
+                  <div className="flex-col flex-col--5">
+                    <div className='address'>
+                      <p>{event.location.address_line_1}{' '}</p>
+                      <p>{event.location.address_line_2}{' '}</p>
+                      <p>{event.location.city}{' '}</p>
+                      <p>{event.location.postcode}</p>
                     </div>
-                    <div className="flex-col flex-col--5">
-                      <div className="service__section service__map">
-                        <MapCard locations={[event]} />
-                      </div>
+                    <div className='google-links'>
+                      <Link
+                        text="View on Google Maps"
+                        size="medium"
+                        href={`https://www.google.com/maps/search/?api=1&query=${event.location.lat},${event.location.lon}`}
+                        iconPosition="right"
+                        target="_blank"
+                        rel="noopener nofollow"
+                        className="location__google-maps--link"
+                      />
+                      <Link
+                        text="Get directions on Google Maps"
+                        size="medium"
+                        href={`https://www.google.com/maps?daddr=${event.location.lat},${event.location.lon}`}
+                        target="_blank"
+                        rel="noopener nofollow"
+                        iconPosition="right"
+                        className="location__google-maps--link"
+                      />
                     </div>
                   </div>
-                  <div className="disability-services">
-                    {event.location.has_wheelchair_access && (
-                      <div className='service'>
-                        <img className='icon' src={InductionLoop} alt='Wheelchair accessible logo' />
-                        Wheelchair accessible
-                      </div>
-                    )}
-                    {event.location.has_induction_loop && (
-                      <div className="service">
-                        <img className='icon' src={WheelChair} alt='Induction loop logo' />
-                        Induction loop
-                      </div>
-                    )}
-                    {event.location.has_accessible_toilet && (
-                      <div className="service">
-                        <img className='icon' src={FallbackLogo} alt=' Accessible toilet logo' />
-                        Accessible toilet
-                      </div>
-                    )}                      
+                  <div className="flex-col flex-col--5">
+                    <div className="service__map">
+                      <MapCard locations={[event]} />
+                    </div>
                   </div>
                 </div>
-              </>
-            )}
-            </div>
+                <div className="disability-services">
+                  {event.location.has_wheelchair_access && (
+                    <div className='service'>
+                      <img className='icon' src={InductionLoop} alt='Wheelchair accessible logo' />
+                      Wheelchair accessible
+                    </div>
+                  )}
+                  {event.location.has_induction_loop && (
+                    <div className="service">
+                      <img className='icon' src={WheelChair} alt='Induction loop logo' />
+                      Induction loop
+                    </div>
+                  )}
+                  {event.location.has_accessible_toilet && (
+                    <div className="service">
+                      <img className='icon' src={FallbackLogo} alt=' Accessible toilet logo' />
+                      Accessible toilet
+                    </div>
+                  )}                      
+                </div>
+              </div>
+            </Accordian>
+          )}
           </div>
 
-          <div className="flex-col flex-col--4 flex-col--mobile--12">
-            <CostCard is_free={event.is_free} fees_url={event.fees_url} />
-            <h2 className="h2">Filter your results</h2>
-            <div className="panel-box__white">
-              <p className='p--large'>You can get more personalised results by providing some extra information</p>
-              <button className="button button__alt--small flex--align--start">Register on EventBrite</button>
+          <div className="flex-col flex-col--4 flex-col--tablet--12">
+            <div className='mobile-hide'>
+              <CostCard is_free={event.is_free} fees_url={event.fees_url} />
             </div>
+            {hasBookingFields && (
+              <Accordian
+                title={event.booking_title as string}
+                className="service__accordian"
+              >
+                <h2 className="h2">{event.booking_title}</h2>
+                <div className="panel-box__white">
+                  <p className='p--large'>{event.booking_summary}</p>
+                  <a href={event.booking_url} className="button button__alt--small">{event.booking_cta}</a>
+                </div>
+              </Accordian>
+            )}
+           
             <h2 className="h2">Add to your calendar?</h2>
 
-            <div className="panel-box__white service__section">
+            <div className="panel-box__white">
               <p className='p--large'>Download this event to your personal calender </p>
-              <button className="button button__alt--small flex--align--start">Download</button>
+              <button className="button button__alt--small">Download</button>
             </div>
             <ShareCard />
             <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
