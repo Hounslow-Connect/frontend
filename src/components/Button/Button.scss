@@ -213,16 +213,13 @@
 }
 
 .button__alt--small {
+  height: pxtorem(35px);
   font-size: $font-body-m;
-  padding: 0.3rem space(16);
+  padding: 0 space(16);
   line-height: 1.16;
+
   svg {
     margin-left: space(16);
-  }
-  @include for-phone-only {
-    height: auto;
-    padding: 0.4rem 1rem;
-    width: 100%;
   }
 }
 
