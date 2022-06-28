@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
 import WheelChair from '../../assets/images/icons/accessibility/wheelchair-accessible.svg';
 import FallbackLogo from '../../assets/images/logo-fallback.png';
@@ -386,10 +387,22 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             )}
 
             <h2 className="h2 margin-bottom">Add to your calendar?</h2>
-
             <div className="panel-box__white margin-bottom">
               <p className="p--large">Download this event to your personal calender </p>
-              <button className="button button__alt--small">Download</button>
+              <div className='calendar-wrapper'>
+                <a href={event.apple_calendar_link} className="button button__alt--small" download>Download
+                {/* @ts-ignore */}
+                <FontAwesomeIcon icon="fab fa-apple" />
+                </a>
+                <a href={event.google_calendar_link} className="button button__alt--small" download>Download
+                  {/* @ts-ignore */}
+                  <FontAwesomeIcon icon="fab fa-google" />
+                </a>
+                <a href={event.microsoft_calendar_link} className="button button__alt--small" download>Download
+                  {/* @ts-ignore */}
+                  <FontAwesomeIcon icon="fab fa-microsoft" />
+                </a>
+              </div>
             </div>
             <ShareCard />
             <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
