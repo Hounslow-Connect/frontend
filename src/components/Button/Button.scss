@@ -30,6 +30,7 @@
   border-radius: 4px;
   box-sizing: border-box;
   transition: all $formControlTransitionDuration ease-in-out;
+  text-decoration: none;
 
   &:hover {
     box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
