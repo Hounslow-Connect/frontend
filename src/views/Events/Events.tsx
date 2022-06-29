@@ -133,7 +133,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   };
 
   return (
-    <section className="results">
+    <section className="events__results">
       <Helmet>
         <meta property="og:type" content="website" />
       </Helmet>
@@ -146,7 +146,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       />
       <div className="flex-container">
         <h1 className="results__heading">Events In Hounslow</h1>
-        <p className="results__heading p--large">
+        <p className="p p--heading">
           The borough has a wide range of community events, many of which are free. Search below to
           explore all
         </p>
@@ -212,7 +212,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           style={{ alignItems: 'center' }}
                           className="flex-container flex-container--no-padding"
                         >
-                          <div className="flex-col flex-col--6 flex-col--mobile--12">
+                          <div className="flex-col flex-col--5 flex-col--mobile--12">
                             <Input
                               id="location"
                               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
