@@ -22,6 +22,7 @@ import ShareCard from '../../views/Service/ShareCard';
 import CostCard from '../../views/Service/CostCard';
 import MapCard from '../../views/Service/MapCard';
 import Accordian from '../../components/Accordian';
+import { formatTimeFromString } from '../../views/Service/timeFormatting';
 
 import './EventDetail.scss';
 
@@ -122,7 +123,6 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
           </div>
         </div>
       </div>
-
       <section className="main">
         <div className="flex-container">
           <div className="mobile-show service__section">
@@ -132,7 +132,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <div className="panel-box__white--large margin-bottom">
               <div className="event-summary-card__pills flex--justify-space">
                 <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
-                  {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
+                  {moment(event.start_date).format('dddd MMMM Do')} - {formatTimeFromString(event.start_time)}
                 </h3>
                 <div className="flex--align--start">
                   <div className="event-summary-card__tag event-summary-card__tag--cost">
@@ -199,7 +199,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               >
                 <div className="flex-col flex-col--12">
                   <h3 className="h3">
-                    {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
+                    {moment(event.start_date).format('dddd MMMM Do')} - {formatTimeFromString(event.start_time)}
                   </h3>
                   <div className="flex-col flex-col--5">
                     <div className="address">
@@ -306,7 +306,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 <div className="panel-box__white flex-col flex-col--12">
                   <div className="flex-container flex-container--no-padding">
                     <h3 className="h3">
-                      {moment(event.start_date).format('dddd MMMM Do')} - {event.start_time}
+                      {moment(event.start_date).format('dddd MMMM Do')} - {formatTimeFromString(event.start_time)}
                     </h3>
                     <div className="flex-col flex-col--5">
                       <div className="address">
