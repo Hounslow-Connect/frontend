@@ -350,6 +350,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       <div className="events__list">
         <div className="results__container">
           {eventList.map(event => (
+            // @ts-ignore
             <EventSummary key={event.id} event={event} />
           ))}
         </div>

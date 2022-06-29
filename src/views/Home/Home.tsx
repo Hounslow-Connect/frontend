@@ -61,7 +61,11 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
       )}
       <Search ref={serviceSectionRef} />
       {/* @ts-ignore */}
-      <EventFeed list={eventStore.eventFeed as IEvent[]} ref={eventSectionRef} />
+      <EventFeed
+        list={eventStore.eventFeed as IEvent[]}
+        ref={eventSectionRef}
+        scrollToEvents={scrollToEvents}
+      />
       <Personas personas={SearchStore.personas} />
     </main>
   );

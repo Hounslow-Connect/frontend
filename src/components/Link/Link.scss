@@ -41,6 +41,7 @@
   font-size: pxtorem(20px);
   text-decoration: none;
   color: $black;
+  white-space: nowrap;
 
   &:last-of-type {
     margin-right: 0;
