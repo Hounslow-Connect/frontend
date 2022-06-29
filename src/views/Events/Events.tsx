@@ -158,19 +158,27 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
           {eventListNone && (
             <div className="events__list events__list--none">
               <div className="flex-container flex-container--justify-top">
-                <div className='panel-box__yellow--large flex-col--6 flex-col--tablet--12'>
-                  <h2 className='events__filter__heading'>Sorry, there are currently no events listed on the platform.</h2>
-                  <p className='p--large'>
-                    Please check back at a later date to see future events or explore the <a href='https://inhounslow.com/'>InHounslow</a> website.
+                <div className="panel-box__yellow--large flex-col--6 flex-col--tablet--12">
+                  <h2 className="events__filter__heading">
+                    Sorry, there are currently no events listed on the platform.
+                  </h2>
+                  <p className="p--large">
+                    Please check back at a later date to see future events or explore the{' '}
+                    <a href="https://inhounslow.com/">InHounslow</a> website.
                   </p>
-                  <p className='p--large'>
-                    Visit our <a href='https://sutton.cloud.servelec-synergy.com/synergy/informationdirectory/'>Family Services Directory</a> for activities for children between 0-19 years.
+                  <p className="p--large">
+                    Visit our{' '}
+                    <a href="https://sutton.cloud.servelec-synergy.com/synergy/informationdirectory/">
+                      Family Services Directory
+                    </a>{' '}
+                    for activities for children between 0-19 years.
                   </p>
                 </div>
-                <div className='panel-box__turquoise--large flex-col--5 flex-col--tablet--12'>
-                  <h2 className='events__filter__heading'>Got an event to list?</h2>
-                  <p className='p--large'>
-                    If you'd like to list your event on Hounslow Connect, get in touch with us via email
+                <div className="panel-box__turquoise--large flex-col--5 flex-col--tablet--12">
+                  <h2 className="events__filter__heading">Got an event to list?</h2>
+                  <p className="p--large">
+                    If you'd like to list your event on Hounslow Connect, get in touch with us via
+                    email
                   </p>
                 </div>
               </div>
@@ -306,7 +314,10 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                       <div className="inner-flex">
                         <div>
                           <h3>Filter your results</h3>
-                          <p>You can get more personalised results by providing some extra information</p>
+                          <p>
+                            You can get more personalised results by providing some extra
+                            information
+                          </p>
                         </div>
                         <button
                           onClick={toggleFilters}
