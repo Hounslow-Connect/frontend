@@ -23,7 +23,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
   const serviceSectionRef = createRef<HTMLDivElement | null>();
 
   useEffect(() => {
-    eventStore.fetchEventFeed();
+    eventStore.fetchEventsHomePage();
   }, [eventStore]);
 
   const scrollToEvents = () => {

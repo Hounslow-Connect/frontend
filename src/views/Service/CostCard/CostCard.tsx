@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const CostCard: React.FunctionComponent<IProps> = ({ is_free, type, fees_url }) => (
-  <div className="service__cost-card panel-box--turqoiuse">
+  <div className="service__cost-card panel-box--turquoise">
     <div className="service__cost-card--img">
       <FontAwesomeIcon icon="pound-sign" className="service__info__cost--icon" />
       <p className="criteria_card-title">{!is_free ? 'Cost' : 'Free'}</p>

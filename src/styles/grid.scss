@@ -114,6 +114,10 @@ body {
   }
 
   // Horizontal align center
+  &--justify-top {
+    align-items: flex-start;
+  }
+
   &--justify {
     justify-content: center;
   }
