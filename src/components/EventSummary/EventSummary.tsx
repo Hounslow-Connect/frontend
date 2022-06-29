@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { History } from 'history';
 
 import { IEvent } from './IEvent';
 import { apiBase } from '../../config/api';
@@ -9,7 +11,12 @@ import FallBackLogo from '../../assets/images/logo-fallback.png';
 
 import './EventSummary.scss';
 
-const EventSummary: React.FC<{ event: IEvent }> = ({ event }) => {
+interface IProps extends RouteComponentProps {
+  event: IEvent;
+  history: History;
+}
+
+const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
   if (!event) {
     return null;
   }
@@ -17,7 +24,7 @@ const EventSummary: React.FC<{ event: IEvent }> = ({ event }) => {
   const { id, title, is_free, is_virtual, start_date, start_time, organisation_id, intro } = event;
 
   return (
-    <div key={id} className="event-summary-card">
+    <div key={id} className="event-summary-card" onClick={() => history.push(`/event/${id}`)}>
       <div className="event-summary-card__inner">
         <div className="search-result-card__title">
           <h3 className="event-summary-card__h3">{title}</h3>
@@ -52,4 +59,4 @@ const EventSummary: React.FC<{ event: IEvent }> = ({ event }) => {
   );
 };
 
-export default EventSummary;
+export default withRouter(EventSummary);

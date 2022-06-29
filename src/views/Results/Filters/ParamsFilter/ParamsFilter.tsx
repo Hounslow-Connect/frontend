@@ -57,7 +57,6 @@ class Filter extends Component<IProps, IState> {
   search = () => {
     const { resultsStore, history } = this.props;
     if (resultsStore) {
-      // @ts-ignore
       resultsStore.setParams();
       history.push({
         search: resultsStore.getQueryParamsString(),

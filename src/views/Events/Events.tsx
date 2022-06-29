@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DatePicker from 'react-datepicker';
 import moment, { Moment } from 'moment';
-// import { withRouter } from 'react-router';
+import { History } from 'history';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import EventSummary from '../../components/EventSummary/EventSummary';
@@ -20,8 +20,8 @@ import './Events.scss';
 
 interface IProps {
   eventStore: EventStore;
-  history: any;
-  location: any;
+  history: History;
+  location: Location;
 }
 
 const Events: React.FC<IProps> = ({ eventStore, history, location }) => {

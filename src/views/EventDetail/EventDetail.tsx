@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
 import WheelChair from '../../assets/images/icons/accessibility/wheelchair-accessible.svg';
@@ -396,8 +397,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   download={true}
                 >
                   Download
-                  {/* @ts-ignore */}
-                  <FontAwesomeIcon icon="fab fa-apple" />
+                  <FontAwesomeIcon icon={'fab fa-apple' as IconProp} />
                 </a>
                 <a
                   href={event.google_calendar_link}
@@ -405,8 +405,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   download={true}
                 >
                   Download
-                  {/* @ts-ignore */}
-                  <FontAwesomeIcon icon="fab fa-google" />
+                  <FontAwesomeIcon icon={'fab fa-google' as IconProp} />
                 </a>
                 <a
                   href={event.microsoft_calendar_link}
@@ -414,8 +413,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   download={true}
                 >
                   Download
-                  {/* @ts-ignore */}
-                  <FontAwesomeIcon icon="fab fa-microsoft" />
+                  <FontAwesomeIcon icon={'fab fa-microsoft' as IconProp} />
                 </a>
               </div>
             </div>

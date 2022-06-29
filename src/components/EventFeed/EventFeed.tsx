@@ -1,6 +1,7 @@
-import React, { useState, LegacyRef } from 'react';
+import React, { useState, LegacyRef, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LinkButton from '../LinkButton';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import EventSummary from '../EventSummary';
@@ -18,9 +19,14 @@ const sliderBreakpoint = '768px';
 const EventFeed: React.FC<{
   list: IEvent[];
   innerRef: LegacyRef<HTMLElement> | undefined;
-}> = ({ list, innerRef }) => {
+  scrollToEvents: () => void;
+}> = ({ list, innerRef, scrollToEvents }) => {
   const [activeCarouselItem, setActiveCarouselItem] = useState<number>(1);
   const { isMobile } = useMediaQuery(`(max-width: 768px${sliderBreakpoint})`);
+
+  useEffect(() => {
+    scrollToEvents();
+  }, [scrollToEvents, activeCarouselItem]);
 
   if (list.length === 0) {
     return null;
@@ -72,6 +78,9 @@ const EventFeed: React.FC<{
               </button>
             </div>
           )}
+        </div>
+        <div className="flex-container flex-container--justify">
+          <LinkButton to="/events" text="Search for more events" />
         </div>
       </div>
     </section>
