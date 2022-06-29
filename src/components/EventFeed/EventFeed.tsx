@@ -28,7 +28,7 @@ const EventFeed: React.FC<{
     scrollToEvents();
   }, [scrollToEvents, activeCarouselItem]);
 
-  if (list.length === 0) {
+  if (!list || list.length === 0) {
     return null;
   }
 
