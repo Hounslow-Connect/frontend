@@ -2,7 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { withRouter } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { History } from 'history';
 
 import { IEvent } from './IEvent';
 import { apiBase } from '../../config/api';
@@ -10,7 +11,12 @@ import FallBackLogo from '../../assets/images/logo-fallback.png';
 
 import './EventSummary.scss';
 
-const EventSummary: React.FC<{ event: IEvent; history: any }> = ({ event, history }) => {
+interface IProps extends RouteComponentProps {
+  event: IEvent;
+  history: History;
+}
+
+const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
   if (!event) {
     return null;
   }
@@ -53,5 +59,4 @@ const EventSummary: React.FC<{ event: IEvent; history: any }> = ({ event, histor
   );
 };
 
-// @ts-ignore
 export default withRouter(EventSummary);

@@ -48,7 +48,6 @@ const EventFeed: React.FC<{
                     key={j}
                     className={'slide' + (activeCarouselItem === i + 1 ? ' slide--active' : '')}
                   >
-                    {/** @ts-ignore */}
                     <EventSummary event={event} />
                   </div>
                 );
@@ -81,7 +80,7 @@ const EventFeed: React.FC<{
           )}
         </div>
         <div className="flex-container flex-container--justify">
-          <LinkButton to="/events" text="Members Area" />
+          <LinkButton to="/events" text="Search for more events" />
         </div>
       </div>
     </section>

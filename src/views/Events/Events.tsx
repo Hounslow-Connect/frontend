@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DatePicker from 'react-datepicker';
 import moment, { Moment } from 'moment';
-// import { withRouter } from 'react-router';
+import { History } from 'history';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import EventSummary from '../../components/EventSummary/EventSummary';
@@ -19,8 +19,8 @@ import './Events.scss';
 
 interface IProps {
   eventStore: EventStore;
-  history: any;
-  location: any;
+  history: History;
+  location: Location;
 }
 
 const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
@@ -350,7 +350,6 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       <div className="events__list">
         <div className="results__container">
           {eventList.map(event => (
-            // @ts-ignore
             <EventSummary key={event.id} event={event} />
           ))}
         </div>
