@@ -23,4 +23,10 @@ select,
   @include for-desktop-up {
     max-width: 320px;
   }
+  &:disabled {
+    color: $gray;
+    opacity: 0.7;
+    border-color: rgba($black, 0.3);
+    background-image: none;
+  }
 }
