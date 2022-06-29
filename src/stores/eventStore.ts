@@ -15,7 +15,7 @@ import { IEvent } from '../components/EventSummary/IEvent';
 
 const PER_PAGE = 9;
 class EventStore {
-  @observable eventFeed: any[] = [];
+  @observable eventsHomePage: any[] = [];
   @observable event: IEvent | undefined = undefined;
   @observable eventList: IEvent[] = [];
   @observable numberOfPages: number = 0;
@@ -42,15 +42,15 @@ class EventStore {
   @observable organisationId: string = '';
 
   @action
-  fetchEventFeed = async () => {
+  fetchEventsHomePage = async () => {
     try {
       const todaysDate = moment().format(moment.HTML5_FMT.DATE);
       const response = await axios.get(
         `${apiBase}/organisation-events?filter[starts_after]=${todaysDate}`
       );
-      const eventFeed = get(response, 'data.data');
-      const eventFeedList = eventFeed.filter((item: IEvent) => item.homepage);
-      this.eventFeed = eventFeedList;
+      const eventsHomePage = get(response, 'data.data');
+      const eventsHomePageList = eventsHomePage.filter((item: IEvent) => item.homepage);
+      this.eventsHomePage = eventsHomePageList;
     } catch (err) {
       console.error({ err });
       return false;

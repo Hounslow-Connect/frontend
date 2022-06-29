@@ -23,7 +23,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
   const serviceSectionRef = createRef<HTMLDivElement | null>();
 
   useEffect(() => {
-    eventStore.fetchEventFeed();
+    eventStore.fetchEventsHomePage();
   }, [eventStore]);
 
   const scrollToEvents = () => {
@@ -61,7 +61,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
       )}
       <Search ref={serviceSectionRef} />
       {/* @ts-ignore */}
-      <EventFeed list={eventStore.eventFeed as IEvent[]} ref={eventSectionRef} />
+      <EventFeed list={eventStore.eventsHomePage as IEvent[]} ref={eventSectionRef} />
       <Personas personas={SearchStore.personas} />
     </main>
   );
