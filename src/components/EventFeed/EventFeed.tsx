@@ -1,4 +1,4 @@
-import React, { useState, LegacyRef, useEffect } from 'react';
+import React, { useState, LegacyRef, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LinkButton from '../LinkButton';
@@ -24,9 +24,10 @@ const EventFeed: React.FC<{
   const [activeCarouselItem, setActiveCarouselItem] = useState<number>(1);
   const { isMobile } = useMediaQuery(`(max-width: 768px${sliderBreakpoint})`);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     scrollToEvents();
-  }, [scrollToEvents, activeCarouselItem]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCarouselItem]);
 
   if (!list || list.length === 0) {
     return null;
