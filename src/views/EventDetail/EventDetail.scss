@@ -94,7 +94,7 @@
   .main {
     position: relative;
     padding: 2rem 0 4rem 0;
-    background-color: #D8EEEA;
+    background-color: $light-turquoise;
   }
 
   .calendar-wrapper {
@@ -193,7 +193,7 @@
       height: 0;
       border-left: 38px solid transparent;
       border-right: 38px solid transparent;
-      border-bottom: 38px solid #FFD940;
+      border-bottom: 38px solid $yellow;
     }
   }
 

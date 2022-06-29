@@ -8,7 +8,7 @@
   background-color: $white;
 
   &:nth-of-type(even) {
-    background-color: #E5E5E5;
+    background-color: $gray;
   }
 
   @include for-tablet-portrait-up { 

@@ -7,11 +7,11 @@
 .event-summary-card {
   padding: pxtorem(20px);
   border-radius: 20px;
-  background-color: #fff;
+  background-color: $white;
   border: 2px solid transparent;
   cursor: pointer;
   &:hover {
-    border-color: #1C1C1C;
+    border-color: $black
   }
 }
 
