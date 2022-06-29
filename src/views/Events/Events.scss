@@ -4,6 +4,19 @@
 @import '../../styles/breakpoints.scss';
 @import '../../styles/variables.scss';
 
+.events__results {
+  position: relative;
+  background: linear-gradient(to bottom, $white 0%, $white 30%, $light-turquoise 270px,$light-turquoise 100%);
+  .date-range-icon-wrapper > svg  {
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+  }
+  .select {
+    max-width: unset;
+  }
+}
+
 .events__list {
   position: relative;
   z-index: 0;
@@ -180,6 +193,19 @@
     padding: inherit;
   }
   h2, p {
+    margin-bottom: 2rem;
+  }
+}
+
+.p--heading {
+  @include heading-l;
+  max-width: 800px;
+  padding: 0 0 0 4rem;
+  font-weight: normal;
+  box-sizing: content-box;
+  margin-bottom: 6rem;
+  @include for-tablet-portrait-down {
+    padding: 0;
     margin-bottom: 2rem;
   }
 }
