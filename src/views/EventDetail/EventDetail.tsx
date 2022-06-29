@@ -272,8 +272,8 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               <div className="flex-col flex-col--6">
                 {event.organiser_name && (
                   <p className="p--large">
-                    Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
-                    for more information
+                    Contact <a href={event.organiser_url as string}>{event.organiser_name}</a> for
+                    more information
                   </p>
                 )}
                 <div className="cms--contact-card--row service__accordian--no-overflow">
@@ -389,16 +389,31 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <h2 className="h2 margin-bottom">Add to your calendar?</h2>
             <div className="panel-box__white margin-bottom">
               <p className="p--large">Download this event to your personal calender </p>
-              <div className='calendar-wrapper'>
-                <a href={event.apple_calendar_link} className="button button__alt--small" download>Download
-                {/* @ts-ignore */}
-                <FontAwesomeIcon icon="fab fa-apple" />
+              <div className="calendar-wrapper">
+                <a
+                  href={event.apple_calendar_link}
+                  className="button button__alt--small"
+                  download={true}
+                >
+                  Download
+                  {/* @ts-ignore */}
+                  <FontAwesomeIcon icon="fab fa-apple" />
                 </a>
-                <a href={event.google_calendar_link} className="button button__alt--small" download>Download
+                <a
+                  href={event.google_calendar_link}
+                  className="button button__alt--small"
+                  download={true}
+                >
+                  Download
                   {/* @ts-ignore */}
                   <FontAwesomeIcon icon="fab fa-google" />
                 </a>
-                <a href={event.microsoft_calendar_link} className="button button__alt--small" download>Download
+                <a
+                  href={event.microsoft_calendar_link}
+                  className="button button__alt--small"
+                  download={true}
+                >
+                  Download
                   {/* @ts-ignore */}
                   <FontAwesomeIcon icon="fab fa-microsoft" />
                 </a>
