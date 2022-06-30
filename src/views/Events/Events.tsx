@@ -133,7 +133,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   };
 
   return (
-    <section className="results">
+    <section className="events__results">
       <Helmet>
         <meta property="og:type" content="website" />
       </Helmet>
@@ -146,7 +146,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       />
       <div className="flex-container">
         <h1 className="results__heading">Events In Hounslow</h1>
-        <p className="results__heading p--large">
+        <p className="p p--heading">
           The borough has a wide range of community events, many of which are free. Search below to
           explore all
         </p>
@@ -212,7 +212,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           style={{ alignItems: 'center' }}
                           className="flex-container flex-container--no-padding"
                         >
-                          <div className="flex-col flex-col--6 flex-col--mobile--12">
+                          <div className="flex-col flex-col--5 flex-col--mobile--12">
                             <Input
                               id="location"
                               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -259,23 +259,23 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           <button
                             data-range="this-week"
                             onClick={setDateRange}
-                            className="button button__alt--small"
+                            className="button button__alt button__alt--small"
                           >
                             this week
                           </button>
-                          {' /'}
+                          <div className='tablet-hide'>{' /'}</div>
                           <button
                             data-range="next-week"
                             onClick={setDateRange}
-                            className="button button__alt--small"
+                            className="button button__alt button__alt--small"
                           >
                             next week
                           </button>
-                          {' /'}
+                          <div className='tablet-hide'>{' /'}</div>
                           <button
                             data-range="next-month"
                             onClick={setDateRange}
-                            className="button button__alt--small"
+                            className="button button__alt button__alt--small"
                           >
                             next month
                           </button>
@@ -290,6 +290,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                                 setStartDate(moment(date).format('YYYY-MM-DD'));
                                 searchFn();
                               }}
+                              dateFormat='dd/MM/yyyy'
                             />
                           </div>
                           <div className="date-picker-outer-wrapper">
@@ -301,6 +302,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                                 setEndDate(moment(date).format('YYYY-MM-DD'));
                                 searchFn();
                               }}
+                              dateFormat='dd/MM/yyyy'
                             />
                           </div>
                         </div>
@@ -312,7 +314,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
 
                     <div className="events__filters--secondary panel-box__white">
                       <div className="inner-flex">
-                        <div>
+                        <div className="events__filters--secondary-text">
                           <h3>Filter your results</h3>
                           <p>
                             You can get more personalised results by providing some extra
@@ -321,7 +323,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                         </div>
                         <button
                           onClick={toggleFilters}
-                          className="button button__alt--small flex--align--start"
+                          className="button button--small"
                         >
                           {showFilters ? 'Hide' : 'Show'} filters
                         </button>

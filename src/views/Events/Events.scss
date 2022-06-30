@@ -4,6 +4,19 @@
 @import '../../styles/breakpoints.scss';
 @import '../../styles/variables.scss';
 
+.events__results {
+  position: relative;
+  background: linear-gradient(to bottom, $white 0%, $white 30%, $light-turquoise 270px,$light-turquoise 100%);
+  .date-range-icon-wrapper > svg  {
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+  }
+  .select {
+    max-width: unset;
+  }
+}
+
 .events__list {
   position: relative;
   z-index: 0;
@@ -103,6 +116,25 @@
 }
 
 .events__filters--secondary {
+  border-radius: 8px;
+  @include for-tablet-landscape-down {
+    margin-top: 2rem;
+  }
+  @include for-phone-only {
+    margin-top: 0;
+  }
+  .events__filters--secondary-text {
+    h3 {
+      margin-bottom: 1rem;
+    }
+    margin-bottom: 1rem;
+    @include for-tablet-landscape-down {
+      max-width: 68%;
+    }
+    @include for-phone-only {
+      max-width: 100%;
+    }
+  }
   .inner-flex {
     display: flex;
     justify-content: space-between;
@@ -129,11 +161,20 @@
     font-size: pxtorem(22px);
     font-weight: 700;
     font-family: "Nunito Sans", sans-serif;
+    @include for-phone-only {
+      margin-bottom: 1rem;
+      display: block;
+    }
   }
 }
 
 .date-range-wrapper {
   margin-bottom: 1rem;
+  .button__alt--small:active {
+    background: black;
+    color: white;
+    box-shadow: none;
+  }
 }
 
 .date-range-icon-wrapper {
@@ -180,6 +221,19 @@
     padding: inherit;
   }
   h2, p {
+    margin-bottom: 2rem;
+  }
+}
+
+.p--heading {
+  @include heading-l;
+  max-width: 800px;
+  padding: 0 0 0 4rem;
+  font-weight: normal;
+  box-sizing: content-box;
+  margin-bottom: 6rem;
+  @include for-tablet-portrait-down {
+    padding: 0;
     margin-bottom: 2rem;
   }
 }

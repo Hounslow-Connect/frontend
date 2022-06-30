@@ -8,6 +8,7 @@ import { History } from 'history';
 import { IEvent } from './IEvent';
 import { apiBase } from '../../config/api';
 import FallBackLogo from '../../assets/images/logo-fallback.png';
+import {formatTimeFromString} from '../../views/Service/timeFormatting';
 
 import './EventSummary.scss';
 
@@ -37,7 +38,7 @@ const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
             </div>
           </div>
           <h4 className="event-summary-card__h4">
-            {moment(start_date).format('dddd MMMM Do')} - {start_time}
+            {moment(start_date).format('dddd MMMM Do')} - {formatTimeFromString(start_time)}
           </h4>
         </div>
         <div className="search-result-card__logo">

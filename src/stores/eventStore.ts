@@ -6,6 +6,8 @@ import get from 'lodash/get';
 import size from 'lodash/size';
 import map from 'lodash/map';
 import pick from 'lodash/pick';
+import omit from 'lodash/omit';
+import isEmpty from 'lodash/isEmpty';
 import queryString from 'query-string';
 
 import { apiBase } from '../config/api';
@@ -69,7 +71,9 @@ class EventStore {
       this.eventList = get(response, 'data.data', []);
       // we have to differentiate between no results after filtering and
       // on the initial fetch from the server when we have no events at all.
-      this.eventListNone = this.eventList.length === 0;
+      const noParamsSetViaUi = isEmpty(omit(this.getPostParams(), ['order']))
+      this.eventListNone = noParamsSetViaUi && this.eventList.length === 0;
+
       this.totalItems = get(response, 'data.meta.total', 0);
       this.numberOfPages = Math.ceil(this.totalItems / PER_PAGE);
       this.loading = false;
