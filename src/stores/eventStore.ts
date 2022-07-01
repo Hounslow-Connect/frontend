@@ -89,8 +89,9 @@ class EventStore {
     this.loading = true;
     const eventData = await axios.get(`${apiBase}/organisation-events/${uuid}`);
     this.event = get(eventData, 'data.data');
-
     if (this.event?.organisation_id) {
+      console.log(this.event?.organisation_id)
+
       this.organisationId = this.event?.organisation_id;
       await this.getOrganisation();
     }
@@ -101,6 +102,7 @@ class EventStore {
     try {
       const organisation = await axios.get(`${apiBase}/organisations/${this.organisationId}`);
       this.organisation = get(organisation, 'data.data', '');
+      console.log(this.organisation)
     } catch (e) {
       // @ts-ignore
     }
