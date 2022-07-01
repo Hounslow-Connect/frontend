@@ -30,6 +30,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   const [typingTimeoutId, setTypingTimeoutId] = useState(undefined);
   const [inputStartDate, inputSetStartDate] = useState(new Date());
   const [inputEndDate, inputSetEndDate] = useState(new Date());
+  const [activeTimeRange, setActiveTimeRange] = useState<string>('');
 
   const {
     totalItems,
@@ -44,6 +45,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
     getQueryParamsString,
     eventCategoryOptions,
     setCategory,
+    category,
     setPostcode,
     postcode,
     distance,
@@ -121,6 +123,8 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
     setStartDate(start.format('YYYY-MM-DD'));
     inputSetEndDate(end.toDate());
     setEndDate(end.format('YYYY-MM-DD'));
+
+    setActiveTimeRange(getFilterRange as string);
   };
 
   const searchFn = () => {
@@ -198,13 +202,13 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                     <div className="flex-container flex-container--no-padding">
                       <div className="flex-col flex-col--5 flex-col--tablet--12">
                         <Select
+                          value={category || ''}
                           options={eventCategoryOptions}
                           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                            setCategory(e.target.selectedOptions[0].text);
+                            setCategory(e.target.value);
                             searchFn();
                           }}
                           showDefaultValue={false}
-                          className=""
                           placeholder="Show all events"
                           id="event-category"
                         />
@@ -259,7 +263,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           <button
                             data-range="this-week"
                             onClick={setDateRange}
-                            className="button button__alt button__alt--small"
+                            className={"button button__alt button__alt--small " + (activeTimeRange === 'this-week' ? 'active' : '')}
                           >
                             this week
                           </button>
@@ -267,7 +271,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           <button
                             data-range="next-week"
                             onClick={setDateRange}
-                            className="button button__alt button__alt--small"
+                            className={"button button__alt button__alt--small " + (activeTimeRange === 'next-week' ? 'active' : '')}
                           >
                             next week
                           </button>
@@ -275,7 +279,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           <button
                             data-range="next-month"
                             onClick={setDateRange}
-                            className="button button__alt button__alt--small"
+                            className={"button button__alt button__alt--small " + (activeTimeRange === 'next-month' ? 'active' : '')}
                           >
                             next month
                           </button>
@@ -285,7 +289,10 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                             <label>From</label>
                             <DatePicker
                               selected={inputStartDate}
-                              onChange={(date: Date) => inputSetStartDate(date)}
+                              onChange={(date: Date) => {
+                                inputSetStartDate(date);
+                                setActiveTimeRange('');
+                              }}
                               onSelect={(date: Date) => {
                                 setStartDate(moment(date).format('YYYY-MM-DD'));
                                 searchFn();
@@ -297,7 +304,10 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                             <label>To</label>
                             <DatePicker
                               selected={inputEndDate}
-                              onChange={(date: Date) => inputSetEndDate(date)}
+                              onChange={(date: Date) => {
+                                inputSetEndDate(date);
+                                setActiveTimeRange('');
+                              }}
                               onSelect={(date: Date) => {
                                 setEndDate(moment(date).format('YYYY-MM-DD'));
                                 searchFn();
