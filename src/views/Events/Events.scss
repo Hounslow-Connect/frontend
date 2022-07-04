@@ -95,6 +95,16 @@
   }
 }
 
+.events__filters--remove {
+  color: $black;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 2rem;
+  @include for-phone-only {
+    margin-top: 1rem;
+  }
+}
+
 .events__filter__heading {
   font-size: pxtorem(30px);
   margin-bottom: 1rem;

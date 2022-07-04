@@ -284,6 +284,36 @@ class EventStore {
     }
   };
 
+  @action
+  clearFilters() {
+    this.eventsHomePage = [];
+    this.event = undefined;
+    this.eventList = [];
+    this.eventListNone = false;
+    this.numberOfPages = 0;
+    this.eventCategories = [];
+    this.distance = '';
+    this.category = null;
+    this.order = 'relevance';
+    this.loading = false;
+    this.currentPage = 1;
+    this.totalItems = 0;
+    this.itemsPerPage = 9;
+    this.postcode = '';
+    this.locationCoords = {};
+    this.queryParams = {};
+    this.eventCategoryOptions = [{ value: '', text: ''}];
+    this.eventListItems = [];
+    this.is_free = false;
+    this.is_virtual = false;
+    this.has_wheelchair_access = false;
+    this.has_induction_loop = false;
+    this.starts_after = '';
+    this.ends_before = '';
+    this.organisation = null;
+    this.organisationId = '';
+  }
+
   getPostParams = () => {
     const params: IParams = {};
 
