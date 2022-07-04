@@ -71,7 +71,7 @@ class EventStore {
       this.eventList = get(response, 'data.data', []);
       // we have to differentiate between no results after filtering and
       // on the initial fetch from the server when we have no events at all.
-      const noParamsSetViaUi = isEmpty(omit(this.getPostParams(), ['order']))
+      const noParamsSetViaUi = isEmpty(omit(this.getPostParams(), ['order']));
       this.eventListNone = noParamsSetViaUi && this.eventList.length === 0;
 
       this.totalItems = get(response, 'data.meta.total', 0);
@@ -90,8 +90,6 @@ class EventStore {
     const eventData = await axios.get(`${apiBase}/organisation-events/${uuid}`);
     this.event = get(eventData, 'data.data');
     if (this.event?.organisation_id) {
-      console.log(this.event?.organisation_id)
-
       this.organisationId = this.event?.organisation_id;
       await this.getOrganisation();
     }
@@ -102,7 +100,6 @@ class EventStore {
     try {
       const organisation = await axios.get(`${apiBase}/organisations/${this.organisationId}`);
       this.organisation = get(organisation, 'data.data', '');
-      console.log(this.organisation)
     } catch (e) {
       // @ts-ignore
     }

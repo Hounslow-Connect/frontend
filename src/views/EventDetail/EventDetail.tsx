@@ -48,7 +48,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
 
   const getImg = (eventInner: IEvent) => {
     if (eventInner) {
-      return `${apiBase}/organisations/${eventInner.organisation_id}/logo.png`
+      return `${apiBase}/organisations/${eventInner.organisation_id}/logo.png`;
     }
   };
 
@@ -129,13 +129,18 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
       <section className="main">
         <div className="flex-container">
           <div className="mobile-show service__section">
-            <CostCard is_free={event.is_free} fees_url={event.fees_url} fees_text={event.fees_text} />
+            <CostCard
+              is_free={event.is_free}
+              fees_url={event.fees_url}
+              fees_text={event.fees_text}
+            />
           </div>
           <div className="flex-col flex-col--12">
             <div className="panel-box__white--large margin-bottom">
               <div className="event-summary-card__pills flex--justify-space">
                 <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
-                  {moment(event.start_date).format('dddd MMMM Do')} - {formatTimeFromString(event.start_time)}
+                  {moment(event.start_date).format('dddd MMMM Do')} -{' '}
+                  {formatTimeFromString(event.start_time)}
                 </h3>
                 <div className="flex--align--start">
                   <div className="event-summary-card__tag event-summary-card__tag--cost">
@@ -158,7 +163,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <Accordian title="Event description" className="service__accordian mobile-show">
               <p className="p--large">{event.description}</p>
               {event.has_image && (
-                <div className='description-image'>
+                <div className="description-image">
                   <img
                     src={`${apiBase}/organisation-events/${event.id}/image.png`}
                     alt={`logo for ${event.title}`}
@@ -172,31 +177,37 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               className="service__accordian mobile-show"
             >
               <div className="css-grid__col-2">
-                {(event.organiser_name && event.organiser_url) || (organisation && organisation.name) && (
-                  <div className="cms--contact-card--row">
-                    {event.organiser_url && (
-                      <p className="p--large">
-                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a> for more information
-                      </p>
-                    )}
-                    {getOrganisationName && organisation && organisation.url && (
-                      <p className="p--large">
-                        Contact <a href={`${organisation.url}`}>{organisation.name}</a> for more information
-                      </p>
-                    )}
-                  </div>
-                )}
-                
-                {event.organiser_url || (organisation && organisation.url) && (
-                  <div className="cms--contact-card--row service__accordian--no-overflow">
-                    <h3>
-                      <FontAwesomeIcon icon="globe" /> Website
-                    </h3>
-                    {event.organiser_url && <a href={`${event.organiser_url}`}>{event.organiser_url}</a>}
-                    {organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
-                  </div>
-                )}
-                
+                {(event.organiser_name && event.organiser_url) ||
+                  (organisation && organisation.name && (
+                    <div className="cms--contact-card--row">
+                      {event.organiser_url && (
+                        <p className="p--large">
+                          Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                          for more information
+                        </p>
+                      )}
+                      {getOrganisationName && organisation && organisation.url && (
+                        <p className="p--large">
+                          Contact <a href={`${organisation.url}`}>{organisation.name}</a> for more
+                          information
+                        </p>
+                      )}
+                    </div>
+                  ))}
+
+                {event.organiser_url ||
+                  (organisation && organisation.url && (
+                    <div className="cms--contact-card--row service__accordian--no-overflow">
+                      <h3>
+                        <FontAwesomeIcon icon="globe" /> Website
+                      </h3>
+                      {event.organiser_url && (
+                        <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
+                      )}
+                      {organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
+                    </div>
+                  ))}
+
                 {getOrganisationPhone && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
@@ -214,7 +225,6 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   </div>
                 )}
               </div>
-
             </Accordian>
 
             {event.location && (
@@ -224,7 +234,8 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               >
                 <div className="flex-col flex-col--12">
                   <h3 className="h3">
-                    {moment(event.start_date).format('dddd MMMM Do')} - {formatTimeFromString(event.start_time)}
+                    {moment(event.start_date).format('dddd MMMM Do')} -{' '}
+                    {formatTimeFromString(event.start_time)}
                   </h3>
                   <div className="flex-col flex-col--5">
                     <div className="address">
@@ -290,7 +301,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <div className="panel-box__white mobile-hide margin-bottom">
               <p className="p--large">{event.description}</p>
               {event.has_image && (
-                <div className='description-image'>
+                <div className="description-image">
                   <img
                     src={`${apiBase}/organisation-events/${event.id}/image.png`}
                     alt={`logo for ${event.title}`}
@@ -298,37 +309,46 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 </div>
               )}
             </div>
-                  
-            <div className='mobile-hide'>
+
+            <div className="mobile-hide">
               <h2 className="h2 mobile-hide margin-bottom">
                 How can I contact this event organiser?
               </h2>
               <div className="css-grid__col-2 contact">
-                {(event.organiser_name && event.organiser_url) || (organisation && organisation.name) && (
-                  <div className="cms--contact-card--row">
-                    {event.organiser_url && (
-                      <p className="p--large">
-                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a> for more information
-                      </p>
-                    )}
-                    {getOrganisationName && organisation && organisation.url && (
-                      <p className="p--large">
-                        Contact {organisation.url && <a href={`${organisation.url}`}>{organisation.name}</a>} for more information
-                      </p>
-                    )}
-                  </div>
-                )}
-                
-                {event.organiser_url || (organisation && organisation.url) && (
-                  <div className="cms--contact-card--row service__accordian--no-overflow">
-                    <h3>
-                      <FontAwesomeIcon icon="globe" /> Website
-                    </h3>
-                    {event.organiser_url && <a href={`${event.organiser_url}`}>{event.organiser_url}</a>}
-                    {organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
-                  </div>
-                )}
-                
+                {(event.organiser_name && event.organiser_url) ||
+                  (organisation && organisation.name && (
+                    <div className="cms--contact-card--row">
+                      {event.organiser_url && (
+                        <p className="p--large">
+                          Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                          for more information
+                        </p>
+                      )}
+                      {getOrganisationName && organisation && organisation.url && (
+                        <p className="p--large">
+                          Contact{' '}
+                          {organisation.url && (
+                            <a href={`${organisation.url}`}>{organisation.name}</a>
+                          )}{' '}
+                          for more information
+                        </p>
+                      )}
+                    </div>
+                  ))}
+
+                {event.organiser_url ||
+                  (organisation && organisation.url && (
+                    <div className="cms--contact-card--row service__accordian--no-overflow">
+                      <h3>
+                        <FontAwesomeIcon icon="globe" /> Website
+                      </h3>
+                      {event.organiser_url && (
+                        <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
+                      )}
+                      {organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
+                    </div>
+                  ))}
+
                 {getOrganisationPhone && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
@@ -353,7 +373,8 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 <h2 className="h2 margin-bottom">Where and when is this event?</h2>
                 <div className="panel-box__white flex-col flex-col--12">
                   <h3 className="h3">
-                    {moment(event.start_date).format('dddd MMMM Do')} - {formatTimeFromString(event.start_time)}
+                    {moment(event.start_date).format('dddd MMMM Do')} -{' '}
+                    {formatTimeFromString(event.start_time)}
                   </h3>
                   <div className="flex-container flex-container--no-padding">
                     <div className="flex-col flex-col--5">
@@ -421,7 +442,11 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
 
           <div className="flex-col flex-col--4 flex-col--tablet--12">
             <div className="mobile-hide margin-bottom">
-              <CostCard is_free={event.is_free} fees_url={event.fees_url} fees_text={event.fees_text} />
+              <CostCard
+                is_free={event.is_free}
+                fees_url={event.fees_url}
+                fees_text={event.fees_text}
+              />
             </div>
             {hasBookingFields && (
               <Accordian
@@ -429,7 +454,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 className="service__accordian margin-bottom mobile-show"
               >
                 <p className="p--large">{event.booking_summary}</p>
-                <br/>
+                <br />
                 <a href={event.booking_url} className="button button__alt--small">
                   {event.booking_cta}
                 </a>
@@ -440,14 +465,13 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               <>
                 <h2 className="h2 margin-bottom">{event.booking_title}</h2>
                 <div className="panel-box__white margin-bottom">
-                  <p className='p--large'>{event.booking_summary}</p>
+                  <p className="p--large">{event.booking_summary}</p>
                   <a href={event.booking_url} className="button button__alt--small">
-                  {event.booking_cta}
-                </a>
+                    {event.booking_cta}
+                  </a>
                 </div>
               </>
             )}
-            
 
             <h2 className="h2 margin-bottom">Add to your calendar?</h2>
             <div className="panel-box__white margin-bottom">
