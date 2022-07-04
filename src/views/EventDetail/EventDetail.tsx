@@ -178,7 +178,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               className="service__accordian mobile-show"
             >
               <div className="css-grid__col-2">
-                {(getOrganisationName && getOrganisationUrl) && (
+                {getOrganisationName && getOrganisationUrl && (
                   <div className="cms--contact-card--row">
                     {event.organiser_url && event.organiser_name && (
                       <p className="p--large">
@@ -186,19 +186,23 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                         for more information
                       </p>
                     )}
-                    {!event.organiser_url && !event.organiser_name && organisation && organisation.url && organisation.name && (
-                      <p className="p--large">
-                        Contact{' '}
-                        {organisation.url && (
-                          <a href={`${organisation.url}`}>{organisation.name}</a>
-                        )}{' '}
-                        for more information
-                      </p>
-                    )}
+                    {!event.organiser_url &&
+                      !event.organiser_name &&
+                      organisation &&
+                      organisation.url &&
+                      organisation.name && (
+                        <p className="p--large">
+                          Contact{' '}
+                          {organisation.url && (
+                            <a href={`${organisation.url}`}>{organisation.name}</a>
+                          )}{' '}
+                          for more information
+                        </p>
+                      )}
                   </div>
                 )}
 
-                {(getOrganisationName && getOrganisationUrl) && (
+                {getOrganisationName && getOrganisationUrl && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
                       <FontAwesomeIcon icon="globe" /> Website
@@ -206,7 +210,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                     {event.organiser_url && (
                       <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
                     )}
-                    {!event.organiser_url && organisation && organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
+                    {!event.organiser_url && organisation && organisation.url && (
+                      <a href={`${organisation.url}`}>{organisation.url}</a>
+                    )}
                   </div>
                 )}
 
@@ -317,7 +323,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 How can I contact this event organiser?
               </h2>
               <div className="css-grid__col-2 contact">
-                {(getOrganisationName && getOrganisationUrl) && (
+                {getOrganisationName && getOrganisationUrl && (
                   <div className="cms--contact-card--row">
                     {event.organiser_url && event.organiser_name && (
                       <p className="p--large">
@@ -325,19 +331,23 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                         for more information
                       </p>
                     )}
-                    {!event.organiser_url && !event.organiser_name && organisation && organisation.url && organisation.name && (
-                      <p className="p--large">
-                        Contact{' '}
-                        {organisation.url && (
-                          <a href={`${organisation.url}`}>{organisation.name}</a>
-                        )}{' '}
-                        for more information
-                      </p>
-                    )}
+                    {!event.organiser_url &&
+                      !event.organiser_name &&
+                      organisation &&
+                      organisation.url &&
+                      organisation.name && (
+                        <p className="p--large">
+                          Contact{' '}
+                          {organisation.url && (
+                            <a href={`${organisation.url}`}>{organisation.name}</a>
+                          )}{' '}
+                          for more information
+                        </p>
+                      )}
                   </div>
                 )}
 
-                {(getOrganisationName && getOrganisationUrl) && (
+                {getOrganisationName && getOrganisationUrl && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
                       <FontAwesomeIcon icon="globe" /> Website
@@ -345,7 +355,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                     {event.organiser_url && (
                       <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
                     )}
-                    {!event.organiser_url && organisation && organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
+                    {!event.organiser_url && organisation && organisation.url && (
+                      <a href={`${organisation.url}`}>{organisation.url}</a>
+                    )}
                   </div>
                 )}
 
