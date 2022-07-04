@@ -11,6 +11,8 @@
 
 .accordian-icon {
   margin-left: space(8);
+  position: absolute;
+  right: 25px;
 }
 
 .accordian-icon--open {
@@ -29,6 +31,7 @@
 
   h4 {
     display: block;
+    font-weight: normal;
   }
 }
 
@@ -37,6 +40,10 @@
   button {
     background: none;
     border: none;
+  }
+
+  h4 {
+    font-weight: 700;
   }
 }
 

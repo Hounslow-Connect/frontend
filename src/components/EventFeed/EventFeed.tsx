@@ -26,7 +26,7 @@ const EventFeed: React.FC<{
 
   useLayoutEffect(() => {
     scrollToEvents();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCarouselItem]);
 
   if (!list || list.length === 0) {

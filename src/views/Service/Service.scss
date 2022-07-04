@@ -299,13 +299,7 @@
 
 .service__accordian {
   padding: space(24) space(12);
-  width: 100%;
-
-  svg {
-    font-size: pxtorem(18px);
-    position: absolute;
-    right: 25px;
-  }
+  width: 100%;    
 
   button {
     text-align: left;

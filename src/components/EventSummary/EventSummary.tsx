@@ -8,7 +8,7 @@ import { History } from 'history';
 import { IEvent } from './IEvent';
 import { apiBase } from '../../config/api';
 import FallBackLogo from '../../assets/images/logo-fallback.png';
-import {formatTimeFromString} from '../../views/Service/timeFormatting';
+import { formatTimeFromString } from '../../views/Service/timeFormatting';
 
 import './EventSummary.scss';
 

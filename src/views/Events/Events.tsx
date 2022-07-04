@@ -263,23 +263,32 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                           <button
                             data-range="this-week"
                             onClick={setDateRange}
-                            className={"button button__alt button__alt--small " + (activeTimeRange === 'this-week' ? 'active' : '')}
+                            className={
+                              'button button__alt button__alt--small ' +
+                              (activeTimeRange === 'this-week' ? 'active' : '')
+                            }
                           >
                             this week
                           </button>
-                          <div className='tablet-hide'>{' /'}</div>
+                          <div className="tablet-hide">{' /'}</div>
                           <button
                             data-range="next-week"
                             onClick={setDateRange}
-                            className={"button button__alt button__alt--small " + (activeTimeRange === 'next-week' ? 'active' : '')}
+                            className={
+                              'button button__alt button__alt--small ' +
+                              (activeTimeRange === 'next-week' ? 'active' : '')
+                            }
                           >
                             next week
                           </button>
-                          <div className='tablet-hide'>{' /'}</div>
+                          <div className="tablet-hide">{' /'}</div>
                           <button
                             data-range="next-month"
                             onClick={setDateRange}
-                            className={"button button__alt button__alt--small " + (activeTimeRange === 'next-month' ? 'active' : '')}
+                            className={
+                              'button button__alt button__alt--small ' +
+                              (activeTimeRange === 'next-month' ? 'active' : '')
+                            }
                           >
                             next month
                           </button>
@@ -297,7 +306,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                                 setStartDate(moment(date).format('YYYY-MM-DD'));
                                 searchFn();
                               }}
-                              dateFormat='dd/MM/yyyy'
+                              dateFormat="dd/MM/yyyy"
                             />
                           </div>
                           <div className="date-picker-outer-wrapper">
@@ -312,7 +321,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                                 setEndDate(moment(date).format('YYYY-MM-DD'));
                                 searchFn();
                               }}
-                              dateFormat='dd/MM/yyyy'
+                              dateFormat="dd/MM/yyyy"
                             />
                           </div>
                         </div>
@@ -331,10 +340,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                             information
                           </p>
                         </div>
-                        <button
-                          onClick={toggleFilters}
-                          className="button button--small"
-                        >
+                        <button onClick={toggleFilters} className="button button--small">
                           {showFilters ? 'Hide' : 'Show'} filters
                         </button>
                       </div>

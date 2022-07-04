@@ -13,7 +13,7 @@ interface IProps {
 const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
   const forceUpdate = useForceUpdate();
   return (
-    <div className="service__share-card panel-box--turquoise service__section">
+    <div className="service__share-card  panel-box__turquoise service__section">
       <div className="service__share-card__social">
         <div className="flex-container flex-container--no-padding flex-container--left flex-container--align-center">
           <h3>Share</h3>
