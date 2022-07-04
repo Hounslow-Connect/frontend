@@ -14,6 +14,7 @@ import Input from '../../components/Input';
 import Select from '../../components/Select';
 import Checkbox from '../../components/Checkbox';
 import Loading from '../../components/Loading';
+import { EventEmitter } from '../../utils/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './Events.scss';
@@ -58,9 +59,16 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
     loading,
   } = eventStore;
 
-  // fetch all events on mount
+  // fetch all events on mount and reset all filters on unmount
   useEffect(() => {
     fetchEvents();
+
+    return () => {
+      eventStore.clearFilters();
+      // @ts-ignore
+      EventEmitter.dispatch('filtersCleared');
+      searchFn();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -125,6 +133,19 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
     setEndDate(end.format('YYYY-MM-DD'));
 
     setActiveTimeRange(getFilterRange as string);
+  };
+
+  const resetFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
+    if (eventStore) {
+      eventStore.clearFilters();
+    }
+    toggleFilters(e);
+    // @ts-ignore
+    EventEmitter.dispatch('filtersCleared', e);
+    searchFn();
   };
 
   const searchFn = () => {
@@ -394,6 +415,9 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                         </div>
                       )}
                     </div>
+                    <button onClick={resetFilters} className={'link events__filters--remove'}>
+                      Reset all filters and show all events
+                    </button>
                   </form>
                 </div>
               </div>
