@@ -31,6 +31,7 @@
 
   h4 {
     display: block;
+    font-weight: normal;
   }
 }
 
@@ -39,6 +40,10 @@
   button {
     background: none;
     border: none;
+  }
+
+  h4 {
+    font-weight: 700;
   }
 }
 
