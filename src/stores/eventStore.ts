@@ -302,7 +302,7 @@ class EventStore {
     this.postcode = '';
     this.locationCoords = {};
     this.queryParams = {};
-    this.eventCategoryOptions = [{ value: '', text: ''}];
+    this.eventCategoryOptions = [{ value: '', text: '' }];
     this.eventListItems = [];
     this.is_free = false;
     this.is_virtual = false;
