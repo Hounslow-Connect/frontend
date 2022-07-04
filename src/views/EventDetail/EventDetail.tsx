@@ -56,6 +56,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
     event.booking_cta && event.booking_summary && event.booking_title && event.booking_url;
 
   const getOrganisationName = event.organiser_name || (organisation && organisation.name);
+  const getOrganisationUrl = event.organiser_url || (organisation && organisation.url);
   const getOrganisationPhone = event.organiser_phone || (organisation && organisation.phone);
   const getOrganisationEmail = event.organiser_email || (organisation && organisation.email);
 
@@ -177,36 +178,43 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               className="service__accordian mobile-show"
             >
               <div className="css-grid__col-2">
-                {(event.organiser_name && event.organiser_url) ||
-                  (organisation && organisation.name && (
-                    <div className="cms--contact-card--row">
-                      {event.organiser_url && (
+                {getOrganisationName && getOrganisationUrl && (
+                  <div className="cms--contact-card--row">
+                    {event.organiser_url && event.organiser_name && (
+                      <p className="p--large">
+                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                        for more information
+                      </p>
+                    )}
+                    {!event.organiser_url &&
+                      !event.organiser_name &&
+                      organisation &&
+                      organisation.url &&
+                      organisation.name && (
                         <p className="p--large">
-                          Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                          Contact{' '}
+                          {organisation.url && (
+                            <a href={`${organisation.url}`}>{organisation.name}</a>
+                          )}{' '}
                           for more information
                         </p>
                       )}
-                      {getOrganisationName && organisation && organisation.url && (
-                        <p className="p--large">
-                          Contact <a href={`${organisation.url}`}>{organisation.name}</a> for more
-                          information
-                        </p>
-                      )}
-                    </div>
-                  ))}
+                  </div>
+                )}
 
-                {event.organiser_url ||
-                  (organisation && organisation.url && (
-                    <div className="cms--contact-card--row service__accordian--no-overflow">
-                      <h3>
-                        <FontAwesomeIcon icon="globe" /> Website
-                      </h3>
-                      {event.organiser_url && (
-                        <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
-                      )}
-                      {organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
-                    </div>
-                  ))}
+                {getOrganisationName && getOrganisationUrl && (
+                  <div className="cms--contact-card--row service__accordian--no-overflow">
+                    <h3>
+                      <FontAwesomeIcon icon="globe" /> Website
+                    </h3>
+                    {event.organiser_url && (
+                      <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
+                    )}
+                    {!event.organiser_url && organisation && organisation.url && (
+                      <a href={`${organisation.url}`}>{organisation.url}</a>
+                    )}
+                  </div>
+                )}
 
                 {getOrganisationPhone && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
@@ -315,16 +323,19 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 How can I contact this event organiser?
               </h2>
               <div className="css-grid__col-2 contact">
-                {(event.organiser_name && event.organiser_url) ||
-                  (organisation && organisation.name && (
-                    <div className="cms--contact-card--row">
-                      {event.organiser_url && (
-                        <p className="p--large">
-                          Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
-                          for more information
-                        </p>
-                      )}
-                      {getOrganisationName && organisation && organisation.url && (
+                {getOrganisationName && getOrganisationUrl && (
+                  <div className="cms--contact-card--row">
+                    {event.organiser_url && event.organiser_name && (
+                      <p className="p--large">
+                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                        for more information
+                      </p>
+                    )}
+                    {!event.organiser_url &&
+                      !event.organiser_name &&
+                      organisation &&
+                      organisation.url &&
+                      organisation.name && (
                         <p className="p--large">
                           Contact{' '}
                           {organisation.url && (
@@ -333,21 +344,22 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                           for more information
                         </p>
                       )}
-                    </div>
-                  ))}
+                  </div>
+                )}
 
-                {event.organiser_url ||
-                  (organisation && organisation.url && (
-                    <div className="cms--contact-card--row service__accordian--no-overflow">
-                      <h3>
-                        <FontAwesomeIcon icon="globe" /> Website
-                      </h3>
-                      {event.organiser_url && (
-                        <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
-                      )}
-                      {organisation.url && <a href={`${organisation.url}`}>{organisation.url}</a>}
-                    </div>
-                  ))}
+                {getOrganisationName && getOrganisationUrl && (
+                  <div className="cms--contact-card--row service__accordian--no-overflow">
+                    <h3>
+                      <FontAwesomeIcon icon="globe" /> Website
+                    </h3>
+                    {event.organiser_url && (
+                      <a href={`${event.organiser_url}`}>{event.organiser_url}</a>
+                    )}
+                    {!event.organiser_url && organisation && organisation.url && (
+                      <a href={`${organisation.url}`}>{organisation.url}</a>
+                    )}
+                  </div>
+                )}
 
                 {getOrganisationPhone && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
