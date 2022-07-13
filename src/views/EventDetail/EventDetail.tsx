@@ -474,7 +474,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             )}
 
             {hasBookingFields && (
-              <div className='links__booking'>
+              <div className="links__booking">
                 <h2 className="h2 margin-bottom">{event.booking_title}</h2>
                 <div className="panel-box__white margin-bottom">
                   <p className="p--large">{event.booking_summary}</p>
@@ -485,7 +485,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               </div>
             )}
 
-            <div className='links__calendar'>
+            <div className="links__calendar">
               <h2 className="h2 margin-bottom">Add to your calendar?</h2>
               <div className="panel-box__white margin-bottom">
                 <p className="p--large">Download this event to your personal calender </p>
@@ -526,7 +526,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 </div>
               </div>
             </div>
-            <div className='links__share'>
+            <div className="links__share">
               <ShareCard />
             </div>
             <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
