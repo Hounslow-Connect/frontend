@@ -61,7 +61,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
   const getOrganisationEmail = event.organiser_email || (organisation && organisation.email);
 
   return (
-    <section className="event-detail">
+    <section className="event__detail">
       <Helmet>
         {get(event, 'title') && <title>{`${get(event, 'title')} | Hounslow Connect`}</title>}
         {!get(event, 'title') && <title>Event | Hounslow Connect</title>}
@@ -493,6 +493,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   href={event.apple_calendar_link}
                   className="button button__alt--small"
                   download={true}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="link to download calendar for Apple devices"
                 >
                   Download
                   <FontAwesomeIcon icon={'fab fa-apple' as IconProp} />
@@ -501,6 +504,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   href={event.google_calendar_link}
                   className="button button__alt--small"
                   download={true}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="link to go to Google calendar via user account"
                 >
                   Download
                   <FontAwesomeIcon icon={'fab fa-google' as IconProp} />
@@ -509,6 +515,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   href={event.microsoft_calendar_link}
                   className="button button__alt--small"
                   download={true}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="link to go to Microsoft calendar via user account"
                 >
                   Download
                   <FontAwesomeIcon icon={'fab fa-microsoft' as IconProp} />
