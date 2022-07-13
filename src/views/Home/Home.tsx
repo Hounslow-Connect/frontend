@@ -1,6 +1,8 @@
-import React, { createRef, useEffect } from 'react';
+import React, { createRef, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
+import { useHistory } from 'react-router';
+
 import Search from '../../components/Search';
 import EventFeed from '../../components/EventFeed';
 
@@ -21,6 +23,7 @@ interface IProps {
 const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
   const eventSectionRef = createRef<HTMLDivElement | null>();
   const serviceSectionRef = createRef<HTMLDivElement | null>();
+  const history = useHistory();
 
   useEffect(() => {
     eventStore.fetchEventsHomePage();
@@ -30,6 +33,7 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
     if (!eventSectionRef.current) {
       return;
     }
+
     eventSectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -39,6 +43,8 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
     }
     serviceSectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const goToEventsPage = useCallback(() => history.push('/events'), [history]);
 
   if (!cmsStore) {
     return null;
@@ -54,7 +60,8 @@ const Home: React.FunctionComponent<IProps> = ({ cmsStore, eventStore }) => {
           header_content={cmsStore.banner}
           banners={cmsStore.home.banners}
           cta={{
-            scrollToEvents,
+            handleEventsNavigation:
+              eventStore.eventsHomePage.length === 0 ? goToEventsPage : scrollToEvents,
             scrollToServices,
           }}
         />

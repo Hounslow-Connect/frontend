@@ -10,7 +10,7 @@ interface IProps {
   banners: [];
   header_content?: IBanner | null;
   cta: {
-    scrollToEvents: () => void;
+    handleEventsNavigation: () => void;
     scrollToServices: () => void;
   };
 }
@@ -36,7 +36,7 @@ const BannerSlider: FunctionComponent<IProps> = ({ banners = [], header_content,
                 size="xl"
                 icon="calendar-days"
                 name="events"
-                onClick={cta.scrollToEvents}
+                onClick={cta.handleEventsNavigation}
               />
               <CTAButton
                 text="Search for services"
