@@ -125,13 +125,26 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
 
   const setDateRange = (event: React.MouseEvent<HTMLButtonElement>) => {
     const getFilterRange = (event.target as HTMLInputElement).getAttribute('data-range');
+
+    // if we have a selected time range clicked on again, deselected and reset 
+    // to initial state with a fresh refetch.
+    if (activeTimeRange === getFilterRange) {
+      setActiveTimeRange('');
+      inputSetStartDate(new Date());
+      inputSetEndDate(new Date());
+      eventStore.clearFilters();
+      // @ts-ignore
+      EventEmitter.dispatch('filtersCleared');
+      searchFn();
+      return;
+    }
+
     const today = moment();
     const { start, end } = setRanges(today, getFilterRange as string);
     inputSetStartDate(start.toDate());
     setStartDate(start.format('YYYY-MM-DD'));
     inputSetEndDate(end.toDate());
     setEndDate(end.format('YYYY-MM-DD'));
-
     setActiveTimeRange(getFilterRange as string);
   };
 

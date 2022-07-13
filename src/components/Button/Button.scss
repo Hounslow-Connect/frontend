@@ -190,6 +190,11 @@
     color: $white;
   }
 
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+
   &:disabled {
     @include disabled-btn;
   }
