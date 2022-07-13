@@ -119,7 +119,7 @@ class Header extends Component<IProps> {
                     Home
                   </RouterLink>
                   <RouterLink
-                    to={!location.pathname.includes('/event/') ? "/events" : "/event"}
+                    to={!location.pathname.includes('/event/') ? '/events' : '/event'}
                     className="link link__inline link--large link__header"
                     activeClassName={cx({
                       'link__header--active': !isMobile,
