@@ -126,7 +126,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   const setDateRange = (event: React.MouseEvent<HTMLButtonElement>) => {
     const getFilterRange = (event.target as HTMLInputElement).getAttribute('data-range');
 
-    // if we have a selected time range clicked on again, deselected and reset 
+    // if we have a selected time range clicked on again, deselected and reset
     // to initial state with a fresh refetch.
     if (activeTimeRange === getFilterRange) {
       setActiveTimeRange('');
