@@ -474,7 +474,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             )}
 
             {hasBookingFields && (
-              <>
+              <div className='links__booking'>
                 <h2 className="h2 margin-bottom">{event.booking_title}</h2>
                 <div className="panel-box__white margin-bottom">
                   <p className="p--large">{event.booking_summary}</p>
@@ -482,49 +482,53 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                     {event.booking_cta}
                   </a>
                 </div>
-              </>
+              </div>
             )}
 
-            <h2 className="h2 margin-bottom">Add to your calendar?</h2>
-            <div className="panel-box__white margin-bottom">
-              <p className="p--large">Download this event to your personal calender </p>
-              <div className="calendar-wrapper">
-                <a
-                  href={event.apple_calendar_link}
-                  className="button button__alt--small"
-                  download={true}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="link to download calendar for Apple devices"
-                >
-                  Download
-                  <FontAwesomeIcon icon={'fab fa-apple' as IconProp} />
-                </a>
-                <a
-                  href={event.google_calendar_link}
-                  className="button button__alt--small"
-                  download={true}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="link to go to Google calendar via user account"
-                >
-                  Download
-                  <FontAwesomeIcon icon={'fab fa-google' as IconProp} />
-                </a>
-                <a
-                  href={event.microsoft_calendar_link}
-                  className="button button__alt--small"
-                  download={true}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="link to go to Microsoft calendar via user account"
-                >
-                  Download
-                  <FontAwesomeIcon icon={'fab fa-microsoft' as IconProp} />
-                </a>
+            <div className='links__calendar'>
+              <h2 className="h2 margin-bottom">Add to your calendar?</h2>
+              <div className="panel-box__white margin-bottom">
+                <p className="p--large">Download this event to your personal calender </p>
+                <div className="calendar-wrapper">
+                  <a
+                    href={event.apple_calendar_link}
+                    className="button button__alt--small"
+                    download={true}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="link to download calendar for Apple devices"
+                  >
+                    Download
+                    <FontAwesomeIcon icon={'fab fa-apple' as IconProp} />
+                  </a>
+                  <a
+                    href={event.google_calendar_link}
+                    className="button button__alt--small"
+                    download={true}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="link to go to Google calendar via user account"
+                  >
+                    Download
+                    <FontAwesomeIcon icon={'fab fa-google' as IconProp} />
+                  </a>
+                  <a
+                    href={event.microsoft_calendar_link}
+                    className="button button__alt--small"
+                    download={true}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="link to go to Microsoft calendar via user account"
+                  >
+                    Download
+                    <FontAwesomeIcon icon={'fab fa-microsoft' as IconProp} />
+                  </a>
+                </div>
               </div>
             </div>
-            <ShareCard />
+            <div className='links__share'>
+              <ShareCard />
+            </div>
             <div className=" flex-col flex-col--12 flex-container flex-container--justify ">
               <p>
                 Page last updated{' '}
