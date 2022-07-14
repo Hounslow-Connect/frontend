@@ -54,7 +54,6 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
 
   const hasBookingFields =
     event.booking_cta && event.booking_summary && event.booking_title && event.booking_url;
-
   const getOrganisationName = event.organiser_name || (organisation && organisation.name);
   const getOrganisationUrl = event.organiser_url || (organisation && organisation.url);
   const getOrganisationPhone = event.organiser_phone || (organisation && organisation.phone);

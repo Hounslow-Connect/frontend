@@ -25,7 +25,7 @@ const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
   const { id, title, is_free, is_virtual, start_date, start_time, organisation_id, intro } = event;
 
   return (
-    <div key={id} className="event-summary-card" onClick={() => history.push(`/event/${id}`)}>
+    <div key={id} className="event-summary-card" onClick={() => history.push(`/events/${id}`)}>
       <div className="event-summary-card__inner">
         <div className="search-result-card__title">
           <h3 className="event-summary-card__h3">{title}</h3>
@@ -50,7 +50,7 @@ const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
         </div>
         <p className="event-summary-card__p">{intro}</p>
         <div className="event-summary-card__view-more">
-          <Link to={`/event/${id}`}>
+          <Link to={`/events/${id}`}>
             <span>View more</span>
             <FontAwesomeIcon icon="arrow-right" />
           </Link>
