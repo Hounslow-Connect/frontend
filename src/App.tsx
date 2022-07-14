@@ -76,14 +76,14 @@ class App extends Component {
           <ScrollToTop>
             <Header />
             <Switch>
-              <Route path="/" exact component={Home} />
+              <Route path="/" exact={true} component={Home} />
               <Route path="/results" component={Results} />
               <Route path="/services/:service" component={Service} />
               <Route path="/favourites" component={Favourites} />
               <Route path="/referral" component={Referral} />
               <Route path="/about" component={About} />
-              <Route path="/events/:uuid" exact component={EventDetail} />
-              <Route path="/events" exact component={Events} />
+              <Route path="/events/:uuid" exact={true} component={EventDetail} />
+              <Route path="/events" exact={true} component={Events} />
               <Route path="/contact" component={Contact} />
               <Route path="/get-involved" component={GetInvolved} />
               <Route path="/privacy-policy" component={Privacy} />
