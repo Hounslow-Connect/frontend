@@ -182,7 +182,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
           { text: 'Events', url: '/' },
         ]}
       />
-      <div className="flex-container">
+      <div className="flex-container events__results__raised">
         <h1 className="results__heading">Events In Hounslow</h1>
         <p className="p p--heading">
           The borough has a wide range of community events, many of which are free. Search below to
@@ -202,11 +202,18 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                   </h2>
                   <p className="p--large">
                     Please check back at a later date to see future events or explore the{' '}
-                    <a href="https://inhounslow.com/">InHounslow</a> website.
+                    <a target="_blank" rel="noopener noreferrer" href="https://inhounslow.com/">
+                      InHounslow
+                    </a>{' '}
+                    website.
                   </p>
                   <p className="p--large">
                     Visit our{' '}
-                    <a href="https://sutton.cloud.servelec-synergy.com/synergy/informationdirectory/">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://sutton.cloud.servelec-synergy.com/synergy/informationdirectory/"
+                    >
                       Family Services Directory
                     </a>{' '}
                     for activities for children between 0-19 years.
@@ -215,8 +222,8 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                 <div className="panel-box__turquoise--large flex-col--5 flex-col--tablet--12">
                   <h2 className="events__filter__heading">Got an event to list?</h2>
                   <p className="p--large">
-                    If you'd like to list your event on Hounslow Connect, get in touch with us via
-                    email
+                    If you'd like to list your event on Hounslow Connect, get in touch with us via{' '}
+                    <a href="mailto:hounslowconnect@hounslow.gov.uk">email</a>
                   </p>
                 </div>
               </div>
