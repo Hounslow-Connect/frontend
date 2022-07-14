@@ -25,7 +25,7 @@ class EventStore {
   @observable eventCategories: any[] = [];
   @observable distance: string = '';
   @observable category: string | null = null;
-  @observable order: 'relevance' | 'distance' = 'relevance';
+  // @observable order: 'relevance' | 'distance' = 'relevance';
   @observable loading: boolean = false;
   @observable currentPage: number = 1;
   @observable totalItems: number = 0;
@@ -275,7 +275,7 @@ class EventStore {
       params.has_induction_loop = this.has_induction_loop;
     }
 
-    params.order = this.order;
+    // params.order = this.order;
 
     this.queryParams = params;
 
@@ -294,7 +294,7 @@ class EventStore {
     this.eventCategories = [];
     this.distance = '';
     this.category = null;
-    this.order = 'relevance';
+    // this.order = 'relevance';
     this.loading = false;
     this.currentPage = 1;
     this.totalItems = 0;
@@ -357,7 +357,7 @@ class EventStore {
       params.location = this.locationCoords;
     }
 
-    params.order = this.order;
+    // params.order = this.order;
 
     return params;
   };

@@ -269,7 +269,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                                 if (typingTimeoutId) {
                                   clearTimeout(typingTimeoutId);
                                 }
-                                const timeOut = setTimeout(() => searchFn(), 500);
+                                const timeOut = setTimeout(() => searchFn(), 1500);
                                 setTypingTimeoutId(timeOut as any);
                               }}
                               placeholder="Postcode"
