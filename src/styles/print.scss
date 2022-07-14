@@ -1,0 +1,90 @@
+@import 'breakpoint-sass';
+
+@media print {
+  // Event detail page (i.e. /event/<uuid>) print customisations
+  .event__detail {
+    .main, .service__header, .margin-bottom {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    // generic white panel box
+    .panel-box__white--large.margin-bottom {
+      padding: 0;
+      margin: 0 0 0 1.4rem;
+    }
+
+    // summary pills, they sit weird in between date and description
+    .event-summary-card__tag {
+      display: none;
+    }
+    
+    // Hide accordions
+    .accordian-container.service__accordian.mobile-show {
+      display: none !important;
+    }
+
+    // remove triangle points from box
+    .contact {
+      padding: 0 !important;
+      margin: 0 !important;
+      &::after {
+        display: none !important;
+      }
+    }
+  
+    // remove triangle points from box
+    .service__header__wrapper {
+      &::after {
+        display: none !important;
+      }
+    }
+
+    // service card
+    .service__cost-card {
+      padding: 0;
+    }
+
+    // right column
+    .flex-col.flex-col--4.flex-col--tablet--12 {
+      .links__booking, .links__calendar, .links__share {
+        display: none;
+      }
+    }
+
+    // last updated wrapper
+    .flex-col.flex-col--12.flex-container.flex-container--justify {
+      padding: 0;
+      display: block;
+    }
+
+    // generic headers
+    .h2.margin-bottom {
+      font-size: 32px !important;
+      margin: 3rem 0 0 !important;
+    }
+
+    // Event description title
+    .flex-col.flex-col--12.mobile-hide {
+      display: block !important;
+    }
+
+    // event date time tag
+    .event-summary-card__tag.event-summary-card__tag--date-time {
+      display: block;
+      padding: 0;
+    }
+
+    // main article image
+    .description-image > img {
+      width: 240px;
+      height: auto;
+    }
+
+    .flex-col.flex-col--8.flex-col--mobile--12.flex-col--tablet--12.service__left-column {
+      .mobile-hide {
+        display: block !important;
+      }
+    }
+  }
+}
