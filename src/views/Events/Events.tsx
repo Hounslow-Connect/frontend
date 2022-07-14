@@ -67,7 +67,6 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       eventStore.clearFilters();
       // @ts-ignore
       EventEmitter.dispatch('filtersCleared');
-      searchFn();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
