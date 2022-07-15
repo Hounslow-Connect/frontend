@@ -5,7 +5,7 @@
 
 .input {
   @include body-m;
-  width: 100%;
+  width: 400px;
   border: none;
   padding: space(20);
   color: $black;
@@ -19,12 +19,13 @@
     box-shadow: 0 0 0pt $formControlOutlineWidth $blue;
   }
 
+  @include for-phone-only {
+    width: 100%;
+  }
+
   &--container {
     display: inline-block;
     margin: space(24) 0;
-    @include for-phone-only {
-      display: block;
-    }
   }
 
   &--error {

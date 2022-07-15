@@ -70,7 +70,7 @@ class Header extends Component<IProps> {
         </div>
         <div className="flex-container flex-container--align-center flex-container--justify header__container">
           <div
-            className={cx('flex-col flex-col--6 flex-col--tablet-large--12 header__brand', {
+            className={cx('flex-col flex-col--4 flex-col--tablet-large--12 header__brand', {
               'header__brand--active': burgerMenuOpen,
               'header__brand--sticky': uiStore.keywordEditOpen,
             })}
@@ -94,7 +94,7 @@ class Header extends Component<IProps> {
             </button>
           </div>
 
-          <div className="flex-col flex-col--6 flex-col--tablet-large--12 flex-col--tablet--12 flex-col--medium--6">
+          <div className="flex-col flex-col--8 flex-col--tablet-large--12 flex-col--tablet--12 flex-col--medium--8">
             <div
               className={cx('flex-container header__content', {
                 'header__content--active': burgerMenuOpen,
