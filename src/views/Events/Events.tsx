@@ -211,7 +211,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://sutton.cloud.servelec-synergy.com/synergy/informationdirectory/"
+                      href="https://fsd.hounslow.gov.uk/SynergyWeb/"
                     >
                       Family Services Directory
                     </a>{' '}
