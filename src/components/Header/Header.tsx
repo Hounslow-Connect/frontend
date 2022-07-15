@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import ReactSVG from 'react-svg';
 import { observer, inject } from 'mobx-react';
 import cx from 'classnames';
 import { NavLink as RouterLink, withRouter, RouteComponentProps } from 'react-router-dom';
@@ -118,6 +117,20 @@ class Header extends Component<IProps> {
                     }}
                   >
                     Home
+                  </RouterLink>
+                  <RouterLink
+                    to="/events"
+                    className="link link__inline link--large link__header"
+                    activeClassName={cx({
+                      'link__header--active': !isMobile,
+                    })}
+                    onClick={() => {
+                      if (burgerMenuOpen) {
+                        toggleBurgerMenu();
+                      }
+                    }}
+                  >
+                    Events
                   </RouterLink>
                   <RouterLink
                     to="/about"

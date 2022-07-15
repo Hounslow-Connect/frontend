@@ -323,8 +323,12 @@ class Service extends Component<IProps> {
                       />
                     )}
 
-                    <div className="flex-col flex-col--tablet--12 mobile-show tablet-show  service__info__cost">
-                      <CostCard service={service} />
+                    <div className="flex-col flex-col--tablet--12 mobile-show tablet-show ">
+                      <CostCard
+                        is_free={service.is_free}
+                        type={service.type}
+                        fees_url={service.fees_url}
+                      />
                     </div>
                   </div>
 
@@ -525,8 +529,12 @@ class Service extends Component<IProps> {
               </div>
               <div className="flex-col flex-col--4 flex-col--tablet--12  ">
                 <div className="flex-container service__right-column mobile-hide">
-                  <div className="tablet-hide flex-col flex-col--12 service__info__cost service__section">
-                    <CostCard service={service} />
+                  <div className="tablet-hide flex-col flex-col--12 service__section">
+                    <CostCard
+                      is_free={service.is_free}
+                      type={service.type}
+                      fees_url={service.fees_url}
+                    />
                   </div>
                   {service.video_embed && (
                     <div className="flex-container flex-container--mobile-no-padding mobile-hide service__video">

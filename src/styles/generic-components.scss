@@ -1,0 +1,64 @@
+@import './mixins.scss';
+@import './colors.scss';
+@import './fonts.scss';
+@import './breakpoints.scss';
+@import './variables.scss';
+
+.panel-box__white {
+  background: $white;
+  padding: 1.4rem;
+}
+
+.panel-box__white--large {
+  background: $white;
+  padding: 2rem;
+  position: relative;
+  @include for-phone-only {
+    padding: 1.4rem;
+  }
+}
+
+.panel-box__yellow {
+  background-color: $yellow;
+  padding: pxtorem(20px);
+}
+
+.panel-box__yellow--large {
+  background: $yellow;
+  padding: 2.5rem;
+  @include for-phone-only {
+    padding: 1.4rem;
+  }
+}
+
+.panel-box__turquoise {
+  background-color: $turquoise;
+  border-radius: 20px;
+  padding: pxtorem(20px);
+}
+
+.panel-box__turquoise--large {
+  background-color: $turquoise;
+  padding: 2.5rem;
+  @include for-phone-only {
+    padding: 1.4rem;
+  }
+}
+
+.p--large {
+  font-size: pxtorem(24px);
+  line-height: 32px;
+  margin-bottom: 1rem;
+  a {
+    font-size: pxtorem(24px);
+    line-height: 32px;
+  }
+  @include for-phone-only {
+    font-size: 1.15rem;
+    line-height: 1.75rem;
+    a {
+      font-size: 1.15rem;
+      line-height: 1.75rem;
+    }
+  }
+}

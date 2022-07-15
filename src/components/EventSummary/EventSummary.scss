@@ -1,0 +1,77 @@
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
+@import '../../styles/fonts.scss';
+
+.event-summary-card {
+  padding: pxtorem(20px);
+  border-radius: 20px;
+  background-color: $white;
+  border: 2px solid transparent;
+  cursor: pointer;
+  &:hover {
+    border-color: $black
+  }
+}
+
+.event-summary-card__inner {
+  display: flex;
+  flex-wrap: wrap
+}
+
+.event-summary-card__tag {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-family: "Nunito Sans", sans-serif;
+  line-height: 1.15;
+  line-height: 0.875rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.event-summary-card__pills {
+  display: flex;
+}
+
+.event-summary-card__tag--date-time {
+  background-color: $light-turquoise;
+  font-size: 22px;
+  padding: 1.4rem 0.7rem;
+}
+
+.event-summary-card__tag--virtual {
+  background-color: $yellow;
+}
+
+.event-summary-card__tag--cost {
+  background-color: $lilac;
+}
+
+.event-summary-card__h3 {
+  margin-bottom: pxtorem(16px);
+}
+
+.event-summary-card__h4 {
+  font-size: pxtorem(20px);
+  margin-bottom: pxtorem(16px);
+}
+
+.event-summary-card__p {
+  font-size: pxtorem(16px);
+  width: 100%;
+  margin-bottom: pxtorem(16px);
+}
+
+.event-summary-card__view-more {
+  > a {
+    display: flex;
+    align-items: center;
+    font-size: pxtorem(20px);
+    > svg {
+      margin-left: pxtorem(6px);
+    }
+  }
+}

@@ -30,6 +30,7 @@
   border-radius: 4px;
   box-sizing: border-box;
   transition: all $formControlTransitionDuration ease-in-out;
+  text-decoration: none;
 
   &:hover {
     box-shadow: 0 2px 4px 0 rgba(56, 56, 56, 0.5);
@@ -189,6 +190,11 @@
     color: $white;
   }
 
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+
   &:disabled {
     @include disabled-btn;
   }
@@ -213,13 +219,16 @@
 }
 
 .button__alt--small {
-  height: pxtorem(35px);
   font-size: $font-body-m;
-  padding: 0 space(16);
+  padding: 0.3rem space(16);
   line-height: 1.16;
-
   svg {
     margin-left: space(16);
+  }
+  @include for-phone-only {
+    height: auto;
+    padding: 0.4rem 1rem;
+    width: 100%;
   }
 }
 

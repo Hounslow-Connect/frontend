@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/breakpoints.scss';
+
+.button__CTA {
+  border-radius: pxtorem(20px);
+  padding: pxtorem(26px) pxtorem(32px);
+  color: $black;
+  font-size: pxtorem(24px);
+  display: flex;
+  align-items: center;
+  margin-right: pxtorem(30px);
+  @include for-phone-only {
+    width: 100%;
+    margin-bottom: 1rem;;
+ }
+}
+
+.button__CTA--events {
+  background: $turquoise;
+}
+
+.button__CTA--services {
+  background: $yellow;
+}
+
+.button__CTA__icon {
+  margin-right: space(24);
+}
+
+.button__CTA__icon--xl {
+  font-size: pxtorem(46px);
+}

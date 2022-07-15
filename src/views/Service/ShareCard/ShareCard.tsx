@@ -7,13 +7,13 @@ import ServiceStore from '../../../stores/serviceStore';
 
 import Button from '../../../components/Button';
 interface IProps {
-  serviceStore: ServiceStore;
+  serviceStore?: ServiceStore;
 }
 
 const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
   const forceUpdate = useForceUpdate();
   return (
-    <div className="service__share-card service__section">
+    <div className="service__share-card  panel-box__turquoise service__section">
       <div className="service__share-card__social">
         <div className="flex-container flex-container--no-padding flex-container--left flex-container--align-center">
           <h3>Share</h3>
@@ -53,16 +53,18 @@ const ShareCard: React.FunctionComponent<IProps> = ({ serviceStore }) => {
       <div className="flex-container flex-container--no-padding">
         <div className="flex-col service__action-buttons">
           <Button size="small" text="Print" icon="print" onClick={() => window.print()} />
-          <Button
-            size="small"
-            text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
-            icon="star"
-            onClick={() => {
-              serviceStore.addToFavourites();
-              forceUpdate();
-            }}
-            disabled={serviceStore.favourite}
-          />
+          {serviceStore && (
+            <Button
+              size="small"
+              text={serviceStore.favourite ? 'In your favourites' : 'Add to favourites'}
+              icon="star"
+              onClick={() => {
+                serviceStore.addToFavourites();
+                forceUpdate();
+              }}
+              disabled={serviceStore.favourite}
+            />
+          )}
         </div>
       </div>
     </div>

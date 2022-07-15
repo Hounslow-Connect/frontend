@@ -78,3 +78,12 @@ export const formatHolidayTimes = (times: IHolidayTimes[]) =>
       ).format('h:mma')}</strong>`;
     }
   });
+
+/** we sometimes get hh:mm:ss separate from the main utc date string from the API  */
+export const formatTimeFromString = (time: string) =>
+  new Date('1970-01-01T' + time + 'Z').toLocaleTimeString('en-gb', {
+    timeZone: 'UTC',
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric',
+  });
