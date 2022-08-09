@@ -21,6 +21,13 @@
   }
 }
 
+.service {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
 .pagination {
   display: flex;
   padding-bottom: pxtorem(40px);
@@ -179,12 +186,6 @@
       align-items: center;
       font-size: 18px;
       font-weight: 700;
-    }
-    .icon {
-      width: 45px;
-      height: 45px;
-      max-width: 100%;
-      margin-right: 1rem;
     }
   }
 

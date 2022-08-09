@@ -9,7 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
-import WheelChair from '../../assets/images/icons/accessibility/wheelchair-accessible.svg';
+import Wheelchair from '../../assets/images/icons/accessibility/wheelchair.svg';
+import AccessibleToilet from '../../assets/images/icons/accessibility/accessible-toilet.svg';
 import FallbackLogo from '../../assets/images/logo-fallback.png';
 
 import Breadcrumb from '../../components/Breadcrumb';
@@ -223,6 +224,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                     <a href={`tel:${getOrganisationPhone}`}>{getOrganisationPhone as string}</a>
                   </div>
                 )}
+
                 {getOrganisationEmail && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
                     <h3>
@@ -278,28 +280,28 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                     </div>
                   </div>
                   <div className="disability-services">
-                    {
+                    {event.location.has_wheelchair_access && (
+                      <div className="service">
+                        <img className="icon" src={Wheelchair} alt="Wheelchair accessible logo" />
+                        Wheelchair accessible
+                      </div>
+                    )}
+                    {event.location.has_induction_loop && (
+                      <div className="service">
+                        <img className="icon" src={InductionLoop} alt="Induction loop logo" />
+                        Induction loop
+                      </div>
+                    )}
+                    {event.location.has_accessible_toilet && (
                       <div className="service">
                         <img
                           className="icon"
-                          src={InductionLoop}
-                          alt="Wheelchair accessible logo"
+                          src={AccessibleToilet}
+                          alt=" Accessible toilet logo"
                         />
-                        Wheelchair accessible
-                      </div>
-                    }
-                    {
-                      <div className="service">
-                        <img className="icon" src={WheelChair} alt="Induction loop logo" />
-                        Induction loop
-                      </div>
-                    }
-                    {
-                      <div className="service">
-                        <img className="icon" src={FallbackLogo} alt=" Accessible toilet logo" />
                         Accessible toilet
                       </div>
-                    }
+                    )}
                   </div>
                 </div>
               </Accordian>
@@ -425,23 +427,23 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   <div className="css-grid__col-2">
                     {event.location.has_wheelchair_access && (
                       <div className="service">
-                        <img
-                          className="icon"
-                          src={InductionLoop}
-                          alt="Wheelchair accessible logo"
-                        />
+                        <img className="icon" src={Wheelchair} alt="Wheelchair accessible logo" />
                         Wheelchair accessible
                       </div>
                     )}
                     {event.location.has_induction_loop && (
                       <div className="service">
-                        <img className="icon" src={WheelChair} alt="Induction loop logo" />
+                        <img className="icon" src={InductionLoop} alt="Induction loop logo" />
                         Induction loop
                       </div>
                     )}
                     {event.location.has_accessible_toilet && (
                       <div className="service">
-                        <img className="icon" src={FallbackLogo} alt=" Accessible toilet logo" />
+                        <img
+                          className="icon"
+                          src={AccessibleToilet}
+                          alt=" Accessible toilet logo"
+                        />
                         Accessible toilet
                       </div>
                     )}
