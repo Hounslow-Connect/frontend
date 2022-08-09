@@ -26,7 +26,6 @@ import Accordian from '../../components/Accordian';
 import { formatTimeFromString } from '../../views/Service/timeFormatting';
 
 import './EventDetail.scss';
-import { ConsoleView } from 'react-device-detect';
 
 interface RouteParams {
   service: string;
@@ -59,7 +58,6 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
     event.booking_cta && event.booking_summary && event.booking_title && event.booking_url;
 
   // Show a specific contact detail of event with organisation detail as fall back
-  console.log(event, organisation, organisation?.name, organisation?.url, organisation?.phone);
   const getOrganisationName = event.organiser_name || (organisation && organisation.name);
   const getOrganisationUrl = event.organiser_url || (organisation && organisation.url);
   const getOrganisationPhone = event.organiser_phone || (organisation && organisation.phone);
@@ -183,24 +181,21 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
               className="service__accordian mobile-show"
             >
               <div className="css-grid__col-2">
-                {getOrganisationName && getOrganisationUrl && (
+                {getOrganisationName && (
                   <div className="cms--contact-card--row">
-                    {event.organiser_url && event.organiser_name && (
+                    {event.organiser_name && (
                       <p className="p--large">
-                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                        Contact <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{event.organiser_name}</a>{' '}
                         for more information
                       </p>
                     )}
-                    {!event.organiser_url &&
-                      !event.organiser_name &&
+                    {!event.organiser_name &&
                       organisation &&
-                      organisation.url &&
                       organisation.name && (
                         <p className="p--large">
                           Contact{' '}
-                          {organisation.url && (
-                            <a href={`${organisation.url}`}>{organisation.name}</a>
-                          )}{' '}
+                          <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{organisation.name}</a>
+                          {' '}
                           for more information
                         </p>
                       )}
@@ -329,29 +324,27 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 How can I contact this event organiser?
               </h2>
               <div className="css-grid__col-2 contact">
-                {getOrganisationName && getOrganisationUrl && (
+                {getOrganisationName && (
                   <div className="cms--contact-card--row">
-                    {event.organiser_url && event.organiser_name && (
+                    {event.organiser_name && (
                       <p className="p--large">
-                        Contact <a href={event.organiser_url as string}>{event.organiser_name}</a>{' '}
+                        Contact <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{event.organiser_name}</a>{' '}
                         for more information
                       </p>
                     )}
-                    {!event.organiser_url &&
-                      !event.organiser_name &&
+                    {!event.organiser_name &&
                       organisation &&
-                      organisation.url &&
                       organisation.name && (
                         <p className="p--large">
                           Contact{' '}
-                          {organisation.url && (
-                            <a href={`${organisation.url}`}>{organisation.name}</a>
-                          )}{' '}
+                          <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{organisation.name}</a>
+                          {' '}
                           for more information
                         </p>
                       )}
                   </div>
                 )}
+
 
                 {getOrganisationName && getOrganisationUrl && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
