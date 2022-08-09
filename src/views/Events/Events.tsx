@@ -155,6 +155,9 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       eventStore.clearFilters();
     }
     toggleFilters(e);
+    setActiveTimeRange('');
+    inputSetStartDate(new Date());
+    inputSetEndDate(new Date());
     // @ts-ignore
     EventEmitter.dispatch('filtersCleared', e);
     searchFn();
