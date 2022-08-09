@@ -73,7 +73,6 @@ class EventStore {
       // on the initial fetch from the server when we have no events at all.
       const noParamsSetViaUi = isEmpty(omit(this.getPostParams(), ['order']));
       this.eventListNone = noParamsSetViaUi && this.eventList.length === 0;
-
       this.totalItems = get(response, 'data.meta.total', 0);
       this.numberOfPages = Math.ceil(this.totalItems / PER_PAGE);
       this.loading = false;
@@ -302,7 +301,6 @@ class EventStore {
     this.postcode = '';
     this.locationCoords = {};
     this.queryParams = {};
-    this.eventCategoryOptions = [{ value: '', text: '' }];
     this.eventListItems = [];
     this.is_free = false;
     this.is_virtual = false;
