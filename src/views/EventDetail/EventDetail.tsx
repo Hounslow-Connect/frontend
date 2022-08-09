@@ -25,6 +25,7 @@ import Accordian from '../../components/Accordian';
 import { formatTimeFromString } from '../../views/Service/timeFormatting';
 
 import './EventDetail.scss';
+import { ConsoleView } from 'react-device-detect';
 
 interface RouteParams {
   service: string;
@@ -52,8 +53,12 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
     }
   };
 
+  // show booking CTA UI if we have all these fields
   const hasBookingFields =
     event.booking_cta && event.booking_summary && event.booking_title && event.booking_url;
+
+  // Show a specific contact detail of event with organisation detail as fall back
+  console.log(event, organisation, organisation?.name, organisation?.url, organisation?.phone);
   const getOrganisationName = event.organiser_name || (organisation && organisation.name);
   const getOrganisationUrl = event.organiser_url || (organisation && organisation.url);
   const getOrganisationPhone = event.organiser_phone || (organisation && organisation.phone);
@@ -202,7 +207,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                 )}
 
                 {getOrganisationName && getOrganisationUrl && (
-                  <div className="cms--contact-card--row service__accordian--no-overflow">
+                  <div className="cms--contact-card--row service__accordian--no-overflow truncate">
                     <h3>
                       <FontAwesomeIcon icon="globe" /> Website
                     </h3>
@@ -224,7 +229,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   </div>
                 )}
                 {getOrganisationEmail && (
-                  <div className="cms--contact-card--row service__accordian--no-overflow">
+                  <div className="cms--contact-card--row service__accordian--no-overflow truncate">
                     <h3>
                       <FontAwesomeIcon icon="envelope" /> Email
                     </h3>
