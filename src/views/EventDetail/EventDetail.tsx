@@ -185,20 +185,22 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   <div className="cms--contact-card--row">
                     {event.organiser_name && (
                       <p className="p--large">
-                        Contact <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{event.organiser_name}</a>{' '}
+                        Contact{' '}
+                        <a href={getOrganisationUrl ? getOrganisationUrl : ''}>
+                          {event.organiser_name}
+                        </a>{' '}
                         for more information
                       </p>
                     )}
-                    {!event.organiser_name &&
-                      organisation &&
-                      organisation.name && (
-                        <p className="p--large">
-                          Contact{' '}
-                          <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{organisation.name}</a>
-                          {' '}
-                          for more information
-                        </p>
-                      )}
+                    {!event.organiser_name && organisation && organisation.name && (
+                      <p className="p--large">
+                        Contact{' '}
+                        <a href={getOrganisationUrl ? getOrganisationUrl : ''}>
+                          {organisation.name}
+                        </a>{' '}
+                        for more information
+                      </p>
+                    )}
                   </div>
                 )}
 
@@ -328,23 +330,24 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
                   <div className="cms--contact-card--row">
                     {event.organiser_name && (
                       <p className="p--large">
-                        Contact <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{event.organiser_name}</a>{' '}
+                        Contact{' '}
+                        <a href={getOrganisationUrl ? getOrganisationUrl : ''}>
+                          {event.organiser_name}
+                        </a>{' '}
                         for more information
                       </p>
                     )}
-                    {!event.organiser_name &&
-                      organisation &&
-                      organisation.name && (
-                        <p className="p--large">
-                          Contact{' '}
-                          <a href={getOrganisationUrl ? getOrganisationUrl : ''}>{organisation.name}</a>
-                          {' '}
-                          for more information
-                        </p>
-                      )}
+                    {!event.organiser_name && organisation && organisation.name && (
+                      <p className="p--large">
+                        Contact{' '}
+                        <a href={getOrganisationUrl ? getOrganisationUrl : ''}>
+                          {organisation.name}
+                        </a>{' '}
+                        for more information
+                      </p>
+                    )}
                   </div>
                 )}
-
 
                 {getOrganisationName && getOrganisationUrl && (
                   <div className="cms--contact-card--row service__accordian--no-overflow">
