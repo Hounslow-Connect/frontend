@@ -76,6 +76,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
   useEffect(() => {
     getEventCategories();
     getSearchTerms();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
@@ -155,6 +156,9 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
       eventStore.clearFilters();
     }
     toggleFilters(e);
+    setActiveTimeRange('');
+    inputSetStartDate(new Date());
+    inputSetEndDate(new Date());
     // @ts-ignore
     EventEmitter.dispatch('filtersCleared', e);
     searchFn();
@@ -162,7 +166,7 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
 
   const searchFn = () => {
     if (eventStore) {
-      setParams();
+      setParams(true);
       history.push({
         search: getQueryParamsString(),
       });

@@ -9,8 +9,9 @@ import ReactSVG from 'react-svg';
 
 import './LocationCard.scss';
 
-import WheelchairAccessible from '../../../assets/images/icons/accessibility/wheelchair-accessible.svg';
+import Wheelchair from '../../../assets/images/icons/accessibility/wheelchair.svg';
 import InductionLoop from '../../../assets/images/icons/accessibility/induction-loop.svg';
+import AccessibleToilet from '../../../assets/images/icons/accessibility/accessible-toilet.svg';
 
 import { humanReadableRegularOpeningHour, formatHolidayTimes } from '../timeFormatting';
 import { IServiceLocation, IOpeningHour } from '../../../types/types';
@@ -123,10 +124,11 @@ const LocationCard: React.FunctionComponent<IProps> = ({ location, className, de
               />
             )}
             <div className="flex-container flex-container--no-padding location__accessibility">
-              {get(location, 'location.has_wheelchair_access') && (
-                <ReactSVG src={WheelchairAccessible} />
-              )}
+              {get(location, 'location.has_wheelchair_access') && <ReactSVG src={Wheelchair} />}
               {get(location, 'location.has_induction_loop') && <ReactSVG src={InductionLoop} />}
+              {get(location, 'location.has_accessible_toilet') && (
+                <ReactSVG src={AccessibleToilet} />
+              )}
             </div>
           </div>
         </div>
