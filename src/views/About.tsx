@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import ReactMarkdown from 'react-markdown';
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player/lazy'
 
 import CMSStore from '../stores/CMSStore';
 import CMSPage from '../components/CMSPageLayout';
@@ -13,6 +13,8 @@ interface IProps {
 }
 
 const About: React.FunctionComponent<IProps> = ({ cmsStore }) => {
+  const [videoPlaying, setVideoPlaying] = useState<boolean>(true)
+
   if (!cmsStore) {
     return null;
   }
@@ -28,7 +30,10 @@ const About: React.FunctionComponent<IProps> = ({ cmsStore }) => {
           url={get(cmsStore, 'about.video_url')}
           style={{ borderRadius: '19px', margin: 'auto', marginTop: '24px' }}
           width={'90%'}
+          controls
           light={true}
+          onClickPreview={() => setVideoPlaying(true)}
+          playing={videoPlaying}
         />
       )}
     </CMSPage>
