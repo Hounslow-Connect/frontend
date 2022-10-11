@@ -22,7 +22,10 @@ const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
     return null;
   }
 
-  const { id, title, is_free, is_virtual, start_date, start_time, organisation_id, intro } = event;
+  const { id, title, is_free, is_virtual, start_date, start_time, end_date, end_time, organisation_id, intro } = event;
+
+  const eventStartDateFormatted = start_date ?  moment(start_date).format('ddd Do MMMM') : null
+  const eventEndDateFormatted = end_date ? moment(end_date).format('ddd Do MMMM') : null
 
   return (
     <div key={id} className="event-summary-card" onClick={() => history.push(`/events/${id}`)}>
@@ -38,7 +41,8 @@ const EventSummary: React.FunctionComponent<IProps> = ({ event, history }) => {
             </div>
           </div>
           <h4 className="event-summary-card__h4">
-            {moment(start_date).format('dddd MMMM Do')} - {formatTimeFromString(start_time)}
+            {`${eventStartDateFormatted} ${formatTimeFromString(start_time)}`}{' '}
+            { moment(start_date).isSame(end_date) ? `- ${end_time && formatTimeFromString(end_time)} ` : eventEndDateFormatted ? `- ${ eventEndDateFormatted} ${end_time && formatTimeFromString(end_time)}  ` : null }
           </h4>
         </div>
         <div className="search-result-card__logo">

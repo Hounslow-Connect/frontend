@@ -62,6 +62,8 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
   const getOrganisationUrl = event.organiser_url || (organisation && organisation.url);
   const getOrganisationPhone = event.organiser_phone || (organisation && organisation.phone);
   const getOrganisationEmail = event.organiser_email || (organisation && organisation.email);
+  const eventStartDateFormatted = event.start_date ?  moment(event.start_date).format('dddd Do MMMM') : null
+  const eventEndDateFormatted = event.end_date ? moment(event.end_date).format('dddd Do MMMM') : null
 
   return (
     <section className="event__detail">
@@ -143,8 +145,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <div className="panel-box__white--large margin-bottom">
               <div className="event-summary-card__pills flex--justify-space">
                 <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
-                  {moment(event.start_date).format('dddd MMMM Do')} -{' '}
-                  {formatTimeFromString(event.start_time)}
+                  { /* If start date and end date same, show just end time (not end date) */ }
+                  {`${eventStartDateFormatted} ${formatTimeFromString(event.start_time)}`}{' '}
+                  { moment(event.start_date).isSame(event.end_date) ? `- ${event.end_time && formatTimeFromString(event.end_time)} ` : eventEndDateFormatted ? `- ${ eventEndDateFormatted} ${event.end_time && formatTimeFromString(event.end_time)}  ` : null }
                 </h3>
                 <div className="flex--align--start">
                   <div className="event-summary-card__tag event-summary-card__tag--cost">
