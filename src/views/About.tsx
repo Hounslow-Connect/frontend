@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { inject, observer } from 'mobx-react';
 import get from 'lodash/get';
 import ReactMarkdown from 'react-markdown';
-import ReactPlayer from 'react-player/lazy'
+import ReactPlayer from 'react-player/lazy';
 
 import CMSStore from '../stores/CMSStore';
 import CMSPage from '../components/CMSPageLayout';
