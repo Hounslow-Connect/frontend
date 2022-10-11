@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const VideoCard: React.FunctionComponent<IProps> = ({ video, width }) => {
-  const [videoPlaying, setVideoPlaying] = useState<boolean>(true)
+  const [videoPlaying, setVideoPlaying] = useState<boolean>(false)
 
   return (
     <div className="flex-col flex-col--mobile--12 service__section">

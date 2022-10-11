@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const About: React.FunctionComponent<IProps> = ({ cmsStore }) => {
-  const [videoPlaying, setVideoPlaying] = useState<boolean>(true)
+  const [videoPlaying, setVideoPlaying] = useState<boolean>(false)
 
   if (!cmsStore) {
     return null;
