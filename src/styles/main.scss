@@ -189,3 +189,37 @@ button {
 .relative {
   position: relative;
 }
+
+.richtext-content {
+  h2, h3 {
+    margin-left: 0 !important;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    @include for-phone-only {
+      font-size: $font-body-l;
+    }
+  }
+
+  & > p {
+    @include body-m;
+  }
+
+  & > p, & > ul {
+    margin-bottom: space(24) !important;
+  }
+
+  ul {
+    padding-left: space(20);
+    list-style-position: outside;
+
+    li {
+      @include body-m;
+
+      &:not(:last-child) {
+        margin-bottom: space(12);
+      }
+    }
+  }
+}

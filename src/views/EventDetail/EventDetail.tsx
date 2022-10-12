@@ -7,6 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import ReactMarkdown from 'react-markdown';
 
 import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
 import Wheelchair from '../../assets/images/icons/accessibility/wheelchair.svg';
@@ -168,7 +169,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
           </div>
           <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
             <Accordian title="Event description" className="service__accordian mobile-show">
-              <p className="p--large">{event.description}</p>
+              <div className='richtext-content'><ReactMarkdown source={event.description} /></div>
               {event.has_image && (
                 <div className="description-image">
                   <img
@@ -313,7 +314,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             )}
 
             <div className="panel-box__white mobile-hide margin-bottom">
-              <p className="p--large">{event.description}</p>
+              <div className='richtext-content'><ReactMarkdown source={event.description} /></div>
               {event.has_image && (
                 <div className="description-image">
                   <img
