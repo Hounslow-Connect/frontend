@@ -7,6 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import ReactMarkdown from 'react-markdown';
 
 import InductionLoop from '../../assets/images/icons/accessibility/induction-loop.svg';
 import Wheelchair from '../../assets/images/icons/accessibility/wheelchair.svg';
@@ -62,6 +63,8 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
   const getOrganisationUrl = event.organiser_url || (organisation && organisation.url);
   const getOrganisationPhone = event.organiser_phone || (organisation && organisation.phone);
   const getOrganisationEmail = event.organiser_email || (organisation && organisation.email);
+  const eventStartDateFormatted = event.start_date ?  moment(event.start_date).format('dddd Do MMMM') : null
+  const eventEndDateFormatted = event.end_date ? moment(event.end_date).format('dddd Do MMMM') : null
 
   return (
     <section className="event__detail">
@@ -143,8 +146,9 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             <div className="panel-box__white--large margin-bottom">
               <div className="event-summary-card__pills flex--justify-space">
                 <h3 className="h3 event-summary-card__tag event-summary-card__tag--date-time">
-                  {moment(event.start_date).format('dddd MMMM Do')} -{' '}
-                  {formatTimeFromString(event.start_time)}
+                  { /* If start date and end date same, show just end time (not end date) */ }
+                  {`${eventStartDateFormatted} ${formatTimeFromString(event.start_time)}`}{' '}
+                  { moment(event.start_date).isSame(event.end_date) ? `- ${event.end_time && formatTimeFromString(event.end_time)} ` : eventEndDateFormatted ? `- ${ eventEndDateFormatted} ${event.end_time && formatTimeFromString(event.end_time)}  ` : null }
                 </h3>
                 <div className="flex--align--start">
                   <div className="event-summary-card__tag event-summary-card__tag--cost">
@@ -165,7 +169,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
           </div>
           <div className="flex-col flex-col--8 flex-col--mobile--12 flex-col--tablet--12 service__left-column">
             <Accordian title="Event description" className="service__accordian mobile-show">
-              <p className="p--large">{event.description}</p>
+              <div className='richtext-content'><ReactMarkdown source={event.description} /></div>
               {event.has_image && (
                 <div className="description-image">
                   <img
@@ -310,7 +314,7 @@ const EventDetail: React.FC<IProps> = ({ eventStore, match }) => {
             )}
 
             <div className="panel-box__white mobile-hide margin-bottom">
-              <p className="p--large">{event.description}</p>
+              <div className='richtext-content'><ReactMarkdown source={event.description} /></div>
               {event.has_image && (
                 <div className="description-image">
                   <img
