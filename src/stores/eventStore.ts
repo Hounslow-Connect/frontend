@@ -109,7 +109,9 @@ class EventStore {
     try {
       const data = await axios.get(`${apiBase}/collections/organisation-events`);
       const getData = get(data, 'data.data', []);
-      const getValues = map(getData, obj => pick(obj, ['name']));
+      const getValues = map(getData, obj => pick(obj, ['name', 'enabled'])).filter(
+        _ => _.enabled === true
+      );
       this.eventCategoryOptions = getValues.map(({ name: text }) => ({ value: text, text }));
     } catch (e) {
       console.error(e);
