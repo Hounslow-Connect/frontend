@@ -87,7 +87,7 @@ export interface IService {
   organisation?: IOrganisation;
   referral_button_text: null | string;
   referral_email: null | string;
-  referral_method: string;
+  referral_method: 'internal' | 'external' | 'none';
   referral_url: null | string;
   service_locations: [];
   show_referral_disclaimer: boolean;
