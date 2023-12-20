@@ -17,7 +17,6 @@ import { humanReadableRegularOpeningHour, formatHolidayTimes } from '../timeForm
 import { IServiceLocation, IOpeningHour } from '../../../types/types';
 import { apiBase } from '../../../config/api';
 import Link from '../../../components/Link';
-import Accordian from '../../../components/Accordian';
 
 interface IProps {
   location: IServiceLocation;
