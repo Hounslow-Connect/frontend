@@ -59,23 +59,17 @@ const Events: React.FC<IProps> = ({ eventStore, history, location }) => {
     loading,
   } = eventStore;
 
-  // fetch all events on mount and reset all filters on unmount
+  // watch for changes to the query string, triggered by searchFn when input
+  // values change
   useEffect(() => {
-    fetchEvents();
+    getEventCategories();
+    getSearchTerms();
 
     return () => {
       eventStore.clearFilters();
       // @ts-ignore
       EventEmitter.dispatch('filtersCleared');
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // watch for changes to the query string, triggered by searchFn when input
-  // values change
-  useEffect(() => {
-    getEventCategories();
-    getSearchTerms();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
